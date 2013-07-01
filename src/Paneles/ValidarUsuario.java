@@ -4,6 +4,7 @@
  */
 package Paneles;
 
+import Refactor.TestBaseDeDatos;
 import helper.InputVerifier;
 import writeproperties.Conexion;
 import writeproperties.ReadProperties;
@@ -33,7 +34,6 @@ public class ValidarUsuario extends javax.swing.JFrame {
         } else {
             usuarioNoEditable();
         }
-
     }
 
     ValidarUsuario() {
@@ -143,17 +143,16 @@ public class ValidarUsuario extends javax.swing.JFrame {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         botonActionPerformed(evt);
-
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void botonActionPerformed(java.awt.event.ActionEvent evt) {
         if ("Aceptar".equals(evt.getActionCommand())) {
-            test =false;
-            TestValidacionUsuario usuarioAceptar = new TestValidacionUsuario(url, database, usuario, password, validar, aceptar, test, this);
+            test = false;
+            TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, test, this);
         }
         if ("Test".equals(evt.getActionCommand())) {
-            test=true;
-            TestValidacionUsuario usuarioAceptar = new TestValidacionUsuario(url, database, usuario, password, validar, aceptar, true, this);
+            test = true;
+            TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, true, this);
         }
     }
     private void usuarioNoEditable() {

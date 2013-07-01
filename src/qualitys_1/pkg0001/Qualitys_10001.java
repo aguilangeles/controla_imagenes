@@ -4,7 +4,7 @@
  */
 package qualitys_1.pkg0001;
 
-import Paneles.Login;
+import Refactor.Login;
 
 /**
  *
