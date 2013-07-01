@@ -4,6 +4,8 @@
  */
 package Paneles;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import writeproperties.TipodeUsuario;
 
 /**
@@ -11,7 +13,8 @@ import writeproperties.TipodeUsuario;
  * @author MUTNPROD003
  */
 public class PanelControl extends javax.swing.JFrame {
-
+    private static final String INFO_LABEL="<html>La edicion de rangos, tipos de"
+            + " verificaciono y controles, asi como el alta de usuarios, solo esta permitido al administrador.</html>";
     private TipodeUsuario usuarioTipo;
     private boolean administrador;
 
@@ -20,13 +23,11 @@ public class PanelControl extends javax.swing.JFrame {
      */
     public PanelControl() {
         initComponents();
-
-
     }
 
     PanelControl(TipodeUsuario usuarioTipo) {
         initComponents();
-        jLabel1.setText("<html>La edicion de rangos, tipos de verificaciono y controles, asi como el alta de usuarios, solo esta permitido al administrador.</html>");
+        jLabel1.setText(INFO_LABEL);
         this.usuarioTipo = usuarioTipo;
         this.administrador = usuarioTipo.isAdmin();
         if (!administrador) {
@@ -35,6 +36,7 @@ public class PanelControl extends javax.swing.JFrame {
             alta_usuarios.setEnabled(false);
             verificacion.setEnabled(false);
         }
+        cargar_lote.addActionListener(null);
     }
 
     public boolean isAdministrador() {
@@ -81,21 +83,11 @@ public class PanelControl extends javax.swing.JFrame {
                 base_datosActionPerformed(evt);
             }
         });
-        base_datos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                base_datosKeyPressed(evt);
-            }
-        });
 
         rangos.setText("Rangos");
         rangos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rangosActionPerformed(evt);
-            }
-        });
-        rangos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                rangosKeyPressed(evt);
             }
         });
 
@@ -105,21 +97,11 @@ public class PanelControl extends javax.swing.JFrame {
                 controlesActionPerformed(evt);
             }
         });
-        controles.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                controlesKeyPressed(evt);
-            }
-        });
 
-        alta_usuarios.setText("Alta Usuarios");
+        alta_usuarios.setText("Usuarios");
         alta_usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alta_usuariosActionPerformed(evt);
-            }
-        });
-        alta_usuarios.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                alta_usuariosKeyPressed(evt);
             }
         });
 
@@ -129,21 +111,11 @@ public class PanelControl extends javax.swing.JFrame {
                 cargar_loteActionPerformed(evt);
             }
         });
-        cargar_lote.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cargar_loteKeyPressed(evt);
-            }
-        });
 
         verificacion.setText("Verificacion");
         verificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verificacionActionPerformed(evt);
-            }
-        });
-        verificacion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                verificacionKeyPressed(evt);
             }
         });
 
@@ -204,107 +176,85 @@ public class PanelControl extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void base_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_base_datosActionPerformed
-        base_datos(evt, null);
+        actionButton(evt);
     }//GEN-LAST:event_base_datosActionPerformed
 
     private void rangosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rangosActionPerformed
-        rangos(evt, null);
+        actionButton(evt);
     }//GEN-LAST:event_rangosActionPerformed
 
     private void controlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_controlesActionPerformed
-        controles(evt, null);
+        actionButton(evt);
     }//GEN-LAST:event_controlesActionPerformed
 
     private void alta_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alta_usuariosActionPerformed
-      usurios(evt, null);
+        actionButton(evt);
     }//GEN-LAST:event_alta_usuariosActionPerformed
 
     private void verificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificacionActionPerformed
-        verficacion(evt, null);
+        actionButton(evt);
     }//GEN-LAST:event_verificacionActionPerformed
 
     private void cargar_loteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_loteActionPerformed
-        cargar_Lote(evt, null);
+        actionButton(evt);
     }//GEN-LAST:event_cargar_loteActionPerformed
 
-    private void base_datosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_base_datosKeyPressed
-        base_datos(null, evt);
-    }//GEN-LAST:event_base_datosKeyPressed
-
-    private void cargar_loteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cargar_loteKeyPressed
-        cargar_Lote(null, evt);
-    }//GEN-LAST:event_cargar_loteKeyPressed
-
-    private void verificacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificacionKeyPressed
-        verficacion(null, evt);
-    }//GEN-LAST:event_verificacionKeyPressed
-
-    private void rangosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rangosKeyPressed
-        rangos(null, evt);
-    }//GEN-LAST:event_rangosKeyPressed
-
-    private void controlesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_controlesKeyPressed
-        controles(null, evt);
-    }//GEN-LAST:event_controlesKeyPressed
-
-    private void alta_usuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_alta_usuariosKeyPressed
-        usurios(null, evt);
-    }//GEN-LAST:event_alta_usuariosKeyPressed
-private void controles(java.awt.event.ActionEvent evt, java.awt.event.KeyEvent et){
-         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ControlesABM().setVisible(true);
-            }
-        });
-}
-    private void usurios(java.awt.event.ActionEvent evt, java.awt.event.KeyEvent et) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new UsuariosABM().setVisible(true);
-            }
-        });
-    }
-    private void rangos(java.awt.event.ActionEvent evt, java.awt.event.KeyEvent et) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new RangosABM().setVisible(true);
-            }
-        });
-    }
-
-    private void verficacion(java.awt.event.ActionEvent evt, java.awt.event.KeyEvent et) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VerificacionABM().setVisible(true);
-            }
-        });
-    }
-
-    private void cargar_Lote(java.awt.event.ActionEvent evt, java.awt.event.KeyEvent et) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CargarLote(getUsuarioTipo()).setVisible(true);
-            }
-        });
-        dispose();
-    }
-
-    private void base_datos(java.awt.event.ActionEvent evt, java.awt.event.KeyEvent et) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ValidarUsuario(isAdministrador()).setVisible(true);
-            }
-        });
+    private void actionButton(java.awt.event.ActionEvent evt) {
+        switch (evt.getActionCommand()) {
+            case "Base de Datos":
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new ValidarUsuario(isAdministrador()).setVisible(true);
+                    }
+                });
+                break;
+            case "Rangos":
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new RangosABM().setVisible(true);
+                    }
+                });
+                break;
+            case "Cargar Lote":
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new CargarLote(getUsuarioTipo()).setVisible(true);
+                    }
+                });
+                dispose();
+                break;
+            case "Controles":
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new ControlesABM().setVisible(true);
+                    }
+                });
+                break;
+            case "Usuarios":
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new UsuariosABM().setVisible(true);
+                    }
+                });
+                break;
+            case "Verificacion":
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new VerificacionABM().setVisible(true);
+                    }
+                });
+                break;
+        }
     }
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alta_usuarios;
     private javax.swing.JButton base_datos;

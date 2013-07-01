@@ -149,7 +149,7 @@ public class Login extends javax.swing.JFrame {
 
     private void loginUsuario() {
         if (isUsuarioValidado()) {
-            setUsuarioFecha setUsuarioFecha = new setUsuarioFecha(getUsuario());
+            SetFechaUltimoIngresoUsuario setUsuarioFecha = new SetFechaUltimoIngresoUsuario(getUsuario());
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
