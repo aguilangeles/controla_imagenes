@@ -35,8 +35,8 @@ public class ImagenesWorker extends SwingWorker<Object, Object> {
     public String doInBackground() throws Exception {
         PDDocument document = PDDocument.load(new File(ruta_archivo)); //try
         PDPage page = (PDPage) document.getDocumentCatalog().getAllPages().get(pagina);
-        BufferedImage image = page.convertToImage(BufferedImage.SCALE_SMOOTH,200);
-        ImageIO.write(image, "png", new File("temp\\" + new Jpg(ruta_archivo, parent, pagina).jpgFile() + FORMATO));
+        BufferedImage image = page.convertToImage(BufferedImage.SCALE_FAST,256);
+        ImageIO.write(image, "jpg", new File("temp\\" + new Jpg(ruta_archivo, parent, pagina).jpgFile() + FORMATO));
         String ruta ="temp\\" + new Jpg(ruta_archivo, parent, pagina).jpgFile() + FORMATO;
         document.close();
         return ruta;
