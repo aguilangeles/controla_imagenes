@@ -4,10 +4,12 @@
  */
 package Paneles;
 
-
 import Rangos.Paq.Desactivar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import writeproperties.Conexion;
 
@@ -16,7 +18,6 @@ import writeproperties.Conexion;
  * @author MUTNPROD003
  */
 public class UsuariosABM extends javax.swing.JFrame {
-
     private Conexion conexion = new Conexion();
     private DefaultTableModel modelo;
     private UsuariosDao usuario;
@@ -31,15 +32,14 @@ public class UsuariosABM extends javax.swing.JFrame {
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         usuario = new UsuariosDao(tablaUsuarios, conexion, ABM);
-
         principalInternal.setVisible(true);
         modelo = (DefaultTableModel) tablaUsuarios.getModel();
         salvar.setVisible(false);
         agregar.setVisible(false);
         editar.setVisible(false);
         desactivar.setVisible(false);
-
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -200,7 +200,7 @@ public class UsuariosABM extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -219,7 +219,7 @@ public class UsuariosABM extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        int idNew = getIde()+1;
+        int idNew = getIde() + 1;
         Object[] ob = new Object[]{idNew};
         modelo.addRow(ob);
         tablaUsuarios.repaint();
@@ -228,15 +228,18 @@ public class UsuariosABM extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        int idjtext = (tablaUsuarios.getSelectedRow());
+        int row = tablaUsuarios.getSelectedRow();
+        int idjtext = (row);
+        System.out.println(tablaUsuarios.getValueAt(row, 0));
         usuario.getEditar().usuarios_setRow(idjtext);
         tablaUsuarios.repaint();
-
     }//GEN-LAST:event_editarActionPerformed
 
+
+
     private void desactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarActionPerformed
-         int idjtext = (tablaUsuarios.getSelectedRow());
-        Desactivar desactivar1 = new Desactivar(idjtext, modelo, conexion,"usuarios",4);
+        int idjtext = (tablaUsuarios.getSelectedRow());
+        Desactivar desactivar1 = new Desactivar(idjtext, modelo, conexion, "usuarios", 4);
         tablaUsuarios.repaint();
 
     }//GEN-LAST:event_desactivarActionPerformed
@@ -275,7 +278,6 @@ public class UsuariosABM extends javax.swing.JFrame {
     public void setIde(int ide) {
         this.ide = ide;
     }
-
     /**
      * @param args the command line arguments
      */

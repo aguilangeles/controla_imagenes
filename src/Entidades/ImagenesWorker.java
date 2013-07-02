@@ -4,41 +4,51 @@
  */
 package Entidades;
 
-import helper.Jpg;
+import helper.ExtensionTemporal;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.SwingWorker;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.im4java.core.ConvertCmd;
+import org.im4java.core.IM4JavaException;
+import org.im4java.core.IMOperation;
 
 /**
  *
  * @author MUTNPROD003
  */
 public class ImagenesWorker extends SwingWorker<Object, Object> {
-       private static final String FORMATO =".jpg";
-    private String parent;
-    private String absolutaPdf;
-    private int pagina;
-    private String ruta_archivo;
 
+            private static final String IM4JAVA_TOOLPATH = "C:\\Program Files (x86)\\ImageMagick-6.8.6-Q16";
 
+    private String rutaConPagina;
+    private String rutaEnTemporal;
 
-   public ImagenesWorker(String ruta_archivo, String parent, int pagina) {
-            this.parent=parent;
-            this.pagina=pagina;
-            this.ruta_archivo = ruta_archivo;
+    public ImagenesWorker(String ruta_archivo, String parent, int pagina) {
+        this.rutaConPagina = ruta_archivo+"["+pagina+"]";
+        this.rutaEnTemporal=new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal();
 
     }
+
     @Override
     public String doInBackground() throws Exception {
-        PDDocument document = PDDocument.load(new File(ruta_archivo)); //try
-        PDPage page = (PDPage) document.getDocumentCatalog().getAllPages().get(pagina);
-        BufferedImage image = page.convertToImage(BufferedImage.SCALE_FAST,256);
-        ImageIO.write(image, "jpg", new File("temp\\" + new Jpg(ruta_archivo, parent, pagina).jpgFile() + FORMATO));
-        String ruta ="temp\\" + new Jpg(ruta_archivo, parent, pagina).jpgFile() + FORMATO;
-        document.close();
-        return ruta;
+        File input = new File(rutaConPagina);
+        File output = new File(rutaEnTemporal);
+        try {
+            IMOperation operation = new IMOperation();
+            operation.density(270);
+            operation.addImage();
+            operation.addImage();
+            ConvertCmd convert = new ConvertCmd();
+            convert.setSearchPath(IM4JAVA_TOOLPATH);
+            convert.run(operation, new Object[]{input.getAbsolutePath(), output.getAbsolutePath()});
+
+        } catch (IM4JavaException e) {
+            System.out.println("im4java exception");
+            System.out.println(e.getMessage());
+        }
+        return rutaEnTemporal;
     }
 }

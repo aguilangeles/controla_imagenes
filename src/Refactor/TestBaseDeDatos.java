@@ -44,13 +44,13 @@ public class TestBaseDeDatos {
             this.test = isTest;
             this.validarUsuario = validarUsuario;
             this.aUsuario = new Usuario(thisUrl, thisDatabase, thisUsuario, thisPassw);
-            usuarioAceptar(aUsuario);
+            testConexion(aUsuario);
         } catch (RuntimeException aRuntimeExc) {
             JOptionPane.showMessageDialog(null, aRuntimeExc.getMessage(), "Campo sin valor", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void usuarioAceptar(Usuario aUsuario) {
+    private void testConexion(Usuario aUsuario) {
         SetearArchivoConfiguracion setProperties = new SetearArchivoConfiguracion(aUsuario.getUrl(), aUsuario.getBase(), aUsuario.getUsuario(), aUsuario.getPassword());
         if (validar.isConexion()) {
             aceptar.setBackground(Color.GREEN);

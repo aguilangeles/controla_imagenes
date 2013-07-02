@@ -77,11 +77,11 @@ public class UsuariosDao {
 
         if (conexion.isConexion()) {
             try {
-                conexion.ExecuteSql("SELECT id, nombre, password, tipo, estado FROM qualitys."+nombreTabla+";");
+                conexion.ExecuteSql("SELECT id, nombre, password, tipo, estado FROM qualitys." + nombreTabla + ";");
                 while (conexion.resulset.next()) {
                     model.addRow(new Object[]{conexion.resulset.getInt(1), conexion.resulset.getString(2),
-                                conexion.resulset.getString(3), conexion.resulset.getInt(4),
-                                conexion.resulset.getInt(5)});
+                        conexion.resulset.getString(3), conexion.resulset.getInt(4),
+                        conexion.resulset.getInt(5)});
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);

@@ -144,6 +144,8 @@ public class RangosABM extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaContenido.setColumnSelectionAllowed(true);
+        tablaContenido.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(tablaContenido);
 
         agregar.setText("Agregar Control");
@@ -181,12 +183,12 @@ public class RangosABM extends javax.swing.JFrame {
                     .addComponent(agregar)
                     .addComponent(editar)
                     .addComponent(desactivar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 19, Short.MAX_VALUE)
                 .addComponent(salvar)
                 .addGap(15, 15, 15))
         );
 
-        principalInternal.setBounds(0, 0, 530, 378);
+        principalInternal.setBounds(0, 0, 530, 382);
         desk.add(principalInternal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         scroll.setViewportView(desk);

@@ -107,10 +107,13 @@ public class RangosDao {
     }
 
     public void abmActionPerformed(java.awt.event.ActionEvent evt) {
-        if ("Activar ABM".equals(evt.getActionCommand())) {
-            editable = true;
-        } else if ("Guardar".equals(evt.getActionCommand())) {
-            editable = false;
+        switch (evt.getActionCommand()) {
+            case "Activar ABM":
+                editable = true;
+                break;
+            case "Guardar":
+                editable = false;
+                break;
         }
     }
 

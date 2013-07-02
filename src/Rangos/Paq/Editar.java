@@ -4,6 +4,10 @@
  */
 package Rangos.Paq;
 
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import writeproperties.Conexion;
 
@@ -12,6 +16,8 @@ import writeproperties.Conexion;
  * @author MUTNPROD003
  */
 public class Editar {
+    private int selectedData;
+    private JTable tabla;
     private Conexion conexion;
     private DefaultTableModel modelo;
 
