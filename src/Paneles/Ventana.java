@@ -65,6 +65,7 @@ public class Ventana extends javax.swing.JFrame {
         rutaJlabel.setText(rutaDb);
         internal.setVisible(true);
         verImagen = primeraImagen(ispdf, siguientes, verImagen);
+        System.out.println("ver imgaent en  internal"+ verImagen);
         VisualizarImagen visualizarImagen = new VisualizarImagen(verImagen, scrollimage, slider, getZoom());
         int id = siguientes.getId();
         new SetChecksBox(tablaCheck).setFirstBoolean(id);
@@ -481,6 +482,7 @@ public class Ventana extends javax.swing.JFrame {
                 worker = new ImagenesWorker(siguientes.getRuta_archivo(), siguientes.getParent(), siguientes.getPagina());
                 worker.execute();
                 String rutaTemporal = worker.doInBackground();
+                System.out.println("ruta temporal en ventana "+rutaTemporal);
                 siguientes.setRutaTemp(rutaTemporal);
                 pagina.setText("Pagina: " + siguientes.getPagina());
                 verImagen = rutaTemporal;

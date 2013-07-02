@@ -68,7 +68,7 @@ public class CargarLote extends javax.swing.JFrame {
 
         jLabel2.setText("Ruta");
 
-        rutaCarpeta.setText("C:\\\\Angeles\\\\reducido");
+        rutaCarpeta.setText("C:\\\\Angeles\\\\PDF");
 
         aceptarSeleccion.setText("Siguiente");
         aceptarSeleccion.addActionListener(new java.awt.event.ActionListener() {

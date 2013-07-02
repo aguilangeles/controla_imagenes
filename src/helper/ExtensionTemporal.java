@@ -22,7 +22,7 @@ public class ExtensionTemporal {
         try {
             this.parent = URLDecoder.decode(parent, "UTF-8");
             String ret = nombre.substring(this.parent.length(), nombre.length() - 4) + "_" + numero;
-            this.rutaTemporal = "temp\\" + ret.replace("\\", "_") + ".jpg";
+            this.rutaTemporal = "temp\\" + ret.replace("\\", "_") + ".png";
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(ExtensionTemporal.class.getName()).log(Level.SEVERE, null, ex);
         }
