@@ -36,7 +36,7 @@ public final class ImageComponent extends JComponent {
     }
 
     static Image load(byte[] data) throws Exception {
-        Image image = null;
+        Image image;
         SeekableStream stream = new ByteArraySeekableStream(data);
         String[] names = ImageCodec.getDecoderNames(stream);
         ImageDecoder dec =

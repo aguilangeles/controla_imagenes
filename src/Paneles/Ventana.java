@@ -29,7 +29,6 @@ import javax.swing.table.DefaultTableModel;
  * @author MUTNPROD003
  */
 public class Ventana extends javax.swing.JFrame {
-
     private Imagen anteriorTif;
     private int sizeRamdom;
     private DefaultTableModel model;
@@ -57,16 +56,13 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void internal(boolean ispdf) {
-        String verImagen = "";
         Imagen siguientes = nextImagen();//trae el ramdom
         anterior.setEnabled(false);
         String rutaDb = siguientes.getRutaDb();//ruta de archivo
         internal.setTitle("Imagen " + contador + "/" + getSizeRamdom());
         rutaJlabel.setText(rutaDb);
         internal.setVisible(true);
-        verImagen = primeraImagen(ispdf, siguientes, verImagen);
-        System.out.println(verImagen);
-String ret ="C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\temp\\FRP_0001_2013-05-07_09-32-19_0.png";
+        String verImagen = primeraImagen(ispdf, siguientes);
         VisualizarImagen visualizarImagen = new VisualizarImagen(verImagen, scrollimage, slider, getZoom());
         int id = siguientes.getId();
         new SetChecksBox(tablaCheck).setFirstBoolean(id);
@@ -339,14 +335,6 @@ String ret ="C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\temp\
         tablaCheck.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0, false), "moveToNextCell");
     }
-    private AbstractAction moveToNextCell =
-            new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int col = tablaCheck.getSelectedColumn() + 1;
-                    tablaCheck.setColumnSelectionInterval(0, 0);
-                }
-            };
 
     private void siguiente_JButton() {
         KeyStroke keyNext = KeyStroke.getKeyStroke(KeyEvent.VK_S,
@@ -360,9 +348,9 @@ String ret ="C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\temp\
                     int setSize = getSizeRamdom() + 1;
                     setSizeRamdom(setSize);
                     setZoom(slider.getValue());
-                    ruta_temp = new Adelante_Atras_boton(anterior, siguiente, getSizeRamdom(),
+                    ruta_temp = new Botones(anterior, siguiente, getSizeRamdom(),
                             internal, rutaJlabel, pagina, tablaCheck, nextImagen(),
-                            pdf, isHasNext(), contador++).VerSiguientes();
+                            pdf, isHasNext(), contador++).Siguiente();
                     VisualizarImagen visualizarImagen = new VisualizarImagen(ruta_temp, scrollimage, slider, getZoom());
                     if (!isHasNext()) {
                         //anterior.setVisible(true);
@@ -391,8 +379,8 @@ String ret ="C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\temp\
                         int descontar = 1;
                         int der = contador - descontar;
                         setContador(der);
-                        visualizacion = new Adelante_Atras_boton(tablaCheck, rutaJlabel, pagina, siguiente,
-                                internal, getSizeRamdom(), pdf, previus(), getContador()).VerAnterior();
+                        visualizacion = new Botones(tablaCheck, rutaJlabel, pagina, siguiente,
+                                internal, getSizeRamdom(), pdf, previus(), getContador()).Anterior();
                         VisualizarImagen visualizarImagen = new VisualizarImagen(visualizacion, scrollimage, slider, getZoom());
                         if (!hasPrevius) {
                             anterior.setEnabled(false);
@@ -477,20 +465,18 @@ String ret ="C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\temp\
     private javax.swing.JButton terminar;
     // End of variables declaration//GEN-END:variables
 
-    private String primeraImagen(boolean ispdf, Imagen siguientes, String verImagen) {
+    private String primeraImagen(boolean ispdf, Imagen siguientes) {
+        String ret ;
         if (ispdf) {
-
             worker = new ImagenesWorker(siguientes.getRuta_archivo(), siguientes.getParent(), siguientes.getPagina());
             worker.execute();
-            String rutaTemporal = worker.doInBackground();
-            siguientes.setRutaTemp(rutaTemporal);
+            ret = worker.doInBackground();
+            siguientes.setRutaTemp(ret);
             pagina.setText("Pagina: " + siguientes.getPagina());
-            verImagen = rutaTemporal;
-
         } else {
-            verImagen = siguientes.getRuta_archivo();
+            ret = siguientes.getRuta_archivo();
             pagina.setVisible(false);
         }
-        return verImagen;
+        return ret;
     }
 }

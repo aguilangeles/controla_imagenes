@@ -24,13 +24,12 @@ public class VisualizarImagen {
         this.scrollPane = scroll;
         this.slider = slider;
         this.zoom = zoom;
-        visualizarImagen(ruta);
+        visualizarImagen();
     }
-        private void visualizarImagen(String imagen) {
+        private void visualizarImagen() {
 
-            System.out.println("\t imagen visualizar imagen"+imagen);
         try {
-            final ImageComponent imageCmp = new ImageComponent(imagen, 2. * getZoom() / slider.getMaximum(), scrollPane);
+            final ImageComponent imageCmp = new ImageComponent(ruta, 2. * getZoom() / slider.getMaximum(), scrollPane);
             scrollPane.getViewport().add(imageCmp);
             slider.setValue(zoom);
             slider.addChangeListener(new ChangeListener() {
