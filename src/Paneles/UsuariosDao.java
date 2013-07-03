@@ -20,7 +20,7 @@ import writeproperties.Conexion;
  * @author MUTNPROD003
  */
 public class UsuariosDao {
-    private static final String nombreTabla ="usuarios";
+    private static final String NOMBRE_TABLA ="usuarios";
     private Conexion conexion;
     private JTable tabla;
     private JButton abm;
@@ -77,7 +77,7 @@ public class UsuariosDao {
 
         if (conexion.isConexion()) {
             try {
-                conexion.ExecuteSql("SELECT id, nombre, password, tipo, estado FROM qualitys." + nombreTabla + ";");
+                conexion.ExecuteSql("SELECT id, nombre, password, tipo, estado FROM qualitys." + NOMBRE_TABLA + ";");
                 while (conexion.resulset.next()) {
                     model.addRow(new Object[]{conexion.resulset.getInt(1), conexion.resulset.getString(2),
                         conexion.resulset.getString(3), conexion.resulset.getInt(4),
@@ -91,28 +91,19 @@ public class UsuariosDao {
     }
 
     public int getLastId() {
-        return new LastID(conexion, nombreTabla).lastId();
+        return new LastID(conexion, NOMBRE_TABLA).lastId();
     }
 
     public InsertRows getInsertar() {
         return insertar;
     }
 
-
-
-public void abmActionPerformed(java.awt.event.ActionEvent evt){
-        switch (evt.getActionCommand()) {
-            case "Activar ABM":
-                editable = true;
-                break;
-            case "Guardar":
-                editable = false;
-                break;
-        }
-}
-
     public boolean isEditable() {
         return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
     public Editar getEditar() {

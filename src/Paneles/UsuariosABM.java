@@ -7,9 +7,6 @@ package Paneles;
 import Rangos.Paq.Desactivar;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import writeproperties.Conexion;
 
@@ -18,11 +15,17 @@ import writeproperties.Conexion;
  * @author MUTNPROD003
  */
 public class UsuariosABM extends javax.swing.JFrame {
+
+    private static final String INSTRUCCIONES = "Para INSERTAR un nuevo elemento, oprima 'AGREGAR CONTROL',"
+            + "\n inserte los datos en la fila vacia y oprima GUARDAR.\n"
+            + "Para EDITAR un contenido, oprima 'EDITAR CONTROL',\n "
+            + "modifique los datos y oprima GUARDAR.\n"
+            + "Para desactivar un control, posarse sobre la columna 'id' y oprimir 'DESACTIVAR CONTROL'.";
     private Conexion conexion = new Conexion();
     private DefaultTableModel modelo;
     private UsuariosDao usuario;
     private int ide;
-
+    private String evento;
     /**
      * Creates new form ABMRangos
      */
@@ -148,7 +151,9 @@ public class UsuariosABM extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaUsuarios.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tablaUsuarios);
+        tablaUsuarios.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         agregar.setText("Agregar Control");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -163,9 +168,7 @@ public class UsuariosABM extends javax.swing.JFrame {
             principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(principalInternalLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(editar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -173,6 +176,10 @@ public class UsuariosABM extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
             .addComponent(jSeparator1)
+            .addGroup(principalInternalLayout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         principalInternalLayout.setVerticalGroup(
             principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +192,9 @@ public class UsuariosABM extends javax.swing.JFrame {
                     .addComponent(agregar)
                     .addComponent(editar)
                     .addComponent(desactivar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(salvar)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         principalInternal.setBounds(0, 0, 530, 340);
@@ -219,25 +226,23 @@ public class UsuariosABM extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        usuario.setEditable(true);
         int idNew = getIde() + 1;
         Object[] ob = new Object[]{idNew};
         modelo.addRow(ob);
         tablaUsuarios.repaint();
         salvar.setVisible(true);
-
+        evento = "Agregar";
     }//GEN-LAST:event_agregarActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        int row = tablaUsuarios.getSelectedRow();
-        int idjtext = (row);
-        System.out.println(tablaUsuarios.getValueAt(row, 0));
-        usuario.getEditar().usuarios_setRow(idjtext);
-        tablaUsuarios.repaint();
+        usuario.setEditable(true);
+        salvar.setVisible(true);
+        evento = "Editar";
     }//GEN-LAST:event_editarActionPerformed
 
-
-
     private void desactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarActionPerformed
+        usuario.setEditable(true);
         int idjtext = (tablaUsuarios.getSelectedRow());
         Desactivar desactivar1 = new Desactivar(idjtext, modelo, conexion, "usuarios", 4);
         tablaUsuarios.repaint();
@@ -249,26 +254,30 @@ public class UsuariosABM extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        usuario.getInsertar().insert_newUsuario(getIde());
-        tablaUsuarios.repaint();
-        usuario.abmActionPerformed(evt);
-        salvar.setVisible(false);
+        botonGuardar();
     }//GEN-LAST:event_salvarActionPerformed
-
+    private void botonGuardar() {
+        switch (evento) {
+            case "Agregar":
+                tablaUsuarios.editCellAt(-1, -1);
+                usuario.getInsertar().insert_newUsuario(getIde());
+                tablaUsuarios.repaint();
+                salvar.setVisible(false);
+                break;
+            case "Editar":
+                tablaUsuarios.editCellAt(-1, -1);
+                int row = tablaUsuarios.getSelectedRow();
+                int idjtext = (row);
+                usuario.getEditar().usuarios_setRow(idjtext);
+                tablaUsuarios.repaint();
+                break;
+        }
+    }
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
-        JOptionPane.showMessageDialog(tablaUsuarios, "Para INSERTAR un nuevo elemento debe completar las filas \n"
-                + "y despues oprimir salvar.\n"
-                + "Para editar uno ya existente debe posarse sobre la fila y modificar el contenido, luego oprimir editar\n"
-                + "Para desactivar un control, posarse en la columna id y presionar desactivar"
-                + "");
-
         principalInternal.setTitle("Módulo de Edición");
-        usuario.abmActionPerformed(evt);
-
         agregar.setVisible(true);
         editar.setVisible(true);
         desactivar.setVisible(true);
-
     }//GEN-LAST:event_ABMActionPerformed
 
     public int getIde() {

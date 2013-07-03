@@ -20,6 +20,7 @@ import writeproperties.Conexion;
  * @author MUTNPROD003
  */
 public class RangosDao {
+    private static final String NOMBRE_TABLA="rangos_qs;";
     private Conexion conexion;
     private JTable tabla;
     private JButton abm;
@@ -81,7 +82,7 @@ public class RangosDao {
 
         if (conexion.isConexion()) {
             try {
-                conexion.ExecuteSql("SELECT * FROM rangos_qs;");
+                conexion.ExecuteSql("SELECT * FROM "+NOMBRE_TABLA);
                 while (conexion.resulset.next()) {
                     model.addRow(new Object[]{conexion.resulset.getInt(1), conexion.resulset.getInt(2),
                                 conexion.resulset.getInt(3), conexion.resulset.getInt(4),
@@ -95,7 +96,7 @@ public class RangosDao {
     }
 
     public int getLastId() {
-        return new LastID(conexion, "rangos_qs").lastId();
+        return new LastID(conexion, NOMBRE_TABLA).lastId();
     }
 
     public Editar getEditar() {
@@ -106,20 +107,25 @@ public class RangosDao {
         return insertar;
     }
 
-    public void abmActionPerformed(java.awt.event.ActionEvent evt) {
-        switch (evt.getActionCommand()) {
-            case "Activar ABM":
-                editable = true;
-                break;
-            case "Guardar":
-                editable = false;
-                break;
-        }
-    }
+//    public void abmActionPerformed(java.awt.event.ActionEvent evt) {
+//        switch (evt.getActionCommand()) {
+//            case "Activar ABM":
+//                editable = true;
+//                break;
+//            case "Guardar":
+//                editable = false;
+//                break;
+//        }
+//    }
 
     public boolean isEditable() {
         return editable;
     }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
 
 
 }

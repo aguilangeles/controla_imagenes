@@ -5,15 +5,11 @@
 package Entidades;
 
 import helper.ExtensionTemporal;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.SwingWorker;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
 import org.im4java.core.ConvertCmd;
 import org.im4java.core.IM4JavaException;
 import org.im4java.core.IMOperation;
@@ -24,7 +20,7 @@ import org.im4java.core.IMOperation;
  */
 public class ImagenesWorker extends SwingWorker<Object, Object> {
 
-    private static final String IM4JAVA_TOOLPATH = "C:\\Program Files (x86)\\ImageMagick-6.8.6-Q16";
+//    private static final String IM4JAVA_TOOLPATH = "C:\\Program Files (x86)\\ImageMagick-6.8.6-Q16";
     private String rutaConPagina;
     private String rutaEnTemporal;
 
@@ -44,7 +40,7 @@ public class ImagenesWorker extends SwingWorker<Object, Object> {
             operation.addImage();
             operation.addImage();
             ConvertCmd convert = new ConvertCmd();
-            convert.setSearchPath(IM4JAVA_TOOLPATH);
+//            convert.setSearchPath(IM4JAVA_TOOLPATH);
             try {
                 convert.run(operation, new Object[]{input.getAbsolutePath(), output.getAbsolutePath()});
             } catch (IOException | InterruptedException ex) {

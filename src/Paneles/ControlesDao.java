@@ -23,7 +23,7 @@ import writeproperties.Conexion;
  */
 public class ControlesDao {
     private Conexion conexion;
-    private static final String nombreTabla="controles";
+    private static final String NOMBRE_TABLA="controles";
     private JTable tabla;
     private JButton abm;
     private boolean editable;
@@ -73,7 +73,7 @@ public class ControlesDao {
                 }
                 return isEditable();
             }
-           // @Override
+            @Override
             public Class getColumnClass(int col) {
                 switch (getColumnName(col)) {
                     case "id":
@@ -100,7 +100,7 @@ public class ControlesDao {
 
         if (conexion.isConexion()) {
             try {
-                conexion.ExecuteSql("SELECT id, descripcion, texto, imagen , estado FROM qualitys."+nombreTabla+";");
+                conexion.ExecuteSql("SELECT id, descripcion, texto, imagen , estado FROM qualitys."+NOMBRE_TABLA+";");
                 while (conexion.resulset.next()) {
                     model.addRow(new Object[]{conexion.resulset.getInt(1),
                         conexion.resulset.getString(2),
@@ -115,20 +115,15 @@ public class ControlesDao {
         return model;
     }
 
-
-    public void abmActionPerformed(java.awt.event.ActionEvent evt) {
-        switch (evt.getActionCommand()) {
-            case "Activar ABM":
-                editable = true;
-                break;
-            case "Guardar":
-                editable = false;
-                break;
-        }
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
+
+   
+
     public int getLastId() {
-        return new LastID(conexion, nombreTabla).lastId();
+        return new LastID(conexion, NOMBRE_TABLA).lastId();
     }
 
     public Editar getEditar() {

@@ -14,10 +14,17 @@ import writeproperties.Conexion;
  * @author MUTNPROD003
  */
 public class RangosABM extends javax.swing.JFrame {
+
+    private static final String INSTRUCCIONES = "Para INSERTAR un nuevo elemento, oprima 'AGREGAR CONTROL',"
+            + "\n inserte los datos en la fila vacia y oprima GUARDAR.\n"
+            + "Para EDITAR un contenido, oprima 'EDITAR CONTROL',\n "
+            + "modifique los datos y oprima GUARDAR.\n"
+            + "Para desactivar un control, posarse sobre la columna 'id' y oprimir 'DESACTIVAR CONTROL'.";
     private Conexion conexion = new Conexion();
     private final RangosDao rangosDao;
     private DefaultTableModel modelo;
     private int ide;
+    private String evento;
 
     /**
      * Creates new form RangosABM
@@ -34,6 +41,7 @@ public class RangosABM extends javax.swing.JFrame {
         desactivar.setVisible(false);
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,8 +152,6 @@ public class RangosABM extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaContenido.setColumnSelectionAllowed(true);
-        tablaContenido.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(tablaContenido);
 
         agregar.setText("Agregar Control");
@@ -161,9 +167,7 @@ public class RangosABM extends javax.swing.JFrame {
             principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(principalInternalLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                    .addComponent(salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(editar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -171,6 +175,10 @@ public class RangosABM extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(principalInternalLayout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         principalInternalLayout.setVerticalGroup(
             principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,12 +191,12 @@ public class RangosABM extends javax.swing.JFrame {
                     .addComponent(agregar)
                     .addComponent(editar)
                     .addComponent(desactivar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 19, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(salvar)
-                .addGap(15, 15, 15))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        principalInternal.setBounds(0, 0, 530, 382);
+        principalInternal.setBounds(0, 0, 530, 390);
         desk.add(principalInternal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         scroll.setViewportView(desk);
@@ -223,24 +231,26 @@ public class RangosABM extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        int idNew = getIde()+1;
+        rangosDao.setEditable(true);
+        int idNew = getIde() + 1;
         Object[] ob = new Object[]{idNew};
         modelo.addRow(ob);
         tablaContenido.repaint();
         salvar.setVisible(true);
+        evento = "Agregar";
 
     }//GEN-LAST:event_agregarActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        int idjtext = (tablaContenido.getSelectedRow());
-        rangosDao.getEditar().rangos_SetRow(idjtext);
-        tablaContenido.repaint();
-
+        rangosDao.setEditable(true);
+        salvar.setVisible(true);
+        evento = "Editar";
     }//GEN-LAST:event_editarActionPerformed
 
     private void desactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarActionPerformed
-         int idjtext = (tablaContenido.getSelectedRow());
-        Desactivar desactivar1 = new Desactivar(idjtext, modelo, conexion,"rangos_qs",5);
+        rangosDao.setEditable(true);
+        int idjtext = (tablaContenido.getSelectedRow());
+        Desactivar desactivar1 = new Desactivar(idjtext, modelo, conexion, "rangos_qs", 5);
         tablaContenido.repaint();
 
     }//GEN-LAST:event_desactivarActionPerformed
@@ -250,26 +260,35 @@ public class RangosABM extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-       rangosDao.getInsertar().insert_newRango(getIde());
-        tablaContenido.repaint();
-        rangosDao.abmActionPerformed(evt);
-        salvar.setVisible(false);
+        botonGuardar();
     }//GEN-LAST:event_salvarActionPerformed
 
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
-        JOptionPane.showMessageDialog(tablaContenido, "Para INSERTAR un nuevo elemento debe completar las filas \n"
-                + "y despues oprimir salvar.\n"
-                + "Para editar uno ya existente debe posarse sobre la fila y modificar el contenido, luego oprimir editar\n"
-                + "Para desactivar un control, posarse en la columna id y presionar desactivar"
-                + "");
-
+        JOptionPane.showMessageDialog(tablaContenido,
+                INSTRUCCIONES);
         principalInternal.setTitle("Módulo de Edición");
-        rangosDao.abmActionPerformed(evt);
         agregar.setVisible(true);
         editar.setVisible(true);
         desactivar.setVisible(true);
 
     }//GEN-LAST:event_ABMActionPerformed
+    private void botonGuardar() {
+        switch (evento) {
+            case "Agregar":
+                tablaContenido.editCellAt(-1, -1);
+                rangosDao.getInsertar().insert_newRango(getIde());
+                tablaContenido.repaint();
+                salvar.setVisible(false);
+                break;
+            case "Editar":
+                tablaContenido.editCellAt(-1, -1);
+                int row = tablaContenido.getSelectedRow();
+                int idjtext = (row);
+                rangosDao.getEditar().rangos_SetRow(idjtext);
+                tablaContenido.repaint();
+                break;
+        }
+    }
 
     public int getIde() {
         return rangosDao.getLastId();
@@ -278,7 +297,6 @@ public class RangosABM extends javax.swing.JFrame {
     public void setIde(int ide) {
         this.ide = ide;
     }
-
     /**
      * @param args the command line arguments
      */

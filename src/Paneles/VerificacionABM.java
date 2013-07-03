@@ -14,6 +14,8 @@ import writeproperties.Conexion;
  */
 public class VerificacionABM extends javax.swing.JFrame {
 
+    private static final String    INSTRUCCIONES="";
+    private String evento;
     private Conexion conexion = new Conexion();
     private VerificacionDao verificacion;
     private DefaultTableModel modelo;
@@ -194,6 +196,7 @@ public class VerificacionABM extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
                 java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new VerificacionAlta(conexion, modelo, tablaV).setVisible(true);
             }
