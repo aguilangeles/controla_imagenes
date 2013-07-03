@@ -337,6 +337,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void siguiente_JButton() {
+
         KeyStroke keyNext = KeyStroke.getKeyStroke(KeyEvent.VK_S,
                 Event.CTRL_MASK);
         Action performNext = new AbstractAction("Siguiente") {
@@ -353,7 +354,6 @@ public class Ventana extends javax.swing.JFrame {
                             pdf, isHasNext(), contador++).Siguiente();
                     VisualizarImagen visualizarImagen = new VisualizarImagen(ruta_temp, scrollimage, slider, getZoom());
                     if (!isHasNext()) {
-                        //anterior.setVisible(true);
                         siguiente.setEnabled(false);
                         terminar.setEnabled(true);
                     }
@@ -365,7 +365,6 @@ public class Ventana extends javax.swing.JFrame {
         siguiente.setAction(performNext);
         siguiente.getActionMap().put("performNext", performNext);
         siguiente.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyNext, "performNext");
-
 
     }
     private void atras_JButton() {
