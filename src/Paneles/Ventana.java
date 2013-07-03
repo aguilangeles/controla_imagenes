@@ -65,7 +65,8 @@ public class Ventana extends javax.swing.JFrame {
         rutaJlabel.setText(rutaDb);
         internal.setVisible(true);
         verImagen = primeraImagen(ispdf, siguientes, verImagen);
-        System.out.println("ver imgaent en  internal"+ verImagen);
+        System.out.println(verImagen);
+String ret ="C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\temp\\FRP_0001_2013-05-07_09-32-19_0.png";
         VisualizarImagen visualizarImagen = new VisualizarImagen(verImagen, scrollimage, slider, getZoom());
         int id = siguientes.getId();
         new SetChecksBox(tablaCheck).setFirstBoolean(id);
@@ -478,18 +479,14 @@ public class Ventana extends javax.swing.JFrame {
 
     private String primeraImagen(boolean ispdf, Imagen siguientes, String verImagen) {
         if (ispdf) {
-            try {
-                worker = new ImagenesWorker(siguientes.getRuta_archivo(), siguientes.getParent(), siguientes.getPagina());
-                worker.execute();
-                String rutaTemporal = worker.doInBackground();
-                System.out.println("ruta temporal en ventana "+rutaTemporal);
-                siguientes.setRutaTemp(rutaTemporal);
-                pagina.setText("Pagina: " + siguientes.getPagina());
-                verImagen = rutaTemporal;
-            } catch (Exception ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
 
-            }
+            worker = new ImagenesWorker(siguientes.getRuta_archivo(), siguientes.getParent(), siguientes.getPagina());
+            worker.execute();
+            String rutaTemporal = worker.doInBackground();
+            siguientes.setRutaTemp(rutaTemporal);
+            pagina.setText("Pagina: " + siguientes.getPagina());
+            verImagen = rutaTemporal;
+
         } else {
             verImagen = siguientes.getRuta_archivo();
             pagina.setVisible(false);

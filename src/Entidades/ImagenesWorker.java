@@ -19,15 +19,14 @@ import org.im4java.core.IMOperation;
  * @author MUTNPROD003
  */
 public class ImagenesWorker extends SwingWorker<Object, Object> {
+    private static final String IM4JAVA_TOOLPATH = "C:\\Program Files (x86)\\ImageMagick-6.8.6-Q16";
 
-//    private static final String IM4JAVA_TOOLPATH = "C:\\Program Files (x86)\\ImageMagick-6.8.6-Q16";
     private String rutaConPagina;
     private String rutaEnTemporal;
 
     public ImagenesWorker(String ruta_archivo, String parent, int pagina) {
         this.rutaConPagina = ruta_archivo + "[" + pagina + "]";
         this.rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal();
-
     }
 
     @Override
@@ -40,7 +39,7 @@ public class ImagenesWorker extends SwingWorker<Object, Object> {
             operation.addImage();
             operation.addImage();
             ConvertCmd convert = new ConvertCmd();
-//            convert.setSearchPath(IM4JAVA_TOOLPATH);
+            convert.setSearchPath(IM4JAVA_TOOLPATH);
             try {
                 convert.run(operation, new Object[]{input.getAbsolutePath(), output.getAbsolutePath()});
             } catch (IOException | InterruptedException ex) {
@@ -51,8 +50,6 @@ public class ImagenesWorker extends SwingWorker<Object, Object> {
             System.out.println("im4java exception");
             System.out.println(e.getMessage());
         }
-        System.out.println(output.getAbsolutePath());
-        System.out.println(rutaEnTemporal);
         return output.getAbsolutePath();
     }
 }

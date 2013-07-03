@@ -19,7 +19,6 @@ public class Imagen {
     private String ruta_archivo;
     private String parent;
     private int pagina;
-
     private String rutaTemp;
     private String rutaDb;
     private int estado;
@@ -29,8 +28,8 @@ public class Imagen {
             this.id = id;
             this.parent = parent;
             this.pagina = pagina;
-            this.rutaDb=URLDecoder.decode(ruta_archivo, "UTF-8");
-           this.ruta_archivo = URLDecoder.decode(parent + ruta_archivo, "UTF-8");
+            this.rutaDb = URLDecoder.decode(ruta_archivo, "UTF-8");
+            this.ruta_archivo = URLDecoder.decode(parent + ruta_archivo, "UTF-8");
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(Imagen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -56,12 +55,9 @@ public class Imagen {
         this.rutaDb = rutaDb;
     }
 
-
-
     public String getRutaTemp() {
         return rutaTemp;
     }
-
     public void setRutaTemp(String rutaTemp) {
         this.rutaTemp = rutaTemp;
     }
@@ -104,6 +100,7 @@ public class Imagen {
 
     @Override
     public String toString() {
-        return "Imagen{" + "id=" + id + ", nombre=" + ruta_archivo + ", parent=" + parent + ", numero=" + pagina + ", rutaTemp=" + rutaTemp + ", estado=" + estado + '}';
+        return "Imagen{" + "id=" + id + ", nombre=" + ruta_archivo + ", parent="
+                + parent + ", numero=" + pagina + ", rutaTemp=" + rutaTemp + ", estado=" + estado + '}';
     }
 }

@@ -4,7 +4,6 @@
  */
 package additems;
 
-import additems.ImageComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -28,6 +27,8 @@ public class VisualizarImagen {
         visualizarImagen(ruta);
     }
         private void visualizarImagen(String imagen) {
+
+            System.out.println("\t imagen visualizar imagen"+imagen);
         try {
             final ImageComponent imageCmp = new ImageComponent(imagen, 2. * getZoom() / slider.getMaximum(), scrollPane);
             scrollPane.getViewport().add(imageCmp);
