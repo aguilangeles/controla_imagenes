@@ -4,7 +4,6 @@
  */
 package Refactor;
 
-import Paneles.SetearArchivoConfiguracion;
 import helper.InputVerifier;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
@@ -14,8 +13,8 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import writeproperties.TipodeUsuario;
-import writeproperties.ValidarIngreso;
+import Entidades.TipodeUsuario;
+import Entidades.ValidarIngreso;
 
 /**
  *

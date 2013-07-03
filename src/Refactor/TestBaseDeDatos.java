@@ -4,14 +4,13 @@
  */
 package Refactor;
 
-import Paneles.SetearArchivoConfiguracion;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import writeproperties.Conexion;
-import writeproperties.Usuario;
+import Entidades.Conexion;
+import Entidades.Usuario;
 
 /**
  *

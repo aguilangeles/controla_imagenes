@@ -4,15 +4,14 @@
  */
 package Refactor;
 
-import Paneles.CargarLote;
-import Paneles.ControlesABM;
-import Paneles.RangosABM;
-import Paneles.UsuariosABM;
-import Paneles.ValidarUsuario;
-import Paneles.VerificacionABM;
+import PanelesABM.CargarLote;
+import PanelesABM.ControlesABM;
+import PanelesABM.RangosABM;
+import PanelesABM.UsuariosABM;
+import PanelesABM.VerificacionABM;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import writeproperties.TipodeUsuario;
+import Entidades.TipodeUsuario;
 
 /**
  *
@@ -211,7 +210,7 @@ public class PanelControl extends javax.swing.JFrame {
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        new ValidarUsuario(isAdministrador()).setVisible(true);
+                        new IngresoBaseDeDatos(isAdministrador()).setVisible(true);
                     }
                 });
                 break;

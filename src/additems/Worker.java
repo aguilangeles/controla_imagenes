@@ -5,8 +5,7 @@
 package additems;
 
 import Entidades.LlenarTrazaDao;
-import Paneles.Ventana;
-import Rangos.Paq.LastID;
+import VentanaVisual.Ventana;
 import helper.Archivo;
 import helper.Traza;
 import java.io.File;
@@ -20,13 +19,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
+import tratamientoruta.EncontrarExtension;
 import tratamientoruta.PaginaPdf;
-import tratamientoruta.Tratamientos.EncontrarExtension;
-import tratamientoruta.Tratamientos.FindParent;
-import tratamientoruta.Tratamientos.GetPages;
-import tratamientoruta.Tratamientos.RamdomList;
-import writeproperties.Conexion;
-import writeproperties.TipodeUsuario;
+import tratamientoruta.FindParent;
+
+
+import tratamientoruta.GetPages;
+import tratamientoruta.RamdomList;
+import Entidades.Conexion;
+import Entidades.TipodeUsuario;
 
 /**
  *
@@ -34,7 +35,7 @@ import writeproperties.TipodeUsuario;
  */
 public class Worker extends SwingWorker<Object, Object> {
 
-    private Conexion conexion = new writeproperties.Conexion();
+    private Conexion conexion = new Entidades.Conexion();
     private TipodeUsuario usarioTipo;
     private int idDocumento;
     private int idVerificacion;
@@ -68,7 +69,7 @@ public class Worker extends SwingWorker<Object, Object> {
             extension = (EncontrarExtension.getExtension());
             switch (extension) {
                 case ".tif":
-                    List listaTif = tratamientoruta.Tratamientos.EncontrarExtension.getLista();
+                    List listaTif = EncontrarExtension.getLista();
                     Traza trazaTif = new Traza(listaTif.size(), idVerificacion, idUsuario, idDocumento, conexion);
                     RamdomList ramdomListTif = new RamdomList(listaTif, trazaTif.getCantidadMuestreada());
                     List<Object> ramdomTif = ramdomListTif.getSeleccion();
@@ -115,7 +116,7 @@ public class Worker extends SwingWorker<Object, Object> {
                     //aca lo mismo
                     break;
                 case ".png":
-                    List listaPng = tratamientoruta.Tratamientos.EncontrarExtension.getLista();
+                    List listaPng = EncontrarExtension.getLista();
                     Traza trazaPng = new Traza(listaPng.size(), idVerificacion, idUsuario, idDocumento, conexion);
                     RamdomList ramdomList = new RamdomList(listaPng, trazaPng.getCantidadMuestreada());
                     List<Object> ramdom = ramdomList.getSeleccion();

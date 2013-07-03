@@ -15,6 +15,7 @@ import tratamientoruta.PaginaPdf;
 import tratamientoruta.Sublote;
 import tratamientoruta.VolumenPDF;
 
+
 /**
  *
  * @author MUTNPROD003
@@ -34,7 +35,6 @@ public class PDF_listarDirectorio {
                 contador++;
                 String absolutePath = files[x].getAbsolutePath();
                 VolumenPDF directorio = new VolumenPDF(contador, absolutePath, null);
-               // System.out.println("volument "+ directorio);
                 lista.add(directorio);
             }
         }

@@ -4,7 +4,7 @@
  */
 package helper;
 
-import Paneles.AyudaVisual;
+import VentanaVisual.AyudaVisual;
 import Entidades.TiposConCheck;
 import Entidades.TrazaDao;
 import java.awt.Component;

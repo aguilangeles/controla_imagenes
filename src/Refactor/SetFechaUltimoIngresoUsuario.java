@@ -4,8 +4,8 @@
  */
 package Refactor;
 
-import writeproperties.Conexion;
-import writeproperties.TipodeUsuario;
+import Entidades.Conexion;
+import Entidades.TipodeUsuario;
 
 /**
  *setea la fecha de ingreso del usuario validado

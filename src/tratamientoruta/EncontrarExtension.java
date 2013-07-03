@@ -5,6 +5,9 @@
 package tratamientoruta;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 /**
@@ -14,6 +17,7 @@ import java.io.File;
 public final class EncontrarExtension {
 
     private static String extension;
+    private static List<Object> lista = new ArrayList<>();
 
     public EncontrarExtension(String ruta) {
         File f = new File(ruta);
@@ -23,7 +27,6 @@ public final class EncontrarExtension {
     public EncontrarExtension(File f) {
         findExtension(f);
     }
-
 
     private static void findExtension(File f) {
         File[] files = f.listFiles();
@@ -39,12 +42,22 @@ public final class EncontrarExtension {
             if (fin) {
                 StringImage stringImage = new StringImage(name);
                 extension = (stringImage.getExtension());
+                lista.add(files[x].getAbsolutePath());
             }
         }
     }
 
+
     public static String getExtension() {
         return extension;
+    }
+
+    public static List<Object> getLista() {
+        return lista;
+    }
+
+    public static void setLista(List<Object> lista) {
+        EncontrarExtension.lista = lista;
     }
 
 

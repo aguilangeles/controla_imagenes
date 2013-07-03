@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author MUTNPROD003
  */
 public class Traza {
-    private writeproperties.Conexion conexion ;
+    private Entidades.Conexion conexion ;
     private int cantidadMuestreada;
     private int idRango;
     private int tamanioLote;
@@ -21,7 +21,7 @@ public class Traza {
     private int idUsuario;
     private int idTipoDocumento;
 
-    public Traza(int tamanioLote, int idVerificacion, int idUsuario, int idTipoDocumento, writeproperties.Conexion conexion) {
+    public Traza(int tamanioLote, int idVerificacion, int idUsuario, int idTipoDocumento, Entidades.Conexion conexion) {
         this.tamanioLote = tamanioLote;
         this.idVerificacion = idVerificacion;
         this.idUsuario = idUsuario;

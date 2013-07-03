@@ -4,7 +4,7 @@
  */
 package helper;
 
-import writeproperties.Conexion;
+import Entidades.Conexion;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Archivo {
     private String ruta;
     private int page;
 
-    public Archivo(writeproperties.Conexion conexion, int id, String ruta, int page) {
+    public Archivo(Conexion conexion, int id, String ruta, int page) {
         this.conexion = conexion;
         this.id += id;
         this.ruta = ruta;
@@ -25,9 +25,8 @@ public class Archivo {
     }
 
     private void archivo_Insertar() {
-        String ret = "";
         int estado = 0;
-        ret = "Insert into qualitys.archivo (idTraza, ruta_archivo, pagina_pdf, estado)"
+        String ret = "Insert into qualitys.archivo (idTraza, ruta_archivo, pagina_pdf, estado)"
                 + " VALUES (" + id + ", '" + ruta + "' ," +page+ " ," + estado + ");";
         conexion.executeUpdate(ret);
     }

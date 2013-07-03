@@ -5,12 +5,12 @@
  */
 package Entidades;
 
+import VentanaVisual.CantidadControlesPorVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import writeproperties.Conexion;
 
 /**
  *
@@ -32,7 +32,7 @@ public class LlenarTipos {
     private List<TiposConCheck> poblarLista() {
         try {
             TiposConCheck tipos;
-                size = new CantidadTiposEnVerificacion(conexion, idTraza).getSize();
+                size = new CantidadControlesPorVerificacion(conexion, idTraza).getCantidad();
                 String insert = "select v.idControl"
                         + ", c.descripcion "
                         + ", c.texto"
