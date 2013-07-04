@@ -8,16 +8,16 @@ package tratamientoruta;
  *
  * @author MUTNPROD003
  */
-public class StringImage {
+public class TipoDeImagen {
 
     private String extension;
 
-    public StringImage(String extension) {
-        this.extension = extension;
+    public TipoDeImagen(String extension) {
+        this.extension = buscarExt(extension);
     }
 
-    public String getExtension() {
-        String ret = "";
+    private String buscarExt(String extension){
+         String ret = "";
         if (extension.endsWith(".tif")) {
             ret = ".tif";
         } else if (extension.endsWith(".pdf")) {
@@ -28,6 +28,9 @@ public class StringImage {
             ret = ".png";
         }
         return ret;
+    }
+    public String getExtension() {
+     return extension;
     }
 
     @Override

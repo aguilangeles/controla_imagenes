@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tratamientoruta;
+package helper;
 
 import java.io.File;
 
@@ -11,16 +11,15 @@ import java.io.File;
  *
  * @author MUTNPROD003
  */
-public final class FindParent {
-
-    private File f;
-
-    public FindParent(File f) {
-        this.f = f;
+public final class IdentificarParent {
+    private String parent;
+    
+    public IdentificarParent(File file) {
+        this.parent= encontrarParent(file);
     }
 
-    public String findParent() {
-        File[] files = f.listFiles();
+    private String encontrarParent(File file) {
+        File[] files = file.listFiles();
         String ret = (files[0].getParent());
         for (int x = 0; x < files.length; x++) {
             if (files[x].isDirectory()) {
@@ -28,4 +27,9 @@ public final class FindParent {
         }
         return ret;
     }
+
+    public String getParent() {
+        return parent;
+    }
+
 }

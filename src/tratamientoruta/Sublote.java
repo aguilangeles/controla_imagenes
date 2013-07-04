@@ -4,6 +4,7 @@
  */
 package tratamientoruta;
 
+import Entidades.Pdf_NombreMasNumero;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,18 +14,16 @@ import java.util.List;
  */
 public class Sublote {
     private int idSublote;
-    private List<PaginaPdf> pdfpagina = new ArrayList<>();
-    private PaginaPdf pp;
-    private String absolutePath;
-    private String parent;
+    private List<Pdf_NombreMasNumero> pdfpagina = new ArrayList<>();
+    private String nombre;
+//    private String absolutePath;
     private String fileName;
     private int paginas;
     private String relativa ;
 
     public Sublote(int idSublote, String absolutePath, String parent, String fileName, int paginas) {
         this.idSublote = idSublote;
-        this.absolutePath = absolutePath;
-        this.parent = parent;
+        this.nombre = absolutePath;
         this.fileName = fileName;
         String rel = parent+"\\";
         this.relativa = absolutePath.substring(rel.length());
@@ -32,13 +31,13 @@ public class Sublote {
     }
 
 
-        public List<PaginaPdf> getPdfpagina() {
-              for(int i =0; i<paginas; i++){
-                pp = new PaginaPdf(getRelativa(), i);
-                pdfpagina.add(pp);
-            }
-            return pdfpagina;
+       public List<Pdf_NombreMasNumero> getPdfpagina() {
+        for (int i = 0; i < paginas; i++) {
+            Pdf_NombreMasNumero paginaNumero = new Pdf_NombreMasNumero(getRelativa(), i);
+            pdfpagina.add(paginaNumero);
         }
+        return pdfpagina;
+    }
 
 
         public int getIdSublote() {
@@ -50,11 +49,11 @@ public class Sublote {
         }
 
         public String getNombre() {
-            return absolutePath;
+            return nombre;
         }
 
         public void setNombre(String nombre) {
-            this.absolutePath = nombre;
+            this.nombre = nombre;
         }
 
         public int getPaginas() {
@@ -69,10 +68,7 @@ public class Sublote {
         return relativa;
     }
 
-    @Override
-    public String toString() {
-        return "Sublote{" + "idSublote=" + idSublote + ", pdfpagina=" + pdfpagina + ", pp=" + pp + ", nombre=" + absolutePath + ", paginas=" + paginas + '}';
-    }
+
     }
 //
 

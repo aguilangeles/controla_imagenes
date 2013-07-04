@@ -19,13 +19,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
-import tratamientoruta.EncontrarExtension;
-import tratamientoruta.PaginaPdf;
-import tratamientoruta.FindParent;
+import helper.IdentificarExtension;
+import Entidades.Pdf_NombreMasNumero;
+import helper.IdentificarParent;
 
 
-import tratamientoruta.GetPages;
-import tratamientoruta.RamdomList;
+import tratamientoruta.BuscarPaginasPdf;
+import tratamientoruta.CrearElRamdom;
 import Entidades.Conexion;
 import Entidades.TipodeUsuario;
 
@@ -56,8 +56,8 @@ public class Worker extends SwingWorker<Object, Object> {
         this.idDocumento = idDocumento;
         this.idVerificacion = idVerificacion;
         this.idUsuario = idUsuario;
-        FindParent ret = new FindParent(new File(ruta.getText()));
-        this.parent = (ret.findParent());
+        IdentificarParent ret = new IdentificarParent(new File(ruta.getText()));
+        this.parent = (ret.getParent());
 
     }
 
@@ -65,13 +65,13 @@ public class Worker extends SwingWorker<Object, Object> {
     protected String doInBackground() {
         if (conexion.isConexion()) {
             idTraza = new LastID(conexion, "traza").lastId();
-           EncontrarExtension ext = new EncontrarExtension(ruta.getText());
-            extension = (EncontrarExtension.getExtension());
+           IdentificarExtension ext = new IdentificarExtension(ruta.getText());
+            extension = (IdentificarExtension.getExtension());
             switch (extension) {
                 case ".tif":
-                    List listaTif = EncontrarExtension.getLista();
+                    List listaTif = IdentificarExtension.getLista();
                     Traza trazaTif = new Traza(listaTif.size(), idVerificacion, idUsuario, idDocumento, conexion);
-                    RamdomList ramdomListTif = new RamdomList(listaTif, trazaTif.getCantidadMuestreada());
+                    CrearElRamdom ramdomListTif = new CrearElRamdom(listaTif, trazaTif.getCantidadMuestreada());
                     List<Object> ramdomTif = ramdomListTif.getSeleccion();
                     for (Object obj : ramdomTif) {
                         try {
@@ -89,19 +89,19 @@ public class Worker extends SwingWorker<Object, Object> {
                     break;
                 case ".pdf":
 
-                    GetPages getPages = new GetPages();
+                    BuscarPaginasPdf getPages = new BuscarPaginasPdf();
                     List<Object> listaPdf = getPages.getLista();
                     Traza trazaPdf = new Traza(listaPdf.size(), idVerificacion, idUsuario, idDocumento, conexion);
                     File file = new File(listaPdf.get(1).toString());
-                    RamdomList ramdomListPdf = new RamdomList(listaPdf, trazaPdf.getCantidadMuestreada());
+                    CrearElRamdom ramdomListPdf = new CrearElRamdom(listaPdf, trazaPdf.getCantidadMuestreada());
                     List<Object> ramdomPdf = ramdomListPdf.getSeleccion();
                     for (Object o : ramdomPdf) {
                         try {
-                            PaginaPdf pagina = (PaginaPdf) o;
+                            Pdf_NombreMasNumero pagina = (Pdf_NombreMasNumero) o;
                             int parentlength = parent.length() + 1;
                             String adaptarFile = pagina.getNombre().substring(parentlength);
                             String filename = URLEncoder.encode(adaptarFile, "UTF-8");
-                            int page = pagina.getIdPagina();
+                            int page = pagina.getNumeroPagina();
                             Archivo archivo = new Archivo(conexion, idTraza, filename, page);
                             imagenyControl();
                         } catch (UnsupportedEncodingException ex) {
@@ -116,9 +116,9 @@ public class Worker extends SwingWorker<Object, Object> {
                     //aca lo mismo
                     break;
                 case ".png":
-                    List listaPng = EncontrarExtension.getLista();
+                    List listaPng = IdentificarExtension.getLista();
                     Traza trazaPng = new Traza(listaPng.size(), idVerificacion, idUsuario, idDocumento, conexion);
-                    RamdomList ramdomList = new RamdomList(listaPng, trazaPng.getCantidadMuestreada());
+                    CrearElRamdom ramdomList = new CrearElRamdom(listaPng, trazaPng.getCantidadMuestreada());
                     List<Object> ramdom = ramdomList.getSeleccion();
                     for (Object obj : ramdom) {
                         try {

@@ -14,20 +14,19 @@ import java.util.List;
  *
  * @author MUTNPROD003
  */
-public class RamdomList {
+public class CrearElRamdom {
     private List<Object> lista;
     private List<Object> seleccion = new ArrayList<>();
     private int rango;
 
-    public RamdomList(List<Object> lista, int rango) {
+    public CrearElRamdom(List<Object> lista, int rango) {
         this.lista = lista;
         this.rango = rango;
-        ramdom();
-
+        generarRamdom();
     }
 
 
-    private  void ramdom() {
+    private  void generarRamdom() {
         HashSet<Object> hash = new HashSet<>();
         int tamanioLote = lista.size();
         while (hash.size() < rango) {
@@ -38,8 +37,8 @@ public class RamdomList {
         Collections.sort(ListaHash);
         Iterator it = ListaHash.iterator();
         while (it.hasNext()) {
-            Integer idTif = (Integer) it.next();
-            seleccion.add(lista.get(idTif));
+            Integer imagen = (Integer) it.next();
+            seleccion.add(lista.get(imagen));
         }
     }
 

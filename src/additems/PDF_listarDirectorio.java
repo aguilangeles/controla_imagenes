@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import tratamientoruta.PaginaPdf;
+import Entidades.Pdf_NombreMasNumero;
 import tratamientoruta.Sublote;
-import tratamientoruta.VolumenPDF;
+import Entidades.VolumenPDF;
 
 
 /**
@@ -22,7 +22,7 @@ import tratamientoruta.VolumenPDF;
  */
 public class PDF_listarDirectorio {
     private List<VolumenPDF> lista;
-    private List<PaginaPdf> listaFiles=new ArrayList<>();
+    private List<Pdf_NombreMasNumero> listaFiles=new ArrayList<>();
     private String parent;
 
     public void listarDirectorio(File f) {
@@ -76,7 +76,7 @@ public class PDF_listarDirectorio {
         int contador = 0;
         for (VolumenPDF v : getLista()) {
             for (Sublote sub : v.getSublotes()) {
-                for (PaginaPdf pdf : sub.getPdfpagina()) {
+                for (Pdf_NombreMasNumero pdf : sub.getPdfpagina()) {
                     contador++;
                     listaFiles.add(pdf);
                 }
@@ -101,11 +101,11 @@ public class PDF_listarDirectorio {
         this.parent = parent;
     }
 
-    public List<PaginaPdf> getListaFiles() {
+    public List<Pdf_NombreMasNumero> getListaFiles() {
         return listaFiles;
     }
 
-    public void setListaFiles(List<PaginaPdf> listaFiles) {
+    public void setListaFiles(List<Pdf_NombreMasNumero> listaFiles) {
         this.listaFiles = listaFiles;
     }
 

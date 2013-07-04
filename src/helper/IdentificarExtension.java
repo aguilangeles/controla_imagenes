@@ -2,11 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tratamientoruta;
+package helper;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import tratamientoruta.TipoDeImagen;
 
 
 
@@ -14,51 +15,45 @@ import java.util.List;
  *
  * @author MUTNPROD003
  */
-public final class EncontrarExtension {
-
+public final class IdentificarExtension {
     private static String extension;
-    private static List<Object> lista = new ArrayList<>();
+    private static List<Object> listaExtension = new ArrayList<>();
 
-    public EncontrarExtension(String ruta) {
-        File f = new File(ruta);
-        findExtension(f);
+    public IdentificarExtension(String ruta) {
+        File file = new File(ruta);
+        buscarExtensiones(file);
     }
 
-    public EncontrarExtension(File f) {
-        findExtension(f);
+    public IdentificarExtension(File aFile) {
+        buscarExtensiones(aFile);
     }
 
-    private static void findExtension(File f) {
-        File[] files = f.listFiles();
+    private static void buscarExtensiones(File aFile) {
+        File[] files = aFile.listFiles();
         for (int x = 0; x < files.length; x++) {
             String name = files[x].getName();
-            boolean fin = (name.endsWith(".tif")
+            boolean ext = (name.endsWith(".tif")
                     || name.endsWith(".pdf")
                     || name.endsWith(".jpg")
                     || name.endsWith(".png")) ? true : false;
             if (files[x].isDirectory()) {
-                findExtension(files[x]);
+                buscarExtensiones(files[x]);
             }
-            if (fin) {
-                StringImage stringImage = new StringImage(name);
+            if (ext) {
+                TipoDeImagen stringImage = new TipoDeImagen(name);
                 extension = (stringImage.getExtension());
-                lista.add(files[x].getAbsolutePath());
+                listaExtension.add(files[x].getAbsolutePath());
             }
         }
     }
 
-
     public static String getExtension() {
         return extension;
     }
-
     public static List<Object> getLista() {
-        return lista;
+        return listaExtension;
     }
-
     public static void setLista(List<Object> lista) {
-        EncontrarExtension.lista = lista;
+        IdentificarExtension.listaExtension = lista;
     }
-
-
 }
