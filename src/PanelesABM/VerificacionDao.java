@@ -4,9 +4,9 @@
  */
 package PanelesABM;
 
-import Verificacion.TiposVerificacion;
-import Verificacion.TiposVerificacion.TiposControlVf;
-import helper.TextAreaRenderer;
+import Ventana.TiposVerificacion;
+import Ventana.TiposVerificacion.TiposControlVf;
+import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
 import java.sql.SQLException;
 import java.util.ArrayList;

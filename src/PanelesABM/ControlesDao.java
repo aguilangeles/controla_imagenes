@@ -4,8 +4,8 @@
  */
 package PanelesABM;
 
-import helper.TextAreaRenderer;
-import additems.LastID;
+import Helpers.TextAreaRenderer;
+import Helpers.LastID;
 import java.awt.Rectangle;
 import java.sql.SQLException;
 import java.util.logging.Level;

@@ -5,7 +5,7 @@
 package ReporteLote;
 
 import ReporteLote.Tabla_TiposDeControlCantidad;
-import helper.BorrarJPG;
+import Helpers.BorrarJPG;
 import java.io.File;
 import java.util.List;
 import javax.swing.ButtonGroup;

@@ -4,11 +4,11 @@
  */
 package PanelesABM;
 
-import additems.LastID;
-import Verificacion.ListaControlesActivos;
-import Verificacion.ListaControlesActivos.TipoControl;
-import Verificacion.TiposVerificacion;
-import Verificacion.TiposVerificacion.TiposControlVf;
+import Helpers.LastID;
+import Ventana.ListaControlesActivos;
+import Ventana.ListaControlesActivos.TipoControl;
+import Ventana.TiposVerificacion;
+import Ventana.TiposVerificacion.TiposControlVf;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;

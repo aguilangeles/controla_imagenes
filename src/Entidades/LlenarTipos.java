@@ -5,7 +5,7 @@
  */
 package Entidades;
 
-import VentanaVisual.CantidadControlesPorVerificacion;
+import Ventana.CantidadControlesPorVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

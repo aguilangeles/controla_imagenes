@@ -4,8 +4,8 @@
  */
 package PanelesABM;
 
-import Verificacion.ListaControlesActivos;
-import Verificacion.ListaControlesActivos.TipoControl;
+import Ventana.ListaControlesActivos;
+import Ventana.ListaControlesActivos.TipoControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

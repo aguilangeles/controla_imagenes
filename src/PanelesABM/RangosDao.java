@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import additems.LastID;
+import Helpers.LastID;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

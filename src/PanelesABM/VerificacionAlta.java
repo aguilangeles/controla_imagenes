@@ -4,9 +4,9 @@
  */
 package PanelesABM;
 
-import Verificacion.ListaControlesActivos;
-import Verificacion.ListaControlesActivos.TipoControl;
-import helper.InputVerifier;
+import Ventana.ListaControlesActivos;
+import Ventana.ListaControlesActivos.TipoControl;
+import Helpers.InputVerifier;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;

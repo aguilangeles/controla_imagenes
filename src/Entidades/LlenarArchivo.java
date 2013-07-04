@@ -5,7 +5,7 @@
 package Entidades;
 
 
-import VentanaVisual.ImagenesWorker;
+import Ventana.ImagenesWorker;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

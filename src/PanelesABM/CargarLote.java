@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import additems.Worker;
+import Ventana.Worker;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class CargarLote extends javax.swing.JFrame {
 
     public CargarLote(TipodeUsuario usuarioTipo) {
         initComponents();
-        rutaCarpeta.setInputVerifier(new helper.InputVerifier().inputVerifierT());
+        rutaCarpeta.setInputVerifier(new Helpers.InputVerifier().inputVerifierT());
         Verificacion_CargarComboBoxs llenarComboBox = new Verificacion_CargarComboBoxs(tipoDocumentoBox, tipoVerificacionBox, con);
         this.usarioTipo = usuarioTipo;
     }
@@ -190,13 +190,13 @@ public class CargarLote extends javax.swing.JFrame {
     }
 
     private int getTipoDocumento() {
-        Verificacion.ListaControlesActivos.TipoControl tip =
-                (Verificacion.ListaControlesActivos.TipoControl) tipoDocumentoBox.getSelectedItem();
+        Ventana.ListaControlesActivos.TipoControl tip =
+                (Ventana.ListaControlesActivos.TipoControl) tipoDocumentoBox.getSelectedItem();
         return tip.getId();
     }
 
     private List<Integer> idControlesByVerificacion() {
-        Verificacion.ListaControlesActivos.TipoControl tip = (Verificacion.ListaControlesActivos.TipoControl) tipoVerificacionBox.getSelectedItem();
+        Ventana.ListaControlesActivos.TipoControl tip = (Ventana.ListaControlesActivos.TipoControl) tipoVerificacionBox.getSelectedItem();
         idVerificacion=tip.getId();
         String selec = "SELECT idControl FROM qualitys.controles_verificacion where idVerificacion =" + tip.getId() + ";";
         if (con.isConexion()) {

@@ -4,7 +4,7 @@
  */
 package Entidades;
 
-import helper.Time;
+import Helpers.Time;
 
 /**
  *
