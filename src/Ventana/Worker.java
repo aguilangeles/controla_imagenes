@@ -4,10 +4,8 @@
  */
 package Ventana;
 
-import Ventana.PDF_listarDirectorio;
 import Helpers.LastID;
 import Entidades.LlenarTrazaDao;
-import Ventana.Ventana;
 import Helpers.Archivo;
 import Helpers.Traza;
 import java.io.File;
@@ -173,7 +171,8 @@ public class Worker extends SwingWorker<Object, Object> {
                 int resultado = new LastID(con, "traza").lastId();
                 trazaID = (resultado == 0) ? 1 : resultado;
                 LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
-                new Ventana(trazaDao.getTraza()).setVisible(true);
+                new VentanaSecundaria(trazaDao.getTraza()).setVisible(true);
+//                new Ventana(trazaDao.getTraza()).setVisible(true);
                 con.desconectar();
             }else{
                 System.out.println("problemas en el done");

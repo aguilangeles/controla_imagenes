@@ -30,13 +30,16 @@ public class VisualizarImagen {
         private void visualizarImagen() {
 
         try {
+//            final VisualizarConvertido vis = new VisualizarConvertido(ruta, 2. * getZoom()/slider.getMaximum(), scrollPane);
             final ImageComponent imageCmp = new ImageComponent(ruta, 2. * getZoom() / slider.getMaximum(), scrollPane);
+//            scrollPane.getViewport().add(vis);
             scrollPane.getViewport().add(imageCmp);
             slider.setValue(zoom);
             slider.addChangeListener(new ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent e) {
                     setZoom(slider.getValue());
+//                    vis.setZoom(2. * getZoom() / slider.getMaximum(), scrollPane);
                     imageCmp.setZoom(2. * getZoom() / slider.getMaximum(), scrollPane);
                 }
             });

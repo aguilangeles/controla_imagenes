@@ -4,23 +4,21 @@
  */
 package Ventana;
 
-import Ventana.Guardar;
 import Entidades.*;
 import ReporteLote.Reporte;
 import Helpers.ButtonEditor;
 import Helpers.ButtonRenderer;
-import java.awt.Event;
-import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +28,8 @@ import javax.swing.table.DefaultTableModel;
  * @author MUTNPROD003
  */
 public class Ventana extends javax.swing.JFrame {
-    private Imagen anteriorTif;
+
+//    private Imagen anteriorTif;
     private int sizeRamdom;
     private DefaultTableModel model;
     private TrazaDao traza;
@@ -45,29 +44,36 @@ public class Ventana extends javax.swing.JFrame {
 
     public Ventana(TrazaDao traza) {
         initComponents();
-        tablaCheck.requestFocusInWindow();
+        siguiente.addKeyListener(new Teclas());
+        anterior.addKeyListener(new Teclas());
+//        tablaCheck.requestFocusInWindow();
+//        setExtendedState(6);
         this.traza = traza;
         poblarTabla();
         guardado = true;
         terminar.setEnabled(false);
         this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;
         internal(pdf);
-        siguiente_JButton();
-        atras_JButton();
+
     }
 
     private void internal(boolean ispdf) {
-        Imagen siguientes = nextImagen();//trae el ramdom
-        anterior.setEnabled(false);
-        String rutaDb = siguientes.getRutaDb();//ruta de archivo
-        internal.setTitle("Imagen " + contador + "/" + getSizeRamdom());
-        rutaJlabel.setText(rutaDb);
-        internal.setVisible(true);
-        String verImagen = primeraImagen(ispdf, siguientes);
-        VisualizarImagen visualizarImagen = new VisualizarImagen(verImagen, scrollimage, slider, getZoom());
-        int id = siguientes.getId();
-        new SetChecksBox(tablaCheck).setEstadoChecksBoxs(id);
-        contador++;
+        try {
+            internal.setMaximum(false);
+            Imagen siguientes = nextImagen();//trae el ramdom
+            anterior.setEnabled(false);
+            String rutaDb = siguientes.getRutaDb();//ruta de archivo
+            internal.setTitle("Imagen " + contador + "/" + getSizeRamdom());
+            rutaJlabel.setText(rutaDb);
+            internal.setVisible(true);
+            String verImagen = primeraImagen(ispdf, siguientes);
+            VisualizarImagen visualizarImagen = new VisualizarImagen(verImagen, scrollimage, slider, getZoom());
+            int id = siguientes.getId();
+            new SetChecksBox(tablaCheck).setEstadoChecksBoxs(id);
+            contador++;
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public ListIterator getIterator() {
@@ -166,7 +172,7 @@ public class Ventana extends javax.swing.JFrame {
 
         slider.setMajorTickSpacing(10);
         slider.setPaintTicks(true);
-        slider.setValue(25);
+        slider.setValue(15);
 
         rutaJlabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         rutaJlabel.setText("RUTA");
@@ -220,8 +226,8 @@ public class Ventana extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        tablaCheck.setColumnSelectionAllowed(true);
-        tablaCheck.setRowSelectionAllowed(false);
+        tablaCheck.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablaCheck.setNextFocusableComponent(siguiente);
         jScrollPane4.setViewportView(tablaCheck);
 
         scrollChecks.setViewportView(jScrollPane4);
@@ -260,8 +266,18 @@ public class Ventana extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jDesktopPane1);
 
         siguiente.setText("Siguiente");
+        siguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siguienteActionPerformed(evt);
+            }
+        });
 
         anterior.setText("Anterior");
+        anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorActionPerformed(evt);
+            }
+        });
 
         terminar.setText("Terminar");
         terminar.addActionListener(new java.awt.event.ActionListener() {
@@ -303,23 +319,22 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
-        Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
-        final int id = traza.getId();
-        NumeroDeArchivosRechazados numeroRechazo = new NumeroDeArchivosRechazados(id);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Reporte(id).setVisible(true);
-            }
-        });
-        dispose();
+        ActionGuardar();
     }//GEN-LAST:event_terminarActionPerformed
+
+    private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+        siguienteSuceso();
+    }//GEN-LAST:event_siguienteActionPerformed
+
+    private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
+        AnteriorSuceso();
+    }//GEN-LAST:event_anteriorActionPerformed
 
     private void poblarTabla() {
         model = (DefaultTableModel) tablaCheck.getModel();
         tablaCheck.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tablaCheck.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(210);
+        tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(230);
         tablaCheck.getColumnModel().getColumn(2).setPreferredWidth(20);
         iterator = traza.getListaTif().listIterator();
         List<TiposConCheck> lt = traza.getListaTipos();
@@ -337,59 +352,101 @@ public class Ventana extends javax.swing.JFrame {
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0, false), "moveToNextCell");
     }
 
-    private void siguiente_JButton() {
-
-        KeyStroke keyNext = KeyStroke.getKeyStroke(KeyEvent.VK_S,
-                Event.CTRL_MASK);
-        Action performNext = new AbstractAction("Siguiente") {
+    private void ActionGuardar() {
+        Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+        final int id = traza.getId();
+        NumeroDeArchivosRechazados numeroRechazo = new NumeroDeArchivosRechazados(id);
+        java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                String ruta_temp;
-                try {
-                    Guardar guardar = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
-                    int setSize = getSizeRamdom() + 1;
-                    setSizeRamdom(setSize);
-                    setZoom(slider.getValue());
-                    ruta_temp = new Botones(anterior, siguiente, getSizeRamdom(),
-                            internal, rutaJlabel, pagina, tablaCheck, nextImagen(),
-                            pdf, isHasNext(), contador++).Siguiente();
-                    VisualizarImagen visualizarImagen = new VisualizarImagen(ruta_temp, scrollimage, slider, getZoom());
-                    if (!isHasNext()) {
-                        siguiente.setEnabled(false);
-                        terminar.setEnabled(true);
-                    }
-                } catch (Exception ex) {
-                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            public void run() {
+                new Reporte(id).setVisible(true);
             }
-        };
-        siguiente.setAction(performNext);
-        siguiente.getActionMap().put("performNext", performNext);
-        siguiente.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyNext, "performNext");
-
+        });
+        dispose();
     }
-    private void atras_JButton() {
-        KeyStroke keyPrev = KeyStroke.getKeyStroke(KeyEvent.VK_D,
-                Event.CTRL_MASK);
-        Action performPrev = new AbstractAction("Anterior") {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String visualizacion = "";
-                        Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
-                        int descontar = 1;
-                        int der = contador - descontar;
-                        setContador(der);
-                        visualizacion = new Botones(tablaCheck, rutaJlabel, pagina, siguiente,
-                                internal, getSizeRamdom(), pdf, previus(), getContador()).Anterior();
-                        VisualizarImagen visualizarImagen = new VisualizarImagen(visualizacion, scrollimage, slider, getZoom());
-                        if (!hasPrevius) {
-                            anterior.setEnabled(false);
-                        }
-                    }
-                };
-        anterior.setAction(performPrev);
-        anterior.getActionMap().put("performPrev", performPrev);
-        anterior.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyPrev, "performPrev");
+
+
+    public class Teclas extends KeyAdapter{
+        public void KeyPessed(KeyEvent k){
+            switch(k.getKeyCode()){
+                case KeyEvent.VK_E:
+                    siguienteSuceso();
+                    break;
+                case KeyEvent.VK_R:
+                    AnteriorSuceso();
+                    break;
+                case KeyEvent.VK_P:
+                    System.out.println("no implementado");
+                    break;
+            }
+        }
+    }
+    private void siguienteSuceso() {
+        String ruta_temp;
+        try {
+            Guardar guardar = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+            int setSize = getSizeRamdom() + 1;
+            setSizeRamdom(setSize);
+            setZoom(slider.getValue());
+            ruta_temp = new Botones(anterior, siguiente, getSizeRamdom(),
+                    internal, rutaJlabel, pagina, tablaCheck, nextImagen(),
+                    pdf, isHasNext(), contador++).Siguiente();
+            VisualizarImagen visualizarImagen = new VisualizarImagen(ruta_temp, scrollimage, slider, getZoom());
+            if (!isHasNext()) {
+                siguiente.setEnabled(false);
+                terminar.setEnabled(true);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+//    private void siguienteSuceso(TrazaDao traza, JLabel rutaJlabel,JTable tablaCheck, int sizeRandom,) {
+//        String ruta_temp;
+//        try {
+//            Guardar guardar = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+//            int setSize = getSizeRamdom() + 1;
+//            setSizeRamdom(setSize);
+//            setZoom(slider.getValue());
+//            ruta_temp = new Botones(anterior, siguiente, getSizeRamdom(),
+//                    internal, rutaJlabel, pagina, tablaCheck, nextImagen(),
+//                    pdf, isHasNext(), contador++).Siguiente();
+//            VisualizarImagen visualizarImagen = new VisualizarImagen(ruta_temp, scrollimage, slider, getZoom());
+//            if (!isHasNext()) {
+//                siguiente.setEnabled(false);
+//                terminar.setEnabled(true);
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+
+//    private void atras_JButton() {
+//
+//        KeyStroke keyPrev = KeyStroke.getKeyStroke(KeyEvent.VK_D,
+//                Event.CTRL_MASK);
+//        Action performPrev = new AbstractAction("Anterior") {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                AnteriorSuceso();
+//            }
+//        };
+//        anterior.setAction(performPrev);
+//        anterior.getActionMap().put("performPrev", performPrev);
+//        anterior.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyPrev, "performPrev");
+//    }
+
+    private void AnteriorSuceso() {
+        String visualizacion = "";
+        Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+        int descontar = 1;
+        int der = contador - descontar;
+        setContador(der);
+        visualizacion = new Botones(tablaCheck, rutaJlabel, pagina, siguiente,
+                internal, getSizeRamdom(), pdf, previus(), getContador()).Anterior();
+        VisualizarImagen visualizarImagen = new VisualizarImagen(visualizacion, scrollimage, slider, getZoom());
+        if (!hasPrevius) {
+            anterior.setEnabled(false);
+        }
     }
 
     public int getZoom() {
@@ -466,7 +523,7 @@ public class Ventana extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private String primeraImagen(boolean ispdf, Imagen siguientes) {
-        String ret ;
+        String ret;
         if (ispdf) {
             worker = new ImagenesWorker(siguientes.getRuta_archivo(), siguientes.getParent(), siguientes.getPagina());
             worker.execute();

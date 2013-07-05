@@ -41,8 +41,9 @@ public class ImagenesWorker extends SwingWorker<Object, Object> {
         try {
             IMOperation operation = new IMOperation();
             operation.density(300);
+            operation.quality(85D);
+            operation.depth(8);
             operation.addImage();
-            operation.quality(300D);
             operation.addImage();
             ConvertCmd convert = new ConvertCmd();
             convert.setSearchPath(IM4JAVA_TOOLPATH);

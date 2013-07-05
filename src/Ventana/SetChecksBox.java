@@ -5,7 +5,6 @@
 package Ventana;
 
 import Entidades.TiposConCheck;
-import Ventana.ObtenerTiposDeControl;
 import javax.swing.JTable;
 
 /**
