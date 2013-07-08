@@ -10,18 +10,20 @@ import Entidades.TrazaDao;
 import Helpers.ButtonEditor;
 import Helpers.ButtonRenderer;
 import ReporteLote.Reporte;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.FocusTraversalPolicy;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,7 +35,6 @@ public class VentanaSecundaria extends javax.swing.JFrame {
     private DefaultTableModel model;
     private TrazaDao traza;
     private ImagenesWorker worker;
-//private ListIterator iterator;
     private boolean hasNext;
     private boolean hasPrevius;
     private boolean pdf;
@@ -43,6 +44,7 @@ public class VentanaSecundaria extends javax.swing.JFrame {
     private int zoom;
     private int sizeRandom;
     private ListIterator iterator;
+    private MyOwnFocusTraversalPolicy newPolicy;
 
     /**
      * Creates new form VentanaSecundaria
@@ -51,8 +53,7 @@ public class VentanaSecundaria extends javax.swing.JFrame {
      */
     public VentanaSecundaria(TrazaDao traza) {
         initComponents();
-        siguiente.addKeyListener(new Teclas());
-        anterior.addKeyListener(new Teclas());
+        jTable1.requestFocus();
         this.traza = traza;
         poblarTabla();
         guardado = true;
@@ -60,6 +61,16 @@ public class VentanaSecundaria extends javax.swing.JFrame {
         this.zoom=25;
         pdf = (traza.getExtension().equals(".pdf")) ? true : false;
         internal(pdf);
+        ordenarComponentes();
+    }
+
+    private void ordenarComponentes(){
+          Vector<Component> order = new Vector<Component>(4);
+        order.add(jTable1);
+        order.add(siguiente);
+        order.add(anterior);
+        order.add(terminar);
+        newPolicy = new MyOwnFocusTraversalPolicy(order);
     }
  private void internal(boolean ispdf) {
         try {
@@ -101,8 +112,8 @@ private void poblarTabla() {
                     new ButtonEditor(new JCheckBox(), lt));
             model.addRow(object);
         }
-        jTable1.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0, false), "moveToNextCell");
+//        jTable1.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+//                .put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0, false), "moveToNextCell");
     }
     private Imagen nextImagen() {
         Imagen tif = null;
@@ -141,23 +152,50 @@ private void poblarTabla() {
         dispose();
     }
 
+    private static class MyOwnFocusTraversalPolicy  extends FocusTraversalPolicy{
+               Vector<Component> order;
 
-    public class Teclas extends KeyAdapter{
-        public void KeyPessed(KeyEvent k){
-            switch(k.getKeyCode()){
-                case KeyEvent.VK_E:
-                    System.out.println("entro en e ");
-                    siguienteSuceso();
-                    break;
-                case KeyEvent.VK_R:
-                    AnteriorSuceso();
-                    break;
-                case KeyEvent.VK_P:
-                    System.out.println("no implementado");
-                    break;
-            }
+        public MyOwnFocusTraversalPolicy(Vector<Component> order) {
+            this.order = new Vector<Component>(order.size());
+            this.order.addAll(order);
         }
+        @Override
+        public Component getComponentAfter(Container focusCycleRoot,
+                                           Component aComponent)
+        {
+            int idx = (order.indexOf(aComponent) + 1) % order.size();
+            return order.get(idx);
+        }
+
+        @Override
+        public Component getComponentBefore(Container focusCycleRoot,
+                                            Component aComponent)
+        {
+            int idx = order.indexOf(aComponent) - 1;
+            if (idx < 0) {
+                idx = order.size() - 1;
+            }
+            return order.get(idx);
+        }
+
+        @Override
+        public Component getDefaultComponent(Container focusCycleRoot) {
+            return order.get(0);
+        }
+
+        @Override
+        public Component getLastComponent(Container focusCycleRoot) {
+            return order.lastElement();
+        }
+
+        @Override
+        public Component getFirstComponent(Container focusCycleRoot) {
+            return order.get(0);
+        }
+
     }
+
+
     private void siguienteSuceso() {
         String ruta_temp;
         try {
@@ -269,9 +307,10 @@ private void poblarTabla() {
         siguiente = new javax.swing.JButton();
         anterior = new javax.swing.JButton();
         terminar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scrolTabla = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -314,6 +353,7 @@ private void poblarTabla() {
         desk.add(internal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         siguiente.setText("Siguiente");
+        siguiente.setFocusCycleRoot(true);
         siguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 siguienteActionPerformed(evt);
@@ -321,10 +361,15 @@ private void poblarTabla() {
         });
 
         anterior.setText("jButton2");
+        anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorActionPerformed(evt);
+            }
+        });
 
         terminar.setText("jButton3");
 
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrolTabla.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -342,9 +387,25 @@ private void poblarTabla() {
                 return types [columnIndex];
             }
         });
+        jTable1.setFocusCycleRoot(true);
+        jTable1.setFocusTraversalPolicyProvider(true);
+        jTable1.setNextFocusableComponent(siguiente);
+        jTable1.setSurrendersFocusOnKeystroke(true);
+        jTable1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jTable1HierarchyChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        jScrollPane2.setViewportView(jScrollPane1);
+        scrolTabla.setViewportView(jScrollPane1);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -352,6 +413,8 @@ private void poblarTabla() {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(39, 39, 39)
                 .addComponent(siguiente)
                 .addGap(51, 51, 51)
                 .addComponent(anterior)
@@ -361,7 +424,7 @@ private void poblarTabla() {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addComponent(desk, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(scrolTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -371,12 +434,13 @@ private void poblarTabla() {
                     .addComponent(desk, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(scrolTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(37, 37, 37)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(siguiente)
                     .addComponent(anterior)
-                    .addComponent(terminar))
+                    .addComponent(terminar)
+                    .addComponent(jButton1))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
@@ -400,6 +464,19 @@ private void poblarTabla() {
         // TODO add your handling code here:
         siguienteSuceso();
     }//GEN-LAST:event_siguienteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+//        sigue();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jTable1HierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1HierarchyChanged
+
+    private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anteriorActionPerformed
 
 //    private void siguienteSuceso() {
 //        Imagen sig = nextImagen();
@@ -461,12 +538,13 @@ private void poblarTabla() {
     private javax.swing.JButton anterior;
     private javax.swing.JDesktopPane desk;
     private javax.swing.JInternalFrame internal;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel pagina;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JLabel ruta;
+    private javax.swing.JScrollPane scrolTabla;
     private javax.swing.JScrollPane scrollImage;
     private javax.swing.JButton siguiente;
     private javax.swing.JSlider slider;

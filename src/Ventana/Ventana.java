@@ -8,17 +8,21 @@ import Entidades.*;
 import ReporteLote.Reporte;
 import Helpers.ButtonEditor;
 import Helpers.ButtonRenderer;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.FocusTraversalPolicy;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
@@ -44,10 +48,8 @@ public class Ventana extends javax.swing.JFrame {
 
     public Ventana(TrazaDao traza) {
         initComponents();
-        siguiente.addKeyListener(new Teclas());
-        anterior.addKeyListener(new Teclas());
-//        tablaCheck.requestFocusInWindow();
-//        setExtendedState(6);
+        tablaCheck.requestFocus();
+        setExtendedState(6);
         this.traza = traza;
         poblarTabla();
         guardado = true;
@@ -348,8 +350,6 @@ public class Ventana extends javax.swing.JFrame {
                     new ButtonEditor(new JCheckBox(), lt));
             model.addRow(object);
         }
-        tablaCheck.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0, false), "moveToNextCell");
     }
 
     private void ActionGuardar() {
@@ -366,21 +366,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
 
-    public class Teclas extends KeyAdapter{
-        public void KeyPessed(KeyEvent k){
-            switch(k.getKeyCode()){
-                case KeyEvent.VK_E:
-                    siguienteSuceso();
-                    break;
-                case KeyEvent.VK_R:
-                    AnteriorSuceso();
-                    break;
-                case KeyEvent.VK_P:
-                    System.out.println("no implementado");
-                    break;
-            }
-        }
-    }
+
     private void siguienteSuceso() {
         String ruta_temp;
         try {
@@ -400,40 +386,6 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-//    private void siguienteSuceso(TrazaDao traza, JLabel rutaJlabel,JTable tablaCheck, int sizeRandom,) {
-//        String ruta_temp;
-//        try {
-//            Guardar guardar = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
-//            int setSize = getSizeRamdom() + 1;
-//            setSizeRamdom(setSize);
-//            setZoom(slider.getValue());
-//            ruta_temp = new Botones(anterior, siguiente, getSizeRamdom(),
-//                    internal, rutaJlabel, pagina, tablaCheck, nextImagen(),
-//                    pdf, isHasNext(), contador++).Siguiente();
-//            VisualizarImagen visualizarImagen = new VisualizarImagen(ruta_temp, scrollimage, slider, getZoom());
-//            if (!isHasNext()) {
-//                siguiente.setEnabled(false);
-//                terminar.setEnabled(true);
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-
-//    private void atras_JButton() {
-//
-//        KeyStroke keyPrev = KeyStroke.getKeyStroke(KeyEvent.VK_D,
-//                Event.CTRL_MASK);
-//        Action performPrev = new AbstractAction("Anterior") {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                AnteriorSuceso();
-//            }
-//        };
-//        anterior.setAction(performPrev);
-//        anterior.getActionMap().put("performPrev", performPrev);
-//        anterior.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyPrev, "performPrev");
-//    }
 
     private void AnteriorSuceso() {
         String visualizacion = "";
