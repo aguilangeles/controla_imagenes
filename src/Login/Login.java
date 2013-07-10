@@ -41,7 +41,6 @@ public class Login extends javax.swing.JFrame {
         user.setInputVerifier(new InputVerifier().inputVerifierT());
         password.setInputVerifier(new InputVerifier().inputVerifierT());
         String rutaImagen ="Logos/nuevo logo sin letras UTN.png";
-        String rutaImagen2 ="Logos/Logo FTA para instructivo.png";
         ImageIcon im = new ImageIcon(rutaImagen);
        setIconImage(im.getImage());
 
