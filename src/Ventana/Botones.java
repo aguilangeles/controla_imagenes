@@ -93,7 +93,6 @@ public class Botones {
             aRuta = isNext.getRuta_archivo();
             pagina.setVisible(false);
         }
-        System.out.println(aRuta);
         return aRuta;
     }
 

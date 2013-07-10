@@ -39,7 +39,7 @@ public class Ventana extends javax.swing.JFrame {
 
     public Ventana(TrazaDao traza) {
         initComponents();
-        String rutaImagen = "Logos/Logo FTA para instructivo";
+            String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
         ImageIcon im = new ImageIcon(rutaImagen);
         setIconImage(im.getImage());
         tablaCheck.requestFocus();
@@ -494,7 +494,8 @@ public class Ventana extends javax.swing.JFrame {
             worker.execute();
             ret = worker.doInBackground();
             siguientes.setRutaTemp(ret);
-            pagina.setText("Pagina: " + siguientes.getPagina());
+            int page =siguientes.getPagina()+1;
+            pagina.setText("Pagina: " + page);
         } else {
             ret = siguientes.getRuta_archivo();
             pagina.setVisible(false);

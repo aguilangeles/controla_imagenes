@@ -5,8 +5,6 @@
 package Ventana;
 
 import Entidades.Imagen;
-import Ventana.ObtenerTiposDeControl;
-import Ventana.SetChecksBox;
 import Entidades.TiposConCheck;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,7 +43,8 @@ public class Next extends JFrame {
         anterior.setEnabled(true);
         internal.setTitle("Imagen " + contador + "/" + sizeRamdom);
         String rutaPdf = tif.getRutaDb();
-        String page = "Pagina: " + tif.getPagina();
+        int mas = tif.getPagina()+1;
+        String page = "Pagina: " +mas;
         titulo.setText(rutaPdf);
         pagina.setText(page);
         internal.setVisible(true);
