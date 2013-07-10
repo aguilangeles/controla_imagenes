@@ -33,7 +33,7 @@ public class UsuariosABM extends javax.swing.JFrame {
         setTitle("Alta, Baja y Modificacion de Usuarios");
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        usuario = new UsuariosDao(tablaUsuarios, conexion, ABM);
+        usuario = new UsuariosDao(tablaUsuarios, conexion);
         principalInternal.setVisible(true);
         modelo = (DefaultTableModel) tablaUsuarios.getModel();
         salvar.setVisible(false);

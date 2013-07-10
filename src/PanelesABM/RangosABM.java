@@ -31,7 +31,7 @@ public class RangosABM extends javax.swing.JFrame {
     public RangosABM() {
         initComponents();
         setResizable(true);
-        rangosDao = new RangosDao(conexion, tablaContenido, ABM);
+        rangosDao = new RangosDao(conexion, tablaContenido);
         principalInternal.setVisible(true);
         modelo = (DefaultTableModel) tablaContenido.getModel();
         salvar.setVisible(false);

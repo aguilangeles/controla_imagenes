@@ -81,7 +81,7 @@ public class ControlesDao extends ABMPaneles {
         list.add(new ColumnaTamanio(2, 500));
         list.add(new ColumnaTamanio(3, 70));
         list.add(new ColumnaTamanio(4, 25));
-        anchoFilas(aTable, list);
+        anchoColumnas(aTable, list);
 
     }
 

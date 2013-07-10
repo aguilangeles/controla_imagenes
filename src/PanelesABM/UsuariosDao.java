@@ -12,34 +12,32 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author MUTNPROD003
  */
-public class UsuariosDao {
+public class UsuariosDao extends ABMPaneles{
     private static final String NOMBRE_TABLA ="usuarios";
-    private Conexion conexion;
-    private JTable tabla;
-    private JButton abm;
+    private Conexion aConexion;
+    private JTable aTable;
     private Editar editar;
     private InsertRows insertar;
     private boolean editable;
     private int lastId;
 
-    public UsuariosDao(JTable tabla, Conexion conexion, JButton abm) {
-        this.tabla = tabla;
-        this.conexion=conexion;
-        this.abm = abm;
-        llenartabla();
+    public UsuariosDao(JTable tabla, Conexion conexion) {
+        super();
+        this.aTable = tabla;
+        this.aConexion=conexion;
+        DefaultTableModel modelo = verTodos();
+        aTable.setModel(modelo);
+        this.editar=new Editar(aConexion, modelo);
+        this.insertar = new InsertRows(aConexion, modelo);
     }
 
-    private void llenartabla() {
-        DefaultTableModel modelo = verTodos();
-        tabla.setModel(modelo);
-        editar=new Editar(conexion, modelo);
-        insertar = new InsertRows(conexion, modelo);
-    }
 
     private DefaultTableModel verTodos() {
         DefaultTableModel model = new DefaultTableModel() {
@@ -67,29 +65,39 @@ public class UsuariosDao {
                 }
             }
         };
-        model.addColumn("id");
-        model.addColumn("nombre");
-        model.addColumn("password");
-        model.addColumn("tipo");
-        model.addColumn("estado");
 
-        if (conexion.isConexion()) {
+        setTitulos(model);
+        setConsulta(model);
+        return model;
+    }
+
+
+    private void setTitulos(DefaultTableModel model) {
+        String split ="id, nombre, password, tipo, estado";
+        titulos(model, split);
+    }
+
+    private void setConsulta(DefaultTableModel model) {
+        List<Object[]> lista= new ArrayList<>();
+        if (aConexion.isConexion()) {
+
             try {
-                conexion.ExecuteSql("SELECT id, nombre, password, tipo, estado FROM qualitys." + NOMBRE_TABLA + ";");
-                while (conexion.resulset.next()) {
-                    model.addRow(new Object[]{conexion.resulset.getInt(1), conexion.resulset.getString(2),
-                        conexion.resulset.getString(3), conexion.resulset.getInt(4),
-                        conexion.resulset.getInt(5)});
+                aConexion.ExecuteSql("SELECT id, nombre, password, tipo, estado FROM qualitys." + NOMBRE_TABLA + ";");
+                while (aConexion.resulset.next()) {
+                    lista.add(new Object[]{aConexion.resulset.getInt(1), aConexion.resulset.getString(2),
+                        aConexion.resulset.getString(3), aConexion.resulset.getInt(4),
+                        aConexion.resulset.getInt(5)});
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return model;
+        consulta(model, lista);
     }
 
+
     public int getLastId() {
-        return new LastID(conexion, NOMBRE_TABLA).lastId();
+        return new LastID(aConexion, NOMBRE_TABLA).lastId();
     }
 
     public InsertRows getInsertar() {
@@ -107,6 +115,4 @@ public class UsuariosDao {
     public Editar getEditar() {
         return editar;
     }
-
-
 }

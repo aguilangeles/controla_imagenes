@@ -39,7 +39,7 @@ public class ABMPaneles {
         }
     }
 
-    public void anchoFilas(JTable tabla, List<ColumnaTamanio> listado) {
+    public void anchoColumnas(JTable tabla, List<ColumnaTamanio> listado) {
         for (ColumnaTamanio t : listado) {
             tabla.getColumnModel().getColumn(t.getColumna()).setPreferredWidth(t.getSize());
         }

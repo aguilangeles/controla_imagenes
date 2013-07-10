@@ -25,7 +25,7 @@ public class VerificacionABM extends javax.swing.JFrame {
      */
     public VerificacionABM() {
         initComponents();
-        verificacion = new VerificacionDao(tablaV, conexion, ABM);
+        verificacion = new VerificacionDao(tablaV, conexion);
         principalInternal.setVisible(true);
         modelo = (DefaultTableModel) tablaV.getModel();
         agregar.setVisible(false);

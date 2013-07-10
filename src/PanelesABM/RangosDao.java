@@ -23,17 +23,15 @@ public class RangosDao extends ABMPaneles{
     private static final String NOMBRE_TABLA="rangos_qs;";
     private Conexion aConexion;
     private JTable aTable;
-    private JButton abm;
     private int lastId;
     private boolean editable;
     private Editar editar;
     private InsertRows insertar;
 
 
-    public RangosDao(Conexion conexion, JTable tabla, JButton abm) {
+    public RangosDao(Conexion conexion, JTable tabla) {
         this.aConexion = conexion;
         this.aTable = tabla;
-        this.abm = abm;
         DefaultTableModel modelo = modelar();
         aTable.setModel(modelo);
         this.editar = new Editar(aConexion, modelo);
