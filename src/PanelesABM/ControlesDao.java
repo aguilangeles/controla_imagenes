@@ -5,7 +5,7 @@
 package PanelesABM;
 
 import Helpers.TextAreaRenderer;
-import Helpers.LastID;
+import Helpers.UltimoIdInsertado;
 import java.awt.Rectangle;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -125,7 +125,7 @@ public class ControlesDao extends ABMPaneles {
     }
 
     public int getLastId() {
-        return new LastID(aConexion, NOMBRE_TABLA).lastId();
+        return new UltimoIdInsertado(aConexion, NOMBRE_TABLA).getUltimoId();
     }
 
     public Editar getEditar() {

@@ -53,7 +53,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -218,7 +217,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="rutaJlabel" min="-2" pref="407" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="pagina" pref="78" max="32767" attributes="0"/>
+                                          <Component id="pagina" pref="72" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -284,7 +283,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="scrollChecks" alignment="0" pref="442" max="32767" attributes="0"/>
+                              <Component id="scrollChecks" alignment="0" pref="444" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -337,7 +336,7 @@
                                       </TableColumnModel>
                                     </Property>
                                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                      <Color id="Cursor Por defecto"/>
+                                      <Color id="Default Cursor"/>
                                     </Property>
                                     <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                                       <ComponentRef name="siguiente"/>

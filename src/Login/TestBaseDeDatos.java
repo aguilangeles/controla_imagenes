@@ -4,13 +4,13 @@
  */
 package Login;
 
+import Entidades.Conexion;
+import Entidades.Usuario;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import Entidades.Conexion;
-import Entidades.Usuario;
 
 /**
  *

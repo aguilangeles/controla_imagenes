@@ -8,6 +8,7 @@ import Entidades.*;
 import ReporteLote.Reporte;
 import Helpers.ButtonEditor;
 import Helpers.ButtonRenderer;
+import Helpers.SetIconImageFromJFrame;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.ListIterator;
@@ -25,87 +26,85 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Ventana extends javax.swing.JFrame {
 
-    private int sizeRamdom;
-    private DefaultTableModel model;
-    private TrazaDao traza;
-    private ListIterator iterator;
-    private boolean hasNext;
-    private boolean hasPrevius;
-    private int contador = 1;
-    private boolean guardado;
-    private int zoom;
-    private ImagenesWorker worker;
-    private boolean pdf;
+  private int sizeRamdom;
+  private DefaultTableModel model;
+  private TrazaDao traza;
+  private ListIterator iterator;
+  private boolean hasNext;
+  private boolean hasPrevius;
+  private int contador = 1;
+  private boolean guardado;
+  private int zoom;
+  private ImagenesWorker worker;
+  private boolean pdf;
 
-    public Ventana(TrazaDao traza) {
-        initComponents();
-            String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-        ImageIcon im = new ImageIcon(rutaImagen);
-        setIconImage(im.getImage());
-        tablaCheck.requestFocus();
-        setExtendedState(6);
-        this.traza = traza;
-        poblarTabla();
-        guardado = true;
-        terminar.setEnabled(false);
-        this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;
-        internal(pdf);
+  public Ventana(TrazaDao traza) {
+    initComponents();
+    new SetIconImageFromJFrame().set();
+    tablaCheck.requestFocus();
+    setExtendedState(6);
+    this.traza = traza;
+    poblarTabla();
+    guardado = true;
+    terminar.setEnabled(false);
+    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;
+    internal(pdf);
 
+  }
+
+  private void internal(boolean ispdf) {
+    try {
+      internal.setMaximum(true);
+      Imagen siguientes = nextImagen();//trae el ramdom
+      anterior.setEnabled(false);
+      String rutaDb = siguientes.getRutaDb();//ruta de archivo
+      internal.setTitle("Imagen " + contador + "/" + getSizeRamdom());
+      rutaJlabel.setText(rutaDb);
+      internal.setVisible(true);
+      String verImagen = primeraImagen(ispdf, siguientes);
+      VisualizarImagen visualizarImagen = new VisualizarImagen(verImagen, scrollimage, slider, getZoom());
+      int id = siguientes.getId();
+      new SetChecksBox(tablaCheck).setEstadoChecksBoxs(id);
+      contador++;
+    } catch (PropertyVetoException ex) {
+      Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
     }
+  }
 
-    private void internal(boolean ispdf) {
-        try {
-            internal.setMaximum(true);
-            Imagen siguientes = nextImagen();//trae el ramdom
-            anterior.setEnabled(false);
-            String rutaDb = siguientes.getRutaDb();//ruta de archivo
-            internal.setTitle("Imagen " + contador + "/" + getSizeRamdom());
-            rutaJlabel.setText(rutaDb);
-            internal.setVisible(true);
-            String verImagen = primeraImagen(ispdf, siguientes);
-            VisualizarImagen visualizarImagen = new VisualizarImagen(verImagen, scrollimage, slider, getZoom());
-            int id = siguientes.getId();
-            new SetChecksBox(tablaCheck).setEstadoChecksBoxs(id);
-            contador++;
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
+  public ListIterator getIterator() {
+    return iterator;
+  }
+
+  private Imagen nextImagen() {
+    Imagen tif = null;
+    try {
+      ListIterator it = getIterator();
+      tif = (Imagen) it.next();
+      hasNext = (!it.hasNext()) ? false : true;
+    } catch (NoSuchElementException e) {
+      System.out.println(e.getMessage());
     }
+    return tif;
+  }
 
-    public ListIterator getIterator() {
-        return iterator;
+  private Imagen previus() {
+    Imagen tif = null;
+    try {
+      ListIterator it = getIterator();
+      tif = (Imagen) it.previous();
+      hasPrevius = (!it.hasPrevious()) ? false : true;
+    } catch (NoSuchElementException e) {
+      System.out.println(e.getMessage());
     }
+    return tif;
+  }
 
-    private Imagen nextImagen() {
-        Imagen tif = null;
-        try {
-            ListIterator it = getIterator();
-            tif = (Imagen) it.next();
-            hasNext = (!it.hasNext()) ? false : true;
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
-        }
-        return tif;
-    }
-
-    private Imagen previus() {
-        Imagen tif = null;
-        try {
-            ListIterator it = getIterator();
-            tif = (Imagen) it.previous();
-            hasPrevius = (!it.hasPrevious()) ? false : true;
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
-        }
-        return tif;
-    }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+  /**
+   * This method is called from within the constructor to initialize the form.
+   * WARNING: Do NOT modify this code. The content of this method is always
+   * regenerated by the Form Editor.
+   */
+  @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -333,137 +332,135 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
-        ActionGuardar();
+      ActionGuardar();
     }//GEN-LAST:event_terminarActionPerformed
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-        siguienteSuceso();
+      siguienteSuceso();
     }//GEN-LAST:event_siguienteActionPerformed
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-        AnteriorSuceso();
+      AnteriorSuceso();
     }//GEN-LAST:event_anteriorActionPerformed
 
-    private void poblarTabla() {
-        model = (DefaultTableModel) tablaCheck.getModel();
-        tablaCheck.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tablaCheck.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(230);
-        tablaCheck.getColumnModel().getColumn(2).setPreferredWidth(20);
-        iterator = traza.getListaTif().listIterator();
-        List<TiposConCheck> lt = traza.getListaTipos();
-        for (TiposConCheck tipos : lt) {
-            boolean ischeck = tipos.isCheck();
-            String nombre = tipos.getNombre();
-            String boton = "Boton";
-            Object[] object = new Object[]{ischeck, nombre, tipos.getId()};
-            tablaCheck.getColumn("?").setCellRenderer(new ButtonRenderer());
-            tablaCheck.getColumn("?").setCellEditor(
-                    new ButtonEditor(new JCheckBox(), lt));
-            model.addRow(object);
-        }
+  private void poblarTabla() {
+    model = (DefaultTableModel) tablaCheck.getModel();
+    tablaCheck.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    tablaCheck.getColumnModel().getColumn(0).setPreferredWidth(20);
+    tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(230);
+    tablaCheck.getColumnModel().getColumn(2).setPreferredWidth(20);
+    iterator = traza.getListaTif().listIterator();
+    List<TiposConCheck> lt = traza.getListaTipos();
+    for (TiposConCheck tipos : lt) {
+      boolean ischeck = tipos.isCheck();
+      String nombre = tipos.getNombre();
+      String boton = "Boton";
+      Object[] object = new Object[]{ischeck, nombre, tipos.getId()};
+      tablaCheck.getColumn("?").setCellRenderer(new ButtonRenderer());
+      tablaCheck.getColumn("?").setCellEditor(
+              new ButtonEditor(new JCheckBox(), lt));
+      model.addRow(object);
     }
+  }
 
-    private void ActionGuardar() {
-        Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
-        final int id = traza.getId();
-        NumeroDeArchivosRechazados numeroRechazo = new NumeroDeArchivosRechazados(id);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Reporte(id).setVisible(true);
-            }
-        });
-        dispose();
+  private void ActionGuardar() {
+    Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+    final int id = traza.getId();
+    NumeroDeArchivosRechazados numeroRechazo = new NumeroDeArchivosRechazados(id);
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        new Reporte(id).setVisible(true);
+      }
+    });
+    dispose();
+  }
+
+  private void siguienteSuceso() {
+    String ruta_temp;
+    try {
+      Guardar guardar = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+      int setSize = getSizeRamdom() + 1;
+      setSizeRamdom(setSize);
+      setZoom(slider.getValue());
+      ruta_temp = new Botones(anterior, siguiente, getSizeRamdom(),
+              internal, rutaJlabel, pagina, tablaCheck, nextImagen(),
+              pdf, isHasNext(), contador++).Siguiente();
+      VisualizarImagen visualizarImagen = new VisualizarImagen(ruta_temp, scrollimage, slider, getZoom());
+      if (!isHasNext()) {
+        siguiente.setEnabled(false);
+        terminar.setEnabled(true);
+      }
+    } catch (Exception ex) {
+      Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
     }
+  }
 
-
-
-    private void siguienteSuceso() {
-        String ruta_temp;
-        try {
-            Guardar guardar = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
-            int setSize = getSizeRamdom() + 1;
-            setSizeRamdom(setSize);
-            setZoom(slider.getValue());
-            ruta_temp = new Botones(anterior, siguiente, getSizeRamdom(),
-                    internal, rutaJlabel, pagina, tablaCheck, nextImagen(),
-                    pdf, isHasNext(), contador++).Siguiente();
-            VisualizarImagen visualizarImagen = new VisualizarImagen(ruta_temp, scrollimage, slider, getZoom());
-            if (!isHasNext()) {
-                siguiente.setEnabled(false);
-                terminar.setEnabled(true);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
+  private void AnteriorSuceso() {
+    String visualizacion = "";
+    Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+    int descontar = 1;
+    int der = contador - descontar;
+    setContador(der);
+    visualizacion = new Botones(tablaCheck, rutaJlabel, pagina, siguiente,
+            internal, getSizeRamdom(), pdf, previus(), getContador()).Anterior();
+    VisualizarImagen visualizarImagen = new VisualizarImagen(visualizacion, scrollimage, slider, getZoom());
+    if (!hasPrevius) {
+      anterior.setEnabled(false);
     }
+  }
 
-    private void AnteriorSuceso() {
-        String visualizacion = "";
-        Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
-        int descontar = 1;
-        int der = contador - descontar;
-        setContador(der);
-        visualizacion = new Botones(tablaCheck, rutaJlabel, pagina, siguiente,
-                internal, getSizeRamdom(), pdf, previus(), getContador()).Anterior();
-        VisualizarImagen visualizarImagen = new VisualizarImagen(visualizacion, scrollimage, slider, getZoom());
-        if (!hasPrevius) {
-            anterior.setEnabled(false);
-        }
-    }
+  public int getZoom() {
+    return slider.getValue();
+  }
 
-    public int getZoom() {
-        return slider.getValue();
-    }
+  public void setZoom(int zoom) {
+    this.zoom = zoom;
+  }
 
-    public void setZoom(int zoom) {
-        this.zoom = zoom;
-    }
+  public boolean isHasNext() {
+    return hasNext;
+  }
 
-    public boolean isHasNext() {
-        return hasNext;
-    }
+  public void setContador(int contador) {
+    this.contador = contador;
+  }
 
-    public void setContador(int contador) {
-        this.contador = contador;
-    }
+  public boolean isGuardado() {
+    return guardado;
+  }
 
-    public boolean isGuardado() {
-        return guardado;
-    }
+  public void setGuardado(boolean guardado) {
+    this.guardado = guardado;
+  }
 
-    public void setGuardado(boolean guardado) {
-        this.guardado = guardado;
-    }
+  public int getContador() {
+    return contador;
+  }
 
-    public int getContador() {
-        return contador;
-    }
+  public boolean isHasPrevius() {
+    return hasPrevius;
+  }
 
-    public boolean isHasPrevius() {
-        return hasPrevius;
-    }
+  public void setHasPrevius(boolean hasPrevius) {
+    this.hasPrevius = hasPrevius;
+  }
 
-    public void setHasPrevius(boolean hasPrevius) {
-        this.hasPrevius = hasPrevius;
-    }
+  public int getSizeRamdom() {
+    return traza.getListaTif().size();
+  }
 
-    public int getSizeRamdom() {
-        return traza.getListaTif().size();
-    }
-
-    public void setSizeRamdom(int sizeRamdom) {
-        this.sizeRamdom = sizeRamdom;
-    }
-    /**
-     * Creates new form Ventana
-     *
-     * @return
-     */
-    /**
-     * @param args the command line arguments
-     */
+  public void setSizeRamdom(int sizeRamdom) {
+    this.sizeRamdom = sizeRamdom;
+  }
+  /**
+   * Creates new form Ventana
+   *
+   * @return
+   */
+  /**
+   * @param args the command line arguments
+   */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anterior;
     private javax.swing.JInternalFrame internal;
@@ -487,19 +484,19 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton terminar;
     // End of variables declaration//GEN-END:variables
 
-    private String primeraImagen(boolean ispdf, Imagen siguientes) {
-        String ret;
-        if (ispdf) {
-            worker = new ImagenesWorker(siguientes.getRuta_archivo(), siguientes.getParent(), siguientes.getPagina());
-            worker.execute();
-            ret = worker.doInBackground();
-            siguientes.setRutaTemp(ret);
-            int page =siguientes.getPagina()+1;
-            pagina.setText("Pagina: " + page);
-        } else {
-            ret = siguientes.getRuta_archivo();
-            pagina.setVisible(false);
-        }
-        return ret;
+  private String primeraImagen(boolean ispdf, Imagen siguientes) {
+    String ret;
+    if (ispdf) {
+      worker = new ImagenesWorker(siguientes.getRuta_archivo(), siguientes.getParent(), siguientes.getPagina());
+      worker.execute();
+      ret = worker.doInBackground();
+      siguientes.setRutaTemp(ret);
+      int page = siguientes.getPagina() + 1;
+      pagina.setText("Pagina: " + page);
+    } else {
+      ret = siguientes.getRuta_archivo();
+      pagina.setVisible(false);
     }
+    return ret;
+  }
 }

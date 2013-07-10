@@ -4,9 +4,9 @@
  */
 package Ventana;
 
-import Helpers.LastID;
+import Helpers.UltimoIdInsertado;
 import Entidades.LlenarTrazaDao;
-import Helpers.Archivo;
+import Helpers.InsertarEnArchivos;
 import Helpers.Traza;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -64,7 +64,7 @@ public class Worker extends SwingWorker<Object, Object> {
     @Override
     protected String doInBackground() {
         if (conexion.isConexion()) {
-            idTraza = new LastID(conexion, "traza").lastId();
+            idTraza = new UltimoIdInsertado(conexion, "traza").getUltimoId();
            IdentificarExtension ext = new IdentificarExtension(ruta.getText());
             extension = (IdentificarExtension.getExtension());
             switch (extension) {
@@ -79,7 +79,7 @@ public class Worker extends SwingWorker<Object, Object> {
                             int parentlength = parent.length() + 1;
                             String adaptarFile = tif.substring(parentlength);
                             String filename = URLEncoder.encode(adaptarFile, "UTF-8");
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, 0);
+                            InsertarEnArchivos archivo = new InsertarEnArchivos(conexion, idTraza, filename, 0);
                             imagenyControl();
                         } catch (UnsupportedEncodingException ex) {
                             JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);
@@ -102,7 +102,7 @@ public class Worker extends SwingWorker<Object, Object> {
                             String adaptarFile = pagina.getNombre().substring(parentlength);
                             String filename = URLEncoder.encode(adaptarFile, "UTF-8");
                             int page = pagina.getNumeroPagina();
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, page);
+                            InsertarEnArchivos archivo = new InsertarEnArchivos(conexion, idTraza, filename, page);
                             imagenyControl();
                         } catch (UnsupportedEncodingException ex) {
                             JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);
@@ -126,7 +126,7 @@ public class Worker extends SwingWorker<Object, Object> {
                             int parentlength = parent.length() + 1;
                             String adaptarFile = tif.substring(parentlength);
                             String filename = URLEncoder.encode(adaptarFile, "UTF-8");
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, 0);
+                            InsertarEnArchivos archivo = new InsertarEnArchivos(conexion, idTraza, filename, 0);
                             imagenyControl();
                         } catch (UnsupportedEncodingException ex) {
                             JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);
@@ -149,7 +149,7 @@ public class Worker extends SwingWorker<Object, Object> {
     private void imagenyControl() {
         int id = getIdTraza() + 1;
         for (Integer idarchivo : idControl) {
-            int lasid = new LastID(conexion, "archivo").lastId();
+            int lasid = new UltimoIdInsertado(conexion, "archivo").getUltimoId();
             String ret = "Insert into qualitys.traza_archivo_controles "
                     + "(idtraza, idarchivo, idcontrol, estado) VALUES "
                     + "(" + id + ", " + lasid + ", " + idarchivo + ", " + 0 + ");";
@@ -168,7 +168,7 @@ public class Worker extends SwingWorker<Object, Object> {
             int trazaID = 0;
             Conexion con = new Conexion();
             if (con.isConexion()) {
-                int resultado = new LastID(con, "traza").lastId();
+                int resultado = new UltimoIdInsertado(con, "traza").getUltimoId();
                 trazaID = (resultado == 0) ? 1 : resultado;
                 LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
 //                new VentanaSecundaria(trazaDao.getTraza()).setVisible(true);

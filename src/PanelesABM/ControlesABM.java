@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
+import Helpers.SetIconImageFromJFrame;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,9 +35,7 @@ public class ControlesABM extends javax.swing.JFrame {
      */
     public ControlesABM() {
             initComponents();
-              String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-            ImageIcon im = new ImageIcon(rutaImagen);
-            setIconImage(im.getImage());
+             new SetIconImageFromJFrame().set();
             controles = new ControlesDao(tablaContenido, conexion  );
             principalInternal.setVisible(true);
             modelo = (DefaultTableModel) tablaContenido.getModel();

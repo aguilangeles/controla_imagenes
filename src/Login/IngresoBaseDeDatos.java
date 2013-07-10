@@ -8,6 +8,7 @@ import Helpers.InputVerifier;
 import Entidades.Conexion;
 import Entidades.ReadProperties;
 import Entidades.Usuario;
+import Helpers.SetIconImageFromJFrame;
 import javax.swing.ImageIcon;
 
 /**
@@ -25,9 +26,7 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
      */
     public IngresoBaseDeDatos(boolean isAdministrador) {
         initComponents();
-         String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-        ImageIcon im = new ImageIcon(rutaImagen);
-        setIconImage(im.getImage());
+       new SetIconImageFromJFrame().set();
         setResizable(false);
         setInputVerifier();
         aceptar.setText("Test");
