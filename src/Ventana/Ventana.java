@@ -8,23 +8,14 @@ import Entidades.*;
 import ReporteLote.Reporte;
 import Helpers.ButtonEditor;
 import Helpers.ButtonRenderer;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.FocusTraversalPolicy;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Ventana extends javax.swing.JFrame {
 
-//    private Imagen anteriorTif;
     private int sizeRamdom;
     private DefaultTableModel model;
     private TrazaDao traza;

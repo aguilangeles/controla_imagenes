@@ -30,7 +30,7 @@ public class ControlesABM extends javax.swing.JFrame {
      */
     public ControlesABM() {
         initComponents();
-        controles = new ControlesDao(tablaContenido, conexion,  ABM);
+        controles = new ControlesDao(tablaContenido, conexion  );
         principalInternal.setVisible(true);
         modelo = (DefaultTableModel) tablaContenido.getModel();
         salvar.setVisible(false);
