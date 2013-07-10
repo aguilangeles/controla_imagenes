@@ -32,6 +32,7 @@ public class VerificacionABM extends javax.swing.JFrame {
         desactivar.setVisible(false);
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -215,11 +216,6 @@ public class VerificacionABM extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
-//        JOptionPane.showMessageDialog(this, "Para INSERTAR un nuevo elemento debe completar las filas \n"
-//                + "y despues oprimir salvar.\n"
-//                + "Para editar uno ya existente debe posarse sobre la fila y modificar el contenido, luego oprimir editar\n"
-//                + "Para desactivar un control, posarse en la columna id y presionar desactivar"
-//                + "");
 
         principalInternal.setTitle("Módulo de Edición");
         agregar.setVisible(true);
