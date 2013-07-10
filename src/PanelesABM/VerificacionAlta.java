@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -35,9 +36,12 @@ public class VerificacionAlta extends javax.swing.JFrame {
      */
     public VerificacionAlta(Conexion conexion, DefaultTableModel abmModel, JTable tabla) {
         initComponents();
+        String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
+        ImageIcon im = new ImageIcon(rutaImagen);
+        setIconImage(im.getImage());
         nombreQs.setInputVerifier((new InputVerifier().inputVerifierT()));
         descripcionQs.setInputVerifier((new InputVerifier().inputVerifierT()));
-        mensajeL.setText("<html>Seleccione un TdC y presione Agregar.<br> "
+        mensajeL.setText("<html>Seleccione un TdC y presione Agregar. "
                 + "Para remover un elemento, seleccione desde el destino y presione Remover.</html>");
         this.conexion = conexion;
         this.abmModel = abmModel;
@@ -73,14 +77,18 @@ public class VerificacionAlta extends javax.swing.JFrame {
         setTitle("Creacion de Tipos de Verificacion");
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(230, 252, 238));
         jPanel1.setNextFocusableComponent(nombreQs);
 
-        jLabel2.setText("Nombre de Verificacion:");
+        jLabel2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        jLabel2.setText("Nombre de Verificación:");
 
+        nombreQs.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         nombreQs.setToolTipText("");
         nombreQs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         nombreQs.setNextFocusableComponent(descripcionQs);
 
+        mensajeL.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mensajeL.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         origen.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -91,6 +99,7 @@ public class VerificacionAlta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(origen);
 
+        agregar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +107,7 @@ public class VerificacionAlta extends javax.swing.JFrame {
             }
         });
 
+        remover.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         remover.setText("Remover");
         remover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +115,7 @@ public class VerificacionAlta extends javax.swing.JFrame {
             }
         });
 
+        aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         aceptarSeleccion.setText("Finalizar");
         aceptarSeleccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,8 +126,10 @@ public class VerificacionAlta extends javax.swing.JFrame {
         destino.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane3.setViewportView(destino);
 
-        jLabel4.setText("Descripcion:");
+        jLabel4.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        jLabel4.setText("Descripción:");
 
+        descripcionQs.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         descripcionQs.setNextFocusableComponent(origen);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -124,30 +137,28 @@ public class VerificacionAlta extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(remover, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                            .addComponent(agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(remover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(aceptarSeleccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGap(48, 48, 48)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(mensajeL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(descripcionQs, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
-                                    .addComponent(nombreQs))))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nombreQs, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                            .addComponent(descripcionQs))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(22, 22, 22))
+            .addComponent(mensajeL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

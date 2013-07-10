@@ -29,11 +29,14 @@ public class UsuariosDao extends ABMPaneles{
     private int lastId;
 
     public UsuariosDao(JTable tabla, Conexion conexion) {
-        super();
+        super(conexion, tabla);
         this.aTable = tabla;
         this.aConexion=conexion;
         DefaultTableModel modelo = verTodos();
         aTable.setModel(modelo);
+        centrarColumna(0);
+        centrarColumna(3);
+        centrarColumna(4);
         this.editar=new Editar(aConexion, modelo);
         this.insertar = new InsertRows(aConexion, modelo);
     }

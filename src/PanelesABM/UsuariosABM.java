@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -29,17 +33,25 @@ public class UsuariosABM extends javax.swing.JFrame {
      * Creates new form ABMRangos
      */
     public UsuariosABM() {
-        initComponents();
-        setTitle("Alta, Baja y Modificacion de Usuarios");
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        usuario = new UsuariosDao(tablaUsuarios, conexion);
-        principalInternal.setVisible(true);
-        modelo = (DefaultTableModel) tablaUsuarios.getModel();
-        salvar.setVisible(false);
-        agregar.setVisible(false);
-        editar.setVisible(false);
-        desactivar.setVisible(false);
+            initComponents();
+                    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
+                ImageIcon im = new ImageIcon(rutaImagen);
+                setIconImage(im.getImage());
+            setTitle("Alta, Baja y Modificacion de Usuarios");
+            setResizable(false);
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            usuario = new UsuariosDao(tablaUsuarios, conexion);
+            principalInternal.setVisible(true);
+            modelo = (DefaultTableModel) tablaUsuarios.getModel();
+            salvar.setVisible(false);
+            agregar.setVisible(false);
+            editar.setVisible(false);
+            desactivar.setVisible(false);
+        try {
+            principalInternal.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(UsuariosABM.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -68,6 +80,11 @@ public class UsuariosABM extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(230, 252, 238));
+
+        jPanel2.setOpaque(false);
+
+        cerrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         cerrar.setText("cerrar");
         cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +92,7 @@ public class UsuariosABM extends javax.swing.JFrame {
             }
         });
 
+        ABM.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         ABM.setText("Activar ABM");
         ABM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,23 +121,27 @@ public class UsuariosABM extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
+        principalInternal.setBackground(new java.awt.Color(230, 252, 238));
         principalInternal.setTitle("Para Editar los contenidos presione Activar ABM");
         principalInternal.setVisible(true);
 
-        editar.setText("Editar Control");
+        editar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        editar.setText("Editar ");
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarActionPerformed(evt);
             }
         });
 
-        desactivar.setText("Desactivar Control");
+        desactivar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        desactivar.setText("Desactivar");
         desactivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 desactivarActionPerformed(evt);
             }
         });
 
+        salvar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         salvar.setText("Guardar ");
         salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +176,8 @@ public class UsuariosABM extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaUsuarios);
         tablaUsuarios.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        agregar.setText("Agregar Control");
+        agregar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
@@ -168,9 +191,9 @@ public class UsuariosABM extends javax.swing.JFrame {
             .addGroup(principalInternalLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(editar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
                 .addComponent(desactivar)
                 .addGap(22, 22, 22))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
@@ -193,7 +216,7 @@ public class UsuariosABM extends javax.swing.JFrame {
                     .addComponent(desactivar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(salvar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         principalInternal.setBounds(0, 0, 530, 340);
@@ -206,8 +229,7 @@ public class UsuariosABM extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

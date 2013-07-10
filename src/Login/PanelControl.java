@@ -33,9 +33,9 @@ public class PanelControl extends javax.swing.JFrame {
 
     PanelControl(TipodeUsuario usuarioTipo) {
         initComponents();
-                String rutaImagen ="Logos/nuevo logo sin letras UTN.png";
+        String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
         ImageIcon im = new ImageIcon(rutaImagen);
-       setIconImage(im.getImage());
+        setIconImage(im.getImage());
         jLabel1.setText(INFO_LABEL);
         this.usuarioTipo = usuarioTipo;
         this.administrador = usuarioTipo.isAdmin();
@@ -256,7 +256,7 @@ public class PanelControl extends javax.swing.JFrame {
                     }
                 });
                 break;
-            case "Verificacion":
+            case "Verificación":
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     @Override
                     public void run() {

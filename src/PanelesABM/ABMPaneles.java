@@ -10,6 +10,7 @@ import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
 import java.util.List;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -64,5 +65,9 @@ public class ABMPaneles {
             model.addColumn(split[i]);
         }
     }
-
+    public void centrarColumna(int column) {
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        tabla.getColumnModel().getColumn(column).setCellRenderer(tcr);
+    }
 }

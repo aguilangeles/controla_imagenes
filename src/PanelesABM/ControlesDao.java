@@ -40,6 +40,8 @@ public class ControlesDao extends ABMPaneles {
         setAnchoFilas();
         setCellRenderer();
         altoCeldas(modelo, aTable);
+        centrarColumna(0);
+        centrarColumna(4);
         this.editar = new Editar(conexion, modelo);
         this.insertar = new InsertRows(conexion, modelo);
     }
@@ -93,7 +95,7 @@ public class ControlesDao extends ABMPaneles {
     }
 
     private void setTitulos(DefaultTableModel model) {
-        String split = "id, nombre, descripcion, imagen, activo";
+        String split = "id, nombre, descripcion, imagen, est";
         titulos(model, split);
     }
 //

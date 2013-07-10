@@ -35,6 +35,8 @@ public class VerificacionDao extends ABMPaneles{
         setAnchoColumna();
         setAltoFilas();
         altoCeldas(modelo, aTable);
+        centrarColumna(0);
+        centrarColumna(4);
     }
 
 
