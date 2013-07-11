@@ -5,21 +5,14 @@
 package Ventana;
 
 import Entidades.*;
-import Helpers.ButtonEditor;
-import Helpers.ButtonRenderer;
 import Helpers.SetIconImageFromJFrame;
 import PanelesABM.CrearPrimerInternalFrame;
+import PanelesABM.PoblarTablaCheckBox;
 import ReporteLote.Reporte;
-import java.beans.PropertyVetoException;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JCheckBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,6 +32,7 @@ public class Ventana extends javax.swing.JFrame {
   private int zoom;
   private ImagenesWorker worker;
   private boolean pdf;
+  private Guardar guardar;
 
   public Ventana(TrazaDao traza) {
     initComponents();
@@ -46,12 +40,14 @@ public class Ventana extends javax.swing.JFrame {
     tablaCheck.requestFocus();
     setExtendedState(6);
     this.traza = traza;
-    poblarTabla();
+    this.iterator = traza.getListaTif().listIterator();
+    PoblarTablaCheckBox poblarTablaCheckBox = new PoblarTablaCheckBox(tablaCheck, model, traza);
     guardado = true;
     terminar.setEnabled(false);
     this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;
     getInternal(pdf);
-
+    anterior.setEnabled(false);
+    this.guardar = new Guardar(traza, rutaJlabel.getText(), tablaCheck);
   }
 
   private void getInternal(boolean ispdf) {
@@ -59,38 +55,37 @@ public class Ventana extends javax.swing.JFrame {
             internal, contador, sizeRamdom);
     VisualizarImagen visualizarImagen = new VisualizarImagen(crea.getInternal(), scrollimage, slider, getZoom());
     contador++;
-    anterior.setEnabled(false);
-
 
   }
 
-
   public ListIterator getIterator() {
+
     return iterator;
+
   }
 
   private Imagen nextImagen() {
-    Imagen tif = null;
+    Imagen imagenN = null;
     try {
       ListIterator it = getIterator();
-      tif = (Imagen) it.next();
+      imagenN = (Imagen) it.next();
       hasNext = (!it.hasNext()) ? false : true;
     } catch (NoSuchElementException e) {
       System.out.println(e.getMessage());
     }
-    return tif;
+    return imagenN;
   }
 
   private Imagen previus() {
-    Imagen tif = null;
+    Imagen imagenP = null;
     try {
       ListIterator it = getIterator();
-      tif = (Imagen) it.previous();
+      imagenP = (Imagen) it.previous();
       hasPrevius = (!it.hasPrevious()) ? false : true;
     } catch (NoSuchElementException e) {
       System.out.println(e.getMessage());
     }
-    return tif;
+    return imagenP;
   }
 
   /**
@@ -338,28 +333,8 @@ public class Ventana extends javax.swing.JFrame {
       AnteriorSuceso();
     }//GEN-LAST:event_anteriorActionPerformed
 
-  private void poblarTabla() {
-    model = (DefaultTableModel) tablaCheck.getModel();
-    tablaCheck.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-    tablaCheck.getColumnModel().getColumn(0).setPreferredWidth(20);
-    tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(230);
-    tablaCheck.getColumnModel().getColumn(2).setPreferredWidth(20);
-    iterator = traza.getListaTif().listIterator();
-    List<TiposConCheck> lt = traza.getListaTipos();
-    for (TiposConCheck tipos : lt) {
-      boolean ischeck = tipos.isCheck();
-      String nombre = tipos.getNombre();
-      String boton = "Boton";
-      Object[] object = new Object[]{ischeck, nombre, tipos.getId()};
-      tablaCheck.getColumn("?").setCellRenderer(new ButtonRenderer());
-      tablaCheck.getColumn("?").setCellEditor(
-              new ButtonEditor(new JCheckBox(), lt));
-      model.addRow(object);
-    }
-  }
-
   private void ActionGuardar() {
-    Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+    guardar.guardarCambios();
     final int id = traza.getId();
     NumeroDeArchivosRechazados numeroRechazo = new NumeroDeArchivosRechazados(id);
     java.awt.EventQueue.invokeLater(new Runnable() {
@@ -374,7 +349,7 @@ public class Ventana extends javax.swing.JFrame {
   private void siguienteSuceso() {
     String ruta_temp;
     try {
-      Guardar guardar = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+      guardar.guardarCambios();
       int setSize = getSizeRamdom() + 1;
       setSizeRamdom(setSize);
       setZoom(slider.getValue());
@@ -393,7 +368,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private void AnteriorSuceso() {
     String visualizacion = "";
-    Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+    guardar.guardarCambios();
     int descontar = 1;
     int der = contador - descontar;
     setContador(der);

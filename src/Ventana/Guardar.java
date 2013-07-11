@@ -25,10 +25,9 @@ public class Guardar {
         this.traza = traza;
         this.nombre = nombre;
         this.tablaCheck = tablaCheck;
-        guardarCambiosCheckBoxs();
     }
 
-    private void guardarCambiosCheckBoxs() {
+    public void guardarCambios() {
         Imagen imagen = traza.getTifByName(nombre);
         LlenarControles llenarControles = new LlenarControles(traza.getId(), imagen.getId());
         for (ControlPorArchivo controlxArchivo : llenarControles.getLista())
