@@ -4,6 +4,7 @@
  */
 package Helpers;
 
+import Entidades.Conexion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,24 +21,31 @@ public class Traza {
     private int idVerificacion;
     private int idUsuario;
     private int idTipoDocumento;
+    private String rutaCompleta;
+    private String ultimaCarpeta;
 
-    public Traza(int tamanioLote, int idVerificacion, int idUsuario, int idTipoDocumento, Entidades.Conexion conexion) {
+    public Traza(int tamanioLote, int idVerificacion, int idUsuario, int idTipoDocumento, Conexion conexion, String rutaCompleta, String ultimaCarpeta) {
         this.tamanioLote = tamanioLote;
         this.idVerificacion = idVerificacion;
         this.idUsuario = idUsuario;
         this.idTipoDocumento = idTipoDocumento;
         this.conexion=conexion;
+        this.rutaCompleta=rutaCompleta;
+        this.ultimaCarpeta=ultimaCarpeta;
         insertTraza();
     }
 
     private void insertTraza() {
             if(conexion.isConexion()){
             try {
+                //todo ruta completa y ultima carpeta
                 muestraRango();
                 int numeroRechazo = 0;
                 String fecha = new Time().toString();
                 String insert = "Insert into qualitys.traza "
                         + "(fecha_control,"
+                        + " rutaCompleta, "
+                        + " ultimaCarpeta, "
                         + " tamanio_lote, "
                         + "cantidad_muestreada, "
                         + "nro_rechazo, idRango, "
@@ -45,6 +53,8 @@ public class Traza {
                         + "idUsuarios, "
                         + "idTipoDocumento) "
                         + "VALUES ('" + fecha
+                        + "', '" + rutaCompleta
+                        + "', '" + ultimaCarpeta
                         + "', " + tamanioLote
                         + ", " + getCantidadMuestreada()
                         + ", " + numeroRechazo

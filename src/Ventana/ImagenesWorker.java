@@ -48,11 +48,7 @@ public class ImagenesWorker extends SwingWorker<Object, Object> {
             ConvertCmd convert = new ConvertCmd();
             convert.setSearchPath(IM4JAVA_TOOLPATH);
             convert.run(operation, new Object[]{input.getAbsolutePath(), output.getAbsolutePath()});
-        } catch (IOException ex) {
-            Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IM4JavaException ex) {
+        } catch (IOException | InterruptedException | IM4JavaException ex) {
             Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
         }
         return output.getAbsolutePath();

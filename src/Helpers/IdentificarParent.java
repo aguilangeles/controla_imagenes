@@ -13,9 +13,12 @@ import java.io.File;
  */
 public final class IdentificarParent {
     private String parent;
-    
+
     public IdentificarParent(File file) {
         this.parent= encontrarParent(file);
+
+
+
     }
 
     private String encontrarParent(File file) {
@@ -28,8 +31,10 @@ public final class IdentificarParent {
         return ret;
     }
 
+
     public String getParent() {
         return parent;
     }
+
 
 }
