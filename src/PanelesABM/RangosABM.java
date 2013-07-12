@@ -7,6 +7,10 @@ package PanelesABM;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -30,14 +34,22 @@ public class RangosABM extends javax.swing.JFrame {
      */
     public RangosABM() {
         initComponents();
-        setResizable(false);
-        rangosDao = new RangosDao(conexion, tablaContenido, ABM);
-        principalInternal.setVisible(true);
-        modelo = (DefaultTableModel) tablaContenido.getModel();
-        salvar.setVisible(false);
-        agregar.setVisible(false);
-        editar.setVisible(false);
-        desactivar.setVisible(false);
+        String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
+        ImageIcon im = new ImageIcon(rutaImagen);
+        setIconImage(im.getImage());
+        setResizable(true);
+        rangosDao = new RangosDao(conexion, tablaContenido);
+            principalInternal.setVisible(true);
+            modelo = (DefaultTableModel) tablaContenido.getModel();
+            salvar.setVisible(false);
+            agregar.setVisible(false);
+            editar.setVisible(false);
+            desactivar.setVisible(false);
+        try {
+            principalInternal.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(RangosABM.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -69,6 +81,11 @@ public class RangosABM extends javax.swing.JFrame {
         setTitle("Alta, Baja y Modificacion de Rangos");
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(230, 252, 238));
+
+        jPanel2.setOpaque(false);
+
+        cerrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         cerrar.setText("cerrar");
         cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +93,7 @@ public class RangosABM extends javax.swing.JFrame {
             }
         });
 
+        ABM.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         ABM.setText("Activar ABM");
         ABM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,24 +122,28 @@ public class RangosABM extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
+        principalInternal.setBackground(new java.awt.Color(230, 252, 238));
         principalInternal.setTitle("Para Editar los contenidos presione Activar ABM");
         principalInternal.setVisible(true);
 
-        editar.setText("Editar Control");
+        editar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        editar.setText("Editar");
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarActionPerformed(evt);
             }
         });
 
-        desactivar.setText("Desactivar Control");
+        desactivar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        desactivar.setText("Desactivar");
         desactivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 desactivarActionPerformed(evt);
             }
         });
 
-        salvar.setText("Guardar ");
+        salvar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        salvar.setText("Guardar");
         salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salvarActionPerformed(evt);
@@ -153,7 +175,8 @@ public class RangosABM extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaContenido);
 
-        agregar.setText("Agregar Control");
+        agregar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+        agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
@@ -167,35 +190,35 @@ public class RangosABM extends javax.swing.JFrame {
             .addGroup(principalInternalLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(31, 31, 31)
                 .addComponent(editar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(desactivar)
                 .addGap(22, 22, 22))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
             .addGroup(principalInternalLayout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(108, 108, 108)
                 .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         principalInternalLayout.setVerticalGroup(
             principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(principalInternalLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(agregar)
                     .addComponent(editar)
                     .addComponent(desactivar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(salvar)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        principalInternal.setBounds(0, 0, 530, 33);
+        principalInternal.setBounds(10, 10, 480, 300);
         desk.add(principalInternal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         scroll.setViewportView(desk);
@@ -208,20 +231,19 @@ public class RangosABM extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 6, Short.MAX_VALUE)
-                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);

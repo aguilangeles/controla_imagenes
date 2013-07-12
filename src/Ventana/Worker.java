@@ -4,10 +4,8 @@
  */
 package Ventana;
 
-import Ventana.PDF_listarDirectorio;
 import Helpers.LastID;
 import Entidades.LlenarTrazaDao;
-import Ventana.Ventana;
 import Helpers.Archivo;
 import Helpers.Traza;
 import java.io.File;
@@ -30,6 +28,7 @@ import tratamientoruta.BuscarPaginasPdf;
 import tratamientoruta.CrearElRamdom;
 import Entidades.Conexion;
 import Entidades.TipodeUsuario;
+import VentanaDos.Ventana_2;
 
 /**
  *
@@ -50,6 +49,7 @@ public class Worker extends SwingWorker<Object, Object> {
     private String parent;
     private PDF_listarDirectorio listar;
     private String extension;
+    private String ultimaCarpeta;
 
     public Worker(JFrame Controles, JTextField ruta, List<Integer> idControles, int idDocumento, int idVerificacion, int idUsuario) {
         this.controles = Controles;
@@ -60,6 +60,17 @@ public class Worker extends SwingWorker<Object, Object> {
         this.idUsuario = idUsuario;
         IdentificarParent ret = new IdentificarParent(new File(ruta.getText()));
         this.parent = (ret.getParent());
+        String prueba = this.parent;
+        String retorno="";
+        if(prueba.contains("\\")){
+                String replace = prueba.replace("\\", ", ");
+                String [] rsplit = replace.split(", ");
+                for(int i = 0; i<rsplit.length;i++){
+                   retorno =(rsplit[i]);
+            }
+           this.ultimaCarpeta=(retorno);
+
+        }
 
     }
 
@@ -72,7 +83,7 @@ public class Worker extends SwingWorker<Object, Object> {
             switch (extension) {
                 case ".tif":
                     List listaTif = IdentificarExtension.getLista();
-                    Traza trazaTif = new Traza(listaTif.size(), idVerificacion, idUsuario, idDocumento, conexion);
+                    Traza trazaTif = new Traza(listaTif.size(), idVerificacion, idUsuario, idDocumento, conexion, parent, ultimaCarpeta);
                     CrearElRamdom ramdomListTif = new CrearElRamdom(listaTif, trazaTif.getCantidadMuestreada());
                     List<Object> ramdomTif = ramdomListTif.getSeleccion();
                     for (Object obj : ramdomTif) {
@@ -93,12 +104,13 @@ public class Worker extends SwingWorker<Object, Object> {
 
                     BuscarPaginasPdf getPages = new BuscarPaginasPdf();
                     List<Object> listaPdf = getPages.getLista();
-                    Traza trazaPdf = new Traza(listaPdf.size(), idVerificacion, idUsuario, idDocumento, conexion);
+                    Traza trazaPdf = new Traza(listaPdf.size(), idVerificacion, idUsuario, idDocumento, conexion, parent, ultimaCarpeta);
                     File file = new File(listaPdf.get(1).toString());
                     CrearElRamdom ramdomListPdf = new CrearElRamdom(listaPdf, trazaPdf.getCantidadMuestreada());
                     List<Object> ramdomPdf = ramdomListPdf.getSeleccion();
                     for (Object o : ramdomPdf) {
                         try {
+
                             Pdf_NombreMasNumero pagina = (Pdf_NombreMasNumero) o;
                             int parentlength = parent.length() + 1;
                             String adaptarFile = pagina.getNombre().substring(parentlength);
@@ -119,7 +131,7 @@ public class Worker extends SwingWorker<Object, Object> {
                     break;
                 case ".png":
                     List listaPng = IdentificarExtension.getLista();
-                    Traza trazaPng = new Traza(listaPng.size(), idVerificacion, idUsuario, idDocumento, conexion);
+                    Traza trazaPng = new Traza(listaPng.size(), idVerificacion, idUsuario, idDocumento, conexion, parent, ultimaCarpeta);
                     CrearElRamdom ramdomList = new CrearElRamdom(listaPng, trazaPng.getCantidadMuestreada());
                     List<Object> ramdom = ramdomList.getSeleccion();
                     for (Object obj : ramdom) {
@@ -143,8 +155,8 @@ public class Worker extends SwingWorker<Object, Object> {
 
             }
         }
-//            }
-//        }
+
+
         return null;
     }
 
@@ -173,6 +185,7 @@ public class Worker extends SwingWorker<Object, Object> {
                 int resultado = new LastID(con, "traza").lastId();
                 trazaID = (resultado == 0) ? 1 : resultado;
                 LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
+//                new VentanaSecundaria(trazaDao.getTraza()).setVisible(true);
                 new Ventana(trazaDao.getTraza()).setVisible(true);
                 con.desconectar();
             }else{

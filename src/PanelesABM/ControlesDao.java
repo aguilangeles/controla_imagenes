@@ -4,7 +4,6 @@
  */
 package PanelesABM;
 
-import Entidades.Conexion;
 import Helpers.LastID;
 import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
@@ -14,47 +13,73 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+//<<<<<<< HEAD
+import Entidades.Conexion;
+import java.util.ArrayList;
+import java.util.List;
+//=======
+//>>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
 
 /**
  *
  * @author MUTNPROD003
  */
-public class ControlesDao {
-    private Conexion conexion;
-    private static final String NOMBRE_TABLA="controles";
-    private JTable tabla;
-    private JButton abm;
+public class ControlesDao extends ABMPaneles {
+
+    private Conexion aConexion;
+    private static final String NOMBRE_TABLA = "controles";
+    private JTable aTable;
     private boolean editable;
     private Editar editar;
     private InsertRows insertar;
     private int lastId;
 
-    public ControlesDao(JTable tabla, Conexion conexion,  JButton abm) {
-        this.tabla = tabla;
-        this.conexion=conexion;
-        this.abm = abm;
-        llenartabla();
-    }
-
-    private void llenartabla() {
+//<<<<<<< HEAD
+    public ControlesDao(JTable tabla, Conexion conexion) {
+        super(conexion, tabla);
+        this.aTable = tabla;
+        this.aConexion = conexion;
         DefaultTableModel modelo = modeldo();
-        tabla.setModel(modelo);
-        ajusteLargoFila();
-        ajusteAltoCelda(modelo);
-        editar=new Editar(conexion, modelo);
-        insertar=new InsertRows(conexion, modelo);
-
+        aTable.setModel(modelo);
+        setAnchoFilas();
+        setCellRenderer();
+        altoCeldas(modelo, aTable);
+        centrarColumna(0);
+        centrarColumna(4);
+        this.editar = new Editar(conexion, modelo);
+        this.insertar = new InsertRows(conexion, modelo);
     }
+
+//    private DefaultTableModel modelar() {
+////=======
+//    public ControlesDao(JTable tabla, Conexion conexion,  JButton abm) {
+//        this.tabla = tabla;
+//        this.conexion=conexion;
+//        this.abm = abm;
+//        llenartabla();
+//    }
+
+//    private void llenartabla() {
+//        DefaultTableModel modelo = modeldo();
+//        tabla.setModel(modelo);
+//        ajusteLargoFila();
+//        ajusteAltoCelda(modelo);
+//        editar=new Editar(conexion, modelo);
+//        insertar=new InsertRows(conexion, modelo);
+
+    //}
 
     private DefaultTableModel modeldo() {
+//>>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int fila, int columna) {
-                if(columna==0){
+                if (columna == 0) {
                     return false;
                 }
                 return isEditable();
             }
+
             @Override
             public Class getColumnClass(int col) {
                 switch (getColumnName(col)) {
@@ -70,25 +95,68 @@ public class ControlesDao {
                         return Integer.class;
                 }
             }
-
         };
+//<<<<<<< HEAD
+        setTitulos(model);
+        setConsulta(model);
+        return model;
+    }
+    private void setAnchoFilas() {
+        List<ColumnaTamanio> list = new ArrayList<>();
+        list.add(new ColumnaTamanio(0, 20));
+        list.add(new ColumnaTamanio(1, 90));
+        list.add(new ColumnaTamanio(2, 500));
+        list.add(new ColumnaTamanio(3, 70));
+        list.add(new ColumnaTamanio(4, 25));
+        anchoColumnas(aTable, list);
+
+    }
+
+    private void setCellRenderer() {
+        ArrayList<ColumnaTamanio> lista = new ArrayList<>();
+        lista.add(new ColumnaTamanio(1, 0));
+        lista.add(new ColumnaTamanio(2, 0));
+        cellRenderer(lista, 70);
+    }
+
+    private void setTitulos(DefaultTableModel model) {
+        String split = "id, nombre, descripcion, imagen, est";
+        titulos(model, split);
+    }
+//
+    private void setConsulta(DefaultTableModel model) {
+        List<Object[]> lista = new ArrayList<>();
+        if (aConexion.isConexion()) {
+            try {
+                aConexion.ExecuteSql("SELECT id, descripcion, texto, imagen , estado FROM qualitys." + NOMBRE_TABLA + ";");
+                while (aConexion.resulset.next()) {
+                    Object[] oo = new Object[]{aConexion.resulset.getInt(1),
+                        aConexion.resulset.getString(2),
+                        aConexion.resulset.getString(3),
+                        aConexion.resulset.getString(4),
+                        aConexion.resulset.getInt(5)};
+                    lista.add(oo);
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ControlesDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//=======
         titulos(model);
 
         if (conexion.isConexion()) {
             consulta(model);
+//>>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
         }
-        return model;
+        consulta(model, lista);
     }
-
+    }
     public void setEditable(boolean editable) {
         this.editable = editable;
     }
 
-
-   
-
     public int getLastId() {
-        return new LastID(conexion, NOMBRE_TABLA).lastId();
+        return new LastID(aConexion, NOMBRE_TABLA).lastId();
     }
 
     public Editar getEditar() {
@@ -102,6 +170,8 @@ public class ControlesDao {
     public InsertRows getInsertar() {
         return insertar;
     }
+//<<<<<<< HEAD
+//=======
 
     private void titulos(DefaultTableModel model) {
         model.addColumn("id");
@@ -150,4 +220,5 @@ public class ControlesDao {
     }
 
 
+//>>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
 }

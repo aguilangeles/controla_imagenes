@@ -43,6 +43,8 @@ public class Botones {
         this.ruta = ruta;
         this.pagina = pagina;
         this.tabla = tabla;
+                new SetChecksBox(tabla).setEstadoChecksBoxs(imagen.getId());
+
         this.imagen = imagen;
         this.pdf = pdf;
         this.hasNext = hasNext;
@@ -75,7 +77,6 @@ public class Botones {
     public String Siguiente() {
         Next proximo = new Next(anterior, siguiente, sizeRamdom,
                 internal, ruta, pagina, tabla);
-        tabla.requestFocusInWindow();
         Imagen isNext = imagen;
         String aRuta = ruta_temporal_Siguiente(isNext);
         proximo.crearInternalFrame(contador++, isNext, hasNext);

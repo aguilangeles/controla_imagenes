@@ -53,13 +53,15 @@ public class TestBaseDeDatos {
         SetearArchivoConfiguracion setProperties = new SetearArchivoConfiguracion(aUsuario.getUrl(), aUsuario.getBase(), aUsuario.getUsuario(), aUsuario.getPassword());
         if (validar.isConexion()) {
             aceptar.setBackground(Color.GREEN);
-            aceptar.setText("Conexion Exitosa");
+            aceptar.setText("OK");
             if (!test) {
-                JOptionPane.showMessageDialog(validarUsuario, CONEXION_EXITOSA, "Configuracion inicial", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(validarUsuario, CONEXION_EXITOSA,
+                        "Configuración inicial", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             } else {
-                aceptar.setText("Test Exitoso");
-                JOptionPane.showMessageDialog(validarUsuario, "Conexion exitosa", "Test de Conexion", JOptionPane.INFORMATION_MESSAGE);
+                aceptar.setText("Test OK");
+                JOptionPane.showMessageDialog(validarUsuario, "Conexión exitosa",
+                        "Test de Conexión", JOptionPane.INFORMATION_MESSAGE);
                 validarUsuario.dispose();
             }
         } else {
@@ -67,11 +69,14 @@ public class TestBaseDeDatos {
             aceptar.setText("Error");
             //arreglar esto
             // arreglar con que?
+            //arreglar que cosa?
+
 
             JOptionPane.showMessageDialog(validarUsuario,
-                    "\nLa conexion ha fallado .\n\nEl programa se cerrará\nContactese con el adminstrador ", "Falla en la config. inicial", JOptionPane.ERROR_MESSAGE);
+                    "\nLa conexión ha fallado .\n\nEl programa se cerrará\n"
+                    + "Contactese con el administrador ", "Falla en la config. inicial",
+                    JOptionPane.ERROR_MESSAGE);
             System.exit(0);
-
         }
     }
 

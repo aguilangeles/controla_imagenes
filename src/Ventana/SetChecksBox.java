@@ -5,7 +5,6 @@
 package Ventana;
 
 import Entidades.TiposConCheck;
-import Ventana.ObtenerTiposDeControl;
 import javax.swing.JTable;
 
 /**
@@ -18,7 +17,6 @@ public class SetChecksBox {
     public SetChecksBox(JTable tablaCheck) {
         this.tablaCheck = tablaCheck;
     }
-
     public void setEstadoChecksBoxs(int id) {
         for (int index = 0; index < tablaCheck.getRowCount(); index++) {
             ObtenerTiposDeControl controles = new ObtenerTiposDeControl(id);
@@ -26,6 +24,17 @@ public class SetChecksBox {
                 String nombre = (String) tablaCheck.getValueAt(index, 1);
                 if (nombre.equals(tipos.getNombre())) {
                     tablaCheck.setValueAt(tipos.isCheck(), index, 0);
+                }
+            }
+        }
+    }
+     public void setFirstBoolean(int id) {
+        for (int index = 0; index < tablaCheck.getRowCount(); index++) {
+            ObtenerTiposDeControl cont = new ObtenerTiposDeControl(id);
+            for (TiposConCheck t : cont.getListadoTipos()) {
+                String nombre = (String) tablaCheck.getValueAt(index, 1);
+                if (nombre.equals(t.getNombre())) {
+                    tablaCheck.setValueAt(t.isCheck(), index, 0);
                 }
             }
         }

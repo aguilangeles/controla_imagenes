@@ -5,9 +5,6 @@
 package Ventana;
 
 import Entidades.Imagen;
-import Ventana.ObtenerTiposDeControl;
-import Ventana.SetChecksBox;
-import Entidades.TiposConCheck;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -38,9 +35,22 @@ public class Next extends JFrame {
         this.tabla = tabla;
     }
 
-    public void crearInternalFrame(int contador, Imagen tif, boolean ishasNext) {
-        int id = tif.getId();
-        new SetChecksBox(tabla).setEstadoChecksBoxs(id);
+//    public void crearInternalFrame(int contador, Imagen tif, boolean ishasNext) {
+//        siguiente.setText("Siguiente");
+//        anterior.setEnabled(true);
+//        internal.setTitle("Imagen " + contador + "/" + sizeRamdom);
+//        String rutaPdf = tif.getRutaDb();
+//        int mas = tif.getPagina() + 1;
+//        String page = "Pagina: " + mas;
+//        titulo.setText(rutaPdf);
+//        pagina.setText(page);
+//        internal.setVisible(true);
+//        int id = tif.getId();
+//        new SetChecksBox(tabla).setEstadoChecksBoxs(id);
+//        contador++;
+//    }
+        public void crearInternalFrame(int contador, Imagen tif, boolean ishasNext) {
+        internal.setVisible(true);
         siguiente.setText("Siguiente");
         anterior.setEnabled(true);
         internal.setTitle("Imagen " + contador + "/" + sizeRamdom);
@@ -48,9 +58,9 @@ public class Next extends JFrame {
         String page = "Pagina: " + tif.getPagina();
         titulo.setText(rutaPdf);
         pagina.setText(page);
-        internal.setVisible(true);
+        int id = tif.getId();
+        new SetChecksBox(tabla).setFirstBoolean(id);
         contador++;
     }
-
 
 }

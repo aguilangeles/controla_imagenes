@@ -34,15 +34,15 @@ public class Previus {
     }
 
     public void setearInternalFrame(int contador, Imagen tif) {
-        System.out.println(tif);
         siguiente.setEnabled(true);
         internal.setTitle("Imagen " + contador + "/" + sizeRamdom);
         String rutaPdf = tif.getRutaDb();
-        String page = "Pagina: " + tif.getPagina();
+        int mas = tif.getPagina()+1;
+        String page = "Pagina: " + mas;
         titulo.setText(rutaPdf);
         pagina.setText(page);
         int id = tif.getId();
-        new SetChecksBox(tabla).setEstadoChecksBoxs(id);
+        new SetChecksBox(tabla).setFirstBoolean(id);
         contador--;
     }
 }

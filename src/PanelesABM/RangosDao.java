@@ -12,38 +12,33 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author MUTNPROD003
  */
-public class RangosDao {
+public class RangosDao extends ABMPaneles{
     private static final String NOMBRE_TABLA="rangos_qs;";
-    private Conexion conexion;
-    private JTable tabla;
-    private JButton abm;
+    private Conexion aConexion;
+    private JTable aTable;
     private int lastId;
     private boolean editable;
     private Editar editar;
     private InsertRows insertar;
 
 
-    public RangosDao(Conexion conexion, JTable tabla, JButton abm) {
-        this.conexion = conexion;
-        this.tabla = tabla;
-        this.abm = abm;
-        llenartabla();
-    }
+    public RangosDao(Conexion conexion, JTable tabla) {
+        this.aConexion = conexion;
+        this.aTable = tabla;
+        DefaultTableModel modelo = modelar();
+        aTable.setModel(modelo);
+        this.editar = new Editar(aConexion, modelo);
+        this.insertar = new InsertRows(aConexion, modelo);
+   }
 
-
-    private void llenartabla() {
-        DefaultTableModel modelo = verTodos();
-        editar = new Editar(conexion, modelo);
-        insertar = new InsertRows(conexion, modelo);
-        tabla.setModel(modelo);
-    }
-
-    private DefaultTableModel verTodos() {
+    private DefaultTableModel modelar() {
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int fila, int columna) {
@@ -71,30 +66,33 @@ public class RangosDao {
                 }
             }
         };
-        model.addColumn("id");
-        model.addColumn("minimo");
-        model.addColumn("maximo");
-        model.addColumn("muestra");
-        model.addColumn("rechazos");
-        model.addColumn("estado");
-
-        if (conexion.isConexion()) {
+        setTitulos(model);
+        setConsulta(model);
+        return model;
+    }
+    private void setConsulta(DefaultTableModel model) {
+        List<Object[]> lista = new ArrayList<>();
+        if (aConexion.isConexion()) {
             try {
-                conexion.ExecuteSql("SELECT * FROM "+NOMBRE_TABLA);
-                while (conexion.resulset.next()) {
-                    model.addRow(new Object[]{conexion.resulset.getInt(1), conexion.resulset.getInt(2),
-                                conexion.resulset.getInt(3), conexion.resulset.getInt(4),
-                                conexion.resulset.getInt(5), conexion.resulset.getInt(6)});
+                aConexion.ExecuteSql("SELECT * FROM "+NOMBRE_TABLA);
+                while (aConexion.resulset.next()) {
+                    lista.add(new Object[]{aConexion.resulset.getInt(1), aConexion.resulset.getInt(2),
+                                aConexion.resulset.getInt(3), aConexion.resulset.getInt(4),
+                                aConexion.resulset.getInt(5), aConexion.resulset.getInt(6)});
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(RangosDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return model;
+        consulta(model, lista);
     }
 
-    public int getLastId() {
-        return new LastID(conexion, NOMBRE_TABLA).lastId();
+    private void setTitulos(DefaultTableModel model) {
+        String split ="id, minimo, maximo, muestra, rechazos, estado";
+        titulos(model, split);
+    }
+        public int getLastId() {
+        return new LastID(aConexion, NOMBRE_TABLA).lastId();
     }
 
     public Editar getEditar() {
@@ -105,17 +103,6 @@ public class RangosDao {
         return insertar;
     }
 
-//    public void abmActionPerformed(java.awt.event.ActionEvent evt) {
-//        switch (evt.getActionCommand()) {
-//            case "Activar ABM":
-//                editable = true;
-//                break;
-//            case "Guardar":
-//                editable = false;
-//                break;
-//        }
-//    }
-
     public boolean isEditable() {
         return editable;
     }
@@ -123,7 +110,4 @@ public class RangosDao {
     public void setEditable(boolean editable) {
         this.editable = editable;
     }
-
-
-
 }
