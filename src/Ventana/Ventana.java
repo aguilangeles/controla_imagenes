@@ -197,7 +197,7 @@ public class Ventana extends javax.swing.JFrame {
 
         slider.setMajorTickSpacing(10);
         slider.setPaintTicks(true);
-        slider.setValue(15);
+        slider.setValue(25);
 
         rutaJlabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         rutaJlabel.setText("RUTA");
@@ -215,7 +215,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(rutaJlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pagina, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)))
+                        .addComponent(pagina, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(scrollimage)
         );
@@ -288,7 +288,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        internal.setBounds(20, 10, 800, 480);
+        internal.setBounds(10, 10, 810, 480);
         jDesktopPane1.add(internal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jScrollPane1.setViewportView(jDesktopPane1);

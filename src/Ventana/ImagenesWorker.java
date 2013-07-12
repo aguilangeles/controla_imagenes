@@ -41,7 +41,7 @@ public class ImagenesWorker extends SwingWorker<Object, Object> {
         try {
             IMOperation operation = new IMOperation();
             operation.density(300);
-            operation.quality(85D);
+            operation.quality(100D);
             operation.depth(8);
             operation.addImage();
             operation.addImage();

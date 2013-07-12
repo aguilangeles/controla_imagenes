@@ -4,7 +4,6 @@
  */
 package ReporteLote;
 
-import ReporteLote.Tabla_TiposDeControlCantidad;
 import Helpers.BorrarJPG;
 import java.io.File;
 import java.util.List;

@@ -96,7 +96,10 @@ public class Worker extends SwingWorker<Object, Object> {
                     CrearElRamdom ramdomListPdf = new CrearElRamdom(listaPdf, trazaPdf.getCantidadMuestreada());
                     List<Object> ramdomPdf = ramdomListPdf.getSeleccion();
                     for (Object o : ramdomPdf) {
+                        System.out.println(o);
+                        System.out.println(parent);
                         try {
+
                             Pdf_NombreMasNumero pagina = (Pdf_NombreMasNumero) o;
                             int parentlength = parent.length() + 1;
                             String adaptarFile = pagina.getNombre().substring(parentlength);

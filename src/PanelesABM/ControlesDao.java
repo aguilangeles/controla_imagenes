@@ -4,7 +4,6 @@
  */
 package PanelesABM;
 
-import Entidades.Conexion;
 import Helpers.LastID;
 import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
@@ -14,12 +13,12 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import Entidades.Conexion;
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
+//=======
+//>>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
 
 /**
  *
@@ -35,12 +34,12 @@ public class ControlesDao extends ABMPaneles {
     private InsertRows insertar;
     private int lastId;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     public ControlesDao(JTable tabla, Conexion conexion) {
         super(conexion, tabla);
         this.aTable = tabla;
         this.aConexion = conexion;
-        DefaultTableModel modelo = modelar();
+        DefaultTableModel modelo = modeldo();
         aTable.setModel(modelo);
         setAnchoFilas();
         setCellRenderer();
@@ -51,27 +50,27 @@ public class ControlesDao extends ABMPaneles {
         this.insertar = new InsertRows(conexion, modelo);
     }
 
-    private DefaultTableModel modelar() {
-=======
-    public ControlesDao(JTable tabla, Conexion conexion,  JButton abm) {
-        this.tabla = tabla;
-        this.conexion=conexion;
-        this.abm = abm;
-        llenartabla();
-    }
+//    private DefaultTableModel modelar() {
+////=======
+//    public ControlesDao(JTable tabla, Conexion conexion,  JButton abm) {
+//        this.tabla = tabla;
+//        this.conexion=conexion;
+//        this.abm = abm;
+//        llenartabla();
+//    }
 
-    private void llenartabla() {
-        DefaultTableModel modelo = modeldo();
-        tabla.setModel(modelo);
-        ajusteLargoFila();
-        ajusteAltoCelda(modelo);
-        editar=new Editar(conexion, modelo);
-        insertar=new InsertRows(conexion, modelo);
+//    private void llenartabla() {
+//        DefaultTableModel modelo = modeldo();
+//        tabla.setModel(modelo);
+//        ajusteLargoFila();
+//        ajusteAltoCelda(modelo);
+//        editar=new Editar(conexion, modelo);
+//        insertar=new InsertRows(conexion, modelo);
 
-    }
+    //}
 
     private DefaultTableModel modeldo() {
->>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
+//>>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int fila, int columna) {
@@ -97,7 +96,7 @@ public class ControlesDao extends ABMPaneles {
                 }
             }
         };
-<<<<<<< HEAD
+//<<<<<<< HEAD
         setTitulos(model);
         setConsulta(model);
         return model;
@@ -142,16 +141,16 @@ public class ControlesDao extends ABMPaneles {
             } catch (SQLException ex) {
                 Logger.getLogger(ControlesDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-=======
+//=======
         titulos(model);
 
         if (conexion.isConexion()) {
             consulta(model);
->>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
+//>>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
         }
         consulta(model, lista);
     }
-
+    }
     public void setEditable(boolean editable) {
         this.editable = editable;
     }
@@ -171,8 +170,8 @@ public class ControlesDao extends ABMPaneles {
     public InsertRows getInsertar() {
         return insertar;
     }
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 
     private void titulos(DefaultTableModel model) {
         model.addColumn("id");
@@ -221,5 +220,5 @@ public class ControlesDao extends ABMPaneles {
     }
 
 
->>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
+//>>>>>>> dfe2936d0bda8775694b5029d291ce8c8ab95bde
 }
