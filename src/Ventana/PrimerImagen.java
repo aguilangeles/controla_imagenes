@@ -41,7 +41,7 @@ private Imagen siguientes;
             new SetChecksBox(jTable1).setEstadoChecksBoxs(id);
             this.contador++;
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(Ventana_1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
        private String primeraImagen(boolean ispdf, Imagen siguientes, JLabel pagina) {

@@ -28,7 +28,7 @@ import tratamientoruta.BuscarPaginasPdf;
 import tratamientoruta.CrearElRamdom;
 import Entidades.Conexion;
 import Entidades.TipodeUsuario;
-import VentanaDos.Ventana;
+import VentanaDos.Ventana_2;
 
 /**
  *
@@ -185,8 +185,8 @@ public class Worker extends SwingWorker<Object, Object> {
                 int resultado = new LastID(con, "traza").lastId();
                 trazaID = (resultado == 0) ? 1 : resultado;
                 LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
+//                new VentanaSecundaria(trazaDao.getTraza()).setVisible(true);
                 new Ventana(trazaDao.getTraza()).setVisible(true);
-//                new Ventana_1(trazaDao.getTraza()).setVisible(true);
                 con.desconectar();
             }else{
                 System.out.println("problemas en el done");

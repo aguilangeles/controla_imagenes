@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author MUTNPROD003
  */
-public class Ventana_1 extends javax.swing.JFrame {
+public class Ventana extends javax.swing.JFrame {
 
     private int sizeRamdom;
     private DefaultTableModel model;
@@ -37,18 +37,18 @@ public class Ventana_1 extends javax.swing.JFrame {
     private ImagenesWorker worker;
     private boolean pdf;
 
-    public Ventana_1(TrazaDao traza) {
+    public Ventana(TrazaDao traza) {
         initComponents();
         String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
         ImageIcon im = new ImageIcon(rutaImagen);
         setIconImage(im.getImage());
-//        tablaCheck.requestFocus();
+        tablaCheck.requestFocus();
         setExtendedState(6);
         this.traza = traza;
-        poblarTabla();
-        guardado = true;
+//        guardado = true;
         terminar.setEnabled(false);
         this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;
+        poblarTabla();
         internal(pdf);
 
     }
@@ -58,17 +58,17 @@ public class Ventana_1 extends javax.swing.JFrame {
             internal.setMaximum(true);
             Imagen siguientes = nextImagen();//trae el ramdom
             anterior.setEnabled(false);
+            int id = siguientes.getId();
+            new SetChecksBox(tablaCheck).setEstadoChecksBoxs(id);
             String rutaDb = siguientes.getRutaDb();//ruta de archivo
             internal.setTitle("Imagen " + contador + "/" + getSizeRamdom());
             rutaJlabel.setText(rutaDb);
             internal.setVisible(true);
             String verImagen = filtroImagen(ispdf, siguientes);
             VisualizarImagen visualizarImagen = new VisualizarImagen(verImagen, scrollimage, slider, getZoom());
-            int id = siguientes.getId();
-            new SetChecksBox(tablaCheck).setEstadoChecksBoxs(id);
             contador++;
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(Ventana_1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -378,8 +378,8 @@ public class Ventana_1 extends javax.swing.JFrame {
     }
     private void siguienteSuceso() {
         String ruta_temp;
-        try {
             Guardar guardar = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck);
+        try {
             int setSize = getSizeRamdom() + 1;
             setSizeRamdom(setSize);
             setZoom(slider.getValue());
@@ -393,7 +393,7 @@ public class Ventana_1 extends javax.swing.JFrame {
                 terminar.setEnabled(true);
             }
         } catch (Exception ex) {
-            Logger.getLogger(Ventana_1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void AnteriorSuceso() {
@@ -466,7 +466,7 @@ public class Ventana_1 extends javax.swing.JFrame {
         this.sizeRamdom = sizeRamdom;
     }
     /**
-     * Creates new form Ventana_1
+     * Creates new form Ventana
      *
      * @return
      */

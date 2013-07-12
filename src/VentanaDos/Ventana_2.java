@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author MUTNPROD003
  */
-public class Ventana extends javax.swing.JFrame {
+public class Ventana_2 extends javax.swing.JFrame {
     //private Imagen siguientes ;
     private Imagen anteriorTif ;
     private int sizeRamdom;
@@ -43,7 +43,7 @@ public class Ventana extends javax.swing.JFrame {
     private int zoom;
     private ImagenesWorker worker;
 
-    public Ventana(TrazaDao traza) {
+    public Ventana_2(TrazaDao traza) {
         initComponents();
         this.traza = traza;
         poblarTabla();
@@ -70,7 +70,7 @@ public class Ventana extends javax.swing.JFrame {
             contador++;
         }
         catch (Exception ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ventana_2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -355,7 +355,7 @@ public class Ventana extends javax.swing.JFrame {
                 terminar.setEnabled(true);
             }
         } catch (Exception ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ventana_2.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -441,7 +441,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     /**
-     * Creates new form Ventana
+     * Creates new form Ventana_2
      * @return
      */
 

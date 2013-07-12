@@ -87,7 +87,7 @@ public class VentanaSecundaria extends javax.swing.JFrame {
             new SetChecksBox(jTable1).setEstadoChecksBoxs(id);
             contador++;
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(Ventana_1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -212,7 +212,7 @@ private void poblarTabla() {
                 terminar.setEnabled(true);
             }
         } catch (Exception ex) {
-            Logger.getLogger(Ventana_1.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void AnteriorSuceso() {
@@ -495,7 +495,7 @@ private void poblarTabla() {
 //                terminar.setEnabled(true);
 //            }
 //        } catch (Exception ex) {
-//            Logger.getLogger(Ventana_1.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
 
