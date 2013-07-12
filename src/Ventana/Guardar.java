@@ -29,6 +29,7 @@ public class Guardar {
     }
 
     private void guardarCambiosCheckBoxs() {
+
         Imagen imagen = traza.getTifByName(nombre);
         LlenarControles llenarControles = new LlenarControles(traza.getId(), imagen.getId());
         for (ControlPorArchivo controlxArchivo : llenarControles.getLista())
@@ -56,6 +57,24 @@ public class Guardar {
             updateChecs = new UpdateEstadoArchivoYTraza(controlxArchivo.getEstado(), controlxArchivo.getIdTrazaArchivoControl());
             updateChecs.updateEstadoTrazaArchivo();
             updateEstadoArchivo(check, imagen);
+        }
+    }
+     private void guardar() {
+        Imagen tif = traza.getTifByName(nombre);
+        LlenarControles controles = new LlenarControles(traza.getId(), tif.getId());
+        for (ControlPorArchivo controlxArchivo : controles.getLista()) {
+            for (int index = 0; index < tablaCheck.getRowCount(); index++) {
+                String descripcion = (String) tablaCheck.getValueAt(index, 1);
+                boolean check = (boolean) tablaCheck.getValueAt(index, 0);
+                if (descripcion.equals(controlxArchivo.getDescripcion())) {
+                    controlxArchivo.setCheck(check);
+                    updateChecs = new UpdateEstadoArchivoYTraza(controlxArchivo.getEstado(), controlxArchivo.getIdTrazaArchivoControl());
+                    updateChecs.updateEstadoTrazaArchivo();
+                    if (check) {
+                        updateChecs.updateEstadoArchivo(tif.getId());
+                    }
+                }
+            }
         }
     }
 }

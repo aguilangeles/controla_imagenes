@@ -28,6 +28,7 @@ import tratamientoruta.BuscarPaginasPdf;
 import tratamientoruta.CrearElRamdom;
 import Entidades.Conexion;
 import Entidades.TipodeUsuario;
+import VentanaDos.Ventana;
 
 /**
  *
@@ -63,7 +64,6 @@ public class Worker extends SwingWorker<Object, Object> {
         String retorno="";
         if(prueba.contains("\\")){
                 String replace = prueba.replace("\\", ", ");
-                System.out.println(replace);
                 String [] rsplit = replace.split(", ");
                 for(int i = 0; i<rsplit.length;i++){
                    retorno =(rsplit[i]);
@@ -112,7 +112,6 @@ public class Worker extends SwingWorker<Object, Object> {
                         try {
 
                             Pdf_NombreMasNumero pagina = (Pdf_NombreMasNumero) o;
-                            System.out.println(parent+"--"+ultimaCarpeta);
                             int parentlength = parent.length() + 1;
                             String adaptarFile = pagina.getNombre().substring(parentlength);
                             String filename = URLEncoder.encode(adaptarFile, "UTF-8");
@@ -186,8 +185,8 @@ public class Worker extends SwingWorker<Object, Object> {
                 int resultado = new LastID(con, "traza").lastId();
                 trazaID = (resultado == 0) ? 1 : resultado;
                 LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
-//                new VentanaSecundaria(trazaDao.getTraza()).setVisible(true);
                 new Ventana(trazaDao.getTraza()).setVisible(true);
+//                new Ventana_1(trazaDao.getTraza()).setVisible(true);
                 con.desconectar();
             }else{
                 System.out.println("problemas en el done");
