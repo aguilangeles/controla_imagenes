@@ -26,28 +26,28 @@ public class CrearElRamdom {
     }
 
 
-    private  void generarRamdom() {
-        HashSet<Object> hash = new HashSet<>();
-        int tamanioLote = lista.size();
-        while (hash.size() < rango) {
-            Integer a1 = new Integer(new java.util.Random().nextInt(tamanioLote));
-            hash.add(a1);
-        }
-        ArrayList ListaHash = new ArrayList(hash);
-        Collections.sort(ListaHash);
-        Iterator it = ListaHash.iterator();
-        while (it.hasNext()) {
-            Integer imagen = (Integer) it.next();
-            seleccion.add(lista.get(imagen));
-        }
+  private void generarRamdom() {
+    HashSet<Object> hash = new HashSet<>();
+    int tamanioLote = lista.size();
+    while (hash.size() < rango) {
+      Integer a1 = new Integer(new java.util.Random().nextInt(tamanioLote));
+      hash.add(a1);
     }
+    ArrayList ListaHash = new ArrayList(hash);
+    Collections.sort(ListaHash);
+    Iterator it = ListaHash.iterator();
+    while (it.hasNext()) {
+      Integer imagen = (Integer) it.next();
+      seleccion.add(lista.get(imagen));
+    }
+  }
 
-    public List<Object> getSeleccion() {
-        return seleccion;
-    }
+  public List<Object> getSeleccion() {
+    return seleccion;
+  }
 
-    public void setSeleccion(List<Object> seleccion) {
-        this.seleccion = seleccion;
-    }
+  public void setSeleccion(List<Object> seleccion) {
+    this.seleccion = seleccion;
+  }
 
 }

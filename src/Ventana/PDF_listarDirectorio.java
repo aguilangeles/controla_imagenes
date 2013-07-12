@@ -62,7 +62,6 @@ public class PDF_listarDirectorio {
                     PDDocument doc = PDDocument.load(absolutePath);
                     int pagina = doc.getDocumentCatalog().getAllPages().size();
                     sublote = new Sublote(contador, absolutePath, getParent(), fileName, pagina);
-                  //  System.out.println("sublote  \t"+ sublote);
                     listSub.add(sublote);
                     doc.close();
                 } catch (IOException ex) {

@@ -5,7 +5,6 @@
 package Ventana;
 
 import Entidades.Imagen;
-import Entidades.TiposConCheck;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -25,6 +24,8 @@ public class Next extends JFrame {
     private JLabel titulo;
     private JLabel pagina;
     private JTable tabla;
+    
+    
     public Next(JButton anterior, JButton siguiente,
             int sizeRamdom, JInternalFrame internal, JLabel titulo, JLabel pagina, JTable tabla) {
         this.anterior = anterior;

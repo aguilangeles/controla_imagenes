@@ -16,6 +16,7 @@ import Entidades.Conexion;
  */
 public class CantidadControlesPorVerificacion {
     private int cantidad;
+    
     public CantidadControlesPorVerificacion(Conexion conexion, int id) {
         this.cantidad = cantidad(conexion, id);
     }

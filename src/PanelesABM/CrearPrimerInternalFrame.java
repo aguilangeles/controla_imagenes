@@ -60,9 +60,10 @@ private int contador, sizeRamdom;
   private String primeraImagen(boolean ispdf, Imagen siguientes, JLabel pagina) {
     String ret;
     if (ispdf) {
-      ImagenesWorker worker = new ImagenesWorker(siguientes.getRuta_archivo(), siguientes.getParent(), siguientes.getPagina());
+      
+      ImagenesWorker worker = new ImagenesWorker(siguientes.getRuta_archivo().replace("\\", "/"), siguientes.getParent(), siguientes.getPagina());
       worker.execute();
-      ret = worker.doInBackground();
+      ret = worker.doInBackground().replace("\\", "/");
       siguientes.setRutaTemp(ret);
       int page = siguientes.getPagina() + 1;
       pagina.setText("Pagina: " + page);
