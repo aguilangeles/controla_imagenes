@@ -4,10 +4,16 @@
  */
 package Ventana;
 
-import Helpers.LastID;
+import Entidades.Conexion;
 import Entidades.LlenarTrazaDao;
+import Entidades.Pdf_NombreMasNumero;
+import Entidades.TipodeUsuario;
 import Helpers.Archivo;
+import Helpers.IdentificarExtension;
+import Helpers.IdentificarParent;
 import Helpers.Traza;
+import Helpers.UltimoIdInsertado;
+import PanelesABM.Ventana;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -19,16 +25,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
-import Helpers.IdentificarExtension;
-import Entidades.Pdf_NombreMasNumero;
-import Helpers.IdentificarParent;
-
-
 import tratamientoruta.BuscarPaginasPdf;
 import tratamientoruta.CrearElRamdom;
-import Entidades.Conexion;
-import Entidades.TipodeUsuario;
-import VentanaDos.Ventana_2;
 
 /**
  *
@@ -51,7 +49,8 @@ public class Worker extends SwingWorker<Object, Object> {
     private String extension;
     private String ultimaCarpeta;
 
-    public Worker(JFrame Controles, JTextField ruta, List<Integer> idControles, int idDocumento, int idVerificacion, int idUsuario) {
+    public Worker(JFrame Controles, JTextField ruta, List<Integer> idControles,
+            int idDocumento, int idVerificacion, int idUsuario) {
         this.controles = Controles;
         this.ruta = ruta;
         this.idControl = idControles;
@@ -77,7 +76,7 @@ public class Worker extends SwingWorker<Object, Object> {
     @Override
     protected String doInBackground() {
         if (conexion.isConexion()) {
-            idTraza = new LastID(conexion, "traza").lastId();
+            idTraza = new UltimoIdInsertado(conexion, "traza").getUltimoId();
            IdentificarExtension ext = new IdentificarExtension(ruta.getText());
             extension = (IdentificarExtension.getExtension());
             switch (extension) {
@@ -163,7 +162,7 @@ public class Worker extends SwingWorker<Object, Object> {
     private void imagenyControl() {
         int id = getIdTraza() + 1;
         for (Integer idarchivo : idControl) {
-            int lasid = new LastID(conexion, "archivo").lastId();
+            int lasid = new UltimoIdInsertado(conexion, "archivo").getUltimoId();
             String ret = "Insert into qualitys.traza_archivo_controles "
                     + "(idtraza, idarchivo, idcontrol, estado) VALUES "
                     + "(" + id + ", " + lasid + ", " + idarchivo + ", " + 0 + ");";
@@ -182,7 +181,7 @@ public class Worker extends SwingWorker<Object, Object> {
             int trazaID = 0;
             Conexion con = new Conexion();
             if (con.isConexion()) {
-                int resultado = new LastID(con, "traza").lastId();
+                int resultado = new UltimoIdInsertado(con, "traza").getUltimoId();
                 trazaID = (resultado == 0) ? 1 : resultado;
                 LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
 //                new VentanaSecundaria(trazaDao.getTraza()).setVisible(true);
