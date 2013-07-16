@@ -5,7 +5,7 @@
 package PanelesABM;
 
 import Entidades.Conexion;
-import Helpers.LastID;
+import Helpers.UltimoIdInsertado;
 import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
 import java.util.List;

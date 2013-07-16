@@ -4,7 +4,6 @@
  */
 package Entidades;
 
-
 import Ventana.ImagenesWorker;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,48 +16,53 @@ import java.util.logging.Logger;
  * @author MUTNPROD003
  */
 public class LlenarArchivo {
-    private int idTraza;
-    private Conexion conexion;
-    private String parent;
-    private boolean isPdf;
-    private List<Imagen> imagenProcesada=new ArrayList<>();
-    private ImagenesWorker worker;
 
-    public LlenarArchivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
-        this.conexion = conexion;
-        this.idTraza = idTraza;
-        this.parent = parent;
-        this.isPdf = isPdf;
-        llenarImagenes();
+  private int idTraza;
+  private Conexion conexion;
+  private String parent;
+  private boolean isPdf;
+  private List<Imagen> imagenProcesada = new ArrayList<>();
+  private ImagenesWorker worker;
+
+  public LlenarArchivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
+    this.conexion = conexion;
+    this.idTraza = idTraza;
+    this.parent = parent;
+    this.isPdf = isPdf;
+    llenarImagenes();
+  }
+
+  private List<Imagen> llenarImagenes() {
+    Imagen imagen;
+    try {
+      String query = "SELECT id , ruta_archivo, pagina_pdf FROM qualitys.archivo where idtraza = " + idTraza + ";";
+      conexion.ExecuteSql(query);
+      while (conexion.resulset.next()) {
+        int id = conexion.resulset.getInt(1);
+        String ruta_archivo = conexion.resulset.getString(2);
+        int pagina = conexion.resulset.getInt(3);
+        switchPdf(id, ruta_archivo, pagina);
+
+      }
+
+    } catch (SQLException ex) {
+      Logger.getLogger(LlenarArchivo.class.getName()).log(Level.SEVERE, null, ex);
     }
+    return imagenProcesada;
+  }
 
-    private List<Imagen> llenarImagenes() {
-        Imagen imagen;
-        try {
-            String query = "SELECT id , ruta_archivo, pagina_pdf FROM qualitys.archivo where idtraza = " + idTraza + ";";
-            conexion.ExecuteSql(query);
-            while (conexion.resulset.next()) {
-                int id = conexion.resulset.getInt(1);
-                String ruta_archivo = conexion.resulset.getString(2);
-                int pagina = conexion.resulset.getInt(3);
-                if (isPdf) {
-                    imagen = new Imagen(id, ruta_archivo, parent, pagina);
-                    imagenProcesada.add(imagen);
-                } else {
-                    imagen = new Imagen(id, ruta_archivo, parent);
-                    System.out.println(imagen);
-                    imagenProcesada.add(imagen);
-                }
+  public List<Imagen> getListaArchivos() {
+    return imagenProcesada;
+  }
 
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(LlenarArchivo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return imagenProcesada;
+  private void switchPdf(int id, String ruta_archivo, int pagina) {
+    Imagen imagen;
+    if (isPdf) {
+      imagen = new Imagen(id, ruta_archivo, parent, pagina);
+      imagenProcesada.add(imagen);
+    } else {
+      imagen = new Imagen(id, ruta_archivo, parent);
+      imagenProcesada.add(imagen);
     }
-
-    public List<Imagen> getListaArchivos() {
-        return imagenProcesada;
-    }
+  }
 }

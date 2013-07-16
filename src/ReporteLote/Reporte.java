@@ -5,6 +5,7 @@
 package ReporteLote;
 
 import Helpers.BorrarJPG;
+import Helpers.SetIconImageFromJFrame;
 import java.io.File;
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -33,9 +34,7 @@ public class Reporte extends javax.swing.JFrame {
     public Reporte(int idtraza) {
 
         initComponents();
-        String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-        ImageIcon im = new ImageIcon(rutaImagen);
-        setIconImage(im.getImage());
+      new SetIconImageFromJFrame().set();
         this.idtraza = idtraza;
         setResizable(false);
            if(conexion.isConexion()){

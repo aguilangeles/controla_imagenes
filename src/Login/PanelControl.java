@@ -9,10 +9,8 @@ import PanelesABM.ControlesABM;
 import PanelesABM.RangosABM;
 import PanelesABM.UsuariosABM;
 import PanelesABM.VerificacionABM;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import Entidades.TipodeUsuario;
-import javax.swing.ImageIcon;
+import Helpers.SetIconImageFromJFrame;
 
 /**
  *
@@ -33,9 +31,7 @@ public class PanelControl extends javax.swing.JFrame {
 
     PanelControl(TipodeUsuario usuarioTipo) {
         initComponents();
-        String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-        ImageIcon im = new ImageIcon(rutaImagen);
-        setIconImage(im.getImage());
+        new SetIconImageFromJFrame().set();
         jLabel1.setText(INFO_LABEL);
         this.usuarioTipo = usuarioTipo;
         this.administrador = usuarioTipo.isAdmin();

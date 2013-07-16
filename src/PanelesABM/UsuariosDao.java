@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import Helpers.LastID;
+import Helpers.UltimoIdInsertado;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,7 +100,7 @@ public class UsuariosDao extends ABMPaneles{
 
 
     public int getLastId() {
-        return new LastID(aConexion, NOMBRE_TABLA).lastId();
+        return new UltimoIdInsertado(aConexion, NOMBRE_TABLA).getUltimoId();
     }
 
     public InsertRows getInsertar() {

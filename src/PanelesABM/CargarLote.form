@@ -8,7 +8,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -135,7 +134,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bitstream Vera Sans Mono" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="C:\u005c\u005cAngeles\u005c\u005cPDF" containsInvalidXMLChars="true"/>
+            <Property name="text" type="java.lang.String" value="/home/maria/Desktop/Gendarmeria"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="aceptarSeleccion">

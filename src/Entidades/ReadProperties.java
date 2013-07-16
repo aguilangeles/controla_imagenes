@@ -22,14 +22,14 @@ public class ReadProperties {
         Usuario user = null;
         try {
             Properties p = new Properties();
-            FileInputStream in = new FileInputStream("config.properties");
-            p.load(in);
-            String url = p.getProperty("url");
-            String base = p.getProperty("database");
-            String usuario = p.getProperty("dbuser");
-            String password = p.getProperty("dbpassword");
-            user = new Usuario(url, base, usuario, password);
-            in.close();
+        try (FileInputStream in = new FileInputStream("config.properties")) {
+          p.load(in);
+          String url = p.getProperty("url");
+          String base = p.getProperty("database");
+          String usuario = p.getProperty("dbuser");
+          String password = p.getProperty("dbpassword");
+          user = new Usuario(url, base, usuario, password);
+        }
 
         } catch (IOException ex) {
             Logger.getLogger(ReadProperties.class.getName()).log(Level.SEVERE, null, ex);
