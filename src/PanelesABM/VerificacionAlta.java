@@ -5,7 +5,7 @@
 package PanelesABM;
 
 import Ventana.ListaControlesActivos;
-import Ventana.ListaControlesActivos.TipoControl;
+import Ventana.ListaControlesActivos.TipoDeControl;
 import Helpers.InputVerifier;
 import java.util.ArrayList;
 import java.util.List;
@@ -253,7 +253,7 @@ public class VerificacionAlta extends javax.swing.JFrame {
 
   private void poblarLista() {
     ListaControlesActivos lista = new ListaControlesActivos(conexion);
-    List<TipoControl> tipos = lista.getLista();
+    List<TipoDeControl> tipos = lista.getLista();
     for (int i = 0; i < tipos.size(); i++) {
       modeloOrigen.addElement(tipos.get(i));
     }

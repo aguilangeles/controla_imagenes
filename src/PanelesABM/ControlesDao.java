@@ -83,20 +83,20 @@ public class ControlesDao extends ABMPaneles {
         return model;
     }
     private void setAnchoFilas() {
-        List<ColumnaTamanio> list = new ArrayList<>();
-        list.add(new ColumnaTamanio(0, 20));
-        list.add(new ColumnaTamanio(1, 90));
-        list.add(new ColumnaTamanio(2, 500));
-        list.add(new ColumnaTamanio(3, 70));
-        list.add(new ColumnaTamanio(4, 25));
+        List<AnchoDeColumna> list = new ArrayList<>();
+        list.add(new AnchoDeColumna(0, 20));
+        list.add(new AnchoDeColumna(1, 90));
+        list.add(new AnchoDeColumna(2, 500));
+        list.add(new AnchoDeColumna(3, 70));
+        list.add(new AnchoDeColumna(4, 25));
         anchoColumnas(aTable, list);
 
     }
 
     private void setCellRenderer() {
-        ArrayList<ColumnaTamanio> lista = new ArrayList<>();
-        lista.add(new ColumnaTamanio(1, 0));
-        lista.add(new ColumnaTamanio(2, 0));
+        ArrayList<AnchoDeColumna> lista = new ArrayList<>();
+        lista.add(new AnchoDeColumna(1, 0));
+        lista.add(new AnchoDeColumna(2, 0));
         cellRenderer(lista, 70);
     }
 

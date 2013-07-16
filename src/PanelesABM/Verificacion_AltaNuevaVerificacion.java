@@ -6,7 +6,7 @@ package PanelesABM;
 
 import Helpers.UltimoIdInsertado;
 import Ventana.ListaControlesActivos;
-import Ventana.ListaControlesActivos.TipoControl;
+import Ventana.ListaControlesActivos.TipoDeControl;
 import Ventana.TiposVerificacion;
 import Ventana.TiposVerificacion.TiposControlVf;
 import java.awt.Rectangle;
@@ -49,7 +49,7 @@ public class Verificacion_AltaNuevaVerificacion {
         int id = lastid.getUltimoId();
         tipos_verificacion = new TiposVerificacion(id, getNombre(), getDescripcion(), 1, null);
         for (Object o : tablaDestinoSeleccionado) {
-            TipoControl tipo = (ListaControlesActivos.TipoControl) o;
+            TipoDeControl tipo = (ListaControlesActivos.TipoDeControl) o;
             String insertar = "INSERT INTO `qualitys`.`controles_verificacion`(`idVerificacion`,`idControl`)"
                     + "VALUES(" + id + "," + tipo.getId() + ")";
             conexion.executeUpdate(insertar);
@@ -59,7 +59,7 @@ public class Verificacion_AltaNuevaVerificacion {
     public void insertarModelo() {
         List<TiposControlVf> tiposControlVerificacionList = new ArrayList<>();
         for (Object object : tablaDestinoSeleccionado) {
-            TipoControl tc = (TipoControl) object;
+            TipoDeControl tc = (TipoDeControl) object;
             TiposControlVf control = new TiposControlVf(tc.getId(), tc.getDescripcion());
             tiposControlVerificacionList.add(control);
         }

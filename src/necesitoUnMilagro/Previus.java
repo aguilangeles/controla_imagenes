@@ -31,7 +31,7 @@ public class Previus {
         this.tabla = tabla;
     }
 
-    public void setearInternalFrame(int contador, Imagen tif) {
+    public void anteriorInternalFrame(int contador, Imagen tif) {
         siguiente.setEnabled(true);
         internal.setTitle("Imagen " + contador + "/" + sizeRamdom);
         String rutaPdf = tif.getRutaDb();

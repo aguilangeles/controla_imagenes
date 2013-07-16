@@ -5,7 +5,7 @@
 package PanelesABM;
 
 import Ventana.ListaControlesActivos;
-import Ventana.ListaControlesActivos.TipoControl;
+import Ventana.ListaControlesActivos.TipoDeControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +38,7 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
                     while (conexion.resulset.next()) {
                         int id = conexion.resulset.getInt(1);
                         String nombre = conexion.resulset.getString(2);
-                         TipoControl t = new ListaControlesActivos.TipoControl(id, nombre);
+                         TipoDeControl t = new ListaControlesActivos.TipoDeControl(id, nombre);
                         tipoVerificacion.addItem(t);
                     }
                 } catch (SQLException ex) {
@@ -57,7 +57,7 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
                 while (conexion.resulset.next()) {
                     int id = conexion.resulset.getInt(1);
                     String nombre = conexion.resulset.getString(2);
-                     TipoControl t = new ListaControlesActivos.TipoControl(id, nombre);
+                     TipoDeControl t = new ListaControlesActivos.TipoDeControl(id, nombre);
                     tipoDocumento.addItem(t);
                 }
             }

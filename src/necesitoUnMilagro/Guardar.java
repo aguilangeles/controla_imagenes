@@ -23,13 +23,6 @@ public class Guardar {
     private JLabel pagina;
 
 
-//    public Guardar(TrazaDao traza, String nombre, JTable tablaCheck) {
-//        this.traza = traza;
-//        this.nombre = nombre;
-//        this.tablaCheck = tablaCheck;
-//        guardar();
-//    }
-
     public Guardar(TrazaDao traza, String nombre, JTable tablaCheck, JLabel pagina, boolean pdf) {
         this.traza = traza;
         this.nombre = nombre;
@@ -41,10 +34,6 @@ public class Guardar {
         }
         guardar();
     }
-
-
-
-
     private void guardar() {
         Imagen aImagen = traza.getImageByNameAndPage(nombre, page);
         LlenarControles controles = new LlenarControles(traza.getId(), aImagen.getId());
@@ -70,6 +59,7 @@ public class Guardar {
             int numeroPagina = Integer.parseInt(rem) - 1;
             this.page = numeroPagina;
         } catch (NumberFormatException e) {
+
             System.out.println(e.getMessage());
         }
     }

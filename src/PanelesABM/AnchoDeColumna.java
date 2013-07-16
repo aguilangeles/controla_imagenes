@@ -8,12 +8,12 @@ package PanelesABM;
  *
  * @author MUTNPROD003
  */
-public class ColumnaTamanio {
+public class AnchoDeColumna {
 
     private int columna;
     private int size;
 
-    public ColumnaTamanio(int columna, int size) {
+    public AnchoDeColumna(int columna, int size) {
         this.columna = columna;
         this.size = size;
     }

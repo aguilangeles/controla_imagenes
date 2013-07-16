@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Entidades.TipodeUsuario;
 import Helpers.SetIconImageFromJFrame;
-import Ventana.ListaControlesActivos.TipoControl;
+import Ventana.ListaControlesActivos.TipoDeControl;
 
 /**
  *
@@ -200,13 +200,13 @@ public class CargarLote extends javax.swing.JFrame {
 
     private int getTipoDocumento() {
 
-       TipoControl tip =
-                (TipoControl) tipoDocumentoBox.getSelectedItem();
-        return tip.getId();
+       TipoDeControl tipoControl =
+                (TipoDeControl) tipoDocumentoBox.getSelectedItem();
+        return tipoControl.getId();
     }
 
     private List<Integer> idControlesByVerificacion() {
-       TipoControl tip = (TipoControl) tipoVerificacionBox.getSelectedItem();
+       TipoDeControl tip = (TipoDeControl) tipoVerificacionBox.getSelectedItem();
         idVerificacion=tip.getId();
         String selec = "SELECT idControl FROM qualitys.controles_verificacion where idVerificacion =" + tip.getId() + ";";
         if (con.isConexion()) {

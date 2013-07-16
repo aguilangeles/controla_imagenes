@@ -17,15 +17,15 @@ import Entidades.Conexion;
  */
 public class ListaControlesActivos {
 private Conexion conexion ;
-    private List<TipoControl> lista=new ArrayList<>();
+    private List<TipoDeControl> lista=new ArrayList<>();
 
     public ListaControlesActivos(Conexion conexion) {
         this.conexion=conexion;
         poblarLista();
     }
 
-    private List<TipoControl> poblarLista() {
-        TipoControl tipo;
+    private List<TipoDeControl> poblarLista() {
+        TipoDeControl tipo;
 
         if (conexion.isConexion()) {
             try {
@@ -33,7 +33,7 @@ private Conexion conexion ;
                 while (conexion.resulset.next()) {
                     int id = conexion.resulset.getInt(1);
                     String descripcion = conexion.resulset.getString(2);
-                    tipo = new TipoControl(id, descripcion);
+                    tipo = new TipoDeControl(id, descripcion);
                     lista.add(tipo);
                 }
             } catch (SQLException ex) {
@@ -43,15 +43,15 @@ private Conexion conexion ;
         return lista;
     }
 
-    public List<TipoControl> getLista() {
+    public List<TipoDeControl> getLista() {
         return lista;
     }
 
-    public static class TipoControl {
+    public static class TipoDeControl {
         private int id;
         private String descripcion;
 
-        public TipoControl(int id, String descripcion) {
+        public TipoDeControl(int id, String descripcion) {
             this.id = id;
             this.descripcion = descripcion;
         }

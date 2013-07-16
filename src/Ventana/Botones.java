@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import necesitoUnMilagro.Next;
+import necesitoUnMilagro.Previus;
 
 /**
  *
@@ -68,8 +70,8 @@ public class Botones {
 
     public String Anterior() {
         Imagen imagenAnterior = imagen;
-        Previus previus = new Previus(siguiente, internal, ruta, pagina, sizeRamdom, tabla);
-        previus.setearInternalFrame(contador, imagenAnterior);
+        Previus previus = new Previus(internal, tabla, siguiente, ruta, pagina, sizeRamdom);
+        previus.anteriorInternalFrame(contador, imagenAnterior);
         String aRuta = ruta_temporal_anterior(imagenAnterior);
         return aRuta;
     }
@@ -79,7 +81,7 @@ public class Botones {
                 internal, ruta, pagina, tabla);
         Imagen isNext = imagen;
         String aRuta = ruta_temporal_Siguiente(isNext);
-        proximo.crearInternalFrame(contador++, isNext, hasNext);
+        proximo.siguienteInternalFrame(contador++, isNext);
         return aRuta;
     }
 

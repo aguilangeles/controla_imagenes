@@ -35,7 +35,6 @@ public class ObtenerControles {
         this.idArchivo = idArchivo;
         this.tabla = tabla;
         traerChecks();
-       // poblarTabla();
     }
 
     private List<TiposConCheck> traerChecks() {
@@ -65,15 +64,4 @@ public class ObtenerControles {
     public List<TiposConCheck> getListadoTipos() {
         return listadoTipos;
     }
-
-//    private void poblarTabla(){
-//         for (TiposConCheck t : getListadoTipos()) {
-//            for (int index = 0; index < tabla.getRowCount(); index++) {
-//                System.out.println(t.getImagen());
-//                tabla.setValueAt(t.isCheck(), index, 0);
-//            }
-//        }
-//    }
-
-
 }

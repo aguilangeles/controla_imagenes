@@ -124,19 +124,19 @@ public class VerificacionDao extends ABMPaneles{
     }
 
     private void setAnchoColumna() {
-        List<ColumnaTamanio> lista = new ArrayList<>();
-        lista.add(new ColumnaTamanio(0, 20));
-        lista.add(new ColumnaTamanio(1, 100));
-        lista.add(new ColumnaTamanio(2, 130));
-        lista.add(new ColumnaTamanio(3, 230));
-        lista.add(new ColumnaTamanio(4, 20));
+        List<AnchoDeColumna> lista = new ArrayList<>();
+        lista.add(new AnchoDeColumna(0, 20));
+        lista.add(new AnchoDeColumna(1, 100));
+        lista.add(new AnchoDeColumna(2, 130));
+        lista.add(new AnchoDeColumna(3, 230));
+        lista.add(new AnchoDeColumna(4, 20));
         anchoColumnas(aTable, lista);
     }
 
     private void setAltoFilas() {
-        List<ColumnaTamanio> l = new ArrayList<>();
-        l.add(new ColumnaTamanio(2, 0));
-        l.add(new ColumnaTamanio(3, 0));
+        List<AnchoDeColumna> l = new ArrayList<>();
+        l.add(new AnchoDeColumna(2, 0));
+        l.add(new AnchoDeColumna(3, 0));
         cellRenderer(l, 100);
     }
 

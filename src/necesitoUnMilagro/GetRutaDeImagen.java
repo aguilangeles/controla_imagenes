@@ -14,7 +14,6 @@ import javax.swing.JLabel;
  */
 public final class GetRutaDeImagen {
     private String siguienteRuta, anteriorRuta;
-
     private Imagen imagen;
     private JLabel pagina;
     private boolean pdf;
@@ -27,13 +26,8 @@ public final class GetRutaDeImagen {
         siguienteImagen();
     }
 
-
-
     private String anteriorImagen() {
         String visualizacion = "";
-//        tabla.requestFocusInWindow();
-//        Previus previus = new Previus(internal, tabla, siguiente, ruta, pagina, sizeRamdom);
-//        previus.setearInternalFrame(contador, imagen);
         if (pdf) {
             anteriorRuta = imagen.getRutaTemp();
         } else if (!pdf) {
@@ -44,9 +38,6 @@ public final class GetRutaDeImagen {
 
     public String siguienteImagen()  {
         String ruta_temp = "";
-//        Next proximo = new Next(anterior, siguiente, sizeRamdom,
-//                internal, ruta, pagina, tabla);
-//        tabla.requestFocusInWindow();
         if (pdf) {
             ImagenesWorker worker = new ImagenesWorker(imagen.getRuta_archivo(), imagen.getParent(), imagen.getPagina());
             worker.execute();
@@ -57,7 +48,6 @@ public final class GetRutaDeImagen {
             siguienteRuta = imagen.getRuta_archivo();
             pagina.setVisible(false);
         }
-//        proximo.crearInternalFrame(contador++, imagen);
         return siguienteRuta;
     }
 
