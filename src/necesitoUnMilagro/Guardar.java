@@ -6,6 +6,7 @@ package necesitoUnMilagro;
 
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Ventana.UpdateEstadoArchivoYTraza;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
@@ -18,7 +19,7 @@ public class Guardar {
     private TrazaDao traza;
     private String nombre;
     private JTable tablaCheck;
-    private UpdateChecs updateChecs;
+    private UpdateEstadoArchivoYTraza update;
     private int idtraza, idimagen, page;
     private JLabel pagina;
 
@@ -43,10 +44,10 @@ public class Guardar {
                 boolean check = (boolean) tablaCheck.getValueAt(index, 0);
                 if (rowDescripcion.equals(controlesImagen.getDescripcion())) {
                     controlesImagen.setCheck(check);
-                    updateChecs = new UpdateChecs(controlesImagen.getEstado(), controlesImagen.getIdTrazaArchivoControl());
-                    updateChecs.update();
+                    update = new UpdateEstadoArchivoYTraza(controlesImagen.getEstado(), controlesImagen.getIdTrazaArchivoControl());
+                    update.updateEstadoTrazaArchivo();
                     if (check) {
-                        updateChecs.updateEstadoArchivo(aImagen.getId());
+                        update.updateEstadoArchivo(aImagen.getId());
                     }
                 }
             }

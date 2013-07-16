@@ -8,9 +8,9 @@ import Entidades.Conexion;
 import Entidades.LlenarTrazaDao;
 import Entidades.Pdf_NombreMasNumero;
 import Entidades.TipodeUsuario;
-import Helpers.Archivo;
 import Helpers.IdentificarExtension;
 import Helpers.IdentificarParent;
+import Helpers.InsertarEnArchivos;
 import Helpers.Traza;
 import Helpers.UltimoIdInsertado;
 import PanelesABM.Ventana;
@@ -91,7 +91,8 @@ public class Worker extends SwingWorker<Object, Object> {
                             int parentlength = parent.length() + 1;
                             String adaptarFile = tif.substring(parentlength);
                             String filename = URLEncoder.encode(adaptarFile, "UTF-8");
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, 0);
+                            InsertarEnArchivos insertarArchivos = new InsertarEnArchivos(conexion, idTraza, filename, 0);
+//                           InsertarEnArchivos insertarArchivos = new InsertarEnArchivos(conexion, idTraza, filename, 0);
                             imagenyControl();
                         } catch (UnsupportedEncodingException ex) {
                             JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);
@@ -115,7 +116,9 @@ public class Worker extends SwingWorker<Object, Object> {
                             String adaptarFile = pagina.getNombre().substring(parentlength);
                             String filename = URLEncoder.encode(adaptarFile, "UTF-8");
                             int page = pagina.getNumeroPagina();
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, page);
+                         InsertarEnArchivos insertarArchivos = new InsertarEnArchivos(conexion, idTraza, filename, 0);
+
+//                            Archivo archivo = new Archivo(conexion, idTraza, filename, page);
                             imagenyControl();
                         } catch (UnsupportedEncodingException ex) {
                             JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);
@@ -139,7 +142,7 @@ public class Worker extends SwingWorker<Object, Object> {
                             int parentlength = parent.length() + 1;
                             String adaptarFile = tif.substring(parentlength);
                             String filename = URLEncoder.encode(adaptarFile, "UTF-8");
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, 0);
+                           InsertarEnArchivos insertarArchivos = new InsertarEnArchivos(conexion, idTraza, filename, 0);
                             imagenyControl();
                         } catch (UnsupportedEncodingException ex) {
                             JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);

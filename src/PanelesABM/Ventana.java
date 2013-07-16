@@ -8,8 +8,8 @@ import Entidades.*;
 import Helpers.Version;
 import ReporteLote.Reporte;
 import Ventana.ImagenesWorker;
+import Ventana.NumeroDeArchivosRechazados;
 
-import Ventana.VisualizarImagen;
 import java.beans.PropertyVetoException;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -19,8 +19,9 @@ import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import necesitoUnMilagro.GetRutaDeImagen;
 import necesitoUnMilagro.Guardar;
-import necesitoUnMilagro.NumeroRechazo;
 import necesitoUnMilagro.SetChecksBox;
+import necesitoUnMilagro.TablaCheckBox;
+import necesitoUnMilagro.VisualizarImagen;
 
 /**
  *
@@ -335,9 +336,8 @@ private void internal(boolean ispdf) {
 
     private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
         Guardar save = new Guardar(traza, rutaJlabel.getText().toString(), tablaCheck, pagina, pdf);
-
         final int id = traza.getId();
-        NumeroRechazo numeroRechazo = new NumeroRechazo(id);
+        NumeroDeArchivosRechazados numeroRechazo = new NumeroDeArchivosRechazados(id);
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import necesitoUnMilagro.Next;
 import necesitoUnMilagro.Previus;
+import necesitoUnMilagro.SetChecksBox;
 
 /**
  *
@@ -45,7 +46,7 @@ public class Botones {
         this.ruta = ruta;
         this.pagina = pagina;
         this.tabla = tabla;
-                new SetChecksBox(tabla).setEstadoChecksBoxs(imagen.getId());
+                new SetChecksBox(tabla).set(imagen.getId());
 
         this.imagen = imagen;
         this.pdf = pdf;

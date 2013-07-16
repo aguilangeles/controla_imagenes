@@ -6,6 +6,7 @@ package Ventana;
 
 import Helpers.SetIconImageFromJFrame;
 import java.io.File;
+import necesitoUnMilagro.VisualizarImagen;
 
 /**
  *
