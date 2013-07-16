@@ -8,7 +8,7 @@ package necesitoUnMilagro;
  *
  * @author MUTNPROD003
  */
-public class ControlByArchivo {
+public class ControlesPorImagen {
     private int idTif;
     private int idTrazaArchivoControl;
     private int idControl;
@@ -16,7 +16,7 @@ public class ControlByArchivo {
     private boolean check;
     private int estado;
 
-    public ControlByArchivo(int idTif,int idTrazaArchivoControl,int idControl, String descripcion, boolean check) {
+    public ControlesPorImagen(int idTif,int idTrazaArchivoControl,int idControl, String descripcion, boolean check) {
         this.idTif=idTif;
         this.idTrazaArchivoControl = idTrazaArchivoControl;
         this.idControl=idControl;

@@ -19,7 +19,7 @@ public class LlenarControles {
 
     private int idTraza;
     private int idTif;
-    private List<ControlByArchivo> listaControles = new ArrayList<>();
+    private List<ControlesPorImagen> listaControles = new ArrayList<>();
 
     public LlenarControles(int idTraza,int idTif){
         this.idTraza = idTraza;
@@ -27,11 +27,11 @@ public class LlenarControles {
         llenarControles();
     }
 
-    private List<ControlByArchivo> llenarControles() {
+    private List<ControlesPorImagen> llenarControles() {
         Conexion conexion = new Conexion();
         if(conexion.isConexion()){
             try {
-                ControlByArchivo control;
+                ControlesPorImagen controles;
                 String query = "select tac.id,  tac.idcontrol, c.descripcion "
                         + "from traza_archivo_controles tac "
                         + "join controles c "
@@ -42,8 +42,8 @@ public class LlenarControles {
                     int trzaArchivo = conexion.resulset.getInt(1);
                     int controlidArchivo = conexion.resulset.getInt(2);
                     String descripcion = conexion.resulset.getString(3);
-                    control = new ControlByArchivo(idTif, trzaArchivo, controlidArchivo, descripcion, false);
-                    listaControles.add(control);
+                    controles = new ControlesPorImagen(idTif, trzaArchivo, controlidArchivo, descripcion, false);
+                    listaControles.add(controles);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(LlenarControles.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,7 +54,7 @@ public class LlenarControles {
         return listaControles;
     }
 
-    public List<ControlByArchivo> getLista() {
+    public List<ControlesPorImagen> getLista() {
         return listaControles;
     }
 }
