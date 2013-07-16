@@ -2,22 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
         <file>
-            <url>src/PanelesABM/ControlesDao.java</url>
+            <url>src/PanelesABM/ControlesDaoSuper.java</url>
             <bookmark id="1">
                 <name/>
-                <line>150</line>
+                <line>30</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Ventana/Ventana.java</file>
-        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Ventana/Next.java</file>
-        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Entidades/Imagen.java</file>
-        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Ventana/SetChecksBox.java</file>
-        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Ventana/ObtenerTiposDeControl.java</file>
-        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Entidades/TiposConCheck.java</file>
-        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Entidades/Conexion.java</file>
-        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Ventana/Worker.java</file>
+        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Ventana/UpdateEstadoArchivoYTraza.java</file>
+        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/Ventana/AyudaVisual.java</file>
+        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/tratamientoruta/TipoDeImagen.java</file>
+        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/PanelesABM/Ventana.java</file>
+        <file>file:/C:/Users/MUTNPROD003/Documents/GitHub/controla_imagenes/src/qualitys_1/pkg0001/Qualitys_10001.java</file>
     </open-files>
 </project-private>
