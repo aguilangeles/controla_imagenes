@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Entidades.TipodeUsuario;
-import Helpers.SetIconImageFromJFrame;
+import Helpers.SetVersionEIcono;
 import Ventana.ListaControlesActivos.TipoDeControl;
 
 /**
@@ -37,7 +37,7 @@ public class CargarLote extends javax.swing.JFrame {
 
     public CargarLote(TipodeUsuario usuarioTipo) {
         initComponents();
-        new SetIconImageFromJFrame().set();
+        new SetVersionEIcono().setImagenIcon(this);
         rutaCarpeta.setInputVerifier(new Helpers.InputVerifier().inputVerifierT());
         Verificacion_CargarComboBoxs llenarComboBox = new Verificacion_CargarComboBoxs(tipoDocumentoBox, tipoVerificacionBox, con);
         this.usarioTipo = usuarioTipo;

@@ -7,7 +7,7 @@ package PanelesABM;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
-import Helpers.SetIconImageFromJFrame;
+import Helpers.SetVersionEIcono;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +34,7 @@ public class RangosABM extends javax.swing.JFrame {
      */
     public RangosABM() {
         initComponents();
-        new SetIconImageFromJFrame().set();
+        new SetVersionEIcono().setImagenIcon(this);
         setResizable(true);
         rangosDao = new RangosDao(conexion, tablaContenido);
             principalInternal.setVisible(true);

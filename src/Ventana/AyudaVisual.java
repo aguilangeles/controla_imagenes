@@ -4,7 +4,7 @@
  */
 package Ventana;
 
-import Helpers.SetIconImageFromJFrame;
+import Helpers.SetVersionEIcono;
 import java.io.File;
 import necesitoUnMilagro.VisualizarImagen;
 
@@ -24,7 +24,7 @@ public class AyudaVisual extends javax.swing.JFrame {
    */
   public AyudaVisual(String descripcion, String texto, String imagen) {
     initComponents();
-    new SetIconImageFromJFrame().set();
+    new SetVersionEIcono(this);
     this.descripcion = descripcion;
     this.texto = texto;
     this.imagen = imagen;

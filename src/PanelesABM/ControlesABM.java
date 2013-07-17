@@ -8,17 +8,17 @@ import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
-import Helpers.SetIconImageFromJFrame;
+import Helpers.SetVersionEIcono;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 
 /**
  *
  * @author MUTNPROD003
  */
 public class ControlesABM extends javax.swing.JFrame {
+
     private static final String INSTRUCCIONES = "Para INSERTAR un nuevo elemento, oprima 'AGREGAR CONTROL',"
             + "\n inserte los datos en la fila vacia y oprima GUARDAR.\n"
             + "Para EDITAR un contenido, oprima 'EDITAR CONTROL',\n "
@@ -34,15 +34,15 @@ public class ControlesABM extends javax.swing.JFrame {
      * Creates new form ControlesABM
      */
     public ControlesABM() {
-            initComponents();
-             new SetIconImageFromJFrame().set();
-            controles = new ControlesDao(tablaContenido, conexion  );
-            principalInternal.setVisible(true);
-            modelo = (DefaultTableModel) tablaContenido.getModel();
-            salvar.setVisible(false);
-            agregar.setVisible(false);
-            editar.setVisible(false);
-            desactivar.setVisible(false);
+        initComponents();
+        new SetVersionEIcono().setImagenIcon(this);
+        controles = new ControlesDao(tablaContenido, conexion);
+        principalInternal.setVisible(true);
+        modelo = (DefaultTableModel) tablaContenido.getModel();
+        salvar.setVisible(false);
+        agregar.setVisible(false);
+        editar.setVisible(false);
+        desactivar.setVisible(false);
         try {
             principalInternal.setMaximum(true);
         } catch (PropertyVetoException ex) {
@@ -50,6 +50,7 @@ public class ControlesABM extends javax.swing.JFrame {
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -257,7 +258,7 @@ public class ControlesABM extends javax.swing.JFrame {
         int idTable = getIde() + 1;
         Object[] ob = new Object[]{idTable};
         modelo.addRow(ob);
-        int row = tablaContenido.getRowCount()-1;
+        int row = tablaContenido.getRowCount() - 1;
         Rectangle rect = tablaContenido.getCellRect(row, 0, true);
         tablaContenido.scrollRectToVisible(rect);
         tablaContenido.clearSelection();
@@ -271,7 +272,7 @@ public class ControlesABM extends javax.swing.JFrame {
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
         controles.setEditable(true);
         salvar.setVisible(true);
-        evento="Editar";
+        evento = "Editar";
 
     }//GEN-LAST:event_editarActionPerformed
 
@@ -309,7 +310,7 @@ public class ControlesABM extends javax.swing.JFrame {
         }
     }
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
-        JOptionPane.showMessageDialog(tablaContenido,INSTRUCCIONES);
+        JOptionPane.showMessageDialog(tablaContenido, INSTRUCCIONES);
         principalInternal.setTitle("Modulo de Edicion");
         agregar.setVisible(true);
         editar.setVisible(true);
@@ -324,11 +325,9 @@ public class ControlesABM extends javax.swing.JFrame {
     public void setIde(int ide) {
         this.ide = ide;
     }
-
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ABM;
     private javax.swing.JButton agregar;

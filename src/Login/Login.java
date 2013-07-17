@@ -7,8 +7,7 @@ package Login;
 import Entidades.TipodeUsuario;
 import Entidades.ValidarIngreso;
 import Helpers.InputVerifier;
-import Helpers.SetIconImageFromJFrame;
-import javax.swing.ImageIcon;
+import Helpers.SetVersionEIcono;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,11 +26,11 @@ public class Login extends javax.swing.JFrame {
    */
   public Login() {
     initComponents();
+    new SetVersionEIcono(this,"Ingreso de Usuario");
     setResizable(false);
     user.requestFocusInWindow();
     user.setInputVerifier(new InputVerifier().inputVerifierT());
     password.setInputVerifier(new InputVerifier().inputVerifierT());
-    new SetIconImageFromJFrame().set();
 
   }
 

@@ -30,12 +30,12 @@ public class ObtenerTiposDeControl {
         estadoDeLosControles();
     }
 
-    public ObtenerTiposDeControl(int idArchivo, JTable tabla) {
-        this.idArchivo = idArchivo;
-        this.tabla = tabla;
-        estadoDeLosControles();
-        poblarTabla();
-    }
+//    public ObtenerTiposDeControl(int idArchivo, JTable tabla) {
+//        this.idArchivo = idArchivo;
+//        this.tabla = tabla;
+//        estadoDeLosControles();
+////        poblarTabla();
+//    }
 
     private List<TiposConCheck> estadoDeLosControles() {
         TiposConCheck tipos;
@@ -65,13 +65,13 @@ public class ObtenerTiposDeControl {
         return listadoTipos;
     }
 
-    private void poblarTabla(){
-         for (TiposConCheck t : getListadoTipos()) {
-            for (int index = 0; index < tabla.getRowCount(); index++) {
-                tabla.setValueAt(t.isCheck(), index, 0);
-            }
-        }
-    }
+//    private void poblarTabla(){
+//         for (TiposConCheck t : getListadoTipos()) {
+//            for (int index = 0; index < tabla.getRowCount(); index++) {
+//                tabla.setValueAt(t.isCheck(), index, 0);
+//            }
+//        }
+//    }
 
 
 }

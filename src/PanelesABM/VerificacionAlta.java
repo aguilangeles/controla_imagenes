@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
-import Helpers.SetIconImageFromJFrame;
+import Helpers.SetVersionEIcono;
 import javax.swing.ImageIcon;
 
 /**
@@ -39,7 +39,7 @@ public class VerificacionAlta extends javax.swing.JFrame {
    */
   public VerificacionAlta(Conexion conexion, DefaultTableModel abmModel, JTable tabla) {
     initComponents();
-    new SetIconImageFromJFrame().set();
+    new SetVersionEIcono().setImagenIcon(this);
     nombreQs.setInputVerifier((new InputVerifier().inputVerifierT()));
     descripcionQs.setInputVerifier((new InputVerifier().inputVerifierT()));
     mensajeL.setText("<html>Seleccione un TdC y presione Agregar. "

@@ -10,7 +10,7 @@ import PanelesABM.RangosABM;
 import PanelesABM.UsuariosABM;
 import PanelesABM.VerificacionABM;
 import Entidades.TipodeUsuario;
-import Helpers.SetIconImageFromJFrame;
+import Helpers.SetVersionEIcono;
 
 /**
  *
@@ -31,7 +31,7 @@ public class PanelControl extends javax.swing.JFrame {
 
     PanelControl(TipodeUsuario usuarioTipo) {
         initComponents();
-        new SetIconImageFromJFrame().set();
+        new SetVersionEIcono(this);
         jLabel1.setText(INFO_LABEL);
         this.usuarioTipo = usuarioTipo;
         this.administrador = usuarioTipo.isAdmin();

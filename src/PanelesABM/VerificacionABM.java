@@ -5,7 +5,7 @@
 package PanelesABM;
 
 import Entidades.Conexion;
-import Helpers.SetIconImageFromJFrame;
+import Helpers.SetVersionEIcono;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +29,7 @@ public class VerificacionABM extends javax.swing.JFrame {
    */
   public VerificacionABM() {
     initComponents();
-    new SetIconImageFromJFrame().set();
+    new SetVersionEIcono().setImagenIcon(this);
     verificacion = new VerificacionDao(tablaV, conexion);
     principalInternal.setVisible(true);
     modelo = (DefaultTableModel) tablaV.getModel();

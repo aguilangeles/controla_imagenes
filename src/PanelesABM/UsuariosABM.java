@@ -7,7 +7,7 @@ package PanelesABM;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
-import Helpers.SetIconImageFromJFrame;
+import Helpers.SetVersionEIcono;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +34,7 @@ public class UsuariosABM extends javax.swing.JFrame {
    */
   public UsuariosABM() {
     initComponents();
-    new SetIconImageFromJFrame().set();
+    new SetVersionEIcono().setImagenIcon(this);
     setTitle("Alta, Baja y Modificacion de Usuarios");
     setResizable(false);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
