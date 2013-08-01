@@ -25,22 +25,22 @@ public class VisualizarImagen {
   private ImagePanel imagePanel;
   private JScrollPane scrollPane;
   private int zoom;
-
+  private float scale;
   public VisualizarImagen(JScrollPane scroll) {
     this.scrollPane = scroll;
     System.gc();
   }
 
-  public void visualizarImagen(String imagen, boolean pdf) {
+  public void visualizarImagen(String imagen, boolean pdf, double zoom) {
     imagePanel = new ImagePanel();
     imagePanel.CargarImg(imagen);
-    SpinnerNumberModel model = new SpinnerNumberModel(1.0, 0.1, 1.4, .01);
+    SpinnerNumberModel model = new SpinnerNumberModel(zoom, 0.1, 1.4, .01);
     final JSpinner spinner = new JSpinner(model);
     spinner.setPreferredSize(new Dimension(45, spinner.getPreferredSize().height));
     spinner.addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
-        float scale = ((Double) spinner.getValue()).floatValue();
+         scale = ((Double) spinner.getValue()).floatValue();
         imagePanel.setScale(scale);
       }
     });
@@ -49,6 +49,13 @@ public class VisualizarImagen {
     scrollPane.getViewport().add(imagePanel);
     scrollPane.revalidate();
   }
+
+  public float getScale() {
+    return scale;
+  }
+
+
+
 //  public void visualizarImagen(String imagen, boolean pdf, int zoom) {
 //    this.zoom = zoom;
 //    try {

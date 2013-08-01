@@ -27,7 +27,7 @@ public class ImagePanel extends JPanel{
 
     public ImagePanel() {
 //        loadImage();
-        scale = 1.0;
+        scale = 0.42;
         setBackground(Color.black);
     }
 

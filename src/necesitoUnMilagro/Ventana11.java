@@ -14,7 +14,6 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -67,7 +66,7 @@ private void internal(boolean ispdf) {
       setTituloYRutaLabel(siguientes);
       String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
       setLabelPagina(ispdf, siguientes);
-      visualizarImagen.visualizarImagen(ruta, pdf);
+      visualizarImagen.visualizarImagen(ruta, pdf, zoom);
       setCB.set(siguientes.getId());
     } catch (PropertyVetoException ex) {
       Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
@@ -350,18 +349,19 @@ private void internal(boolean ispdf) {
       guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
       Imagen imagen = nextImagen();
       try {
-        setZoom(slider.getValue());
+        setZoom((int) visualizarImagen.getScale());
         jDesktopPane1.add(jInternal);
         setTituloYRutaLabel(imagen);
         setLabelPagina(pdf, imagen);
         setCB.set(imagen.getId());
         String ruta_temp = rutadeimagen.siguienteImagen(pdf, imagen);
-        visualizarImagen.visualizarImagen(ruta_temp, pdf);
+        visualizarImagen.visualizarImagen(ruta_temp, pdf, zoom);
         if (!isHasNext()) {
           siguiente.setEnabled(false);
           terminar.setEnabled(true);
         }
         jInternal.setVisible(true);
+        System.out.println(visualizarImagen.getScale());
         contador++;
       } catch (Exception ex) {
         Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
@@ -382,7 +382,7 @@ private void internal(boolean ispdf) {
       setLabelPagina(pdf, pr);
       setCB.set(pr.getId());
       visualizacion = rutadeimagen.anteriorImagen(pdf, pr);
-      visualizarImagen.visualizarImagen(pr.getRutaTemp(), pdf);
+      visualizarImagen.visualizarImagen(pr.getRutaTemp(), pdf, zoom);
       if (!hasPrevius) {
         anterior.setEnabled(false);
       }

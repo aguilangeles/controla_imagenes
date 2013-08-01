@@ -55,7 +55,7 @@ public class Informe1 extends javax.swing.JInternalFrame {
       ruta.setText(img.getRutaDb());
       String rutaTemp = rutadeimagen.siguienteImagen(pdf, img);
       setLabelPagina(img);
-      visualizarImagen.visualizarImagen(rutaTemp, pdf);
+      visualizarImagen.visualizarImagen(rutaTemp, pdf, zoom);
       setCB.set(img.getId());
     } catch (Exception e) {
       //TODO
