@@ -17,37 +17,39 @@ import java.util.List;
 public class CrearElRamdom {
     private List<Object> lista;
     private List<Object> seleccion = new ArrayList<>();
-    private int rango;
+    private int tamanio,rango;
+
 
     public CrearElRamdom(List<Object> lista, int rango) {
         this.lista = lista;
         this.rango = rango;
+        this.tamanio =lista.size();
         generarRamdom();
     }
 
 
-  private void generarRamdom() {
-    HashSet<Object> hash = new HashSet<>();
-    int tamanioLote = lista.size();
-    while (hash.size() < rango) {
-      Integer a1 = new Integer(new java.util.Random().nextInt(tamanioLote));
-      hash.add(a1);
+    private  void generarRamdom() {
+        HashSet<Object> hash = new HashSet<>();
+        while (hash.size() < rango) {
+            Integer a1 = new Integer(new java.util.Random().nextInt(tamanio));
+            hash.add(a1);
+        }
+        ArrayList ListaHash = new ArrayList(hash);
+        Collections.sort(ListaHash);
+        Iterator it = ListaHash.iterator();
+        while (it.hasNext()) {
+            Integer imagen = (Integer) it.next();
+            seleccion.add(lista.get(imagen));
+        }
+        new Helpers.PasarGarbageCollector();
     }
-    ArrayList ListaHash = new ArrayList(hash);
-    Collections.sort(ListaHash);
-    Iterator it = ListaHash.iterator();
-    while (it.hasNext()) {
-      Integer imagen = (Integer) it.next();
-      seleccion.add(lista.get(imagen));
+
+    public List<Object> getSeleccion() {
+        return seleccion;
     }
-  }
 
-  public List<Object> getSeleccion() {
-    return seleccion;
-  }
-
-  public void setSeleccion(List<Object> seleccion) {
-    this.seleccion = seleccion;
-  }
+    public void setSeleccion(List<Object> seleccion) {
+        this.seleccion = seleccion;
+    }
 
 }

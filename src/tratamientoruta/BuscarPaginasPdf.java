@@ -10,8 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JLabel;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import Helpers.IdentificarExtension;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,13 +21,13 @@ import Helpers.IdentificarExtension;
 public class BuscarPaginasPdf {
     private List<Object> listaPaginas = new ArrayList<>();
 
-    public BuscarPaginasPdf() {
-        encontrarPaginas();
+    public BuscarPaginasPdf(List<Object> listaD, JLabel infoLabel) {
+        encontrarPaginas(listaD, infoLabel);
     }
 
 
-    private void encontrarPaginas() {
-        for (Iterator<Object> it = IdentificarExtension.getLista().iterator(); it.hasNext();) {
+    private void encontrarPaginas(List<Object> listaD, JLabel infoLabel) {
+        for (Iterator<Object> it = listaD.iterator(); it.hasNext();) {
             Object object = it.next();
             try {
                 String ruta = (String) object;
@@ -36,10 +37,11 @@ public class BuscarPaginasPdf {
                 for (int i = 0; i < pagina; i++) {
                    Pdf_NombreMasNumero  page = new Pdf_NombreMasNumero(ruta, i);
                     listaPaginas.add(page);
+                    infoLabel.setText("<html>"+page.toString()+"</html>");
                 }
                 pddDocument.close();
             } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Encontrar Paginas PDF", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

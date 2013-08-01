@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +32,7 @@ public class LlenarTipos {
 
     private List<TiposConCheck> poblarLista() {
         try {
+          Runtime gar = Runtime.getRuntime();
             TiposConCheck tipos;
                 size = new CantidadControlesPorVerificacion(conexion, idTraza).getCantidad();
                 String insert = "select v.idControl"
@@ -51,8 +53,11 @@ public class LlenarTipos {
                     listadeTipos.add(tipos);
                 }
                 conexion.desconectar();
+          gar.gc();
         } catch (SQLException ex) {
-            Logger.getLogger(LlenarTipos.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Tipos", JOptionPane.ERROR_MESSAGE);
+
+//            Logger.getLogger(LlenarTipos.class.getName()).log(Level.SEVERE, null, ex);
         }
             return listadeTipos;
     }

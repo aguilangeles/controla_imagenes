@@ -4,11 +4,12 @@
  */
 package Login;
 
+import Helpers.InputVerifier;
+import javax.swing.JOptionPane;
 import Entidades.TipodeUsuario;
 import Entidades.ValidarIngreso;
-import Helpers.InputVerifier;
-import Helpers.SetVersionEIcono;
-import javax.swing.JOptionPane;
+import Helpers.VersionEImageIcon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,12 +27,11 @@ public class Login extends javax.swing.JFrame {
    */
   public Login() {
     initComponents();
-    new SetVersionEIcono(this,"Ingreso de Usuario");
+    VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this, "Ingreso de Usuario");
     setResizable(false);
     user.requestFocusInWindow();
     user.setInputVerifier(new InputVerifier().inputVerifierT());
     password.setInputVerifier(new InputVerifier().inputVerifierT());
-
   }
 
   /**

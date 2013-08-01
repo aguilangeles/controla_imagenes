@@ -5,6 +5,7 @@
 package necesitoUnMilagro;
 
 import Entidades.Imagen;
+import Helpers.PasarGarbageCollector;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -31,7 +32,7 @@ public class Previus {
         this.tabla = tabla;
     }
 
-    public void anteriorInternalFrame(int contador, Imagen tif) {
+    public void setearInternalFrame(int contador, Imagen tif) {
         siguiente.setEnabled(true);
         internal.setTitle("Imagen " + contador + "/" + sizeRamdom);
         String rutaPdf = tif.getRutaDb();
@@ -41,5 +42,6 @@ public class Previus {
         int id = tif.getId();
         new SetChecksBox(tabla).set(id);
         contador--;
+        new PasarGarbageCollector();
     }
 }

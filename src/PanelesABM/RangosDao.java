@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import Helpers.UltimoIdInsertado;
+import Helpers.LastID;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -81,7 +82,9 @@ public class RangosDao extends ABMPaneles{
                                 aConexion.resulset.getInt(5), aConexion.resulset.getInt(6)});
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(RangosDao.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Tabla Rangos", JOptionPane.ERROR_MESSAGE);
+
+//                Logger.getLogger(RangosDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         consulta(model, lista);
@@ -92,7 +95,7 @@ public class RangosDao extends ABMPaneles{
         titulos(model, split);
     }
         public int getLastId() {
-        return new UltimoIdInsertado(aConexion, NOMBRE_TABLA).getUltimoId();
+        return new LastID(aConexion, NOMBRE_TABLA).lastId();
     }
 
     public Editar getEditar() {

@@ -4,8 +4,6 @@
  */
 package Entidades;
 
-import Entidades.TipodeUsuario;
-import Entidades.Conexion;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -14,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public final class ValidarIngreso {
-    
+
     private Conexion conexion = new Conexion();
     private String aName;
     private String aPassw;
@@ -47,7 +45,7 @@ public final class ValidarIngreso {
             }
             conexion.desconectar();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error en la Validacion del Usuario", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error en la Validación del Usuario", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -59,8 +57,8 @@ public final class ValidarIngreso {
         }
         return false;
     }
-    
-    
+
+
     public boolean isUsuario() {
         return usuario;
     }

@@ -14,6 +14,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import Entidades.Pdf_NombreMasNumero;
 import tratamientoruta.Sublote;
 import Entidades.VolumenPDF;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -62,10 +63,13 @@ public class PDF_listarDirectorio {
                     PDDocument doc = PDDocument.load(absolutePath);
                     int pagina = doc.getDocumentCatalog().getAllPages().size();
                     sublote = new Sublote(contador, absolutePath, getParent(), fileName, pagina);
+                  //  System.out.println("sublote  \t"+ sublote);
                     listSub.add(sublote);
                     doc.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null, ex.getMessage(), "Listar Directorios", JOptionPane.ERROR_MESSAGE);
+
+//                    Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }//fin for

@@ -5,6 +5,7 @@
 package necesitoUnMilagro;
 
 import Entidades.Imagen;
+import Helpers.PasarGarbageCollector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,7 +26,6 @@ public class Next extends JFrame {
     private JLabel titulo;
     private JLabel pagina;
     private JTable tabla;
-
     public Next(JButton anterior, JButton siguiente,
             int sizeRamdom, JInternalFrame internal, JLabel titulo, JLabel pagina, JTable tabla) {
         this.anterior = anterior;
@@ -37,7 +37,7 @@ public class Next extends JFrame {
         this.tabla = tabla;
     }
 
-    public void siguienteInternalFrame(int contador, Imagen tif) {
+    public void crearInternalFrame(int contador, Imagen tif) {
         anterior.setEnabled(true);
         int id = tif.getId();
         String rutaPdf = tif.getRutaDb();
@@ -49,6 +49,7 @@ public class Next extends JFrame {
         String page = "Pagina: " + tif.getPagina();
         pagina.setText(page);
         contador++;
+        new PasarGarbageCollector();
     }
 
 

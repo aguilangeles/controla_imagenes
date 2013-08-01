@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Entidades.Conexion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,7 +17,6 @@ import Entidades.Conexion;
  */
 public class CantidadControlesPorVerificacion {
     private int cantidad;
-    
     public CantidadControlesPorVerificacion(Conexion conexion, int id) {
         this.cantidad = cantidad(conexion, id);
     }
@@ -34,7 +34,9 @@ public class CantidadControlesPorVerificacion {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(CantidadControlesPorVerificacion.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Cantidad controles por Verificacion", JOptionPane.ERROR_MESSAGE);
+
+//            Logger.getLogger(CantidadControlesPorVerificacion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cantidadControles;
     }

@@ -4,13 +4,13 @@
  */
 package Login;
 
-import Entidades.Conexion;
-import Entidades.Usuario;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import Entidades.Conexion;
+import Entidades.Usuario;
 
 /**
  *
@@ -19,8 +19,8 @@ import javax.swing.JTextField;
 public class TestBaseDeDatos {
 
     private static final String STRING_VALIDO = "El campo no puede estar vacio";
-    private static final String CONEXION_EXITOSA = "\nLa conexion ha sido exitosa .\n\nEl programa se cerrará\nPara ingresar al panel de "
-            + "control debera ingresar su usuario y password validado en la DB";
+    private static final String CONEXION_EXITOSA = "La conexion ha sido exitosa.\nEl programa se cerrará\nPara ingresar al panel de "
+            + "control deberá ingresar\n su usuario y password validado en la DB";
     private String thisUrl;
     private String thisDatabase;
     private String thisUsuario;

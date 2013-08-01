@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,9 +22,12 @@ public class ExtensionTemporal {
         try {
             this.parent = URLDecoder.decode(parent, "UTF-8");
             String ret = nombre.substring(this.parent.length(), nombre.length() - 4) + "_" + numero;
-            this.rutaTemporal = "temp\\" + ret.replace("\\", "_");
+            this.rutaTemporal =  ret.replace("\\", "_");
+//            this.rutaTemporal = "temp\\" + ret.replace("\\", "_");
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(ExtensionTemporal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Extension Temporal: encoding", JOptionPane.ERROR_MESSAGE);
+
+//            Logger.getLogger(ExtensionTemporal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -32,11 +32,11 @@ public class TablaCheckBox {
     this.model = model;
     this.tablaCheck = tablaCheck;
     this.traza = traza;
-    llenarTablaCheckBoxs();
+    poblar();
   }
+  
 
-
-  private void llenarTablaCheckBoxs() {
+  private void poblar() {
 
     model = (DefaultTableModel) tablaCheck.getModel();
     setAnchoColumnas();

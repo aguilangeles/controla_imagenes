@@ -5,7 +5,7 @@
 package PanelesABM;
 
 import Ventana.ListaControlesActivos;
-import Ventana.ListaControlesActivos.TipoDeControl;
+import Ventana.ListaControlesActivos.TipoControl;
 import Helpers.InputVerifier;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
-import Helpers.SetVersionEIcono;
 import javax.swing.ImageIcon;
 
 /**
@@ -39,7 +38,9 @@ public class VerificacionAlta extends javax.swing.JFrame {
    */
   public VerificacionAlta(Conexion conexion, DefaultTableModel abmModel, JTable tabla) {
     initComponents();
-    new SetVersionEIcono().setImagenIcon(this);
+    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
+    ImageIcon im = new ImageIcon(rutaImagen);
+    setIconImage(im.getImage());
     nombreQs.setInputVerifier((new InputVerifier().inputVerifierT()));
     descripcionQs.setInputVerifier((new InputVerifier().inputVerifierT()));
     mensajeL.setText("<html>Seleccione un TdC y presione Agregar. "
@@ -216,11 +217,14 @@ public class VerificacionAlta extends javax.swing.JFrame {
         } else if (modeloDestino.getSize() != 0) {
           List<Integer> id = new ArrayList<>();
           Verificacion_AltaNuevaVerificacion alta = new Verificacion_AltaNuevaVerificacion(nombreQs.getText(), descripcionQs.getText(), getIdTipoControl(), conexion, abmModel, tabla);
-          alta.inserTipos_verificacion();
-          alta.insertarTipos_Control();
-          alta.insertarModelo();
+          if (alta.inserTipos_verificacion() && alta.insertarTipos_Control()) {
+            alta.insertarModelo();
+            dispose();
+          } else {
+            JOptionPane.showMessageDialog(aceptarSeleccion, "La Verificación no pudo ser insertada", "Falló Insert", JOptionPane.ERROR_MESSAGE);
+
+          }
         }
-        dispose();
       }
     }//GEN-LAST:event_aceptarSeleccionActionPerformed
 
@@ -233,10 +237,7 @@ public class VerificacionAlta extends javax.swing.JFrame {
         idTipoControl.add(o);
       } catch (ArrayIndexOutOfBoundsException e) {
         JOptionPane.showMessageDialog(origen, "Debe seleccionar por lo menos un tipo de control", "Sin controles asignados al Qs", JOptionPane.ERROR_MESSAGE);
-
       }
-
-
     }//GEN-LAST:event_agregarActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
@@ -253,7 +254,7 @@ public class VerificacionAlta extends javax.swing.JFrame {
 
   private void poblarLista() {
     ListaControlesActivos lista = new ListaControlesActivos(conexion);
-    List<TipoDeControl> tipos = lista.getLista();
+    List<TipoControl> tipos = lista.getLista();
     for (int i = 0; i < tipos.size(); i++) {
       modeloOrigen.addElement(tipos.get(i));
     }

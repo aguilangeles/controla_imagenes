@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -28,14 +30,15 @@ public class Conexion {
     public Statement statement = null;
     public ResultSet resulset = null;
     private PreparedStatement prepareStatement;
+  private int filasAfectadas;
 
     public Conexion() {
     }
 
     public boolean isConexion() {
+            FileInputStream in = null;
         try {
             Properties prop = new Properties();
-            FileInputStream in = null;
             in = new FileInputStream("config.properties");
             prop.load(in);
             String url = prop.getProperty("url");
@@ -60,19 +63,54 @@ public class Conexion {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
 //            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+              try {
+                in.close();
+                finalize();
+              } catch (IOException ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (Throwable ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+              }
         }
-            return false;
+        return false;
     }
- public boolean desconectar() {
-        try {
+
+  public boolean desconectar() {
+    if (resulset != null) {
+      try {
+        resulset.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    if (statement != null) {
+      try {
+        statement.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    if (conexion != null) {
+      try {
+        if (!conexion.isClosed()) {
+          try {
             conexion.close();
+
             return true;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+          } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"error en base de datos", JOptionPane.ERROR_MESSAGE);
             return false;
+          }
         }
+      } catch (SQLException ex) {
+        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
+    return false;
+  }
 //para consultar
+
     public void ExecuteSql(String sql) {
         try {
             statement = (Statement) conexion.createStatement();
@@ -91,13 +129,19 @@ public class Conexion {
         }
     }
 //para insertar y setear
-    public void executeUpdate(String sql) {
-        try {
-            prepareStatement = conexion.prepareStatement(sql);
-            int filasAfectadas = prepareStatement.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
 
-        }
+    public void executeUpdate(String sql) throws SQLException {
+//        try {
+            prepareStatement = conexion.prepareStatement(sql);
+             filasAfectadas = prepareStatement.executeUpdate();
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//
+//        }
     }
+
+  public int getFilasAfectadas() {
+    return filasAfectadas;
+  }
+
 }

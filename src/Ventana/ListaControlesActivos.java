@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Entidades.Conexion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,15 +18,15 @@ import Entidades.Conexion;
  */
 public class ListaControlesActivos {
 private Conexion conexion ;
-    private List<TipoDeControl> lista=new ArrayList<>();
+    private List<TipoControl> lista=new ArrayList<>();
 
     public ListaControlesActivos(Conexion conexion) {
         this.conexion=conexion;
         poblarLista();
     }
 
-    private List<TipoDeControl> poblarLista() {
-        TipoDeControl tipo;
+    private List<TipoControl> poblarLista() {
+        TipoControl tipo;
 
         if (conexion.isConexion()) {
             try {
@@ -33,25 +34,27 @@ private Conexion conexion ;
                 while (conexion.resulset.next()) {
                     int id = conexion.resulset.getInt(1);
                     String descripcion = conexion.resulset.getString(2);
-                    tipo = new TipoDeControl(id, descripcion);
+                    tipo = new TipoControl(id, descripcion);
                     lista.add(tipo);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(ListaControlesActivos.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Lista de controles Activos", JOptionPane.ERROR_MESSAGE);
+
+//                Logger.getLogger(ListaControlesActivos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return lista;
     }
 
-    public List<TipoDeControl> getLista() {
+    public List<TipoControl> getLista() {
         return lista;
     }
 
-    public static class TipoDeControl {
+    public static class TipoControl {
         private int id;
         private String descripcion;
 
-        public TipoDeControl(int id, String descripcion) {
+        public TipoControl(int id, String descripcion) {
             this.id = id;
             this.descripcion = descripcion;
         }

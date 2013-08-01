@@ -32,15 +32,7 @@ public class TrazaDao {
     public void setExtension(String extension) {
         this.extension = extension;
     }
- public Imagen getImageByNameAndPage(String nombre, int page) {
-        Imagen tif = null;
-        for (Imagen temp : this.listaTif) {
-            if (temp.getRutaDb().equalsIgnoreCase(nombre)&& temp.getPagina()==page) {
-                tif = temp;
-            }
-        }
-        return tif;
-    }
+
 
     public int getId() {
         return id;
@@ -71,10 +63,17 @@ public class TrazaDao {
     }
     public Imagen getTifByName(String nombre) {
         Imagen tif = null;
-        Iterator it = this.listaTif.iterator();
-        while (it.hasNext()) {
-            Imagen temp = (Imagen)it.next();
+        for (Imagen temp : this.listaTif) {
             if (temp.getRutaDb().equalsIgnoreCase(nombre)) {
+                tif = temp;
+            }
+        }
+        return tif;
+    }
+    public Imagen getTifByNameAndPage(String nombre, int page) {
+        Imagen tif = null;
+        for (Imagen temp : this.listaTif) {
+            if (temp.getRutaDb().equalsIgnoreCase(nombre)&& temp.getPagina()==page) {
                 tif = temp;
             }
         }

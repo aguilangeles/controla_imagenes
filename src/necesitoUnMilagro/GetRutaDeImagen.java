@@ -6,65 +6,50 @@ package necesitoUnMilagro;
 
 import Entidades.Imagen;
 import Ventana.ImagenesWorker;
-import javax.swing.JLabel;
 
 /**
  *
  * @author MUTNPROD003
  */
 public final class GetRutaDeImagen {
-    private String siguienteRuta, anteriorRuta;
-    private Imagen imagen;
-    private JLabel pagina;
-    private boolean pdf;
 
-    public GetRutaDeImagen(Imagen imagen, boolean pdf,JLabel pagina) {
-        this.imagen = imagen;
-        this.pdf = pdf;
-        this.pagina=pagina;
-        anteriorImagen();
-        siguienteImagen();
+  private String siguienteRuta, anteriorRuta;
+
+  public GetRutaDeImagen() {
+  }
+
+
+
+  public String anteriorImagen(boolean pdf, Imagen imagen) {
+    if (pdf) {
+      ImagenesWorker worker = new ImagenesWorker(imagen.getRuta_archivo(),
+              imagen.getParent(), imagen.getPagina());
+      anteriorRuta = worker.doInBackground();
+      imagen.setRutaTemp(anteriorRuta);
+    } else if (!pdf) {
+      anteriorRuta = imagen.getRuta_archivo();
     }
+    return anteriorRuta;
+  }
+//  public String anteriorImagen(boolean pdf, Imagen imagen) {
+//    String visualizacion = "";
+//    if (pdf) {
+//      anteriorRuta = imagen.getRutaTemp();
+//    } else if (!pdf) {
+//      anteriorRuta = imagen.getRuta_archivo();
+//    }
+//    return anteriorRuta;
+//  }
 
-    private String anteriorImagen() {
-        String visualizacion = "";
-        if (pdf) {
-            anteriorRuta = imagen.getRutaTemp();
-        } else if (!pdf) {
-            anteriorRuta = imagen.getRuta_archivo();
-        }
-        return anteriorRuta;
+  public String siguienteImagen(boolean pdf, Imagen imagen) {
+    if (pdf) {
+      ImagenesWorker worker = new ImagenesWorker(imagen.getRuta_archivo(),
+              imagen.getParent(), imagen.getPagina());
+      siguienteRuta = worker.doInBackground();
+      imagen.setRutaTemp(siguienteRuta);
+    } else if (!pdf) {
+      siguienteRuta = imagen.getRuta_archivo();
     }
-
-    public String siguienteImagen()  {
-        String ruta_temp = "";
-        if (pdf) {
-            ImagenesWorker worker = new ImagenesWorker(imagen.getRuta_archivo(), imagen.getParent(), imagen.getPagina());
-            worker.execute();
-            siguienteRuta = worker.doInBackground();
-            imagen.setRutaTemp(ruta_temp);
-
-        } else if (!pdf) {
-            siguienteRuta = imagen.getRuta_archivo();
-            pagina.setVisible(false);
-        }
-        return siguienteRuta;
-    }
-
-    public String getSiguienteRuta() {
-        return siguienteRuta;
-    }
-
-    public void setSiguienteRuta(String siguienteRuta) {
-        this.siguienteRuta = siguienteRuta;
-    }
-
-    public String getAnteriorRuta() {
-        return anteriorRuta;
-    }
-
-    public void setAnteriorRuta(String anteriorRuta) {
-        this.anteriorRuta = anteriorRuta;
-    }
-
+    return siguienteRuta;
+  }
 }

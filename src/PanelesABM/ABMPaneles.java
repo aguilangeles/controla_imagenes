@@ -5,7 +5,7 @@
 package PanelesABM;
 
 import Entidades.Conexion;
-import Helpers.UltimoIdInsertado;
+import Helpers.LastID;
 import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
 import java.util.List;
@@ -40,8 +40,8 @@ public class ABMPaneles {
         }
     }
 
-    public void anchoColumnas(JTable tabla, List<AnchoDeColumna> listado) {
-        for (AnchoDeColumna t : listado) {
+    public void anchoColumnas(JTable tabla, List<ColumnaTamanio> listado) {
+        for (ColumnaTamanio t : listado) {
             tabla.getColumnModel().getColumn(t.getColumna()).setPreferredWidth(t.getSize());
         }
     }
@@ -52,8 +52,8 @@ public class ABMPaneles {
         }
     }
 
-    public void cellRenderer(List<AnchoDeColumna> lista, int rowHeigth) {
-        for (AnchoDeColumna cl : lista) {
+    public void cellRenderer(List<ColumnaTamanio> lista, int rowHeigth) {
+        for (ColumnaTamanio cl : lista) {
             tabla.getColumnModel().getColumn(cl.getColumna()).setCellRenderer(new TextAreaRenderer());
         }
         tabla.setRowHeight(rowHeigth);
