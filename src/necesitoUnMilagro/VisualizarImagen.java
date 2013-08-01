@@ -6,6 +6,11 @@ package necesitoUnMilagro;
 
 //import additems.ImageComponent;
 import Ventana.ImageComponent;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -23,27 +28,28 @@ public class VisualizarImagen {
 
     public VisualizarImagen(String ruta, JScrollPane scroll, JSlider slider, int zoom) {
         this.ruta = ruta;
+                
         this.scrollPane = scroll;
         this.slider = slider;
         this.zoom = zoom;
         visualizarImagen(ruta);
     }
-        private void visualizarImagen(String imagen) {
-        try {
-            final ImageComponent imageCmp = new ImageComponent(imagen, 2. * getZoom() / slider.getMaximum(), scrollPane);
-            scrollPane.getViewport().add(imageCmp);
-            slider.setValue(zoom);
-            slider.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent e) {
-                    setZoom(slider.getValue());
-                    imageCmp.setZoom(2. * getZoom() / slider.getMaximum(), scrollPane);
-                }
-            });
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+  private void visualizarImagen(String imagen) {
+    try {
+      final ImageComponent imageCmp = new ImageComponent(imagen, 2. * getZoom() / slider.getMaximum(), scrollPane);
+      scrollPane.getViewport().add(imageCmp);
+      slider.setValue(zoom);
+      slider.addChangeListener(new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent e) {
+          setZoom(slider.getValue());
+          imageCmp.setZoom(2. * getZoom() / slider.getMaximum(), scrollPane);
         }
+      });
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
     }
+  }
 
     public int getZoom() {
         return zoom;
