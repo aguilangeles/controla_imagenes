@@ -5,12 +5,10 @@
 package necesitoUnMilagro;
 
 //import additems.ImageComponent;
-import Ventana.ImageComponent;
 import Ventana.ImagePanel;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -24,37 +22,28 @@ public class VisualizarImagen {
 
   private ImagePanel imagePanel;
   private JScrollPane scrollPane;
-  private int zoom;
-  private float scale;
+ // private int zoom;
+//  private float scale;
   public VisualizarImagen(JScrollPane scroll) {
     this.scrollPane = scroll;
     System.gc();
   }
 
-  public void visualizarImagen(String imagen, boolean pdf, double zoom) {
-    imagePanel = new ImagePanel();
+  public void visualizarImagen(String imagen, boolean pdf, final JSpinner spinner1, SpinnerNumberModel modelo, double zoomDouble) {
+    imagePanel = new ImagePanel((float) zoomDouble);
     imagePanel.CargarImg(imagen);
-    SpinnerNumberModel model = new SpinnerNumberModel(zoom, 0.1, 1.4, .01);
-    final JSpinner spinner = new JSpinner(model);
-    spinner.setPreferredSize(new Dimension(45, spinner.getPreferredSize().height));
-    spinner.addChangeListener(new ChangeListener() {
+    spinner1.setModel(modelo);
+    spinner1.setPreferredSize(new Dimension(45, spinner1.getPreferredSize().height));
+    spinner1.addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
-         scale = ((Double) spinner.getValue()).floatValue();
+        float scale = ((Double) spinner1.getValue()).floatValue();
         imagePanel.setScale(scale);
       }
     });
-    imagePanel.add(new JLabel("scale"));
-    imagePanel.add(spinner);
     scrollPane.getViewport().add(imagePanel);
     scrollPane.revalidate();
   }
-
-  public float getScale() {
-    return scale;
-  }
-
-
 
 //  public void visualizarImagen(String imagen, boolean pdf, int zoom) {
 //    this.zoom = zoom;
@@ -77,11 +66,11 @@ public class VisualizarImagen {
 //    }
 //  }
 
-  public int getZoom() {
-    return zoom;
-  }
-
-  public void setZoom(int zoom) {
-    this.zoom = zoom;
-  }
+//  public int getZoom() {
+//    return zoom;
+//  }
+//
+//  public void setZoom(int zoom) {
+//    this.zoom = zoom;
+//  }
 }
