@@ -6,8 +6,6 @@ package Entidades;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,45 +15,44 @@ import javax.swing.JOptionPane;
 public class Imagen {
 
   private int id;
-  private String ruta_archivo;
+  private String rutaParaConversion;
   private String parent;
   private int pagina;
   private String rutaTemp;
-  private String rutaDb;
+  private String rutaInsertadaEnDB;
   private int estado;
 
   public Imagen(int id, String ruta_archivo, String parent, int pagina) {
-    try {
-      this.id = id;
-      this.parent = parent;
-      this.pagina = pagina;
-      this.rutaDb = URLDecoder.decode(ruta_archivo, "UTF-8");
-      this.ruta_archivo = URLDecoder.decode(parent + ruta_archivo, "UTF-8");
-    } catch (UnsupportedEncodingException ex) {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Problemas en Encoding", JOptionPane.ERROR_MESSAGE);
-//            Logger.getLogger(Imagen.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    this.id = id;
+    this.parent = parent;
+    this.pagina = pagina;
+    this.rutaInsertadaEnDB = decodear(ruta_archivo);
+    this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
   public Imagen(int id, String ruta_archivo, String parent) {
-    try {
-      this.id = id;
-      this.parent = parent;
-      this.rutaDb = URLDecoder.decode(ruta_archivo, "UTF-8");
-      this.ruta_archivo = URLDecoder.decode(parent + ruta_archivo, "UTF-8");
-    } catch (UnsupportedEncodingException ex) {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Problemas en Encoding", JOptionPane.ERROR_MESSAGE);
-//      Logger.getLogger(Imagen.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    this.id = id;
+    this.parent = parent;
+    this.rutaInsertadaEnDB = decodear(ruta_archivo);
+    this.rutaParaConversion = decodear(parent + ruta_archivo);
 
   }
 
+  private static String decodear(String aString) {
+    String ret = "";
+    try {
+      ret = URLDecoder.decode(aString, "UTF-8");
+    } catch (UnsupportedEncodingException ex) {
+      JOptionPane.showMessageDialog(null, ex.getMessage(), "Problemas en Encoding", JOptionPane.ERROR_MESSAGE);
+    }
+    return ret;
+  }
   public String getRutaDb() {
-    return rutaDb;
+    return rutaInsertadaEnDB;
   }
 
   public void setRutaDb(String rutaDb) {
-    this.rutaDb = rutaDb;
+    this.rutaInsertadaEnDB = rutaDb;
   }
 
   public String getRutaTemp() {
@@ -83,7 +80,7 @@ public class Imagen {
   }
 
   public String getRuta_archivo() {
-    return ruta_archivo;
+    return rutaParaConversion;
   }
 
   public int getId() {
@@ -100,11 +97,5 @@ public class Imagen {
 
   public void setEstado(int estado) {
     this.estado = estado;
-  }
-
-  @Override
-  public String toString() {
-    return "Imagen{" + "id=" + id + ", nombre=" + ruta_archivo + ", parent="
-            + parent + ", numero=" + pagina + ", rutaTemp=" + rutaTemp + ", estado=" + estado + '}';
   }
 }
