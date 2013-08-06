@@ -38,6 +38,10 @@ public class ImagePanel extends JPanel {
     this.scale = scala;
     setBackground(Color.black);
   }
+  public ImagePanel(float scala, Color color) {
+    this.scale = scala;
+    setBackground(color);
+  }
 
   public void CargarImg(String path, boolean pdf, boolean tif) { //aca va el scala de spinner
     loadImage(path, pdf, tif);
