@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public class Imagen {
-
   private int id;
   private String rutaParaConversion;
   private String parent;

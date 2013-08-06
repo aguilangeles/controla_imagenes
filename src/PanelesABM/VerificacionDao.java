@@ -76,7 +76,7 @@ public class VerificacionDao extends ABMPaneles {
   private void llenarListaTiposVerificacion() {
     if (aConexion.isConexion()) {
       try {
-        aConexion.ExecuteSql("SELECT * FROM tipos_verificacion;");
+        aConexion.executeQuery("SELECT * FROM tipos_verificacion;");
         while (aConexion.resulset.next()) {
           int id = aConexion.resulset.getInt(1);
           String nombre = aConexion.resulset.getString(2);
@@ -112,7 +112,7 @@ public class VerificacionDao extends ABMPaneles {
         String ret = "SELECT  v.idControl, c.descripcion "
                 + "FROM controles_verificacion v join controles c on v.idControl = c.id "
                 + "where v.idVerificacion =" + id + ";";
-        aConexion.ExecuteSql(ret);
+        aConexion.executeQuery(ret);
         while (aConexion.resulset.next()) {
           tcv = new TiposVerificacion.TiposControlVf(aConexion.resulset.getInt(1), aConexion.resulset.getString(2));
           tipos.add(tcv);

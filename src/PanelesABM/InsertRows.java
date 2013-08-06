@@ -63,7 +63,7 @@ public class InsertRows {
   }
 
   private int estadoValido(DefaultTableModel modelo, int ide, int columna) {
-    int ret = 0;
+    int ret;
     int caso = (int) modelo.getValueAt(ide, columna);
     switch (caso) {
       case 1:
@@ -82,7 +82,7 @@ public class InsertRows {
     return ret;
   }
   private int tipo(DefaultTableModel modelo, int ide, int columna) {
-    int ret = 0;
+    int ret;
     int caso = (int) modelo.getValueAt(ide, columna);
     switch (caso) {
       case 1:

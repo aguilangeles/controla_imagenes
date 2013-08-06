@@ -22,7 +22,6 @@ import javax.swing.JComboBox;
  * @author MUTNPROD003
  */
 public class CargarLote extends javax.swing.JFrame {
-
   private TipodeUsuario usarioTipo;
   private Entidades.Conexion con = new Entidades.Conexion();
   private List<Integer> idTipoControl = new ArrayList<>();
@@ -81,7 +80,6 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel2.setText("Ruta");
 
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    rutaCarpeta.setText("c:\\angeles\\reducido");
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     aceptarSeleccion.setText("Siguiente");
@@ -193,7 +191,7 @@ public class CargarLote extends javax.swing.JFrame {
                   "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
         } else {
           idControlesByVerificacion();//controles
-          con.desconectar();//
+          con.isConexionClose();//
           IdentificarParent parent = new IdentificarParent(files);
           String rutaCompleta = parent.getParent();
           String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);
@@ -239,10 +237,11 @@ public class CargarLote extends javax.swing.JFrame {
   private List<Integer> idControlesByVerificacion() {
     Ventana.ListaControlesActivos.TipoControl tip = (Ventana.ListaControlesActivos.TipoControl) tipoVerificacionBox.getSelectedItem();
     idVerificacion = tip.getId();
-    String selec = "SELECT idControl FROM qualitys.controles_verificacion where idVerificacion =" + tip.getId() + ";";
+    String selec = "SELECT idControl FROM qualitys.controles_verificacion where"
+            + " idVerificacion =" + tip.getId() + ";";
     if (con.isConexion()) {
       try {
-        con.ExecuteSql(selec);
+        con.executeQuery(selec);
         while (con.resulset.next()) {
           idTipoControl.add(con.resulset.getInt(1));
         }

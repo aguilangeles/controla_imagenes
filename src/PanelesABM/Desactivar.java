@@ -21,9 +21,6 @@ public class Desactivar {
   private int aID,  tablaEstado;
   public static final String DB_FAIL="Error en el update Estado";
 
-//    public Desactivar(Conexion conexion, DefaultTableModel modelo, String tablaDB, int aID, int tablaEstado) {
-////        modificarEstado(conexion, modelo, tablaDB, aID, tablaEstado);
-//    }
 
   public Desactivar(Conexion conexion, DefaultTableModel modelo, String tablaDB, int aID, int tablaEstado) {
     this.conexion = conexion;
@@ -39,7 +36,7 @@ public class Desactivar {
     int ret = 0;
     try {
       String getEstado = "SELECT estado FROM " + tablaDB + " where id = " + ide + ";";
-      conexion.ExecuteSql(getEstado);
+      conexion.executeQuery(getEstado);
       while (conexion.resulset.next()) {
         int estado = conexion.resulset.getInt(1);
         if (estado == 1) {

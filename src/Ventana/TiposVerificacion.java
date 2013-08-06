@@ -68,9 +68,6 @@ public class TiposVerificacion {
         this.listaControles = listaControles;
     }
 
-//    void setListaControles(List<Object> idtipocontrol) {
-//        throw new UnsupportedOperationException("Not yet implemented");
-//    }
 
     public static class TiposControlVf {
 

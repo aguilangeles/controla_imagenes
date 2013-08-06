@@ -41,7 +41,7 @@ public class AyudaVisual extends javax.swing.JFrame {
     visualizarImagen = new VisualizarImagen(scrollImage);
     String ruta = "AyudaImagenes" + File.separator + image;
     SpinnerNumberModel model1 = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
-    visualizarImagen.visualizarImagen(ruta, false, spinner, model1, getZoom());
+    visualizarImagen.visualizarImagen(ruta, false, true, spinner, model1, getZoom());
   }
 
   public double getZoom() {

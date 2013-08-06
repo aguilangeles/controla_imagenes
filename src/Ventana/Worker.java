@@ -7,8 +7,9 @@ package Ventana;
 import Entidades.Conexion;
 import Entidades.LlenarTrazaDao;
 import Entidades.Pdf_NombreMasNumero;
+import Entidades.TrazaDao;
 import Helpers.Archivo;
-import Helpers.LastID;
+import Helpers.UltimoIDInsertado;
 import Helpers.PasarGarbageCollector;
 import Helpers.Traza;
 import java.sql.SQLException;
@@ -16,7 +17,6 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import tratamientoruta.CrearElRamdom;
 
@@ -26,8 +26,7 @@ import tratamientoruta.CrearElRamdom;
  */
 public class Worker extends SwingWorker<Object, Object> {
 
-  private Conexion conexion = new Entidades.Conexion();
-  //
+  private Conexion conexion = new Conexion();
   private JFrame controles;// lo necesito para mostrar el conteo
   private JLabel infoLabel;
   private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
@@ -36,6 +35,8 @@ public class Worker extends SwingWorker<Object, Object> {
   private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
   private int idTraza;
+  private static Traza sTraza;
+  private CrearElRamdom crearRamdom;
 
   public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl,
           List<Object> lista, String parent, String extension, String ultimaCarpeta,
@@ -53,19 +54,18 @@ public class Worker extends SwingWorker<Object, Object> {
     this.muestra = muestra;
     this.tamanioLote = tamanioLote;
     this.idRango = idRango;
+    this.crearRamdom = new CrearElRamdom(lista, muestra);
   }
 
   @Override
   protected String doInBackground() {
-
     if (conexion.isConexion()) {
-      idTraza = new LastID(conexion, "traza").lastId();
+      idTraza = new UltimoIDInsertado(conexion, "traza").getUltimoID();
       switch (extension) {
         case ".tif":
         case ".png":
         case ".jpg":
-          Traza traza = new Traza(conexion, idUsuario, idDocumento, idVerificacion, lista.size(), parent, ultimaCarpeta, muestra, idRango);
-          CrearElRamdom crearRamdom = new CrearElRamdom(lista, muestra);
+          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion, lista.size(), parent, ultimaCarpeta, muestra, idRango);
           List<Object> ramdomList = crearRamdom.getSeleccion();
           for (Object obj : ramdomList) {
             String aImagen = (String) obj;
@@ -74,12 +74,13 @@ public class Worker extends SwingWorker<Object, Object> {
             String filename = adaptarFile.replace("\\", "\\\\");
             Archivo archivo = new Archivo(conexion, idTraza, filename, 0, infoLabel);
             imagenyControl();
+            Runtime gar = Runtime.getRuntime();
+            gar.gc();
           }
           break;
         case ".pdf":
-          Traza trazaPdf = new Traza(conexion, idUsuario, idDocumento, idVerificacion, tamanioLote, parent, ultimaCarpeta, muestra, idRango);
-          CrearElRamdom ramdomListPdf = new CrearElRamdom(lista, muestra);
-          List<Object> ramdomPdf = ramdomListPdf.getSeleccion();
+          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion, tamanioLote, parent, ultimaCarpeta, muestra, idRango);
+          List<Object> ramdomPdf = crearRamdom.getSeleccion();
           for (Object o : ramdomPdf) {
             contador++;
             Pdf_NombreMasNumero pagina = (Pdf_NombreMasNumero) o;
@@ -90,7 +91,7 @@ public class Worker extends SwingWorker<Object, Object> {
             Archivo archivo = new Archivo(conexion, idTraza, filename, page, infoLabel);
             imagenyControl();
             Runtime gar = Runtime.getRuntime();
-          gar.gc();
+            gar.gc();
           }
           break;
       }
@@ -101,14 +102,14 @@ public class Worker extends SwingWorker<Object, Object> {
   private void imagenyControl() {
     int id = getIdTraza() + 1;
     for (Integer idarchivo : idControl) {
-      int lasid = new LastID(conexion, "archivo").lastId();
+      int lasid = new UltimoIDInsertado(conexion, "archivo").getUltimoID();
       String ret = "Insert into qualitys.traza_archivo_controles "
               + "(idtraza, idarchivo, idcontrol, estado) VALUES "
               + "(" + id + ", " + lasid + ", " + idarchivo + ", " + 0 + ");";
       try {
         conexion.executeUpdate(ret);
       } catch (SQLException ex) {
-              JOptionPane.showMessageDialog(null, ex.getMessage(), "Imagen y control", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Imagen y control", JOptionPane.ERROR_MESSAGE);
 
 //        Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -123,8 +124,7 @@ public class Worker extends SwingWorker<Object, Object> {
   protected void done() {
     if (!isCancelled()) {
       new PasarGarbageCollector();
-    infoLabel.setText("Preparando la ventana Principal...");
-      conexion.desconectar();
+      conexion.isConexionClose();
       crearNuevoWorker();
     }
   }
@@ -138,15 +138,16 @@ public class Worker extends SwingWorker<Object, Object> {
   }
 
   private void crearNuevoWorker() {
-    int trazaID = 0;
+    int trazaID;
     Conexion con = new Conexion();
     if (con.isConexion()) {
-      int resultado = new LastID(con, "traza").lastId();
+      int resultado = new UltimoIDInsertado(con, "traza").getUltimoID();
       trazaID = (resultado == 0) ? 1 : resultado;
-      LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension(), infoLabel);
+      LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
       new necesitoUnMilagro.Ventana11(trazaDao.getTraza()).setVisible(true);
-      con.desconectar();
+
     }
+    con.isConexionClose();
     controles.dispose();
   }
 }

@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import Helpers.LastID;
+import Helpers.UltimoIDInsertado;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,7 +75,7 @@ public class RangosDao extends ABMPaneles{
         List<Object[]> lista = new ArrayList<>();
         if (aConexion.isConexion()) {
             try {
-                aConexion.ExecuteSql("SELECT * FROM "+NOMBRE_TABLA);
+                aConexion.executeQuery("SELECT * FROM "+NOMBRE_TABLA);
                 while (aConexion.resulset.next()) {
                     lista.add(new Object[]{aConexion.resulset.getInt(1), aConexion.resulset.getInt(2),
                                 aConexion.resulset.getInt(3), aConexion.resulset.getInt(4),
@@ -95,7 +95,7 @@ public class RangosDao extends ABMPaneles{
         titulos(model, split);
     }
         public int getLastId() {
-        return new LastID(aConexion, NOMBRE_TABLA).lastId();
+        return new UltimoIDInsertado(aConexion, NOMBRE_TABLA).getUltimoID();
     }
 
     public Editar getEditar() {

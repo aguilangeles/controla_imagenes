@@ -28,21 +28,21 @@ public class Reporte extends javax.swing.JFrame {
      * Creates new form Reporte
      * @param idtraza
      */
-    public Reporte(int idtraza) {
+  public Reporte(int idtraza) {
 
-        initComponents();
-        String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-        ImageIcon im = new ImageIcon(rutaImagen);
-        setIconImage(im.getImage());
-        this.idtraza = idtraza;
-        setResizable(false);
-           if(conexion.isConexion()){
-            Tabla_TrazaReporte poblarTablaTraza = new Tabla_TrazaReporte(conexion, idtraza, tablaDetalles);
-            Tabla_TiposDeControlCantidad poblarTablaDiscriminacionTipos = new Tabla_TiposDeControlCantidad(idtraza, conexion, tabladeTipos);
-            actionRadioButton();
-           imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  "+poblarTablaTraza.getRechazo());
-           }
+    initComponents();
+    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
+    ImageIcon im = new ImageIcon(rutaImagen);
+    setIconImage(im.getImage());
+    this.idtraza = idtraza;
+    setResizable(false);
+    if (conexion.isConexion()) {
+      Tabla_TrazaReporte poblarTablaTraza = new Tabla_TrazaReporte(conexion, idtraza, tablaDetalles);
+      Tabla_TiposDeControlCantidad poblarTablaDiscriminacionTipos = new Tabla_TiposDeControlCantidad(idtraza, conexion, tabladeTipos);
+      actionRadioButton();
+      imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  " + poblarTablaTraza.getRechazo());
     }
+  }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -210,7 +210,7 @@ public class Reporte extends javax.swing.JFrame {
 
             }else{
             UpdateEstadoLote updateEstadoLote = new UpdateEstadoLote(conexion, idtraza, si.isSelected(), jTextArea1);
-            conexion.desconectar();
+            conexion.isConexionClose();
             System.exit(0);
             }
         } else {

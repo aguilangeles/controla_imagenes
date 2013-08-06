@@ -9,8 +9,6 @@ import Ventana.CantidadControlesPorVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +16,6 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public class LlenarTipos {
-
     private Conexion conexion;
     private int idTraza;
     private int size;
@@ -42,8 +39,9 @@ public class LlenarTipos {
                         + " from controles_verificacion v"
                         + " join controles c "
                         + " on v.idControl = c.id "
-                        + "where idVerificacion = (SELECT  t.idVerificacion FROM qualitys.traza  t where t.id = "+idTraza+");";
-                conexion.ExecuteSql(insert);
+                        + "where idVerificacion = "
+                        + "(SELECT  t.idVerificacion FROM qualitys.traza  t where t.id = "+idTraza+");";
+                conexion.executeQuery(insert);
                 while (conexion.resulset.next()) {
                     int idcontroles =conexion.resulset.getInt(1);
                     String descripcion =conexion.resulset.getString(2);
@@ -52,7 +50,7 @@ public class LlenarTipos {
                     tipos = new TiposConCheck(idcontroles, descripcion, false, texto, imagen);
                     listadeTipos.add(tipos);
                 }
-                conexion.desconectar();
+                conexion.isConexionClose();
           gar.gc();
         } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Tipos", JOptionPane.ERROR_MESSAGE);

@@ -26,7 +26,7 @@ public class Minimo {
     int ret = 0;
     if (conexion.isConexion()) {
       try {
-        conexion.ExecuteSql("SELECT maximo FROM qualitys.rangos_qs where id =" + id);
+        conexion.executeQuery("SELECT maximo FROM qualitys.rangos_qs where id =" + id);
         while (conexion.resulset.next()) {
           ret = conexion.resulset.getInt(1);
         }
@@ -34,7 +34,7 @@ public class Minimo {
         Logger.getLogger(Minimo.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
-    conexion.desconectar();
+    conexion.isConexionClose();
     int resultado= ret+1;
     return resultado;
   }

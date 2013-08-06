@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import tratamientoruta.BuscarPaginasPdf;
 import tratamientoruta.TipoDeImagen;
@@ -88,7 +87,6 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   @Override
     protected Void doInBackground() throws Exception {
     buscarExtensiones(file);
-    infoLabel.setText("Espere mientras se construye la ventana principal...");
     listaResultado = switchExtension(extension, listaExtension, infoLabel);
     tamanio = listaResultado.size();
     MuestraRango muestraRango = new MuestraRango(tamanio);

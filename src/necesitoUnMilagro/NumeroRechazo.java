@@ -22,12 +22,12 @@ public class NumeroRechazo {
             Conexion c = new Conexion();
            if(c.isConexion()){
             try {
-                c.ExecuteSql("SELECT count(estado) FROM qualitys.archivo where idtraza = "+idTraza+" and estado = 1");
+                c.executeQuery("SELECT count(estado) FROM qualitys.archivo where idtraza = "+idTraza+" and estado = 1");
                 while(c.resulset.next()){
                     numero = c.resulset.getInt(1);
                 }
                 c.executeUpdate("UPDATE `qualitys`.`traza` SET `nro_rechazo` = "+numero+" WHERE id = "+idTraza+";");
-                c.desconectar();
+                c.isConexionClose();
             } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Numero de Rechazo", JOptionPane.ERROR_MESSAGE);
 

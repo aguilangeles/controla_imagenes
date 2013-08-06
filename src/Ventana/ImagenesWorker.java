@@ -7,8 +7,6 @@ package Ventana;
 import Helpers.ExtensionTemporal;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.im4java.core.ConvertCmd;
@@ -59,7 +57,7 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
 //        Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
       }
     } catch (IOException ex) {
-              JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imagenes desde PDF", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imágenes desde PDF", JOptionPane.ERROR_MESSAGE);
 //      Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
     }
     outputemp.deleteOnExit();

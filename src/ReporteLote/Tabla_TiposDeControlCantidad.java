@@ -69,7 +69,7 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
                     + " where tac.idtraza = " + idtraza
                     + " and tac.estado = 1  "
                     + "group by tac.idcontrol ";
-            conexion.ExecuteSql(query);
+            conexion.executeQuery(query);
             while (conexion.resulset.next()) {
                 idControl = conexion.resulset.getInt(1);
                 descripcion = conexion.resulset.getString(2);

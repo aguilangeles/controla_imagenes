@@ -34,7 +34,7 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
     if (conexion.isConexion()) {
       try {
         String ret = "SELECT id, nombre FROM qualitys.tipos_verificacion  where estado = 1;";
-        conexion.ExecuteSql(ret);
+        conexion.executeQuery(ret);
         while (conexion.resulset.next()) {
           int id = conexion.resulset.getInt(1);
           String nombre = conexion.resulset.getString(2);
@@ -43,7 +43,7 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
           tipoVerificacion.addElement(t);
 
         }
-        conexion.desconectar();
+        conexion.isConexionClose();
       } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la carga de JComboBox ", JOptionPane.ERROR_MESSAGE);
 //                    Logger.getLogger(Verificacion_CargarComboBoxs.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,7 +55,7 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
     try {
       if (conexion.isConexion()) {
         String ret = "SELECT * FROM qualitys.tipos_documentos;";
-        conexion.ExecuteSql(ret);
+        conexion.executeQuery(ret);
         while (conexion.resulset.next()) {
           int id = conexion.resulset.getInt(1);
           String nombre = conexion.resulset.getString(2);
@@ -64,7 +64,7 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
           tipoDocumento.addElement(t);
         }
       }
-      conexion.desconectar();
+      conexion.isConexionClose();
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la carga de JComboBox ", JOptionPane.ERROR_MESSAGE);
 //            Logger.getLogger(Verificacion_CargarComboBoxs.class.getName()).log(Level.SEVERE, null, ex);

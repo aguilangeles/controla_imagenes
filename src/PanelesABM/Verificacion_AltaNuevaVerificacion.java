@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import Helpers.LastID;
+import Helpers.UltimoIDInsertado;
 import Ventana.ListaControlesActivos;
 import Ventana.ListaControlesActivos.TipoControl;
 import Ventana.TiposVerificacion;
@@ -59,8 +59,8 @@ public class Verificacion_AltaNuevaVerificacion {
 
   public boolean insertarTipos_Control() {
     boolean ret = false;
-    LastID lastid = new LastID(conexion, "tipos_verificacion");
-    int id = lastid.lastId();
+    UltimoIDInsertado lastid = new UltimoIDInsertado(conexion, "tipos_verificacion");
+    int id = lastid.getUltimoID();
     tipos_verificacion = new TiposVerificacion(id, getNombre(), getDescripcion(), 1, null);
     for (Object o : tablaDestinoSeleccionado) {
       TipoControl tipo = (ListaControlesActivos.TipoControl) o;

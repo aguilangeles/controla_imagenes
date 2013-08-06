@@ -6,8 +6,6 @@ package Ventana;
 
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import Entidades.Conexion;
 import javax.swing.JOptionPane;
 
@@ -28,7 +26,7 @@ public class CantidadControlesPorVerificacion {
                     + "from controles_verificacion "
                     + "where idVerificacion = "
                     + "(SELECT  idVerificacion FROM qualitys.traza where id =" + id + ")";
-            conexion.ExecuteSql(insert);
+            conexion.executeQuery(insert);
             while (conexion.resulset.next()) {
                 cantidadControles = conexion.resulset.getInt(1);
             }

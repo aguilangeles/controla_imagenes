@@ -36,7 +36,7 @@ public class LlenarControles {
               + "join controles c "
               + "on c.id = tac.idcontrol "
               + "where tac.idtraza = " + idTraza + " and tac.idarchivo = " + idTif + ";";
-      conexion.ExecuteSql(query);
+      conexion.executeQuery(query);
       while (conexion.resulset.next()) {
         int trzaArchivo = conexion.resulset.getInt(1);
         int controlidArchivo = conexion.resulset.getInt(2);

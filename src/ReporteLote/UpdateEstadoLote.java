@@ -7,8 +7,6 @@ package ReporteLote;
 import javax.swing.JTextArea;
 import Entidades.Conexion;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,8 +36,6 @@ public class UpdateEstadoLote {
         conexion.executeUpdate(update);
       } catch (SQLException ex) {
               JOptionPane.showMessageDialog(null, ex.getMessage(), "Seteo Estado Lote", JOptionPane.ERROR_MESSAGE);
-
-//        Logger.getLogger(UpdateEstadoLote.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
 }

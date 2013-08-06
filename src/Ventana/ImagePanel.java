@@ -12,8 +12,11 @@ import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -36,10 +39,11 @@ public class ImagePanel extends JPanel {
     setBackground(Color.black);
   }
 
-  public void CargarImg(String path) { //aca va el scala de spinner
-    loadImage(path);
+  public void CargarImg(String path, boolean pdf, boolean tif) { //aca va el scala de spinner
+    loadImage(path, pdf, tif);
   }
 
+  @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
@@ -72,14 +76,27 @@ public class ImagePanel extends JPanel {
     repaint();
   }
 
-  private void loadImage(String path) {
-    try {
-      File arch = new File(path);
-      image = ImageIO.read(arch);
-    } catch (MalformedURLException mue) {
-      System.out.println("URL trouble: " + mue.getMessage());
-    } catch (IOException ioe) {
-      System.out.println("read trouble: " + ioe.getMessage());
+  private void loadImage(String path, boolean pdf, boolean tif) {
+    if (pdf || !tif) {
+      System.out.println("leyendo png");
+      try {
+        File arch = new File(path);
+        image = ImageIO.read(arch);
+      } catch (MalformedURLException mue) {
+        System.out.println("URL trouble: " + mue.getMessage());
+      } catch (IOException ioe) {
+        System.out.println("read trouble: " + ioe.getMessage());
+      }
+    } else {
+      try {
+        ImageTif img = new ImageTif();
+        image = (BufferedImage) img.leerImagen(path);
+      } catch (FileNotFoundException ex) {
+        Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IOException ex) {
+        Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+      }
+
     }
   }
 }

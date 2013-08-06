@@ -36,7 +36,7 @@ public class SetFechaUltimoIngresoUsuario {
                 + tipoUsuario.getFechaUltimoIngreso() + "' WHERE id = "
                 + tipoUsuario.getId() + ";";
         conexion.executeUpdate(ret);
-        conexion.desconectar();
+        conexion.isConexionClose();
       } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en Seteo de Fecha", JOptionPane.ERROR_MESSAGE);
         Logger.getLogger(SetFechaUltimoIngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);

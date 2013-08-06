@@ -61,7 +61,7 @@ public class Guardar {
       }
       borrarTemp();
     }
-    conexion.desconectar();
+    conexion.isConexionClose();
 
   }
 

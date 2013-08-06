@@ -11,19 +11,21 @@ import javax.swing.JFrame;
  *
  * @author MUTNPROD003
  */
-public class VersionEImageIcon extends JFrame{
-    public static final String VERSION ="Qualitys 1.0.01";
+public final class VersionEImageIcon extends JFrame{
+    public static final String VERSION ="Qualitys 1.0.02";
 
     public VersionEImageIcon() {
     }
 
     public VersionEImageIcon(JFrame frame) {
+      // cambia la version y la imagen
         setImagenIcon(frame);
         frame.setTitle(VERSION);
     }
 
 
     public VersionEImageIcon(JFrame frame, String mensaje) {
+      //cambia la version y permite un mensaje, y la vimagen
         setImagenIcon(frame);
         frame.setTitle(mensaje+" "+VERSION);
     }

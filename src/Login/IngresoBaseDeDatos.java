@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 public class IngresoBaseDeDatos extends javax.swing.JFrame {
 
     private Conexion validar = new Conexion();
-    private boolean test;
+//    private boolean test;
 
     /**
      * Creates new form IngresoBaseDeDatos
@@ -164,11 +164,11 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
 
     private void botonActionPerformed(java.awt.event.ActionEvent evt) {
         if ("Aceptar".equals(evt.getActionCommand())) {
-            test = false;
-            TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, test, this);
+//            test = false;
+            TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, false, this);
         }
         if ("Test".equals(evt.getActionCommand())) {
-            test = true;
+//            test = true;
             TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, true, this);
         }
     }

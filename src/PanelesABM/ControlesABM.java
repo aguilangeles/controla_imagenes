@@ -10,8 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import Helpers.VersionEImageIcon;
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 
 /**
@@ -20,7 +18,7 @@ import javax.swing.JTable;
  */
 public class ControlesABM extends javax.swing.JFrame {
 
-  public static final String ROW_EMPTY = "No pueden quedar filas vacías";
+  public static final String ROW_EMPTY = "No deben quedar filas vacías";
   private String evento;
   private ControlesDao controles;
   private Conexion conexion = new Conexion();
@@ -261,7 +259,7 @@ public class ControlesABM extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
       controles.setEditable(true);
       int idTable = getIde() + 1;
-      Object[] ob = new Object[]{idTable, "Ingrese nombre", "Ingrese descripcion", "ejemplo.jpg", 1};
+      Object[] ob = new Object[]{idTable, "Ingrese nombre", "Ingrese descripción", "ejemplo.jpg", 1};
       modelo.addRow(ob);
       int row = tablaContenido.getRowCount() - 1;
       Rectangle rect = tablaContenido.getCellRect(row, 0, true);

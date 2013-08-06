@@ -27,7 +27,7 @@ public class MuestraRango {
         if (conexion.isConexion()) {
             try {
                 String query = "select  minimo , maximo, muestra, id from rangos_qs";
-                conexion.ExecuteSql(query);
+                conexion.executeQuery(query);
                 while (conexion.resulset.next()) {
                     int minimo = conexion.resulset.getInt(1);
                     int maximo = conexion.resulset.getInt(2);
@@ -36,7 +36,7 @@ public class MuestraRango {
                         idRango = (conexion.resulset.getInt(4));
                     }
                 }
-                conexion.desconectar();
+                conexion.isConexionClose();
             } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Poblar tabla de Rangos", JOptionPane.ERROR_MESSAGE);
 

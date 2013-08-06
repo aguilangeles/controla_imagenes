@@ -33,10 +33,10 @@ public class Ventana11 extends javax.swing.JFrame {
   private boolean hasNext;
   private boolean hasPrevius;
   private int contador = 1;
-//  private int zoom;
-  private double zoomDouble;
+  private double zoom;
   private ImagenesWorker worker;
-  private boolean pdf;
+  private boolean isPDF;
+  private boolean isTIF;
   private final SetChecksBox setCB;
   private final Guardar save;
   private final VisualizarImagen visualizarImagen;
@@ -56,21 +56,29 @@ public class Ventana11 extends javax.swing.JFrame {
     this.rutadeimagen = new GetRutaDeImagen(); // llama al conversor de pdf y devuelve la ruta de imagen
     this.visualizarImagen = new VisualizarImagen(scrollimage); // llama al imagecomponent
     this.iterator = traza.getListaTif().listIterator();//genera la lista
-    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
+    this.isPDF = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
+    this.isTIF = isTIF(isPDF, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tablaCheck, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
     setExtendedState(6);
     terminar.setEnabled(false);
-    internal(pdf);
+    internal(isPDF);
     contador++;
   }
 
-  public double getZoomDouble() {
+  private boolean isTIF(boolean pdf, String extension) {
+    if (!pdf && extension.equalsIgnoreCase(".tif")) {
+      return true;
+    }
+    return false;
+  }
+
+  public double getZoom() {
     return (double) spinner.getValue();
   }
 
-  public void setZoomDouble(double zoomDouble) {
-    this.zoomDouble = zoomDouble;
+  public void setZoom(double zoomDouble) {
+    this.zoom = zoomDouble;
   }
 
   private void internal(boolean ispdf) {
@@ -79,10 +87,10 @@ public class Ventana11 extends javax.swing.JFrame {
       anterior.setEnabled(false);
       Imagen siguientes = nextImagen();//trae el ramdom
       setTituloYRutaLabel(siguientes);
-      String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
+      String ruta = rutadeimagen.siguienteImagen(isPDF, siguientes);
       setLabelPagina(ispdf, siguientes);
-      SpinnerNumberModel model1 = new SpinnerNumberModel(getZoomDouble(), 0.1, 1.4, .01);
-      visualizarImagen.visualizarImagen(ruta, pdf, spinner, model1, getZoomDouble());
+      SpinnerNumberModel model1 = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
+      visualizarImagen.visualizarImagen(ruta, isPDF, isTIF, spinner, model1, getZoom());
       setCB.set(siguientes.getId());
     } catch (PropertyVetoException ex) {
       Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
@@ -143,6 +151,7 @@ public class Ventana11 extends javax.swing.JFrame {
     rutaJlabel = new javax.swing.JLabel();
     pagina = new javax.swing.JLabel();
     spinner = new javax.swing.JSpinner();
+    jLabel1 = new javax.swing.JLabel();
     panelButtCheck = new javax.swing.JPanel();
     scrollChecks = new javax.swing.JScrollPane();
     jScrollPane4 = new javax.swing.JScrollPane();
@@ -237,20 +246,25 @@ public class Ventana11 extends javax.swing.JFrame {
 
     spinner.setValue(0.20);
 
+    jLabel1.setText("Escala");
+
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addComponent(scrollimage, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
       .addGroup(jPanel2Layout.createSequentialGroup()
-        .addComponent(rutaJlabel, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(jPanel2Layout.createSequentialGroup()
+            .addComponent(rutaJlabel, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(jPanel2Layout.createSequentialGroup()
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
-      .addGroup(jPanel2Layout.createSequentialGroup()
-        .addGap(123, 123, 123)
-        .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,10 +272,12 @@ public class Ventana11 extends javax.swing.JFrame {
         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(rutaJlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(25, 25, 25)
-        .addComponent(scrollimage, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+        .addGap(1, 1, 1)
+        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(scrollimage, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE))
     );
 
     scrollChecks.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -365,7 +381,7 @@ public class Ventana11 extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
-      save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
+      save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, isPDF);
       NumeroRechazo numeroRechazo = new NumeroRechazo(traza.getId());
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
@@ -378,18 +394,17 @@ public class Ventana11 extends javax.swing.JFrame {
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
       anterior.setEnabled(true);
-      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
-      Imagen imagen = nextImagen();
+      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
+      Imagen imagen1 = nextImagen();
       try {
-//        setZoom(slider.getValue());
-        setZoomDouble((double) spinner.getValue());
+        setZoom((double) spinner.getValue());
         jDesktopPane1.add(jInternal);
-        setTituloYRutaLabel(imagen);
-        setLabelPagina(pdf, imagen);
-        setCB.set(imagen.getId());
-        String ruta_temp = rutadeimagen.siguienteImagen(pdf, imagen);
-        SpinnerNumberModel model = new SpinnerNumberModel(getZoomDouble(), 0.1, 1.4, .01);
-        visualizarImagen.visualizarImagen(ruta_temp, pdf, spinner, model, getZoomDouble());
+        setTituloYRutaLabel(imagen1);
+        setLabelPagina(isPDF, imagen1);
+        setCB.set(imagen1.getId());
+        String ruta_temp = rutadeimagen.siguienteImagen(isPDF, imagen1);
+        SpinnerNumberModel modelo = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
+        visualizarImagen.visualizarImagen(ruta_temp, isPDF, isTIF, spinner, modelo, getZoom());
         if (!isHasNext()) {
           siguiente.setEnabled(false);
           terminar.setEnabled(true);
@@ -405,31 +420,22 @@ public class Ventana11 extends javax.swing.JFrame {
       System.gc();
       String visualizacion = "";
       Imagen pr = previus();
-      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
+      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
       int der = contador - 1;
       setContador(der);
       siguiente.setEnabled(true);
       jDesktopPane1.add(jInternal);
       jInternal.setVisible(true);
       setTituloYRutaLabel(pr);
-      setLabelPagina(pdf, pr);
+      setLabelPagina(isPDF, pr);
       setCB.set(pr.getId());
-      visualizacion = rutadeimagen.anteriorImagen(pdf, pr);
-      SpinnerNumberModel model = new SpinnerNumberModel(getZoomDouble(), 0.1, 1.4, .01);
-      visualizarImagen.visualizarImagen(pr.getRutaTemp(), pdf, spinner, model, getZoomDouble());
+      visualizacion = rutadeimagen.anteriorImagen(isPDF, pr);
+      SpinnerNumberModel model = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
+      visualizarImagen.visualizarImagen(pr.getRutaTemp(), isPDF, isTIF, spinner, model, getZoom());
       if (!hasPrevius) {
         anterior.setEnabled(false);
       }
     }//GEN-LAST:event_anteriorActionPerformed
-
-//  public int getZoom() {
-////        return 0;
-//    return slider.getValue();
-//  }
-//
-//  public void setZoom(int zoom) {
-//    this.zoom = zoom;
-//  }
 
   public boolean isHasNext() {
     return hasNext;
@@ -470,6 +476,7 @@ public class Ventana11 extends javax.swing.JFrame {
   private javax.swing.JButton anterior;
   private javax.swing.JDesktopPane jDesktopPane1;
   private javax.swing.JInternalFrame jInternal;
+  private javax.swing.JLabel jLabel1;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
   private javax.swing.JScrollPane jScrollPane1;

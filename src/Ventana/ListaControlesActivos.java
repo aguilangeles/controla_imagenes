@@ -7,8 +7,6 @@ package Ventana;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import Entidades.Conexion;
 import javax.swing.JOptionPane;
 
@@ -30,7 +28,7 @@ private Conexion conexion ;
 
         if (conexion.isConexion()) {
             try {
-                conexion.ExecuteSql("Select id, descripcion from controles where estado = 1 ");
+                conexion.executeQuery("Select id, descripcion from controles where estado = 1 ");
                 while (conexion.resulset.next()) {
                     int id = conexion.resulset.getInt(1);
                     String descripcion = conexion.resulset.getString(2);

@@ -46,14 +46,14 @@ public class ObtenerControles {
                 String query = "SELECT  tac.idcontrol ,c.descripcion , tac.estado "
                         + "FROM qualitys.traza_archivo_controles tac join controles c"
                         + " on tac.idcontrol = c.id where idarchivo = " + idArchivo + ";";
-                conexion.ExecuteSql(query);
+                conexion.executeQuery(query);
                 while (conexion.resulset.next()) {
                     int estado = conexion.resulset.getInt(3);
                     boolean isEstado = (estado == 0) ? false : true;
                     tipos = new TiposConCheck(conexion.resulset.getInt(1), conexion.resulset.getString(2), isEstado);
                     listadoTipos.add(tipos);
                 }
-                conexion.desconectar();
+                conexion.isConexionClose();
 
             } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Obtener control por Imagen", JOptionPane.ERROR_MESSAGE);

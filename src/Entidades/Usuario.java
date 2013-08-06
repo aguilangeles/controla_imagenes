@@ -55,9 +55,10 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "url=" + url + ", base=" + base + ", usuario=" + usuario + ", password=" + password + '}';
+        return "Usuario{" + "url=" + url + ", base=" + base + ", usuario="
+                + usuario + ", password=" + password + '}';
     }
 
-    
+
 
 }

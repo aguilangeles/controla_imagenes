@@ -31,6 +31,7 @@ public class ButtonEditor extends DefaultCellEditor {
         button = new JButton();
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 fireEditingStopped();
             }
@@ -38,6 +39,7 @@ public class ButtonEditor extends DefaultCellEditor {
         this.listado=listado;
 
     }
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
       boolean isSelected, int row, int column) {
     if (isSelected) {
@@ -53,6 +55,7 @@ public class ButtonEditor extends DefaultCellEditor {
     return button;
   }
 
+    @Override
     public Object getCellEditorValue() {
         if (isPushed) {
             for (TiposConCheck t : listado) {
@@ -62,20 +65,18 @@ public class ButtonEditor extends DefaultCellEditor {
                     ayuda.setVisible(true);
                 }
             }
-      //
-      //
-//      JOptionPane.showMessageDialog(button, label + ": Ouch!");
-      // System.out.println(label + ": Ouch!");
     }
     isPushed = false;
     return new String(label);
   }
 
+    @Override
   public boolean stopCellEditing() {
     isPushed = false;
     return super.stopCellEditing();
   }
 
+    @Override
   protected void fireEditingStopped() {
     super.fireEditingStopped();
   }
