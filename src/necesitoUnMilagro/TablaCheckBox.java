@@ -5,7 +5,7 @@
 package necesitoUnMilagro;
 
 import Daos.TiposDeControl;
-import Entidades.TrazaDao;
+import Daos.TrazaDao;
 import Helpers.ButtonEditor;
 import Helpers.ButtonRenderer;
 import java.awt.event.ActionEvent;

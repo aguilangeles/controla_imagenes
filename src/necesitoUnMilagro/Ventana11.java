@@ -4,6 +4,7 @@
  */
 package necesitoUnMilagro;
 
+import Daos.TrazaDao;
 import Daos.Imagen;
 import Entidades.*;
 import Helpers.VersionEImageIcon;

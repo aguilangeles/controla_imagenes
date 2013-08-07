@@ -4,9 +4,10 @@
  */
 package necesitoUnMilagro;
 
+import Daos.ControlByArchivo;
 import Entidades.Conexion;
 import Daos.Imagen;
-import Entidades.TrazaDao;
+import Daos.TrazaDao;
 import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

@@ -4,6 +4,7 @@
  */
 package Ventana;
 
+import Daos.Controles;
 import Daos.TiposDeControl;
 import java.util.List;
 
@@ -11,43 +12,42 @@ import java.util.List;
  *
  * @author MUTNPROD003
  */
-public class TiposVerificacion {
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private int estado;
-    private List<TiposDeControl> listaControles;
+public class TiposVerificacion extends Controles {
+  private int estado;
+  private List<TiposDeControl> listaControles;
 
-    public TiposVerificacion(int id, String nombre, String descripcion, int estado, List<TiposDeControl> listaControles) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.estado = estado;
-        this.listaControles = listaControles;
-    }
+  public TiposVerificacion(int id, String nombre, String descripcion, int estado, List<TiposDeControl> listaControles) {
+    super(id, nombre, descripcion);
+    this.estado = estado;
+    this.listaControles = listaControles;
+  }
 
-    public int getId() {
-        return id;
-    }
+  @Override
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  @Override
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getNombre() {
-        return nombre;
-    }
+  @Override
+  public String getNombre() {
+    return nombre;
+  }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+  @Override
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return texto;
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.texto = descripcion;
     }
 
     public int getEstado() {

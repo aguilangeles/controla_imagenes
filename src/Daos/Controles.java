@@ -19,16 +19,23 @@ public class Controles {
   }
 
   public Controles(int id, String nombre, boolean check, String texto, String imagen) {
-    this.check = check;
     this.id = id;
+    this.nombre = nombre;
+    this.check = check;
+    this.texto = texto;
     this.imagen = imagen;
+  }
+  public Controles(int id, String nombre, String texto) {
+    this.id = id;
     this.nombre = nombre;
     this.texto = texto;
   }
+
   public Controles(int id, String texto) {
     this.id = id;
     this.texto = texto;
   }
+
 
 
   public int getId() {

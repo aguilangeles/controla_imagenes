@@ -7,7 +7,7 @@ package Ventana;
 import Entidades.Conexion;
 import Entidades.LlenarTrazaDao;
 import Daos.NombrePaginaDelPDF;
-import Entidades.TrazaDao;
+import Daos.TrazaDao;
 import Helpers.Archivo;
 import Helpers.UltimoIDInsertado;
 import Helpers.PasarGarbageCollector;

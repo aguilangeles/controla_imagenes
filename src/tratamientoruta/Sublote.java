@@ -16,7 +16,6 @@ public class Sublote {
     private int idSublote;
     private List<NombrePaginaDelPDF> pdfpagina = new ArrayList<>();
     private String nombre;
-//    private String absolutePath;
     private String fileName;
     private int paginas;
     private String relativa ;

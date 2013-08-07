@@ -2,34 +2,35 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package necesitoUnMilagro;
+package Daos;
 
 /**
  *
  * @author MUTNPROD003
  */
 public class ControlByArchivo {
-    private int idTif;
+    private int idImagen;
     private int idTrazaArchivoControl;
     private int idControl;
     private String descripcion;
     private boolean check;
     private int estado;
 
-    public ControlByArchivo(int idTif,int idTrazaArchivoControl,int idControl, String descripcion, boolean check) {
-        this.idTif=idTif;
+    public ControlByArchivo(int idImagen,int idTrazaArchivoControl,int idControl,
+            String descripcion, boolean check) {
+        this.idImagen=idImagen;
         this.idTrazaArchivoControl = idTrazaArchivoControl;
         this.idControl=idControl;
         this.descripcion = descripcion;
         this.check = check;
     }
 
-    public int getIdTif() {
-        return idTif;
+    public int getIdImagen() {
+        return idImagen;
     }
 
-    public void setIdTif(int idTif) {
-        this.idTif = idTif;
+    public void setIdImagen(int idTif) {
+        this.idImagen = idTif;
     }
 
 
