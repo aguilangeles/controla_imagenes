@@ -4,7 +4,7 @@
  */
 package necesitoUnMilagro;
 
-import Entidades.TiposConCheck;
+import Daos.TiposDeControl;
 import javax.swing.JTable;
 
 /**
@@ -26,7 +26,7 @@ public class SetChecksBox {
     public void set(int id) {
         for (int index = 0; index < tablaCheck.getRowCount(); index++) {
             ObtenerControles cont = new ObtenerControles(id);
-            for (TiposConCheck t : cont.getListadoTipos()) {
+            for (TiposDeControl t : cont.getListadoTipos()) {
                 String nombre = (String) tablaCheck.getValueAt(index, 1);
                 if (nombre.equals(t.getNombre())) {
                     tablaCheck.setValueAt(t.isCheck(), index, 0);

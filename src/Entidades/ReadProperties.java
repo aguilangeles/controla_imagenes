@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import Daos.LogQualitys;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -17,8 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class ReadProperties {
 
-  public Usuario getUser() {
-    Usuario user = null;
+  public LogQualitys getUser() {
+    LogQualitys user = null;
     FileInputStream in = null;
     try {
       Properties p = new Properties();
@@ -28,7 +29,7 @@ public class ReadProperties {
       String base = p.getProperty("database");
       String usuario = p.getProperty("dbuser");
       String password = p.getProperty("dbpassword");
-      user = new Usuario(url, base, usuario, password);
+      user = new LogQualitys(url, base, usuario, password);
     } catch (IOException ex) {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties", JOptionPane.ERROR_MESSAGE);
     } finally {

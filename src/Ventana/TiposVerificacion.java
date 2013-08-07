@@ -4,6 +4,7 @@
  */
 package Ventana;
 
+import Daos.TiposDeControl;
 import java.util.List;
 
 /**
@@ -15,18 +16,15 @@ public class TiposVerificacion {
     private String nombre;
     private String descripcion;
     private int estado;
-    private List<TiposControlVf> listaControles;
+    private List<TiposDeControl> listaControles;
 
-    public TiposVerificacion(int id, String nombre, String descripcion, int estado, List<TiposControlVf> listaControles) {
+    public TiposVerificacion(int id, String nombre, String descripcion, int estado, List<TiposDeControl> listaControles) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;
         this.listaControles = listaControles;
     }
-
-
-
 
     public int getId() {
         return id;
@@ -60,28 +58,11 @@ public class TiposVerificacion {
         this.estado = estado;
     }
 
-    public List<TiposControlVf> getListaControles() {
+    public List<TiposDeControl> getListaControles() {
         return listaControles;
     }
 
-    public void setListaControles(List<TiposControlVf> listaControles) {
+    public void setListaControles(List<TiposDeControl> listaControles) {
         this.listaControles = listaControles;
-    }
-
-
-    public static class TiposControlVf {
-
-        private int control;
-        private String descripcion;
-
-        public TiposControlVf(int control, String descripcion) {
-            this.control = control;
-            this.descripcion = descripcion;
-        }
-
-        @Override
-        public String toString() {
-            return descripcion;
-        }
     }
 }

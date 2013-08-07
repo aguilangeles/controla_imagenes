@@ -4,11 +4,11 @@
  */
 package Entidades;
 
+import Daos.Imagen;
 import Ventana.ImagenesWorker;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,7 +51,7 @@ public class LlenarArchivo {
       imagen = new Imagen(id, ruta_archivo, parent, pagina);
       imagenProcesada.add(imagen);
     } else {
-      imagen = new Imagen(id, ruta_archivo, parent);
+      imagen = new Imagen(id, ruta_archivo, parent,0);
       imagenProcesada.add(imagen);
     }
   }

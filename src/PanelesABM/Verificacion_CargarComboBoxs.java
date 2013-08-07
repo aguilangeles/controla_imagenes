@@ -4,8 +4,7 @@
  */
 package PanelesABM;
 
-import Ventana.ListaControlesActivos;
-import Ventana.ListaControlesActivos.TipoControl;
+import Daos.TiposDeControl;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import Entidades.Conexion;
@@ -26,7 +25,6 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
   private List<Object> documentoList = new ArrayList<>();
   private List<Object> verificacionList = new ArrayList<>();
 
-
   public Verificacion_CargarComboBoxs() {
   }
 
@@ -38,15 +36,14 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
         while (conexion.resulset.next()) {
           int id = conexion.resulset.getInt(1);
           String nombre = conexion.resulset.getString(2);
-          TipoControl t = new ListaControlesActivos.TipoControl(id, nombre);
-          verificacionList.add(t);
-          tipoVerificacion.addElement(t);
+          TiposDeControl t = new TiposDeControl(id, nombre);
+          verificacionList.add(t.newToString());
+          tipoVerificacion.addElement(t.newToString());
 
         }
         conexion.isConexionClose();
       } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la carga de JComboBox ", JOptionPane.ERROR_MESSAGE);
-//                    Logger.getLogger(Verificacion_CargarComboBoxs.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -59,15 +56,14 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
         while (conexion.resulset.next()) {
           int id = conexion.resulset.getInt(1);
           String nombre = conexion.resulset.getString(2);
-          TipoControl t = new ListaControlesActivos.TipoControl(id, nombre);
-          documentoList.add(t);
-          tipoDocumento.addElement(t);
+          TiposDeControl t = new TiposDeControl(id, nombre);
+          documentoList.add(t.getId()+"-"+t.getTexto());
+          tipoDocumento.addElement(t.getId()+"-"+t.getTexto());
         }
       }
       conexion.isConexionClose();
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la carga de JComboBox ", JOptionPane.ERROR_MESSAGE);
-//            Logger.getLogger(Verificacion_CargarComboBoxs.class.getName()).log(Level.SEVERE, null, ex);
     }
 
   }
@@ -79,6 +75,7 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
   public DefaultComboBoxModel getTipoVerificacion() {
     return tipoVerificacion;
   }
+
   public List<Object> getDocumentoList() {
     return documentoList;
   }

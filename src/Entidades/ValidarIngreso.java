@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import Daos.Usuario;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -15,7 +16,7 @@ public final class ValidarIngreso {
 
   private String aName;
   private String aPassw;
-  private TipodeUsuario usuarioValidado = null;
+  private Usuario usuarioValidado = null;
   private boolean usuario;
 
   public ValidarIngreso(String aName, String aPassw) {
@@ -36,7 +37,7 @@ public final class ValidarIngreso {
           String contrasenia = conexion.resulset.getString(3);
           int tipo = conexion.resulset.getInt(4);
           int estado = conexion.resulset.getInt(5);
-          TipodeUsuario user = new TipodeUsuario(id, nombre, contrasenia, tipo, estado);
+          Usuario user = new Usuario(id, nombre, contrasenia, tipo, estado);
           if (isUsuarioExistente_y_Activo(user)) {
             usuario = true;
             usuarioValidado = user;
@@ -49,7 +50,7 @@ public final class ValidarIngreso {
     }
   }
 
-  private boolean isUsuarioExistente_y_Activo(TipodeUsuario tipoUsuari) {
+  private boolean isUsuarioExistente_y_Activo(Usuario tipoUsuari) {
     if (tipoUsuari.getNombre().equalsIgnoreCase(aName)
             && tipoUsuari.getPassw().equalsIgnoreCase(aPassw)
             && tipoUsuari.isActivo()) {
@@ -66,11 +67,11 @@ public final class ValidarIngreso {
     this.usuario = usuario;
   }
 
-  public TipodeUsuario getUsuarioValidado() {
+  public Usuario getUsuarioValidado() {
     return usuarioValidado;
   }
 
-  public void setTipoUsuario(TipodeUsuario tipoUsuario) {
+  public void setTipoUsuario(Usuario tipoUsuario) {
     this.usuarioValidado = tipoUsuario;
   }
 }

@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import Daos.TiposDeControl;
+import Daos.Imagen;
 import java.util.List;
 
 /**
@@ -13,12 +15,12 @@ import java.util.List;
 public class TrazaDao {
 
   private int id;
-  private List<TiposConCheck> listaTipos;
+  private List<TiposDeControl> listaTipos;
   private List<Imagen> listaTif;
   private int estado;
   private String extension;
 
-  public TrazaDao(int id, List<Imagen> listaTif, String extension, List<TiposConCheck> listaTipos) {
+  public TrazaDao(int id, List<Imagen> listaTif, String extension, List<TiposDeControl> listaTipos) {
     this.id = id;
     this.listaTif = listaTif;
     this.extension = extension;
@@ -57,14 +59,14 @@ public class TrazaDao {
     this.estado = estado;
   }
 
-  public List<TiposConCheck> getListaTipos() {
+  public List<TiposDeControl> getListaTipos() {
     return listaTipos;
   }
 
   public Imagen getTifByName(String nombre) {
     Imagen tif = null;
     for (Imagen temp : this.listaTif) {
-      if (temp.getRutaDb().equalsIgnoreCase(nombre)) {
+      if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre)) {
         tif = temp;
       }
     }
@@ -74,7 +76,7 @@ public class TrazaDao {
   public Imagen getTifByNameAndPage(String nombre, int page) {
     Imagen tif = null;
     for (Imagen temp : this.listaTif) {
-      if (temp.getRutaDb().equalsIgnoreCase(nombre) && temp.getPagina() == page) {
+      if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page) {
         tif = temp;
       }
     }

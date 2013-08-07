@@ -4,6 +4,7 @@
  */
 package necesitoUnMilagro;
 
+import Daos.Imagen;
 import Entidades.*;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
@@ -431,7 +432,7 @@ public class Ventana11 extends javax.swing.JFrame {
       setCB.set(pr.getId());
       visualizacion = rutadeimagen.anteriorImagen(isPDF, pr);
       SpinnerNumberModel model = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
-      visualizarImagen.visualizarImagen(pr.getRutaTemp(), isPDF, isTIF, spinner, model, getZoom());
+      visualizarImagen.visualizarImagen(pr.getRutaTemporal(), isPDF, isTIF, spinner, model, getZoom());
       if (!hasPrevius) {
         anterior.setEnabled(false);
       }
@@ -499,7 +500,7 @@ public class Ventana11 extends javax.swing.JFrame {
 
   private void setTituloYRutaLabel(Imagen siguientes) {
     jInternal.setTitle("Imagen " + contador + "/" + getSizeRamdom());
-    rutaJlabel.setText(siguientes.getRutaDb());
+    rutaJlabel.setText(siguientes.getRutaInsertadaEnDB());
   }
 
   private void setLabelPagina(boolean ispdf, Imagen siguientes) {

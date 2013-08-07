@@ -5,7 +5,7 @@
 package Login;
 
 import Entidades.Conexion;
-import Entidades.TipodeUsuario;
+import Daos.Usuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,12 +18,12 @@ import javax.swing.JOptionPane;
  */
 public class SetFechaUltimoIngresoUsuario {
 
-  private TipodeUsuario tipoUsuario;
+  private Usuario tipoUsuario;
 
   public SetFechaUltimoIngresoUsuario() {
   }
 
-  SetFechaUltimoIngresoUsuario(TipodeUsuario usuarioTipo) {
+  SetFechaUltimoIngresoUsuario(Usuario usuarioTipo) {
     this.tipoUsuario = usuarioTipo;
     setFecha();
   }

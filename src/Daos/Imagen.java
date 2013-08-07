@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package Daos;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -14,10 +14,10 @@ import javax.swing.JOptionPane;
  */
 public class Imagen {
   private int id;
-  private String rutaParaConversion;
-  private String parent;
   private int pagina;
-  private String rutaTemp;
+  private String parent;
+  private String rutaParaConversion;
+  private String rutaTemporal;
   private String rutaInsertadaEnDB;
   private int estado;
 
@@ -29,37 +29,30 @@ public class Imagen {
     this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
-  public Imagen(int id, String ruta_archivo, String parent) {
-    this.id = id;
-    this.parent = parent;
-    this.rutaInsertadaEnDB = decodear(ruta_archivo);
-    this.rutaParaConversion = decodear(parent + ruta_archivo);
-
-  }
-
   private static String decodear(String aString) {
     String ret = "";
     try {
       ret = URLDecoder.decode(aString, "UTF-8");
     } catch (UnsupportedEncodingException ex) {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Problemas en Encoding", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, ex.getMessage(),
+              "Problemas en Encoding", JOptionPane.ERROR_MESSAGE);
     }
     return ret;
   }
-  public String getRutaDb() {
+  public String getRutaInsertadaEnDB() {
     return rutaInsertadaEnDB;
   }
 
-  public void setRutaDb(String rutaDb) {
+  public void setRutaInsertadaEnDB(String rutaDb) {
     this.rutaInsertadaEnDB = rutaDb;
   }
 
-  public String getRutaTemp() {
-    return rutaTemp;
+  public String getRutaTemporal() {
+    return rutaTemporal;
   }
 
-  public void setRutaTemp(String rutaTemp) {
-    this.rutaTemp = rutaTemp;
+  public void setRutaTemporal(String rutaTemp) {
+    this.rutaTemporal = rutaTemp;
   }
 
   public int getPagina() {
@@ -78,7 +71,7 @@ public class Imagen {
     this.parent = parent;
   }
 
-  public String getRuta_archivo() {
+  public String getRutaParaConversion() {
     return rutaParaConversion;
   }
 

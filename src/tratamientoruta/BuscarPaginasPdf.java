@@ -4,7 +4,7 @@
  */
 package tratamientoruta;
 
-import Entidades.Pdf_NombreMasNumero;
+import Daos.NombrePaginaDelPDF;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class BuscarPaginasPdf {
                 PDDocument pddDocument = PDDocument.load(file.getAbsolutePath());
                 int pagina = pddDocument.getDocumentCatalog().getAllPages().size();
                 for (int i = 0; i < pagina; i++) {
-                   Pdf_NombreMasNumero  page = new Pdf_NombreMasNumero(ruta, i);
+                   NombrePaginaDelPDF  page = new NombrePaginaDelPDF(ruta, i);
                     listaPaginas.add(page);
                     infoLabel.setText("<html>"+page.toString()+"</html>");
                 }

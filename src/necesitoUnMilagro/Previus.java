@@ -4,7 +4,7 @@
  */
 package necesitoUnMilagro;
 
-import Entidades.Imagen;
+import Daos.Imagen;
 import Helpers.PasarGarbageCollector;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -35,7 +35,7 @@ public class Previus {
     public void setearInternalFrame(int contador, Imagen tif) {
         siguiente.setEnabled(true);
         internal.setTitle("Imagen " + contador + "/" + sizeRamdom);
-        String rutaPdf = tif.getRutaDb();
+        String rutaPdf = tif.getRutaInsertadaEnDB();
         String page = "Pagina: " + tif.getPagina();
         titulo.setText(rutaPdf);
         pagina.setText(page);

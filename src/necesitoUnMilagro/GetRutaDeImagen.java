@@ -4,7 +4,7 @@
  */
 package necesitoUnMilagro;
 
-import Entidades.Imagen;
+import Daos.Imagen;
 import Ventana.ImagenesWorker;
 
 /**
@@ -22,33 +22,33 @@ public final class GetRutaDeImagen {
 
   public String anteriorImagen(boolean pdf, Imagen imagen) {
     if (pdf) {
-      ImagenesWorker worker = new ImagenesWorker(imagen.getRuta_archivo(),
+      ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
               imagen.getParent(), imagen.getPagina());
       anteriorRuta = worker.doInBackground();
-      imagen.setRutaTemp(anteriorRuta);
+      imagen.setRutaTemporal(anteriorRuta);
     } else if (!pdf) {
-      anteriorRuta = imagen.getRuta_archivo();
+      anteriorRuta = imagen.getRutaParaConversion();
     }
     return anteriorRuta;
   }
 //  public String anteriorImagen(boolean pdf, Imagen imagen) {
 //    String visualizacion = "";
 //    if (pdf) {
-//      anteriorRuta = imagen.getRutaTemp();
+//      anteriorRuta = imagen.getRutaTemporal();
 //    } else if (!pdf) {
-//      anteriorRuta = imagen.getRuta_archivo();
+//      anteriorRuta = imagen.getRutaParaConversion();
 //    }
 //    return anteriorRuta;
 //  }
 
   public String siguienteImagen(boolean pdf, Imagen imagen) {
     if (pdf) {
-      ImagenesWorker worker = new ImagenesWorker(imagen.getRuta_archivo(),
+      ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
               imagen.getParent(), imagen.getPagina());
       siguienteRuta = worker.doInBackground();
-      imagen.setRutaTemp(siguienteRuta);
+      imagen.setRutaTemporal(siguienteRuta);
     } else if (!pdf) {
-      siguienteRuta = imagen.getRuta_archivo();
+      siguienteRuta = imagen.getRutaParaConversion();
     }
     return siguienteRuta;
   }

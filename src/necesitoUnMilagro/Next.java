@@ -4,7 +4,7 @@
  */
 package necesitoUnMilagro;
 
-import Entidades.Imagen;
+import Daos.Imagen;
 import Helpers.PasarGarbageCollector;
 
 import javax.swing.JButton;
@@ -40,7 +40,7 @@ public class Next extends JFrame {
     public void crearInternalFrame(int contador, Imagen tif) {
         anterior.setEnabled(true);
         int id = tif.getId();
-        String rutaPdf = tif.getRutaDb();
+        String rutaPdf = tif.getRutaInsertadaEnDB();
         internal.setTitle("Imagen " + contador + "/" + sizeRamdom);
         new SetChecksBox(tabla).set(id);
         titulo.setText(rutaPdf);

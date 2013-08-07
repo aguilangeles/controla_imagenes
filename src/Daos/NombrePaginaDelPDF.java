@@ -2,24 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package Daos;
 
 /**
  *
  * @author MUTNPROD003
  */
-public class Pdf_NombreMasNumero {
+public class NombrePaginaDelPDF {
 
   private String nombre;//nombre
-  private int numeroPagina;
+  private int pagina;
 
-  public Pdf_NombreMasNumero(String nombre, int numeroPagina) {
+  public NombrePaginaDelPDF(String nombre, int pagina) {
     this.nombre = nombre;
-    this.numeroPagina = numeroPagina;
+    this.pagina = pagina;
   }
 
   public int getNumeroPagina() {
-    return numeroPagina;
+    return pagina;
   }
 
   public String getNombre() {
@@ -28,6 +28,6 @@ public class Pdf_NombreMasNumero {
 
   @Override
   public String toString() {
-    return nombre + ": " + numeroPagina;
+    return nombre + ": " + pagina;
   }
 }

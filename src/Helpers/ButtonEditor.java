@@ -5,7 +5,7 @@
 package Helpers;
 
 import Ventana.AyudaVisual;
-import Entidades.TiposConCheck;
+import Daos.TiposDeControl;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,9 +24,9 @@ public class ButtonEditor extends DefaultCellEditor {
     private String label;
     private boolean isPushed;
     private AyudaVisual ayuda;
-    private List<TiposConCheck> listado;
+    private List<TiposDeControl> listado;
 
-    public ButtonEditor(JCheckBox jCheckBox, List<TiposConCheck> listado) {
+    public ButtonEditor(JCheckBox jCheckBox, List<TiposDeControl> listado) {
         super(jCheckBox);
         button = new JButton();
         button.setOpaque(true);
@@ -58,7 +58,7 @@ public class ButtonEditor extends DefaultCellEditor {
     @Override
     public Object getCellEditorValue() {
         if (isPushed) {
-            for (TiposConCheck t : listado) {
+            for (TiposDeControl t : listado) {
                 int id = Integer.parseInt(button.getText());
                 if (t.getId() == id) {
                     ayuda = new AyudaVisual(t.getNombre(), t.getTexto(), t.getImagen());

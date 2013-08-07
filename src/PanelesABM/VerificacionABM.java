@@ -17,7 +17,6 @@ import javax.swing.ImageIcon;
  */
 public class VerificacionABM extends javax.swing.JFrame {
 
-    private static final String    INSTRUCCIONES="";
     private String evento;
     private Conexion conexion = new Conexion();
     private VerificacionDao verificacion;
@@ -255,13 +254,7 @@ public class VerificacionABM extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ABMActionPerformed
 
-    public int getIde() {
-        return 0;
-    }
-
-    public void setIde(int ide) {
-        this.ide = ide;
-    }
+//  
 
     /**
      * @param args the command line arguments

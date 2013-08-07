@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Entidades.Conexion;
-import Entidades.Usuario;
+import Daos.LogQualitys;
 
 /**
  *
@@ -29,7 +29,7 @@ public class TestBaseDeDatos {
     private JButton aceptar;
     private boolean test;
     private JFrame validarUsuario;
-    private Usuario aUsuario;
+    private LogQualitys aUsuario;
 
     public TestBaseDeDatos(JTextField url, JTextField database, JTextField usuario,
             JTextField password, Conexion conexion, JButton aceptar, boolean isTest, JFrame validarUsuario) {
@@ -42,14 +42,14 @@ public class TestBaseDeDatos {
             this.aceptar = aceptar;
             this.test = isTest;
             this.validarUsuario = validarUsuario;
-            this.aUsuario = new Usuario(thisUrl, thisDatabase, thisUsuario, thisPassw);
+            this.aUsuario = new LogQualitys(thisUrl, thisDatabase, thisUsuario, thisPassw);
             testConexion(aUsuario);
         } catch (RuntimeException aRuntimeExc) {
             JOptionPane.showMessageDialog(null, aRuntimeExc.getMessage(), "Campo sin valor", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void testConexion(Usuario aUsuario) {
+    private void testConexion(LogQualitys aUsuario) {
         SetearArchivoConfiguracion setProperties = new SetearArchivoConfiguracion(aUsuario.getUrl(), aUsuario.getBase(), aUsuario.getUsuario(), aUsuario.getPassword());
         if (validar.isConexion()) {
             aceptar.setBackground(Color.GREEN);

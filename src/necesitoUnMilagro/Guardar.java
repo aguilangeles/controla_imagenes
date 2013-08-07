@@ -5,7 +5,7 @@
 package necesitoUnMilagro;
 
 import Entidades.Conexion;
-import Entidades.Imagen;
+import Daos.Imagen;
 import Entidades.TrazaDao;
 import java.io.File;
 import javax.swing.JLabel;

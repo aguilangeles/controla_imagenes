@@ -6,7 +6,7 @@ package Ventana;
 
 import Entidades.Conexion;
 import Entidades.LlenarTrazaDao;
-import Entidades.Pdf_NombreMasNumero;
+import Daos.NombrePaginaDelPDF;
 import Entidades.TrazaDao;
 import Helpers.Archivo;
 import Helpers.UltimoIDInsertado;
@@ -65,7 +65,8 @@ public class Worker extends SwingWorker<Object, Object> {
         case ".tif":
         case ".png":
         case ".jpg":
-          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion, lista.size(), parent, ultimaCarpeta, muestra, idRango);
+          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion,
+                  lista.size(), parent, ultimaCarpeta, muestra, idRango);
           List<Object> ramdomList = crearRamdom.getSeleccion();
           for (Object obj : ramdomList) {
             String aImagen = (String) obj;
@@ -79,11 +80,12 @@ public class Worker extends SwingWorker<Object, Object> {
           }
           break;
         case ".pdf":
-          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion, tamanioLote, parent, ultimaCarpeta, muestra, idRango);
+          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion,
+                  tamanioLote, parent, ultimaCarpeta, muestra, idRango);
           List<Object> ramdomPdf = crearRamdom.getSeleccion();
           for (Object o : ramdomPdf) {
             contador++;
-            Pdf_NombreMasNumero pagina = (Pdf_NombreMasNumero) o;
+            NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
             int parentlength = parent.length() + 1;
             String adaptarFile = pagina.getNombre().substring(parentlength);
             String filename = adaptarFile.replace("\\", "\\\\");
@@ -123,7 +125,7 @@ public class Worker extends SwingWorker<Object, Object> {
   @Override
   protected void done() {
     if (!isCancelled()) {
-      new PasarGarbageCollector();
+      PasarGarbageCollector pasarGarbageCollector = new PasarGarbageCollector();
       conexion.isConexionClose();
       crearNuevoWorker();
     }

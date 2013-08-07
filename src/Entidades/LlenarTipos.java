@@ -5,6 +5,7 @@
  */
 package Entidades;
 
+import Daos.TiposDeControl;
 import Ventana.CantidadControlesPorVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class LlenarTipos {
     private Conexion conexion;
     private int idTraza;
     private int size;
-    private List<TiposConCheck> listadeTipos = new ArrayList<>();
+    private List<TiposDeControl> listadeTipos = new ArrayList<>();
 
     public LlenarTipos(Conexion conectar ,int id) {
         this.conexion=conectar;
@@ -27,10 +28,10 @@ public class LlenarTipos {
         poblarLista();
     }
 
-    private List<TiposConCheck> poblarLista() {
+    private List<TiposDeControl> poblarLista() {
         try {
           Runtime gar = Runtime.getRuntime();
-            TiposConCheck tipos;
+            TiposDeControl tipos;
                 size = new CantidadControlesPorVerificacion(conexion, idTraza).getCantidad();
                 String insert = "select v.idControl"
                         + ", c.descripcion "
@@ -47,7 +48,7 @@ public class LlenarTipos {
                     String descripcion =conexion.resulset.getString(2);
                     String texto =conexion.resulset.getString(3);
                     String imagen =conexion.resulset.getString(4);
-                    tipos = new TiposConCheck(idcontroles, descripcion, false, texto, imagen);
+                    tipos = new TiposDeControl(idcontroles, descripcion, false, texto, imagen);
                     listadeTipos.add(tipos);
                 }
                 conexion.isConexionClose();
@@ -60,7 +61,7 @@ public class LlenarTipos {
             return listadeTipos;
     }
 
-    public List<TiposConCheck> getListadeTipos() {
+    public List<TiposDeControl> getListadeTipos() {
         return listadeTipos;
     }
 

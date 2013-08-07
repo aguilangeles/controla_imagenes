@@ -9,7 +9,7 @@ import PanelesABM.ControlesABM;
 import PanelesABM.RangosABM;
 import PanelesABM.UsuariosABM;
 import PanelesABM.VerificacionABM;
-import Entidades.TipodeUsuario;
+import Daos.Usuario;
 import Helpers.VersionEImageIcon;
 import PanelesABM.Verificacion_CargarComboBoxs;
 import javax.swing.JOptionPane;
@@ -22,7 +22,7 @@ public class PanelControl extends javax.swing.JFrame {
 
   private static final String INFO_LABEL = "<html>La edición de rangos, tipos de"
           + " verificación, controles y alta de usuarios, sólo esta permitido al administrador.</html>";
-  private TipodeUsuario usuarioTipo;
+  private Usuario usuarioTipo;
   private boolean administrador;
 
   /**
@@ -32,7 +32,7 @@ public class PanelControl extends javax.swing.JFrame {
     initComponents();
   }
 
-  PanelControl(TipodeUsuario usuarioTipo) {
+  PanelControl(Usuario usuarioTipo) {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon();
     jLabel1.setText(INFO_LABEL);
@@ -55,7 +55,7 @@ public class PanelControl extends javax.swing.JFrame {
     this.administrador = administrador;
   }
 
-  public TipodeUsuario getUsuarioTipo() {
+  public Usuario getUsuarioTipo() {
     return usuarioTipo;
   }
 

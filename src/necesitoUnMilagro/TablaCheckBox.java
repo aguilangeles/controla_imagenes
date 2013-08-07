@@ -4,7 +4,7 @@
  */
 package necesitoUnMilagro;
 
-import Entidades.TiposConCheck;
+import Daos.TiposDeControl;
 import Entidades.TrazaDao;
 import Helpers.ButtonEditor;
 import Helpers.ButtonRenderer;
@@ -40,8 +40,8 @@ public class TablaCheckBox {
 
     model = (DefaultTableModel) tablaCheck.getModel();
     setAnchoColumnas();
-    List<TiposConCheck> listatipos = traza.getListaTipos();
-    for (TiposConCheck tipos : listatipos) {
+    List<TiposDeControl> listatipos = traza.getListaTipos();
+    for (TiposDeControl tipos : listatipos) {
       boolean ischeck = tipos.isCheck();
       String nombre = tipos.getNombre();
       String boton = "Boton";

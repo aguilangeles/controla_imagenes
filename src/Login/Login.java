@@ -6,10 +6,9 @@ package Login;
 
 import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
-import Entidades.TipodeUsuario;
+import Daos.Usuario;
 import Entidades.ValidarIngreso;
 import Helpers.VersionEImageIcon;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,7 +19,7 @@ public class Login extends javax.swing.JFrame {
   private static final String USER_DEFAULT = "default";
   private static final String USER_INVALID = "<html>El Usuario o password "
           + "no existe en la base de datos, o no es un usuario activo</html>";
-  private TipodeUsuario usuario;
+  private Usuario usuario;
 
   /**
    * Creates new form Login
@@ -66,9 +65,11 @@ public class Login extends javax.swing.JFrame {
     jLabel2.setText("Password");
 
     user.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    user.setText("admin");
     user.setNextFocusableComponent(password);
 
     password.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    password.setText("admin");
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     entrar.setText("Entrar");
@@ -183,7 +184,7 @@ public class Login extends javax.swing.JFrame {
   /**
    * @return
    */
-  public TipodeUsuario getUsuario() {
+  public Usuario getUsuario() {
     return usuario;
   }
 

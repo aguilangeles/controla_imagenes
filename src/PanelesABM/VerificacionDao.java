@@ -4,13 +4,11 @@
  */
 package PanelesABM;
 
+import Daos.TiposDeControl;
 import Ventana.TiposVerificacion;
-import Ventana.TiposVerificacion.TiposControlVf;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
@@ -96,7 +94,7 @@ public class VerificacionDao extends ABMPaneles {
   private void llenarTabla(DefaultTableModel model) {
     List<Object[]> lista = new ArrayList<>();
     for (TiposVerificacion t : listaV) {
-      t.setListaControles(listaTiposControl(t.getId()));
+      t.setListaControles( listaTiposControl(t.getId()));
       String ret = t.getListaControles().toString();
       String trat = ret.substring(1, ret.length() - 1).replace(", ", "\n");
       lista.add(new Object[]{t.getId(), t.getNombre(), t.getDescripcion(), trat, t.getEstado()});
@@ -104,9 +102,9 @@ public class VerificacionDao extends ABMPaneles {
     consulta(model, lista);
   }
 
-  public List<TiposControlVf> listaTiposControl(int id) {
-    List<TiposControlVf> tipos = new ArrayList<>();
-    TiposControlVf tcv;
+  public List<TiposDeControl> listaTiposControl(int id) {
+    List<TiposDeControl> tipos = new ArrayList<>();
+    TiposDeControl tcv;
     if (aConexion.isConexion()) {
       try {
         String ret = "SELECT  v.idControl, c.descripcion "
@@ -114,13 +112,11 @@ public class VerificacionDao extends ABMPaneles {
                 + "where v.idVerificacion =" + id + ";";
         aConexion.executeQuery(ret);
         while (aConexion.resulset.next()) {
-          tcv = new TiposVerificacion.TiposControlVf(aConexion.resulset.getInt(1), aConexion.resulset.getString(2));
+          tcv = new TiposDeControl(aConexion.resulset.getInt(1), aConexion.resulset.getString(2));
           tipos.add(tcv);
         }
       } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Lista Tipos de Control", JOptionPane.ERROR_MESSAGE);
-
-//        System.out.println(ex.getMessage() + this.getClass());
       }
     }
     return tipos;

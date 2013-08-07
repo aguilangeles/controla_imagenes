@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import Entidades.TipodeUsuario;
+import Daos.Usuario;
 import Helpers.IdentificarExtension;
 import Helpers.IdentificarParent;
 import Helpers.VersionEImageIcon;
@@ -22,7 +22,8 @@ import javax.swing.JComboBox;
  * @author MUTNPROD003
  */
 public class CargarLote extends javax.swing.JFrame {
-  private TipodeUsuario usarioTipo;
+
+  private Usuario usarioTipo;
   private Entidades.Conexion con = new Entidades.Conexion();
   private List<Integer> idTipoControl = new ArrayList<>();
   private int idVerificacion;
@@ -37,7 +38,7 @@ public class CargarLote extends javax.swing.JFrame {
 
   }
 
-  public CargarLote(TipodeUsuario usuarioTipo, DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion) {
+  public CargarLote(Usuario usuarioTipo, DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion) {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
     this.usarioTipo = usuarioTipo;
@@ -80,6 +81,7 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel2.setText("Ruta");
 
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    rutaCarpeta.setText("C:/angeles/reducido");
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     aceptarSeleccion.setText("Siguiente");
@@ -224,21 +226,24 @@ public class CargarLote extends javax.swing.JFrame {
     return idTipoControl;
   }
 
-  public TipodeUsuario getUsarioTipo() {
+  public Usuario getUsarioTipo() {
     return usarioTipo;
   }
 
   private int getTipoDocumento() {
-    Ventana.ListaControlesActivos.TipoControl tip =
-            (Ventana.ListaControlesActivos.TipoControl) tipoDocumentoBox.getSelectedItem();
-    return tip.getId();
+    String result = (String) tipoDocumentoBox.getSelectedItem();
+    String[] dos = result.split("-");
+    int id = Integer.parseInt(dos[0]);
+    return id;
   }
 
   private List<Integer> idControlesByVerificacion() {
-    Ventana.ListaControlesActivos.TipoControl tip = (Ventana.ListaControlesActivos.TipoControl) tipoVerificacionBox.getSelectedItem();
-    idVerificacion = tip.getId();
+    String result = (String) tipoVerificacionBox.getSelectedItem();
+    String[] dos = result.split("-");
+    int id = Integer.parseInt(dos[0]);
+    idVerificacion = id;
     String selec = "SELECT idControl FROM qualitys.controles_verificacion where"
-            + " idVerificacion =" + tip.getId() + ";";
+            + " idVerificacion =" + id + ";";
     if (con.isConexion()) {
       try {
         con.executeQuery(selec);
@@ -301,6 +306,4 @@ public class CargarLote extends javax.swing.JFrame {
   private javax.swing.JComboBox tipoDocumentoBox;
   private javax.swing.JComboBox tipoVerificacionBox;
   // End of variables declaration//GEN-END:variables
-
-
 }
