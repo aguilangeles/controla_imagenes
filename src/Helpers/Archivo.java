@@ -38,8 +38,6 @@ public class Archivo {
       conexion.executeUpdate(ret);
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Archivo Insertar", JOptionPane.ERROR_MESSAGE);
-
-//        Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
     }
     return false;
   }

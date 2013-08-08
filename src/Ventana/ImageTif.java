@@ -48,14 +48,13 @@ public final class ImageTif extends JComponent {
     return image;
   }
 
-  public Image leerImagen(String location) throws FileNotFoundException, IOException {
+  public Image lecturaImagen(String location) throws FileNotFoundException, IOException {
     ByteBuffer buffer;
     FileInputStream in = new FileInputStream(location);
     FileChannel channel = in.getChannel();
     buffer = ByteBuffer.allocate((int) channel.size());
     buffer.clear();
     channel.read(buffer);
-
     return load(buffer.array());
   }
 }

@@ -8,7 +8,7 @@ package Daos;
  *
  * @author MUTNPROD003
  */
-public class ControlByArchivo {
+public class ControlPorImagen {
     private int idImagen;
     private int idTrazaArchivoControl;
     private int idControl;
@@ -16,7 +16,7 @@ public class ControlByArchivo {
     private boolean check;
     private int estado;
 
-    public ControlByArchivo(int idImagen,int idTrazaArchivoControl,int idControl,
+    public ControlPorImagen(int idImagen,int idTrazaArchivoControl,int idControl,
             String descripcion, boolean check) {
         this.idImagen=idImagen;
         this.idTrazaArchivoControl = idTrazaArchivoControl;

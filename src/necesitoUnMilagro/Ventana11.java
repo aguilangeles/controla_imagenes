@@ -6,7 +6,6 @@ package necesitoUnMilagro;
 
 import Daos.TrazaDao;
 import Daos.Imagen;
-import Entidades.*;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
 import Ventana.ImagenesWorker;
@@ -90,6 +89,7 @@ public class Ventana11 extends javax.swing.JFrame {
       Imagen siguientes = nextImagen();//trae el ramdom
       setTituloYRutaLabel(siguientes);
       String ruta = rutadeimagen.siguienteImagen(isPDF, siguientes);
+      System.out.println(ruta);
       setLabelPagina(ispdf, siguientes);
       SpinnerNumberModel model1 = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
       visualizarImagen.visualizarImagen(ruta, isPDF, isTIF, spinner, model1, getZoom());
@@ -405,6 +405,7 @@ public class Ventana11 extends javax.swing.JFrame {
         setLabelPagina(isPDF, imagen1);
         setCB.set(imagen1.getId());
         String ruta_temp = rutadeimagen.siguienteImagen(isPDF, imagen1);
+        System.out.println(ruta_temp);
         SpinnerNumberModel modelo = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
         visualizarImagen.visualizarImagen(ruta_temp, isPDF, isTIF, spinner, modelo, getZoom());
         if (!isHasNext()) {
@@ -420,7 +421,7 @@ public class Ventana11 extends javax.swing.JFrame {
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
       System.gc();
-      String visualizacion = "";
+
       Imagen pr = previus();
       guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
       int der = contador - 1;
@@ -431,9 +432,10 @@ public class Ventana11 extends javax.swing.JFrame {
       setTituloYRutaLabel(pr);
       setLabelPagina(isPDF, pr);
       setCB.set(pr.getId());
-      visualizacion = rutadeimagen.anteriorImagen(isPDF, pr);
+    String visualizacion = rutadeimagen.anteriorImagen(isPDF, pr);
+      System.out.println(visualizacion);
       SpinnerNumberModel model = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
-      visualizarImagen.visualizarImagen(pr.getRutaTemporal(), isPDF, isTIF, spinner, model, getZoom());
+      visualizarImagen.visualizarImagen(visualizacion, isPDF, isTIF, spinner, model, getZoom());
       if (!hasPrevius) {
         anterior.setEnabled(false);
       }

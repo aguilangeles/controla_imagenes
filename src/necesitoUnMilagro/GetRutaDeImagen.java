@@ -25,7 +25,7 @@ public final class GetRutaDeImagen {
       ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
               imagen.getParent(), imagen.getPagina());
       anteriorRuta = worker.doInBackground();
-      imagen.setRutaTemporal(anteriorRuta);
+      imagen.setRutaCarpetaTemp(anteriorRuta);
     } else if (!pdf) {
       anteriorRuta = imagen.getRutaParaConversion();
     }
@@ -34,7 +34,7 @@ public final class GetRutaDeImagen {
 //  public String anteriorImagen(boolean pdf, Imagen imagen) {
 //    String visualizacion = "";
 //    if (pdf) {
-//      anteriorRuta = imagen.getRutaTemporal();
+//      anteriorRuta = imagen.getRutaCarpetaTemp();
 //    } else if (!pdf) {
 //      anteriorRuta = imagen.getRutaParaConversion();
 //    }
@@ -46,7 +46,7 @@ public final class GetRutaDeImagen {
       ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
               imagen.getParent(), imagen.getPagina());
       siguienteRuta = worker.doInBackground();
-      imagen.setRutaTemporal(siguienteRuta);
+      imagen.setRutaCarpetaTemp(siguienteRuta);
     } else if (!pdf) {
       siguienteRuta = imagen.getRutaParaConversion();
     }

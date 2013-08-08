@@ -4,7 +4,7 @@
  */
 package necesitoUnMilagro;
 
-import Daos.ControlByArchivo;
+import Daos.ControlPorImagen;
 import Entidades.Conexion;
 import Daos.Imagen;
 import Daos.TrazaDao;
@@ -45,7 +45,7 @@ public class Guardar {
       getNumerodePagina(pdf, pagina);
       Imagen tif = traza.getTifByNameAndPage(nombre, page);
       LlenarControles controles = new LlenarControles(traza.getId(), tif.getId(), conexion);
-      for (ControlByArchivo controlxArchivo : controles.getLista()) {
+      for (ControlPorImagen controlxArchivo : controles.getLista()) {
         for (int index = 0; index < tablaCheck.getRowCount(); index++) {
           String descripcion = (String) tablaCheck.getValueAt(index, 1);
           boolean check = (boolean) tablaCheck.getValueAt(index, 0);

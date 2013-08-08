@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 public class ImagePanel extends JPanel {
 
   BufferedImage image;
+  ImageTif img = new ImageTif();
   double scale;
 
   public ImagePanel() {
@@ -38,6 +39,7 @@ public class ImagePanel extends JPanel {
     this.scale = scala;
     setBackground(Color.black);
   }
+
   public ImagePanel(float scala, Color color) {
     this.scale = scala;
     setBackground(color);
@@ -93,8 +95,8 @@ public class ImagePanel extends JPanel {
       }
     } else {
       try {
-        ImageTif img = new ImageTif();
-        image = (BufferedImage) img.leerImagen(path);
+
+        image = (BufferedImage) img.lecturaImagen(path);
       } catch (FileNotFoundException ex) {
         Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
       } catch (IOException ex) {

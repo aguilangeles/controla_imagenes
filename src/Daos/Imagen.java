@@ -9,15 +9,15 @@ import java.net.URLDecoder;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author MUTNPROD003
+ *
  */
 public class Imagen {
   private int id;
   private int pagina;
   private String parent;
   private String rutaParaConversion;
-  private String rutaTemporal;
+  private String rutaCarpetaTemp;
   private String rutaInsertadaEnDB;
   private int estado;
 
@@ -47,12 +47,12 @@ public class Imagen {
     this.rutaInsertadaEnDB = rutaDb;
   }
 
-  public String getRutaTemporal() {
-    return rutaTemporal;
+  public String getRutaCarpetaTemp() {
+    return rutaCarpetaTemp;
   }
 
-  public void setRutaTemporal(String rutaTemp) {
-    this.rutaTemporal = rutaTemp;
+  public void setRutaCarpetaTemp(String rutaTemp) {
+    this.rutaCarpetaTemp = rutaTemp;
   }
 
   public int getPagina() {

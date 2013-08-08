@@ -7,7 +7,6 @@ package Ventana;
 import Entidades.Conexion;
 import Entidades.LlenarTrazaDao;
 import Daos.NombrePaginaDelPDF;
-import Daos.TrazaDao;
 import Helpers.Archivo;
 import Helpers.UltimoIDInsertado;
 import Helpers.PasarGarbageCollector;
@@ -73,6 +72,7 @@ public class Worker extends SwingWorker<Object, Object> {
             int parentlength = parent.length() + 1;
             String adaptarFile = aImagen.substring(parentlength);
             String filename = adaptarFile.replace("\\", "\\\\");
+            System.out.println(filename);
             Archivo archivo = new Archivo(conexion, idTraza, filename, 0, infoLabel);
             imagenyControl();
             Runtime gar = Runtime.getRuntime();
