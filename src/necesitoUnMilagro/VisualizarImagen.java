@@ -29,7 +29,7 @@ public class VisualizarImagen {
   }
 
   public void visualizarImagen(String imagen, boolean pdf, boolean tif, final JSpinner spinner1, SpinnerNumberModel modelo, double zoomDouble) {
-    imagePanel = new ImagePanel((float) zoomDouble);
+    imagePanel = new ImagePanel((float) zoomDouble, Color.gray);
     imagePanel.CargarImg(imagen, pdf, tif);
     spinner1.setModel(modelo);
     spinner1.setPreferredSize(new Dimension(45, spinner1.getPreferredSize().height));

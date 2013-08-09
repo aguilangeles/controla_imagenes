@@ -18,7 +18,9 @@ public final class Traza {
           + "a foreign key constraint fails (`qualitys`.`traza`, CONSTRAINT "
           + "`fk_traza_rango` FOREIGN KEY (`idRango`) REFERENCES `rangos_qs` "
           + "(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)";
-  private static final String RANGO_INEXISTENTE = "No existen un rango que se \npueda aplicar al tama?o del lote.";
+  private static final String RANGO_INEXISTENTE = "No existe un rango que"
+          + " se pueda aplicar al tamanio del volumen.\n"
+          + "Edite la tabla 'Rangos'.";
   private Conexion conexion;
   private int idUsuario;
   private int idTipoDocumento;
@@ -73,9 +75,8 @@ public final class Traza {
       conexion.executeUpdate(insert);
     } catch (SQLException ex) {
       if (ex.getMessage().equals(MENSAJE_SQL)) {
-        JOptionPane.showMessageDialog(null, RANGO_INEXISTENTE, "Insertar Traza", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, RANGO_INEXISTENTE, "Sin rangos que aplicar al volumen", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
-
       } else {
         System.out.println(ex.getMessage());
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Insertar Traza", JOptionPane.ERROR_MESSAGE);

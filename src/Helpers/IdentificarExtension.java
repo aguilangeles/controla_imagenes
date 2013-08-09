@@ -24,7 +24,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
 
   private static final String INCOMPATIBLE_TAMANIO_CON_RANGO = "<html>El tamanio del "
           + "lote es inferior al rango asignado para ese volumen. Edite tabla 'Rangos'.</html>";
-      private int tamanio, muestra, idRango;
+  private int tamanio, muestra, idRango;
   private String extension;
   private List<Object> listaExtension = new ArrayList<>();
   private List<Object> listaResultado;
@@ -35,7 +35,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion;
 
-  public IdentificarExtension(JFrame frame, JLabel infoLabel,  List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
+  public IdentificarExtension(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
     this.controlesList = controlesList;
     this.file = file;
     this.frame = frame;
@@ -85,7 +85,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   }
 
   @Override
-    protected Void doInBackground() throws Exception {
+  protected Void doInBackground() throws Exception {
     buscarExtensiones(file);
     listaResultado = switchExtension(extension, listaExtension, infoLabel);
     tamanio = listaResultado.size();
@@ -110,7 +110,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   @Override
   protected void done() {
     if (!isCancelled()) {
-      if (isTamanioCompatibleConRango(getTamanio(), getIdRango())) {
+      if (isTamanioCompatibleConRango(getTamanio(), getMuestra())) {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
@@ -146,7 +146,6 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   public List<Object> getListaResultado() {
     return listaResultado;
   }
-
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
     boolean ret = (aTamanio > aRango) ? true : false;
     return ret;
