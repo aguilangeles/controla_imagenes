@@ -18,12 +18,12 @@ import javax.swing.event.ChangeListener;
  *
  * @author MUTNPROD003
  */
-public class VisualizarImagen {
+public class VisualizarImagen1 {
 
   private ImagePanel imagePanel;
   private JScrollPane scrollPane;
 
-  public VisualizarImagen(JScrollPane scroll) {
+  public VisualizarImagen1(JScrollPane scroll) {
     this.scrollPane = scroll;
     System.gc();
   }

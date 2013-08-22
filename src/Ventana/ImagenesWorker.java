@@ -7,11 +7,15 @@ package Ventana;
 import Helpers.ExtensionTemporal;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.im4java.core.ConvertCmd;
 import org.im4java.core.IM4JavaException;
 import org.im4java.core.IMOperation;
+import org.im4java.core.Info;
+import org.im4java.core.InfoException;
 
 /**
  *
@@ -25,7 +29,6 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
   private String parent;
   private int pagina;
 
-
   public ImagenesWorker(String ruta_archivo, String parent, int pagina) {
     this.rutaConPagina = ruta_archivo + "[" + pagina + "]";
     this.ruta_archivo = ruta_archivo;
@@ -36,34 +39,43 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
   @Override
   public String doInBackground() {
     File input = new File(rutaConPagina);
-    File outputemp = null;
+    File temp_Original = null;
     try {
       String rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal() + "_t_";
-      outputemp = File.createTempFile(rutaEnTemporal, ".jpg", new File("temp"));
+      temp_Original = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
       try {
+       // getInfoOriginalImage(input);
         IMOperation operation = new IMOperation();
-        operation.density(300);
-        operation.quality(100D);
-        operation.depth(8);
+        operation.density(200);
+        operation.quality(80D);
+        operation.depth(16);
+        operation.border(20,20);
         operation.addImage();
         operation.addImage();
         ConvertCmd convert = new ConvertCmd();
         convert.setSearchPath(IM4JAVA_TOOLPATH);
-        convert.run(operation, new Object[]{input.getAbsolutePath(), outputemp.getAbsolutePath()});
+        convert.run(operation, new Object[]{input.getAbsolutePath(), temp_Original.getAbsolutePath()});
         operation.closeOperation();
-      } catch (IOException | InterruptedException | IM4JavaException ex) {
-              JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imagenes desde PDF", JOptionPane.ERROR_MESSAGE);
 
-//        Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IOException | InterruptedException | IM4JavaException ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imagenes desde PDF", JOptionPane.ERROR_MESSAGE);
       }
     } catch (IOException ex) {
-              JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imágenes desde PDF", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imágenes desde PDF", JOptionPane.ERROR_MESSAGE);
 //      Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
     }
-    outputemp.deleteOnExit();
-    return outputemp.getAbsolutePath();
+    temp_Original.deleteOnExit();
+    return temp_Original.getAbsolutePath();
   }
 
 
-
-}
+  private void getInfoOriginalImage(File input) throws InfoException {
+    Info imageInfo = new Info(input.getAbsolutePath(), true);
+    System.out.println("Format: " + imageInfo.getImageFormat());
+    System.out.println("Page Geometry: " + imageInfo.getPageGeometry());
+    System.out.println("Width: " + imageInfo.getImageWidth());
+    System.out.println("Height: " + imageInfo.getImageHeight());
+    System.out.println("Geometry: " + imageInfo.getImageGeometry());
+    System.out.println("Depth: " + imageInfo.getImageDepth());
+    System.out.println("Class: " + imageInfo.getImageClass());
+  }}
