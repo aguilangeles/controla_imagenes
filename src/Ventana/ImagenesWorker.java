@@ -47,7 +47,7 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
         operation.density(200);
         operation.quality(80D);
         operation.depth(16);
-        operation.border(20,20);
+//        operation.border(20,20);
         operation.addImage();
         operation.addImage();
         ConvertCmd convert = new ConvertCmd();

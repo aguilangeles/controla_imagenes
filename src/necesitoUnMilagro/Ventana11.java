@@ -10,7 +10,6 @@ import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
 import Ventana.ImagenesWorker;
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 
 import java.beans.PropertyVetoException;
 import java.util.ListIterator;
@@ -19,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,7 +26,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Ventana11 extends javax.swing.JFrame {
 
-  private Dimension dimension = new Dimension(1000, 1500);
+  private float xScaleFactor = 1;
+  private float yScaleFactor = 1;
+  private Dimension dimension = new Dimension();
   private int sizeRamdom;
   private DefaultTableModel model;
   private TrazaDao traza;
@@ -74,13 +74,6 @@ public class Ventana11 extends javax.swing.JFrame {
     return false;
   }
 
-//  public double getZoom() {
-//    return (double) spinner.getValue();
-//  }
-//
-//  public void setZoom(double zoomDouble) {
-//    this.zoom = zoomDouble;
-//  }
   private void internal(boolean ispdf) {
     try {
       jInternal.setMaximum(true);
@@ -367,8 +360,8 @@ public class Ventana11 extends javax.swing.JFrame {
           .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(minus)
-          .addComponent(plus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+          .addComponent(plus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(minus)))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -409,7 +402,10 @@ public class Ventana11 extends javax.swing.JFrame {
         setCB.set(imagen1.getId());
         String ruta_temp = rutadeimagen.siguienteImagen(isPDF, imagen1);
 
-        zoomP = new Zoom();
+        zoomP = new Zoom(getDimension());
+//        zoomP.setPreferredSize(new Dimension(getDimension()));
+        System.out.println(getDimension());
+        System.out.println(getyScaleFactor() + " \t" + getyScaleFactor());
         zoomP.cargarImage(ruta_temp, isPDF, isTIF);
         scrollImage.getViewport().add(zoomP);
 //
@@ -454,12 +450,39 @@ public class Ventana11 extends javax.swing.JFrame {
     }//GEN-LAST:event_anteriorActionPerformed
 
   private void minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusActionPerformed
+    xScaleFactor -= 0.1;
+    yScaleFactor -= 0.1;
+//    System.out.println(xScaleFactor + "\t" + yScaleFactor);
     zoomP.decreaseZoom();
   }//GEN-LAST:event_minusActionPerformed
 
   private void plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusActionPerformed
-    zoomP.increaseZoom();
+    xScaleFactor += 0.1;
+    yScaleFactor += 0.1;
+
+    System.out.println(xScaleFactor + "\t" + yScaleFactor);
+    setDimension(zoomP.getPreferredSize());
+    dimension = zoomP.getPreferredSize();
+    System.out.println("dim +" + dimension);
+
+    zoomP.increaseZoom(xScaleFactor, yScaleFactor);
   }//GEN-LAST:event_plusActionPerformed
+
+  public float getxScaleFactor() {
+    return xScaleFactor;
+  }
+
+  public void setxScaleFactor(float xScaleFactor) {
+    this.xScaleFactor = xScaleFactor;
+  }
+
+  public float getyScaleFactor() {
+    return yScaleFactor;
+  }
+
+  public void setyScaleFactor(float yScaleFactor) {
+    this.yScaleFactor = yScaleFactor;
+  }
 
   public boolean isHasNext() {
     return hasNext;

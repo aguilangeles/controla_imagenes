@@ -9,7 +9,6 @@ import Ventana.ImageTif;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -44,14 +42,18 @@ public class Zoom extends JPanel {
     }
   }
 
-  public Zoom() {
+  public Zoom(Dimension dimension) {
+    this.dimension1 = dimension;
   }
-
 
   public void cargarImage(String path, boolean pdf, boolean tif) {
     loadImage(path, pdf, tif);
 
   }
+
+  public Zoom() {
+  }
+
 
   private void loadImage(String path, boolean pdf, boolean tif) {
     if (pdf || !tif) {
@@ -81,6 +83,13 @@ public class Zoom extends JPanel {
     repaint();
   }
 
+  public void increaseZoom(float x, float y) {
+    xScaleFactor = x;
+    yScaleFactor = y;
+    Izq += 20;
+    repaint();
+  }
+
   public void decreaseZoom() {
     xScaleFactor -= 0.2;
     yScaleFactor -= 0.2;
@@ -105,22 +114,22 @@ public class Zoom extends JPanel {
   @Override
   public void paintComponent(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
-        int newW = (int) ((originalImage.getWidth() / 2) * xScaleFactor);
-        int newH = (int) ((originalImage.getHeight() / 2) * yScaleFactor);
-        Dimension dim = new Dimension(newW, newH);
-        setPreferredSize(dim);
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.clearRect(0, 0, getWidth(), getHeight());
-        Dimension dim2 = getPreferredSize();
-        int ww = (int) dim2.getWidth();
-        int hh = (int) dim2.getHeight();
-        g2.drawImage(originalImage, Izq, 0, ww, hh,null);
-        g2.getBackground();
+    int newW = (int) ((originalImage.getWidth() / 2) * xScaleFactor);
+    int newH = (int) ((originalImage.getHeight() / 2) * yScaleFactor);
+    Dimension dim = new Dimension(newW, newH);
+    setPreferredSize(dim);
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.clearRect(0, 0, getWidth(), getHeight());
+    Dimension dim2 = getPreferredSize();
+    int ww = (int) dim2.getWidth();
+    int hh = (int) dim2.getHeight();
+    g2.drawImage(originalImage, Izq, 0, ww, hh, null);
+    g2.getBackground();
 //        scrollRectToVisible(new Rectangle(dim));
-        revalidate();
-        repaint();
-    }
+    revalidate();
+    repaint();
   }
+}
 //  @Override
 //  public void paintComponent(Graphics g) {
 //    Graphics2D g2 = (Graphics2D) g;
@@ -135,6 +144,4 @@ public class Zoom extends JPanel {
 //    revalidate();
 //    repaint();
 //  }
-
-
 

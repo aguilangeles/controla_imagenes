@@ -115,8 +115,8 @@
                       <Component id="anterior" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="terminar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="siguiente" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="minus" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="plus" alignment="3" max="32767" attributes="0"/>
+                      <Component id="minus" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
