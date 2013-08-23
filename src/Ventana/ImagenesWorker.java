@@ -7,8 +7,6 @@ package Ventana;
 import Helpers.ExtensionTemporal;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.im4java.core.ConvertCmd;

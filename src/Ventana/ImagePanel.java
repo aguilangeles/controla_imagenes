@@ -95,14 +95,12 @@ public class ImagePanel extends JPanel {
       }
     } else {
       try {
-
         image = (BufferedImage) img.lecturaImagen(path);
       } catch (FileNotFoundException ex) {
         Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
       } catch (IOException ex) {
         Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
       }
-
     }
   }
 }

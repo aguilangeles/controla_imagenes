@@ -4,7 +4,8 @@
  */
 package necesitoUnMilagro;
 
-import java.awt.Color;
+import Ventana.ImagePanel;
+import Ventana.ImageTif;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,11 +13,14 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -29,27 +33,44 @@ public class Zoom extends JPanel {
   private float yScaleFactor = 1;
   private int Izq = 70;
   private Dimension dimension1;
-
-  public Zoom(BufferedImage originalImage) {
-    this.originalImage = originalImage;
-  }
+  private int opIndex;
+  ImageTif img = new ImageTif();
 
   public Zoom(String ruta) {
     try {
       this.originalImage = ImageIO.read(new File(ruta));
-      this.xScaleFactor = 1;
-      this.yScaleFactor = 1;
     } catch (IOException ex) {
       Logger.getLogger(Zoom.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
-  public Zoom(String ruta, Dimension dimension) {
-    try {
-      this.originalImage = ImageIO.read(new File(ruta));
-      setPreferredSize(dimension);
-    } catch (IOException ex) {
-      Logger.getLogger(Zoom.class.getName()).log(Level.SEVERE, null, ex);
+  public Zoom() {
+  }
+
+
+  public void cargarImage(String path, boolean pdf, boolean tif) {
+    loadImage(path, pdf, tif);
+
+  }
+
+  private void loadImage(String path, boolean pdf, boolean tif) {
+    if (pdf || !tif) {
+      try {
+        File arch = new File(path);
+        originalImage = ImageIO.read(arch);
+      } catch (MalformedURLException mue) {
+        System.out.println("URL trouble: " + mue.getMessage());
+      } catch (IOException ioe) {
+        System.out.println("read trouble: " + ioe.getMessage());
+      }
+    } else {
+      try {
+        originalImage = (BufferedImage) img.lecturaImagen(path);
+      } catch (FileNotFoundException ex) {
+        Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IOException ex) {
+        Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
   }
 
@@ -84,19 +105,21 @@ public class Zoom extends JPanel {
   @Override
   public void paintComponent(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
-    int newW = (int) (originalImage.getWidth() * xScaleFactor);
-    int newH = (int) (originalImage.getHeight() * yScaleFactor);
-    Dimension dim = new Dimension(newW, newH);
-    setPreferredSize(dim);
-    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-    g2.clearRect(0, 0, getWidth(), getHeight());
-    Dimension dim2 = getPreferredSize();
-    int ww = (int) dim2.getWidth()/2;
-    int hh = (int) dim.getHeight()/2;
-    g2.drawImage(originalImage, Izq, 0, ww, hh, null);
-    scrollRectToVisible(new Rectangle(dim));
-    revalidate();
-    repaint();
+        int newW = (int) ((originalImage.getWidth() / 2) * xScaleFactor);
+        int newH = (int) ((originalImage.getHeight() / 2) * yScaleFactor);
+        Dimension dim = new Dimension(newW, newH);
+        setPreferredSize(dim);
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.clearRect(0, 0, getWidth(), getHeight());
+        Dimension dim2 = getPreferredSize();
+        int ww = (int) dim2.getWidth();
+        int hh = (int) dim2.getHeight();
+        g2.drawImage(originalImage, Izq, 0, ww, hh,null);
+        g2.getBackground();
+//        scrollRectToVisible(new Rectangle(dim));
+        revalidate();
+        repaint();
+    }
   }
 //  @Override
 //  public void paintComponent(Graphics g) {
@@ -113,7 +136,5 @@ public class Zoom extends JPanel {
 //    repaint();
 //  }
 
-  public Dimension getDimension() {
-    return getPreferredSize();
-  }
-}
+
+

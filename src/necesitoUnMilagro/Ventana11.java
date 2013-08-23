@@ -89,8 +89,8 @@ public class Ventana11 extends javax.swing.JFrame {
       setTituloYRutaLabel(siguientes);
       String ruta = rutadeimagen.siguienteImagen(isPDF, siguientes);
       setLabelPagina(ispdf, siguientes);
-      zoomP = new Zoom(ruta);
-      zoomP.setPreferredSize(getDimension());
+      zoomP = new Zoom();
+      zoomP.cargarImage(ruta, isPDF, isTIF);
       scrollImage.getViewport().add(zoomP);
       setCB.set(siguientes.getId());
     } catch (PropertyVetoException ex) {
@@ -409,7 +409,8 @@ public class Ventana11 extends javax.swing.JFrame {
         setCB.set(imagen1.getId());
         String ruta_temp = rutadeimagen.siguienteImagen(isPDF, imagen1);
 
-        zoomP = new Zoom(ruta_temp, new Dimension(800, 1000));
+        zoomP = new Zoom();
+        zoomP.cargarImage(ruta_temp, isPDF, isTIF);
         scrollImage.getViewport().add(zoomP);
 //
 //        System.out.println(ruta_temp);
@@ -440,7 +441,8 @@ public class Ventana11 extends javax.swing.JFrame {
       setLabelPagina(isPDF, pr);
       setCB.set(pr.getId());
       String visualizacion = rutadeimagen.anteriorImagen(isPDF, pr);
-      zoomP = new Zoom(visualizacion);
+      zoomP = new Zoom();
+      zoomP.cargarImage(visualizacion, isPDF, isTIF);
       scrollImage.getViewport().add(zoomP);
 
 //      System.out.println(visualizacion);
@@ -457,8 +459,6 @@ public class Ventana11 extends javax.swing.JFrame {
 
   private void plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusActionPerformed
     zoomP.increaseZoom();
-    dimension.setSize(zoomP.getDimension());
-    System.out.println(getDimension() + "\t" + zoomP.getDimension());
   }//GEN-LAST:event_plusActionPerformed
 
   public boolean isHasNext() {
