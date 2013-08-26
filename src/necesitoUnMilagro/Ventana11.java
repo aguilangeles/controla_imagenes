@@ -10,6 +10,8 @@ import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
 import Ventana.ImagenesWorker;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.beans.PropertyVetoException;
 import java.util.ListIterator;
@@ -26,9 +28,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Ventana11 extends javax.swing.JFrame {
 
-  private float xScaleFactor = 1;
-  private float yScaleFactor = 1;
-  private Dimension dimension = new Dimension();
   private int sizeRamdom;
   private DefaultTableModel model;
   private TrazaDao traza;
@@ -36,16 +35,14 @@ public class Ventana11 extends javax.swing.JFrame {
   private boolean hasNext;
   private boolean hasPrevius;
   private int contador = 1;
-  private double zoom;
   private ImagenesWorker worker;
   private boolean isPDF;
   private boolean isTIF;
   private final SetChecksBox setCB;
   private final Guardar save;
-  private final VisualizarImagen visualizarImagen;
   private final GetRutaDeImagen rutadeimagen;
   private final TablaCheckBox tablaCheckBox;
-  private Zoom zoomP;
+  private int opcion = 1;
 
   public Ventana11(TrazaDao traza) {
     initComponents();
@@ -55,7 +52,6 @@ public class Ventana11 extends javax.swing.JFrame {
     this.setCB = new SetChecksBox(tablaCheck);//trae los estados desde la base de datos
     this.save = new Guardar();// salva los contenidos del internalframe
     this.rutadeimagen = new GetRutaDeImagen(); // llama al conversor de pdf y devuelve la ruta de imagen
-    this.visualizarImagen = new VisualizarImagen(scrollImage); // llama al imagecomponent
     this.iterator = traza.getListaTif().listIterator();//genera la lista
     this.isPDF = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.isTIF = isTIF(isPDF, traza.getExtension());
@@ -63,6 +59,12 @@ public class Ventana11 extends javax.swing.JFrame {
     //TODO pdf versus tif,png y jpg
 //    setExtendedState(6);
     terminar.setEnabled(false);
+    combo.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setOpcion(combo.getSelectedIndex());
+      }
+    });
     internal(isPDF);
     contador++;
   }
@@ -74,6 +76,14 @@ public class Ventana11 extends javax.swing.JFrame {
     return false;
   }
 
+  public int getOpcion() {
+    return opcion;
+  }
+
+  public void setOpcion(int opcion) {
+    this.opcion = opcion;
+  }
+
   private void internal(boolean ispdf) {
     try {
       jInternal.setMaximum(true);
@@ -82,22 +92,25 @@ public class Ventana11 extends javax.swing.JFrame {
       setTituloYRutaLabel(siguientes);
       String ruta = rutadeimagen.siguienteImagen(isPDF, siguientes);
       setLabelPagina(ispdf, siguientes);
-      zoomP = new Zoom();
-      zoomP.cargarImage(ruta, isPDF, isTIF);
-      scrollImage.getViewport().add(zoomP);
+      ImageDrawingComponent idc = new ImageDrawingComponent(ruta);
+//      selectionJcombo(idc);
+      idc.setOpIndex(getOpcion());
+      scrollImage.getViewport().add(idc);
       setCB.set(siguientes.getId());
     } catch (PropertyVetoException ex) {
       Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
-  public Dimension getDimension() {
-    return dimension;
-  }
-
-  public void setDimension(Dimension dimension) {
-    this.dimension = dimension;
-  }
+//  private void selectionJcombo(final ImageDrawingComponent idc) {
+//    combo.addActionListener(new ActionListener() {
+//      @Override
+//      public void actionPerformed(ActionEvent e) {
+//        idc.setOpIndex(combo.getSelectedIndex());
+//        scrollImage.getViewport().add(idc);
+//      }
+//    });
+//  }
 
   public ListIterator getIterator() {
     return iterator;
@@ -155,8 +168,7 @@ public class Ventana11 extends javax.swing.JFrame {
     jScrollPane4 = new javax.swing.JScrollPane();
     tablaCheck = new javax.swing.JTable();
     scrollImage = new javax.swing.JScrollPane();
-    plus = new javax.swing.JButton();
-    minus = new javax.swing.JButton();
+    combo = new javax.swing.JComboBox();
 
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
@@ -319,30 +331,17 @@ public class Ventana11 extends javax.swing.JFrame {
 
     jScrollPane1.setViewportView(jDesktopPane1);
 
-    plus.setText("++");
-    plus.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        plusActionPerformed(evt);
-      }
-    });
-
-    minus.setText("--");
-    minus.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        minusActionPerformed(evt);
-      }
-    });
+    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "125%", "100%", "75%", "50%", "" }));
+    combo.setSelectedIndex(1);
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        .addContainerGap(142, Short.MAX_VALUE)
-        .addComponent(plus, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(18, 18, 18)
-        .addComponent(minus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(18, 18, 18)
+        .addGap(32, 32, 32)
+        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
         .addComponent(siguiente)
         .addGap(67, 67, 67)
         .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,8 +359,7 @@ public class Ventana11 extends javax.swing.JFrame {
           .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(plus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(minus)))
+          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -392,26 +390,19 @@ public class Ventana11 extends javax.swing.JFrame {
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
       anterior.setEnabled(true);
+//      scrollImage.removeAll();
       guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
       Imagen imagen1 = nextImagen();
       try {
-//        setZoom((double) spinner.getValue());
         jDesktopPane1.add(jInternal);
         setTituloYRutaLabel(imagen1);
         setLabelPagina(isPDF, imagen1);
         setCB.set(imagen1.getId());
         String ruta_temp = rutadeimagen.siguienteImagen(isPDF, imagen1);
-
-        zoomP = new Zoom(getDimension());
-//        zoomP.setPreferredSize(new Dimension(getDimension()));
-        System.out.println(getDimension());
-        System.out.println(getyScaleFactor() + " \t" + getyScaleFactor());
-        zoomP.cargarImage(ruta_temp, isPDF, isTIF);
-        scrollImage.getViewport().add(zoomP);
-//
-//        System.out.println(ruta_temp);
-//        SpinnerNumberModel modelo = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
-//        visualizarImagen.visualizarImagen(ruta_temp, isPDF, isTIF, spinner, modelo, getZoom());
+        ImageDrawingComponent idc = new ImageDrawingComponent(ruta_temp);
+//        selectionJcombo(idc);
+        idc.setOpIndex(getOpcion());
+        scrollImage.getViewport().add(idc);
         if (!isHasNext()) {
           siguiente.setEnabled(false);
           terminar.setEnabled(true);
@@ -425,8 +416,8 @@ public class Ventana11 extends javax.swing.JFrame {
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
       System.gc();
-
       Imagen pr = previus();
+//      scrollImage.removeAll();
       guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
       int der = contador - 1;
       setContador(der);
@@ -437,52 +428,14 @@ public class Ventana11 extends javax.swing.JFrame {
       setLabelPagina(isPDF, pr);
       setCB.set(pr.getId());
       String visualizacion = rutadeimagen.anteriorImagen(isPDF, pr);
-      zoomP = new Zoom();
-      zoomP.cargarImage(visualizacion, isPDF, isTIF);
-      scrollImage.getViewport().add(zoomP);
-
-//      System.out.println(visualizacion);
-//      SpinnerNumberModel model = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
-//      visualizarImagen.visualizarImagen(visualizacion, isPDF, isTIF, spinner, model, getZoom());
+      ImageDrawingComponent idc = new ImageDrawingComponent(visualizacion);
+//      selectionJcombo(idc);
+      idc.setOpIndex(getOpcion());
+      scrollImage.getViewport().add(idc);
       if (!hasPrevius) {
         anterior.setEnabled(false);
       }
     }//GEN-LAST:event_anteriorActionPerformed
-
-  private void minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusActionPerformed
-    xScaleFactor -= 0.1;
-    yScaleFactor -= 0.1;
-//    System.out.println(xScaleFactor + "\t" + yScaleFactor);
-    zoomP.decreaseZoom();
-  }//GEN-LAST:event_minusActionPerformed
-
-  private void plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusActionPerformed
-    xScaleFactor += 0.1;
-    yScaleFactor += 0.1;
-
-    System.out.println(xScaleFactor + "\t" + yScaleFactor);
-    setDimension(zoomP.getPreferredSize());
-    dimension = zoomP.getPreferredSize();
-    System.out.println("dim +" + dimension);
-
-    zoomP.increaseZoom(xScaleFactor, yScaleFactor);
-  }//GEN-LAST:event_plusActionPerformed
-
-  public float getxScaleFactor() {
-    return xScaleFactor;
-  }
-
-  public void setxScaleFactor(float xScaleFactor) {
-    this.xScaleFactor = xScaleFactor;
-  }
-
-  public float getyScaleFactor() {
-    return yScaleFactor;
-  }
-
-  public void setyScaleFactor(float yScaleFactor) {
-    this.yScaleFactor = yScaleFactor;
-  }
 
   public boolean isHasNext() {
     return hasNext;
@@ -521,6 +474,7 @@ public class Ventana11 extends javax.swing.JFrame {
    */
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton anterior;
+  private javax.swing.JComboBox combo;
   private javax.swing.JDesktopPane jDesktopPane1;
   private javax.swing.JInternalFrame jInternal;
   private javax.swing.JPanel jPanel1;
@@ -531,10 +485,8 @@ public class Ventana11 extends javax.swing.JFrame {
   private javax.swing.JScrollPane jScrollPane4;
   private javax.swing.JTable jTable1;
   private javax.swing.JTable jTable2;
-  private javax.swing.JButton minus;
   private javax.swing.JLabel pagina;
   private javax.swing.JPanel panelButtCheck;
-  private javax.swing.JButton plus;
   private javax.swing.JLabel rutaJlabel;
   private javax.swing.JScrollPane scrollChecks;
   private javax.swing.JScrollPane scrollImage;
