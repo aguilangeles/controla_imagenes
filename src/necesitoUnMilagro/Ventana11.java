@@ -92,13 +92,11 @@ public class Ventana11 extends javax.swing.JFrame {
     try {
       jInternal.setMaximum(true);
       anterior.setEnabled(false);
-//      Imagen siguientes = nextImagen();//trae el ramdom
       Imagen siguientes = goImagen(contador);//trae el ramdom
       setTituloYRutaLabel(siguientes);
       String ruta = rutadeimagen.siguienteImagen(isPDF, siguientes);
       setLabelPagina(ispdf, siguientes);
       ImageDrawingComponent idc = new ImageDrawingComponent(ruta);
-//      selectionJcombo(idc);
       idc.setOpIndex(getOpcion());
       scrollImage.getViewport().add(idc);
       setCB.set(siguientes.getId());
@@ -111,17 +109,6 @@ public class Ventana11 extends javax.swing.JFrame {
     return iterator;
   }
 
-//  private Imagen nextImagen() {
-//    Imagen tif = null;
-//    try {
-//      ListIterator it = getIterator();
-//      tif = (Imagen) it.next();
-//      hasNext = (!it.hasNext()) ? false : true;
-//    } catch (NoSuchElementException e) {
-//      System.out.println(e.getMessage());
-//    }
-//    return tif;
-//  }
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
     Imagen tif = traza.getListaTif().get(contador);
@@ -143,17 +130,6 @@ public class Ventana11 extends javax.swing.JFrame {
     return imagen;
   }
 
-//  private Imagen previus() {
-//    Imagen tif = null;
-//    try {
-//      ListIterator it = getIterator();
-//      tif = (Imagen) it.previous();
-//      hasPrevius = (!it.hasPrevious()) ? false : true;
-//    } catch (NoSuchElementException e) {
-//      System.out.println(e.getMessage());
-//    }
-//    return tif;
-//  }
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -406,10 +382,8 @@ public class Ventana11 extends javax.swing.JFrame {
       contador++;
       cantidad++;
       anterior.setEnabled(true);
-//      scrollImage.removeAll();
       guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
       Imagen imagen1 = goImagen(contador);
-//      Imagen imagen1 = nextImagen();
       try {
         jDesktopPane1.add(jInternal);
         setTituloYRutaLabel(imagen1);
@@ -417,12 +391,8 @@ public class Ventana11 extends javax.swing.JFrame {
         setCB.set(imagen1.getId());
         String ruta_temp = rutadeimagen.siguienteImagen(isPDF, imagen1);
         ImageDrawingComponent idc = new ImageDrawingComponent(ruta_temp);
-//        selectionJcombo(idc);
         idc.setOpIndex(getOpcion());
         scrollImage.getViewport().add(idc);
-//        if (!isHasNext()) {
-//          siguiente.setEnabled(false);
-//        }
         jInternal.setVisible(true);
       } catch (Exception ex) {
         Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
@@ -433,12 +403,8 @@ public class Ventana11 extends javax.swing.JFrame {
       System.gc();
       contador--;
       cantidad--;
-
       Imagen pr = backImagen(contador);
-//      scrollImage.removeAll();
       guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
-//      int der = contador - 1;
-//      setContador(der);
       siguiente.setEnabled(true);
       jDesktopPane1.add(jInternal);
       jInternal.setVisible(true);
@@ -447,41 +413,15 @@ public class Ventana11 extends javax.swing.JFrame {
       setCB.set(pr.getId());
       String visualizacion = rutadeimagen.anteriorImagen(isPDF, pr);
       ImageDrawingComponent idc = new ImageDrawingComponent(visualizacion);
-//      selectionJcombo(idc);
       idc.setOpIndex(getOpcion());
       scrollImage.getViewport().add(idc);
-//      if (!hasPrevius) {
-//        anterior.setEnabled(false);
-//      }
     }//GEN-LAST:event_anteriorActionPerformed
 
-  public boolean isHasNext() {
-    return hasNext;
-  }
-
-  public void setContador(int contador) {
-    this.contador = contador;
-  }
-
-  public int getContador() {
-    return contador;
-  }
-
-  public boolean isHasPrevius() {
-    return hasPrevius;
-  }
-
-  public void setHasPrevius(boolean hasPrevius) {
-    this.hasPrevius = hasPrevius;
-  }
 
   public int getSizeRamdom() {
     return traza.getListaTif().size();
   }
 
-  public void setSizeRamdom(int sizeRamdom) {
-    this.sizeRamdom = sizeRamdom;
-  }
   /**
    * Creates new form Ventana
    *
