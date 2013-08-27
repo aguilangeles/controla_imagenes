@@ -9,10 +9,8 @@ import Daos.Imagen;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
 import Ventana.ImagenesWorker;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.beans.PropertyVetoException;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -27,14 +25,14 @@ import javax.swing.table.DefaultTableModel;
  * @author MUTNPROD003
  */
 public class Ventana11 extends javax.swing.JFrame {
-
   private int sizeRamdom;
+  private int contador = 0;
+  private int cantidad = 1;
   private DefaultTableModel model;
   private TrazaDao traza;
   private ListIterator iterator;
   private boolean hasNext;
   private boolean hasPrevius;
-  private int contador = 1;
   private ImagenesWorker worker;
   private boolean isPDF;
   private boolean isTIF;
@@ -45,6 +43,7 @@ public class Ventana11 extends javax.swing.JFrame {
   private int opcion = 1;
 
   public Ventana11(TrazaDao traza) {
+    iniciar(traza);
     initComponents();
     VersionEImageIcon version = new VersionEImageIcon(this);
     tablaCheck.requestFocus();
@@ -66,7 +65,12 @@ public class Ventana11 extends javax.swing.JFrame {
       }
     });
     internal(isPDF);
-    contador++;
+  }
+
+  private void iniciar(TrazaDao traza) {
+    traza.getListaTif();
+
+
   }
 
   private boolean isTIF(boolean pdf, String extension) {
@@ -88,7 +92,8 @@ public class Ventana11 extends javax.swing.JFrame {
     try {
       jInternal.setMaximum(true);
       anterior.setEnabled(false);
-      Imagen siguientes = nextImagen();//trae el ramdom
+//      Imagen siguientes = nextImagen();//trae el ramdom
+      Imagen siguientes = goImagen(contador);//trae el ramdom
       setTituloYRutaLabel(siguientes);
       String ruta = rutadeimagen.siguienteImagen(isPDF, siguientes);
       setLabelPagina(ispdf, siguientes);
@@ -102,44 +107,53 @@ public class Ventana11 extends javax.swing.JFrame {
     }
   }
 
-//  private void selectionJcombo(final ImageDrawingComponent idc) {
-//    combo.addActionListener(new ActionListener() {
-//      @Override
-//      public void actionPerformed(ActionEvent e) {
-//        idc.setOpIndex(combo.getSelectedIndex());
-//        scrollImage.getViewport().add(idc);
-//      }
-//    });
-//  }
-
   public ListIterator getIterator() {
     return iterator;
   }
 
-  private Imagen nextImagen() {
-    Imagen tif = null;
-    try {
-      ListIterator it = getIterator();
-      tif = (Imagen) it.next();
-      hasNext = (!it.hasNext()) ? false : true;
-    } catch (NoSuchElementException e) {
-      System.out.println(e.getMessage());
+//  private Imagen nextImagen() {
+//    Imagen tif = null;
+//    try {
+//      ListIterator it = getIterator();
+//      tif = (Imagen) it.next();
+//      hasNext = (!it.hasNext()) ? false : true;
+//    } catch (NoSuchElementException e) {
+//      System.out.println(e.getMessage());
+//    }
+//    return tif;
+//  }
+  private Imagen goImagen(int contador) {
+    int limiteSuperior = getSizeRamdom() - 1;
+    Imagen tif = traza.getListaTif().get(contador);
+    if (contador == limiteSuperior) {
+      siguiente.setEnabled(false);
+      terminar.setEnabled(true);
+
     }
     return tif;
   }
 
-  private Imagen previus() {
-    Imagen tif = null;
-    try {
-      ListIterator it = getIterator();
-      tif = (Imagen) it.previous();
-      hasPrevius = (!it.hasPrevious()) ? false : true;
-    } catch (NoSuchElementException e) {
-      System.out.println(e.getMessage());
+  private Imagen backImagen(int contador) {
+    Imagen imagen = null;
+    int limiteInferior = 0;
+    imagen = traza.getListaTif().get(contador);
+    if (limiteInferior == contador) {
+      anterior.setEnabled(false);
     }
-    return tif;
+    return imagen;
   }
 
+//  private Imagen previus() {
+//    Imagen tif = null;
+//    try {
+//      ListIterator it = getIterator();
+//      tif = (Imagen) it.previous();
+//      hasPrevius = (!it.hasPrevious()) ? false : true;
+//    } catch (NoSuchElementException e) {
+//      System.out.println(e.getMessage());
+//    }
+//    return tif;
+//  }
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -389,10 +403,13 @@ public class Ventana11 extends javax.swing.JFrame {
     }//GEN-LAST:event_terminarActionPerformed
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+      contador++;
+      cantidad++;
       anterior.setEnabled(true);
 //      scrollImage.removeAll();
       guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
-      Imagen imagen1 = nextImagen();
+      Imagen imagen1 = goImagen(contador);
+//      Imagen imagen1 = nextImagen();
       try {
         jDesktopPane1.add(jInternal);
         setTituloYRutaLabel(imagen1);
@@ -403,12 +420,10 @@ public class Ventana11 extends javax.swing.JFrame {
 //        selectionJcombo(idc);
         idc.setOpIndex(getOpcion());
         scrollImage.getViewport().add(idc);
-        if (!isHasNext()) {
-          siguiente.setEnabled(false);
-          terminar.setEnabled(true);
-        }
+//        if (!isHasNext()) {
+//          siguiente.setEnabled(false);
+//        }
         jInternal.setVisible(true);
-        contador++;
       } catch (Exception ex) {
         Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -416,11 +431,14 @@ public class Ventana11 extends javax.swing.JFrame {
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
       System.gc();
-      Imagen pr = previus();
+      contador--;
+      cantidad--;
+
+      Imagen pr = backImagen(contador);
 //      scrollImage.removeAll();
       guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
-      int der = contador - 1;
-      setContador(der);
+//      int der = contador - 1;
+//      setContador(der);
       siguiente.setEnabled(true);
       jDesktopPane1.add(jInternal);
       jInternal.setVisible(true);
@@ -432,9 +450,9 @@ public class Ventana11 extends javax.swing.JFrame {
 //      selectionJcombo(idc);
       idc.setOpIndex(getOpcion());
       scrollImage.getViewport().add(idc);
-      if (!hasPrevius) {
-        anterior.setEnabled(false);
-      }
+//      if (!hasPrevius) {
+//        anterior.setEnabled(false);
+//      }
     }//GEN-LAST:event_anteriorActionPerformed
 
   public boolean isHasNext() {
@@ -496,7 +514,7 @@ public class Ventana11 extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private void setTituloYRutaLabel(Imagen siguientes) {
-    jInternal.setTitle("Imagen " + contador + "/" + getSizeRamdom());
+    jInternal.setTitle("Imagen " + cantidad + "/" + getSizeRamdom());
     rutaJlabel.setText(siguientes.getRutaInsertadaEnDB());
   }
 

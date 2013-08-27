@@ -7,7 +7,6 @@ package Ventana;
 import java.io.File;
 import java.awt.Color;
 import javax.swing.SpinnerNumberModel;
-import necesitoUnMilagro.VisualizarImagen;
 
 /**
  *
