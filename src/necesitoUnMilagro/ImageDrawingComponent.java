@@ -4,6 +4,8 @@
  */
 package necesitoUnMilagro;
 
+import Ventana.ImagePanel;
+import Ventana.ImageTif;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,7 +13,11 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -22,116 +28,118 @@ import javax.swing.JPanel;
 public class ImageDrawingComponent extends JPanel {
 
   int opIndex;
-  int izq = 0;
-  int arr = 0;
+  ImageTif img = new ImageTif();
   private BufferedImage bi;
-  private int w, h;
-
-
-
-  private BufferedImage bufferedImage(String imageSrc) {
-    BufferedImage bim = null;
-    int w1, h1;
-    try {
-      File file = new File(imageSrc);
-      bim = ImageIO.read(file);
-      w1 = bim.getWidth(null);
-      h1 = bim.getHeight(null);
-      if (bim.getType() != BufferedImage.TYPE_INT_RGB) {
-        BufferedImage bi2 =
-                new BufferedImage(w1, h1, BufferedImage.TYPE_INT_RGB);
-        Graphics big = bi2.getGraphics();
-        big.drawImage(bim, 0, 0, null);
-        bim = bi2;
-      }
-    } catch (IOException e) {
-      System.out.println("Image could not be read");
-    }
-    return bim;
-  }
-
-  public ImageDrawingComponent(String image) {
-    bi = bufferedImage(image);
-    this.w = bi.getWidth(null);
-    this.h = bi.getHeight(null);
-
-  }
 
   public ImageDrawingComponent() {
   }
 
-
-  public void setMargen(int x, int y) {
-    izq = -x;
-    arr = -y;
+  public void cargarImage(String path, boolean pdf, boolean tif, int opcion) {
+    loadImage(path, pdf, tif);
+    setOpIndex(opcion);
   }
 
-  public void setOpIndex(int i) {
+  private void setOpIndex(int i) {
     opIndex = i;
   }
-
 
   @Override
   public void paint(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
     switch (opIndex) {
       case 0:
-        int w_125 = (int) ((bi.getWidth() /2 )*1.25);
-        int y_125 = (int) ((bi.getHeight() /2) *1.25);
-        setPreferredSize(new Dimension(w_125, y_125));
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.clearRect(0, 0, getWidth(), getHeight());
-        g2.drawImage(bi,
-                0, 0, w_125, y_125, /* src area of image */
-                null);
-        scrollRectToVisible(new Rectangle(getPreferredSize()));
-        revalidate();
-        repaint();
+        setCientoVeintiCinco(g2);
         break;
-
       case 1:
-        int w_100 = (int) (bi.getWidth() /2);
-        int y_100 = (int) (bi.getHeight() /2);
-        setPreferredSize(new Dimension(w_100, y_100));
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.clearRect(0, 0, getWidth(), getHeight());
-        g2.drawImage(bi,
-                0, 0, w_100, y_100, /* src area of image */
-                null);
-        scrollRectToVisible(new Rectangle(getPreferredSize()));
-        revalidate();
-        repaint();
+        setCien(g2);
         break;
-
-      case 2: //setentaycinco
-        int w_75 = (int) ((bi.getWidth() /2)/1.3);
-        int y_75 = (int) ((bi.getHeight() /2)/1.3);
-        setPreferredSize(new Dimension(w_75, y_75));
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.clearRect(0, 0, getWidth(), getHeight());
-        g2.drawImage(bi,
-                0, 0, w_75, y_75, /* src area of image */
-                null);
-        scrollRectToVisible(new Rectangle(getPreferredSize()));
-        revalidate();
-        repaint();
+      case 2:
+        setSetentaYCinco(g2);
         break;
-      case 3: /* cincuenta */
-        int w_50 = (int) ((bi.getWidth()/2) / 2);
-        int y_50 = (int) ((bi.getHeight() / 2)/2);
-        setPreferredSize(new Dimension(w_50, y_50));
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-
-        g2.clearRect(0, 0, getWidth(), getHeight());
-        g2.drawImage(bi,
-
-                0, 0, w_50, y_50, /* src area of image */
-                null);
-        scrollRectToVisible(new Rectangle(getPreferredSize()));
-        revalidate();
-        repaint();
-
+      default:
+        setCincuenta(g2);
         break;
-         }
+    }
+  }
+
+  private void loadImage(String path, boolean pdf, boolean tif) {
+    if (pdf || !tif) {
+      try {
+        File arch = new File(path);
+        bi = ImageIO.read(arch);
+      } catch (MalformedURLException mue) {
+        System.out.println("URL trouble: " + mue.getMessage());
+      } catch (IOException ioe) {
+        System.out.println("read trouble: " + ioe.getMessage());
+      }
+    } else {
+      try {
+        bi = (BufferedImage) img.lecturaImagen(path);
+      } catch (FileNotFoundException ex) {
+        Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IOException ex) {
+        Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+  }
+
+  private void setCincuenta(Graphics2D g2) {
+    /* cincuenta */
+    int w_50 = (int) ((bi.getWidth() / 2) / 2);
+    int y_50 = (int) ((bi.getHeight() / 2) / 2);
+    setPreferredSize(new Dimension(w_50, y_50));
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.clearRect(0, 0, getWidth(), getHeight());
+    g2.drawImage(bi,
+            0, 0, w_50, y_50,
+            null);
+    scrollRectToVisible(new Rectangle(getPreferredSize()));
+    revalidate();
+    repaint();
+  }
+
+  private void setSetentaYCinco(Graphics2D g2) {
+    //setentaycinco
+    int w_75 = (int) ((bi.getWidth() / 2) / 1.3);
+    int y_75 = (int) ((bi.getHeight() / 2) / 1.3);
+    setPreferredSize(new Dimension(w_75, y_75));
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.clearRect(0, 0, getWidth(), getHeight());
+    g2.drawImage(bi,
+            0, 0, w_75, y_75, /* src area of image */
+            null);
+    scrollRectToVisible(new Rectangle(getPreferredSize()));
+    revalidate();
+    repaint();
+  }
+
+  private void setCien(Graphics2D g2) {
+    /*cien*/
+    int w_100 = (int) (bi.getWidth() / 2);
+    int y_100 = (int) (bi.getHeight() / 2);
+    setPreferredSize(new Dimension(w_100, y_100));
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.clearRect(0, 0, getWidth(), getHeight());
+    g2.drawImage(bi,
+            0, 0, w_100, y_100, /* src area of image */
+            null);
+    scrollRectToVisible(new Rectangle(getPreferredSize()));
+    revalidate();
+    repaint();
+  }
+
+  private void setCientoVeintiCinco(Graphics2D g2) {
+    /*veinticinco*/
+    int w_125 = (int) ((bi.getWidth() / 2) * 1.25);
+    int y_125 = (int) ((bi.getHeight() / 2) * 1.25);
+    setPreferredSize(new Dimension(w_125, y_125));
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.clearRect(0, 0, getWidth(), getHeight());
+    g2.drawImage(bi,
+            0, 0, w_125, y_125, /* src area of image */
+            null);
+    scrollRectToVisible(new Rectangle(getPreferredSize()));
+    revalidate();
+    repaint();
   }
 }

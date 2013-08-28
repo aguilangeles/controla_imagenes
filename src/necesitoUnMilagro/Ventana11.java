@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author MUTNPROD003
  */
 public class Ventana11 extends javax.swing.JFrame {
+
   private int sizeRamdom;
   private int contador = 0;
   private int cantidad = 1;
@@ -33,13 +34,14 @@ public class Ventana11 extends javax.swing.JFrame {
   private boolean hasNext;
   private boolean hasPrevius;
   private ImagenesWorker worker;
-  private boolean isPDF;
-  private boolean isTIF;
+  private boolean pdf;
+  private boolean tif;
   private final SetChecksBox setCB;
   private final Guardar save;
   private final GetRutaDeImagen rutadeimagen;
   private final TablaCheckBox tablaCheckBox;
   private int opcion = 1;
+  private ImageDrawingComponent imageDraw = new ImageDrawingComponent();
 
   public Ventana11(TrazaDao traza) {
     iniciar(traza);
@@ -51,8 +53,8 @@ public class Ventana11 extends javax.swing.JFrame {
     this.save = new Guardar();// salva los contenidos del internalframe
     this.rutadeimagen = new GetRutaDeImagen(); // llama al conversor de pdf y devuelve la ruta de imagen
     this.iterator = traza.getListaTif().listIterator();//genera la lista
-    this.isPDF = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
-    this.isTIF = isTIF(isPDF, traza.getExtension());
+    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
+    this.tif = isTIF(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tablaCheck, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
     setExtendedState(6);
@@ -63,15 +65,25 @@ public class Ventana11 extends javax.swing.JFrame {
         setOpcion(combo.getSelectedIndex());
       }
     });
-    internal(isPDF);
+    internal(pdf);
   }
 
   private void iniciar(TrazaDao traza) {
     traza.getListaTif();
-
-
   }
 
+//  private void actionCombo(final ImageDrawingComponent imgC) {
+//    combo.addActionListener(new ActionListener() {
+//      @Override
+//      public void actionPerformed(ActionEvent e) {
+//
+//        ImageDrawingComponent img = imgC;
+//        img.setOpIndex(combo.getSelectedIndex());
+//        scrollImage.getViewport().add(img);
+//
+//      }
+//    });
+//  }
   private boolean isTIF(boolean pdf, String extension) {
     if (!pdf && extension.equalsIgnoreCase(".tif")) {
       return true;
@@ -93,11 +105,10 @@ public class Ventana11 extends javax.swing.JFrame {
       anterior.setEnabled(false);
       Imagen siguientes = goImagen(contador);//trae el ramdom
       setTituloYRutaLabel(siguientes);
-      String ruta = rutadeimagen.siguienteImagen(isPDF, siguientes);
+      String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
       setLabelPagina(ispdf, siguientes);
-      ImageDrawingComponent idc = new ImageDrawingComponent(ruta);
-      idc.setOpIndex(getOpcion());
-      scrollImage.getViewport().add(idc);
+      imageDraw.cargarImage(ruta, pdf, tif, getOpcion());
+      scrollImage.getViewport().add(imageDraw);
       setCB.set(siguientes.getId());
     } catch (PropertyVetoException ex) {
       Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
@@ -366,7 +377,7 @@ public class Ventana11 extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
-      save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, isPDF);
+      save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
       NumeroRechazo numeroRechazo = new NumeroRechazo(traza.getId());
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
@@ -381,17 +392,16 @@ public class Ventana11 extends javax.swing.JFrame {
       contador++;
       cantidad++;
       anterior.setEnabled(true);
-      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
+      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
       Imagen imagen1 = goImagen(contador);
       try {
         jDesktopPane1.add(jInternal);
         setTituloYRutaLabel(imagen1);
-        setLabelPagina(isPDF, imagen1);
+        setLabelPagina(pdf, imagen1);
         setCB.set(imagen1.getId());
-        String ruta_temp = rutadeimagen.siguienteImagen(isPDF, imagen1);
-        ImageDrawingComponent idc = new ImageDrawingComponent(ruta_temp);
-        idc.setOpIndex(getOpcion());
-        scrollImage.getViewport().add(idc);
+        String ruta_temp = rutadeimagen.siguienteImagen(pdf, imagen1);
+        imageDraw.cargarImage(ruta_temp, pdf, tif, getOpcion());
+        scrollImage.getViewport().add(imageDraw);
         jInternal.setVisible(true);
       } catch (Exception ex) {
         Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
@@ -403,24 +413,21 @@ public class Ventana11 extends javax.swing.JFrame {
       contador--;
       cantidad--;
       Imagen pr = backImagen(contador);
-      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, isPDF);
+      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
       siguiente.setEnabled(true);
       jDesktopPane1.add(jInternal);
       jInternal.setVisible(true);
       setTituloYRutaLabel(pr);
-      setLabelPagina(isPDF, pr);
+      setLabelPagina(pdf, pr);
       setCB.set(pr.getId());
-      String visualizacion = rutadeimagen.anteriorImagen(isPDF, pr);
-      ImageDrawingComponent idc = new ImageDrawingComponent(visualizacion);
-      idc.setOpIndex(getOpcion());
-      scrollImage.getViewport().add(idc);
+      String visualizacion = rutadeimagen.anteriorImagen(pdf, pr);
+      imageDraw.cargarImage(visualizacion, pdf, tif, getOpcion());
+      scrollImage.getViewport().add(imageDraw);
     }//GEN-LAST:event_anteriorActionPerformed
-
 
   public int getSizeRamdom() {
     return traza.getListaTif().size();
   }
-
   /**
    * Creates new form Ventana
    *
