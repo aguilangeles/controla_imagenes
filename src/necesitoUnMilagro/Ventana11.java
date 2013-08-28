@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -56,7 +55,7 @@ public class Ventana11 extends javax.swing.JFrame {
     this.isTIF = isTIF(isPDF, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tablaCheck, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
-//    setExtendedState(6);
+    setExtendedState(6);
     terminar.setEnabled(false);
     combo.addActionListener(new ActionListener() {
       @Override
