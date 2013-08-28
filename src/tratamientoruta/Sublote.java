@@ -4,7 +4,7 @@
  */
 package tratamientoruta;
 
-import Entidades.Pdf_NombreMasNumero;
+import Daos.NombrePaginaDelPDF;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +14,8 @@ import java.util.List;
  */
 public class Sublote {
     private int idSublote;
-    private List<Pdf_NombreMasNumero> pdfpagina = new ArrayList<>();
+    private List<NombrePaginaDelPDF> pdfpagina = new ArrayList<>();
     private String nombre;
-//    private String absolutePath;
     private String fileName;
     private int paginas;
     private String relativa ;
@@ -31,9 +30,9 @@ public class Sublote {
     }
 
 
-       public List<Pdf_NombreMasNumero> getPdfpagina() {
+       public List<NombrePaginaDelPDF> getPdfpagina() {
         for (int i = 0; i < paginas; i++) {
-            Pdf_NombreMasNumero paginaNumero = new Pdf_NombreMasNumero(getRelativa(), i);
+            NombrePaginaDelPDF paginaNumero = new NombrePaginaDelPDF(getRelativa(), i);
             pdfpagina.add(paginaNumero);
         }
         return pdfpagina;
@@ -70,7 +69,6 @@ public class Sublote {
 
 
     }
-//
 
 
 

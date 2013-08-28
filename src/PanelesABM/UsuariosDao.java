@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import Helpers.LastID;
+import Helpers.UltimoIDInsertado;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -85,14 +86,16 @@ public class UsuariosDao extends ABMPaneles{
         if (aConexion.isConexion()) {
 
             try {
-                aConexion.ExecuteSql("SELECT id, nombre, password, tipo, estado FROM qualitys." + NOMBRE_TABLA + ";");
+                aConexion.executeQuery("SELECT id, nombre, password, tipo, estado FROM qualitys." + NOMBRE_TABLA + ";");
                 while (aConexion.resulset.next()) {
                     lista.add(new Object[]{aConexion.resulset.getInt(1), aConexion.resulset.getString(2),
                         aConexion.resulset.getString(3), aConexion.resulset.getInt(4),
                         aConexion.resulset.getInt(5)});
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Tabla Usuario", JOptionPane.ERROR_MESSAGE);
+
+//                Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         consulta(model, lista);
@@ -100,7 +103,7 @@ public class UsuariosDao extends ABMPaneles{
 
 
     public int getLastId() {
-        return new LastID(aConexion, NOMBRE_TABLA).lastId();
+        return new UltimoIDInsertado(aConexion, NOMBRE_TABLA).getUltimoID();
     }
 
     public InsertRows getInsertar() {

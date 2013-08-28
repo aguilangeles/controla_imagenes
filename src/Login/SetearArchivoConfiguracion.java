@@ -7,6 +7,7 @@ package Login;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,23 +36,23 @@ public class SetearArchivoConfiguracion {
 
 
 
-    private void setearArchivoConfiguracion() {
-        try {
-            properties.setProperty("url", "");
-            properties.setProperty("database", "");
-            properties.setProperty("dbuser", "");
-            properties.setProperty("dbpassword", "");
-            properties.store(new FileOutputStream(CONFIG), null);
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new IngresoBaseDeDatos().setVisible(true);
-                }
-            });
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+  private void setearArchivoConfiguracion() {
+    try {
+      properties.setProperty("url", "");
+      properties.setProperty("database", "");
+      properties.setProperty("dbuser", "");
+      properties.setProperty("dbpassword", "");
+      properties.store(new FileOutputStream(CONFIG), null);
+      java.awt.EventQueue.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+          new IngresoBaseDeDatos().setVisible(true);
         }
+      });
+    } catch (IOException e) {
+      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear archivo de configuracion", JOptionPane.ERROR_MESSAGE);
     }
+  }
     private void setearDesdeTextField() {
         try {
             properties.setProperty("url", url);
@@ -60,7 +61,7 @@ public class SetearArchivoConfiguracion {
             properties.setProperty("dbpassword", password);
             properties.store(new FileOutputStream(CONFIG), null);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear desde JTextField", JOptionPane.ERROR_MESSAGE);
         }
 
     }

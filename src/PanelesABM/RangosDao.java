@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import Helpers.LastID;
+import Helpers.UltimoIDInsertado;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -74,14 +75,16 @@ public class RangosDao extends ABMPaneles{
         List<Object[]> lista = new ArrayList<>();
         if (aConexion.isConexion()) {
             try {
-                aConexion.ExecuteSql("SELECT * FROM "+NOMBRE_TABLA);
+                aConexion.executeQuery("SELECT * FROM "+NOMBRE_TABLA);
                 while (aConexion.resulset.next()) {
                     lista.add(new Object[]{aConexion.resulset.getInt(1), aConexion.resulset.getInt(2),
                                 aConexion.resulset.getInt(3), aConexion.resulset.getInt(4),
                                 aConexion.resulset.getInt(5), aConexion.resulset.getInt(6)});
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(RangosDao.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Tabla Rangos", JOptionPane.ERROR_MESSAGE);
+
+//                Logger.getLogger(RangosDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         consulta(model, lista);
@@ -92,7 +95,7 @@ public class RangosDao extends ABMPaneles{
         titulos(model, split);
     }
         public int getLastId() {
-        return new LastID(aConexion, NOMBRE_TABLA).lastId();
+        return new UltimoIDInsertado(aConexion, NOMBRE_TABLA).getUltimoID();
     }
 
     public Editar getEditar() {

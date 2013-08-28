@@ -6,6 +6,8 @@ package ReporteLote;
 
 import javax.swing.JTextArea;
 import Entidades.Conexion;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +32,10 @@ public class UpdateEstadoLote {
         String update = "UPDATE `qualitys`.`traza` "
                 + "SET `estadoLote` = " + setEstado + ", `observaciones` = '" + observaciones + "' "
                 + "WHERE id =" + idtraza + ";";
+      try {
         conexion.executeUpdate(update);
+      } catch (SQLException ex) {
+              JOptionPane.showMessageDialog(null, ex.getMessage(), "Seteo Estado Lote", JOptionPane.ERROR_MESSAGE);
+      }
     }
 }

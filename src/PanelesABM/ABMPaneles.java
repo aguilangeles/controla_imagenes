@@ -5,7 +5,6 @@
 package PanelesABM;
 
 import Entidades.Conexion;
-import Helpers.LastID;
 import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
 import java.util.List;
@@ -23,7 +22,6 @@ public class ABMPaneles {
 
     public ABMPaneles() {
     }
-
     public ABMPaneles(Conexion conexion, JTable tabla) {
         this.conexion = conexion;
         this.tabla = tabla;

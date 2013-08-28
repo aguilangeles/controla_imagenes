@@ -5,8 +5,7 @@
 package Helpers;
 
 import Ventana.AyudaVisual;
-import Entidades.TiposConCheck;
-import Entidades.TrazaDao;
+import Daos.TiposDeControl;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +13,6 @@ import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -26,13 +24,14 @@ public class ButtonEditor extends DefaultCellEditor {
     private String label;
     private boolean isPushed;
     private AyudaVisual ayuda;
-    private List<TiposConCheck> listado;
+    private List<TiposDeControl> listado;
 
-    public ButtonEditor(JCheckBox jCheckBox, List<TiposConCheck> listado) {
+    public ButtonEditor(JCheckBox jCheckBox, List<TiposDeControl> listado) {
         super(jCheckBox);
         button = new JButton();
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 fireEditingStopped();
             }
@@ -40,6 +39,7 @@ public class ButtonEditor extends DefaultCellEditor {
         this.listado=listado;
 
     }
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
       boolean isSelected, int row, int column) {
     if (isSelected) {
@@ -55,29 +55,28 @@ public class ButtonEditor extends DefaultCellEditor {
     return button;
   }
 
+    @Override
     public Object getCellEditorValue() {
         if (isPushed) {
-            for (TiposConCheck t : listado) {
+            for (TiposDeControl t : listado) {
                 int id = Integer.parseInt(button.getText());
                 if (t.getId() == id) {
                     ayuda = new AyudaVisual(t.getNombre(), t.getTexto(), t.getImagen());
                     ayuda.setVisible(true);
                 }
             }
-      //
-      //
-//      JOptionPane.showMessageDialog(button, label + ": Ouch!");
-      // System.out.println(label + ": Ouch!");
     }
     isPushed = false;
     return new String(label);
   }
 
+    @Override
   public boolean stopCellEditing() {
     isPushed = false;
     return super.stopCellEditing();
   }
 
+    @Override
   protected void fireEditingStopped() {
     super.fireEditingStopped();
   }

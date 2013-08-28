@@ -5,23 +5,22 @@
  */
 package Entidades;
 
+import Daos.TiposDeControl;
 import Ventana.CantidadControlesPorVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author MUTNPROD003
  */
 public class LlenarTipos {
-
     private Conexion conexion;
     private int idTraza;
     private int size;
-    private List<TiposConCheck> listadeTipos = new ArrayList<>();
+    private List<TiposDeControl> listadeTipos = new ArrayList<>();
 
     public LlenarTipos(Conexion conectar ,int id) {
         this.conexion=conectar;
@@ -29,9 +28,10 @@ public class LlenarTipos {
         poblarLista();
     }
 
-    private List<TiposConCheck> poblarLista() {
+    private List<TiposDeControl> poblarLista() {
         try {
-            TiposConCheck tipos;
+          Runtime gar = Runtime.getRuntime();
+            TiposDeControl tipos;
                 size = new CantidadControlesPorVerificacion(conexion, idTraza).getCantidad();
                 String insert = "select v.idControl"
                         + ", c.descripcion "
@@ -40,24 +40,28 @@ public class LlenarTipos {
                         + " from controles_verificacion v"
                         + " join controles c "
                         + " on v.idControl = c.id "
-                        + "where idVerificacion = (SELECT  t.idVerificacion FROM qualitys.traza  t where t.id = "+idTraza+");";
-                conexion.ExecuteSql(insert);
+                        + "where idVerificacion = "
+                        + "(SELECT  t.idVerificacion FROM qualitys.traza  t where t.id = "+idTraza+");";
+                conexion.executeQuery(insert);
                 while (conexion.resulset.next()) {
                     int idcontroles =conexion.resulset.getInt(1);
                     String descripcion =conexion.resulset.getString(2);
                     String texto =conexion.resulset.getString(3);
                     String imagen =conexion.resulset.getString(4);
-                    tipos = new TiposConCheck(idcontroles, descripcion, false, texto, imagen);
+                    tipos = new TiposDeControl(idcontroles, descripcion, false, texto, imagen);
                     listadeTipos.add(tipos);
                 }
-                conexion.desconectar();
+                conexion.isConexionClose();
+          gar.gc();
         } catch (SQLException ex) {
-            Logger.getLogger(LlenarTipos.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Tipos", JOptionPane.ERROR_MESSAGE);
+
+//            Logger.getLogger(LlenarTipos.class.getName()).log(Level.SEVERE, null, ex);
         }
             return listadeTipos;
     }
 
-    public List<TiposConCheck> getListadeTipos() {
+    public List<TiposDeControl> getListadeTipos() {
         return listadeTipos;
     }
 

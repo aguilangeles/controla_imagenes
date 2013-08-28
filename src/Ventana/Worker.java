@@ -4,31 +4,20 @@
  */
 package Ventana;
 
-import Helpers.LastID;
-import Entidades.LlenarTrazaDao;
-import Helpers.Archivo;
-import Helpers.Traza;
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingWorker;
-import Helpers.IdentificarExtension;
-import Entidades.Pdf_NombreMasNumero;
-import Helpers.IdentificarParent;
-
-
-import tratamientoruta.BuscarPaginasPdf;
-import tratamientoruta.CrearElRamdom;
 import Entidades.Conexion;
-import Entidades.TipodeUsuario;
-import VentanaDos.Ventana_2;
+import Entidades.LlenarTrazaDao;
+import Daos.NombrePaginaDelPDF;
+import Helpers.Archivo;
+import Helpers.UltimoIDInsertado;
+import Helpers.PasarGarbageCollector;
+import Helpers.Traza;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import tratamientoruta.CrearElRamdom;
 
 /**
  *
@@ -36,170 +25,131 @@ import VentanaDos.Ventana_2;
  */
 public class Worker extends SwingWorker<Object, Object> {
 
-    private Conexion conexion = new Entidades.Conexion();
-    private TipodeUsuario usarioTipo;
-    private int idDocumento;
-    private int idVerificacion;
-    private int idUsuario;
-    private JFrame controles;
-    private int idTraza;
-    private JTextField ruta;
-    private static List<Object> listaFiles = new ArrayList<>();
-    private List<Integer> idControl;
-    private String parent;
-    private PDF_listarDirectorio listar;
-    private String extension;
-    private String ultimaCarpeta;
+  private Conexion conexion = new Conexion();
+  private JFrame controles;// lo necesito para mostrar el conteo
+  private JLabel infoLabel;
+  private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
+  private List<Object> lista;
+  private String parent, extension, ultimaCarpeta;
+  private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
+  private int idRango, contador;
+  private int idTraza;
+  private static Traza sTraza;
+  private CrearElRamdom crearRamdom;
 
-    public Worker(JFrame Controles, JTextField ruta, List<Integer> idControles, int idDocumento, int idVerificacion, int idUsuario) {
-        this.controles = Controles;
-        this.ruta = ruta;
-        this.idControl = idControles;
-        this.idDocumento = idDocumento;
-        this.idVerificacion = idVerificacion;
-        this.idUsuario = idUsuario;
-        IdentificarParent ret = new IdentificarParent(new File(ruta.getText()));
-        this.parent = (ret.getParent());
-        String prueba = this.parent;
-        String retorno="";
-        if(prueba.contains("\\")){
-                String replace = prueba.replace("\\", ", ");
-                String [] rsplit = replace.split(", ");
-                for(int i = 0; i<rsplit.length;i++){
-                   retorno =(rsplit[i]);
-            }
-           this.ultimaCarpeta=(retorno);
+  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl,
+          List<Object> lista, String parent, String extension, String ultimaCarpeta,
+          int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
+    this.controles = controles;
+    this.infoLabel = infoLabel;
+    this.idControl = idControl;
+    this.lista = lista;
+    this.parent = parent;
+    this.extension = extension;
+    this.ultimaCarpeta = ultimaCarpeta;
+    this.idUsuario = idUsuario;
+    this.idDocumento = idDocumento;
+    this.idVerificacion = idVerificacion;
+    this.muestra = muestra;
+    this.tamanioLote = tamanioLote;
+    this.idRango = idRango;
+    this.crearRamdom = new CrearElRamdom(lista, muestra);
+  }
 
-        }
+  @Override
+  protected String doInBackground() {
+    if (conexion.isConexion()) {
+      idTraza = new UltimoIDInsertado(conexion, "traza").getUltimoID();
+      switch (extension) {
+        case ".tif":
+        case ".png":
+        case ".jpg":
+          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion,
+                  lista.size(), parent, ultimaCarpeta, muestra, idRango);
+          List<Object> ramdomList = crearRamdom.getSeleccion();
+          for (Object obj : ramdomList) {
+            String aImagen = (String) obj;
+            int parentlength = parent.length() + 1;
+            String adaptarFile = aImagen.substring(parentlength);
+            String filename = adaptarFile.replace("\\", "\\\\");
+            System.out.println(filename);
+            Archivo archivo = new Archivo(conexion, idTraza, filename, 0, infoLabel);
+            imagenyControl();
+            Runtime gar = Runtime.getRuntime();
+            gar.gc();
+          }
+          break;
+        case ".pdf":
+          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion,
+                  tamanioLote, parent, ultimaCarpeta, muestra, idRango);
+          List<Object> ramdomPdf = crearRamdom.getSeleccion();
+          for (Object o : ramdomPdf) {
+            contador++;
+            NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
+            int parentlength = parent.length() + 1;
+            String adaptarFile = pagina.getNombre().substring(parentlength);
+            String filename = adaptarFile.replace("\\", "\\\\");
+            int page = pagina.getNumeroPagina();
+            Archivo archivo = new Archivo(conexion, idTraza, filename, page, infoLabel);
+            imagenyControl();
+            Runtime gar = Runtime.getRuntime();
+            gar.gc();
+          }
+          break;
+      }
+    }
+    return null;
+  }
+
+  private void imagenyControl() {
+    int id = getIdTraza() + 1;
+    for (Integer idarchivo : idControl) {
+      int lasid = new UltimoIDInsertado(conexion, "archivo").getUltimoID();
+      String ret = "Insert into qualitys.traza_archivo_controles "
+              + "(idtraza, idarchivo, idcontrol, estado) VALUES "
+              + "(" + id + ", " + lasid + ", " + idarchivo + ", " + 0 + ");";
+      try {
+        conexion.executeUpdate(ret);
+      } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Imagen y control", JOptionPane.ERROR_MESSAGE);
+
+//        Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+  }
+
+  public String getExtension() {
+    return extension;
+  }
+
+  @Override
+  protected void done() {
+    if (!isCancelled()) {
+      PasarGarbageCollector pasarGarbageCollector = new PasarGarbageCollector();
+      conexion.isConexionClose();
+      crearNuevoWorker();
+    }
+  }
+
+  public int getIdTraza() {
+    return idTraza;
+  }
+
+  public String getParent() {
+    return parent;
+  }
+
+  private void crearNuevoWorker() {
+    int trazaID;
+    Conexion con = new Conexion();
+    if (con.isConexion()) {
+      int resultado = new UltimoIDInsertado(con, "traza").getUltimoID();
+      trazaID = (resultado == 0) ? 1 : resultado;
+      LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
+      new necesitoUnMilagro.Ventana11(trazaDao.getTraza()).setVisible(true);
 
     }
-
-    @Override
-    protected String doInBackground() {
-        if (conexion.isConexion()) {
-            idTraza = new LastID(conexion, "traza").lastId();
-           IdentificarExtension ext = new IdentificarExtension(ruta.getText());
-            extension = (IdentificarExtension.getExtension());
-            switch (extension) {
-                case ".tif":
-                    List listaTif = IdentificarExtension.getLista();
-                    Traza trazaTif = new Traza(listaTif.size(), idVerificacion, idUsuario, idDocumento, conexion, parent, ultimaCarpeta);
-                    CrearElRamdom ramdomListTif = new CrearElRamdom(listaTif, trazaTif.getCantidadMuestreada());
-                    List<Object> ramdomTif = ramdomListTif.getSeleccion();
-                    for (Object obj : ramdomTif) {
-                        try {
-                            String tif = (String) obj;
-                            int parentlength = parent.length() + 1;
-                            String adaptarFile = tif.substring(parentlength);
-                            String filename = URLEncoder.encode(adaptarFile, "UTF-8");
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, 0);
-                            imagenyControl();
-                        } catch (UnsupportedEncodingException ex) {
-                            JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);
-
-                        }
-                    }
-                    break;
-                case ".pdf":
-
-                    BuscarPaginasPdf getPages = new BuscarPaginasPdf();
-                    List<Object> listaPdf = getPages.getLista();
-                    Traza trazaPdf = new Traza(listaPdf.size(), idVerificacion, idUsuario, idDocumento, conexion, parent, ultimaCarpeta);
-                    File file = new File(listaPdf.get(1).toString());
-                    CrearElRamdom ramdomListPdf = new CrearElRamdom(listaPdf, trazaPdf.getCantidadMuestreada());
-                    List<Object> ramdomPdf = ramdomListPdf.getSeleccion();
-                    for (Object o : ramdomPdf) {
-                        try {
-
-                            Pdf_NombreMasNumero pagina = (Pdf_NombreMasNumero) o;
-                            int parentlength = parent.length() + 1;
-                            String adaptarFile = pagina.getNombre().substring(parentlength);
-                            String filename = URLEncoder.encode(adaptarFile, "UTF-8");
-                            int page = pagina.getNumeroPagina();
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, page);
-                            imagenyControl();
-                        } catch (UnsupportedEncodingException ex) {
-                            JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);
-
-                        }
-                    }
-
-                    break;
-                case ".jpg":
-                    JOptionPane.showMessageDialog(null, "no esta configurado para el trabajo");
-                    //aca lo mismo
-                    break;
-                case ".png":
-                    List listaPng = IdentificarExtension.getLista();
-                    Traza trazaPng = new Traza(listaPng.size(), idVerificacion, idUsuario, idDocumento, conexion, parent, ultimaCarpeta);
-                    CrearElRamdom ramdomList = new CrearElRamdom(listaPng, trazaPng.getCantidadMuestreada());
-                    List<Object> ramdom = ramdomList.getSeleccion();
-                    for (Object obj : ramdom) {
-                        try {
-                            String tif = (String) obj;
-                            int parentlength = parent.length() + 1;
-                            String adaptarFile = tif.substring(parentlength);
-                            String filename = URLEncoder.encode(adaptarFile, "UTF-8");
-                            Archivo archivo = new Archivo(conexion, idTraza, filename, 0);
-                            imagenyControl();
-                        } catch (UnsupportedEncodingException ex) {
-                            JOptionPane.showMessageDialog(controles, ex.getMessage(), Worker.class.getName(), JOptionPane.ERROR_MESSAGE);
-                            Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "no esta configurado para el trabajo");
-                    isCancelled();
-                    break;
-
-            }
-        }
-
-
-        return null;
-    }
-
-    private void imagenyControl() {
-        int id = getIdTraza() + 1;
-        for (Integer idarchivo : idControl) {
-            int lasid = new LastID(conexion, "archivo").lastId();
-            String ret = "Insert into qualitys.traza_archivo_controles "
-                    + "(idtraza, idarchivo, idcontrol, estado) VALUES "
-                    + "(" + id + ", " + lasid + ", " + idarchivo + ", " + 0 + ");";
-            conexion.executeUpdate(ret);
-        }
-    }
-
-    public String getExtension() {
-        return extension;
-    }
-
-    @Override
-    protected void done() {
-        if (!isCancelled()) {
-            conexion.desconectar();
-            int trazaID = 0;
-            Conexion con = new Conexion();
-            if (con.isConexion()) {
-                int resultado = new LastID(con, "traza").lastId();
-                trazaID = (resultado == 0) ? 1 : resultado;
-                LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
-//                new VentanaSecundaria(trazaDao.getTraza()).setVisible(true);
-                new Ventana(trazaDao.getTraza()).setVisible(true);
-                con.desconectar();
-            }else{
-                System.out.println("problemas en el done");
-            }
-            controles.dispose();
-        }
-    }
-
-    public int getIdTraza() {
-        return idTraza;
-    }
-
-    public String getParent() {
-        return parent;
-    }
+    con.isConexionClose();
+    controles.dispose();
+  }
 }

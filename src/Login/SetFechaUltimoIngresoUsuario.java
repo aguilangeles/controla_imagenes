@@ -5,32 +5,42 @@
 package Login;
 
 import Entidades.Conexion;
-import Entidades.TipodeUsuario;
+import Daos.Usuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
- *setea la fecha de ingreso del usuario validado
+ * setea la fecha de ingreso del usuario validado
+ *
  * @author MUTNPROD003
  */
 public class SetFechaUltimoIngresoUsuario {
 
-    private TipodeUsuario tipoUsuario;
+  private Usuario tipoUsuario;
 
-    public SetFechaUltimoIngresoUsuario() {
-    }
+  public SetFechaUltimoIngresoUsuario() {
+  }
 
-    SetFechaUltimoIngresoUsuario(TipodeUsuario usuarioTipo) {
-        this.tipoUsuario=usuarioTipo;
-        setFecha();
-    }
+  SetFechaUltimoIngresoUsuario(Usuario usuarioTipo) {
+    this.tipoUsuario = usuarioTipo;
+    setFecha();
+  }
 
-    private void setFecha() {
-        Conexion conexion = new Conexion();
-        if (conexion.isConexion()) {
-            String ret = "UPDATE `qualitys`.`usuarios` SET`fecha_ingreso` = '"
-                    + tipoUsuario.getFechaUltimoIngreso() + "' WHERE id = "
-                    + tipoUsuario.getId() + ";";
-            conexion.executeUpdate(ret);
-            conexion.desconectar();
-        }
+  private void setFecha() {
+    Conexion conexion = new Conexion();
+    if (conexion.isConexion()) {
+      try {
+        String ret = "UPDATE `qualitys`.`usuarios` SET`fecha_ingreso` = '"
+                + tipoUsuario.getFechaUltimoIngreso() + "' WHERE id = "
+                + tipoUsuario.getId() + ";";
+        conexion.executeUpdate(ret);
+        conexion.isConexionClose();
+      } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en Seteo de Fecha", JOptionPane.ERROR_MESSAGE);
+        Logger.getLogger(SetFechaUltimoIngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
+  }
 }

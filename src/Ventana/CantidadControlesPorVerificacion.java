@@ -6,9 +6,8 @@ package Ventana;
 
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import Entidades.Conexion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,13 +26,15 @@ public class CantidadControlesPorVerificacion {
                     + "from controles_verificacion "
                     + "where idVerificacion = "
                     + "(SELECT  idVerificacion FROM qualitys.traza where id =" + id + ")";
-            conexion.ExecuteSql(insert);
+            conexion.executeQuery(insert);
             while (conexion.resulset.next()) {
                 cantidadControles = conexion.resulset.getInt(1);
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(CantidadControlesPorVerificacion.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Cantidad controles por Verificacion", JOptionPane.ERROR_MESSAGE);
+
+//            Logger.getLogger(CantidadControlesPorVerificacion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cantidadControles;
     }

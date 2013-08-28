@@ -6,12 +6,11 @@ package ReporteLote;
 
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,7 +70,7 @@ public class Tabla_TrazaReporte extends JFrame{
                     + "join tipos_documentos d "
                     + "on t.idTipoDocumento = d.id "
                     + "where t.id =" + idtraza;
-            conexion.ExecuteSql(query);
+            conexion.executeQuery(query);
             while (conexion.resulset.next()) {
                 fecha = conexion.resulset.getObject(1);
                 tamanio = conexion.resulset.getInt(2);
@@ -83,7 +82,7 @@ public class Tabla_TrazaReporte extends JFrame{
                 resultados = ordenarResultados();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Tabla_TrazaReporte.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Carga de Tabla Reporte", JOptionPane.ERROR_MESSAGE);
         }
 
     }

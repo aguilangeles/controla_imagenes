@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
         tabla.setModel(modelo);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(365);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(360);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(30);
 
     }
@@ -54,7 +55,7 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
         };
         modelTipos.addColumn("id");
         modelTipos.addColumn("Descripcion");
-        modelTipos.addColumn("Cantidad");
+        modelTipos.addColumn("Ct");
         CantidadesEncontradasDeErroresPorTDC(modelTipos);
         return modelTipos;
     }
@@ -68,7 +69,7 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
                     + " where tac.idtraza = " + idtraza
                     + " and tac.estado = 1  "
                     + "group by tac.idcontrol ";
-            conexion.ExecuteSql(query);
+            conexion.executeQuery(query);
             while (conexion.resulset.next()) {
                 idControl = conexion.resulset.getInt(1);
                 descripcion = conexion.resulset.getString(2);
@@ -77,7 +78,9 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Cantidad de errores por TDC", JOptionPane.ERROR_MESSAGE);
+
+//            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

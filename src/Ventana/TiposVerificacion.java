@@ -4,52 +4,50 @@
  */
 package Ventana;
 
+import Daos.Controles;
+import Daos.TiposDeControl;
 import java.util.List;
 
 /**
  *
  * @author MUTNPROD003
  */
-public class TiposVerificacion {
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private int estado;
-    private List<TiposControlVf> listaControles;
+public class TiposVerificacion extends Controles {
+  private int estado;
+  private List<TiposDeControl> listaControles;
 
-    public TiposVerificacion(int id, String nombre, String descripcion, int estado, List<TiposControlVf> listaControles) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.estado = estado;
-        this.listaControles = listaControles;
-    }
+  public TiposVerificacion(int id, String nombre, String descripcion, int estado, List<TiposDeControl> listaControles) {
+    super(id, nombre, descripcion);
+    this.estado = estado;
+    this.listaControles = listaControles;
+  }
 
+  @Override
+  public int getId() {
+    return id;
+  }
 
+  @Override
+  public void setId(int id) {
+    this.id = id;
+  }
 
+  @Override
+  public String getNombre() {
+    return nombre;
+  }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+  @Override
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return texto;
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.texto = descripcion;
     }
 
     public int getEstado() {
@@ -60,31 +58,11 @@ public class TiposVerificacion {
         this.estado = estado;
     }
 
-    public List<TiposControlVf> getListaControles() {
+    public List<TiposDeControl> getListaControles() {
         return listaControles;
     }
 
-    public void setListaControles(List<TiposControlVf> listaControles) {
+    public void setListaControles(List<TiposDeControl> listaControles) {
         this.listaControles = listaControles;
-    }
-
-//    void setListaControles(List<Object> idtipocontrol) {
-//        throw new UnsupportedOperationException("Not yet implemented");
-//    }
-
-    public static class TiposControlVf {
-
-        private int control;
-        private String descripcion;
-
-        public TiposControlVf(int control, String descripcion) {
-            this.control = control;
-            this.descripcion = descripcion;
-        }
-
-        @Override
-        public String toString() {
-            return descripcion;
-        }
     }
 }

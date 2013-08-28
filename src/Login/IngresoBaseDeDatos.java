@@ -7,7 +7,8 @@ package Login;
 import Helpers.InputVerifier;
 import Entidades.Conexion;
 import Entidades.ReadProperties;
-import Entidades.Usuario;
+import Daos.LogQualitys;
+import Helpers.VersionEImageIcon;
 import javax.swing.ImageIcon;
 
 /**
@@ -17,7 +18,7 @@ import javax.swing.ImageIcon;
 public class IngresoBaseDeDatos extends javax.swing.JFrame {
 
     private Conexion validar = new Conexion();
-    private boolean test;
+//    private boolean test;
 
     /**
      * Creates new form IngresoBaseDeDatos
@@ -25,9 +26,7 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
      */
     public IngresoBaseDeDatos(boolean isAdministrador) {
         initComponents();
-         String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-        ImageIcon im = new ImageIcon(rutaImagen);
-        setIconImage(im.getImage());
+      VersionEImageIcon versionEImageIcon = new VersionEImageIcon();
         setResizable(false);
         setInputVerifier();
         aceptar.setText("Test");
@@ -165,16 +164,16 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
 
     private void botonActionPerformed(java.awt.event.ActionEvent evt) {
         if ("Aceptar".equals(evt.getActionCommand())) {
-            test = false;
-            TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, test, this);
+//            test = false;
+            TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, false, this);
         }
         if ("Test".equals(evt.getActionCommand())) {
-            test = true;
+//            test = true;
             TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, true, this);
         }
     }
     private void usuarioNoEditable() {
-        Usuario us = new ReadProperties().getUser();
+        LogQualitys us = new ReadProperties().getUser();
         url.setText(us.getUrl());
         database.setText(us.getBase());
         usuario.setText(us.getUsuario());
@@ -185,8 +184,8 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
         password.setEditable(false);
     }
 
-    private Usuario usuarioEditable() {
-        Usuario usuarioEdit = new ReadProperties().getUser();
+    private LogQualitys usuarioEditable() {
+        LogQualitys usuarioEdit = new ReadProperties().getUser();
         url.setText(usuarioEdit.getUrl());
         database.setText(usuarioEdit.getBase());
         usuario.setText(usuarioEdit.getUsuario());

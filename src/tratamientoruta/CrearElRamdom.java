@@ -17,20 +17,21 @@ import java.util.List;
 public class CrearElRamdom {
     private List<Object> lista;
     private List<Object> seleccion = new ArrayList<>();
-    private int rango;
+    private int tamanio,rango;
+
 
     public CrearElRamdom(List<Object> lista, int rango) {
         this.lista = lista;
         this.rango = rango;
+        this.tamanio =lista.size();
         generarRamdom();
     }
 
 
     private  void generarRamdom() {
         HashSet<Object> hash = new HashSet<>();
-        int tamanioLote = lista.size();
         while (hash.size() < rango) {
-            Integer a1 = new Integer(new java.util.Random().nextInt(tamanioLote));
+            Integer a1 = new Integer(new java.util.Random().nextInt(tamanio));
             hash.add(a1);
         }
         ArrayList ListaHash = new ArrayList(hash);
@@ -40,6 +41,7 @@ public class CrearElRamdom {
             Integer imagen = (Integer) it.next();
             seleccion.add(lista.get(imagen));
         }
+        new Helpers.PasarGarbageCollector();
     }
 
     public List<Object> getSeleccion() {
