@@ -61,7 +61,6 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
       }
     } catch (IOException ex) {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imágenes desde PDF", JOptionPane.ERROR_MESSAGE);
-//      Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
     }
     temp_Original.deleteOnExit();
     return temp_Original.getAbsolutePath();
