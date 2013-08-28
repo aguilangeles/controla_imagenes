@@ -35,8 +35,8 @@ public class Ventana11 extends javax.swing.JFrame {
 
   public Ventana11(TrazaDao traza) {
     iniciar(traza);
-    initComponents();
     VersionEImageIcon version = new VersionEImageIcon(this);
+    initComponents();
     tablaCheck.requestFocus();
     this.traza = traza;
     this.setCB = new SetChecksBox(tablaCheck);//trae los estados desde la base de datos
@@ -302,11 +302,11 @@ public class Ventana11 extends javax.swing.JFrame {
     jPanel1Layout.setHorizontalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        .addContainerGap()
+        .addContainerGap(37, Short.MAX_VALUE)
         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(39, 39, 39)
+        .addGap(36, 36, 36)
         .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+        .addGap(68, 68, 68)
         .addComponent(siguiente)
         .addGap(67, 67, 67)
         .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)

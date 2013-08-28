@@ -83,7 +83,7 @@ public class CargarLote extends javax.swing.JFrame {
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    aceptarSeleccion.setText("Siguiente");
+    aceptarSeleccion.setText("Comenzar");
     aceptarSeleccion.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         aceptarSeleccionActionPerformed(evt);
@@ -97,10 +97,8 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel5.setText("Verificación");
 
     tipoDocumentoBox.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    tipoDocumentoBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione el Tipo de Documento" }));
 
     tipoVerificacionBox.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    tipoVerificacionBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione el Tipo de Verificación" }));
 
     informa.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 10)); // NOI18N
     informa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Información del Proceso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bitstream Vera Sans Mono", 0, 10), new java.awt.Color(51, 102, 0))); // NOI18N
