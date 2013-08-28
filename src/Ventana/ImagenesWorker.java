@@ -42,7 +42,7 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
       String rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal() + "_t_";
       temp_Original = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
       try {
-       // getInfoOriginalImage(input);
+//        getInfoOriginalImage(input);
         IMOperation operation = new IMOperation();
         operation.density(200);
         operation.quality(80D);

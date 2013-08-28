@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +21,7 @@ import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
@@ -34,9 +37,18 @@ public class ImageDrawingComponent extends JPanel {
   public ImageDrawingComponent() {
   }
 
-  public void cargarImage(String path, boolean pdf, boolean tif, int opcion) {
+//  public void cargarImage(String path, boolean pdf, boolean tif, int opcion) {
+//    loadImage(path, pdf, tif);
+//    setOpIndex(opcion);
+//  }
+  public void cargarImage(String path, boolean pdf, boolean tif, final JComboBox combo) {
     loadImage(path, pdf, tif);
-    setOpIndex(opcion);
+    combo.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setOpIndex(combo.getSelectedIndex());
+      }
+    });
   }
 
   private void setOpIndex(int i) {
@@ -48,12 +60,15 @@ public class ImageDrawingComponent extends JPanel {
     Graphics2D g2 = (Graphics2D) g;
     switch (opIndex) {
       case 0:
-        setCientoVeintiCinco(g2);
+        setCientoCincuenta(g2);
         break;
       case 1:
-        setCien(g2);
+        setCientoVeintiCinco(g2);
         break;
       case 2:
+        setCien(g2);
+        break;
+      case 3:
         setSetentaYCinco(g2);
         break;
       default:
@@ -85,8 +100,8 @@ public class ImageDrawingComponent extends JPanel {
 
   private void setCincuenta(Graphics2D g2) {
     /* cincuenta */
-    int w_50 = (int) ((bi.getWidth() / 2) / 2);
-    int y_50 = (int) ((bi.getHeight() / 2) / 2);
+    int w_50 = (int) ((bi.getWidth() / 2.7) / 2);
+    int y_50 = (int) ((bi.getHeight() / 2.7) / 2);
     setPreferredSize(new Dimension(w_50, y_50));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.clearRect(0, 0, getWidth(), getHeight());
@@ -100,8 +115,8 @@ public class ImageDrawingComponent extends JPanel {
 
   private void setSetentaYCinco(Graphics2D g2) {
     //setentaycinco
-    int w_75 = (int) ((bi.getWidth() / 2) / 1.3);
-    int y_75 = (int) ((bi.getHeight() / 2) / 1.3);
+    int w_75 = (int) ((bi.getWidth() / 2.7) / 1.3);
+    int y_75 = (int) ((bi.getHeight() / 2.7) / 1.3);
     setPreferredSize(new Dimension(w_75, y_75));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.clearRect(0, 0, getWidth(), getHeight());
@@ -115,8 +130,8 @@ public class ImageDrawingComponent extends JPanel {
 
   private void setCien(Graphics2D g2) {
     /*cien*/
-    int w_100 = (int) (bi.getWidth() / 2);
-    int y_100 = (int) (bi.getHeight() / 2);
+    int w_100 = (int) (bi.getWidth() / 2.7);
+    int y_100 = (int) (bi.getHeight() / 2.7);
     setPreferredSize(new Dimension(w_100, y_100));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.clearRect(0, 0, getWidth(), getHeight());
@@ -130,13 +145,28 @@ public class ImageDrawingComponent extends JPanel {
 
   private void setCientoVeintiCinco(Graphics2D g2) {
     /*veinticinco*/
-    int w_125 = (int) ((bi.getWidth() / 2) * 1.25);
-    int y_125 = (int) ((bi.getHeight() / 2) * 1.25);
+    int w_125 = (int) ((bi.getWidth() / 2.7) * 1.25);
+    int y_125 = (int) ((bi.getHeight() / 2.7) * 1.25);
     setPreferredSize(new Dimension(w_125, y_125));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
             0, 0, w_125, y_125, /* src area of image */
+            null);
+    scrollRectToVisible(new Rectangle(getPreferredSize()));
+    revalidate();
+    repaint();
+  }
+
+  private void setCientoCincuenta(Graphics2D g2) {
+    /*veinticinco*/
+    int w_150 = (int) ((bi.getWidth() / 2.7) * 1.50);
+    int y_150 = (int) ((bi.getHeight() / 2.7) * 1.50);
+    setPreferredSize(new Dimension(w_150, y_150));
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.clearRect(0, 0, getWidth(), getHeight());
+    g2.drawImage(bi,
+            0, 0, w_150, y_150, /* src area of image */
             null);
     scrollRectToVisible(new Rectangle(getPreferredSize()));
     revalidate();

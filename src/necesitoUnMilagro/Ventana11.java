@@ -8,11 +8,7 @@ import Daos.TrazaDao;
 import Daos.Imagen;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
-import Ventana.ImagenesWorker;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
-import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -24,23 +20,17 @@ import javax.swing.table.DefaultTableModel;
  * @author MUTNPROD003
  */
 public class Ventana11 extends javax.swing.JFrame {
-
   private int sizeRamdom;
   private int contador = 0;
   private int cantidad = 1;
   private DefaultTableModel model;
   private TrazaDao traza;
-  private ListIterator iterator;
-  private boolean hasNext;
-  private boolean hasPrevius;
-  private ImagenesWorker worker;
   private boolean pdf;
   private boolean tif;
   private final SetChecksBox setCB;
   private final Guardar save;
   private final GetRutaDeImagen rutadeimagen;
   private final TablaCheckBox tablaCheckBox;
-  private int opcion = 1;
   private ImageDrawingComponent imageDraw = new ImageDrawingComponent();
 
   public Ventana11(TrazaDao traza) {
@@ -52,51 +42,23 @@ public class Ventana11 extends javax.swing.JFrame {
     this.setCB = new SetChecksBox(tablaCheck);//trae los estados desde la base de datos
     this.save = new Guardar();// salva los contenidos del internalframe
     this.rutadeimagen = new GetRutaDeImagen(); // llama al conversor de pdf y devuelve la ruta de imagen
-    this.iterator = traza.getListaTif().listIterator();//genera la lista
     this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.tif = isTIF(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tablaCheck, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
     setExtendedState(6);
     terminar.setEnabled(false);
-    combo.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        setOpcion(combo.getSelectedIndex());
-      }
-    });
     internal(pdf);
   }
 
   private void iniciar(TrazaDao traza) {
     traza.getListaTif();
   }
-
-//  private void actionCombo(final ImageDrawingComponent imgC) {
-//    combo.addActionListener(new ActionListener() {
-//      @Override
-//      public void actionPerformed(ActionEvent e) {
-//
-//        ImageDrawingComponent img = imgC;
-//        img.setOpIndex(combo.getSelectedIndex());
-//        scrollImage.getViewport().add(img);
-//
-//      }
-//    });
-//  }
   private boolean isTIF(boolean pdf, String extension) {
     if (!pdf && extension.equalsIgnoreCase(".tif")) {
       return true;
     }
     return false;
-  }
-
-  public int getOpcion() {
-    return opcion;
-  }
-
-  public void setOpcion(int opcion) {
-    this.opcion = opcion;
   }
 
   private void internal(boolean ispdf) {
@@ -107,7 +69,7 @@ public class Ventana11 extends javax.swing.JFrame {
       setTituloYRutaLabel(siguientes);
       String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
       setLabelPagina(ispdf, siguientes);
-      imageDraw.cargarImage(ruta, pdf, tif, getOpcion());
+      imageDraw.cargarImage(ruta, pdf, tif,combo);
       scrollImage.getViewport().add(imageDraw);
       setCB.set(siguientes.getId());
     } catch (PropertyVetoException ex) {
@@ -115,25 +77,21 @@ public class Ventana11 extends javax.swing.JFrame {
     }
   }
 
-  public ListIterator getIterator() {
-    return iterator;
-  }
+
 
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
-    Imagen tif = traza.getListaTif().get(contador);
+    Imagen imagen = traza.getListaTif().get(contador);
     if (contador == limiteSuperior) {
       siguiente.setEnabled(false);
       terminar.setEnabled(true);
-
     }
-    return tif;
+    return imagen;
   }
 
   private Imagen backImagen(int contador) {
-    Imagen imagen = null;
     int limiteInferior = 0;
-    imagen = traza.getListaTif().get(contador);
+    Imagen imagen = traza.getListaTif().get(contador);
     if (limiteInferior == contador) {
       anterior.setEnabled(false);
     }
@@ -169,6 +127,7 @@ public class Ventana11 extends javax.swing.JFrame {
     tablaCheck = new javax.swing.JTable();
     scrollImage = new javax.swing.JScrollPane();
     combo = new javax.swing.JComboBox();
+    jLabel1 = new javax.swing.JLabel();
 
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
@@ -331,16 +290,22 @@ public class Ventana11 extends javax.swing.JFrame {
 
     jScrollPane1.setViewportView(jDesktopPane1);
 
-    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "125%", "100%", "75%", "50%", "" }));
-    combo.setSelectedIndex(1);
+    combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%" }));
+    combo.setToolTipText("");
+
+    jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    jLabel1.setText("Visualizar Imagen al");
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        .addGap(32, 32, 32)
-        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap()
+        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(39, 39, 39)
+        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
         .addComponent(siguiente)
         .addGap(67, 67, 67)
@@ -359,7 +324,8 @@ public class Ventana11 extends javax.swing.JFrame {
           .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel1)))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -400,7 +366,7 @@ public class Ventana11 extends javax.swing.JFrame {
         setLabelPagina(pdf, imagen1);
         setCB.set(imagen1.getId());
         String ruta_temp = rutadeimagen.siguienteImagen(pdf, imagen1);
-        imageDraw.cargarImage(ruta_temp, pdf, tif, getOpcion());
+        imageDraw.cargarImage(ruta_temp, pdf, tif,combo);
         scrollImage.getViewport().add(imageDraw);
         jInternal.setVisible(true);
       } catch (Exception ex) {
@@ -409,7 +375,6 @@ public class Ventana11 extends javax.swing.JFrame {
     }//GEN-LAST:event_siguienteActionPerformed
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-      System.gc();
       contador--;
       cantidad--;
       Imagen pr = backImagen(contador);
@@ -421,7 +386,7 @@ public class Ventana11 extends javax.swing.JFrame {
       setLabelPagina(pdf, pr);
       setCB.set(pr.getId());
       String visualizacion = rutadeimagen.anteriorImagen(pdf, pr);
-      imageDraw.cargarImage(visualizacion, pdf, tif, getOpcion());
+      imageDraw.cargarImage(visualizacion, pdf, tif,combo);
       scrollImage.getViewport().add(imageDraw);
     }//GEN-LAST:event_anteriorActionPerformed
 
@@ -441,6 +406,7 @@ public class Ventana11 extends javax.swing.JFrame {
   private javax.swing.JComboBox combo;
   private javax.swing.JDesktopPane jDesktopPane1;
   private javax.swing.JInternalFrame jInternal;
+  private javax.swing.JLabel jLabel1;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
   private javax.swing.JScrollPane jScrollPane1;

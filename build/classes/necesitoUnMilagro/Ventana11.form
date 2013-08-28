@@ -91,8 +91,10 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="combo" min="-2" pref="241" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="170" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="combo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="92" max="32767" attributes="0"/>
                   <Component id="siguiente" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
@@ -114,6 +116,7 @@
                       <Component id="terminar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="siguiente" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="combo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -368,16 +371,27 @@
         </Container>
         <Component class="javax.swing.JComboBox" name="combo">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Bitstream Vera Sans Mono" size="12" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
-                <StringItem index="0" value="125%"/>
-                <StringItem index="1" value="100%"/>
-                <StringItem index="2" value="75%"/>
-                <StringItem index="3" value="50%"/>
-                <StringItem index="4" value=""/>
+                <StringItem index="0" value="150%"/>
+                <StringItem index="1" value="125%"/>
+                <StringItem index="2" value="100%"/>
+                <StringItem index="3" value="75%"/>
+                <StringItem index="4" value="50%"/>
               </StringArray>
             </Property>
-            <Property name="selectedIndex" type="int" value="1"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Bitstream Vera Sans Mono" size="12" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Visualizar Imagen al"/>
           </Properties>
         </Component>
       </SubComponents>

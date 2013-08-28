@@ -9,10 +9,10 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author MUTNPROD003
+ * @author aguilangeles@gmail.com
  */
 public final class VersionEImageIcon extends JFrame{
-    public static final String VERSION ="Qualitys 1.0.02";
+    public static final String VERSION ="Qualitys 1.0.04";
 
     public VersionEImageIcon() {
     }
@@ -23,14 +23,11 @@ public final class VersionEImageIcon extends JFrame{
         frame.setTitle(VERSION);
     }
 
-
     public VersionEImageIcon(JFrame frame, String mensaje) {
       //cambia la version y permite un mensaje, y la vimagen
         setImagenIcon(frame);
         frame.setTitle(mensaje+" "+VERSION);
     }
-
-
 
     public void setImagenIcon(JFrame frame) {
         String rutaImagen = "Logos\\nuevo logo sin letras UTN.png";
@@ -38,6 +35,4 @@ public final class VersionEImageIcon extends JFrame{
         setIconImage(im.getImage());
         frame.setIconImage(im.getImage());
     }
-
-
 }
