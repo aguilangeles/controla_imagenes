@@ -40,6 +40,7 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
     File temp_Original = null;
     try {
       String rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal() + "_t_";
+      System.out.println(rutaEnTemporal);
       temp_Original = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
       try {
 //        getInfoOriginalImage(input);
@@ -76,4 +77,5 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
     System.out.println("Geometry: " + imageInfo.getImageGeometry());
     System.out.println("Depth: " + imageInfo.getImageDepth());
     System.out.println("Class: " + imageInfo.getImageClass());
-  }}
+  }
+}
