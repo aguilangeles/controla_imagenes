@@ -130,6 +130,7 @@
             </Property>
             <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Siguiente"/>
+            <Property name="toolTipText" type="java.lang.String" value="Alt+S"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="siguienteActionPerformed"/>
@@ -142,6 +143,7 @@
             </Property>
             <Property name="mnemonic" type="int" value="97"/>
             <Property name="text" type="java.lang.String" value="Anterior"/>
+            <Property name="toolTipText" type="java.lang.String" value="ALT+A"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anteriorActionPerformed"/>
@@ -154,6 +156,7 @@
             </Property>
             <Property name="mnemonic" type="int" value="116"/>
             <Property name="text" type="java.lang.String" value="Terminar"/>
+            <Property name="toolTipText" type="java.lang.String" value="ALT+T"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="terminarActionPerformed"/>

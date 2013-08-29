@@ -103,10 +103,13 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bitstream Vera Sans Mono" size="14" style="0"/>
             </Property>
+            <Property name="mnemonic" type="int" value="98"/>
             <Property name="text" type="java.lang.String" value="Base de Datos"/>
+            <Property name="toolTipText" type="java.lang.String" value="alt+b"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="base_datosActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="base_datosKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="rangos">
@@ -114,10 +117,13 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bitstream Vera Sans Mono" size="14" style="0"/>
             </Property>
+            <Property name="mnemonic" type="int" value="114"/>
             <Property name="text" type="java.lang.String" value="Rangos"/>
+            <Property name="toolTipText" type="java.lang.String" value="alt+r"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rangosActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rangosKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="controles">
@@ -125,10 +131,13 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bitstream Vera Sans Mono" size="14" style="0"/>
             </Property>
+            <Property name="mnemonic" type="int" value="99"/>
             <Property name="text" type="java.lang.String" value="Controles"/>
+            <Property name="toolTipText" type="java.lang.String" value="alt+c"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="controlesActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="controlesKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="alta_usuarios">
@@ -136,10 +145,13 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bitstream Vera Sans Mono" size="14" style="0"/>
             </Property>
+            <Property name="mnemonic" type="int" value="117"/>
             <Property name="text" type="java.lang.String" value="Usuarios"/>
+            <Property name="toolTipText" type="java.lang.String" value="alt+u"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="alta_usuariosActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="alta_usuariosKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="cargar_lote">
@@ -147,10 +159,13 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bitstream Vera Sans Mono" size="14" style="0"/>
             </Property>
+            <Property name="mnemonic" type="int" value="108"/>
             <Property name="text" type="java.lang.String" value="Cargar Lote"/>
+            <Property name="toolTipText" type="java.lang.String" value="alt+l;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cargar_loteActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cargar_loteKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="verificacion">
@@ -158,10 +173,13 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bitstream Vera Sans Mono" size="14" style="0"/>
             </Property>
+            <Property name="mnemonic" type="int" value="118"/>
             <Property name="text" type="java.lang.String" value="Verificaci&#xf3;n"/>
+            <Property name="toolTipText" type="java.lang.String" value="alt+v"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verificacionActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificacionKeyPressed"/>
           </Events>
         </Component>
       </SubComponents>

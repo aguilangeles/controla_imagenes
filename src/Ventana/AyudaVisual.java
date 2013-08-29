@@ -32,6 +32,7 @@ public class AyudaVisual extends javax.swing.JFrame {
     this.texto = texto;
     this.imagen = imagen;
     initComponents();
+    cerrar.requestFocus();
     setTitle(this.descripcion);
     tratarTexto(texto);
     visualizar(imagen);
@@ -70,26 +71,38 @@ public class AyudaVisual extends javax.swing.JFrame {
 
     jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 102), 2));
 
+    scrollImage.setFocusable(false);
+
     mensaje.setEditable(false);
     mensaje.setColumns(20);
     mensaje.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     mensaje.setRows(5);
+    mensaje.setFocusable(false);
     jScrollPane2.setViewportView(mensaje);
 
     cerrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    cerrar.setMnemonic('c');
     cerrar.setText("Cerrar");
+    cerrar.setToolTipText("alt+c");
     cerrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         cerrarActionPerformed(evt);
       }
     });
+    cerrar.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        cerrarKeyPressed(evt);
+      }
+    });
 
     spinner.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     spinner.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    spinner.setFocusable(false);
     spinner.setValue(0.10);
 
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     jLabel1.setText("Escala");
+    jLabel1.setFocusable(false);
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
@@ -124,8 +137,8 @@ public class AyudaVisual extends javax.swing.JFrame {
         .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(cerrar)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(15, 15, 15))
     );
 
@@ -148,6 +161,10 @@ public class AyudaVisual extends javax.swing.JFrame {
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
       dispose();
     }//GEN-LAST:event_cerrarActionPerformed
+
+  private void cerrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cerrarKeyPressed
+    dispose();
+  }//GEN-LAST:event_cerrarKeyPressed
 
   public void setZoom(int zoom) {
     this.zoom = (double) spinner.getValue();

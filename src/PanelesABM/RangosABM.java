@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import Helpers.Minimo;
 import Helpers.VersionEImageIcon;
+import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +22,8 @@ import javax.swing.JTable;
  * @author MUTNPROD003
  */
 public class RangosABM extends javax.swing.JFrame {
-  public static final String ROW_EMPTY = "No pueden quedar filas vacías";
 
+  public static final String ROW_EMPTY = "No pueden quedar filas vacías";
   private Conexion conexion = new Conexion();
   private final RangosDao rangosDao;
   private DefaultTableModel modelo;
@@ -47,7 +49,7 @@ public class RangosABM extends javax.swing.JFrame {
       principalInternal.setMaximum(true);
     } catch (PropertyVetoException ex) {
 
-     JOptionPane.showMessageDialog(this, ex.getMessage(), "Ajuste Internal Frame", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(this, ex.getMessage(), "Ajuste Internal Frame", JOptionPane.ERROR_MESSAGE);
     }
   }
 
@@ -85,10 +87,17 @@ public class RangosABM extends javax.swing.JFrame {
     jPanel2.setOpaque(false);
 
     cerrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    cerrar.setMnemonic('c');
     cerrar.setText("cerrar");
+    cerrar.setToolTipText("alt+c");
     cerrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         cerrarActionPerformed(evt);
+      }
+    });
+    cerrar.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        cerrarKeyPressed(evt);
       }
     });
 
@@ -97,6 +106,11 @@ public class RangosABM extends javax.swing.JFrame {
     ABM.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         ABMActionPerformed(evt);
+      }
+    });
+    ABM.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        ABMKeyPressed(evt);
       }
     });
 
@@ -259,31 +273,14 @@ public class RangosABM extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-      rangosDao.setEditable(true);
-      int idNew = getIde() + 1;
-      int nuevoMin = (minimo.minimoMasUno(getIde()));
-      Object[] ob = new Object[]{idNew, nuevoMin, 0, 0, 0, 1};
-      modelo.addRow(ob);
-      tablaContenido.repaint();
-      salvar.setVisible(true);
-      evento = "Agregar";
-
+      getAgregar();
     }//GEN-LAST:event_agregarActionPerformed
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-      rangosDao.setEditable(true);
-      salvar.setVisible(true);
-      evento = "Editar";
+      getEditar();
     }//GEN-LAST:event_editarActionPerformed
 
     private void desactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarActionPerformed
-      rangosDao.setEditable(true);
-      int idjtext = (tablaContenido.getSelectedRow());
-      Desactivar desactivar1 = new Desactivar(conexion, modelo, "rangos_qs", idjtext, 5);
-      if (desactivar1.modificarEstado()) {
-        mensajeLabel.setText("<html>Estado<br>Modificado</html>");
-        tablaContenido.repaint();
-      }
-
+      getDesactivar();
     }//GEN-LAST:event_desactivarActionPerformed
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
@@ -295,15 +292,20 @@ public class RangosABM extends javax.swing.JFrame {
     }//GEN-LAST:event_salvarActionPerformed
 
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
-      JOptionPane.showMessageDialog(tablaContenido,
-              MensajeABM.INSTRUCCIONES);
-      ABM.setEnabled(false);
-      principalInternal.setTitle("Módulo de Edición");
-      agregar.setVisible(true);
-      editar.setVisible(true);
-      desactivar.setVisible(true);
-
+      getABM();
     }//GEN-LAST:event_ABMActionPerformed
+
+  private void ABMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ABMKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      getABM();
+    }
+  }//GEN-LAST:event_ABMKeyPressed
+
+  private void cerrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cerrarKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      dispose();
+    }
+  }//GEN-LAST:event_cerrarKeyPressed
   private void botonGuardar() {
     switch (evento) {
       case "Agregar":
@@ -418,4 +420,41 @@ public class RangosABM extends javax.swing.JFrame {
   private javax.swing.JScrollPane scroll;
   private javax.swing.JTable tablaContenido;
   // End of variables declaration//GEN-END:variables
+
+  private void getAgregar() {
+    rangosDao.setEditable(true);
+    int idNew = getIde() + 1;
+    int nuevoMin = (minimo.minimoMasUno(getIde()));
+    Object[] ob = new Object[]{idNew, nuevoMin, 0, 0, 0, 1};
+    modelo.addRow(ob);
+    tablaContenido.repaint();
+    salvar.setVisible(true);
+    evento = "Agregar";
+  }
+
+  private void getEditar() {
+    rangosDao.setEditable(true);
+    salvar.setVisible(true);
+    evento = "Editar";
+  }
+
+  private void getDesactivar() {
+    rangosDao.setEditable(true);
+    int idjtext = (tablaContenido.getSelectedRow());
+    Desactivar desactivar1 = new Desactivar(conexion, modelo, "rangos_qs", idjtext, 5);
+    if (desactivar1.modificarEstado()) {
+      mensajeLabel.setText("<html>Estado<br>Modificado</html>");
+      tablaContenido.repaint();
+    }
+  }
+
+  private void getABM() throws HeadlessException {
+    JOptionPane.showMessageDialog(tablaContenido,
+            MensajeABM.INSTRUCCIONES);
+    ABM.setEnabled(false);
+    principalInternal.setTitle("Módulo de Edición");
+    agregar.setVisible(true);
+    editar.setVisible(true);
+    desactivar.setVisible(true);
+  }
 }

@@ -65,15 +65,24 @@ public class Login extends javax.swing.JFrame {
     jLabel2.setText("Password");
 
     user.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    user.setText("admin");
     user.setNextFocusableComponent(password);
 
     password.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    password.setText("admin");
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    entrar.setMnemonic('e');
     entrar.setText("Entrar");
+    entrar.setToolTipText("alt + t");
     entrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         entrarActionPerformed(evt);
+      }
+    });
+    entrar.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        entrarKeyPressed(evt);
       }
     });
 
@@ -146,13 +155,12 @@ public class Login extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-      if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
-              && password.getText().trim().equalsIgnoreCase(USER_DEFAULT)) {
-        SetearArchivoConfiguracion setConfig = new SetearArchivoConfiguracion();
-      } else {
-        loginUsuario();
-      }
+    setEntrar();
     }//GEN-LAST:event_entrarActionPerformed
+
+  private void entrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entrarKeyPressed
+    setEntrar();
+  }//GEN-LAST:event_entrarKeyPressed
 
   private boolean isUsuarioValidado() {
     ValidarIngreso validarIngreso = new ValidarIngreso(user.getText(), password.getText());
@@ -200,4 +208,13 @@ public class Login extends javax.swing.JFrame {
   private javax.swing.JPasswordField password;
   private javax.swing.JTextField user;
   // End of variables declaration//GEN-END:variables
+
+  private void setEntrar() {
+    if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
+            && password.getText().trim().equalsIgnoreCase(USER_DEFAULT)) {
+      SetearArchivoConfiguracion setConfig = new SetearArchivoConfiguracion();
+    } else {
+      loginUsuario();
+    }
+  }
 }

@@ -171,6 +171,7 @@ public class Ventana11 extends javax.swing.JFrame {
     siguiente.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     siguiente.setMnemonic('s');
     siguiente.setText("Siguiente");
+    siguiente.setToolTipText("Alt+S");
     siguiente.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         siguienteActionPerformed(evt);
@@ -180,6 +181,7 @@ public class Ventana11 extends javax.swing.JFrame {
     anterior.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     anterior.setMnemonic('a');
     anterior.setText("Anterior");
+    anterior.setToolTipText("ALT+A");
     anterior.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         anteriorActionPerformed(evt);
@@ -189,6 +191,7 @@ public class Ventana11 extends javax.swing.JFrame {
     terminar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     terminar.setMnemonic('t');
     terminar.setText("Terminar");
+    terminar.setToolTipText("ALT+T");
     terminar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         terminarActionPerformed(evt);

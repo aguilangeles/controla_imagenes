@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import Helpers.VersionEImageIcon;
+import java.awt.HeadlessException;
 import java.beans.PropertyVetoException;
 import javax.swing.JTable;
 
@@ -82,10 +83,17 @@ public class ControlesABM extends javax.swing.JFrame {
     jPanel2.setOpaque(false);
 
     cerrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    cerrar.setMnemonic('c');
     cerrar.setText("cerrar");
+    cerrar.setToolTipText("alt+c");
     cerrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         cerrarActionPerformed(evt);
+      }
+    });
+    cerrar.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        cerrarKeyPressed(evt);
       }
     });
 
@@ -94,6 +102,11 @@ public class ControlesABM extends javax.swing.JFrame {
     ABM.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         ABMActionPerformed(evt);
+      }
+    });
+    ABM.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        ABMKeyPressed(evt);
       }
     });
 
@@ -331,14 +344,17 @@ public class ControlesABM extends javax.swing.JFrame {
   }
 
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
-      JOptionPane.showMessageDialog(tablaContenido, MensajeABM.INSTRUCCIONES);
-      ABM.setEnabled(false);
-      principalInternal.setTitle("Modulo de Edicion");
-      agregar.setVisible(true);
-      editar.setVisible(true);
-      desactivar.setVisible(true);
+      getABM();
 
     }//GEN-LAST:event_ABMActionPerformed
+
+  private void ABMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ABMKeyPressed
+    getABM();
+  }//GEN-LAST:event_ABMKeyPressed
+
+  private void cerrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cerrarKeyPressed
+    dispose();
+  }//GEN-LAST:event_cerrarKeyPressed
 
   public int getIde() {
     return controles.getLastId();
@@ -390,5 +406,14 @@ public class ControlesABM extends javax.swing.JFrame {
       mensajLab.setText("<html>" + mensajeJl + "<br>Rechazado</html>");
       salvar.setVisible(true);
     }
+  }
+
+  private void getABM() throws HeadlessException {
+    JOptionPane.showMessageDialog(tablaContenido, MensajeABM.INSTRUCCIONES);
+    ABM.setEnabled(false);
+    principalInternal.setTitle("Modulo de Edicion");
+    agregar.setVisible(true);
+    editar.setVisible(true);
+    desactivar.setVisible(true);
   }
 }

@@ -14,6 +14,7 @@ import Daos.Usuario;
 import Helpers.IdentificarExtension;
 import Helpers.IdentificarParent;
 import Helpers.VersionEImageIcon;
+import java.awt.HeadlessException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
@@ -83,10 +84,17 @@ public class CargarLote extends javax.swing.JFrame {
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    aceptarSeleccion.setMnemonic('c');
     aceptarSeleccion.setText("Comenzar");
+    aceptarSeleccion.setToolTipText("alt+c");
     aceptarSeleccion.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         aceptarSeleccionActionPerformed(evt);
+      }
+    });
+    aceptarSeleccion.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        aceptarSeleccionKeyPressed(evt);
       }
     });
 
@@ -176,36 +184,12 @@ public class CargarLote extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarSeleccionActionPerformed
-      String ruta = rutaCarpeta.getText();
-      List<Object> lista = null;
-      File file = new File(ruta);
-      if (file.exists()) {
-        File[] files = file.listFiles();
-        if (tipoDocumentoBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de documento")) {
-          JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de documentos sin seleccionar",
-                  "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-        } else if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de verificacion")) {
-
-          JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
-                  "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-        } else {
-          idControlesByVerificacion();//controles
-          con.isConexionClose();//
-          IdentificarParent parent = new IdentificarParent(files);
-          String rutaCompleta = parent.getParent();
-          String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);
-          IdentificarExtension idext = new IdentificarExtension(this, informa, getIdTipoControl(), file,
-                  rutaCompleta, ultimaCarpeta, usarioTipo.getId(), getTipoDocumento(), getIdVerificacion());
-          idext.execute();
-          aceptarSeleccion.setEnabled(false);
-
-        }
-      } else {
-        JOptionPane.showMessageDialog(rutaCarpeta, "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
-        rutaCarpeta.setText("");
-      }
-
+    getAceptar();
     }//GEN-LAST:event_aceptarSeleccionActionPerformed
+
+  private void aceptarSeleccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarSeleccionKeyPressed
+    getAceptar();
+  }//GEN-LAST:event_aceptarSeleccionKeyPressed
 
   private String getUltimaCarpeta(String aParent) {
     String ret = "";
@@ -303,4 +287,35 @@ public class CargarLote extends javax.swing.JFrame {
   private javax.swing.JComboBox tipoDocumentoBox;
   private javax.swing.JComboBox tipoVerificacionBox;
   // End of variables declaration//GEN-END:variables
+
+  private void getAceptar() throws HeadlessException {
+    String ruta = rutaCarpeta.getText();
+    List<Object> lista = null;
+    File file = new File(ruta);
+    if (file.exists()) {
+      File[] files = file.listFiles();
+      if (tipoDocumentoBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de documento")) {
+        JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de documentos sin seleccionar",
+                "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
+      } else if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de verificacion")) {
+
+        JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
+                "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
+      } else {
+        idControlesByVerificacion();//controles
+        con.isConexionClose();//
+        IdentificarParent parent = new IdentificarParent(files);
+        String rutaCompleta = parent.getParent();
+        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);
+        IdentificarExtension idext = new IdentificarExtension(this, informa, getIdTipoControl(), file,
+                rutaCompleta, ultimaCarpeta, usarioTipo.getId(), getTipoDocumento(), getIdVerificacion());
+        idext.execute();
+        aceptarSeleccion.setEnabled(false);
+
+      }
+    } else {
+      JOptionPane.showMessageDialog(rutaCarpeta, "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
+      rutaCarpeta.setText("");
+    }
+  }
 }

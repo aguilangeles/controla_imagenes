@@ -35,9 +35,6 @@ public class Guardar {
     this.traza = traza;
     this.nombre = nombre;
     this.tablaCheck = tablaCheck;
-//    getNumerodePagina(pdf, pagina);
-//    guardar(traza, nombre, tablaCheck, pagina, pdf);
-//    borrarTemp();
   }
 
   public void guardar(TrazaDao traza, String nombre, JTable tablaCheck, JLabel pagina, boolean pdf) {

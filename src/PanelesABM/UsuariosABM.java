@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import static PanelesABM.ControlesABM.ROW_EMPTY;
+import java.awt.HeadlessException;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,10 +85,17 @@ public class UsuariosABM extends javax.swing.JFrame {
     jPanel2.setOpaque(false);
 
     cerrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    cerrar.setMnemonic('c');
     cerrar.setText("cerrar");
+    cerrar.setToolTipText("alt+c");
     cerrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         cerrarActionPerformed(evt);
+      }
+    });
+    cerrar.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        cerrarKeyPressed(evt);
       }
     });
 
@@ -96,6 +104,11 @@ public class UsuariosABM extends javax.swing.JFrame {
     ABM.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         ABMActionPerformed(evt);
+      }
+    });
+    ABM.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        ABMKeyPressed(evt);
       }
     });
 
@@ -319,13 +332,17 @@ public class UsuariosABM extends javax.swing.JFrame {
     }
   }
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
-      JOptionPane.showMessageDialog(tablaUsuarios, MensajeABM.INSTRUCCIONES);
-      ABM.setEnabled(false);
-      principalInternal.setTitle("Módulo de Edición");
-      agregar.setVisible(true);
-      editar.setVisible(true);
-      desactivar.setVisible(true);
+      getABM();
     }//GEN-LAST:event_ABMActionPerformed
+
+  private void ABMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ABMKeyPressed
+    getABM();
+  }//GEN-LAST:event_ABMKeyPressed
+
+  private void cerrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cerrarKeyPressed
+    // TODO add your handling code here:
+    dispose();
+  }//GEN-LAST:event_cerrarKeyPressed
 
   public int getIde() {
     return usuario.getLastId();
@@ -408,4 +425,13 @@ public class UsuariosABM extends javax.swing.JFrame {
   private javax.swing.JScrollPane scroll;
   private javax.swing.JTable tablaUsuarios;
   // End of variables declaration//GEN-END:variables
+
+  private void getABM() throws HeadlessException {
+    JOptionPane.showMessageDialog(tablaUsuarios, MensajeABM.INSTRUCCIONES);
+    ABM.setEnabled(false);
+    principalInternal.setTitle("Módulo de Edición");
+    agregar.setVisible(true);
+    editar.setVisible(true);
+    desactivar.setVisible(true);
+  }
 }

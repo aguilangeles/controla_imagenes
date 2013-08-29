@@ -53,50 +53,49 @@ public class Tabla_TrazaReporte extends JFrame{
         return modelo;
     }
 
-    private void consultaYCarga() {
-        try {
-            String query = "SELECT t.fecha_control, "
-                    + "t.tamanio_lote, "
-                    + "t.cantidad_muestreada "
-                    + ", t.nro_rechazo , "
-                    + "v.descripcion "
-                    + ", u.nombre "
-                    + ", d.descripcion "
-                    + "from traza t  "
-                    + "join tipos_verificacion v "
-                    + "on t.idVerificacion = v.id "
-                    + "join usuarios u "
-                    + "on t.idUsuarios = u.id "
-                    + "join tipos_documentos d "
-                    + "on t.idTipoDocumento = d.id "
-                    + "where t.id =" + idtraza;
-            conexion.executeQuery(query);
-            while (conexion.resulset.next()) {
-                fecha = conexion.resulset.getObject(1);
-                tamanio = conexion.resulset.getInt(2);
-                muestra = conexion.resulset.getInt(3);
-                rechazo = conexion.resulset.getInt(4);
-                verificacion = conexion.resulset.getString(5);
-                usuario = conexion.resulset.getString(6);
-                documento = conexion.resulset.getString(7);
-                resultados = ordenarResultados();
-            }
-        } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Carga de Tabla Reporte", JOptionPane.ERROR_MESSAGE);
-        }
-
+  private void consultaYCarga() {
+    try {
+      String query = "SELECT t.fecha_control, "
+              + "t.tamanio_lote, "
+              + "t.cantidad_muestreada "
+              + ", t.nro_rechazo , "
+              + "v.descripcion "
+              + ", u.nombre "
+              + ", d.descripcion "
+              + "from traza t  "
+              + "join tipos_verificacion v "
+              + "on t.idVerificacion = v.id "
+              + "join usuarios u "
+              + "on t.idUsuarios = u.id "
+              + "join tipos_documentos d "
+              + "on t.idTipoDocumento = d.id "
+              + "where t.id =" + idtraza;
+      conexion.executeQuery(query);
+      while (conexion.resulset.next()) {
+        fecha = conexion.resulset.getObject(1);
+        tamanio = conexion.resulset.getInt(2);
+        muestra = conexion.resulset.getInt(3);
+        rechazo = conexion.resulset.getInt(4);
+        verificacion = conexion.resulset.getString(5);
+        usuario = conexion.resulset.getString(6);
+        documento = conexion.resulset.getString(7);
+        resultados = ordenarResultados();
+      }
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null, ex.getMessage(), "Carga de Tabla Reporte", JOptionPane.ERROR_MESSAGE);
     }
+  }
 
-    private void poblarTabla(DefaultTableModel modelo) {
-        String titulos = "Operador de Control, Fecha de Control, "
-                + "Tamanio Lote, Cantidad muestreada, Total Rechazos, "
-                + "Linea de captura, Digitalizador, Tipo de Verificacion, Tipo de Documento\n ";
-        String[] titulo = titulos.split(", ");
-        for (int t = 0; t < titulo.length; t++) {
-            modelo.addRow(new Object[]{titulo[t], 0});
-        }
-        resultadosEnTabla(modelo);
+  private void poblarTabla(DefaultTableModel modelo) {
+    String titulos = "Operador de Control, Fecha de Control, "
+            + "Tamanio Lote, Cantidad muestreada, Total Rechazos, "
+            + "Linea de captura, Digitalizador, Tipo de Verificacion, Tipo de Documento\n ";
+    String[] titulo = titulos.split(", ");
+    for (int t = 0; t < titulo.length; t++) {
+      modelo.addRow(new Object[]{titulo[t], 0});
     }
+    resultadosEnTabla(modelo);
+  }
 
     private String ordenarResultados() {
         String ret = usuario+", " + fecha + ", " + tamanio
