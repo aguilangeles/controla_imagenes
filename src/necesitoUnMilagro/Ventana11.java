@@ -8,11 +8,18 @@ import Daos.TrazaDao;
 import Daos.Imagen;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
+import java.awt.Event;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author MUTNPROD003
  */
 public class Ventana11 extends javax.swing.JFrame {
+
   private int sizeRamdom;
   private int contador = 0;
   private int cantidad = 1;
@@ -40,13 +48,14 @@ public class Ventana11 extends javax.swing.JFrame {
     tablaCheck.requestFocus();
     this.traza = traza;
     this.setCB = new SetChecksBox(tablaCheck);//trae los estados desde la base de datos
+    setExtendedState(6);
     this.save = new Guardar();// salva los contenidos del internalframe
     this.rutadeimagen = new GetRutaDeImagen(); // llama al conversor de pdf y devuelve la ruta de imagen
     this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.tif = isTIF(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tablaCheck, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
-    setExtendedState(6);
+    tablaCheck.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     internal(pdf);
   }
@@ -54,6 +63,7 @@ public class Ventana11 extends javax.swing.JFrame {
   private void iniciar(TrazaDao traza) {
     traza.getListaTif();
   }
+
   private boolean isTIF(boolean pdf, String extension) {
     if (!pdf && extension.equalsIgnoreCase(".tif")) {
       return true;
@@ -69,15 +79,13 @@ public class Ventana11 extends javax.swing.JFrame {
       setTituloYRutaLabel(siguientes);
       String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
       setLabelPagina(ispdf, siguientes);
-      imageDraw.cargarImage(ruta, pdf, tif,combo);
+      imageDraw.cargarImage(ruta, pdf, tif, combo);
       scrollImage.getViewport().add(imageDraw);
       setCB.set(siguientes.getId());
     } catch (PropertyVetoException ex) {
       Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
-
-
 
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
@@ -161,6 +169,7 @@ public class Ventana11 extends javax.swing.JFrame {
     jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     siguiente.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    siguiente.setMnemonic('s');
     siguiente.setText("Siguiente");
     siguiente.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +178,7 @@ public class Ventana11 extends javax.swing.JFrame {
     });
 
     anterior.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    anterior.setMnemonic('a');
     anterior.setText("Anterior");
     anterior.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +187,7 @@ public class Ventana11 extends javax.swing.JFrame {
     });
 
     terminar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    terminar.setMnemonic('t');
     terminar.setText("Terminar");
     terminar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -342,53 +353,17 @@ public class Ventana11 extends javax.swing.JFrame {
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
-    private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
-      save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
-      NumeroRechazo numeroRechazo = new NumeroRechazo(traza.getId());
-      java.awt.EventQueue.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          new Reporte(traza.getId()).setVisible(true);
-        }
-      });
-      dispose();
-    }//GEN-LAST:event_terminarActionPerformed
+  private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+    setNextImage();
+  }//GEN-LAST:event_siguienteActionPerformed
 
-    private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-      contador++;
-      cantidad++;
-      anterior.setEnabled(true);
-      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
-      Imagen imagen1 = goImagen(contador);
-      try {
-        jDesktopPane1.add(jInternal);
-        setTituloYRutaLabel(imagen1);
-        setLabelPagina(pdf, imagen1);
-        setCB.set(imagen1.getId());
-        String ruta_temp = rutadeimagen.siguienteImagen(pdf, imagen1);
-        imageDraw.cargarImage(ruta_temp, pdf, tif,combo);
-        scrollImage.getViewport().add(imageDraw);
-        jInternal.setVisible(true);
-      } catch (Exception ex) {
-        Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
-      }
-    }//GEN-LAST:event_siguienteActionPerformed
+  private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
+    setBackImage();
+  }//GEN-LAST:event_anteriorActionPerformed
 
-    private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-      contador--;
-      cantidad--;
-      Imagen pr = backImagen(contador);
-      guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
-      siguiente.setEnabled(true);
-      jDesktopPane1.add(jInternal);
-      jInternal.setVisible(true);
-      setTituloYRutaLabel(pr);
-      setLabelPagina(pdf, pr);
-      setCB.set(pr.getId());
-      String visualizacion = rutadeimagen.anteriorImagen(pdf, pr);
-      imageDraw.cargarImage(visualizacion, pdf, tif,combo);
-      scrollImage.getViewport().add(imageDraw);
-    }//GEN-LAST:event_anteriorActionPerformed
+  private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
+    setFinalizar();
+  }//GEN-LAST:event_terminarActionPerformed
 
   public int getSizeRamdom() {
     return traza.getListaTif().size();
@@ -444,5 +419,53 @@ public class Ventana11 extends javax.swing.JFrame {
     jInternal.dispose();
     jDesktopPane1.removeAll();
     jDesktopPane1.repaint();
+  }
+
+  private void setNextImage() {
+    contador++;
+    cantidad++;
+    anterior.setEnabled(true);
+    guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
+    Imagen imagen1 = goImagen(contador);
+    try {
+      jDesktopPane1.add(jInternal);
+      setTituloYRutaLabel(imagen1);
+      setLabelPagina(pdf, imagen1);
+      setCB.set(imagen1.getId());
+      String ruta_temp = rutadeimagen.siguienteImagen(pdf, imagen1);
+      imageDraw.cargarImage(ruta_temp, pdf, tif, combo);
+      scrollImage.getViewport().add(imageDraw);
+      jInternal.setVisible(true);
+    } catch (Exception ex) {
+      Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  private void setBackImage() {
+    contador--;
+    cantidad--;
+    Imagen pr = backImagen(contador);
+    guardarYLimpiar(rutaJlabel, tablaCheck, pagina, pdf);
+    siguiente.setEnabled(true);
+    jDesktopPane1.add(jInternal);
+    jInternal.setVisible(true);
+    setTituloYRutaLabel(pr);
+    setLabelPagina(pdf, pr);
+    setCB.set(pr.getId());
+    String visualizacion = rutadeimagen.anteriorImagen(pdf, pr);
+    imageDraw.cargarImage(visualizacion, pdf, tif, combo);
+    scrollImage.getViewport().add(imageDraw);
+  }
+
+  private void setFinalizar() {
+    save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
+    NumeroRechazo numeroRechazo = new NumeroRechazo(traza.getId());
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        new Reporte(traza.getId()).setVisible(true);
+      }
+    });
+    dispose();
   }
 }

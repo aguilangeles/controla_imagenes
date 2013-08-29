@@ -54,6 +54,7 @@ public class Guardar {
             updateChecs = new UpdateChecs(controlxArchivo.getEstado(),
                     controlxArchivo.getIdTrazaArchivoControl(), conexion);
             updateChecs.update();
+             tablaCheck.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
             if (check) {
               updateChecs.updateEstadoArchivo(tif.getId());
             }
