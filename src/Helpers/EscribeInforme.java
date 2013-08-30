@@ -44,7 +44,8 @@ public class EscribeInforme {
       if (null != fichero) {
         try {
           fichero.close();
-          JOptionPane.showMessageDialog(tablaDetalles, "Podrá visualizar una síntesis del reporte en\n\t" + UBICACION+"\n");
+          JOptionPane.showMessageDialog(tablaDetalles, "Podrá visualizar una síntesis del reporte en\n\t"
+                  + UBICACION + "\n", "Reporte final", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
           JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(), "Error al cerrar archivo informe.txt", JOptionPane.ERROR_MESSAGE);
           Logger.getLogger(EscribeInforme.class.getName()).log(Level.SEVERE, null, ex);

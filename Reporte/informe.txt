@@ -1,8 +1,8 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-08-30 02:56:56.0
+Fecha de Control: 2013-08-30 03:10:51.0
 
-Id Traza: 96
+Id Traza: 99
 
 Ruta Completa: c:\angeles\reducido
 

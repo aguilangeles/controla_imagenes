@@ -69,14 +69,17 @@ public class AyudaVisual extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
     jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 102), 2));
 
+    scrollImage.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
     scrollImage.setFocusable(false);
 
     mensaje.setEditable(false);
     mensaje.setColumns(20);
     mensaje.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     mensaje.setRows(5);
+    mensaje.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
     mensaje.setFocusable(false);
     jScrollPane2.setViewportView(mensaje);
 
@@ -134,7 +137,7 @@ public class AyudaVisual extends javax.swing.JFrame {
           .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGap(11, 11, 11)
-        .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+        .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import necesitoUnMilagro.Ventana;
 import tratamientoruta.CrearElRamdom;
 
 /**
@@ -112,8 +113,6 @@ public class Worker extends SwingWorker<Object, Object> {
         conexion.executeUpdate(ret);
       } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Imagen y control", JOptionPane.ERROR_MESSAGE);
-
-//        Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -146,10 +145,7 @@ public class Worker extends SwingWorker<Object, Object> {
       int resultado = new UltimoIDInsertado(con, "traza").getUltimoID();
       trazaID = (resultado == 0) ? 1 : resultado;
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
-      new necesitoUnMilagro.Ventana(trazaDao.getTraza()).setVisible(true);
-//      new necesitoUnMilagro.Ventana11(trazaDao.getTraza()).setVisible(true);
-
-
+      new Ventana(trazaDao.getTraza()).setVisible(true);
     }
     con.isConexionClose();
     controles.dispose();
