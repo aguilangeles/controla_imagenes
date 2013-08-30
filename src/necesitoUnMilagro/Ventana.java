@@ -180,10 +180,12 @@ public class Ventana extends javax.swing.JFrame {
         .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
-    rutaJL.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    rutaJL.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    rutaJL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-    page.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    page.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     page.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    page.setText("pagina:22");
 
     jLabel2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -210,9 +212,9 @@ public class Ventana extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(rutaJL, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-            .addComponent(page, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(rutaJL, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+            .addComponent(page)
             .addGap(11, 11, 11))
           .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
