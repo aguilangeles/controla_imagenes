@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author MUTNPROD003
  */
-public class Ventana11 extends javax.swing.JFrame {
+public class Ventana13 extends javax.swing.JFrame {
 
   private int sizeRamdom;
   private int contador = 0;
@@ -34,7 +34,7 @@ public class Ventana11 extends javax.swing.JFrame {
   private final TablaCheckBox tablaCheckBox;
   private ImageDrawingComponent imageDraw = new ImageDrawingComponent();
 
-  public Ventana11(TrazaDao traza) {
+  public Ventana13(TrazaDao traza) {
     iniciar(traza);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
@@ -76,7 +76,7 @@ public class Ventana11 extends javax.swing.JFrame {
       scrollImage.getViewport().add(imageDraw);
       setCB.set(siguientes.getId());
     } catch (PropertyVetoException ex) {
-      Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(Ventana13.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
@@ -113,22 +113,22 @@ public class Ventana11 extends javax.swing.JFrame {
     jScrollPane3 = new javax.swing.JScrollPane();
     jTable2 = new javax.swing.JTable();
     jPanel1 = new javax.swing.JPanel();
+    siguiente = new javax.swing.JButton();
+    anterior = new javax.swing.JButton();
+    terminar = new javax.swing.JButton();
     jScrollPane1 = new javax.swing.JScrollPane();
     jDesktopPane1 = new javax.swing.JDesktopPane();
     jInternal = new javax.swing.JInternalFrame();
     jPanel2 = new javax.swing.JPanel();
     rutaJlabel = new javax.swing.JLabel();
-    scrollImage = new javax.swing.JScrollPane();
+    pagina = new javax.swing.JLabel();
+    panelButtCheck = new javax.swing.JPanel();
     scrollChecks = new javax.swing.JScrollPane();
     jScrollPane4 = new javax.swing.JScrollPane();
     tablaCheck = new javax.swing.JTable();
-    jPanel3 = new javax.swing.JPanel();
-    siguiente = new javax.swing.JButton();
-    anterior = new javax.swing.JButton();
-    jLabel1 = new javax.swing.JLabel();
+    scrollImage = new javax.swing.JScrollPane();
     combo = new javax.swing.JComboBox();
-    terminar = new javax.swing.JButton();
-    pagina = new javax.swing.JLabel();
+    jLabel1 = new javax.swing.JLabel();
 
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
@@ -161,6 +161,36 @@ public class Ventana11 extends javax.swing.JFrame {
 
     jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
+    siguiente.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    siguiente.setMnemonic('s');
+    siguiente.setText("Siguiente");
+    siguiente.setToolTipText("Alt+S");
+    siguiente.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        siguienteActionPerformed(evt);
+      }
+    });
+
+    anterior.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    anterior.setMnemonic('a');
+    anterior.setText("Anterior");
+    anterior.setToolTipText("ALT+A");
+    anterior.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        anteriorActionPerformed(evt);
+      }
+    });
+
+    terminar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    terminar.setMnemonic('t');
+    terminar.setText("Terminar");
+    terminar.setToolTipText("ALT+T");
+    terminar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        terminarActionPerformed(evt);
+      }
+    });
+
     jInternal.setBackground(new java.awt.Color(230, 252, 238));
     jInternal.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
     jInternal.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -176,22 +206,28 @@ public class Ventana11 extends javax.swing.JFrame {
     rutaJlabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     rutaJlabel.setText("RUTA");
 
+    pagina.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    pagina.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    pagina.setText("Pagina: ");
+
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel2Layout.createSequentialGroup()
-        .addComponent(rutaJlabel, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-        .addGap(101, 101, 101))
+        .addComponent(rutaJlabel, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap())
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-        .addGap(0, 0, Short.MAX_VALUE)
-        .addComponent(rutaJlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+      .addGroup(jPanel2Layout.createSequentialGroup()
+        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(rutaJlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(21, 21, 21))
     );
-
-    scrollImage.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(230, 252, 238)));
 
     scrollChecks.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -219,87 +255,18 @@ public class Ventana11 extends javax.swing.JFrame {
 
     scrollChecks.setViewportView(jScrollPane4);
 
-    jPanel3.setOpaque(false);
-
-    siguiente.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    siguiente.setMnemonic('s');
-    siguiente.setText("Siguiente");
-    siguiente.setToolTipText("Alt+S");
-    siguiente.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        siguienteActionPerformed(evt);
-      }
-    });
-
-    anterior.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    anterior.setMnemonic('a');
-    anterior.setText("Anterior");
-    anterior.setToolTipText("ALT+A");
-    anterior.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        anteriorActionPerformed(evt);
-      }
-    });
-
-    jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
-    jLabel1.setText("Visualizar Imagen al");
-
-    combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
-    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%" }));
-    combo.setToolTipText("");
-
-    terminar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    terminar.setMnemonic('t');
-    terminar.setText("Terminar");
-    terminar.setToolTipText("ALT+T");
-    terminar.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        terminarActionPerformed(evt);
-      }
-    });
-
-    javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-    jPanel3.setLayout(jPanel3Layout);
-    jPanel3Layout.setHorizontalGroup(
-      jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel3Layout.createSequentialGroup()
-        .addContainerGap()
-        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jPanel3Layout.createSequentialGroup()
-            .addComponent(siguiente)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-            .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addGroup(jPanel3Layout.createSequentialGroup()
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap())
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(40, 40, 40))
+    javax.swing.GroupLayout panelButtCheckLayout = new javax.swing.GroupLayout(panelButtCheck);
+    panelButtCheck.setLayout(panelButtCheckLayout);
+    panelButtCheckLayout.setHorizontalGroup(
+      panelButtCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(scrollChecks, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
     );
-    jPanel3Layout.setVerticalGroup(
-      jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel3Layout.createSequentialGroup()
-        .addContainerGap()
-        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(jPanel3Layout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(terminar)
-        .addContainerGap())
+    panelButtCheckLayout.setVerticalGroup(
+      panelButtCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(scrollChecks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
     );
 
-    pagina.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    pagina.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-    pagina.setText("Pagina: ");
+    scrollImage.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(230, 252, 238)));
 
     javax.swing.GroupLayout jInternalLayout = new javax.swing.GroupLayout(jInternal.getContentPane());
     jInternal.getContentPane().setLayout(jInternalLayout);
@@ -307,67 +274,72 @@ public class Ventana11 extends javax.swing.JFrame {
       jInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jInternalLayout.createSequentialGroup()
         .addGroup(jInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jInternalLayout.createSequentialGroup()
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(41, 41, 41)
-            .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(20, 20, 20))
+          .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(scrollImage))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(jInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(scrollChecks, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-        .addContainerGap())
+        .addComponent(panelButtCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(0, 0, 0))
     );
     jInternalLayout.setVerticalGroup(
       jInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalLayout.createSequentialGroup()
+      .addGroup(jInternalLayout.createSequentialGroup()
         .addGroup(jInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(panelButtCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(jInternalLayout.createSequentialGroup()
-            .addComponent(scrollChecks, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addGroup(jInternalLayout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(jInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGroup(jInternalLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(11, 11, 11)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(scrollImage)))
         .addContainerGap())
     );
 
-    jInternal.setBounds(10, 10, 790, 460);
+    jInternal.setBounds(10, 10, 830, 480);
     jDesktopPane1.add(jInternal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     jScrollPane1.setViewportView(jDesktopPane1);
+
+    combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%" }));
+    combo.setToolTipText("");
+
+    jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    jLabel1.setText("Visualizar Imagen al");
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
-        .addContainerGap())
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        .addContainerGap(37, Short.MAX_VALUE)
+        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(36, 36, 36)
+        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(68, 68, 68)
+        .addComponent(siguiente)
+        .addGap(67, 67, 67)
+        .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(75, 75, 75)
+        .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(29, 29, 29))
+      .addComponent(jScrollPane1)
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-        .addContainerGap())
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel1)))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGap(0, 0, 0))
+      .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,7 +380,6 @@ public class Ventana11 extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel1;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
-  private javax.swing.JPanel jPanel3;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JScrollPane jScrollPane3;
@@ -416,6 +387,7 @@ public class Ventana11 extends javax.swing.JFrame {
   private javax.swing.JTable jTable1;
   private javax.swing.JTable jTable2;
   private javax.swing.JLabel pagina;
+  private javax.swing.JPanel panelButtCheck;
   private javax.swing.JLabel rutaJlabel;
   private javax.swing.JScrollPane scrollChecks;
   private javax.swing.JScrollPane scrollImage;
@@ -461,7 +433,7 @@ public class Ventana11 extends javax.swing.JFrame {
       scrollImage.getViewport().add(imageDraw);
       jInternal.setVisible(true);
     } catch (Exception ex) {
-      Logger.getLogger(Ventana11.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(Ventana13.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 

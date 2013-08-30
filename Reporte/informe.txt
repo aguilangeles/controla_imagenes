@@ -1,16 +1,16 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-08-30 10:30:26.0
+Fecha de Control: 2013-08-30 11:41:22.0
 
-Id Traza: 41
+Id Traza: 48
 
-Ruta Completa: c:\angeles\volreducido
+Ruta Completa: c:\angeles\reducido
 
-Tamanio Lote: 16
+Tamanio Lote: 75
 
 Cantidad muestreada: 3
 
-Total Rechazos: 1
+Total Rechazos: 0
 
 Linea de captura: --/--
 
@@ -22,5 +22,5 @@ Tipo de Documento: Recibo
 
 Estado: Aceptado
 
-Observaciones: ruta completa
+Observaciones: 
 

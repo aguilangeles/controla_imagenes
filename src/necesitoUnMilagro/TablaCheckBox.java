@@ -34,7 +34,7 @@ public class TablaCheckBox {
     this.traza = traza;
     poblar();
   }
-  
+
 
   private void poblar() {
 
@@ -66,7 +66,7 @@ public class TablaCheckBox {
   private void setAnchoColumnas() {
     tablaCheck.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     tablaCheck.getColumnModel().getColumn(0).setPreferredWidth(20);
-    tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(210);
+    tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(214);
     tablaCheck.getColumnModel().getColumn(2).setPreferredWidth(20);
   }
 }
