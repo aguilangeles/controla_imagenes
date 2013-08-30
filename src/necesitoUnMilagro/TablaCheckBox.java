@@ -32,12 +32,11 @@ public class TablaCheckBox {
     this.model = model;
     this.tablaCheck = tablaCheck;
     this.traza = traza;
+    tablaCheck.setOpaque(false);
     poblar();
   }
 
-
   private void poblar() {
-
     model = (DefaultTableModel) tablaCheck.getModel();
     setAnchoColumnas();
     List<TiposDeControl> listatipos = traza.getListaTipos();
@@ -56,17 +55,17 @@ public class TablaCheckBox {
   }
   private AbstractAction moveToNextCell =
           new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-              int col = tablaCheck.getSelectedColumn() + 1;
-              tablaCheck.setColumnSelectionInterval(0, 0);
-            }
-          };
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      int col = tablaCheck.getSelectedColumn() + 1;
+      tablaCheck.setColumnSelectionInterval(0, 0);
+    }
+  };
 
   private void setAnchoColumnas() {
     tablaCheck.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     tablaCheck.getColumnModel().getColumn(0).setPreferredWidth(20);
-    tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(214);
+    tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(216);
     tablaCheck.getColumnModel().getColumn(2).setPreferredWidth(20);
   }
 }

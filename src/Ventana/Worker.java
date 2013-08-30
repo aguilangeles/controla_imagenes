@@ -146,7 +146,9 @@ public class Worker extends SwingWorker<Object, Object> {
       int resultado = new UltimoIDInsertado(con, "traza").getUltimoID();
       trazaID = (resultado == 0) ? 1 : resultado;
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
-      new necesitoUnMilagro.Ventana11(trazaDao.getTraza()).setVisible(true);
+      new necesitoUnMilagro.Ventana(trazaDao.getTraza()).setVisible(true);
+//      new necesitoUnMilagro.Ventana11(trazaDao.getTraza()).setVisible(true);
+
 
     }
     con.isConexionClose();

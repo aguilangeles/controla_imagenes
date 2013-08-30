@@ -46,8 +46,10 @@ public class Ventana11 extends javax.swing.JFrame {
     this.rutadeimagen = new GetRutaDeImagen(); // llama al conversor de pdf y devuelve la ruta de imagen
     this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.tif = isTIF(pdf, traza.getExtension());
+
     this.tablaCheckBox = new TablaCheckBox(model, tablaCheck, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
+    scrollChecks.setOpaque(false);
     tablaCheck.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     internal(pdf);
@@ -55,6 +57,7 @@ public class Ventana11 extends javax.swing.JFrame {
 
   private void iniciar(TrazaDao traza) {
     traza.getListaTif();
+
   }
 
   private boolean isTIF(boolean pdf, String extension) {
@@ -181,7 +184,7 @@ public class Ventana11 extends javax.swing.JFrame {
     jPanel2Layout.setHorizontalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel2Layout.createSequentialGroup()
-        .addComponent(rutaJlabel, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+        .addComponent(rutaJlabel, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
         .addGap(101, 101, 101))
     );
     jPanel2Layout.setVerticalGroup(
@@ -215,6 +218,7 @@ public class Ventana11 extends javax.swing.JFrame {
     });
     tablaCheck.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
     tablaCheck.setNextFocusableComponent(siguiente);
+    tablaCheck.setOpaque(false);
     jScrollPane4.setViewportView(tablaCheck);
 
     scrollChecks.setViewportView(jScrollPane4);
@@ -313,7 +317,7 @@ public class Ventana11 extends javax.swing.JFrame {
             .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(20, 20, 20))
           .addComponent(scrollImage))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGap(18, 18, 18)
         .addGroup(jInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(scrollChecks, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
