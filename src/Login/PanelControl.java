@@ -12,7 +12,12 @@ import PanelesABM.VerificacionABM;
 import Daos.Usuario;
 import Helpers.VersionEImageIcon;
 import PanelesABM.Verificacion_CargarComboBoxs;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +50,6 @@ public class PanelControl extends javax.swing.JFrame {
       alta_usuarios.setEnabled(false);
       verificacion.setEnabled(false);
     }
-//    cargar_lote.addActionListener(null);
   }
 
   public boolean isAdministrador() {
@@ -231,66 +235,53 @@ public class PanelControl extends javax.swing.JFrame {
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
-    private void base_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_base_datosActionPerformed
-      getBaseDatos();
-    }//GEN-LAST:event_base_datosActionPerformed
-
-    private void rangosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rangosActionPerformed
-      getRangos();
-    }//GEN-LAST:event_rangosActionPerformed
-
-    private void controlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_controlesActionPerformed
-      getControles();
-    }//GEN-LAST:event_controlesActionPerformed
-
-    private void alta_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alta_usuariosActionPerformed
-      getUsuarios();
-    }//GEN-LAST:event_alta_usuariosActionPerformed
-
-    private void verificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificacionActionPerformed
-      getVerificacion();
-    }//GEN-LAST:event_verificacionActionPerformed
-
-    private void cargar_loteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_loteActionPerformed
-      getCargaLote();
-    }//GEN-LAST:event_cargar_loteActionPerformed
+  private void base_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_base_datosActionPerformed
+    action(evt);
+  }//GEN-LAST:event_base_datosActionPerformed
 
   private void base_datosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_base_datosKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      getBaseDatos();
-    }
+    keyPressed(evt, base_datos);
   }//GEN-LAST:event_base_datosKeyPressed
 
+  private void rangosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rangosActionPerformed
+    action(evt);
+  }//GEN-LAST:event_rangosActionPerformed
+
   private void rangosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rangosKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      getRangos();
-    }
+    keyPressed(evt, rangos);
   }//GEN-LAST:event_rangosKeyPressed
 
   private void controlesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_controlesKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      getControles();
-    }
-
+    keyPressed(evt, controles);
   }//GEN-LAST:event_controlesKeyPressed
 
+  private void controlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_controlesActionPerformed
+    action(evt);
+  }//GEN-LAST:event_controlesActionPerformed
+
   private void verificacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificacionKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      getVerificacion();
-    }
+    keyPressed(evt, verificacion);
   }//GEN-LAST:event_verificacionKeyPressed
 
+  private void verificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificacionActionPerformed
+    action(evt);
+  }//GEN-LAST:event_verificacionActionPerformed
+
   private void alta_usuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_alta_usuariosKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      getUsuarios();
-    }
+    keyPressed(evt, alta_usuarios);
   }//GEN-LAST:event_alta_usuariosKeyPressed
 
+  private void alta_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alta_usuariosActionPerformed
+    action(evt);
+  }//GEN-LAST:event_alta_usuariosActionPerformed
+
   private void cargar_loteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cargar_loteKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      getCargaLote();
-    }
+    keyPressed(evt, cargar_lote);
   }//GEN-LAST:event_cargar_loteKeyPressed
+
+  private void cargar_loteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_loteActionPerformed
+    action(evt);
+  }//GEN-LAST:event_cargar_loteActionPerformed
   /**
    * @param args the command line arguments
    */
@@ -324,7 +315,8 @@ public class PanelControl extends javax.swing.JFrame {
   }
 
   private void getCargaLote() {
-    ControlDocumentosyVerificaciones control = new ControlDocumentosyVerificaciones(this, getUsuarioTipo());
+    ControlDocumentosyVerificaciones control =
+            new ControlDocumentosyVerificaciones(this, getUsuarioTipo());
   }
 
   private void getControles() {
@@ -352,5 +344,54 @@ public class PanelControl extends javax.swing.JFrame {
         new VerificacionABM().setVisible(true);
       }
     });
+  }
+
+  private void action(java.awt.event.ActionEvent evt) {
+    switch (evt.getActionCommand()) {
+      case "Base de Datos":
+        getBaseDatos();
+        break;
+      case "Rangos":
+        getRangos();
+        break;
+      case "Controles":
+        getControles();
+
+        break;
+      case "Verificación":
+        getVerificacion();
+        break;
+      case "Usuarios":
+        getUsuarios();
+        break;
+      default:
+        getCargaLote();
+        break;
+    }
+  }
+
+  public void keyPressed(KeyEvent e, JButton boton) {
+    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+      switch (boton.getText()) {
+        case "Base de Datos":
+          getBaseDatos();
+          break;
+        case "Rangos":
+          getRangos();
+          break;
+        case "Controles":
+          getControles();
+          break;
+        case "Verificación":
+          getVerificacion();
+          break;
+        case "Usuarios":
+          getUsuarios();
+          break;
+        default:
+          getCargaLote();
+          break;
+      }
+    }
   }
 }
