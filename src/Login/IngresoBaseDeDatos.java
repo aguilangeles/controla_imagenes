@@ -9,7 +9,6 @@ import Entidades.Conexion;
 import Entidades.ReadProperties;
 import Daos.LogQualitys;
 import Helpers.VersionEImageIcon;
-import javax.swing.ImageIcon;
 
 /**
  *

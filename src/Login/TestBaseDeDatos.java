@@ -50,7 +50,7 @@ public class TestBaseDeDatos {
     }
 
     private void testConexion(LogQualitys aUsuario) {
-        SetearArchivoConfiguracion setProperties = new SetearArchivoConfiguracion(aUsuario.getUrl(), aUsuario.getBase(), aUsuario.getUsuario(), aUsuario.getPassword());
+        SetConfigFile setProperties = new SetConfigFile(aUsuario.getUrl(), aUsuario.getBase(), aUsuario.getUsuario(), aUsuario.getPassword());
         if (validar.isConexion()) {
             aceptar.setBackground(Color.GREEN);
             aceptar.setText("OK");

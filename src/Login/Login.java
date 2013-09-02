@@ -153,12 +153,21 @@ public class Login extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-    setEntrar();
+      setEntrar();
     }//GEN-LAST:event_entrarActionPerformed
 
   private void entrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entrarKeyPressed
     setEntrar();
   }//GEN-LAST:event_entrarKeyPressed
+  private void setEntrar() {
+    /*Define si se setea el archivo o permite el ingreso del usuario*/
+    if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
+            && password.getText().trim().equalsIgnoreCase(USER_DEFAULT)) {
+      SetConfigFile setConfigFile = new SetConfigFile();
+    } else {
+      loginUsuario();
+    }
+  }
 
   private boolean isUsuarioValidado() {
     ValidarIngreso validarIngreso = new ValidarIngreso(user.getText(), password.getText());
@@ -206,13 +215,4 @@ public class Login extends javax.swing.JFrame {
   private javax.swing.JPasswordField password;
   private javax.swing.JTextField user;
   // End of variables declaration//GEN-END:variables
-
-  private void setEntrar() {
-    if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
-            && password.getText().trim().equalsIgnoreCase(USER_DEFAULT)) {
-      SetearArchivoConfiguracion setConfig = new SetearArchivoConfiguracion();
-    } else {
-      loginUsuario();
-    }
-  }
 }

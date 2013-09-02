@@ -19,20 +19,19 @@ public class CrearElRamdom {
     private List<Object> seleccion = new ArrayList<>();
     private int tamanio,rango;
 
-
     public CrearElRamdom(List<Object> lista, int rango) {
         this.lista = lista;
         this.rango = rango;
         this.tamanio =lista.size();
         generarRamdom();
     }
-
-
     private  void generarRamdom() {
         HashSet<Object> hash = new HashSet<>();
         while (hash.size() < rango) {
             Integer a1 = new Integer(new java.util.Random().nextInt(tamanio));
-            hash.add(a1);
+       if (!hash.contains(a1)) {
+        hash.add(a1);
+      }
         }
         ArrayList ListaHash = new ArrayList(hash);
         Collections.sort(ListaHash);
