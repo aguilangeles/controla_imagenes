@@ -4,21 +4,14 @@
  */
 package Login;
 
-import PanelesABM.CargarLote;
 import PanelesABM.ControlesABM;
 import PanelesABM.RangosABM;
 import PanelesABM.UsuariosABM;
 import PanelesABM.VerificacionABM;
 import Daos.Usuario;
 import Helpers.VersionEImageIcon;
-import PanelesABM.Verificacion_CargarComboBoxs;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.Action;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 /**
  *

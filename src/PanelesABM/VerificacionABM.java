@@ -244,13 +244,7 @@ public class VerificacionABM extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarActionPerformed
 
     private void desactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarActionPerformed
-      int idjtext = (tablaV.getSelectedRow());
-      Desactivar desactivar1 = new Desactivar(conexion, modelo, "tipos_verificacion", idjtext, 4);
-      if (desactivar1.modificarEstado()) {
-        mensajeLabel.setText("<html>Estado<br>Modificado</html>");
-        tablaV.repaint();
-
-      }
+      getDesactivarBoton();
 
     }//GEN-LAST:event_desactivarActionPerformed
 
@@ -326,5 +320,9 @@ public class VerificacionABM extends javax.swing.JFrame {
     ABM.setEnabled(false);
     agregar.setVisible(true);
     desactivar.setVisible(true);
+  }
+
+  private void getDesactivarBoton() {
+    new DesactivarBoton(tablaV, conexion, modelo, "Tipos_verificacion", 4, mensajeLabel);
   }
 }

@@ -264,7 +264,7 @@ public class UsuariosABM extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
       usuario.setEditable(true);
       int idNew = getIde() + 1;
-      Object[] ob = new Object[]{idNew,"ingrese nombre", "ingrese pasww",1,1};
+      Object[] ob = new Object[]{idNew, "ingrese nombre", "ingrese pasww", 1, 1};
       modelo.addRow(ob);
       tablaUsuarios.repaint();
       salvar.setVisible(true);
@@ -278,14 +278,7 @@ public class UsuariosABM extends javax.swing.JFrame {
     }//GEN-LAST:event_editarActionPerformed
 
     private void desactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarActionPerformed
-      usuario.setEditable(true);
-      int idjtext = (tablaUsuarios.getSelectedRow());
-      Desactivar desactivar1 = new Desactivar(conexion, modelo, "usuarios", idjtext, 4);
-      if(desactivar1.modificarEstado()){
-        mensajeLabel.setText("<html>Usuario<br>Modificado</html>");
-      tablaUsuarios.repaint();
-      }
-
+      getDesactivarBoton();
     }//GEN-LAST:event_desactivarActionPerformed
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
@@ -300,13 +293,13 @@ public class UsuariosABM extends javax.swing.JFrame {
       case "Agregar":
         boolean insertad;
         try {
-        tablaUsuarios.editCellAt(-1, -1);
+          tablaUsuarios.editCellAt(-1, -1);
           if (isRowEmpty(tablaUsuarios, getIde())) {
             insertad = usuario.getInsertar().insert_newUsuario(getIde());
             mensajeUpdate(insertad, "Usuario");
           }
         } catch (RuntimeException e) {
-           mensajeLabel.setText("<html>usuario<br>Rechazado</html>");
+          mensajeLabel.setText("<html>usuario<br>Rechazado</html>");
           JOptionPane.showMessageDialog(null, e.getMessage(), "Rango vacia", JOptionPane.ERROR_MESSAGE);
         }
         break;
@@ -318,9 +311,9 @@ public class UsuariosABM extends javax.swing.JFrame {
 
         tablaUsuarios.repaint();
         try {
-          if(isRowEmpty(tablaUsuarios, idjtext)){
-            update=
-        usuario.getEditar().usuarios_setRow(idjtext);
+          if (isRowEmpty(tablaUsuarios, idjtext)) {
+            update =
+                    usuario.getEditar().usuarios_setRow(idjtext);
             mensajeUpdate(update, "Usuario");
 
           }
@@ -426,12 +419,15 @@ public class UsuariosABM extends javax.swing.JFrame {
   private javax.swing.JTable tablaUsuarios;
   // End of variables declaration//GEN-END:variables
 
-  private void getABM() throws HeadlessException {
-    JOptionPane.showMessageDialog(tablaUsuarios, MensajeABM.INSTRUCCIONES);
-    ABM.setEnabled(false);
-    principalInternal.setTitle("Módulo de Edición");
-    agregar.setVisible(true);
-    editar.setVisible(true);
-    desactivar.setVisible(true);
+  private void getABM() {
+    AltaBajaYModificacionBoton altaBajaYModificacionBoton =
+            new AltaBajaYModificacionBoton(tablaUsuarios, ABM, agregar, editar, desactivar, principalInternal);
+    {
+    }
+  }
+
+  private void getDesactivarBoton() {
+    usuario.setEditable(true);
+    new DesactivarBoton(tablaUsuarios, conexion, modelo, "usuarios", 4, mensajeLabel);
   }
 }

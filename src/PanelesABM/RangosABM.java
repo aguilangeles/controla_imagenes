@@ -292,12 +292,12 @@ public class RangosABM extends javax.swing.JFrame {
     }//GEN-LAST:event_salvarActionPerformed
 
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
-      getABM();
+      activarABM();
     }//GEN-LAST:event_ABMActionPerformed
 
   private void ABMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ABMKeyPressed
     if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      getABM();
+      activarABM();
     }
   }//GEN-LAST:event_ABMKeyPressed
 
@@ -440,21 +440,13 @@ public class RangosABM extends javax.swing.JFrame {
 
   private void getDesactivar() {
     rangosDao.setEditable(true);
-    int idjtext = (tablaContenido.getSelectedRow());
-    Desactivar desactivar1 = new Desactivar(conexion, modelo, "rangos_qs", idjtext, 5);
-    if (desactivar1.modificarEstado()) {
-      mensajeLabel.setText("<html>Estado<br>Modificado</html>");
-      tablaContenido.repaint();
-    }
+    DesactivarBoton desactivarBoton =
+            new DesactivarBoton(tablaContenido, conexion, modelo,
+            "rangos_qs", 5, mensajeLabel);
   }
 
-  private void getABM() throws HeadlessException {
-    JOptionPane.showMessageDialog(tablaContenido,
-            MensajeABM.INSTRUCCIONES);
-    ABM.setEnabled(false);
-    principalInternal.setTitle("Módulo de Edición");
-    agregar.setVisible(true);
-    editar.setVisible(true);
-    desactivar.setVisible(true);
+  private void activarABM() {
+    AltaBajaYModificacionBoton altaBajaYModificacionBoton =
+            new AltaBajaYModificacionBoton(tablaContenido, ABM, agregar, editar, desactivar, principalInternal);
   }
 }
