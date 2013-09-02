@@ -16,30 +16,27 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class SetFechaUltimoIngresoUsuario {
+public class SetFechaDeIngreso {
 
-  private Usuario tipoUsuario;
-
-  public SetFechaUltimoIngresoUsuario() {
+  public SetFechaDeIngreso() {
   }
 
-  SetFechaUltimoIngresoUsuario(Usuario usuarioTipo) {
-    this.tipoUsuario = usuarioTipo;
-    setFecha();
+  SetFechaDeIngreso(Usuario usuario) {
+    setFecha(usuario);
   }
 
-  private void setFecha() {
+  private void setFecha(Usuario usuario) {
     Conexion conexion = new Conexion();
     if (conexion.isConexion()) {
       try {
         String ret = "UPDATE `qualitys`.`usuarios` SET`fecha_ingreso` = '"
-                + tipoUsuario.getFechaUltimoIngreso() + "' WHERE id = "
-                + tipoUsuario.getId() + ";";
+                + usuario.getFechaUltimoIngreso() + "' WHERE id = "
+                + usuario.getId() + ";";
         conexion.executeUpdate(ret);
         conexion.isConexionClose();
       } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en Seteo de Fecha", JOptionPane.ERROR_MESSAGE);
-        Logger.getLogger(SetFechaUltimoIngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//        Logger.getLogger(SetFechaDeIngreso.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
   }

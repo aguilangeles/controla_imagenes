@@ -12,21 +12,19 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public final class ValidarIngreso {
+public final class UsuarioYCategoria {
 
-  private String aName;
-  private String aPassw;
   private Usuario usuarioValidado = null;
   private boolean usuario;
 
-  public ValidarIngreso(String aName, String aPassw) {
-    this.aName = aName.trim();
-    this.aPassw = aPassw.trim();
-    verificarUsuarioEnBaseDeDatos();
+  public UsuarioYCategoria(String aName, String aPassw) {
+    String name = aName.trim();
+    String password = aPassw.trim();
+    verificarUsuarioEnBaseDeDatos(name, password);
 
   }
 
-  private void verificarUsuarioEnBaseDeDatos() {
+  private void verificarUsuarioEnBaseDeDatos(String name, String password) {
     Conexion conexion = new Conexion();
     try {
       if (conexion.isConexion()) {
@@ -37,10 +35,10 @@ public final class ValidarIngreso {
           String contrasenia = conexion.resulset.getString(3);
           int tipo = conexion.resulset.getInt(4);
           int estado = conexion.resulset.getInt(5);
-          Usuario user = new Usuario(id, nombre, contrasenia, tipo, estado);
-          if (isUsuarioExistente_y_Activo(user)) {
+          Usuario aUsuario = new Usuario(id, nombre, contrasenia, tipo, estado);
+          if (userExistsandIsActive(aUsuario, name, password)) {
             usuario = true;
-            usuarioValidado = user;
+            usuarioValidado = aUsuario;
           }
         }
       }
@@ -50,7 +48,7 @@ public final class ValidarIngreso {
     }
   }
 
-  private boolean isUsuarioExistente_y_Activo(Usuario tipoUsuari) {
+  private boolean userExistsandIsActive(Usuario tipoUsuari, String aName, String aPassw) {
     if (tipoUsuari.getNombre().equalsIgnoreCase(aName)
             && tipoUsuari.getPassw().equalsIgnoreCase(aPassw)
             && tipoUsuari.isActivo()) {

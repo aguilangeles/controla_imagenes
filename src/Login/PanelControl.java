@@ -45,7 +45,7 @@ public class PanelControl extends javax.swing.JFrame {
       alta_usuarios.setEnabled(false);
       verificacion.setEnabled(false);
     }
-    cargar_lote.addActionListener(null);
+//    cargar_lote.addActionListener(null);
   }
 
   public boolean isAdministrador() {
@@ -324,24 +324,7 @@ public class PanelControl extends javax.swing.JFrame {
   }
 
   private void getCargaLote() {
-    final Verificacion_CargarComboBoxs vc = new Verificacion_CargarComboBoxs();
-    vc.llenarQualitys();
-    vc.llenarDocumentos();
-    if (vc.getDocumentoList().isEmpty()) {
-      JOptionPane.showMessageDialog(rootPane, "No existen tipos de documento para aplicar al Lote",
-              "Error en la carga Tipo de Documento", JOptionPane.INFORMATION_MESSAGE);
-    } else if (vc.getVerificacionList().isEmpty()) {
-      JOptionPane.showMessageDialog(rootPane, "No existen tipos de Verificación para aplicar al Lote",
-              "Error en la carga Tipo de Verificación", JOptionPane.ERROR_MESSAGE);
-    } else {
-      java.awt.EventQueue.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          new CargarLote(getUsuarioTipo(), vc.getTipoDocumento(), vc.getTipoVerificacion()).setVisible(true);
-        }
-      });
-      dispose();
-    }
+    ControlDocumentosyVerificaciones control = new ControlDocumentosyVerificaciones(this, getUsuarioTipo());
   }
 
   private void getControles() {

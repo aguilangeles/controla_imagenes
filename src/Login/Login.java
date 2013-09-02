@@ -7,7 +7,7 @@ package Login;
 import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
 import Daos.Usuario;
-import Entidades.ValidarIngreso;
+import Entidades.UsuarioYCategoria;
 import Helpers.VersionEImageIcon;
 
 /**
@@ -165,22 +165,15 @@ public class Login extends javax.swing.JFrame {
             && password.getText().trim().equalsIgnoreCase(USER_DEFAULT)) {
       SetConfigFile setConfigFile = new SetConfigFile();
     } else {
+
       loginUsuario();
     }
   }
 
-  private boolean isUsuarioValidado() {
-    ValidarIngreso validarIngreso = new ValidarIngreso(user.getText(), password.getText());
-    if (validarIngreso.isUsuario()) {
-      usuario = validarIngreso.getUsuarioValidado();
-      return true;
-    }
-    return false;
-  }
-
   private void loginUsuario() {
+    /*si el usuario es apto, setea la fecha de ingreso*/
     if (isUsuarioValidado()) {
-      SetFechaUltimoIngresoUsuario setUsuarioFecha = new SetFechaUltimoIngresoUsuario(getUsuario());
+      SetFechaDeIngreso setfecha = new SetFechaDeIngreso(getUsuario());
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
@@ -190,8 +183,19 @@ public class Login extends javax.swing.JFrame {
       dispose();
     } else {
       JOptionPane.showMessageDialog(entrar, USER_INVALID, "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
-      setearTextFields();
+      user.setText("");
+      password.setText("");
     }
+  }
+
+  private boolean isUsuarioValidado() {
+    /*Identifica si es un usuario y qué categoria posee*/
+    UsuarioYCategoria userCat = new UsuarioYCategoria(user.getText(), password.getText());
+    if (userCat.isUsuario()) {
+      usuario = userCat.getUsuarioValidado();
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -199,11 +203,6 @@ public class Login extends javax.swing.JFrame {
    */
   public Usuario getUsuario() {
     return usuario;
-  }
-
-  private void setearTextFields() {
-    user.setText("");
-    password.setText("");
   }
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton entrar;
