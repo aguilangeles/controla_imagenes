@@ -23,8 +23,8 @@ public class ControlDocumentosyVerificaciones {
 
   private void cargar(JFrame panelControl, final Usuario usuario) {
     final Verificacion_CargarComboBoxs vc = new Verificacion_CargarComboBoxs();
-    vc.llenarQualitys();
-    vc.llenarDocumentos();
+    vc.llenarQualitys();    //llena el combo de verificacion
+    vc.llenarDocumentos(); //llena el combo documentos
     if (vc.getDocumentoList().isEmpty()) {
       JOptionPane.showMessageDialog(panelControl, "No existen tipos de documento para aplicar al Lote",
               "Error en la carga Tipo de Documento", JOptionPane.INFORMATION_MESSAGE);
@@ -40,6 +40,5 @@ public class ControlDocumentosyVerificaciones {
       });
       panelControl.dispose();
     }
-
   }
 }

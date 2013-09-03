@@ -184,7 +184,7 @@ public class CargarLote extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarSeleccionActionPerformed
-    getAceptar();
+      getAceptar();
     }//GEN-LAST:event_aceptarSeleccionActionPerformed
 
   private void aceptarSeleccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarSeleccionKeyPressed
@@ -204,6 +204,7 @@ public class CargarLote extends javax.swing.JFrame {
   }
 
   public List<Integer> getIdTipoControl() {
+
     return idTipoControl;
   }
 
@@ -218,26 +219,11 @@ public class CargarLote extends javax.swing.JFrame {
     return id;
   }
 
-  private List<Integer> idControlesByVerificacion() {
-    String result = (String) tipoVerificacionBox.getSelectedItem();
-    String[] dos = result.split("-");
-    int id = Integer.parseInt(dos[0]);
-    idVerificacion = id;
-    String selec = "SELECT idControl FROM qualitys.controles_verificacion where"
-            + " idVerificacion =" + id + ";";
-    if (con.isConexion()) {
-      try {
-        con.executeQuery(selec);
-        while (con.resulset.next()) {
-          idTipoControl.add(con.resulset.getInt(1));
-        }
-      } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(tipoDocumentoBox, ex.getMessage(), CargarLote.class.getName(), JOptionPane.ERROR_MESSAGE);
-      }
-    }
-    return idTipoControl;
+  private void getControlesPorVerificacion() {
+    ControlesByVerificacion ctrls = new ControlesByVerificacion();
+    idTipoControl = ctrls.idControlesByVerificacion(tipoVerificacionBox, con, idTipoControl);
+    idVerificacion = ctrls.getIdVerificacion();
   }
-
   public int getIdVerificacion() {
     return idVerificacion;
   }
@@ -302,7 +288,7 @@ public class CargarLote extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
                 "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
       } else {
-        idControlesByVerificacion();//controles
+        getControlesPorVerificacion();//controles
         con.isConexionClose();//
         IdentificarParent parent = new IdentificarParent(files);
         String rutaCompleta = parent.getParent();
