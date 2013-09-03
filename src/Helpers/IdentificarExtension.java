@@ -5,17 +5,16 @@
 package Helpers;
 
 import PanelesABM.ListaRecursiva;
+import PanelesABM.SwitchListaExtension;
 import Ventana.MuestraRango;
 import Ventana.Worker;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import tratamientoruta.BuscarPaginasPdf;
-import tratamientoruta.TipoDeImagen;
 
 /**
  *
@@ -27,7 +26,6 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
           + "lote es inferior al rango asignado para ese volumen. Edite tabla 'Rangos'.</html>";
   private int tamanio, muestra, idRango;
   private String extension;
-//  private List<Object> listaExtension = new ArrayList<>();
   private List<Object> listaExtension;
   private List<Object> listaResultado;
   private List<Integer> controlesList;
@@ -50,28 +48,16 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   }
 
   @Override
-  protected Void doInBackground() throws Exception {
+  protected Void doInBackground()  {
     ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel,file);
     listaExtension = extensionImagen.getListaExtension();
     extension = extensionImagen.getExtension();
-    listaResultado = switchExtension(extension, listaExtension, infoLabel);
+    listaResultado = new SwitchListaExtension(extension, listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();
     MuestraRango muestraRango = new MuestraRango(tamanio);
     muestra = muestraRango.getMuestra();
     idRango = muestraRango.getIdRango();
     return null;
-  }
-
-  public int getTamanio() {
-    return tamanio;
-  }
-
-  public int getMuestra() {
-    return muestra;
-  }
-
-  public int getIdRango() {
-    return idRango;
   }
 
   @Override
@@ -82,8 +68,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
           @Override
           public void run() {
             Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, parent,
-                    extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, getMuestra(), getTamanio(),
-                    getIdRango());
+                    extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio,idRango);
             worker.execute();
           }
         });
@@ -94,36 +79,19 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
       }
     }
   }
-
-  private List<Object> switchExtension(String extension, List<Object> lista, JLabel infoLabel) {
-    switch (extension) {
-      case ".tif":
-      case ".png":
-      case ".jpg":
-        lista = lista;
-        break;
-      case ".pdf":
-        BuscarPaginasPdf pagePdf = new BuscarPaginasPdf(lista, infoLabel);
-        lista = pagePdf.getLista();
-        break;
-    }
-    return lista;
-  }
-
-  public List<Object> getListaResultado() {
-    return listaResultado;
-  }
-
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
     boolean ret = (aTamanio > aRango) ? true : false;
     return ret;
   }
-
-  public List<Object> getLista() {
-    return listaExtension;
+  public int getTamanio() {
+    return tamanio;
   }
 
-  public void setLista(List<Object> lista) {
-    listaExtension = lista;
+  public int getMuestra() {
+    return muestra;
+  }
+
+  public int getIdRango() {
+    return idRango;
   }
 }

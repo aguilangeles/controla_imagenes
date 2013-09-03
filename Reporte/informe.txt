@@ -1,12 +1,12 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-03 12:08:46.0
+Fecha de Control: 2013-09-03 12:29:52.0
 
-Id Traza: 10
+Id Traza: 18
 
-Ruta Completa: C:\angeles\reducido
+Ruta Completa: C:\angeles\volreducido
 
-Tamanio Lote: 75
+Tamanio Lote: 16
 
 Cantidad muestreada: 3
 

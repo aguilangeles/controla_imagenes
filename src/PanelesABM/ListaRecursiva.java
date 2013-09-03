@@ -17,19 +17,15 @@ import tratamientoruta.TipoDeImagen;
 public class ListaRecursiva {
 
   private JLabel infoLabel;
-  private String extension;
-  private List<Object> listaExtension =new ArrayList<>();
   private File file;
+  private static String extension;
+  private static List<Object> listaExtension =new ArrayList<>();
 
   public ListaRecursiva(JLabel infoLabel,File file) {
     this.infoLabel = infoLabel;
-    this.file=file;
     buscarExtensiones(file);
-
   }
-
-
-
+  
   private void buscarExtensiones(File aFile) {
     File[] files = aFile.listFiles();
     for (int x = 0; x < files.length; x++) {

@@ -137,7 +137,7 @@ public class Ventana extends javax.swing.JFrame {
     });
 
     jComboBox1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%", " " }));
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
 
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setText("Ver Imagen al");
@@ -212,8 +212,8 @@ public class Ventana extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(rutaJL, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+            .addComponent(rutaJL, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(page)
             .addGap(11, 11, 11))
           .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -242,14 +242,14 @@ public class Ventana extends javax.swing.JFrame {
         .addContainerGap())
     );
 
-    internal.setBounds(0, 0, 820, 410);
+    internal.setBounds(0, 0, 840, 410);
     desktop.add(internal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     javax.swing.GroupLayout panelInicialLayout = new javax.swing.GroupLayout(panelInicial);
     panelInicial.setLayout(panelInicialLayout);
     panelInicialLayout.setHorizontalGroup(
       panelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(desktop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+      .addComponent(desktop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
     );
     panelInicialLayout.setVerticalGroup(
       panelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
