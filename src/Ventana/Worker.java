@@ -11,6 +11,8 @@ import Helpers.Archivo;
 import Helpers.UltimoIDInsertado;
 import Helpers.PasarGarbageCollector;
 import Helpers.Traza;
+import PanelesABM.OnlyPdf;
+import PanelesABM.Tif_Png_Jpg;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JFrame;
@@ -65,77 +67,21 @@ public class Worker extends SwingWorker<Object, Object> {
         case ".tif":
         case ".png":
         case ".jpg":
-          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion,
-                  lista.size(), parent, ultimaCarpeta, muestra, idRango);
-          List<Object> ramdomList = crearRamdom.getSeleccion();
-          for (Object obj : ramdomList) {
-            String aImagen = (String) obj;
-            int parentlength = parent.length() + 1;
-            String adaptarFile = aImagen.substring(parentlength);
-            String filename = adaptarFile.replace("\\", "\\\\");
-            System.out.println(filename);
-            Archivo archivo = new Archivo(conexion, idTraza, filename, 0, infoLabel);
-            imagenyControl();
-            Runtime gar = Runtime.getRuntime();
-            gar.gc();
-          }
+          Tif_Png_Jpg();
           break;
         case ".pdf":
-          sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion,
-                  tamanioLote, parent, ultimaCarpeta, muestra, idRango);
-          List<Object> ramdomPdf = crearRamdom.getSeleccion();
-          for (Object o : ramdomPdf) {
-            contador++;
-            NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
-            int parentlength = parent.length() + 1;
-            String adaptarFile = pagina.getNombre().substring(parentlength);
-            String filename = adaptarFile.replace("\\", "\\\\");
-            int page = pagina.getNumeroPagina();
-            Archivo archivo = new Archivo(conexion, idTraza, filename, page, infoLabel);
-            imagenyControl();
-            Runtime gar = Runtime.getRuntime();
-            gar.gc();
-          }
+          OnlyPdf();
           break;
       }
     }
     return null;
   }
-
-  private void imagenyControl() {
-    int id = getIdTraza() + 1;
-    for (Integer idarchivo : idControl) {
-      int lasid = new UltimoIDInsertado(conexion, "archivo").getUltimoID();
-      String ret = "Insert into qualitys.traza_archivo_controles "
-              + "(idtraza, idarchivo, idcontrol, estado) VALUES "
-              + "(" + id + ", " + lasid + ", " + idarchivo + ", " + 0 + ");";
-      try {
-        conexion.executeUpdate(ret);
-      } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Imagen y control", JOptionPane.ERROR_MESSAGE);
-      }
-    }
-  }
-
-  public String getExtension() {
-    return extension;
-  }
-
   @Override
   protected void done() {
     if (!isCancelled()) {
-      PasarGarbageCollector pasarGarbageCollector = new PasarGarbageCollector();
       conexion.isConexionClose();
       crearNuevoWorker();
     }
-  }
-
-  public int getIdTraza() {
-    return idTraza;
-  }
-
-  public String getParent() {
-    return parent;
   }
 
   private void crearNuevoWorker() {
@@ -149,5 +95,30 @@ public class Worker extends SwingWorker<Object, Object> {
     }
     con.isConexionClose();
     controles.dispose();
+  }
+
+  private void Tif_Png_Jpg() {
+    Tif_Png_Jpg tif_Png_Jpg =
+            new Tif_Png_Jpg(sTraza, conexion, idUsuario, idDocumento,
+            idVerificacion, idRango, muestra, lista.size(), idTraza,
+            parent, ultimaCarpeta, crearRamdom, infoLabel, idControl);
+  }
+
+  private void OnlyPdf() {
+    OnlyPdf onlyPdf =
+            new OnlyPdf(sTraza, conexion, idUsuario, idDocumento,
+            idVerificacion, tamanioLote, muestra, idRango, idTraza,
+            parent, ultimaCarpeta, crearRamdom, infoLabel, idControl);
+  }
+
+  public int getIdTraza() {
+    return idTraza;
+  }
+
+  public String getExtension() {
+    return extension;
+  }
+  public String getParent() {
+    return parent;
   }
 }
