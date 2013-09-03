@@ -24,11 +24,6 @@ public class Ventana extends javax.swing.JFrame {
   private boolean pdf;
   private boolean tif;
   private final TablaCheckBox tablaCheckBox;
-//  private final SetChecksBox setCB;
-//  private final Guardar save;
-//  private final GetRutaDeImagen rutadeimagen;
-//  private ImageDrawingComponent imageDraw = new ImageDrawingComponent();
-
   /**
    * Creates new form Ventana
    *
@@ -357,7 +352,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
-    new CrearInternal(traza, desktopPane, internal,
+    new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).mostrarPrimeraImagen(siguientes);
   }
@@ -366,7 +361,7 @@ public class Ventana extends javax.swing.JFrame {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
-    new CrearInternal(traza, desktopPane, internal,
+    new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).setNextImage(imagen1);
   }
@@ -375,7 +370,7 @@ public class Ventana extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
-    new CrearInternal(traza, desktopPane, internal,
+    new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).setBackImage(pr);
   }

@@ -21,7 +21,7 @@ import javax.swing.JTable;
  *
  * @author aguilangeles@gmail.com
  */
-public class CrearInternal {
+public class MostrarInternalFrames {
 
   private TrazaDao traza;
   private JDesktopPane desktopPane;
@@ -39,7 +39,7 @@ public class CrearInternal {
   private static Guardar save;
   private static SetChecksBox setCB;
 
-  public CrearInternal(TrazaDao traza, JDesktopPane desktopPane, JInternalFrame internal,
+  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane, JInternalFrame internal,
           JButton anterior, boolean pdf, boolean tif, JComboBox combo, JScrollPane scrollImage,
           int cantidad, int sizeRamdom, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente) {
     this.traza = traza;
@@ -56,8 +56,8 @@ public class CrearInternal {
     this.pageLabel = pageLabel;
     this.tabla = tabla;
     this.siguiente = siguiente;
-    CrearInternal.save = new Guardar();// sa
-    CrearInternal.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
+    MostrarInternalFrames.save = new Guardar();// sa
+    MostrarInternalFrames.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
   }
 
   public void mostrarPrimeraImagen(Imagen siguientes) {
