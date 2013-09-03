@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-import tratamientoruta.BuscarPaginasPdf;
 
 /**
  *
@@ -24,18 +23,20 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
 
   private static final String INCOMPATIBLE_TAMANIO_CON_RANGO = "<html>El tamanio del "
           + "lote es inferior al rango asignado para ese volumen. Edite tabla 'Rangos'.</html>";
-  private int tamanio, muestra, idRango;
-  private String extension;
-  private List<Object> listaExtension;
-  private List<Object> listaResultado;
   private List<Integer> controlesList;
   private File file;
   private JFrame frame;
   private JLabel infoLabel;
   private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion;
+  //
+  private static int tamanio, muestra, idRango;
+  private static String extension;
+  private static List<Object> listaExtension;
+  private static List<Object> listaResultado;
 
-  public IdentificarExtension(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
+  public IdentificarExtension(JFrame frame, JLabel infoLabel,
+          List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
     this.controlesList = controlesList;
     this.file = file;
     this.frame = frame;
