@@ -5,14 +5,9 @@
 package PanelesABM;
 
 import Ventana.Worker;
-import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import Daos.Usuario;
-import Helpers.IdentificarExtension;
-import Helpers.IdentificarParent;
 import Helpers.VersionEImageIcon;
 import java.awt.HeadlessException;
 import javax.swing.DefaultComboBoxModel;
@@ -204,7 +199,6 @@ public class CargarLote extends javax.swing.JFrame {
   }
 
   public List<Integer> getIdTipoControl() {
-
     return idTipoControl;
   }
 
@@ -274,34 +268,7 @@ public class CargarLote extends javax.swing.JFrame {
   private javax.swing.JComboBox tipoVerificacionBox;
   // End of variables declaration//GEN-END:variables
 
-  private void getAceptar() throws HeadlessException {
-    String ruta = rutaCarpeta.getText();
-    List<Object> lista = null;
-    File file = new File(ruta);
-    if (file.exists()) {
-      File[] files = file.listFiles();
-      if (tipoDocumentoBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de documento")) {
-        JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de documentos sin seleccionar",
-                "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-      } else if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de verificacion")) {
-
-        JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
-                "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-      } else {
-        getControlesPorVerificacion();//controles
-        con.isConexionClose();//
-        IdentificarParent parent = new IdentificarParent(files);
-        String rutaCompleta = parent.getParent();
-        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);
-        IdentificarExtension idext = new IdentificarExtension(this, informa, getIdTipoControl(), file,
-                rutaCompleta, ultimaCarpeta, usarioTipo.getId(), getTipoDocumento(), getIdVerificacion());
-        idext.execute();
-        aceptarSeleccion.setEnabled(false);
-
-      }
-    } else {
-      JOptionPane.showMessageDialog(rutaCarpeta, "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
-      rutaCarpeta.setText("");
-    }
+  private void getAceptar() {
+    AceptarCargarLote acc = new AceptarCargarLote(tipoDocumentoBox, tipoVerificacionBox, rutaCarpeta, con, aceptarSeleccion, informa, usarioTipo.getId(), this);
   }
 }
