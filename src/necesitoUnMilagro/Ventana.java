@@ -8,11 +8,6 @@ import Daos.Imagen;
 import Daos.TrazaDao;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JLabel;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,11 +23,11 @@ public class Ventana extends javax.swing.JFrame {
   private TrazaDao traza;
   private boolean pdf;
   private boolean tif;
-  private final SetChecksBox setCB;
-  private final Guardar save;
-  private final GetRutaDeImagen rutadeimagen;
   private final TablaCheckBox tablaCheckBox;
-  private ImageDrawingComponent imageDraw = new ImageDrawingComponent();
+//  private final SetChecksBox setCB;
+//  private final Guardar save;
+//  private final GetRutaDeImagen rutadeimagen;
+//  private ImageDrawingComponent imageDraw = new ImageDrawingComponent();
 
   /**
    * Creates new form Ventana
@@ -45,18 +40,14 @@ public class Ventana extends javax.swing.JFrame {
     initComponents();
     tabla.requestFocus();
     this.traza = trazadao;
-    this.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
     setExtendedState(6);
-    this.save = new Guardar();// salva los contenidos del internalframe
-    this.rutadeimagen = new GetRutaDeImagen(); // llama al conversor de pdf y devuelve la ruta de imagen
     this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.tif = isImagenTif(pdf, traza.getExtension());
-
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
-    internal(pdf);
+    getFirstImage(pdf);
   }
 
   /**
@@ -69,18 +60,18 @@ public class Ventana extends javax.swing.JFrame {
   private void initComponents() {
 
     panelInicial = new javax.swing.JPanel();
-    desktop = new javax.swing.JDesktopPane();
+    desktopPane = new javax.swing.JDesktopPane();
     internal = new javax.swing.JInternalFrame();
     jScrollPane2 = new javax.swing.JScrollPane();
     tabla = new javax.swing.JTable();
     jPanel1 = new javax.swing.JPanel();
     siguiente = new javax.swing.JButton();
     anterior = new javax.swing.JButton();
-    jComboBox1 = new javax.swing.JComboBox();
+    combo = new javax.swing.JComboBox();
     jLabel1 = new javax.swing.JLabel();
     terminar = new javax.swing.JButton();
-    rutaJL = new javax.swing.JLabel();
-    page = new javax.swing.JLabel();
+    rutaLabel = new javax.swing.JLabel();
+    pageLabel = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
     jPanel2 = new javax.swing.JPanel();
     scrollImage = new javax.swing.JScrollPane();
@@ -136,8 +127,8 @@ public class Ventana extends javax.swing.JFrame {
       }
     });
 
-    jComboBox1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
+    combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
 
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setText("Ver Imagen al");
@@ -163,7 +154,7 @@ public class Ventana extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+          .addComponent(combo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
       .addComponent(terminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     jPanel1Layout.setVerticalGroup(
@@ -174,18 +165,18 @@ public class Ventana extends javax.swing.JFrame {
           .addComponent(anterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGap(9, 9, 9)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel1))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
-    rutaJL.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
-    rutaJL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    rutaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-    page.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
-    page.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-    page.setText("pagina:22");
+    pageLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    pageLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    pageLabel.setText("pagina:22");
 
     jLabel2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -212,9 +203,9 @@ public class Ventana extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(rutaJL, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(rutaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(page)
+            .addComponent(pageLabel)
             .addGap(11, 11, 11))
           .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -229,8 +220,8 @@ public class Ventana extends javax.swing.JFrame {
       .addGroup(internalLayout.createSequentialGroup()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(rutaJL, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(page, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(rutaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,17 +234,17 @@ public class Ventana extends javax.swing.JFrame {
     );
 
     internal.setBounds(0, 0, 840, 410);
-    desktop.add(internal, javax.swing.JLayeredPane.DEFAULT_LAYER);
+    desktopPane.add(internal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     javax.swing.GroupLayout panelInicialLayout = new javax.swing.GroupLayout(panelInicial);
     panelInicial.setLayout(panelInicialLayout);
     panelInicialLayout.setHorizontalGroup(
       panelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(desktop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
+      .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
     );
     panelInicialLayout.setVerticalGroup(
       panelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(desktop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+      .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -271,19 +262,35 @@ public class Ventana extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
-    // TODO add your handling code here:
     setFinalizar();
   }//GEN-LAST:event_terminarActionPerformed
 
   private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-    // TODO add your handling code here:
     setBackImage();
   }//GEN-LAST:event_anteriorActionPerformed
 
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-    // TODO add your handling code here:
-    setNextImage();
+    getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
+   private Imagen goImagen(int contador) {
+    int limiteSuperior = getSizeRamdom() - 1;
+    Imagen imagen = traza.getListaTif().get(contador);
+    if (contador == limiteSuperior) {
+      siguiente.setEnabled(false);
+      terminar.setEnabled(true);
+    }
+    return imagen;
+  }
+
+  private Imagen backImagen(int contador) {
+    int limiteInferior = 0;
+    Imagen imagen = traza.getListaTif().get(contador);
+    if (limiteInferior == contador) {
+      anterior.setEnabled(false);
+    }
+    return imagen;
+  }
+
   /**
    * @param args the command line arguments
    */
@@ -320,27 +327,22 @@ public class Ventana extends javax.swing.JFrame {
 //  }
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton anterior;
-  private javax.swing.JDesktopPane desktop;
+  private javax.swing.JComboBox combo;
+  private javax.swing.JDesktopPane desktopPane;
   private javax.swing.JInternalFrame internal;
-  private javax.swing.JComboBox jComboBox1;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
   private javax.swing.JScrollPane jScrollPane2;
-  private javax.swing.JLabel page;
+  private javax.swing.JLabel pageLabel;
   private javax.swing.JPanel panelInicial;
-  private javax.swing.JLabel rutaJL;
+  private javax.swing.JLabel rutaLabel;
   private javax.swing.JScrollPane scrollImage;
   private javax.swing.JButton siguiente;
   private javax.swing.JTable tabla;
   private javax.swing.JButton terminar;
   // End of variables declaration//GEN-END:variables
-
-  private void iniciar(TrazaDao traza) {
-    traza.getListaTif();
-
-  }
 
   private boolean isImagenTif(boolean pdf, String extension) {
     if (!pdf && extension.equalsIgnoreCase(".tif")) {
@@ -349,100 +351,38 @@ public class Ventana extends javax.swing.JFrame {
     return false;
   }
 
-  private void internal(boolean pdf) {
-    try {
-      internal.setMaximum(true);
-      anterior.setEnabled(false);
-      Imagen siguientes = goImagen(contador);//trae el ramdom
-      setTituloYRutaLabel(siguientes);
-      String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
-      setLabelPagina(pdf, siguientes);
-      imageDraw.cargarImage(ruta, pdf, tif, jComboBox1);
-      scrollImage.getViewport().add(imageDraw);
-      setCB.set(siguientes.getId());
-    } catch (PropertyVetoException ex) {
-      Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  private void iniciar(TrazaDao traza) {
+    traza.getListaTif();
   }
 
-  private Imagen goImagen(int contador) {
-    int limiteSuperior = getSizeRamdom() - 1;
-    Imagen imagen = traza.getListaTif().get(contador);
-    if (contador == limiteSuperior) {
-      siguiente.setEnabled(false);
-      terminar.setEnabled(true);
-    }
-    return imagen;
+  private void getFirstImage(boolean pdf) {
+    Imagen siguientes = goImagen(contador);//trae el ramdom
+    new CrearInternal(traza, desktopPane, internal,
+            anterior, pdf, tif, combo, scrollImage,
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).mostrarPrimeraImagen(siguientes);
   }
 
-  private Imagen backImagen(int contador) {
-    int limiteInferior = 0;
-    Imagen imagen = traza.getListaTif().get(contador);
-    if (limiteInferior == contador) {
-      anterior.setEnabled(false);
-    }
-    return imagen;
-  }
-
-  private void setTituloYRutaLabel(Imagen siguientes) {
-    internal.setTitle("Imagen " + cantidad + "/" + getSizeRamdom());
-    rutaJL.setText(siguientes.getRutaInsertadaEnDB());
-  }
-
-  private void setLabelPagina(boolean pdf, Imagen siguientes) {
-    if (pdf) {
-      int page1 = siguientes.getPagina() + 1;
-      page.setText("Pagina: " + page1);
-    } else {
-      page.setVisible(false);
-    }
-  }
-
-  private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina, boolean pdf) {
-    save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
-    internal.dispose();
-    desktop.removeAll();
-    desktop.repaint();
-  }
-
-  private void setNextImage() {
+  private void getNextImage() {
     contador++;
     cantidad++;
-    anterior.setEnabled(true);
-    guardarYLimpiar(rutaJL, tabla, page, pdf);
     Imagen imagen1 = goImagen(contador);
-    try {
-      desktop.add(internal);
-      setTituloYRutaLabel(imagen1);
-      setLabelPagina(pdf, imagen1);
-      setCB.set(imagen1.getId());
-      String ruta_temp = rutadeimagen.siguienteImagen(pdf, imagen1);
-      imageDraw.cargarImage(ruta_temp, pdf, tif, jComboBox1);
-      scrollImage.getViewport().add(imageDraw);
-      internal.setVisible(true);
-    } catch (Exception ex) {
-      Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    new CrearInternal(traza, desktopPane, internal,
+            anterior, pdf, tif, combo, scrollImage,
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).setNextImage(imagen1);
   }
 
   private void setBackImage() {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
-    guardarYLimpiar(rutaJL, tabla, page, pdf);
-    siguiente.setEnabled(true);
-    desktop.add(internal);
-    internal.setVisible(true);
-    setTituloYRutaLabel(pr);
-    setLabelPagina(pdf, pr);
-    setCB.set(pr.getId());
-    String visualizacion = rutadeimagen.anteriorImagen(pdf, pr);
-    imageDraw.cargarImage(visualizacion, pdf, tif, jComboBox1);
-    scrollImage.getViewport().add(imageDraw);
+    new CrearInternal(traza, desktopPane, internal,
+            anterior, pdf, tif, combo, scrollImage,
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).setBackImage(pr);
   }
 
   private void setFinalizar() {
-    save.guardar(traza, rutaJL.getText(), tabla, page, pdf);
+    Guardar save = new Guardar();
+    save.guardar(traza, rutaLabel.getText(), tabla, pageLabel, pdf);
     NumeroRechazo numeroRechazo = new NumeroRechazo(traza.getId());
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override

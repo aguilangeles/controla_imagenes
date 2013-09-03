@@ -6,18 +6,13 @@ package Ventana;
 
 import Entidades.Conexion;
 import Entidades.LlenarTrazaDao;
-import Daos.NombrePaginaDelPDF;
-import Helpers.Archivo;
 import Helpers.UltimoIDInsertado;
-import Helpers.PasarGarbageCollector;
 import Helpers.Traza;
 import PanelesABM.OnlyPdf;
 import PanelesABM.Tif_Png_Jpg;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import necesitoUnMilagro.Ventana;
 import tratamientoruta.CrearElRamdom;
@@ -64,9 +59,7 @@ public class Worker extends SwingWorker<Object, Object> {
     if (conexion.isConexion()) {
       idTraza = new UltimoIDInsertado(conexion, "traza").getUltimoID();
       switch (extension) {
-        case ".tif":
-        case ".png":
-        case ".jpg":
+        case ".tif": case ".png": case ".jpg":
           Tif_Png_Jpg();
           break;
         case ".pdf":
@@ -76,6 +69,7 @@ public class Worker extends SwingWorker<Object, Object> {
     }
     return null;
   }
+
   @Override
   protected void done() {
     if (!isCancelled()) {

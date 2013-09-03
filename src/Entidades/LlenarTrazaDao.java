@@ -7,7 +7,6 @@ package Entidades;
 import Daos.TrazaDao;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
