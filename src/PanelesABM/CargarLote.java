@@ -77,6 +77,7 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel2.setText("Ruta");
 
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    rutaCarpeta.setText("C:/angeles/reducido");
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     aceptarSeleccion.setMnemonic('c');
@@ -185,42 +186,6 @@ public class CargarLote extends javax.swing.JFrame {
   private void aceptarSeleccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarSeleccionKeyPressed
     getAceptar();
   }//GEN-LAST:event_aceptarSeleccionKeyPressed
-
-  private String getUltimaCarpeta(String aParent) {
-    String ret = "";
-    if (aParent.contains("\\")) {
-      String replace = aParent.replace("\\", ", ");
-      String[] rsplit = replace.split(", ");
-      for (int i = 0; i < rsplit.length; i++) {
-        ret = (rsplit[i]);
-      }
-    }
-    return ret;
-  }
-
-  public List<Integer> getIdTipoControl() {
-    return idTipoControl;
-  }
-
-  public Usuario getUsarioTipo() {
-    return usarioTipo;
-  }
-
-  private int getTipoDocumento() {
-    String result = (String) tipoDocumentoBox.getSelectedItem();
-    String[] dos = result.split("-");
-    int id = Integer.parseInt(dos[0]);
-    return id;
-  }
-
-  private void getControlesPorVerificacion() {
-    ControlesByVerificacion ctrls = new ControlesByVerificacion();
-    idTipoControl = ctrls.idControlesByVerificacion(tipoVerificacionBox, con, idTipoControl);
-    idVerificacion = ctrls.getIdVerificacion();
-  }
-  public int getIdVerificacion() {
-    return idVerificacion;
-  }
   /**
    * @param args the command line arguments
    */

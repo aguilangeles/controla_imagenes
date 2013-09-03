@@ -4,6 +4,7 @@
  */
 package Helpers;
 
+import PanelesABM.ListaRecursiva;
 import Ventana.MuestraRango;
 import Ventana.Worker;
 import java.io.File;
@@ -26,7 +27,8 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
           + "lote es inferior al rango asignado para ese volumen. Edite tabla 'Rangos'.</html>";
   private int tamanio, muestra, idRango;
   private String extension;
-  private List<Object> listaExtension = new ArrayList<>();
+//  private List<Object> listaExtension = new ArrayList<>();
+  private List<Object> listaExtension;
   private List<Object> listaResultado;
   private List<Integer> controlesList;
   private File file;
@@ -47,46 +49,11 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     this.idVerificacion = idVerificacion;
   }
 
-  public IdentificarExtension(File aFile) {
-    this.file = aFile;
-  }
-
-  private void buscarExtensiones(File aFile) {
-    File[] files = aFile.listFiles();
-    for (int x = 0; x < files.length; x++) {
-      String name = files[x].getName();
-      infoLabel.setText("Analizando..." + name);
-      boolean ext = (name.endsWith(".tif")//
-              || name.endsWith(".pdf")
-              || name.endsWith(".jpg")
-              || name.endsWith(".png")) ? true : false;
-      if (files[x].isDirectory()) {
-        buscarExtensiones(files[x]);
-      }
-      if (ext) {
-        TipoDeImagen stringImage = new TipoDeImagen(name);
-        extension = (stringImage.getExtension());
-        listaExtension.add(files[x].getAbsolutePath());
-      }
-    }
-
-  }
-
-  public String getExtension() {
-    return extension;
-  }
-
-  public List<Object> getLista() {
-    return listaExtension;
-  }
-
-  public void setLista(List<Object> lista) {
-    listaExtension = lista;
-  }
-
   @Override
   protected Void doInBackground() throws Exception {
-    buscarExtensiones(file);
+    ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel,file);
+    listaExtension = extensionImagen.getListaExtension();
+    extension = extensionImagen.getExtension();
     listaResultado = switchExtension(extension, listaExtension, infoLabel);
     tamanio = listaResultado.size();
     MuestraRango muestraRango = new MuestraRango(tamanio);
@@ -146,8 +113,17 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   public List<Object> getListaResultado() {
     return listaResultado;
   }
+
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
     boolean ret = (aTamanio > aRango) ? true : false;
     return ret;
+  }
+
+  public List<Object> getLista() {
+    return listaExtension;
+  }
+
+  public void setLista(List<Object> lista) {
+    listaExtension = lista;
   }
 }

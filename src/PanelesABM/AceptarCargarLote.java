@@ -34,7 +34,8 @@ public class AceptarCargarLote {
 
   private static int idVerificacion;
   private static List<Integer> idTipoControl = new ArrayList<>();
-  public AceptarCargarLote(JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox, JTextField rutaCarpeta, Conexion con, JButton aceptarSeleccion, JLabel informa, int idUsuario, JFrame frame) {
+  public AceptarCargarLote(JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox,
+          JTextField rutaCarpeta, Conexion con, JButton aceptarSeleccion, JLabel informa, int idUsuario, JFrame frame) {
     this.tipoDocumentoBox = tipoDocumentoBox;
     this.tipoVerificacionBox = tipoVerificacionBox;
     this.rutaCarpeta = rutaCarpeta;
@@ -45,6 +46,7 @@ public class AceptarCargarLote {
     this.frame = frame;
     getAceptar();
   }
+
 
   private void getAceptar() {
 
