@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import static PanelesABM.ControlesABM.ROW_EMPTY;
-import java.awt.HeadlessException;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -262,13 +261,7 @@ public class UsuariosABM extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-      usuario.setEditable(true);
-      int idNew = getIde() + 1;
-      Object[] ob = new Object[]{idNew, "ingrese nombre", "ingrese pasww", 1, 1};
-      modelo.addRow(ob);
-      tablaUsuarios.repaint();
-      salvar.setVisible(true);
-      evento = "Agregar";
+      AgregarBoton();
     }//GEN-LAST:event_agregarActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
@@ -288,7 +281,8 @@ public class UsuariosABM extends javax.swing.JFrame {
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
       botonGuardar();
     }//GEN-LAST:event_salvarActionPerformed
-  private void botonGuardar() {
+  
+    private void botonGuardar() {
     switch (evento) {
       case "Agregar":
         boolean insertad;
@@ -333,7 +327,6 @@ public class UsuariosABM extends javax.swing.JFrame {
   }//GEN-LAST:event_ABMKeyPressed
 
   private void cerrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cerrarKeyPressed
-    // TODO add your handling code here:
     dispose();
   }//GEN-LAST:event_cerrarKeyPressed
 
@@ -422,12 +415,18 @@ public class UsuariosABM extends javax.swing.JFrame {
   private void getABM() {
     AltaBajaYModificacionBoton altaBajaYModificacionBoton =
             new AltaBajaYModificacionBoton(tablaUsuarios, ABM, agregar, editar, desactivar, principalInternal);
-    {
-    }
   }
 
   private void getDesactivarBoton() {
     usuario.setEditable(true);
     new DesactivarBoton(tablaUsuarios, conexion, modelo, "usuarios", 4, mensajeLabel);
+  }
+
+  private void AgregarBoton() {
+    usuario.setEditable(true);
+    int idNew = getIde() + 1;
+    Object[] ob = new Object[]{idNew, "ingrese nombre", "ingrese passw", 1, 1};
+    new AgregarBoton(modelo, tablaUsuarios, salvar, ob);
+    evento = "Agregar";
   }
 }

@@ -9,12 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import Entidades.Conexion;
 import Helpers.Minimo;
 import Helpers.VersionEImageIcon;
-import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
 /**
@@ -426,9 +422,7 @@ public class RangosABM extends javax.swing.JFrame {
     int idNew = getIde() + 1;
     int nuevoMin = (minimo.minimoMasUno(getIde()));
     Object[] ob = new Object[]{idNew, nuevoMin, 0, 0, 0, 1};
-    modelo.addRow(ob);
-    tablaContenido.repaint();
-    salvar.setVisible(true);
+    new AgregarBoton(modelo, tablaContenido, salvar, ob);
     evento = "Agregar";
   }
 

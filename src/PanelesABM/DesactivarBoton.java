@@ -15,13 +15,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DesactivarBoton {
 
-  public DesactivarBoton(JTable tabla, Conexion conexion, DefaultTableModel modelo, String nombreTabla,  int columna, JLabel mensaje) {
+  public DesactivarBoton(JTable tabla, Conexion conexion, DefaultTableModel modelo,
+          String nombreTabla, int columna, JLabel mensaje) {
 
-  getDesactivar(tabla, conexion, modelo, nombreTabla,  columna, mensaje);
+    getDesactivar(tabla, conexion, modelo, nombreTabla, columna, mensaje);
   }
 
-  private void getDesactivar(JTable tabla, Conexion conexion, DefaultTableModel modelo, String nombreTabla, int columna, JLabel mensaje) {
-//    rangosDao.setEditable(true);
+  private void getDesactivar(JTable tabla, Conexion conexion, DefaultTableModel modelo,
+          String nombreTabla, int columna, JLabel mensaje) {
     int idjtext = (tabla.getSelectedRow());
     Desactivar desactivar1 = new Desactivar(conexion, modelo, nombreTabla, idjtext, columna);
     if (desactivar1.modificarEstado()) {

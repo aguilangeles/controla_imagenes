@@ -307,11 +307,6 @@ public class PanelControl extends javax.swing.JFrame {
     });
   }
 
-  private void getCargaLote() {
-    ControlDocumentosyVerificaciones control =
-            new ControlDocumentosyVerificaciones(this, getUsuarioTipo());
-  }
-
   private void getControles() {
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
@@ -320,6 +315,16 @@ public class PanelControl extends javax.swing.JFrame {
       }
     });
   }
+  
+  private void getVerificacion() {
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        new VerificacionABM().setVisible(true);
+      }
+    });
+  }
+
 
   private void getUsuarios() {
     java.awt.EventQueue.invokeLater(new Runnable() {
@@ -329,15 +334,11 @@ public class PanelControl extends javax.swing.JFrame {
       }
     });
   }
-
-  private void getVerificacion() {
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        new VerificacionABM().setVisible(true);
-      }
-    });
+  private void getCargaLote() {
+    ControlDocumentosyVerificaciones control =
+            new ControlDocumentosyVerificaciones(this, getUsuarioTipo());
   }
+
 
   private void action(java.awt.event.ActionEvent evt) {
     switch (evt.getActionCommand()) {

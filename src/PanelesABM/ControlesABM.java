@@ -270,18 +270,7 @@ public class ControlesABM extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-      controles.setEditable(true);
-      int idTable = getIde() + 1;
-      Object[] ob = new Object[]{idTable, "Ingrese nombre", "Ingrese descripción", "ejemplo.jpg", 1};
-      modelo.addRow(ob);
-      int row = tablaContenido.getRowCount() - 1;
-      Rectangle rect = tablaContenido.getCellRect(row, 0, true);
-      tablaContenido.scrollRectToVisible(rect);
-      tablaContenido.clearSelection();
-      tablaContenido.setRowSelectionInterval(row, row);
-      modelo.fireTableDataChanged();
-      salvar.setVisible(true);
-      evento = "Agregar";
+      getAgregarBoton();
 
     }//GEN-LAST:event_agregarActionPerformed
 
@@ -409,6 +398,15 @@ public class ControlesABM extends javax.swing.JFrame {
 
   private void getDesactivarBoton() {
     controles.setEditable(true);
-    DesactivarBoton desactivarBoton = new DesactivarBoton(tablaContenido, conexion, modelo, "controles", 4, mensajLab);
+    DesactivarBoton desactivarBoton =
+            new DesactivarBoton(tablaContenido, conexion, modelo, "controles", 4, mensajLab);
+  }
+
+  private void getAgregarBoton() {
+    controles.setEditable(true);
+    int idTable = getIde() + 1;
+    Object[] ob = new Object[]{idTable, "Ingrese nombre", "Ingrese descripción", "ejemplo.jpg", 1};
+    new AgregarBoton().addWithRectangle(ob, modelo, tablaContenido, salvar);
+    evento = "Agregar";
   }
 }
