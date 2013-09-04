@@ -40,7 +40,6 @@ public class CrearElRamdom {
             Integer imagen = (Integer) it.next();
             seleccion.add(lista.get(imagen));
         }
-        new Helpers.PasarGarbageCollector();
     }
 
     public List<Object> getSeleccion() {

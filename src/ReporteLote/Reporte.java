@@ -4,10 +4,7 @@
  */
 package ReporteLote;
 
-import Helpers.EscribeInforme;
 import java.awt.HeadlessException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -44,7 +41,6 @@ public class Reporte extends javax.swing.JFrame {
     this.idtraza = idtraza;
     setResizable(false);
     if (conexion.isConexion()) {
-
       Tabla_TrazaReporte poblarTablaTraza = new Tabla_TrazaReporte(conexion, idtraza, tablaDetalles);
       Tabla_TiposDeControlCantidad poblarTablaDiscriminacionTipos = new Tabla_TiposDeControlCantidad(idtraza, conexion, tabladeTipos);
       actionRadioButton();
@@ -254,7 +250,6 @@ public class Reporte extends javax.swing.JFrame {
     if (bg.getSelection() != null) {
       if (jTextArea1.getText().length() >= 500) {
         JOptionPane.showMessageDialog(jTextArea1, "Reduzca el texto a 500 caracteres", "Limite de texto permitido", JOptionPane.ERROR_MESSAGE);
-
       } else {
         UpdateEstadoLote updateEstadoLote = new UpdateEstadoLote(conexion, idtraza, si.isSelected(), jTextArea1, tablaDetalles);
         conexion.isConexionClose();
