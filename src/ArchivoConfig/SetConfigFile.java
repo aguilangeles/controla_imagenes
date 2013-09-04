@@ -11,6 +11,7 @@ import java.util.Properties;
 import javax.swing.JOptionPane;
 
 /**
+ * Setea el archivo de configuracion en funcion del tipo de usuario.
  *
  * @author MUTNPROD003
  */
@@ -20,15 +21,17 @@ public class SetConfigFile {
   private Properties properties = new Properties();
 
   public SetConfigFile() {
-    removerYAbrirNuevoLog();
+    removerCamposYAbrirNuevoLog();
   }
 
   public SetConfigFile(String url, String database, String user, String password) {
     mostrarCamposExistentes(url, database, user, password);
   }
 
-  private void removerYAbrirNuevoLog() {
-    try {
+  private void removerCamposYAbrirNuevoLog() {
+    /*si el usuario es admininstrador, permite el ingreso de nuevos campos*/
+    try
+      {
       properties.setProperty("url", "");
       properties.setProperty("database", "");
       properties.setProperty("dbuser", "");
@@ -40,21 +43,25 @@ public class SetConfigFile {
           new IngresoBaseDeDatos().setVisible(true);
         }
       });
-    } catch (IOException e) {
+      } catch (IOException e)
+      {
       JOptionPane.showMessageDialog(null, e.getMessage(), "Setear archivo de configuración", JOptionPane.ERROR_MESSAGE);
-    }
+      }
   }
 
   private void mostrarCamposExistentes(String url, String database, String user, String password) {
-    try {
+    /*si el usuario es carga, muestra la base que se ha establecido como principal*/
+    try
+      {
       properties.setProperty("url", url);
       properties.setProperty("database", database);
       properties.setProperty("dbuser", user);
       properties.setProperty("dbpassword", password);
       properties.store(new FileOutputStream(CONFIG), null);
-    } catch (IOException e) {
+      } catch (IOException e)
+      {
       JOptionPane.showMessageDialog(null, e.getMessage(), "Setear desde JTextField", JOptionPane.ERROR_MESSAGE);
-    }
+      }
 
   }
 }

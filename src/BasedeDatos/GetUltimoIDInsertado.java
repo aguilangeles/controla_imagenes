@@ -5,11 +5,11 @@
 package BasedeDatos;
 
 import java.sql.SQLException;
-import BasedeDatos.Conexion;
 import javax.swing.JOptionPane;
 
 /**
- *obtiene el ultimo id según la base requerida.
+ * Obtiene el ultimo id según la base requerida.
+ *
  * @author MUTNPROD003
  */
 public class GetUltimoIDInsertado {
@@ -24,14 +24,17 @@ public class GetUltimoIDInsertado {
 
   public int getUltimoID() {
     int ret = 0;
-    try {
+    try
+      {
       conexion.executeQuery("SELECT max(id) FROM " + tabla + ";");
-      while (conexion.resulset.next()) {
+      while (conexion.resulset.next())
+        {
         ret = conexion.resulset.getInt(1);
-      }
-    } catch (SQLException ex) {
+        }
+      } catch (SQLException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Obtener Ultimo ID", JOptionPane.ERROR_MESSAGE);
-    }
+      }
 
     return ret;
   }

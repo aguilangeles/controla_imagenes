@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Lee el archivo de configuracion.
  * @author MUTNPROD003
  */
 public class ReadProperties {
@@ -21,7 +21,8 @@ public class ReadProperties {
   public LogQualitys getUser() {
     LogQualitys user = null;
     FileInputStream in = null;
-    try {
+    try
+      {
       Properties p = new Properties();
       in = new FileInputStream("config.properties");
       p.load(in);
@@ -30,20 +31,26 @@ public class ReadProperties {
       String usuario = p.getProperty("dbuser");
       String password = p.getProperty("dbpassword");
       user = new LogQualitys(url, base, usuario, password);
-    } catch (IOException ex) {
+      } catch (IOException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties", JOptionPane.ERROR_MESSAGE);
-    } finally {
-      if (in != null) {
-        try {
+      } finally
+      {
+      if (in != null)
+        {
+        try
+          {
           in.close();
           super.finalize();
-        } catch (IOException ex) {
+          } catch (IOException ex)
+          {
           JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties finally", JOptionPane.ERROR_MESSAGE);
-        } catch (Throwable ex) {
+          } catch (Throwable ex)
+          {
           Logger.getLogger(ReadProperties.class.getName()).log(Level.SEVERE, null, ex);
+          }
         }
       }
-    }
     return user;
   }
 }

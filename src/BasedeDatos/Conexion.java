@@ -35,99 +35,121 @@ public class Conexion {
 
   public boolean isConexion() {
     FileInputStream in = null;
-    try {
+    try
+      {
       Properties prop = new Properties();
       in = new FileInputStream("config.properties");
       prop.load(in);
       String url = prop.getProperty("url");
       String base = prop.getProperty("database");
-      String sUrl = "jdbc:mysql://" + url + "/" + base;
+      String urlExtendida = "jdbc:mysql://" + url + "/" + base;
       String user = prop.getProperty("dbuser");
       String passw = prop.getProperty("dbpassword");
       Class.forName(DRIVER);
-      conexion = DriverManager.getConnection(sUrl, user, passw);
-      if (conexion != null) {
+      conexion = DriverManager.getConnection(urlExtendida, user, passw);
+      if (conexion != null)
+        {
         return true;
-      }
-    } catch (SQLException ex) {
+        }
+      } catch (SQLException ex)
+      {
       System.out.println(ex.getMessage());
 //            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
+      } catch (ClassNotFoundException ex)
+      {
       System.out.println(ex.getMessage());
 //            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
+      } catch (IOException ex)
+      {
       System.out.println(ex.getMessage());
 //            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (Exception ex) {
+      } catch (Exception ex)
+      {
       System.out.println(ex.getMessage());
 //            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-      try {
+      } finally
+      {
+      try
+        {
         in.close();
         finalize();
-      } catch (IOException ex) {
+        } catch (IOException ex)
+        {
         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (Throwable ex) {
+        } catch (Throwable ex)
+        {
         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
-    }
     return false;
   }
 
   public boolean isConexionClose() {
-    if (resulset != null) {
-      try {
-
+    if (resulset != null)
+      {
+      try
+        {
         resulset.close();
-      } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
-    }
-    if (statement != null) {
-      try {
+    if (statement != null)
+      {
+      try
+        {
         statement.close();
-      } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
-    }
-    if (conexion != null) {
-      try {
-        if (!conexion.isClosed()) {
-          try {
+    if (conexion != null)
+      {
+      try
+        {
+        if (!conexion.isClosed())
+          {
+          try
+            {
             conexion.close();
 
             return true;
-          } catch (SQLException ex) {
+            } catch (SQLException ex)
+            {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "error en base de datos", JOptionPane.ERROR_MESSAGE);
             return false;
+            }
           }
-        }
-      } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
-    }
     return false;
   }
 //para consultar
 
   public void executeQuery(String sql) {
-    try {
+    try
+      {
       statement = (Statement) conexion.createStatement();
       resulset = statement.executeQuery(sql);
 
-    } catch (SQLException sqle) {
+      } catch (SQLException sqle)
+      {
 //envia mensajes si la consulta tuvo un error
-      do {
-
+      do
+        {
         System.out.println("SQL STATE: " + sqle.getSQLState());
         System.out.println("ERROR CODE: " + sqle.getErrorCode());
         System.out.println("MESSAGE: " + sqle.getMessage());
         System.out.println();
         sqle = sqle.getNextException();
-      } while (sqle != null);
-    }
+        } while (sqle != null);
+      }
   }
-//para insertar y setear
 
   public void executeUpdate(String sql) throws SQLException {
     prepareStatement = conexion.prepareStatement(sql);

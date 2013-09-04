@@ -5,11 +5,11 @@
 package BasedeDatos;
 
 import java.sql.SQLException;
-import BasedeDatos.Conexion;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Cuenta la cantidad de imagenes con estado 1 (rechazado) e incluye esa cantidad
+ * en la traza bajo nro_rechazo.
  * @author MUTNPROD003
  */
 public class GetNumerosImagenesRechazadas {

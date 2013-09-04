@@ -4,7 +4,7 @@
  */
 package PaneldeControl;
 
-import BasedeDatos.ControlesByVerificacion;
+import BasedeDatos.IdControlFromVerificacionList;
 import BasedeDatos.Conexion;
 import TratarFile.IdentificarExtension;
 import TratarFile.IdentificarParent;
@@ -103,7 +103,7 @@ public class AceptarCargarLote {
   }
 
   private void getControlesPorVerificacion() {
-    ControlesByVerificacion ctrls = new ControlesByVerificacion();
+    IdControlFromVerificacionList ctrls = new IdControlFromVerificacionList();
     idTipoControl = ctrls.idControlesByVerificacion(tipoVerificacionBox, con, idTipoControl);
     idVerificacion = ctrls.getIdVerificacion();
   }

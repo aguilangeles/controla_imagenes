@@ -12,10 +12,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
+ * Genera una lista de los archivos insertados en la base de datos segun el
+ * idtraza.
  *
  * @author MUTNPROD003
  */
 public class ArchivosPorTrazaList {
+
   private List<Imagen> imagenProcesada = new ArrayList<>();
   private ImagenesWorker worker;
 
@@ -26,32 +29,39 @@ public class ArchivosPorTrazaList {
   private void getImagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
     Runtime gar = Runtime.getRuntime();
     Imagen imagen;
-    try {
+    try
+      {
       String query = "SELECT id , ruta_archivo, pagina_pdf FROM qualitys.archivo where idtraza = " + idTraza + ";";
       conexion.executeQuery(query);
-      while (conexion.resulset.next()) {
+      while (conexion.resulset.next())
+        {
+
         int id = conexion.resulset.getInt(1);
         String ruta_archivo = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
-        diferenciarPDF(isPdf, id, ruta_archivo, parent, pagina);
-      }
-    } catch (SQLException ex) {
+        archivoConNumeroDePagina(isPdf, id, ruta_archivo, parent, pagina);
+        }
+      } catch (SQLException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la consulta de ruta archivo", JOptionPane.ERROR_MESSAGE);
-    }
+      }
     gar.gc();
   }
 
-
-  private void diferenciarPDF(boolean isPdf, int id, String ruta_archivo, String parent, int pagina) {
+  private void archivoConNumeroDePagina(boolean isPdf, int id, String ruta_archivo, String parent, int pagina) {
+    /*discrima segun sea pdf o no, para tener en cuenta el numero de pagina*/
     Imagen imagen;
-    if (isPdf) {
+    if (isPdf)
+      {
       imagen = new Imagen(id, ruta_archivo, parent, pagina);
       imagenProcesada.add(imagen);
-    } else {
-      imagen = new Imagen(id, ruta_archivo, parent,0);
+      } else
+      {
+      imagen = new Imagen(id, ruta_archivo, parent, 0);
       imagenProcesada.add(imagen);
-    }
+      }
   }
+
   public List<Imagen> getListaArchivos() {
     return imagenProcesada;
   }
