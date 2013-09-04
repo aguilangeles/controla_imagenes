@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package necesitoUnMilagro;
+package Imagenes;
 
-import Ventana.ImagePanel;
-import Ventana.ImageTif;
+import Imagenes.ReadImageTif;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -31,7 +30,7 @@ import javax.swing.JPanel;
 public class ImageDrawingComponent extends JPanel {
 
   int opIndex;
-  ImageTif img = new ImageTif();
+  ReadImageTif img = new ReadImageTif();
   private BufferedImage bi;
 
   public ImageDrawingComponent() {
@@ -91,9 +90,9 @@ public class ImageDrawingComponent extends JPanel {
       try {
         bi = (BufferedImage) img.lecturaImagen(path);
       } catch (FileNotFoundException ex) {
-        Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
       } catch (IOException ex) {
-        Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
   }

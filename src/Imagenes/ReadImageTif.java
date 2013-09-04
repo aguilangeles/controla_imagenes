@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ventana;
+package Imagenes;
 
 import com.sun.media.jai.codec.ByteArraySeekableStream;
 import com.sun.media.jai.codec.ImageCodec;
@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 import javax.media.jai.PlanarImage;
 import javax.swing.*;
 
-public final class ImageTif extends JComponent {
+public final class ReadImageTif extends JComponent {
 
-  public ImageTif() {
+  public ReadImageTif() {
   }
 
   static Image load(byte[] data) {
@@ -37,12 +37,12 @@ public final class ImageTif extends JComponent {
       image = PlanarImage.wrapRenderedImage(im).getAsBufferedImage();
       image.flush();
     } catch (IOException ex) {
-      Logger.getLogger(ImageTif.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       try {
         stream.close();
       } catch (IOException ex) {
-        Logger.getLogger(ImageTif.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
     return image;

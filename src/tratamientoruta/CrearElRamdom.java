@@ -45,7 +45,6 @@ public class CrearElRamdom {
     public List<Object> getSeleccion() {
         return seleccion;
     }
-
     public void setSeleccion(List<Object> seleccion) {
         this.seleccion = seleccion;
     }

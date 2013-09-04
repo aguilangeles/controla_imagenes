@@ -7,6 +7,7 @@ package Ventana;
 import java.io.File;
 import java.awt.Color;
 import javax.swing.SpinnerNumberModel;
+import Imagenes.ImageDrawingComponent;
 
 /**
  *
@@ -15,10 +16,10 @@ import javax.swing.SpinnerNumberModel;
 public class AyudaVisual extends javax.swing.JFrame {
 
   private String descripcion;
-  private VisualizarImagen visualizarImagen;
   private String texto;
   private String imagen;
   private double zoom;
+  private ImageDrawingComponent imageDrawingComponent = new ImageDrawingComponent();
 
   /**
    * Creates new form AyudaVisual
@@ -39,15 +40,9 @@ public class AyudaVisual extends javax.swing.JFrame {
   }
 
   private void visualizar(String image) {
-    visualizarImagen = new VisualizarImagen(scrollImage);
     String ruta = "AyudaImagenes" + File.separator + image;
-    SpinnerNumberModel model1 = new SpinnerNumberModel(getZoom(), 0.1, 1.4, .01);
-
-    visualizarImagen.visualizarImagen(ruta, false, true, spinner, model1, getZoom(), Color.gray);
-  }
-
-  public double getZoom() {
-    return (double) spinner.getValue();
+    imageDrawingComponent.cargarImage(ruta, false, true, jComboBox1);
+    scrollImage.getViewport().add(imageDrawingComponent);
   }
 
   /**
@@ -66,6 +61,7 @@ public class AyudaVisual extends javax.swing.JFrame {
     cerrar = new javax.swing.JButton();
     spinner = new javax.swing.JSpinner();
     jLabel1 = new javax.swing.JLabel();
+    jComboBox1 = new javax.swing.JComboBox();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,6 +103,8 @@ public class AyudaVisual extends javax.swing.JFrame {
     jLabel1.setText("Escala");
     jLabel1.setFocusable(false);
 
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
+
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -121,12 +119,14 @@ public class AyudaVisual extends javax.swing.JFrame {
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addGap(139, 139, 139)
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(29, 29, 29)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 141, Short.MAX_VALUE)))
+            .addGap(34, 34, 34)
+            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        .addGap(0, 0, Short.MAX_VALUE)
+        .addGap(0, 196, Short.MAX_VALUE)
         .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(193, 193, 193))
     );
@@ -135,7 +135,8 @@ public class AyudaVisual extends javax.swing.JFrame {
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGap(11, 11, 11)
         .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,14 +169,6 @@ public class AyudaVisual extends javax.swing.JFrame {
   private void cerrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cerrarKeyPressed
     dispose();
   }//GEN-LAST:event_cerrarKeyPressed
-
-  public void setZoom(int zoom) {
-    this.zoom = (double) spinner.getValue();
-  }
-
-  public void setZoom(double zoom) {
-    this.zoom = zoom;
-  }
 
   private void tratarTexto(String texto) {
     mensaje.setLineWrap(true);
@@ -218,6 +211,7 @@ public class AyudaVisual extends javax.swing.JFrame {
 //    }
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton cerrar;
+  private javax.swing.JComboBox jComboBox1;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JScrollPane jScrollPane2;

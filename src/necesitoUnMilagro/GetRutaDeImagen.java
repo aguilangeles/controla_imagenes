@@ -5,7 +5,7 @@
 package necesitoUnMilagro;
 
 import Daos.Imagen;
-import Ventana.ImagenesWorker;
+import Imagenes.ImagenesWorker;
 
 /**
  *

@@ -8,7 +8,7 @@ package Daos;
  *
  * @author MUTNPROD003
  */
-public class TiposDeControl extends Controles {
+public class TiposDeControl extends Control {
 
   public TiposDeControl(int id, String nombre, boolean check, String texto, String imagen) {
     super(id, nombre, check, texto, imagen);

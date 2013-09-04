@@ -8,11 +8,11 @@ package tratamientoruta;
  *
  * @author MUTNPROD003
  */
-public class TipoDeImagen {
+public class ExtensionImagen {
 
     private String extension;
 
-    public TipoDeImagen(String extension) {
+    public ExtensionImagen(String extension) {
         this.extension = buscarExt(extension);
     }
 

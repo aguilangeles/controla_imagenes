@@ -4,6 +4,7 @@
  */
 package PanelesABM;
 
+import Daos.ColumnaTamanio;
 import Daos.TiposDeControl;
 import Ventana.TiposVerificacion;
 import java.sql.SQLException;

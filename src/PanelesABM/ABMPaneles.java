@@ -4,6 +4,7 @@
  */
 package PanelesABM;
 
+import Daos.ColumnaTamanio;
 import Entidades.Conexion;
 import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;

@@ -66,8 +66,6 @@ public class Sublote {
     public String getRelativa() {
         return relativa;
     }
-
-
     }
 
 

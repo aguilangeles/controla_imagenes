@@ -4,6 +4,7 @@
  */
 package PanelesABM;
 
+import Daos.ColumnaTamanio;
 import Helpers.UltimoIDInsertado;
 import java.sql.SQLException;
 import java.util.logging.Level;

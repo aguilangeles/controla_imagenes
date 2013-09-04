@@ -39,7 +39,7 @@ public class TablaCheckBox {
   private void poblar() {
     model = (DefaultTableModel) tablaCheck.getModel();
     setAnchoColumnas();
-    List<TiposDeControl> listatipos = traza.getListaTipos();
+    List<TiposDeControl> listatipos = traza.getTiposList();
     for (TiposDeControl tipos : listatipos) {
       boolean ischeck = tipos.isCheck();
       String nombre = tipos.getNombre();

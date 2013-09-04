@@ -4,7 +4,7 @@
  */
 package Ventana;
 
-import Daos.Controles;
+import Daos.Control;
 import Daos.TiposDeControl;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author MUTNPROD003
  */
-public class TiposVerificacion extends Controles {
+public class TiposVerificacion extends Control {
   private int estado;
   private List<TiposDeControl> listaControles;
 

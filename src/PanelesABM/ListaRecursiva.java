@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
-import tratamientoruta.TipoDeImagen;
+import tratamientoruta.ExtensionImagen;
 
 /**
  *
@@ -39,7 +39,7 @@ public class ListaRecursiva {
         buscarExtensiones(files[x]);
       }
       if (ext) {
-        TipoDeImagen stringImage = new TipoDeImagen(name);
+        ExtensionImagen stringImage = new ExtensionImagen(name);
         extension = (stringImage.getExtension());
         listaExtension.add(files[x].getAbsolutePath());
       }

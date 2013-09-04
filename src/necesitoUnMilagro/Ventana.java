@@ -269,7 +269,7 @@ public class Ventana extends javax.swing.JFrame {
   }//GEN-LAST:event_siguienteActionPerformed
    private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
-    Imagen imagen = traza.getListaTif().get(contador);
+    Imagen imagen = traza.getImagenList().get(contador);
     if (contador == limiteSuperior) {
       siguiente.setEnabled(false);
       terminar.setEnabled(true);
@@ -279,7 +279,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private Imagen backImagen(int contador) {
     int limiteInferior = 0;
-    Imagen imagen = traza.getListaTif().get(contador);
+    Imagen imagen = traza.getImagenList().get(contador);
     if (limiteInferior == contador) {
       anterior.setEnabled(false);
     }
@@ -347,7 +347,7 @@ public class Ventana extends javax.swing.JFrame {
   }
 
   private void iniciar(TrazaDao traza) {
-    traza.getListaTif();
+    traza.getImagenList();
   }
 
   private void getFirstImage(boolean pdf) {
@@ -389,6 +389,6 @@ public class Ventana extends javax.swing.JFrame {
   }
 
   private int getSizeRamdom() {
-    return traza.getListaTif().size();
+    return traza.getImagenList().size();
   }
 }

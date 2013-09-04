@@ -4,6 +4,7 @@
  */
 package necesitoUnMilagro;
 
+import Imagenes.ImageDrawingComponent;
 import Daos.Imagen;
 import Daos.TrazaDao;
 import java.beans.PropertyVetoException;

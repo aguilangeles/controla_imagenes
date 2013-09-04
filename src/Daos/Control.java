@@ -8,30 +8,30 @@ package Daos;
  *
  * @author aguilangeles@gmail.com
  */
-public class Controles {
+public class Control {
   protected boolean check;
   protected int id;
   protected String imagen;
   protected String nombre;
   protected String texto;
 
-  public Controles() {
+  public Control() {
   }
 
-  public Controles(int id, String nombre, boolean check, String texto, String imagen) {
+  public Control(int id, String nombre, boolean check, String texto, String imagen) {
     this.id = id;
     this.nombre = nombre;
     this.check = check;
     this.texto = texto;
     this.imagen = imagen;
   }
-  public Controles(int id, String nombre, String texto) {
+  public Control(int id, String nombre, String texto) {
     this.id = id;
     this.nombre = nombre;
     this.texto = texto;
   }
 
-  public Controles(int id, String texto) {
+  public Control(int id, String texto) {
     this.id = id;
     this.texto = texto;
   }
