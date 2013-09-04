@@ -4,10 +4,11 @@
  */
 package PanelesABM;
 
+import BasedeDatos.InsertTrazaArchivoContolYEstado;
 import Daos.NombrePaginaDelPDF;
-import Entidades.Conexion;
-import Helpers.Archivo;
-import Helpers.Traza;
+import BasedeDatos.Conexion;
+import BasedeDatos.InsertarNuevoArchivo;
+import BasedeDatos.InsertarNuevaTraza;
 import java.util.List;
 import javax.swing.JLabel;
 import tratamientoruta.CrearElRamdom;
@@ -18,7 +19,7 @@ import tratamientoruta.CrearElRamdom;
  */
 public class OnlyPdf {
 
-  private Traza sTraza;
+  private InsertarNuevaTraza sTraza;
   private Conexion conexion;
   private int idUsuario, idDocumento, idVerificacion, tamanioLote, muestra, idRango, idTraza;
   private String parent, ultimaCarpeta;
@@ -26,7 +27,7 @@ public class OnlyPdf {
   private JLabel infoLabel;
   private List<Integer> idControl;
 
-  public OnlyPdf(Traza sTraza, Conexion conexion, int idUsuario, int idDocumento, int idVerificacion, int tamanioLote, int muestra, int idRango, int idTraza, String parent, String ultimaCarpeta, CrearElRamdom crearRamdom, JLabel infoLabel, List<Integer> idControl) {
+  public OnlyPdf(InsertarNuevaTraza sTraza, Conexion conexion, int idUsuario, int idDocumento, int idVerificacion, int tamanioLote, int muestra, int idRango, int idTraza, String parent, String ultimaCarpeta, CrearElRamdom crearRamdom, JLabel infoLabel, List<Integer> idControl) {
     this.sTraza = sTraza;
     this.conexion = conexion;
     this.idUsuario = idUsuario;
@@ -45,7 +46,7 @@ public class OnlyPdf {
   }
 
   private void OnlyPdf() {
-    sTraza = new Traza(conexion, idUsuario, idDocumento, idVerificacion,
+    sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanioLote, parent, ultimaCarpeta, muestra, idRango);
     List<Object> ramdomPdf = crearRamdom.getSeleccion();
     for (Object o : ramdomPdf) {
@@ -54,7 +55,7 @@ public class OnlyPdf {
       String adaptarFile = pagina.getNombre().substring(parentlength);
       String filename = adaptarFile.replace("\\", "\\\\");
       int page = pagina.getNumeroPagina();
-      Archivo archivo = new Archivo(conexion, idTraza, filename, page, infoLabel);
+      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, page, infoLabel);
       imagenyControl();
       Runtime gar = Runtime.getRuntime();
       gar.gc();

@@ -4,7 +4,8 @@
  */
 package PanelesABM;
 
-import Entidades.Conexion;
+import BasedeDatos.ControlesByVerificacion;
+import BasedeDatos.Conexion;
 import Helpers.IdentificarExtension;
 import Helpers.IdentificarParent;
 import java.io.File;

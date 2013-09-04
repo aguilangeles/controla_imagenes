@@ -7,7 +7,7 @@ package PanelesABM;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import Helpers.VersionEImageIcon;
 import java.awt.HeadlessException;
 import java.beans.PropertyVetoException;

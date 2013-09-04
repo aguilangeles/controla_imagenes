@@ -18,8 +18,6 @@ public final class GetRutaDeImagen {
   public GetRutaDeImagen() {
   }
 
-
-
   public String anteriorImagen(boolean pdf, Imagen imagen) {
     if (pdf) {
       ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
@@ -31,15 +29,6 @@ public final class GetRutaDeImagen {
     }
     return anteriorRuta;
   }
-//  public String anteriorImagen(boolean pdf, Imagen imagen) {
-//    String visualizacion = "";
-//    if (pdf) {
-//      anteriorRuta = imagen.getRutaCarpetaTemp();
-//    } else if (!pdf) {
-//      anteriorRuta = imagen.getRutaParaConversion();
-//    }
-//    return anteriorRuta;
-//  }
 
   public String siguienteImagen(boolean pdf, Imagen imagen) {
     if (pdf) {

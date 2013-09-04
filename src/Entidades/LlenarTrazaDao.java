@@ -4,6 +4,9 @@
  */
 package Entidades;
 
+import BasedeDatos.ControlesporVerificacionList;
+import BasedeDatos.ArchivosPorTrazaList;
+import BasedeDatos.Conexion;
 import Daos.TrazaDao;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -53,8 +56,8 @@ public class LlenarTrazaDao {
   }
 
   private TrazaDao llenartraza() {
-    traza = new TrazaDao(id, new LlenarArchivo(conexion, id, parent, isPdfFile()).getListaArchivos(),
-            extension, new LlenarTipos(conexion, id).getListadeTipos());
+    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getListaArchivos(),
+            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;
   }
 

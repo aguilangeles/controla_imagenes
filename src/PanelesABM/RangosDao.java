@@ -4,11 +4,12 @@
  */
 package PanelesABM;
 
-import Helpers.UltimoIDInsertado;
+import BasedeDatos.InsertarFilasABM;
+import BasedeDatos.GetUltimoIDInsertado;
 import java.sql.SQLException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,7 +25,7 @@ public class RangosDao extends ABMPaneles{
     private int lastId;
     private boolean editable;
     private Editar editar;
-    private InsertRows insertar;
+    private InsertarFilasABM insertar;
 
 
     public RangosDao(Conexion conexion, JTable tabla) {
@@ -33,7 +34,7 @@ public class RangosDao extends ABMPaneles{
         DefaultTableModel modelo = modelar();
         aTable.setModel(modelo);
         this.editar = new Editar(aConexion, modelo);
-        this.insertar = new InsertRows(aConexion, modelo);
+        this.insertar = new InsertarFilasABM(aConexion, modelo);
    }
 
     private DefaultTableModel modelar() {
@@ -92,14 +93,14 @@ public class RangosDao extends ABMPaneles{
         titulos(model, split);
     }
         public int getLastId() {
-        return new UltimoIDInsertado(aConexion, NOMBRE_TABLA).getUltimoID();
+        return new GetUltimoIDInsertado(aConexion, NOMBRE_TABLA).getUltimoID();
     }
 
     public Editar getEditar() {
         return editar;
     }
 
-    public InsertRows getInsertar() {
+    public InsertarFilasABM getInsertar() {
         return insertar;
     }
 

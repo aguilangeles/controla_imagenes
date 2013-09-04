@@ -13,7 +13,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import javax.swing.ImageIcon;
 
 /**

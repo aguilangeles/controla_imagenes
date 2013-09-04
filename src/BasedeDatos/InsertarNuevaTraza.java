@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Helpers;
+package BasedeDatos;
 
-import Entidades.Conexion;
+import Helpers.Time;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public final class Traza {
+public final class InsertarNuevaTraza {
 
   private static String MENSAJE_SQL = "Cannot add or update a child row: "
           + "a foreign key constraint fails (`qualitys`.`traza`, CONSTRAINT "
@@ -31,7 +31,7 @@ public final class Traza {
   private int muestra;
   private int idRango;
 
-  public Traza(Conexion conexion, int idUsuario, int idTipoDocumento,
+  public InsertarNuevaTraza(Conexion conexion, int idUsuario, int idTipoDocumento,
           int idVerificacion, int tamanioLote, String rutaCompleta, String ultimaCarpeta, int muestra, int idRango) {
     this.conexion = conexion;
     this.idUsuario = idUsuario;
@@ -48,7 +48,7 @@ public final class Traza {
   private void insertTraza() {
     int numeroRechazo = 0;
     String fecha = new Time().toString();
-    String insert = "Insert into qualitys.traza "
+    String insertar = "Insert into qualitys.traza "
             + "(fecha_control,"
             + " rutaCompleta, "
             + " ultimaCarpeta, "
@@ -72,7 +72,7 @@ public final class Traza {
             + ");";
     //cambiar por booleano
     try {
-      conexion.executeUpdate(insert);
+      conexion.executeUpdate(insertar);
     } catch (SQLException ex) {
       if (ex.getMessage().equals(MENSAJE_SQL)) {
         JOptionPane.showMessageDialog(null, RANGO_INEXISTENTE, "Sin rangos que aplicar al volumen", JOptionPane.ERROR_MESSAGE);
@@ -82,7 +82,5 @@ public final class Traza {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Insertar Traza", JOptionPane.ERROR_MESSAGE);
       }
     }
-
-
   }
 }

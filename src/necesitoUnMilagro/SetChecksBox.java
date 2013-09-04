@@ -4,6 +4,7 @@
  */
 package necesitoUnMilagro;
 
+import BasedeDatos.TiposdeControlPorArchivo;
 import Daos.TiposDeControl;
 import javax.swing.JTable;
 
@@ -13,27 +14,24 @@ import javax.swing.JTable;
  */
 public class SetChecksBox {
 
-    private JTable tablaCheck;
-    private int id;
+  private JTable tablaCheck;
+  private int id;
 
-    public SetChecksBox(JTable tablaCheck) {
-        this.tablaCheck = tablaCheck;
+  public SetChecksBox(JTable tablaCheck) {
+    this.tablaCheck = tablaCheck;
+  }
 
-    }
-
-
-
-    public void set(int id) {
-        for (int index = 0; index < tablaCheck.getRowCount(); index++) {
-            ObtenerControles cont = new ObtenerControles(id);
-            for (TiposDeControl t : cont.getListadoTipos()) {
-                String nombre = (String) tablaCheck.getValueAt(index, 1);
-                if (nombre.equals(t.getNombre())) {
-                    tablaCheck.setValueAt(t.isCheck(), index, 0);
-                }
-            }
+  public void set(int id) {
+    for (int index = 0; index < tablaCheck.getRowCount(); index++) {
+      TiposdeControlPorArchivo controles = new TiposdeControlPorArchivo(id);
+      for (TiposDeControl t : controles.getTiposControlList()) {
+        String nombre = (String) tablaCheck.getValueAt(index, 1);
+        if (nombre.equals(t.getNombre())) {
+          tablaCheck.setValueAt(t.isCheck(), index, 0);
         }
-        Runtime gar = Runtime.getRuntime();
-          gar.gc();
+      }
     }
+    Runtime gar = Runtime.getRuntime();
+    gar.gc();
+  }
 }

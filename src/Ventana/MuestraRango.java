@@ -4,7 +4,7 @@
  */
 package Ventana;
 
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 

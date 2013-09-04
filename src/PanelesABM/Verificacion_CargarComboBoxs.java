@@ -7,7 +7,7 @@ package PanelesABM;
 import Daos.TiposDeControl;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;

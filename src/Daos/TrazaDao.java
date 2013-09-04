@@ -68,7 +68,7 @@ public class TrazaDao {
     return tif;
   }
 
-  public Imagen getTifByNameAndPage(String nombre, int page) {
+  public Imagen getImageByNameAndPage(String nombre, int page) {
     Imagen tif = null;
     for (Imagen temp : this.imagenList) {
       if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page) {

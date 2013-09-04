@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package ArchivoConfig;
 
 import Daos.LogQualitys;
 import java.io.FileInputStream;

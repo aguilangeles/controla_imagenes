@@ -20,7 +20,7 @@ import javax.swing.JComboBox;
 public class CargarLote extends javax.swing.JFrame {
 
   private Usuario usarioTipo;
-  private Entidades.Conexion con = new Entidades.Conexion();
+  private BasedeDatos.Conexion con = new BasedeDatos.Conexion();
   private List<Integer> idTipoControl = new ArrayList<>();
   private int idVerificacion;
   private Worker worker;

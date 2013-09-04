@@ -6,7 +6,7 @@ package PanelesABM;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import Helpers.Minimo;
 import Helpers.VersionEImageIcon;
 import java.awt.event.KeyEvent;

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import javax.swing.JOptionPane;
 
 /**

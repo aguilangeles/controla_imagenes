@@ -5,7 +5,7 @@
 package PanelesABM;
 
 import Daos.ColumnaTamanio;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
 import java.util.List;

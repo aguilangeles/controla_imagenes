@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package BasedeDatos;
 
+import BasedeDatos.Conexion;
 import Daos.Usuario;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -12,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public final class UsuarioYCategoria {
+public final class GetUsuarioyCategoriaQs {
 
   private Usuario usuarioValidado = null;
   private boolean usuario;
 
-  public UsuarioYCategoria(String aName, String aPassw) {
+  public GetUsuarioyCategoriaQs(String aName, String aPassw) {
     String name = aName.trim();
     String password = aPassw.trim();
     verificarUsuarioEnBaseDeDatos(name, password);

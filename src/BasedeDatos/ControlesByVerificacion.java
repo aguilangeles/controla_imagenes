@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package PanelesABM;
+package BasedeDatos;
 
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
+import PanelesABM.CargarLote;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -28,11 +29,11 @@ public class ControlesByVerificacion {
     String[] dos = result.split("-");
     int id = Integer.parseInt(dos[0]);
     idVerificacion = id;
-    String selec = "SELECT idControl FROM qualitys.controles_verificacion where"
+    String query = "SELECT idControl FROM qualitys.controles_verificacion where"
             + " idVerificacion =" + id + ";";
     if (con.isConexion()) {
       try {
-        con.executeQuery(selec);
+        con.executeQuery(query);
         while (con.resulset.next()) {
           idTipoControl.add(con.resulset.getInt(1));
         }

@@ -4,6 +4,7 @@
  */
 package necesitoUnMilagro;
 
+import BasedeDatos.GetNumerosImagenesRechazadas;
 import Daos.Imagen;
 import Daos.TrazaDao;
 import Helpers.VersionEImageIcon;
@@ -378,7 +379,7 @@ public class Ventana extends javax.swing.JFrame {
   private void setFinalizar() {
     Guardar save = new Guardar();
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel, pdf);
-    NumeroRechazo numeroRechazo = new NumeroRechazo(traza.getId());
+    GetNumerosImagenesRechazadas numeroRechazo = new GetNumerosImagenesRechazadas(traza.getId());
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {

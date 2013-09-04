@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package BasedeDatos;
 
 import Daos.Imagen;
 import Imagenes.ImagenesWorker;
@@ -15,15 +15,15 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class LlenarArchivo {
+public class ArchivosPorTrazaList {
   private List<Imagen> imagenProcesada = new ArrayList<>();
   private ImagenesWorker worker;
 
-  public LlenarArchivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
-    imagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);
+  public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf) {
+    getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);
   }
 
-  private void imagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
+  private void getImagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
     Runtime gar = Runtime.getRuntime();
     Imagen imagen;
     try {
@@ -36,14 +36,11 @@ public class LlenarArchivo {
         diferenciarPDF(isPdf, id, ruta_archivo, parent, pagina);
       }
     } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en insercion de ruta archivo", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la consulta de ruta archivo", JOptionPane.ERROR_MESSAGE);
     }
     gar.gc();
   }
 
-  public List<Imagen> getListaArchivos() {
-    return imagenProcesada;
-  }
 
   private void diferenciarPDF(boolean isPdf, int id, String ruta_archivo, String parent, int pagina) {
     Imagen imagen;
@@ -54,5 +51,8 @@ public class LlenarArchivo {
       imagen = new Imagen(id, ruta_archivo, parent,0);
       imagenProcesada.add(imagen);
     }
+  }
+  public List<Imagen> getListaArchivos() {
+    return imagenProcesada;
   }
 }

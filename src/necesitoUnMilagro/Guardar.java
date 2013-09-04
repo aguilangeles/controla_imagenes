@@ -4,8 +4,10 @@
  */
 package necesitoUnMilagro;
 
+import BasedeDatos.UpdateChecks;
+import BasedeDatos.LlenarControles;
 import Daos.ControlPorImagen;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import Daos.Imagen;
 import Daos.TrazaDao;
 import java.io.File;
@@ -21,7 +23,7 @@ public class Guardar {
     private TrazaDao traza;
     private String nombre;
     private JTable tablaCheck;
-    private UpdateChecs updateChecs;
+    private UpdateChecks updateChecs;
     private int idtraza, idimagen, page;
     private JLabel pagina;
     private Conexion conexion = new Conexion();
@@ -37,23 +39,28 @@ public class Guardar {
     this.tablaCheck = tablaCheck;
   }
 
-  public void guardar(TrazaDao traza, String nombre, JTable tablaCheck, JLabel pagina, boolean pdf) {
+  public void guardar(TrazaDao traza, String nombre, JTable tabla, JLabel pagina, boolean pdf) {
     if (conexion.isConexion()) {
+      /*diferencia entre pdf y otros y obtiene el numero de pagina*/
       getNumerodePagina(pdf, pagina);
-      Imagen tif = traza.getTifByNameAndPage(nombre, page);
-      LlenarControles controles = new LlenarControles(traza.getId(), tif.getId(), conexion);
-      for (ControlPorImagen controlxArchivo : controles.getLista()) {
-        for (int index = 0; index < tablaCheck.getRowCount(); index++) {
-          String descripcion = (String) tablaCheck.getValueAt(index, 1);
-          boolean check = (boolean) tablaCheck.getValueAt(index, 0);
-          if (descripcion.equals(controlxArchivo.getDescripcion())) {
-            controlxArchivo.setCheck(check);
-            updateChecs = new UpdateChecs(controlxArchivo.getEstado(),
-                    controlxArchivo.getIdTrazaArchivoControl(), conexion);
-            updateChecs.update();
-             tablaCheck.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+      /*Trae la imagen desde la base de datos, junto con la pagina*/
+      Imagen imagen = traza.getImageByNameAndPage(nombre, page);
+      /*trae los controles asignados a esa imagen*/
+      LlenarControles controles = new LlenarControles(traza.getId(), imagen.getId(), conexion);
+      /*itera las posibilidades*/
+      for (ControlPorImagen controlImagen : controles.getControlesList()) {
+        for (int index = 0; index < tabla.getRowCount(); index++) {
+          String descripcion = (String) tabla.getValueAt(index, 1);
+          boolean check = (boolean) tabla.getValueAt(index, 0);
+          if (descripcion.equals(controlImagen.getDescripcion())) {
+            /*Modifica el estado en la base de datos en funcion de los cbx del frame*/
+            controlImagen.setCheck(check);
+            updateChecs = new UpdateChecks(controlImagen.getEstado(),
+                    controlImagen.getIdTrazaArchivoControl(), conexion);
+            updateChecs.updateEstadoTraza();
+             tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
             if (check) {
-              updateChecs.updateEstadoArchivo(tif.getId());
+              updateChecs.updateEstadoArchivo(imagen.getId());
             }
           }
         }

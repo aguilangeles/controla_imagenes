@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package PanelesABM;
+package BasedeDatos;
 
 import javax.swing.table.DefaultTableModel;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class InsertRows {
+public class InsertarFilasABM {
 
   private Conexion conexion;
   private DefaultTableModel modelo;
   public static final String BD_FAIL = "Error en los contenidos ingresados";
 
-  public InsertRows(Conexion conexion, DefaultTableModel modelo) {
+  public InsertarFilasABM(Conexion conexion, DefaultTableModel modelo) {
     this.conexion = conexion;
     this.modelo = modelo;
   }
@@ -40,7 +40,7 @@ public class InsertRows {
       return true;
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
-      Logger.getLogger(InsertRows.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(InsertarFilasABM.class.getName()).log(Level.SEVERE, null, ex);
       return false;
     }
 
@@ -112,7 +112,7 @@ public class InsertRows {
       conexion.executeUpdate(up);
       return true;
     } catch (SQLException ex) {
-      Logger.getLogger(InsertRows.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(InsertarFilasABM.class.getName()).log(Level.SEVERE, null, ex);
       return false;
     }
   }

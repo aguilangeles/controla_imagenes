@@ -4,7 +4,7 @@
  */
 package Login;
 
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import Daos.Usuario;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;

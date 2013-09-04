@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Login;
+package ArchivoConfig;
 
+import Login.IngresoBaseDeDatos;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;

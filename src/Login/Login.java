@@ -4,10 +4,11 @@
  */
 package Login;
 
+import ArchivoConfig.SetConfigFile;
 import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
 import Daos.Usuario;
-import Entidades.UsuarioYCategoria;
+import BasedeDatos.GetUsuarioyCategoriaQs;
 import Helpers.VersionEImageIcon;
 
 /**
@@ -192,7 +193,7 @@ public class Login extends javax.swing.JFrame {
 
   private boolean isUsuarioValidado() {
     /*Identifica si es un usuario y qué categoria posee*/
-    UsuarioYCategoria userCat = new UsuarioYCategoria(user.getText(), password.getText());
+    GetUsuarioyCategoriaQs userCat = new GetUsuarioyCategoriaQs(user.getText(), password.getText());
     if (userCat.isUsuario()) {
       usuario = userCat.getUsuarioValidado();
       return true;

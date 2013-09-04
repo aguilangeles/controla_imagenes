@@ -4,7 +4,7 @@
  */
 package PanelesABM;
 
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

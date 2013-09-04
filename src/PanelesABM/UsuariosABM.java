@@ -7,7 +7,7 @@ package PanelesABM;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import static PanelesABM.ControlesABM.ROW_EMPTY;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;

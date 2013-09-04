@@ -5,8 +5,8 @@
 package Login;
 
 import Helpers.InputVerifier;
-import Entidades.Conexion;
-import Entidades.ReadProperties;
+import BasedeDatos.Conexion;
+import ArchivoConfig.ReadProperties;
 import Daos.LogQualitys;
 import Helpers.VersionEImageIcon;
 
@@ -37,7 +37,7 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
     }
   }
 
-  IngresoBaseDeDatos() {
+  public IngresoBaseDeDatos() {
     initComponents();
     setInputVerifier();
   }

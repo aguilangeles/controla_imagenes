@@ -5,14 +5,14 @@
 package PanelesABM;
 
 import Daos.TiposDeControl;
-import Helpers.UltimoIDInsertado;
+import BasedeDatos.GetUltimoIDInsertado;
 import Ventana.TiposVerificacion;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -53,7 +53,7 @@ public class Verificacion_AltaNuevaVerificacion {
 
   public boolean insertarTipos_Control() {
     boolean ret = false;
-    UltimoIDInsertado lastid = new UltimoIDInsertado(conexion, "tipos_verificacion");
+    GetUltimoIDInsertado lastid = new GetUltimoIDInsertado(conexion, "tipos_verificacion");
     int id = lastid.getUltimoID();
     tipos_verificacion = new TiposVerificacion(id, getNombre(), getDescripcion(), 1, null);
     for (Object o : tablaDestinoSeleccionado) {

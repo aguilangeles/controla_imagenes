@@ -1,8 +1,8 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-04 09:51:35.0
+Fecha de Control: 2013-09-04 10:24:29.0
 
-Id Traza: 39
+Id Traza: 40
 
 Ruta Completa: C:\angeles\reducido
 
@@ -10,7 +10,7 @@ Tamanio Lote: 75
 
 Cantidad muestreada: 3
 
-Total Rechazos: 1
+Total Rechazos: 0
 
 Linea de captura: --/--
 

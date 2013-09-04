@@ -4,10 +4,10 @@
  */
 package Ventana;
 
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import Entidades.LlenarTrazaDao;
-import Helpers.UltimoIDInsertado;
-import Helpers.Traza;
+import BasedeDatos.GetUltimoIDInsertado;
+import BasedeDatos.InsertarNuevaTraza;
 import PanelesABM.OnlyPdf;
 import PanelesABM.Tif_Png_Jpg;
 import java.util.List;
@@ -32,7 +32,7 @@ public class Worker extends SwingWorker<Object, Object> {
   private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
   private int idTraza;
-  private static Traza sTraza;
+  private static InsertarNuevaTraza sTraza;
   private CrearElRamdom crearRamdom;
 
   public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl,
@@ -57,7 +57,7 @@ public class Worker extends SwingWorker<Object, Object> {
   @Override
   protected String doInBackground() {
     if (conexion.isConexion()) {
-      idTraza = new UltimoIDInsertado(conexion, "traza").getUltimoID();
+      idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       switch (extension) {
         case ".tif": case ".png": case ".jpg":
           Tif_Png_Jpg();
@@ -82,7 +82,7 @@ public class Worker extends SwingWorker<Object, Object> {
     int trazaID;
     Conexion con = new Conexion();
     if (con.isConexion()) {
-      int resultado = new UltimoIDInsertado(con, "traza").getUltimoID();
+      int resultado = new GetUltimoIDInsertado(con, "traza").getUltimoID();
       trazaID = (resultado == 0) ? 1 : resultado;
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
       new Ventana(trazaDao.getTraza()).setVisible(true);

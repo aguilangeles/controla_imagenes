@@ -2,22 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Helpers;
+package BasedeDatos;
 
 import java.sql.SQLException;
-import Entidades.Conexion;
+import BasedeDatos.Conexion;
 import javax.swing.JOptionPane;
 
 /**
  *obtiene el ultimo id según la base requerida.
  * @author MUTNPROD003
  */
-public class UltimoIDInsertado {
+public class GetUltimoIDInsertado {
 
   private Conexion conexion;
   private String tabla;
 
-  public UltimoIDInsertado(Conexion conexion, String tabla) {
+  public GetUltimoIDInsertado(Conexion conexion, String tabla) {
     this.conexion = conexion;
     this.tabla = tabla;
   }
