@@ -5,7 +5,7 @@
 package BasedeDatos;
 
 import BasedeDatos.Conexion;
-import PanelesABM.CargarLote;
+import PaneldeControl.CargarLote;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JComboBox;

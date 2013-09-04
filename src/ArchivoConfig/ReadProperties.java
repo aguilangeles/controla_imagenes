@@ -4,7 +4,7 @@
  */
 package ArchivoConfig;
 
-import Daos.LogQualitys;
+import Entidades.LogQualitys;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;

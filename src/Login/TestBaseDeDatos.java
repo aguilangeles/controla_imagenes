@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import BasedeDatos.Conexion;
-import Daos.LogQualitys;
+import Entidades.LogQualitys;
 
 /**
  *

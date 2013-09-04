@@ -5,7 +5,7 @@
 package BasedeDatos;
 
 import BasedeDatos.Conexion;
-import Daos.Usuario;
+import Entidades.Usuario;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 

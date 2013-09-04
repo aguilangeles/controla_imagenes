@@ -4,7 +4,7 @@
  */
 package BasedeDatos;
 
-import Daos.Imagen;
+import Entidades.Imagen;
 import Imagenes.ImagenesWorker;
 import java.sql.SQLException;
 import java.util.ArrayList;

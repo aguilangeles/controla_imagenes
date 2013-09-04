@@ -4,7 +4,7 @@
  */
 package BasedeDatos;
 
-import Daos.ControlPorImagen;
+import Entidades.ControlPorImagen;
 import BasedeDatos.Conexion;
 import java.sql.SQLException;
 import java.util.ArrayList;

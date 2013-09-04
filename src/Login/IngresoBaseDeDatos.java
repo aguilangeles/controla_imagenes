@@ -7,7 +7,7 @@ package Login;
 import Helpers.InputVerifier;
 import BasedeDatos.Conexion;
 import ArchivoConfig.ReadProperties;
-import Daos.LogQualitys;
+import Entidades.LogQualitys;
 import Helpers.VersionEImageIcon;
 
 /**

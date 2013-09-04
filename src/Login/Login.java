@@ -4,10 +4,11 @@
  */
 package Login;
 
+import PaneldeControl.PanelControl;
 import ArchivoConfig.SetConfigFile;
 import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
-import Daos.Usuario;
+import Entidades.Usuario;
 import BasedeDatos.GetUsuarioyCategoriaQs;
 import Helpers.VersionEImageIcon;
 

@@ -6,8 +6,8 @@
 package BasedeDatos;
 
 import BasedeDatos.Conexion;
-import Daos.TiposDeControl;
-import Ventana.CantidadControlesPorVerificacion;
+import Entidades.TiposDeControl;
+import VentanaPrincipal.CantidadControlesPorVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
