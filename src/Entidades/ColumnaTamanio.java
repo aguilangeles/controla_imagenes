@@ -10,27 +10,27 @@ package Entidades;
  */
 public class ColumnaTamanio {
 
-    private int columna;
-    private int size;
+  private int columna;
+  private int tamanio;
 
-    public ColumnaTamanio(int columna, int size) {
-        this.columna = columna;
-        this.size = size;
-    }
+  public ColumnaTamanio(int columna, int tamanio) {
+    this.columna = columna;
+    this.tamanio = tamanio;
+  }
 
-    public int getColumna() {
-        return columna;
-    }
+  public int getColumna() {
+    return columna;
+  }
 
-    public int getSize() {
-        return size;
-    }
+  public int getTamanio() {
+    return tamanio;
+  }
 
-    public void setColumna(int columna) {
-        this.columna = columna;
-    }
+  public void setColumna(int columna) {
+    this.columna = columna;
+  }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
+  public void setTamanio(int tamanio) {
+    this.tamanio = tamanio;
+  }
 }

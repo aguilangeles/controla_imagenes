@@ -4,7 +4,7 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.UpdateChecks;
+import BasedeDatos.UpdateCheckBoxs;
 import BasedeDatos.LlenarControles;
 import Entidades.ControlPorImagen;
 import BasedeDatos.Conexion;
@@ -23,7 +23,7 @@ public class Guardar {
     private TrazaDao traza;
     private String nombre;
     private JTable tablaCheck;
-    private UpdateChecks updateChecs;
+    private UpdateCheckBoxs updateChecs;
     private int idtraza, idimagen, page;
     private JLabel pagina;
     private Conexion conexion = new Conexion();
@@ -55,7 +55,7 @@ public class Guardar {
           if (descripcion.equals(controlImagen.getDescripcion())) {
             /*Modifica el estado en la base de datos en funcion de los cbx del frame*/
             controlImagen.setCheck(check);
-            updateChecs = new UpdateChecks(controlImagen.getEstado(),
+            updateChecs = new UpdateCheckBoxs(controlImagen.getEstado(),
                     controlImagen.getIdTrazaArchivoControl(), conexion);
             updateChecs.updateEstadoTraza();
              tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);

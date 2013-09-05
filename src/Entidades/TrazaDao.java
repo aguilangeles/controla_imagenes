@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -45,7 +46,6 @@ public class TrazaDao {
     return imagenList;
   }
 
-
   public int getEstado() {
     return estado;
   }
@@ -57,24 +57,17 @@ public class TrazaDao {
   public List<TiposDeControl> getTiposList() {
     return tiposList;
   }
-
-  public Imagen getTifByName(String nombre) {
-    Imagen tif = null;
-    for (Imagen temp : this.imagenList) {
-      if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre)) {
-        tif = temp;
-      }
-    }
-    return tif;
-  }
-
   public Imagen getImageByNameAndPage(String nombre, int page) {
+    /*va a iterar en la lista hasta encontrar coincidencias*/
     Imagen tif = null;
-    for (Imagen temp : this.imagenList) {
-      if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page) {
+    for (Iterator<Imagen> it = imagenList.iterator(); it.hasNext();)
+      {
+      Imagen temp = it.next();
+      if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page)
+        {
         tif = temp;
+        }
       }
-    }
     return tif;
   }
 

@@ -4,9 +4,6 @@
  */
 package VentanaPrincipal;
 
-import VentanaPrincipal.TablaCheckBox;
-import VentanaPrincipal.MostrarInternalFrames;
-import VentanaPrincipal.Guardar;
 import BasedeDatos.GetNumerosImagenesRechazadas;
 import Entidades.Imagen;
 import Entidades.TrazaDao;

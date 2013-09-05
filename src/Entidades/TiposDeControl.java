@@ -18,10 +18,9 @@ public class TiposDeControl extends Control {
     super(id, texto);
   }
 
-
-public String newToString(){
-  return getId()+"-"+getTexto();
-}
+  public String newToString() {
+    return getId() + "-" + getTexto();
+  }
 
   @Override
   public String toString() {

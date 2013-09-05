@@ -9,6 +9,7 @@ package Entidades;
  * @author aguilangeles@gmail.com
  */
 public class Control {
+
   protected boolean check;
   protected int id;
   protected String imagen;
@@ -25,6 +26,7 @@ public class Control {
     this.texto = texto;
     this.imagen = imagen;
   }
+
   public Control(int id, String nombre, String texto) {
     this.id = id;
     this.nombre = nombre;
@@ -35,8 +37,6 @@ public class Control {
     this.id = id;
     this.texto = texto;
   }
-
-
 
   public int getId() {
     return id;
@@ -82,5 +82,4 @@ public class Control {
   public String toString() {
     return "Tipos{" + "id=" + id + ", nombre=" + nombre + ", check=" + check + ", texto=" + texto + ", imagen=" + imagen + '}';
   }
-
 }

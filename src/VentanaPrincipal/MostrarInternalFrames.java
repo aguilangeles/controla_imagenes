@@ -64,7 +64,8 @@ public class MostrarInternalFrames {
   }
 
   public void mostrarPrimeraImagen(Imagen siguientes) {
-    try {
+    try
+      {
       internal.setMaximum(true);
       anterior.setEnabled(false);
       setTituloYRutaLabel(siguientes);
@@ -73,15 +74,17 @@ public class MostrarInternalFrames {
       imageDraw.cargarImage(ruta, pdf, tif, combo);
       scrollImage.getViewport().add(imageDraw);
       setCB.set(siguientes.getId());
-    } catch (PropertyVetoException ex) {
+      } catch (PropertyVetoException ex)
+      {
       Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-    }
+      }
   }//
 
   public void setNextImage(Imagen imagen1) {
     anterior.setEnabled(true);
     guardarYLimpiar(rutaLabel, tabla, pageLabel, pdf);
-    try {
+    try
+      {
       desktopPane.add(internal);
       setTituloYRutaLabel(imagen1);
       setLabelPagina(pdf, imagen1);
@@ -90,9 +93,10 @@ public class MostrarInternalFrames {
       imageDraw.cargarImage(ruta_temp, pdf, tif, combo);
       scrollImage.getViewport().add(imageDraw);
       internal.setVisible(true);
-    } catch (Exception ex) {
+      } catch (Exception ex)
+      {
       Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-    }
+      }
   }
 
   public void setBackImage(Imagen pr) {
@@ -114,15 +118,18 @@ public class MostrarInternalFrames {
   }
 
   private void setLabelPagina(boolean pdf, Imagen siguientes) {
-    if (pdf) {
+    if (pdf)
+      {
       int page1 = siguientes.getPagina() + 1;
       pageLabel.setText("Pagina: " + page1);
-    } else {
+      } else
+      {
       pageLabel.setVisible(false);
-    }
+      }
   }
 
   private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina, boolean pdf) {
+    System.out.println("save recibe esta ruta " + rutaJlabel.getText() + "pg. " + pagina.getText());
     save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
     internal.dispose();
     desktopPane.removeAll();

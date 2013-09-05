@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  *
  */
 public class Imagen {
+
   private int id;
   private int pagina;
   private String parent;
@@ -31,14 +32,17 @@ public class Imagen {
 
   private static String decodear(String aString) {
     String ret = "";
-    try {
+    try
+      {
       ret = URLDecoder.decode(aString, "UTF-8");
-    } catch (UnsupportedEncodingException ex) {
+      } catch (UnsupportedEncodingException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(),
               "Problemas en Encoding", JOptionPane.ERROR_MESSAGE);
-    }
+      }
     return ret;
   }
+
   public String getRutaInsertadaEnDB() {
     return rutaInsertadaEnDB;
   }
@@ -89,5 +93,12 @@ public class Imagen {
 
   public void setEstado(int estado) {
     this.estado = estado;
+  }
+
+  @Override
+  public String toString() {
+    return "id=" + id
+            + ", " + rutaInsertadaEnDB
+            + ", pagina=" + pagina;
   }
 }
