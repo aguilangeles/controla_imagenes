@@ -124,7 +124,7 @@ public class Ventana extends javax.swing.JFrame {
     });
 
     combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
+    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%" }));
 
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setText("Ver Imagen al");

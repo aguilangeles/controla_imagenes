@@ -36,10 +36,6 @@ public class ImageDrawingComponent extends JPanel {
   public ImageDrawingComponent() {
   }
 
-//  public void cargarImage(String path, boolean pdf, boolean tif, int opcion) {
-//    loadImage(path, pdf, tif);
-//    setOpIndex(opcion);
-//  }
   public void cargarImage(String path, boolean pdf, boolean tif, final JComboBox combo) {
     loadImage(path, pdf, tif);
     combo.addActionListener(new ActionListener() {

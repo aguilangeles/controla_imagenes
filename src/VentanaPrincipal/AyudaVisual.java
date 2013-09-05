@@ -35,6 +35,7 @@ public class AyudaVisual extends javax.swing.JFrame {
     initComponents();
     cerrar.requestFocus();
     setTitle(this.descripcion);
+    jLabel1.setText(descripcion);
     tratarTexto(texto);
     visualizar(imagen);
   }
@@ -59,7 +60,6 @@ public class AyudaVisual extends javax.swing.JFrame {
     jScrollPane2 = new javax.swing.JScrollPane();
     mensaje = new javax.swing.JTextArea();
     cerrar = new javax.swing.JButton();
-    spinner = new javax.swing.JSpinner();
     jLabel1 = new javax.swing.JLabel();
     jComboBox1 = new javax.swing.JComboBox();
 
@@ -94,36 +94,25 @@ public class AyudaVisual extends javax.swing.JFrame {
       }
     });
 
-    spinner.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
-    spinner.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-    spinner.setFocusable(false);
-    spinner.setValue(0.10);
-
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
-    jLabel1.setText("Escala");
     jLabel1.setFocusable(false);
 
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%" }));
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel1Layout.createSequentialGroup()
+        .addContainerGap()
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPane2)
+          .addComponent(scrollImage)
           .addGroup(jPanel1Layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jScrollPane2)
-              .addComponent(scrollImage)))
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(139, 139, 139)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(34, 34, 34)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE)))
+            .addGap(77, 77, 77)))
         .addContainerGap())
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
         .addGap(0, 196, Short.MAX_VALUE)
@@ -133,12 +122,11 @@ public class AyudaVisual extends javax.swing.JFrame {
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel1Layout.createSequentialGroup()
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(11, 11, 11)
-        .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -217,6 +205,5 @@ public class AyudaVisual extends javax.swing.JFrame {
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JTextArea mensaje;
   private javax.swing.JScrollPane scrollImage;
-  private javax.swing.JSpinner spinner;
   // End of variables declaration//GEN-END:variables
 }

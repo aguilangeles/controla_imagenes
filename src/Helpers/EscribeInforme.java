@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
- *
+ * Genera un reporte  de la tabla descriptiva.
  * @author aguilangeles@gmail.com
  */
 public class EscribeInforme {
@@ -36,6 +36,7 @@ public class EscribeInforme {
       }
       pw.println("Estado: " + estado + "\n");
       pw.println("Observaciones: " + observaciones + "\n");
+      pw.println("Versión  app: " + VersionEImageIcon.VERSION + "\n");
     } catch (IOException ex) {
       JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(), "Excepción en la escritura del reporte", JOptionPane.ERROR_MESSAGE);
 

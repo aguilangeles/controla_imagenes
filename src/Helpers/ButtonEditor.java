@@ -16,67 +16,77 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
 /**
- *
+ * Permite que la tercer columna del la tabla tenga comportamiento de
+ * jbutton
  * @author MUTNPROD003
  */
 public class ButtonEditor extends DefaultCellEditor {
-    protected JButton button;
-    private String label;
-    private boolean isPushed;
-    private AyudaVisual ayuda;
-    private List<TiposDeControl> listado;
 
-    public ButtonEditor(JCheckBox jCheckBox, List<TiposDeControl> listado) {
-        super(jCheckBox);
-        button = new JButton();
-        button.setOpaque(true);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fireEditingStopped();
-            }
-        });
-        this.listado=listado;
+  protected JButton button;
+  private String label;
+  private boolean isPushed;
+  private AyudaVisual ayuda;
+  private List<TiposDeControl> listado;
 
-    }
-    @Override
-    public Component getTableCellEditorComponent(JTable table, Object value,
-      boolean isSelected, int row, int column) {
-    if (isSelected) {
+  public ButtonEditor(JCheckBox jCheckBox, List<TiposDeControl> listado) {
+    super(jCheckBox);
+    button = new JButton();
+    button.setOpaque(true);
+    button.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        fireEditingStopped();
+      }
+    });
+    this.listado = listado;
+
+  }
+
+  @Override
+  public Component getTableCellEditorComponent(JTable table, Object value,
+          boolean isSelected, int row, int column) {
+    if (isSelected)
+      {
       button.setForeground(table.getSelectionForeground());
       button.setBackground(table.getSelectionBackground());
-    } else {
+      } else
+      {
       button.setForeground(table.getForeground());
       button.setBackground(table.getBackground());
-    }
+      }
     label = (value == null) ? "" : value.toString();
     button.setText(label);
     isPushed = true;
     return button;
   }
 
-    @Override
-    public Object getCellEditorValue() {
-        if (isPushed) {
-            for (TiposDeControl t : listado) {
-                int id = Integer.parseInt(button.getText());
-                if (t.getId() == id) {
-                    ayuda = new AyudaVisual(t.getNombre(), t.getTexto(), t.getImagen());
-                    ayuda.setVisible(true);
-                }
-            }
-    }
+  @Override
+  public Object getCellEditorValue() {
+    String ret="";
+    if (isPushed)
+      {
+      for (TiposDeControl t : listado)
+        {
+        int id = Integer.parseInt(button.getText());
+        if (t.getId() == id)
+          {
+          ayuda = new AyudaVisual(t.getNombre(), t.getTexto(), t.getImagen());
+          ayuda.setVisible(true);
+          }
+        }
+      }
     isPushed = false;
-    return new String(label);
+    ret = label;
+    return ret;
   }
 
-    @Override
+  @Override
   public boolean stopCellEditing() {
     isPushed = false;
     return super.stopCellEditing();
   }
 
-    @Override
+  @Override
   protected void fireEditingStopped() {
     super.fireEditingStopped();
   }
