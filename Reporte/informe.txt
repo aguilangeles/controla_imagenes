@@ -1,8 +1,8 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-05 09:56:43.0
+Fecha de Control: 2013-09-05 10:10:43.0
 
-Id Traza: 119
+Id Traza: 126
 
 Ruta Completa: C:\angeles\reducido
 
@@ -10,7 +10,7 @@ Tamanio Lote: 75
 
 Cantidad muestreada: 3
 
-Total Rechazos: 1
+Total Rechazos: 2
 
 Linea de captura: --/--
 
@@ -20,7 +20,7 @@ Tipo de Verificacion: uno
 
 Tipo de Documento: Recibo
 
-Estado: Rechazado
+Estado: Aceptado
 
 Observaciones: 
 

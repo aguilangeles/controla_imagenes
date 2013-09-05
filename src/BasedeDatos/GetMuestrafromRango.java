@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- * Verifica que el tama?o del lote ingresado, este contenido en alguno de los
+ * Verifica que el tamanio del lote ingresado, este contenido en alguno de los
  * rangos de la base de datos.
  *
  * @author MUTNPROD003
@@ -27,7 +27,11 @@ public class GetMuestrafromRango {
       {
       try
         {
-        String query = "select  minimo , maximo, muestra, id from rangos_qs";
+        String query = "select  minimo "
+                + ", maximo "
+                + ", muestra"
+                + ", id "
+                + " from rangos_qs";
         conexion.executeQuery(query);
         while (conexion.resulset.next())
           {

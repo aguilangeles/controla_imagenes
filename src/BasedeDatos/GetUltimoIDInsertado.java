@@ -33,7 +33,8 @@ public class GetUltimoIDInsertado {
         }
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Obtener Ultimo ID", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, ex.getMessage(),
+              "Obtener Ultimo ID", JOptionPane.ERROR_MESSAGE);
       }
 
     return ret;
