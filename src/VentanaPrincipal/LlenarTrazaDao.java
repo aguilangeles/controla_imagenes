@@ -56,7 +56,7 @@ public class LlenarTrazaDao {
   }
 
   private TrazaDao llenartraza() {
-    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getListaArchivos(),
+    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
             extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;
   }

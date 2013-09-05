@@ -1,8 +1,8 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-04 12:43:47.0
+Fecha de Control: 2013-09-05 09:56:43.0
 
-Id Traza: 45
+Id Traza: 119
 
 Ruta Completa: C:\angeles\reducido
 
@@ -20,7 +20,7 @@ Tipo de Verificacion: uno
 
 Tipo de Documento: Recibo
 
-Estado: Aceptado
+Estado: Rechazado
 
 Observaciones: 
 

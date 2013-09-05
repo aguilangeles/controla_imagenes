@@ -12,15 +12,15 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- * Genera una lista de los archivos insertados en la base de datos segun el
+ * Genera una lista de los archivos insertados en la base de datos según el
  * idtraza.
  *
  * @author MUTNPROD003
  */
 public class ArchivosPorTrazaList {
 
-  private List<Imagen> imagenProcesada = new ArrayList<>();
-  private ImagenesWorker worker;
+  private List<Imagen> imagenProcesadaList = new ArrayList<>();
+  private ImagenesWorker imagenesWorker;
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf) {
     getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);
@@ -31,11 +31,14 @@ public class ArchivosPorTrazaList {
     Imagen imagen;
     try
       {
-      String query = "SELECT id , ruta_archivo, pagina_pdf FROM qualitys.archivo where idtraza = " + idTraza + ";";
+      String query = "SELECT id "
+              + ", ruta_archivo "
+              + ", pagina_pdf "
+              + "FROM qualitys.archivo "
+              + "where idtraza = " + idTraza + ";";
       conexion.executeQuery(query);
       while (conexion.resulset.next())
         {
-
         int id = conexion.resulset.getInt(1);
         String ruta_archivo = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
@@ -43,7 +46,8 @@ public class ArchivosPorTrazaList {
         }
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la consulta de ruta archivo", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, ex.getMessage(),
+              "Error en la consulta de ruta archivo", JOptionPane.ERROR_MESSAGE);
       }
     gar.gc();
   }
@@ -54,15 +58,14 @@ public class ArchivosPorTrazaList {
     if (isPdf)
       {
       imagen = new Imagen(id, ruta_archivo, parent, pagina);
-      imagenProcesada.add(imagen);
+      imagenProcesadaList.add(imagen);
       } else
       {
       imagen = new Imagen(id, ruta_archivo, parent, 0);
-      imagenProcesada.add(imagen);
+      imagenProcesadaList.add(imagen);
       }
   }
-
-  public List<Imagen> getListaArchivos() {
-    return imagenProcesada;
+  public List<Imagen> getImagenesList() {
+    return imagenProcesadaList;
   }
 }
