@@ -4,7 +4,7 @@
  */
 package Imagenes;
 
-import Imagenes.ReadImageTif;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,13 +24,15 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
+ * Santinelli dixit. unica manera de que no levante memoria, se mantenga el zoom
+ * entre imagenes y el scroll sea agil.
  *
  * @author aguilangeles@gmail.com
  */
 public class ImageDrawingComponent extends JPanel {
 
   int opIndex;
-  ReadImageTif img = new ReadImageTif();
+  ReadImageTif tif = new ReadImageTif();
   private BufferedImage bi;
 
   public ImageDrawingComponent() {
@@ -53,7 +55,8 @@ public class ImageDrawingComponent extends JPanel {
   @Override
   public void paint(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
-    switch (opIndex) {
+    switch (opIndex)
+      {
       case 0:
         setCientoCincuenta(g2);
         break;
@@ -69,28 +72,36 @@ public class ImageDrawingComponent extends JPanel {
       default:
         setCincuenta(g2);
         break;
-    }
+      }
   }
 
   private void loadImage(String path, boolean pdf, boolean tif) {
-    if (pdf || !tif) {
-      try {
+    if (pdf || !tif)
+      {
+      try
+        {
         File arch = new File(path);
         bi = ImageIO.read(arch);
-      } catch (MalformedURLException mue) {
+        } catch (MalformedURLException mue)
+        {
         System.out.println("URL trouble: " + mue.getMessage());
-      } catch (IOException ioe) {
+        } catch (IOException ioe)
+        {
         System.out.println("read trouble: " + ioe.getMessage());
-      }
-    } else {
-      try {
-        bi = (BufferedImage) img.lecturaImagen(path);
-      } catch (FileNotFoundException ex) {
+        }
+      } else
+      {
+      try
+        {
+        bi = (BufferedImage) this.tif.getImagen(path);
+        } catch (FileNotFoundException ex)
+        {
         Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (IOException ex) {
+        } catch (IOException ex)
+        {
         Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
-    }
   }
 
   private void setCincuenta(Graphics2D g2) {
@@ -99,6 +110,8 @@ public class ImageDrawingComponent extends JPanel {
     int y_50 = (int) ((bi.getHeight() / 2.7) / 2);
     setPreferredSize(new Dimension(w_50, y_50));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.setBackground(Color.gray);
+
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
             0, 0, w_50, y_50,
@@ -114,6 +127,8 @@ public class ImageDrawingComponent extends JPanel {
     int y_75 = (int) ((bi.getHeight() / 2.7) / 1.3);
     setPreferredSize(new Dimension(w_75, y_75));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.setBackground(Color.gray);
+
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
             0, 0, w_75, y_75, /* src area of image */
@@ -129,6 +144,8 @@ public class ImageDrawingComponent extends JPanel {
     int y_100 = (int) (bi.getHeight() / 2.7);
     setPreferredSize(new Dimension(w_100, y_100));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.setBackground(Color.gray);
+
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
             0, 0, w_100, y_100, /* src area of image */
@@ -144,6 +161,8 @@ public class ImageDrawingComponent extends JPanel {
     int y_125 = (int) ((bi.getHeight() / 2.7) * 1.25);
     setPreferredSize(new Dimension(w_125, y_125));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.setBackground(Color.gray);
+
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
             0, 0, w_125, y_125, /* src area of image */
@@ -158,6 +177,7 @@ public class ImageDrawingComponent extends JPanel {
     int w_150 = (int) ((bi.getWidth() / 2.7) * 1.50);
     int y_150 = (int) ((bi.getHeight() / 2.7) * 1.50);
     setPreferredSize(new Dimension(w_150, y_150));
+    g2.setBackground(Color.gray);
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,

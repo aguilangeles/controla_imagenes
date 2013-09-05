@@ -67,11 +67,9 @@ public class Login extends javax.swing.JFrame {
     jLabel2.setText("Password");
 
     user.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    user.setText("admin");
     user.setNextFocusableComponent(password);
 
     password.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    password.setText("admin");
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     entrar.setMnemonic('e');
@@ -166,17 +164,19 @@ public class Login extends javax.swing.JFrame {
   private void setEntrar() {
     /*Define si se setea el archivo o permite el ingreso del usuario*/
     if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
-            && password.getText().trim().equalsIgnoreCase(USER_DEFAULT)) {
+            && password.getText().trim().equalsIgnoreCase(USER_DEFAULT))
+      {
       SetConfigFile setConfigFile = new SetConfigFile();
-    } else {
-
+      } else
+      {
       loginUsuario();
-    }
+      }
   }
 
   private void loginUsuario() {
     /*si el usuario es apto, setea la fecha de ingreso*/
-    if (isUsuarioValidado()) {
+    if (isUsuarioValidado())
+      {
       SetFechaDeIngreso setfecha = new SetFechaDeIngreso(getUsuario());
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
@@ -185,20 +185,22 @@ public class Login extends javax.swing.JFrame {
         }
       });
       dispose();
-    } else {
+      } else
+      {
       JOptionPane.showMessageDialog(entrar, USER_INVALID, "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
       user.setText("");
       password.setText("");
-    }
+      }
   }
 
   private boolean isUsuarioValidado() {
     /*Identifica si es un usuario y qué categoria posee*/
     GetUsuarioyCategoriaQs userCat = new GetUsuarioyCategoriaQs(user.getText(), password.getText());
-    if (userCat.isUsuario()) {
+    if (userCat.isUsuario())
+      {
       usuario = userCat.getUsuarioValidado();
       return true;
-    }
+      }
     return false;
   }
 

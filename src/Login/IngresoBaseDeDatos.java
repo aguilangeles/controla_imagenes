@@ -29,12 +29,14 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
     setResizable(false);
     setInputVerifier();
     aceptar.setText("Test");
-    if (isAdministrador) {
+    if (isAdministrador)
+      {
       setInputVerifier();
       usuarioEditable();
-    } else {
+      } else
+      {
       usuarioNoEditable();
-    }
+      }
   }
 
   public IngresoBaseDeDatos() {
@@ -174,21 +176,25 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
   }//GEN-LAST:event_aceptarKeyPressed
 
   private void botonActionPerformed(java.awt.event.ActionEvent evt) {
-    if ("Aceptar".equals(evt.getActionCommand())) {
+    if ("Aceptar".equals(evt.getActionCommand()))
+      {
       TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, false, this);
-    }
-    if ("Test".equals(evt.getActionCommand())) {
+      }
+    if ("Test".equals(evt.getActionCommand()))
+      {
       TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, true, this);
-    }
+      }
   }
 
   private void botonKeyPressed(java.awt.event.KeyEvent evt) {
-    if ("Aceptar".equals(aceptar.getText())) {
+    if ("Aceptar".equals(aceptar.getText()))
+      {
       TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, false, this);
-    }
-    if ("Test".equals(aceptar.getText())) {
+      }
+    if ("Test".equals(aceptar.getText()))
+      {
       TestBaseDeDatos usuarioAceptar = new TestBaseDeDatos(url, database, usuario, password, validar, aceptar, true, this);
-    }
+      }
   }
 
   private void usuarioNoEditable() {

@@ -251,7 +251,7 @@ public class Reporte extends javax.swing.JFrame {
       if (jTextArea1.getText().length() >= 500) {
         JOptionPane.showMessageDialog(jTextArea1, "Reduzca el texto a 500 caracteres", "Limite de texto permitido", JOptionPane.ERROR_MESSAGE);
       } else {
-        UpdateEstadoLote updateEstadoLote = new UpdateEstadoLote(conexion, idtraza, si.isSelected(), jTextArea1, tablaDetalles);
+        UpdateEstadoLote updateEstadoLote = new UpdateEstadoLote(conexion, idtraza, si.isSelected(), jTextArea1, tablaDetalles, jButton1);
         conexion.isConexionClose();
         System.exit(0);
       }

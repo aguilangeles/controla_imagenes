@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 import BasedeDatos.Conexion;
 import Helpers.EscribeInforme;
 import java.sql.SQLException;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -22,13 +23,13 @@ public class UpdateEstadoLote {
   private JTextArea mensaje;
   private int setEstado;
 
-  public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado, JTextArea mensaje, JTable tabla) {
+  public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado, JTextArea mensaje, JTable tabla, JButton finalizar) {
     this.conexion = conexion;
     this.idtraza = idtraza;
     this.mensaje = mensaje;
     this.setEstado = (!estado) ? 0 : 1;
     update();
-    EscribeInforme escribeInforme = new EscribeInforme(tabla, estado, mensaje.getText());
+    EscribeInforme escribeInforme = new EscribeInforme(tabla, estado, mensaje.getText(), finalizar);
   }
 
   private void update() {

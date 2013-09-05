@@ -1,4 +1,4 @@
-/*permite la apertura de imagenes Tif
+/* permite la apertura de imagenes Tif
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -25,10 +25,11 @@ public final class ReadImageTif extends JComponent {
   public ReadImageTif() {
   }
 
-  static Image load(byte[] data) {
+  static Image imageTif(byte[] data) {
     SeekableStream stream = null;
     Image image = null;
-    try {
+    try
+      {
       stream = new ByteArraySeekableStream(data);
       String[] names = ImageCodec.getDecoderNames(stream);
       ImageDecoder dec =
@@ -36,25 +37,29 @@ public final class ReadImageTif extends JComponent {
       RenderedImage im = dec.decodeAsRenderedImage();
       image = PlanarImage.wrapRenderedImage(im).getAsBufferedImage();
       image.flush();
-    } catch (IOException ex) {
+      } catch (IOException ex)
+      {
       Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-      try {
+      } finally
+      {
+      try
+        {
         stream.close();
-      } catch (IOException ex) {
+        } catch (IOException ex)
+        {
         Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
-    }
     return image;
   }
 
-  public Image lecturaImagen(String location) throws FileNotFoundException, IOException {
+  public Image getImagen(String location) throws FileNotFoundException, IOException {
     ByteBuffer buffer;
     FileInputStream in = new FileInputStream(location);
     FileChannel channel = in.getChannel();
     buffer = ByteBuffer.allocate((int) channel.size());
     buffer.clear();
     channel.read(buffer);
-    return load(buffer.array());
+    return imageTif(buffer.array());
   }
 }

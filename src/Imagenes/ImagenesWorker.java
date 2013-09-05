@@ -16,6 +16,7 @@ import org.im4java.core.Info;
 import org.im4java.core.InfoException;
 
 /**
+ * Convierte el pdf en un jpg gracias al image magick
  *
  * @author MUTNPROD003
  */
@@ -37,11 +38,13 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
   @Override
   public String doInBackground() {
     File input = new File(rutaConPagina);
-    File temp_Original = null;
-    try {
+    File outputTemp = null;
+    try
+      {
       String rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal() + "_t_";
-      temp_Original = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
-      try {
+      outputTemp = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
+      try
+        {
 //        getInfoOriginalImage(input);
         IMOperation operation = new IMOperation();
         operation.density(200);
@@ -52,20 +55,24 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
         operation.addImage();
         ConvertCmd convert = new ConvertCmd();
         convert.setSearchPath(IM4JAVA_TOOLPATH);
-        convert.run(operation, new Object[]{input.getAbsolutePath(), temp_Original.getAbsolutePath()});
+        convert.run(operation, new Object[]
+          {
+          input.getAbsolutePath(), outputTemp.getAbsolutePath()
+          });
         operation.closeOperation();
 
-      } catch (IOException | InterruptedException | IM4JavaException ex) {
+        } catch (IOException | InterruptedException | IM4JavaException ex)
+        {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imagenes desde PDF", JOptionPane.ERROR_MESSAGE);
-      }
-    } catch (IOException ex) {
+        }
+      } catch (IOException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imágenes desde PDF", JOptionPane.ERROR_MESSAGE);
 //      Logger.getLogger(ImagenesWorker.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    temp_Original.deleteOnExit();
-    return temp_Original.getAbsolutePath();
+      }
+    outputTemp.deleteOnExit();
+    return outputTemp.getAbsolutePath();
   }
-
 
   private void getInfoOriginalImage(File input) throws InfoException {
     Info imageInfo = new Info(input.getAbsolutePath(), true);
@@ -76,4 +83,5 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
     System.out.println("Geometry: " + imageInfo.getImageGeometry());
     System.out.println("Depth: " + imageInfo.getImageDepth());
     System.out.println("Class: " + imageInfo.getImageClass());
-  }}
+  }
+}

@@ -25,17 +25,21 @@ public class SetFechaDeIngreso {
 
   private void setFecha(Usuario usuario) {
     Conexion conexion = new Conexion();
-    if (conexion.isConexion()) {
-      try {
-        String ret = "UPDATE `qualitys`.`usuarios` SET`fecha_ingreso` = '"
-                + usuario.getFechaUltimoIngreso() + "' WHERE id = "
+    if (conexion.isConexion())
+      {
+      try
+        {
+        String ret = "UPDATE `qualitys`.`usuarios` "
+                + "SET`fecha_ingreso` = '"
+                + usuario.getFechaUltimoIngreso()
+                + "' WHERE id = "
                 + usuario.getId() + ";";
         conexion.executeUpdate(ret);
         conexion.isConexionClose();
-      } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en Seteo de Fecha", JOptionPane.ERROR_MESSAGE);
-//        Logger.getLogger(SetFechaDeIngreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
-    }
   }
 }
