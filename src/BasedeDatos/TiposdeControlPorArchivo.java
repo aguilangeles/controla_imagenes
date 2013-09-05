@@ -4,7 +4,6 @@
  */
 package BasedeDatos;
 
-import BasedeDatos.Conexion;
 import Entidades.TiposDeControl;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,14 +12,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
+ * Trae los tipos de control por archivo
  *
  * @author MUTNPROD003
  */
 public class TiposdeControlPorArchivo {
 
-  private Conexion conexion = new Conexion();
+  private static Conexion conexion = new Conexion();
   private int idArchivo;
-  private int idArchivoTraza;
   private int idTraza;
   private JTable tabla;
   private List<TiposDeControl> tiposControlList = new ArrayList<>();
@@ -30,16 +29,12 @@ public class TiposdeControlPorArchivo {
     traerChecks();
   }
 
-  public TiposdeControlPorArchivo(int idArchivo, JTable tabla) {
-    this.idArchivo = idArchivo;
-    this.tabla = tabla;
-    traerChecks();
-  }
-
   private List<TiposDeControl> traerChecks() {
     TiposDeControl tipos;
-    if (conexion.isConexion()) {
-      try {
+    if (conexion.isConexion())
+      {
+      try
+        {
         String query = "SELECT  tac.idcontrol "
                 + ", c.descripcion "
                 + ", tac.estado "
@@ -48,18 +43,22 @@ public class TiposdeControlPorArchivo {
                 + " on tac.idcontrol = c.id "
                 + " where idarchivo = " + idArchivo + ";";
         conexion.executeQuery(query);
-        while (conexion.resulset.next()) {
+        while (conexion.resulset.next())
+          {
           int estado = conexion.resulset.getInt(3);
           boolean isEstado = (estado == 0) ? false : true;
-          tipos = new TiposDeControl(conexion.resulset.getInt(1), conexion.resulset.getString(2), isEstado, null, null);
+          tipos = new TiposDeControl(conexion.resulset.getInt(1),
+                  conexion.resulset.getString(2), isEstado, null, null);
           tiposControlList.add(tipos);
-        }
+          }
         conexion.isConexionClose();
 
-      } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Obtener control por Imagen", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex)
+        {
+        JOptionPane.showMessageDialog(null, ex.getMessage(),
+                "Obtener control por Imagen", JOptionPane.ERROR_MESSAGE);
+        }
       }
-    }
     return tiposControlList;
   }
 

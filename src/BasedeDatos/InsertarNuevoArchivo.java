@@ -4,12 +4,12 @@
  */
 package BasedeDatos;
 
-import BasedeDatos.Conexion;
 import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
+ * Inserta en archivo, id, ruta, numero de pagina y estado cero
  *
  * @author MUTNPROD003
  */
@@ -29,16 +29,23 @@ public class InsertarNuevoArchivo {
   }
 
   private boolean archivo_Insertar(JLabel procesando) {
-    //cambiar por booleano
     int estado = 0;
-    String insertar = "Insert into qualitys.archivo (idTraza, ruta_archivo, pagina_pdf, estado)"
-            + " VALUES (" + id + ", '" + ruta + "' ," + page + " ," + estado + ");";
-    procesando.setText("Insertando " + ruta);
-    try {
+    String insertar = "Insert into qualitys.archivo (idTraza"
+            + ", ruta_archivo "
+            + ", pagina_pdf "
+            + ", estado)"
+            + " VALUES (" + id
+            + ", '" + ruta
+            + "', " + page
+            + ", " + estado + ");";
+    procesando.setText("Insertando en DB" + ruta);
+    try
+      {
       conexion.executeUpdate(insertar);
-    } catch (SQLException ex) {
+      } catch (SQLException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Archivo Insertar", JOptionPane.ERROR_MESSAGE);
-    }
+      }
     return false;
   }
 }
