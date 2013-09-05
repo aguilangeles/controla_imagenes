@@ -47,7 +47,6 @@ public class IdControlFromVerificacionList {
     return idTipoControl;
   }
 
-
   private int getIdFromComboBox(JComboBox tipoVerificacionBox) {
     String combo = (String) tipoVerificacionBox.getSelectedItem();
     String[] dos = combo.split("-");
