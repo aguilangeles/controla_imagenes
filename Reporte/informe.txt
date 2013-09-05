@@ -1,10 +1,10 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-05 10:34:21.0
+Fecha de Control: 2013-09-05 11:25:39.0
 
-Id Traza: 2
+Id Traza: 6
 
-Ruta Completa: C:\angeles\reducido
+Ruta Completa: c:\angeles\reducido
 
 Tamanio Lote: 75
 

@@ -300,7 +300,7 @@ public class ControlesABM extends javax.swing.JFrame {
         tablaContenido.editCellAt(-1, -1);
         try {
           if (isRowEmpty(tablaContenido, getIde())) {
-            insertado = controles.getInsertar().insert_newControl(getIde());
+            insertado = controles.getInsertar().nuevoControl(getIde());
             mensajeUpdate(insertado, "Control");
           }
         } catch (RuntimeException e) {

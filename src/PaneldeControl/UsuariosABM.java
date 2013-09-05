@@ -289,7 +289,7 @@ public class UsuariosABM extends javax.swing.JFrame {
         try {
           tablaUsuarios.editCellAt(-1, -1);
           if (isRowEmpty(tablaUsuarios, getIde())) {
-            insertad = usuario.getInsertar().insert_newUsuario(getIde());
+            insertad = usuario.getInsertar().nuevoUsuario(getIde());
             mensajeUpdate(insertad, "Usuario");
           }
         } catch (RuntimeException e) {

@@ -309,7 +309,7 @@ public class RangosABM extends javax.swing.JFrame {
         tablaContenido.editCellAt(-1, -1);
         try {
           if (isRowEmpty(tablaContenido, getIde())) {
-            insertado = rangosDao.getInsertar().insert_newRango(getIde());
+            insertado = rangosDao.getInsertar().nuevoRango(getIde());
             mensajeUpdate(insertado, "Rango");
           }
         } catch (RuntimeException e) {

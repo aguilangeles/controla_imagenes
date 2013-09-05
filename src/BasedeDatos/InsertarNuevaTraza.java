@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
+ * Genera una nueva traza a insertar en la base de datos
  *
  * @author MUTNPROD003
  */
@@ -45,20 +46,20 @@ public final class InsertarNuevaTraza {
     insertTraza();
   }
 
-  private void insertTraza() {
+  private boolean insertTraza() {
     int numeroRechazo = 0;
     String fecha = new Time().toString();
     String insertar = "Insert into qualitys.traza "
-            + "(fecha_control,"
-            + " rutaCompleta, "
-            + " ultimaCarpeta, "
-            + "tamanio_lote, "
-            + "cantidad_muestreada, "
-            + "nro_rechazo, "
-            + "idRango, "
-            + "idVerificacion, "
-            + "idUsuarios, "
-            + "idTipoDocumento) "
+            + "(fecha_control"
+            + ", rutaCompleta "
+            + ", ultimaCarpeta "
+            + ", tamanio_lote "
+            + ", cantidad_muestreada "
+            + ", nro_rechazo "
+            + ", idRango "
+            + ", idVerificacion "
+            + ", idUsuarios "
+            + ", idTipoDocumento) "
             + "VALUES ('" + fecha
             + "', '" + rutaCompleta
             + "', '" + ultimaCarpeta
@@ -71,16 +72,24 @@ public final class InsertarNuevaTraza {
             + ", " + idTipoDocumento
             + ");";
     //cambiar por booleano
-    try {
+    try
+      {
       conexion.executeUpdate(insertar);
-    } catch (SQLException ex) {
-      if (ex.getMessage().equals(MENSAJE_SQL)) {
-        JOptionPane.showMessageDialog(null, RANGO_INEXISTENTE, "Sin rangos que aplicar al volumen", JOptionPane.ERROR_MESSAGE);
+      return true;
+      } catch (SQLException ex)
+      {
+      if (ex.getMessage().equals(MENSAJE_SQL))
+        {
+        JOptionPane.showMessageDialog(null, RANGO_INEXISTENTE,
+                "Sin rangos que aplicar al volumen", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
-      } else {
-        System.out.println(ex.getMessage());
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Insertar Traza", JOptionPane.ERROR_MESSAGE);
+        return false;
+        } else
+        {
+        JOptionPane.showMessageDialog(null, ex.getMessage(),
+                "Insertar Traza", JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
       }
-    }
   }
 }
