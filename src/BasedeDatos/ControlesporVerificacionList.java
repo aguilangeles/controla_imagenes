@@ -44,8 +44,8 @@ public class ControlesporVerificacionList {
               + " from controles_verificacion v"
               + " join controles c "
               + " on v.idControl = c.id "
-              + "where idVerificacion = "
-              + "(SELECT  t.idVerificacion FROM qualitys.traza  t where t.id = " + idTraza + ");";//
+              + " where idVerificacion = "
+              + " (SELECT  t.idVerificacion FROM qualitys.traza  t where t.id = " + idTraza + ");";//
       conexion.executeQuery(query);
       while (conexion.resulset.next())
         {
