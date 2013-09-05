@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 
 /**
  * Busca en la base de datos todos los usuarios, y los compara con los datos de
- * ingreso en el frame. Si los campos son validados y es  usuario activo, permite
+ * ingreso en el frame. Si los campos son validados y es usuario activo, permite
  * acceder al Panel de Control
- * 
+ *
  * @author MUTNPROD003
  */
 public final class GetUsuarioyCategoriaQs {
@@ -33,7 +33,12 @@ public final class GetUsuarioyCategoriaQs {
       {
       if (conexion.isConexion())
         {
-        conexion.executeQuery("SELECT id, nombre, password, tipo, estado FROM usuarios;");
+        conexion.executeQuery("SELECT id "
+                + ", nombre"
+                + ", password"
+                + ", tipo"
+                + ", estado"
+                + " FROM usuarios;");
         while (conexion.resulset.next())
           {
           int id = conexion.resulset.getInt(1);
@@ -52,7 +57,8 @@ public final class GetUsuarioyCategoriaQs {
       conexion.isConexionClose();
       } catch (SQLException e)
       {
-      JOptionPane.showMessageDialog(null, e.getMessage(), "Error en la Validación del Usuario", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, e.getMessage(),
+              "Error en la Validación del Usuario", JOptionPane.ERROR_MESSAGE);
       }
   }
 

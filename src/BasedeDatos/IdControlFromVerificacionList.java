@@ -11,7 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
- * trae la lista de los id de control contenidos en la verificación. Segun la
+ * Trae la lista de los id de control contenidos en la verificación. Según la
  * seleccion del Combobox.
  *
  * @author aguilangeles@gmail.com
@@ -25,9 +25,10 @@ public class IdControlFromVerificacionList {
 
   public List<Integer> idControlesByVerificacion(JComboBox tipoVerificacionBox,
           Conexion con, List<Integer> idTipoControl) {
-    idVerificacion = getIdFromComboBox(tipoVerificacionBox);;
-    String query = "SELECT idControl FROM qualitys.controles_verificacion where"
-            + " idVerificacion =" + idVerificacion + ";";
+    idVerificacion = getIdFromComboBox(tipoVerificacionBox);
+    String query = "SELECT idControl "
+            + " FROM qualitys.controles_verificacion "
+            + " where idVerificacion =" + idVerificacion + ";";
     if (con.isConexion())
       {
       try
@@ -46,14 +47,15 @@ public class IdControlFromVerificacionList {
     return idTipoControl;
   }
 
-  public int getIdVerificacion() {
-    return idVerificacion;
-  }
 
-  private int getIdFromComboBox(JComboBox tipoVerificacionBox) throws NumberFormatException {
+  private int getIdFromComboBox(JComboBox tipoVerificacionBox) {
     String combo = (String) tipoVerificacionBox.getSelectedItem();
     String[] dos = combo.split("-");
     int id = Integer.parseInt(dos[0]);
     return id;
+  }
+
+  public int getIdVerificacion() {
+    return idVerificacion;
   }
 }

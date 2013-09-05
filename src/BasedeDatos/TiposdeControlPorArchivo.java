@@ -41,10 +41,12 @@ public class TiposdeControlPorArchivo {
     if (conexion.isConexion()) {
       try {
         String query = "SELECT  tac.idcontrol "
-                + ",c.descripcion "
+                + ", c.descripcion "
                 + ", tac.estado "
-                + "FROM qualitys.traza_archivo_controles tac join controles c"
-                + " on tac.idcontrol = c.id where idarchivo = " + idArchivo + ";";
+                + " FROM qualitys.traza_archivo_controles tac "
+                + " join controles c"
+                + " on tac.idcontrol = c.id "
+                + " where idarchivo = " + idArchivo + ";";
         conexion.executeQuery(query);
         while (conexion.resulset.next()) {
           int estado = conexion.resulset.getInt(3);

@@ -1,8 +1,8 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-05 10:10:43.0
+Fecha de Control: 2013-09-05 10:21:21.0
 
-Id Traza: 126
+Id Traza: 1
 
 Ruta Completa: C:\angeles\reducido
 
@@ -16,7 +16,7 @@ Linea de captura: --/--
 
 Digitalizador: --/--
 
-Tipo de Verificacion: uno
+Tipo de Verificacion: tes
 
 Tipo de Documento: Recibo
 
