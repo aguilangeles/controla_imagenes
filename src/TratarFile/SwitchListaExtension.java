@@ -6,7 +6,6 @@ package TratarFile;
 
 import java.util.List;
 import javax.swing.JLabel;
-import TratarFile.BuscarPaginasPdf;
 
 /**
  *
@@ -34,7 +33,7 @@ public class SwitchListaExtension {
         break;
       case ".pdf":
         BuscarPaginasPdf pagePdf = new BuscarPaginasPdf(lista, infoLabel);
-        lista = pagePdf.getLista();
+        lista = pagePdf.getListaPaginas();
         break;
     }
     return lista;

@@ -11,7 +11,6 @@ import BasedeDatos.InsertarNuevoArchivo;
 import BasedeDatos.InsertarNuevaTraza;
 import java.util.List;
 import javax.swing.JLabel;
-import TratarFile.CrearElRamdom;
 
 /**
  *
@@ -26,8 +25,13 @@ public class OnlyPdf {
   private CrearElRamdom crearRamdom;
   private JLabel infoLabel;
   private List<Integer> idControl;
+  private List<Object> listaImagenes;
+  private static CrearElRamdom ramdom;
 
-  public OnlyPdf(InsertarNuevaTraza sTraza, Conexion conexion, int idUsuario, int idDocumento, int idVerificacion, int tamanioLote, int muestra, int idRango, int idTraza, String parent, String ultimaCarpeta, CrearElRamdom crearRamdom, JLabel infoLabel, List<Integer> idControl) {
+  public OnlyPdf(InsertarNuevaTraza sTraza, Conexion conexion, int idUsuario,
+          int idDocumento, int idVerificacion, int tamanioLote, int muestra,
+          int idRango, int idTraza, String parent, String ultimaCarpeta,
+          List<Object> listaImagenes, JLabel infoLabel, List<Integer> idControl) {
     this.sTraza = sTraza;
     this.conexion = conexion;
     this.idUsuario = idUsuario;
@@ -39,17 +43,20 @@ public class OnlyPdf {
     this.idTraza = idTraza;
     this.parent = parent;
     this.ultimaCarpeta = ultimaCarpeta;
-    this.crearRamdom = crearRamdom;
+    this.listaImagenes = listaImagenes;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
+    ramdom = new CrearElRamdom(listaImagenes, muestra);
     OnlyPdf();
   }
 
-  private void OnlyPdf() {
+  private void OnlyPdf() {//voy a cambiar por stack
     sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanioLote, parent, ultimaCarpeta, muestra, idRango);
-    List<Object> ramdomPdf = crearRamdom.getSeleccion();
-    for (Object o : ramdomPdf) {
+
+    List<Object> ramdomPdf = ramdom.getStack();
+    for (Object o : ramdomPdf)
+      {
       NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
       int parentlength = parent.length() + 1;
       String adaptarFile = pagina.getNombre().substring(parentlength);
@@ -59,8 +66,25 @@ public class OnlyPdf {
       imagenyControl();
       Runtime gar = Runtime.getRuntime();
       gar.gc();
-    }
+      }
   }
+//  private void OnlyPdf() {
+//    sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+//            tamanioLote, parent, ultimaCarpeta, muestra, idRango);
+//    List<Object> ramdomPdf = crearRamdom.getSeleccion();
+//    for (Object o : ramdomPdf)
+//      {
+//      NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
+//      int parentlength = parent.length() + 1;
+//      String adaptarFile = pagina.getNombre().substring(parentlength);
+//      String filename = adaptarFile.replace("\\", "\\\\");
+//      int page = pagina.getNumeroPagina();
+//      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, page, infoLabel);
+//      imagenyControl();
+//      Runtime gar = Runtime.getRuntime();
+//      gar.gc();
+//      }
+//  }
 
   private void imagenyControl() {
     InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado = new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion);

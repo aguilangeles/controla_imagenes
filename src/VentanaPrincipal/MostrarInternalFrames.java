@@ -4,8 +4,6 @@
  */
 package VentanaPrincipal;
 
-import VentanaPrincipal.Guardar;
-import VentanaPrincipal.GetRutaDeImagen;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
@@ -129,7 +127,6 @@ public class MostrarInternalFrames {
   }
 
   private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina, boolean pdf) {
-    System.out.println("save recibe esta ruta " + rutaJlabel.getText() + "pg. " + pagina.getText());
     save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
     internal.dispose();
     desktopPane.removeAll();

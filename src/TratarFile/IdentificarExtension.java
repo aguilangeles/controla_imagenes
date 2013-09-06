@@ -49,7 +49,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   @Override
   protected Void doInBackground()  {
     ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel,file);
-    listaExtension = extensionImagen.getListaExtension();
+    listaExtension = extensionImagen.getListaExtensionImagen();
     extension = extensionImagen.getExtension();
     listaResultado = new SwitchListaExtension(extension, listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();

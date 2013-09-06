@@ -8,7 +8,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
-import TratarFile.ExtensionImagen;
 
 /**
  *
@@ -25,7 +24,7 @@ public class ListaRecursiva {
     this.infoLabel = infoLabel;
     buscarExtensiones(file);
   }
-  
+
   private void buscarExtensiones(File aFile) {
     File[] files = aFile.listFiles();
     for (int x = 0; x < files.length; x++) {
@@ -50,7 +49,7 @@ public class ListaRecursiva {
     return extension;
   }
 
-  public List<Object> getListaExtension() {
+  public List<Object> getListaExtensionImagen() {
     return listaExtension;
   }
 

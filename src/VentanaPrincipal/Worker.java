@@ -25,21 +25,21 @@ public class Worker extends SwingWorker<Object, Object> {
   private JFrame controles;// lo necesito para mostrar el conteo
   private JLabel infoLabel;
   private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
-  private List<Object> lista;
+  private List<Object> listaImagenes;
   private String parent, extension, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
   private int idTraza;
   private static InsertarNuevaTraza sTraza;
-  private CrearElRamdom crearRamdom;
+//  private static CrearElRamdom crearRamdom;
 
   public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl,
-          List<Object> lista, String parent, String extension, String ultimaCarpeta,
+          List<Object> listaImagenes, String parent, String extension, String ultimaCarpeta,
           int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
     this.controles = controles;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
-    this.lista = lista;
+    this.listaImagenes = listaImagenes;
     this.parent = parent;
     this.extension = extension;
     this.ultimaCarpeta = ultimaCarpeta;
@@ -49,42 +49,49 @@ public class Worker extends SwingWorker<Object, Object> {
     this.muestra = muestra;
     this.tamanioLote = tamanioLote;
     this.idRango = idRango;
-    this.crearRamdom = new CrearElRamdom(lista, muestra);
+//    System.out.println("lista imagnes " + listaImagenes);
+//    crearRamdom = new CrearElRamdom(listaImagenes, muestra);
   }
 
   @Override
   protected String doInBackground() {
-    if (conexion.isConexion()) {
+    if (conexion.isConexion())
+      {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
-      switch (extension) {
-        case ".tif": case ".png": case ".jpg":
+      switch (extension)
+        {
+        case ".tif":
+        case ".png":
+        case ".jpg":
           Tif_Png_Jpg();
           break;
         case ".pdf":
           OnlyPdf();
           break;
+        }
       }
-    }
     return null;
   }
 
   @Override
   protected void done() {
-    if (!isCancelled()) {
+    if (!isCancelled())
+      {
       conexion.isConexionClose();
       crearNuevoWorker();
-    }
+      }
   }
 
   private void crearNuevoWorker() {
     int trazaID;
     Conexion con = new Conexion();
-    if (con.isConexion()) {
+    if (con.isConexion())
+      {
       int resultado = new GetUltimoIDInsertado(con, "traza").getUltimoID();
       trazaID = (resultado == 0) ? 1 : resultado;
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
       new Ventana(trazaDao.getTraza()).setVisible(true);
-    }
+      }
     con.isConexionClose();
     controles.dispose();
   }
@@ -92,15 +99,15 @@ public class Worker extends SwingWorker<Object, Object> {
   private void Tif_Png_Jpg() {
     Tif_Png_Jpg tif_Png_Jpg =
             new Tif_Png_Jpg(sTraza, conexion, idUsuario, idDocumento,
-            idVerificacion, idRango, muestra, lista.size(), idTraza,
-            parent, ultimaCarpeta, crearRamdom, infoLabel, idControl);
+            idVerificacion, idRango, muestra, tamanioLote, idTraza,
+            parent, ultimaCarpeta, infoLabel, idControl, listaImagenes);
   }
 
   private void OnlyPdf() {
     OnlyPdf onlyPdf =
             new OnlyPdf(sTraza, conexion, idUsuario, idDocumento,
             idVerificacion, tamanioLote, muestra, idRango, idTraza,
-            parent, ultimaCarpeta, crearRamdom, infoLabel, idControl);
+            parent, ultimaCarpeta, listaImagenes, infoLabel, idControl);
   }
 
   public int getIdTraza() {
@@ -110,6 +117,7 @@ public class Worker extends SwingWorker<Object, Object> {
   public String getExtension() {
     return extension;
   }
+
   public String getParent() {
     return parent;
   }

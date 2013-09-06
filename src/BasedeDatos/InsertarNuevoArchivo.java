@@ -38,7 +38,7 @@ public class InsertarNuevoArchivo {
             + ", '" + ruta
             + "', " + page
             + ", " + estado + ");";
-    procesando.setText("Insertando en DB" + ruta);
+    procesando.setText("Insertando en DB " + ruta);
     try
       {
       conexion.executeUpdate(insertar);

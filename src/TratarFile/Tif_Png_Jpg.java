@@ -10,7 +10,6 @@ import BasedeDatos.InsertarNuevoArchivo;
 import BasedeDatos.InsertarNuevaTraza;
 import java.util.List;
 import javax.swing.JLabel;
-import TratarFile.CrearElRamdom;
 
 /**
  *
@@ -22,11 +21,11 @@ public class Tif_Png_Jpg {
   private Conexion conexion;
   private int idUsuario, idDocumento, idVerificacion, idRango, muestra, tamanio, idTraza;
   private String parent, ultimaCarpeta;
-  private CrearElRamdom crearRamdom;
+  private static CrearElRamdom ramdom;
   private JLabel infoLabel;
   private List<Integer> idControl;
 
-  public Tif_Png_Jpg(InsertarNuevaTraza sTraza, Conexion conexion, int idUsuario, int idDocumento, int idVerificacion, int idRango, int muestra, int tamanio, int idTraza, String parent, String ultimaCarpeta, CrearElRamdom crearRamdom, JLabel infoLabel, List<Integer> idControl) {
+  public Tif_Png_Jpg(InsertarNuevaTraza sTraza, Conexion conexion, int idUsuario, int idDocumento, int idVerificacion, int idRango, int muestra, int tamanio, int idTraza, String parent, String ultimaCarpeta, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes) {
     this.sTraza = sTraza;
     this.conexion = conexion;
     this.idUsuario = idUsuario;
@@ -38,17 +37,19 @@ public class Tif_Png_Jpg {
     this.idTraza = idTraza;
     this.parent = parent;
     this.ultimaCarpeta = ultimaCarpeta;
-    this.crearRamdom = crearRamdom;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
+    ramdom = new CrearElRamdom(listaImagenes, muestra);
     Tif_Png_Jpg();
   }
 
   private void Tif_Png_Jpg() {
+    //todo replace for stack
     sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanio, parent, ultimaCarpeta, muestra, idRango);
-    List<Object> ramdomList = crearRamdom.getSeleccion();
-    for (Object obj : ramdomList) {
+    List<Object> ramdomList = ramdom.getStack();
+    for (Object obj : ramdomList)
+      {
       String aImagen = (String) obj;
       int parentlength = parent.length() + 1;
       String adaptarFile = aImagen.substring(parentlength);
@@ -57,7 +58,22 @@ public class Tif_Png_Jpg {
       imagenyControl();
       Runtime gar = Runtime.getRuntime();
       gar.gc();
-    }
+      }
+    
+//  private void Tif_Png_Jpg() {
+//    sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+//            tamanio, parent, ultimaCarpeta, muestra, idRango);
+//    List<Object> ramdomList = crearRamdom.getSeleccion();
+//    for (Object obj : ramdomList) {
+//      String aImagen = (String) obj;
+//      int parentlength = parent.length() + 1;
+//      String adaptarFile = aImagen.substring(parentlength);
+//      String filename = adaptarFile.replace("\\", "\\\\");
+//      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, 0, infoLabel);
+//      imagenyControl();
+//      Runtime gar = Runtime.getRuntime();
+//      gar.gc();
+//    }
   }
 
   private void imagenyControl() {
