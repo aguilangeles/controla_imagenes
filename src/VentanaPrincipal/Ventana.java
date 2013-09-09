@@ -43,6 +43,7 @@ public class Ventana extends javax.swing.JFrame {
     //TODO pdf versus tif,png y jpg
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
+    anterior.setEnabled(false);
     getFirstImage(pdf);
   }
 

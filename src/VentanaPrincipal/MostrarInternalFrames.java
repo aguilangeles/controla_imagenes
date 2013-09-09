@@ -65,12 +65,8 @@ public class MostrarInternalFrames {
     try
       {
       internal.setMaximum(true);
-      anterior.setEnabled(false);
       setTituloYRutaLabel(siguientes);
-      String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
-      setLabelPagina(pdf, siguientes);
-      imageDraw.cargarImage(ruta, pdf, tif, combo);
-      scrollImage.getViewport().add(imageDraw);
+      setImagenes(siguientes);
       setCB.set(siguientes.getId());
       } catch (PropertyVetoException ex)
       {
@@ -85,11 +81,8 @@ public class MostrarInternalFrames {
       {
       desktopPane.add(internal);
       setTituloYRutaLabel(imagen1);
-      setLabelPagina(pdf, imagen1);
       setCB.set(imagen1.getId());
-      String ruta_temp = rutadeimagen.siguienteImagen(pdf, imagen1);
-      imageDraw.cargarImage(ruta_temp, pdf, tif, combo);
-      scrollImage.getViewport().add(imageDraw);
+      setImagenes(imagen1);
       internal.setVisible(true);
       } catch (Exception ex)
       {
@@ -103,11 +96,8 @@ public class MostrarInternalFrames {
     desktopPane.add(internal);
     internal.setVisible(true);
     setTituloYRutaLabel(pr);
-    setLabelPagina(pdf, pr);
+    setImagenes(pr);
     setCB.set(pr.getId());
-    String visualizacion = rutadeimagen.anteriorImagen(pdf, pr);
-    imageDraw.cargarImage(visualizacion, pdf, tif, combo);
-    scrollImage.getViewport().add(imageDraw);
   }
 
   private void setTituloYRutaLabel(Imagen siguientes) {
@@ -131,5 +121,12 @@ public class MostrarInternalFrames {
     internal.dispose();
     desktopPane.removeAll();
     desktopPane.repaint();
+  }
+
+  private void setImagenes(Imagen siguientes) {
+    String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
+    setLabelPagina(pdf, siguientes);
+    imageDraw.cargarImage(ruta, pdf, tif, combo);
+    scrollImage.getViewport().add(imageDraw);
   }
 }

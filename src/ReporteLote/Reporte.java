@@ -4,10 +4,10 @@
  */
 package ReporteLote;
 
+import Helpers.VersionEImageIcon;
 import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,18 +34,19 @@ public class Reporte extends javax.swing.JFrame {
   public Reporte(int idtraza) {
 
     initComponents();
-    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-    ImageIcon im = new ImageIcon(rutaImagen);
-    setIconImage(im.getImage());
-
+    VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
     this.idtraza = idtraza;
     setResizable(false);
-    if (conexion.isConexion()) {
-      Tabla_TrazaReporte poblarTablaTraza = new Tabla_TrazaReporte(conexion, idtraza, tablaDetalles);
-      Tabla_TiposDeControlCantidad poblarTablaDiscriminacionTipos = new Tabla_TiposDeControlCantidad(idtraza, conexion, tabladeTipos);
+    if (conexion.isConexion())
+      {
+      Tabla_TrazaReporte poblarTablaTraza =
+              new Tabla_TrazaReporte(conexion, idtraza, tablaDetalles);
+      Tabla_TiposDeControlCantidad poblarTablaDiscriminacionTipos =
+              new Tabla_TiposDeControlCantidad(idtraza, conexion, tabladeTipos);
       actionRadioButton();
-      imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  " + poblarTablaTraza.getRechazo());
-    }
+      imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  "
+              + poblarTablaTraza.getRechazo());
+      }
   }
 
   /**
@@ -247,16 +248,26 @@ public class Reporte extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private void getFinalizar() throws HeadlessException {
-    if (bg.getSelection() != null) {
-      if (jTextArea1.getText().length() >= 500) {
-        JOptionPane.showMessageDialog(jTextArea1, "Reduzca el texto a 500 caracteres", "Limite de texto permitido", JOptionPane.ERROR_MESSAGE);
-      } else {
-        UpdateEstadoLote updateEstadoLote = new UpdateEstadoLote(conexion, idtraza, si.isSelected(), jTextArea1, tablaDetalles, jButton1);
+    if (bg.getSelection() != null)
+      {
+      if (jTextArea1.getText().length() >= 500)
+        {
+        JOptionPane.showMessageDialog(jTextArea1,
+                "Reduzca el texto a 500 caracteres", "Limite de texto permitido",
+                JOptionPane.ERROR_MESSAGE);
+        } else
+        {
+        UpdateEstadoLote updateEstadoLote =
+                new UpdateEstadoLote(conexion, idtraza, si.isSelected(),
+                jTextArea1, tablaDetalles, jButton1);
         conexion.isConexionClose();
         System.exit(0);
+        }
+      } else
+      {
+      JOptionPane.showMessageDialog(null,
+              "Debe aceptar o rechazar el lote antes de salir", "Selección de Lote",
+              JOptionPane.ERROR_MESSAGE);
       }
-    } else {
-      JOptionPane.showMessageDialog(null, "Debe aceptar o rechazar el lote antes de salir", "Selección de Lote", JOptionPane.ERROR_MESSAGE);
-    }
   }
 }

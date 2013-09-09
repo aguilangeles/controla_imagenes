@@ -1,8 +1,8 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-06 02:21:57.0
+Fecha de Control: 2013-09-09 09:35:09.0
 
-Id Traza: 74
+Id Traza: 80
 
 Ruta Completa: c:\angeles\volreducido
 
@@ -24,5 +24,5 @@ Estado: Aceptado
 
 Observaciones: 
 
-Versión  app: Qualitys 1.0.06b
+Versión  app: Qualitys 1.0.07
 
