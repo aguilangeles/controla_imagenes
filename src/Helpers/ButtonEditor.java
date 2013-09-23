@@ -4,7 +4,7 @@
  */
 package Helpers;
 
-import VentanaPrincipal.AyudaVisual;
+import Imagenes.AyudaVisual;
 import Entidades.TiposDeControl;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
