@@ -22,7 +22,7 @@ import javax.swing.JTable;
  */
 public class EscribeInforme {
 
-  private static final String UBICACION = "Reporte/informe.txt";
+  private static final String UBICACION = "Reporte/"+new Time().getDateForTXT()+".txt";
 
   public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar) {
     String estadoS = (estado) ? "Aceptado" : "Rechazado";
@@ -34,7 +34,10 @@ public class EscribeInforme {
     PrintWriter pw = null;
     try
       {
-      fichero =  new FileWriter("Reporte/informe.txt",true);
+
+//      String date = "Reporte/"+new Time().getDateForTXT()+".txt";
+//        System.out.println(date);
+      fichero =  new FileWriter(UBICACION,true);
       pw = new PrintWriter(new BufferedWriter(fichero));
 //      pw = new PrintWriter(fichero, true);
       pw.println("--------------------------------------------"+new Date()+"--");

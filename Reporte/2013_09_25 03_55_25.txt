@@ -1,0 +1,15 @@
+--------------------------------------------Wed Sep 25 15:55:25 ART 2013--
+Operador de Control: admin
+Fecha de Control: 2013-09-25 03:55:17.0
+Id Traza: 16
+Ruta Completa: c:\angeles\volreducido
+Tamanio Lote: 774
+Cantidad muestreada: 3
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: t
+Tipo de Documento: Recibo
+Estado: Aceptado
+Observaciones: 
+Versión  app: Qualitys 1.0.08
