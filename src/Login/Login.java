@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
   private static final String USER_DEFAULT = "default";
   private static final String USER_INVALID = "<html>El Usuario o password "
           + "no existe en la base de datos, o no es un usuario activo</html>";
-  private Usuario usuario;
+  private static Usuario usuario;
 
   /**
    * Creates new form Login
@@ -207,7 +207,7 @@ public class Login extends javax.swing.JFrame {
   /**
    * @return
    */
-  public Usuario getUsuario() {
+  public static Usuario getUsuario() {
     return usuario;
   }
   // Variables declaration - do not modify//GEN-BEGIN:variables

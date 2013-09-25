@@ -35,7 +35,7 @@ public class ControlDocumentosyVerificaciones {
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
-          new CargarLote(usuario, vc.getTipoDocumento(), vc.getTipoVerificacion(), panelControl).setVisible(true);
+          new CargarLote(vc.getTipoDocumento(), vc.getTipoVerificacion(), panelControl).setVisible(true);
         }
       });
       //panelControl.dispose();

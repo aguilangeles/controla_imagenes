@@ -27,11 +27,13 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   private JLabel infoLabel;
   private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion;
+  private JFrame panelControl ;
   //
-  private static int tamanio, muestra, idRango;
+  private  int tamanio, muestra, idRango;
   private static String extension;
   private static List<Object> listaExtension;
   private static List<Object> listaResultado;
+
 
   public IdentificarExtension(JFrame frame, JLabel infoLabel,
           List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
@@ -53,9 +55,9 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     extension = extensionImagen.getExtension();
     listaResultado = new SwitchListaExtension(extension, listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();
-    GetMuestrafromRango muestraRango = new GetMuestrafromRango(tamanio);
-    muestra = muestraRango.getMuestra();
-    idRango = muestraRango.getIdRango();
+    new GetMuestrafromRango(tamanio);
+    muestra =GetMuestrafromRango.getMuestra();
+    idRango = GetMuestrafromRango.getIdRango();
     return null;
   }
 
@@ -78,6 +80,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
       }
     }
   }
+
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
     boolean ret = (aTamanio > aRango) ? true : false;
     return ret;

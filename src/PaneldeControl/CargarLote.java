@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import Entidades.Usuario;
 import Helpers.VersionEImageIcon;
-import java.awt.HeadlessException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -33,13 +32,12 @@ public class CargarLote extends javax.swing.JFrame {
    */
   public CargarLote() {
     initComponents();
-
   }
 
-  public CargarLote(Usuario usuarioTipo, DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion, JFrame panelControl) {
+  public CargarLote(DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion, JFrame panelControl) {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
-    this.usarioTipo = usuarioTipo;
+    this.usarioTipo = Login.Login.getUsuario();
     rutaCarpeta.setInputVerifier(new Helpers.InputVerifier().inputVerifierT());
     this.tipoDocumentoBox.setModel(documentos);
     this.tipoVerificacionBox.setModel(verificacion);
@@ -81,6 +79,7 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel2.setText("Ruta");
 
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    rutaCarpeta.setText("c:/angeles/volreducido");
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     aceptarSeleccion.setMnemonic('c');
@@ -257,6 +256,5 @@ public class CargarLote extends javax.swing.JFrame {
             new AceptarCargarLote(tipoDocumentoBox, tipoVerificacionBox,
             rutaCarpeta, con, aceptarSeleccion, informa, usarioTipo.getId(), this);
     panelControl.dispose();
-
   }
 }
