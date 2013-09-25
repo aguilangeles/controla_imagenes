@@ -34,8 +34,8 @@ public class EscribeInforme {
     PrintWriter pw = null;
     try
       {
-     // fichero = new FileWriter(UBICACION);
-      pw = new PrintWriter(new BufferedWriter(new FileWriter("Reporte/informe.txt",true)));
+      fichero =  new FileWriter("Reporte/informe.txt",true);
+      pw = new PrintWriter(new BufferedWriter(fichero));
 //      pw = new PrintWriter(fichero, true);
       pw.println("--------------------------------------------"+new Date()+"--");
       for (int row = 0; row < tablaDetalles.getRowCount(); row++)
