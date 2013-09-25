@@ -21,7 +21,7 @@ public class ControlDocumentosyVerificaciones {
     cargar(panelControl, usuario);
   }
 
-  private void cargar(JFrame panelControl, final Usuario usuario) {
+  private void cargar(final JFrame panelControl, final Usuario usuario) {
     final Verificacion_CargarComboBoxs vc = new Verificacion_CargarComboBoxs();
     vc.llenarQualitys();    //llena el combo de verificacion
     vc.llenarDocumentos(); //llena el combo documentos
@@ -35,10 +35,10 @@ public class ControlDocumentosyVerificaciones {
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
-          new CargarLote(usuario, vc.getTipoDocumento(), vc.getTipoVerificacion()).setVisible(true);
+          new CargarLote(usuario, vc.getTipoDocumento(), vc.getTipoVerificacion(), panelControl).setVisible(true);
         }
       });
-      panelControl.dispose();
+      //panelControl.dispose();
     }
   }
 }

@@ -6,6 +6,7 @@ package TratarFile;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -30,6 +31,7 @@ public class ListaRecursiva {
     for (int x = 0; x < files.length; x++) {
       String name = files[x].getName();
       infoLabel.setText("Analizando..." + name);
+      System.out.println("Analizando..." + name);
       boolean ext = (name.endsWith(".tif")//
               || name.endsWith(".pdf")
               || name.endsWith(".jpg")
@@ -41,6 +43,7 @@ public class ListaRecursiva {
         ExtensionImagen stringImage = new ExtensionImagen(name);
         extension = (stringImage.getExtension());
         listaExtension.add(files[x].getAbsolutePath());
+        Collections.shuffle(listaExtension);
       }
     }
   }

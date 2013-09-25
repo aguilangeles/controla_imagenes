@@ -25,15 +25,14 @@ public class CrearElRamdom {
   }
 
   private void generarRamdom() {
-    /*Replace for Stack*/
     int posicion = 0;
-//    int muestra = muestra;
     for (int i = 0; i < muestra; i++)
       {
-      posicion = (int) Math.floor(Math.random() * muestra);
+      posicion = (int) new java.util.Random().nextInt(muestra+1);
+//      posicion = (int) Math.floor(Math.random() * muestra+1);
       while (stack.contains(lista.get(posicion)))
         {
-        posicion = (int) Math.floor(Math.random() * muestra);
+        posicion = (int) new java.util.Random().nextInt(muestra+1);
         }
       stack.push(lista.get(posicion));
       }
@@ -61,11 +60,4 @@ public class CrearElRamdom {
   public Stack<Object> getStack() {
     return stack;
   }
-//  public List<Object> getSeleccion() {
-//    return seleccion;
-//  }
-//
-//  public void setSeleccion(List<Object> seleccion) {
-//    this.seleccion = seleccion;
-//  }
 }

@@ -1,14 +1,14 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-09 09:35:09.0
+Fecha de Control: 2013-09-25 12:43:04.0
 
-Id Traza: 80
+Id Traza: 8
 
-Ruta Completa: c:\angeles\volreducido
+Ruta Completa: \\192.168.1.57\osn\Produccion\Linea09\V201102V09001
 
-Tamanio Lote: 40
+Tamanio Lote: 86894
 
-Cantidad muestreada: 39
+Cantidad muestreada: 4000
 
 Total Rechazos: 0
 
@@ -16,7 +16,7 @@ Linea de captura: --/--
 
 Digitalizador: --/--
 
-Tipo de Verificacion: tes
+Tipo de Verificacion: test
 
 Tipo de Documento: Recibo
 
@@ -24,5 +24,5 @@ Estado: Aceptado
 
 Observaciones: 
 
-Versión  app: Qualitys 1.0.07
+Versión  app: Qualitys 1.0.08
 
