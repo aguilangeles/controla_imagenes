@@ -4,9 +4,11 @@
  */
 package Helpers;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -32,15 +34,18 @@ public class EscribeInforme {
     PrintWriter pw = null;
     try
       {
-      fichero = new FileWriter(UBICACION);
-      pw = new PrintWriter(fichero);
+     // fichero = new FileWriter(UBICACION);
+      pw = new PrintWriter(new BufferedWriter(new FileWriter("Reporte/informe.txt",true)));
+//      pw = new PrintWriter(fichero, true);
+      pw.println("--------------------------------------------"+new Date()+"--");
       for (int row = 0; row < tablaDetalles.getRowCount(); row++)
         {
-        pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1) + "\n");
+        pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1));
         }
-      pw.println("Estado: " + estado + "\n");
-      pw.println("Observaciones: " + observaciones + "\n");
-      pw.println("Versión  app: " + VersionEImageIcon.VERSION + "\n");
+      pw.println("Estado: " + estado);
+      pw.println("Observaciones: " + observaciones);
+      pw.println("Versión  app: " + VersionEImageIcon.VERSION);
+      pw.close();
       } catch (IOException ex)
       {
       JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(),

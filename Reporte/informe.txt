@@ -1,14 +1,16 @@
+
+--Wed Sep 25 14:26:19 ART 2013--
 Operador de Control: admin
 
-Fecha de Control: 2013-09-25 12:43:04.0
+Fecha de Control: 2013-09-25 02:26:00.0
 
-Id Traza: 8
+Id Traza: 16
 
-Ruta Completa: \\192.168.1.57\osn\Produccion\Linea09\V201102V09001
+Ruta Completa: c:\angeles\volreducido
 
-Tamanio Lote: 86894
+Tamanio Lote: 774
 
-Cantidad muestreada: 4000
+Cantidad muestreada: 5
 
 Total Rechazos: 0
 
@@ -22,7 +24,22 @@ Tipo de Documento: Recibo
 
 Estado: Aceptado
 
-Observaciones: 
+Observaciones: she knows
 
 Versión  app: Qualitys 1.0.08
 
+--------------------------------------------Wed Sep 25 14:28:18 ART 2013--
+Operador de Control: admin
+Fecha de Control: 2013-09-25 02:28:03.0
+Id Traza: 17
+Ruta Completa: c:\angeles\volreducido
+Tamanio Lote: 774
+Cantidad muestreada: 5
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: test
+Tipo de Documento: Recibo
+Estado: Rechazado
+Observaciones: hola, soy otro comentario
+Versión  app: Qualitys 1.0.08
