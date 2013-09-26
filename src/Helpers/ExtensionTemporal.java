@@ -9,13 +9,14 @@ import java.net.URLDecoder;
 import javax.swing.JOptionPane;
 
 /**
+ * Genera una ruta para la imagen temporal del pdf convertido en png
  *
  * @author MUTNPROD003
  */
 public class ExtensionTemporal {
 
   private String rutaTemporal;
-  private String aParent;
+  private  String aParent;
 
   public ExtensionTemporal(String nombre, String parent, int numero) {
     this.aParent = decoder(parent);
@@ -23,17 +24,19 @@ public class ExtensionTemporal {
     this.rutaTemporal = ret.replace("\\", "_");
   }
 
-  public String getRutaTemporal() {
-    return rutaTemporal;
-  }
-
   private String decoder(String sString) {
     String ret = "";
-    try {
+    try
+      {
       ret = URLDecoder.decode(sString, "UTF-8");
-    } catch (UnsupportedEncodingException ex) {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Extension Temporal: encoding", JOptionPane.ERROR_MESSAGE);
-    }
+      } catch (UnsupportedEncodingException ex)
+      {
+      JOptionPane.showMessageDialog(null, ex.getMessage(),
+              "Extension Temporal: encoding", JOptionPane.ERROR_MESSAGE);
+      }
     return ret;
+  }
+  public String getRutaTemporal() {
+    return rutaTemporal;
   }
 }

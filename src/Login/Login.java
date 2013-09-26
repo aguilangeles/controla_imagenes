@@ -4,10 +4,12 @@
  */
 package Login;
 
+import PaneldeControl.PanelControl;
+import ArchivoConfig.SetConfigFile;
 import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
-import Daos.Usuario;
-import Entidades.ValidarIngreso;
+import Entidades.Usuario;
+import BasedeDatos.GetUsuarioyCategoriaQs;
 import Helpers.VersionEImageIcon;
 
 /**
@@ -19,7 +21,7 @@ public class Login extends javax.swing.JFrame {
   private static final String USER_DEFAULT = "default";
   private static final String USER_INVALID = "<html>El Usuario o password "
           + "no existe en la base de datos, o no es un usuario activo</html>";
-  private Usuario usuario;
+  private static Usuario usuario;
 
   /**
    * Creates new form Login
@@ -65,17 +67,22 @@ public class Login extends javax.swing.JFrame {
     jLabel2.setText("Password");
 
     user.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    user.setText("admin");
     user.setNextFocusableComponent(password);
 
     password.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    password.setText("admin");
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    entrar.setMnemonic('e');
     entrar.setText("Entrar");
+    entrar.setToolTipText("alt + t");
     entrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         entrarActionPerformed(evt);
+      }
+    });
+    entrar.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyPressed(java.awt.event.KeyEvent evt) {
+        entrarKeyPressed(evt);
       }
     });
 
@@ -148,49 +155,60 @@ public class Login extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-      if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
-              && password.getText().trim().equalsIgnoreCase(USER_DEFAULT)) {
-        SetearArchivoConfiguracion setConfig = new SetearArchivoConfiguracion();
-      } else {
-        loginUsuario();
-      }
+      setEntrar();
     }//GEN-LAST:event_entrarActionPerformed
 
-  private boolean isUsuarioValidado() {
-    ValidarIngreso validarIngreso = new ValidarIngreso(user.getText(), password.getText());
-    if (validarIngreso.isUsuario()) {
-      usuario = validarIngreso.getUsuarioValidado();
-      return true;
-    }
-    return false;
+  private void entrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entrarKeyPressed
+    setEntrar();
+  }//GEN-LAST:event_entrarKeyPressed
+  private void setEntrar() {
+    /*Define si se setea el archivo o permite el ingreso del usuario*/
+    if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
+            && password.getText().trim().equalsIgnoreCase(USER_DEFAULT))
+      {
+      SetConfigFile setConfigFile = new SetConfigFile();
+      } else
+      {
+      loginUsuario();
+      }
   }
 
   private void loginUsuario() {
-    if (isUsuarioValidado()) {
-      SetFechaUltimoIngresoUsuario setUsuarioFecha = new SetFechaUltimoIngresoUsuario(getUsuario());
+    /*si el usuario es apto, setea la fecha de ingreso*/
+    if (isUsuarioValidado())
+      {
+      SetFechaDeIngreso setfecha = new SetFechaDeIngreso(getUsuario());
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
-          new PanelControl(getUsuario()).setVisible(true);
+          new PanelControl().setVisible(true);
         }
       });
       dispose();
-    } else {
+      } else
+      {
       JOptionPane.showMessageDialog(entrar, USER_INVALID, "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
-      setearTextFields();
-    }
+      user.setText("");
+      password.setText("");
+      }
+  }
+
+  private boolean isUsuarioValidado() {
+    /*Identifica si es un usuario y qué categoria posee*/
+    GetUsuarioyCategoriaQs userCat = new GetUsuarioyCategoriaQs(user.getText(), password.getText());
+    if (userCat.isUsuario())
+      {
+      usuario = userCat.getUsuarioValidado();
+      return true;
+      }
+    return false;
   }
 
   /**
    * @return
    */
-  public Usuario getUsuario() {
+  public static Usuario getUsuario() {
     return usuario;
-  }
-
-  private void setearTextFields() {
-    user.setText("");
-    password.setText("");
   }
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton entrar;
