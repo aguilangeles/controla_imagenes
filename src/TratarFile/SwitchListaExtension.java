@@ -23,7 +23,6 @@ public class SwitchListaExtension {
     this.infoLabel = infoLabel;
   }
 
-
   public List<Object> switchExtension() {
     switch (extension) {
       case ".tif":
@@ -35,7 +34,7 @@ public class SwitchListaExtension {
         BuscarPaginasPdf pagePdf = new BuscarPaginasPdf(lista, infoLabel);
         lista = pagePdf.getListaPaginas();
         break;
-    }
+      }
     return lista;
   }
 }

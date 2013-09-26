@@ -1,0 +1,70 @@
+Operador de Control: admin
+Fecha de Control: 2013-09-26 03:08:22.0
+Id Traza: 1
+Ruta Completa: c:\angeles\Testeo\gnd
+Tamanio Lote: 1292
+Cantidad muestreada: 13
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: i
+Tipo de Documento: Recibo
+Estado: Aceptado
+Observaciones: 
+Versión  app: Qualitys 1.0.08
+Operador de Control: admin
+Fecha de Control: 2013-09-26 03:08:57.0
+Id Traza: 2
+Ruta Completa: c:\angeles\Testeo\osn
+Tamanio Lote: 571
+Cantidad muestreada: 13
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: u
+Tipo de Documento: Recibo
+Estado: Aceptado
+Observaciones: 
+Versión  app: Qualitys 1.0.08
+Operador de Control: admin
+Fecha de Control: 2013-09-26 03:09:39.0
+Id Traza: 3
+Ruta Completa: c:\angeles\Testeo\gnd
+Tamanio Lote: 1292
+Cantidad muestreada: 13
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: tres
+Tipo de Documento: Recibo
+Estado: Aceptado
+Observaciones: 
+Versión  app: Qualitys 1.0.08
+Operador de Control: admin
+Fecha de Control: 2013-09-26 03:10:40.0
+Id Traza: 4
+Ruta Completa: c:\angeles\Testeo\gnd
+Tamanio Lote: 1292
+Cantidad muestreada: 23
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: u
+Tipo de Documento: Recibo
+Estado: Aceptado
+Observaciones: 
+Versión  app: Qualitys 1.0.08
+Operador de Control: admin
+Fecha de Control: 2013-09-26 03:11:23.0
+Id Traza: 5
+Ruta Completa: c:\angeles\Testeo\osn
+Tamanio Lote: 571
+Cantidad muestreada: 23
+Total Rechazos: 1
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: i
+Tipo de Documento: Recibo
+Estado: Aceptado
+Observaciones: 
+Versión  app: Qualitys 1.0.08

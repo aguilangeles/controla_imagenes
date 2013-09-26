@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class IdControlFromVerificacionList {
 
-  private int idVerificacion;
+  private static int idVerificacion;
 
   public IdControlFromVerificacionList() {
   }
@@ -54,7 +54,9 @@ public class IdControlFromVerificacionList {
     return id;
   }
 
-  public int getIdVerificacion() {
+  public static int getIdVerificacion() {
     return idVerificacion;
   }
+
+ 
 }

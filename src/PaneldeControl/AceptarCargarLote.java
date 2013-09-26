@@ -32,8 +32,8 @@ public class AceptarCargarLote {
   private JLabel informa;
   private int idUsuario;
   private JFrame cargarLoteFrame;
-  private static int idVerificacion;
-  private static List<Integer> idTipoControl = new ArrayList<>();
+//  private  int idVerificacion;
+  private  List<Integer> idTipoControl = new ArrayList<>();
 
   public AceptarCargarLote(JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox,
           JTextField rutaCarpeta, Conexion con, JButton aceptarSeleccion, JLabel informa, int idUsuario, JFrame frame) {
@@ -71,8 +71,9 @@ public class AceptarCargarLote {
         IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
         String rutaCompleta = parent.getParent();
         String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+
         IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
-                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), idVerificacion);
+                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
         idext.execute();
         aceptarSeleccion.setEnabled(false);
         }
@@ -111,6 +112,5 @@ public class AceptarCargarLote {
   private void getControlesPorVerificacion() {
     IdControlFromVerificacionList ctrls = new IdControlFromVerificacionList();
     idTipoControl = ctrls.idControlesByVerificacion(tipoVerificacionBox, con, idTipoControl);
-    idVerificacion = ctrls.getIdVerificacion();
   }
 }

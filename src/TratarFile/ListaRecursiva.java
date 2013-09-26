@@ -18,33 +18,36 @@ public class ListaRecursiva {
 
   private JLabel infoLabel;
   private File file;
-  private static String extension;
-  private static List<Object> listaExtension =new ArrayList<>();
+  private String extension;
+  private List<Object> listaExtension = new ArrayList<>();
 
-  public ListaRecursiva(JLabel infoLabel,File file) {
+  public ListaRecursiva(JLabel infoLabel, File file) {
     this.infoLabel = infoLabel;
     buscarExtensiones(file);
   }
 
   private void buscarExtensiones(File aFile) {
     File[] files = aFile.listFiles();
-    for (int x = 0; x < files.length; x++) {
+    for (int x = 0; x < files.length; x++)
+      {
       String name = files[x].getName();
       infoLabel.setText("Analizando..." + name);
       boolean ext = (name.endsWith(".tif")//
               || name.endsWith(".pdf")
               || name.endsWith(".jpg")
               || name.endsWith(".png")) ? true : false;
-      if (files[x].isDirectory()) {
+      if (files[x].isDirectory())
+        {
         buscarExtensiones(files[x]);
-      }
-      if (ext) {
+        }
+      if (ext)
+        {
         ExtensionImagen stringImage = new ExtensionImagen(name);
         extension = (stringImage.getExtension());
         listaExtension.add(files[x].getAbsolutePath());
         Collections.shuffle(listaExtension);
+        }
       }
-    }
   }
 
   public String getExtension() {
@@ -54,5 +57,4 @@ public class ListaRecursiva {
   public List<Object> getListaExtensionImagen() {
     return listaExtension;
   }
-
 }
