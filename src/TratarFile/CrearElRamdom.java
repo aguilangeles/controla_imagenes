@@ -29,7 +29,6 @@ public class CrearElRamdom {
     for (int i = 0; i < muestra; i++)
       {
       posicion = (int) new java.util.Random().nextInt(muestra+1);
-//      posicion = (int) Math.floor(Math.random() * muestra+1);
       while (stack.contains(lista.get(posicion)))
         {
         posicion = (int) new java.util.Random().nextInt(muestra+1);
@@ -38,25 +37,6 @@ public class CrearElRamdom {
       }
   }
 
-  //  private void generarRamdom() {
-  //    HashSet<Object> hash = new HashSet<>();
-  //    while (hash.size() < rango)
-  //      {
-  //      Integer a1 = new Integer(new java.util.Random().nextInt(tamanio));
-  //      if (!hash.contains(a1))
-  //        {
-  //        hash.add(a1);
-  //        }
-  //      }
-  //    ArrayList ListaHash = new ArrayList(hash);
-  //    Collections.sort(ListaHash);
-  //    Iterator it = ListaHash.iterator();
-  //    while (it.hasNext())
-  //      {
-  //      Integer imagen = (Integer) it.next();
-  //      seleccion.add(lista.get(imagen));
-  //  }
-  //  }
   public Stack<Object> getStack() {
     return stack;
   }
