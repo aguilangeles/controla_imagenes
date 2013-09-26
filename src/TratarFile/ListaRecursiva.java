@@ -31,7 +31,6 @@ public class ListaRecursiva {
     for (int x = 0; x < files.length; x++) {
       String name = files[x].getName();
       infoLabel.setText("Analizando..." + name);
-      System.out.println("Analizando..." + name);
       boolean ext = (name.endsWith(".tif")//
               || name.endsWith(".pdf")
               || name.endsWith(".jpg")

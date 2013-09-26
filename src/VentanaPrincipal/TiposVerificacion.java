@@ -16,7 +16,8 @@ public class TiposVerificacion extends Control {
   private int estado;
   private List<TiposDeControl> listaControles;
 
-  public TiposVerificacion(int id, String nombre, String descripcion, int estado, List<TiposDeControl> listaControles) {
+  public TiposVerificacion(int id, String nombre, String descripcion,
+          int estado, List<TiposDeControl> listaControles) {
     super(id, nombre, descripcion);
     this.estado = estado;
     this.listaControles = listaControles;

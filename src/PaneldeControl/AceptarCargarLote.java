@@ -31,7 +31,7 @@ public class AceptarCargarLote {
   private JButton aceptarSeleccion;
   private JLabel informa;
   private int idUsuario;
-  private JFrame frame;
+  private JFrame cargarLoteFrame;
   private static int idVerificacion;
   private static List<Integer> idTipoControl = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class AceptarCargarLote {
     this.aceptarSeleccion = aceptarSeleccion;
     this.informa = informa;
     this.idUsuario = idUsuario;
-    this.frame = frame;
+    this.cargarLoteFrame = frame;
     getAceptar();
   }
 
@@ -71,13 +71,14 @@ public class AceptarCargarLote {
         IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
         String rutaCompleta = parent.getParent();
         String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
-        IdentificarExtension idext = new IdentificarExtension(frame, informa, idTipoControl, file,
+        IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
                 rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), idVerificacion);
         idext.execute();
         aceptarSeleccion.setEnabled(false);
         }
     } else {
-      JOptionPane.showMessageDialog(rutaCarpeta, "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(rutaCarpeta,
+              "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
       rutaCarpeta.setText("");
       }
   }

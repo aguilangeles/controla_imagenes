@@ -55,7 +55,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     extension = extensionImagen.getExtension();
     listaResultado = new SwitchListaExtension(extension, listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();
-    new GetMuestrafromRango(tamanio);
+    GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
     muestra =GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
     return null;

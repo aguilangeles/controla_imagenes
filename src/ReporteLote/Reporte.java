@@ -303,7 +303,7 @@ public class Reporte extends javax.swing.JFrame {
                 jTextArea1, tablaDetalles, jButton1);
         conexion.isConexionClose();
         this.dispose();
-        new PaneldeControl.PanelControl(Login.Login.getUsuario()).setVisible(true);
+        new PaneldeControl.PanelControl().setVisible(true);
         }
       } else
       {

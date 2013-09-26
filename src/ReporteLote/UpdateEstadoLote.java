@@ -23,7 +23,8 @@ public class UpdateEstadoLote {
   private JTextArea mensaje;
   private int setEstado;
 
-  public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado, JTextArea mensaje, JTable tabla, JButton finalizar) {
+  public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado,
+          JTextArea mensaje, JTable tabla, JButton finalizar) {
     this.conexion = conexion;
     this.idtraza = idtraza;
     this.mensaje = mensaje;
@@ -37,10 +38,12 @@ public class UpdateEstadoLote {
     String update = "UPDATE `qualitys`.`traza` "
             + "SET `estadoLote` = " + setEstado + ", `observaciones` = '" + observaciones + "' "
             + "WHERE id =" + idtraza + ";";
-    try {
+    try
+      {
       conexion.executeUpdate(update);
-    } catch (SQLException ex) {
+      } catch (SQLException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Seteo Estado Lote", JOptionPane.ERROR_MESSAGE);
-    }
+      }
   }
 }

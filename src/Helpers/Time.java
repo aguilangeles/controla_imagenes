@@ -35,10 +35,10 @@ public class Time {
   public void setDatetime(String datetime) {
     this.datetime = datetime;
   }
-public String getDateForTXT(){
-  String ret = datetime.replace("-", "_");
-  return ret.replace(":", "_");
-}
+  public String getDateForTXT() {
+    String ret = datetime.replace("-", "_");
+    return ret.replace(":", "_");
+  }
   @Override
   public String toString() {
     return datetime;

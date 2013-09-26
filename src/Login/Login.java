@@ -67,11 +67,9 @@ public class Login extends javax.swing.JFrame {
     jLabel2.setText("Password");
 
     user.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    user.setText("admin");
     user.setNextFocusableComponent(password);
 
     password.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    password.setText("admin");
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     entrar.setMnemonic('e');
@@ -183,7 +181,7 @@ public class Login extends javax.swing.JFrame {
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
-          new PanelControl(getUsuario()).setVisible(true);
+          new PanelControl().setVisible(true);
         }
       });
       dispose();

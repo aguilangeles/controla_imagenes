@@ -33,9 +33,9 @@ public class ExtensionImagen {
      return extension;
     }
 
-    @Override
-    public String toString() {
-        return extension ;
-    }
+//    @Override
+//    public String toString() {
+//        return extension ;
+//    }
 
 }

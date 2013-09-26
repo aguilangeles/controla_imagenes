@@ -5,7 +5,6 @@
 package VentanaPrincipal;
 
 import BasedeDatos.Conexion;
-import BasedeDatos.GetMuestrafromRango;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevaTraza;
 import TratarFile.OnlyPdf;
@@ -31,7 +30,6 @@ public class Worker extends SwingWorker<Object, Object> {
   private int idRango, contador;
   private int idTraza;
   private static InsertarNuevaTraza sTraza;
-//  private static CrearElRamdom crearRamdom;
 
   public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl,
           List<Object> listaImagenes, String parent, String extension, String ultimaCarpeta,
@@ -49,8 +47,6 @@ public class Worker extends SwingWorker<Object, Object> {
     this.muestra = muestra;
     this.tamanioLote = tamanioLote;
     this.idRango = idRango;
-//    System.out.println("lista imagnes " + listaImagenes);
-//    crearRamdom = new CrearElRamdom(listaImagenes, muestra);
   }
 
   @Override
