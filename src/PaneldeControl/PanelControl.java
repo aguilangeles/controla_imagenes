@@ -4,11 +4,14 @@
  */
 package PaneldeControl;
 
+import PaneldeControl.ControlesABM;
+import PaneldeControl.RangosABM;
+import PaneldeControl.UsuariosABM;
+import PaneldeControl.VerificacionABM;
 import Entidades.Usuario;
 import Helpers.VersionEImageIcon;
 import VentanaPrincipal.ControlDocumentosyVerificaciones;
 import Login.IngresoBaseDeDatos;
-import Login.Login;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 
@@ -19,32 +22,43 @@ import javax.swing.JButton;
 public class PanelControl extends javax.swing.JFrame {
 
   private static final String INFO_LABEL = "<html>La edición de rangos, tipos de"
-          + " verificación, controles y alta de usuarios, sólo esta permitido al "
-          + "administrador.</html>";
+          + " verificación, controles y alta de usuarios, sólo esta permitido al administrador.</html>";
+  private Usuario usuarioTipo;
   private boolean administrador;
 
   /**
    * Creates new form PanelControl
    */
-
   public PanelControl() {
+    initComponents();
+  }
+
+  public PanelControl(Usuario usuarioTipo) {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon();
     jLabel1.setText(INFO_LABEL);
-    Usuario usuarioTipo = Login.getUsuario();
+    this.usuarioTipo = usuarioTipo;
     this.administrador = usuarioTipo.isAdmin();
-    if (!administrador)
-      {
+    if (!administrador) {
       rangos.setEnabled(false);
       controles.setEnabled(false);
       alta_usuarios.setEnabled(false);
       verificacion.setEnabled(false);
-      }
+    }
   }
 
   public boolean isAdministrador() {
     return administrador;
   }
+
+  public void setAdministrador(boolean administrador) {
+    this.administrador = administrador;
+  }
+
+  public Usuario getUsuarioTipo() {
+    return usuarioTipo;
+  }
+
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -313,6 +327,7 @@ public class PanelControl extends javax.swing.JFrame {
     });
   }
 
+
   private void getUsuarios() {
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
@@ -321,15 +336,14 @@ public class PanelControl extends javax.swing.JFrame {
       }
     });
   }
-
   private void getCargaLote() {
     ControlDocumentosyVerificaciones control =
-            new ControlDocumentosyVerificaciones(this);
+            new ControlDocumentosyVerificaciones(this, getUsuarioTipo());
   }
 
+
   private void action(java.awt.event.ActionEvent evt) {
-    switch (evt.getActionCommand())
-      {
+    switch (evt.getActionCommand()) {
       case "Base de Datos":
         getBaseDatos();
         break;
@@ -349,14 +363,12 @@ public class PanelControl extends javax.swing.JFrame {
       default:
         getCargaLote();
         break;
-      }
+    }
   }
 
   public void keyPressed(KeyEvent e, JButton boton) {
-    if (e.getKeyCode() == KeyEvent.VK_ENTER)
-      {
-      switch (boton.getText())
-        {
+    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+      switch (boton.getText()) {
         case "Base de Datos":
           getBaseDatos();
           break;
@@ -375,7 +387,7 @@ public class PanelControl extends javax.swing.JFrame {
         default:
           getCargaLote();
           break;
-        }
       }
+    }
   }
 }

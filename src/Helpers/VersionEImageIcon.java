@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  */
 public final class VersionEImageIcon extends JFrame{
 
-  public static final String VERSION ="Qualitys 1.0.08";
+  public static final String VERSION ="Qualitys 1.0.07";
 
 
     public VersionEImageIcon() {

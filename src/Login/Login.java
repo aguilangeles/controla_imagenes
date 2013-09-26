@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
   private static final String USER_DEFAULT = "default";
   private static final String USER_INVALID = "<html>El Usuario o password "
           + "no existe en la base de datos, o no es un usuario activo</html>";
-  private static Usuario usuario;
+  private Usuario usuario;
 
   /**
    * Creates new form Login
@@ -181,7 +181,7 @@ public class Login extends javax.swing.JFrame {
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
-          new PanelControl().setVisible(true);
+          new PanelControl(getUsuario()).setVisible(true);
         }
       });
       dispose();
@@ -207,7 +207,7 @@ public class Login extends javax.swing.JFrame {
   /**
    * @return
    */
-  public static Usuario getUsuario() {
+  public Usuario getUsuario() {
     return usuario;
   }
   // Variables declaration - do not modify//GEN-BEGIN:variables

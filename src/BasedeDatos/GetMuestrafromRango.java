@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class GetMuestrafromRango {
 
   private Conexion conexion = new Conexion();
-  private static int muestra, idRango;
+  private int muestra, idRango;
 
   public GetMuestrafromRango(int tamanioLote) {
     muestraRango(tamanioLote);
@@ -52,13 +52,11 @@ public class GetMuestrafromRango {
       }
   }
 
-  public static int getMuestra() {
+  public int getMuestra() {
     return muestra;
   }
 
-  public static int getIdRango() {
+  public int getIdRango() {
     return idRango;
   }
-
-
 }

@@ -31,10 +31,10 @@ public class AceptarCargarLote {
   private JButton aceptarSeleccion;
   private JLabel informa;
   private int idUsuario;
-  private JFrame cargarLoteFrame;
-//  private  int idVerificacion;
-  private  List<Integer> idTipoControl = new ArrayList<>();
+  private JFrame frame;
 
+  private static int idVerificacion;
+  private static List<Integer> idTipoControl = new ArrayList<>();
   public AceptarCargarLote(JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox,
           JTextField rutaCarpeta, Conexion con, JButton aceptarSeleccion, JLabel informa, int idUsuario, JFrame frame) {
     this.tipoDocumentoBox = tipoDocumentoBox;
@@ -44,61 +44,54 @@ public class AceptarCargarLote {
     this.aceptarSeleccion = aceptarSeleccion;
     this.informa = informa;
     this.idUsuario = idUsuario;
-    this.cargarLoteFrame = frame;
+    this.frame = frame;
     getAceptar();
   }
+
 
   private void getAceptar() {
 
     String ruta = rutaCarpeta.getText();//trae la ruta
     File file = new File(ruta);//busca el file
-    if (file.exists())
-      {// si el archivo existe
+    if (file.exists()) {// si el archivo existe
       File[] files = file.listFiles();//lista los mismos
-      if (tipoDocumentoBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de documento"))
-        {//condicion obsoleta
+      if (tipoDocumentoBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de documento")) {//condicion obsoleta
         JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de documentos sin seleccionar",//porque se posiciona el en index cero de los combos
                 "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-        } else if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de verificacion"))
-        {
+      } else if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de verificacion")) {
         JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
                 "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-        } else
-        {
+      } else {
         getControlesPorVerificacion();//controles de la verificacion seleccionada
         con.isConexionClose();////cierra conexion
-
         IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
         String rutaCompleta = parent.getParent();
         String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
-
-        IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
-                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+        IdentificarExtension idext = new IdentificarExtension(frame, informa, idTipoControl, file,
+                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), idVerificacion);
         idext.execute();
         aceptarSeleccion.setEnabled(false);
-        }
-    } else {
-      JOptionPane.showMessageDialog(rutaCarpeta,
-              "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
-      rutaCarpeta.setText("");
       }
+    } else {
+      JOptionPane.showMessageDialog(rutaCarpeta, "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
+      rutaCarpeta.setText("");
+    }
   }
 
   public List<Integer> getIdTipoControl() {
     return idTipoControl;
   }
 
+
   private String getUltimaCarpeta(String aParent) {
     String ret = "";
-    if (aParent.contains("\\"))
-      {
+    if (aParent.contains("\\")) {
       String replace = aParent.replace("\\", ", ");
       String[] rsplit = replace.split(", ");
-      for (int i = 0; i < rsplit.length; i++)
-        {
+      for (int i = 0; i < rsplit.length; i++) {
         ret = (rsplit[i]);
-        }
       }
+    }
     return ret;
   }
 
@@ -112,5 +105,6 @@ public class AceptarCargarLote {
   private void getControlesPorVerificacion() {
     IdControlFromVerificacionList ctrls = new IdControlFromVerificacionList();
     idTipoControl = ctrls.idControlesByVerificacion(tipoVerificacionBox, con, idTipoControl);
+    idVerificacion = ctrls.getIdVerificacion();
   }
 }

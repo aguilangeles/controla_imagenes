@@ -4,6 +4,7 @@
  */
 package VentanaPrincipal;
 
+import Entidades.Usuario;
 import PaneldeControl.CargarLote;
 import PaneldeControl.Verificacion_CargarComboBoxs;
 import javax.swing.JFrame;
@@ -16,12 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class ControlDocumentosyVerificaciones {
 
-  public ControlDocumentosyVerificaciones(JFrame panelControl) {
-    cargar(panelControl);
+  public ControlDocumentosyVerificaciones(JFrame panelControl, Usuario usuario) {
+    cargar(panelControl, usuario);
   }
 
-  private void cargar(final JFrame panelControl) {
-
+  private void cargar(JFrame panelControl, final Usuario usuario) {
     final Verificacion_CargarComboBoxs vc = new Verificacion_CargarComboBoxs();
     vc.llenarQualitys();    //llena el combo de verificacion
     vc.llenarDocumentos(); //llena el combo documentos
@@ -35,10 +35,10 @@ public class ControlDocumentosyVerificaciones {
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
-          new CargarLote(vc.getTipoDocumento(), vc.getTipoVerificacion(),
-                  panelControl).setVisible(true);
+          new CargarLote(usuario, vc.getTipoDocumento(), vc.getTipoVerificacion()).setVisible(true);
         }
       });
+      panelControl.dispose();
     }
   }
 }

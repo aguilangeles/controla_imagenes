@@ -2,9 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Imagenes;
+package VentanaPrincipal;
 
 import java.io.File;
+import java.awt.Color;
+import javax.swing.SpinnerNumberModel;
+import Imagenes.ImageDrawingComponent;
 
 /**
  *
@@ -15,6 +18,8 @@ public class AyudaVisual extends javax.swing.JFrame {
   private String descripcion;
   private String texto;
   private String imagen;
+  private double zoom;
+  private ImageDrawingComponent imageDrawingComponent = new ImageDrawingComponent();
 
   /**
    * Creates new form AyudaVisual
@@ -37,11 +42,9 @@ public class AyudaVisual extends javax.swing.JFrame {
 
   private void visualizar(String image) {
     String ruta = "AyudaImagenes" + File.separator + image;
-    VisualizarImagen vimg = new VisualizarImagen(scrollImage, jSlider1);
-    vimg.visualizarImagen(ruta, jSlider1.getValue());
+    imageDrawingComponent.cargarImage(ruta, false, true, jComboBox1);
+    scrollImage.getViewport().add(imageDrawingComponent);
   }
-
-
 
   /**
    * This method is called from within the constructor to initialize the form.
@@ -58,7 +61,7 @@ public class AyudaVisual extends javax.swing.JFrame {
     mensaje = new javax.swing.JTextArea();
     cerrar = new javax.swing.JButton();
     jLabel1 = new javax.swing.JLabel();
-    jSlider1 = new javax.swing.JSlider();
+    jComboBox1 = new javax.swing.JComboBox();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,10 +97,7 @@ public class AyudaVisual extends javax.swing.JFrame {
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     jLabel1.setFocusable(false);
 
-    jSlider1.setPaintLabels(true);
-    jSlider1.setPaintTicks(true);
-    jSlider1.setValue(25);
-    jSlider1.setOpaque(false);
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%" }));
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
@@ -106,24 +106,25 @@ public class AyudaVisual extends javax.swing.JFrame {
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPane2)
+          .addComponent(scrollImage)
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addComponent(jScrollPane2)
-          .addComponent(scrollImage))
+            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(77, 77, 77)))
         .addContainerGap())
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        .addGap(0, 183, Short.MAX_VALUE)
+        .addGap(0, 196, Short.MAX_VALUE)
         .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(193, 193, 193))
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel1Layout.createSequentialGroup()
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,10 +199,10 @@ public class AyudaVisual extends javax.swing.JFrame {
 //    }
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton cerrar;
+  private javax.swing.JComboBox jComboBox1;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JScrollPane jScrollPane2;
-  private javax.swing.JSlider jSlider1;
   private javax.swing.JTextArea mensaje;
   private javax.swing.JScrollPane scrollImage;
   // End of variables declaration//GEN-END:variables

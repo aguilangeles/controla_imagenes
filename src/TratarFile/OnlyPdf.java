@@ -20,8 +20,7 @@ public class OnlyPdf {
 
   private InsertarNuevaTraza sTraza;
   private Conexion conexion;
-  private int idUsuario, idDocumento, idVerificacion, tamanioLote, muestra,
-          idRango, idTraza;
+  private int idUsuario, idDocumento, idVerificacion, tamanioLote, muestra, idRango, idTraza;
   private String parent, ultimaCarpeta;
   private CrearElRamdom crearRamdom;
   private JLabel infoLabel;
@@ -69,9 +68,25 @@ public class OnlyPdf {
       gar.gc();
       }
   }
+//  private void OnlyPdf() {
+//    sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+//            tamanioLote, parent, ultimaCarpeta, muestra, idRango);
+//    List<Object> ramdomPdf = crearRamdom.getSeleccion();
+//    for (Object o : ramdomPdf)
+//      {
+//      NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
+//      int parentlength = parent.length() + 1;
+//      String adaptarFile = pagina.getNombre().substring(parentlength);
+//      String filename = adaptarFile.replace("\\", "\\\\");
+//      int page = pagina.getNumeroPagina();
+//      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, page, infoLabel);
+//      imagenyControl();
+//      Runtime gar = Runtime.getRuntime();
+//      gar.gc();
+//      }
+//  }
 
   private void imagenyControl() {
-    InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado =
-            new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion);
+    InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado = new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion);
   }
 }

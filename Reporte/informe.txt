@@ -1,0 +1,28 @@
+Operador de Control: admin
+
+Fecha de Control: 2013-09-09 09:35:09.0
+
+Id Traza: 80
+
+Ruta Completa: c:\angeles\volreducido
+
+Tamanio Lote: 40
+
+Cantidad muestreada: 39
+
+Total Rechazos: 0
+
+Linea de captura: --/--
+
+Digitalizador: --/--
+
+Tipo de Verificacion: tes
+
+Tipo de Documento: Recibo
+
+Estado: Aceptado
+
+Observaciones: 
+
+Versión  app: Qualitys 1.0.07
+

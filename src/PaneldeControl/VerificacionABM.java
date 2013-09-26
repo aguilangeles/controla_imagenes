@@ -135,7 +135,7 @@ public class VerificacionABM extends javax.swing.JFrame {
     principalInternal.setVisible(true);
 
     desactivar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    desactivar.setText("Cambiar Estado");
+    desactivar.setText("Desactivar");
     desactivar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         desactivarActionPerformed(evt);
@@ -183,10 +183,10 @@ public class VerificacionABM extends javax.swing.JFrame {
       .addGroup(principalInternalLayout.createSequentialGroup()
         .addGap(23, 23, 23)
         .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(desactivar)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+        .addComponent(desactivar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(35, 35, 35))
-      .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+      .addComponent(jScrollPane1)
     );
     principalInternalLayout.setVerticalGroup(
       principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

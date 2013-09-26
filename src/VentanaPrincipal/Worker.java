@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingWorker;
+import TratarFile.CrearElRamdom;
 
 /**
  *
@@ -21,7 +22,7 @@ import javax.swing.SwingWorker;
 public class Worker extends SwingWorker<Object, Object> {
 
   private Conexion conexion = new Conexion();
-  private JFrame cargaLote;// lo necesito para mostrar el conteo
+  private JFrame controles;// lo necesito para mostrar el conteo
   private JLabel infoLabel;
   private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
   private List<Object> listaImagenes;
@@ -30,11 +31,12 @@ public class Worker extends SwingWorker<Object, Object> {
   private int idRango, contador;
   private int idTraza;
   private static InsertarNuevaTraza sTraza;
+//  private static CrearElRamdom crearRamdom;
 
   public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl,
           List<Object> listaImagenes, String parent, String extension, String ultimaCarpeta,
           int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
-    this.cargaLote = controles;
+    this.controles = controles;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.listaImagenes = listaImagenes;
@@ -47,6 +49,8 @@ public class Worker extends SwingWorker<Object, Object> {
     this.muestra = muestra;
     this.tamanioLote = tamanioLote;
     this.idRango = idRango;
+//    System.out.println("lista imagnes " + listaImagenes);
+//    crearRamdom = new CrearElRamdom(listaImagenes, muestra);
   }
 
   @Override
@@ -89,7 +93,7 @@ public class Worker extends SwingWorker<Object, Object> {
       new Ventana(trazaDao.getTraza()).setVisible(true);
       }
     con.isConexionClose();
-    cargaLote.dispose();
+    controles.dispose();
   }
 
   private void Tif_Png_Jpg() {

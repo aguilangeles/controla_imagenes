@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import Entidades.Usuario;
 import Helpers.VersionEImageIcon;
+import java.awt.HeadlessException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 
 /**
  *
@@ -25,23 +25,22 @@ public class CargarLote extends javax.swing.JFrame {
   private int idVerificacion;
   private Worker worker;
   private JComboBox documentos, verificacion;
-  private JFrame panelControl;
 
   /**
    * Creates new form CargarLote
    */
   public CargarLote() {
     initComponents();
+
   }
 
-  public CargarLote(DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion, JFrame panelControl) {
+  public CargarLote(Usuario usuarioTipo, DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion) {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
-    this.usarioTipo = Login.Login.getUsuario();
+    this.usarioTipo = usuarioTipo;
     rutaCarpeta.setInputVerifier(new Helpers.InputVerifier().inputVerifierT());
     this.tipoDocumentoBox.setModel(documentos);
     this.tipoVerificacionBox.setModel(verificacion);
-    this.panelControl = panelControl;
   }
 
   /**
@@ -63,7 +62,6 @@ public class CargarLote extends javax.swing.JFrame {
     tipoDocumentoBox = new javax.swing.JComboBox();
     tipoVerificacionBox = new javax.swing.JComboBox();
     informa = new javax.swing.JLabel();
-    jButton1 = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Carga de lote");
@@ -108,14 +106,6 @@ public class CargarLote extends javax.swing.JFrame {
     informa.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 10)); // NOI18N
     informa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Información del Proceso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bitstream Vera Sans Mono", 0, 10), new java.awt.Color(51, 102, 0))); // NOI18N
 
-    jButton1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    jButton1.setText("Cancelar");
-    jButton1.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButton1ActionPerformed(evt);
-      }
-    });
-
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -126,18 +116,13 @@ public class CargarLote extends javax.swing.JFrame {
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
               .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tipoDocumentoBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(aceptarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                  .addComponent(tipoVerificacionBox, 0, 476, Short.MAX_VALUE))))
+                .addComponent(tipoVerificacionBox, 0, 476, Short.MAX_VALUE))
+              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tipoDocumentoBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,6 +132,10 @@ public class CargarLote extends javax.swing.JFrame {
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addComponent(informa, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(0, 9, Short.MAX_VALUE))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(aceptarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(189, 189, 189))
       .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     jPanel1Layout.setVerticalGroup(
@@ -167,9 +156,7 @@ public class CargarLote extends javax.swing.JFrame {
           .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(tipoVerificacionBox, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGap(18, 18, 18)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-          .addComponent(aceptarSeleccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addComponent(aceptarSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(17, 17, 17)
         .addComponent(informa, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -198,10 +185,6 @@ public class CargarLote extends javax.swing.JFrame {
   private void aceptarSeleccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarSeleccionKeyPressed
     getAceptar();
   }//GEN-LAST:event_aceptarSeleccionKeyPressed
-
-  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    dispose();
-  }//GEN-LAST:event_jButton1ActionPerformed
   /**
    * @param args the command line arguments
    */
@@ -239,7 +222,6 @@ public class CargarLote extends javax.swing.JFrame {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton aceptarSeleccion;
   private javax.swing.JLabel informa;
-  private javax.swing.JButton jButton1;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel4;
@@ -251,9 +233,6 @@ public class CargarLote extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private void getAceptar() {
-    AceptarCargarLote acc =
-            new AceptarCargarLote(tipoDocumentoBox, tipoVerificacionBox,
-            rutaCarpeta, con, aceptarSeleccion, informa, usarioTipo.getId(), this);
-    panelControl.dispose();
+    AceptarCargarLote acc = new AceptarCargarLote(tipoDocumentoBox, tipoVerificacionBox, rutaCarpeta, con, aceptarSeleccion, informa, usarioTipo.getId(), this);
   }
 }

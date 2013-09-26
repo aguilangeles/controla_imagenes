@@ -4,11 +4,9 @@
  */
 package Helpers;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -22,7 +20,7 @@ import javax.swing.JTable;
  */
 public class EscribeInforme {
 
-  private static final String UBICACION = "Reporte/" + new Time().getDateForTXT() + ".txt";
+  private static final String UBICACION = "Reporte/informe.txt";
 
   public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar) {
     String estadoS = (estado) ? "Aceptado" : "Rechazado";
@@ -34,16 +32,15 @@ public class EscribeInforme {
     PrintWriter pw = null;
     try
       {
-      fichero = new FileWriter(UBICACION, true);
-      pw = new PrintWriter(new BufferedWriter(fichero));
+      fichero = new FileWriter(UBICACION);
+      pw = new PrintWriter(fichero);
       for (int row = 0; row < tablaDetalles.getRowCount(); row++)
         {
-        pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1));
+        pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1) + "\n");
         }
-      pw.println("Estado: " + estado);
-      pw.println("Observaciones: " + observaciones);
-      pw.println("Versión  app: " + VersionEImageIcon.VERSION);
-      pw.close();
+      pw.println("Estado: " + estado + "\n");
+      pw.println("Observaciones: " + observaciones + "\n");
+      pw.println("Versión  app: " + VersionEImageIcon.VERSION + "\n");
       } catch (IOException ex)
       {
       JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(),
@@ -61,8 +58,7 @@ public class EscribeInforme {
                   + UBICACION + "\n", "Reporte final", JOptionPane.INFORMATION_MESSAGE);
           } catch (IOException ex)
           {
-          JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(),
-                  "Error al cerrar archivo informe.txt", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(), "Error al cerrar archivo informe.txt", JOptionPane.ERROR_MESSAGE);
           }
         }
       }
