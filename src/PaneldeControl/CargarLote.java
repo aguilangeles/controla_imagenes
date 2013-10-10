@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import Entidades.Usuario;
 import Helpers.VersionEImageIcon;
-import java.awt.HeadlessException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
