@@ -9,7 +9,7 @@ import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
-import javax.swing.JFrame;
+import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +26,8 @@ public class Ventana extends javax.swing.JFrame {
   private boolean pdf;
   private boolean tif;
   private final TablaCheckBox tablaCheckBox;
+  private static Dimension panelDimension;
+
   /**
    * Creates new form Ventana
    *
@@ -33,11 +35,12 @@ public class Ventana extends javax.swing.JFrame {
    */
   public Ventana(TrazaDao trazadao) {
     iniciar(trazadao);
+   // setExtendedState(6);
+//    this.panelDimension=
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
     tabla.requestFocus();
     this.traza = trazadao;
-    setExtendedState(6);
     this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.tif = isImagenTif(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
@@ -45,8 +48,16 @@ public class Ventana extends javax.swing.JFrame {
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     anterior.setEnabled(false);
+
+    panelDimension =new Dimension( panelScroll.getWidth()-5,  panelScroll.getHeight()-5);
     getFirstImage(pdf);
+
   }
+
+  public static Dimension getPanelDimension() {
+    return panelDimension;
+  }
+
 
   /**
    * This method is called from within the constructor to initialize the form.
@@ -71,7 +82,7 @@ public class Ventana extends javax.swing.JFrame {
     rutaLabel = new javax.swing.JLabel();
     pageLabel = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
-    jPanel2 = new javax.swing.JPanel();
+    panelScroll = new javax.swing.JPanel();
     scrollImage = new javax.swing.JScrollPane();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -180,17 +191,17 @@ public class Ventana extends javax.swing.JFrame {
     jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel2.setText("Tipos de Control");
 
-    scrollImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 0), 2));
+    panelScroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-    jPanel2.setLayout(jPanel2Layout);
-    jPanel2Layout.setHorizontalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    javax.swing.GroupLayout panelScrollLayout = new javax.swing.GroupLayout(panelScroll);
+    panelScroll.setLayout(panelScrollLayout);
+    panelScrollLayout.setHorizontalGroup(
+      panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addComponent(scrollImage)
     );
-    jPanel2Layout.setVerticalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(scrollImage)
+    panelScrollLayout.setVerticalGroup(
+      panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(scrollImage, javax.swing.GroupLayout.Alignment.TRAILING)
     );
 
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
@@ -205,7 +216,7 @@ public class Ventana extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(pageLabel)
             .addGap(11, 11, 11))
-          .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -224,14 +235,14 @@ public class Ventana extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
     );
 
-    internal.setBounds(0, 0, 960, 410);
+    internal.setBounds(0, 0, 960, 500);
     desktopPane.add(internal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     javax.swing.GroupLayout panelInicialLayout = new javax.swing.GroupLayout(panelInicial);
@@ -242,7 +253,7 @@ public class Ventana extends javax.swing.JFrame {
     );
     panelInicialLayout.setVerticalGroup(
       panelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+      .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -332,10 +343,10 @@ public class Ventana extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JPanel jPanel1;
-  private javax.swing.JPanel jPanel2;
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JLabel pageLabel;
   private javax.swing.JPanel panelInicial;
+  private javax.swing.JPanel panelScroll;
   private javax.swing.JLabel rutaLabel;
   private javax.swing.JScrollPane scrollImage;
   private javax.swing.JButton siguiente;

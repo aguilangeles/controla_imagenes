@@ -59,6 +59,9 @@ public class MostrarInternalFrames {
     this.siguiente = siguiente;
     MostrarInternalFrames.save = new Guardar();// sa
     MostrarInternalFrames.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
+
+
+
   }
 
   public void mostrarPrimeraImagen(Imagen siguientes) {
