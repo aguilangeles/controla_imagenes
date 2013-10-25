@@ -9,7 +9,8 @@ import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
-import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,6 +49,7 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
+
   }
 
 //  public Dimension getPanelDimension() {
@@ -201,11 +203,6 @@ public class Ventana extends javax.swing.JFrame {
     );
 
     ampliar.setText("<>");
-    ampliar.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        ampliarActionPerformed(evt);
-      }
-    });
 
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
@@ -290,9 +287,6 @@ public class Ventana extends javax.swing.JFrame {
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
-
-  private void ampliarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ampliarActionPerformed
-  }//GEN-LAST:event_ampliarActionPerformed
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
     Imagen imagen = traza.getImagenList().get(contador);
@@ -380,11 +374,10 @@ public class Ventana extends javax.swing.JFrame {
   }
 
   private void getFirstImage(boolean pdf) {
-   // panelDimension.setSize(getPanelDimension());
     Imagen siguientes = goImagen(contador);//trae el ramdom
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll).mostrarPrimeraImagen(siguientes);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll, ampliar).mostrarPrimeraImagen(siguientes);
   }
 
   private void getNextImage() {
@@ -393,7 +386,7 @@ public class Ventana extends javax.swing.JFrame {
     Imagen imagen1 = goImagen(contador);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll).setNextImage(imagen1);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll, ampliar).setNextImage(imagen1);
   }
 
   private void setBackImage() {
@@ -402,7 +395,7 @@ public class Ventana extends javax.swing.JFrame {
     Imagen pr = backImagen(contador);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll).setBackImage(pr);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll, ampliar).setBackImage(pr);
   }
 
   private void setFinalizar() {

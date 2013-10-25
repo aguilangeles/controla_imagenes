@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -35,18 +36,25 @@ public class ImageDrawingComponent extends JPanel {
   ReadImageTif tif = new ReadImageTif();
   private BufferedImage bi;
   private ImageSize imageSize;
-  private Dimension dimensionPanel;
+  private Dimension dimensionPanel = new Dimension();
 
   public ImageDrawingComponent() {
   }
 
-  public void cargarImage(String path, boolean pdf, boolean tif, final JComboBox combo, final JPanel panelscroll) {
+  public void cargarImage(String path, boolean pdf, boolean tif, final JComboBox combo, final JPanel panelscroll, JButton button) {
     loadImage(path, pdf, tif);
     combo.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        dimensionPanel.setSize(panelscroll.getSize());
         setOpIndex(combo.getSelectedIndex());
+      }
+    });
+    button.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setOpIndex(5);
+        dimensionPanel.setSize(panelscroll.getSize());
+//        throw new UnsupportedOperationException("NotC supported yet."); //To change body of generated methods, choose Tools | Templates.
       }
     });
   }
@@ -72,11 +80,22 @@ public class ImageDrawingComponent extends JPanel {
       case 3:
         setSetentaYCinco(g2);
         break;
-      default:
+      case 4:
         setCincuenta(g2);
+        break;
+      case 5:
+        getampliar(g2);
+        break;
+      default:
+
         break;
       }
 
+
+  }
+
+  public Dimension getDimensionPanel() {
+    return dimensionPanel;
   }
 
   private void loadImage(String path, boolean pdf, boolean tif) {
@@ -106,22 +125,16 @@ public class ImageDrawingComponent extends JPanel {
         Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
-    Dimension getSizeImage = new Dimension(bi.getWidth(), bi.getHeight());
-    this.imageSize = new ImageSize(getSizeImage, getDimensionPanel());
 
-  }
-
-  public Dimension getDimensionPanel() {
-    return dimensionPanel;
   }
 
   private void setCincuenta(Graphics2D g2) {
 //    System.out.println("set cincuenta ");
     /* cincuenta */
-//    int w_50 = (int) ((bi.getWidth() / 2.7) / 2);
-//    int y_50 = (int) ((bi.getHeight() / 2.7) / 2);
-    int w_50 = (int) (imageSize.getDimforhalf().getWidth() - 5);
-    int y_50 = (int) (imageSize.getDimforhalf().getHeight() - 5);
+    int w_50 = (int) ((bi.getWidth() / 2.7) / 2);
+    int y_50 = (int) ((bi.getHeight() / 2.7) / 2);
+    // int w_50 = (int) (imageSize.getDimforhalf().getWidth() - 5);
+    // int y_50 = (int) (imageSize.getDimforhalf().getHeight() - 5);
     setPreferredSize(new Dimension(w_50, y_50));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.setBackground(Color.gray);
@@ -195,6 +208,23 @@ public class ImageDrawingComponent extends JPanel {
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
             0, 0, w_150, y_150, /* src area of image */
+            null);
+    scrollRectToVisible(new Rectangle(getPreferredSize()));
+    revalidate();
+    repaint();
+  }
+
+  private void getampliar(Graphics2D g2) {
+    imageSize = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
+    /*veinticinco*/
+    int w_150 = (int) imageSize.getDimforhalf().getWidth();
+    int y_150 = (int) (imageSize.getDimforhalf().getHeight());
+    setPreferredSize(imageSize.getDimforhalf());
+    g2.setBackground(Color.red);
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.clearRect(0, 0, getWidth(), getHeight());
+    g2.drawImage(bi,
+            0, 0, getWidth(), getHeight(), /* src area of image */
             null);
     scrollRectToVisible(new Rectangle(getPreferredSize()));
     revalidate();

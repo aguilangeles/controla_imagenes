@@ -22,10 +22,12 @@ public class ImageSize {
     this.imgSize = imgSize;
     this.wipanel = dimPanel.getWidth();
     this.hepanel = dimPanel.getHeight();
+   // this.wipanel = 800;
+   // this.hepanel = 900;
     alineacion();
     alinearalHeight();
-    Dimension panel = new Dimension((int) wipanel, (int) hepanel);
-    System.out.println("Size panel " + panel + "image size " + this.imgSize);
+    //Dimension panel = new Dimension((int) wipanel, (int) hepanel);
+    //System.out.println("Size panel " + panel + "image size " + this.imgSize);
   }
 
   private boolean isWithanHe() {

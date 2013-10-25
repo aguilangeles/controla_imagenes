@@ -41,11 +41,9 @@ public class MostrarInternalFrames {
   private static Guardar save;
   private static SetChecksBox setCB;
   private JPanel panelScroll;
+  private JButton button;
 
-  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane,
-          JInternalFrame internal, JButton anterior, boolean pdf, boolean tif,
-          JComboBox combo, JScrollPane scrollImage, int cantidad, int sizeRamdom,
-          JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente, JPanel panelSroll) {
+  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane, JInternalFrame internal, JButton anterior, boolean pdf, boolean tif, JComboBox combo, JScrollPane scrollImage, int cantidad, int sizeRamdom, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente, JPanel panelSroll, JButton boton) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -60,6 +58,8 @@ public class MostrarInternalFrames {
     this.pageLabel = pageLabel;
     this.tabla = tabla;
     this.siguiente = siguiente;
+    this.button = boton;
+    this.panelScroll = panelSroll;
     MostrarInternalFrames.save = new Guardar();// sa
     MostrarInternalFrames.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
   }
@@ -129,7 +129,7 @@ public class MostrarInternalFrames {
   private void setImagenes(Imagen siguientes) {
     String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
     setLabelPagina(pdf, siguientes);
-    imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll);
+    imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll, button);
     scrollImage.getViewport().add(imageDraw);
   }
 }
