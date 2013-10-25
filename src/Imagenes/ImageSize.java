@@ -1,13 +1,9 @@
 package Imagenes;
 
-
-
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.awt.Dimension;
 
 /**
@@ -16,11 +12,21 @@ import java.awt.Dimension;
  */
 public class ImageSize {
 
-  private static double wipanel = (int) Ventana.getPanelDimension().getWidth();
-  private static double hepanel = (int) Ventana.getPanelDimension().getHeight();
+  private double wipanel;
+  private double hepanel;
   private Dimension imgSize;
   private Dimension dimforPanel;
   private Dimension dimforhalf;
+
+  public ImageSize(Dimension imgSize, Dimension dimPanel) {
+    this.imgSize = imgSize;
+    this.wipanel = dimPanel.getWidth();
+    this.hepanel = dimPanel.getHeight();
+    alineacion();
+    alinearalHeight();
+    Dimension panel = new Dimension((int) wipanel, (int) hepanel);
+    System.out.println("Size panel " + panel + "image size " + this.imgSize);
+  }
 
   private boolean isWithanHe() {
     if (imgSize.getWidth() <= imgSize.getHeight())
@@ -54,7 +60,7 @@ public class ImageSize {
   }
 
   private void alinearalHeight() {
-    int ww = (int) wipanel - 15;
+    int ww = (int) wipanel;
     int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
     dimforhalf = new Dimension(ww, hh);
   }

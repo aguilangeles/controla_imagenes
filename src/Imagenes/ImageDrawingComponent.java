@@ -34,15 +34,18 @@ public class ImageDrawingComponent extends JPanel {
   int opIndex;
   ReadImageTif tif = new ReadImageTif();
   private BufferedImage bi;
+  private ImageSize imageSize;
+  private Dimension dimensionPanel;
 
   public ImageDrawingComponent() {
   }
 
-  public void cargarImage(String path, boolean pdf, boolean tif, final JComboBox combo) {
+  public void cargarImage(String path, boolean pdf, boolean tif, final JComboBox combo, final JPanel panelscroll) {
     loadImage(path, pdf, tif);
     combo.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        dimensionPanel.setSize(panelscroll.getSize());
         setOpIndex(combo.getSelectedIndex());
       }
     });
@@ -73,6 +76,7 @@ public class ImageDrawingComponent extends JPanel {
         setCincuenta(g2);
         break;
       }
+
   }
 
   private void loadImage(String path, boolean pdf, boolean tif) {
@@ -102,19 +106,28 @@ public class ImageDrawingComponent extends JPanel {
         Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
+    Dimension getSizeImage = new Dimension(bi.getWidth(), bi.getHeight());
+    this.imageSize = new ImageSize(getSizeImage, getDimensionPanel());
+
+  }
+
+  public Dimension getDimensionPanel() {
+    return dimensionPanel;
   }
 
   private void setCincuenta(Graphics2D g2) {
+//    System.out.println("set cincuenta ");
     /* cincuenta */
-    int w_50 = (int) ((bi.getWidth() / 2.7) / 2);
-    int y_50 = (int) ((bi.getHeight() / 2.7) / 2);
+//    int w_50 = (int) ((bi.getWidth() / 2.7) / 2);
+//    int y_50 = (int) ((bi.getHeight() / 2.7) / 2);
+    int w_50 = (int) (imageSize.getDimforhalf().getWidth() - 5);
+    int y_50 = (int) (imageSize.getDimforhalf().getHeight() - 5);
     setPreferredSize(new Dimension(w_50, y_50));
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.setBackground(Color.gray);
-
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
-            0, 0, w_50, y_50,
+            10, 0, w_50, y_50,
             null);
     scrollRectToVisible(new Rectangle(getPreferredSize()));
     revalidate();
