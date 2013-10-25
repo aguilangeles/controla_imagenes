@@ -35,13 +35,14 @@ public class ImageDrawingComponent extends JPanel {
   int opIndex;
   ReadImageTif tif = new ReadImageTif();
   private BufferedImage bi;
-  private ImageSize imageSize;
+//  private ImageSize imageSize;
   private Dimension dimensionPanel = new Dimension();
 
   public ImageDrawingComponent() {
   }
 
-  public void cargarImage(String path, boolean pdf, boolean tif, final JComboBox combo, final JPanel panelscroll, JButton button) {
+  public void cargarImage(String path, boolean pdf, boolean tif,
+          final JComboBox combo, final JPanel panelscroll, JButton button, JButton entera) {
     loadImage(path, pdf, tif);
     combo.addActionListener(new ActionListener() {
       @Override
@@ -54,9 +55,16 @@ public class ImageDrawingComponent extends JPanel {
       public void actionPerformed(ActionEvent e) {
         setOpIndex(5);
         dimensionPanel.setSize(panelscroll.getSize());
-//        throw new UnsupportedOperationException("NotC supported yet."); //To change body of generated methods, choose Tools | Templates.
       }
     });
+    entera.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setOpIndex(6);
+        dimensionPanel.setSize(panelscroll.getSize());
+      }
+    });
+
   }
 
   private void setOpIndex(int i) {
@@ -84,10 +92,12 @@ public class ImageDrawingComponent extends JPanel {
         setCincuenta(g2);
         break;
       case 5:
-        getampliar(g2);
+        adjustWidtht(g2);
+        break;
+      case 6:
+        adjustPage(g2);
         break;
       default:
-
         break;
       }
 
@@ -125,6 +135,8 @@ public class ImageDrawingComponent extends JPanel {
         Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
+//    imageSize = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
+
 
   }
 
@@ -214,8 +226,8 @@ public class ImageDrawingComponent extends JPanel {
     repaint();
   }
 
-  private void getampliar(Graphics2D g2) {
-    imageSize = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
+  private void adjustWidtht(Graphics2D g2) {
+    ImageSize imageSize = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
     setPreferredSize(imageSize.getDimforhalf());
     g2.setBackground(Color.red);
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -226,5 +238,21 @@ public class ImageDrawingComponent extends JPanel {
     scrollRectToVisible(new Rectangle(getPreferredSize()));
     revalidate();
     repaint();
+  }
+
+  private void adjustPage(Graphics2D g2) {
+    ImageSize imageSize = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
+    Dimension dim = imageSize.getDimforPanel();
+    setPreferredSize(dim);
+    g2.setBackground(Color.cyan);
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g2.clearRect(0, 0, getWidth(), getHeight());
+    g2.drawImage(bi,
+            0, 0, (int) dim.getWidth(), (int) dim.getHeight(), /* src area of image */
+            null);
+    scrollRectToVisible(new Rectangle(getPreferredSize()));
+    revalidate();
+    repaint();
+
   }
 }

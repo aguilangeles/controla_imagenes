@@ -55,7 +55,6 @@ public class Ventana extends javax.swing.JFrame {
 //  public Dimension getPanelDimension() {
 //    return panelScroll.getSize();
 //  }
-
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,6 +81,7 @@ public class Ventana extends javax.swing.JFrame {
     panelScroll = new javax.swing.JPanel();
     scrollImage = new javax.swing.JScrollPane();
     ampliar = new javax.swing.JButton();
+    entera = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setBackground(new java.awt.Color(230, 252, 238));
@@ -202,7 +202,9 @@ public class Ventana extends javax.swing.JFrame {
       .addComponent(scrollImage, javax.swing.GroupLayout.Alignment.TRAILING)
     );
 
-    ampliar.setText("<>");
+    ampliar.setText("Ancho");
+
+    entera.setText("Entera");
 
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
@@ -226,6 +228,8 @@ public class Ventana extends javax.swing.JFrame {
       .addGroup(internalLayout.createSequentialGroup()
         .addGap(167, 167, 167)
         .addComponent(ampliar)
+        .addGap(43, 43, 43)
+        .addComponent(entera)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     internalLayout.setVerticalGroup(
@@ -244,8 +248,9 @@ public class Ventana extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(ampliar)
-        .addGap(12, 12, 12))
+        .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(ampliar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+          .addComponent(entera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
     );
 
     internal.setBounds(0, 0, 960, 500);
@@ -346,6 +351,7 @@ public class Ventana extends javax.swing.JFrame {
   private javax.swing.JButton anterior;
   private javax.swing.JComboBox combo;
   private javax.swing.JDesktopPane desktopPane;
+  private javax.swing.JButton entera;
   private javax.swing.JInternalFrame internal;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
@@ -377,7 +383,8 @@ public class Ventana extends javax.swing.JFrame {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll, ampliar).mostrarPrimeraImagen(siguientes);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
   }
 
   private void getNextImage() {
@@ -386,7 +393,8 @@ public class Ventana extends javax.swing.JFrame {
     Imagen imagen1 = goImagen(contador);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll, ampliar).setNextImage(imagen1);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).setNextImage(imagen1);
   }
 
   private void setBackImage() {
@@ -395,7 +403,8 @@ public class Ventana extends javax.swing.JFrame {
     Imagen pr = backImagen(contador);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente, panelScroll, ampliar).setBackImage(pr);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).setBackImage(pr);
   }
 
   private void setFinalizar() {

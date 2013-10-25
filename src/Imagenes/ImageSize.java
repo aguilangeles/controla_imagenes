@@ -22,12 +22,8 @@ public class ImageSize {
     this.imgSize = imgSize;
     this.wipanel = dimPanel.getWidth();
     this.hepanel = dimPanel.getHeight();
-   // this.wipanel = 800;
-   // this.hepanel = 900;
     alineacion();
-    alinearalHeight();
-    //Dimension panel = new Dimension((int) wipanel, (int) hepanel);
-    //System.out.println("Size panel " + panel + "image size " + this.imgSize);
+    adjustWidth();
   }
 
   private boolean isWithanHe() {
@@ -43,16 +39,16 @@ public class ImageSize {
     int h = 0;
     if (isWithanHe())
       {
-      double wight = (hepanel * imgSize.getWidth() / imgSize.getHeight()) - 15;
-      double height = (wight * imgSize.getHeight() / imgSize.getWidth());
+      double wight = hepanel * imgSize.getWidth() / imgSize.getHeight();
+      double height = wight * imgSize.getHeight() / imgSize.getWidth();
       w = (int) (wight);
-      h = (int) (height);
+      h = (int) (height) - 20;
       } else
       {
-      double height = (hepanel * imgSize.getHeight() / imgSize.getWidth());
+      double height = ((wipanel) * imgSize.getHeight() / imgSize.getWidth());
       double wight = (height * imgSize.getWidth() / imgSize.getHeight());
       w = (int) (wight);
-      h = (int) (height);
+      h = (int) (height)-80;
       }
     dimforPanel = new Dimension(w, h);
   }
@@ -61,8 +57,8 @@ public class ImageSize {
     return dimforPanel;
   }
 
-  private void alinearalHeight() {
-    int ww = (int) wipanel-80;
+  private void adjustWidth() {
+    int ww = (int) wipanel - 80;
     int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
     dimforhalf = new Dimension(ww, hh);
   }
