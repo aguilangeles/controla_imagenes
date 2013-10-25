@@ -62,7 +62,7 @@ public class ImageSize {
   }
 
   private void alinearalHeight() {
-    int ww = (int) wipanel;
+    int ww = (int) wipanel-80;
     int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
     dimforhalf = new Dimension(ww, hh);
   }

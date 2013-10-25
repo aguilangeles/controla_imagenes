@@ -1,14 +1,14 @@
 Operador de Control: admin
-Fecha de Control: 2013-10-23 09:29:20.0
-Id Traza: 10
-Ruta Completa: c:\angeles\testeo\pdf
-Tamanio Lote: 930
-Cantidad muestreada: 18
+Fecha de Control: 2013-10-25 01:54:15.0
+Id Traza: 90
+Ruta Completa: C:\angeles\testeo\pdf
+Tamanio Lote: 412
+Cantidad muestreada: 8
 Total Rechazos: 0
 Linea de captura: --/--
 Digitalizador: --/--
 Tipo de Verificacion: uno
 Tipo de Documento: Recibo
-Estado: Aceptado
+Estado: Rechazado
 Observaciones: 
 Versión  app: Qualitys 1.0.08

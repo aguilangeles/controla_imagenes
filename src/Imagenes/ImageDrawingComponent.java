@@ -216,9 +216,6 @@ public class ImageDrawingComponent extends JPanel {
 
   private void getampliar(Graphics2D g2) {
     imageSize = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
-    /*veinticinco*/
-    int w_150 = (int) imageSize.getDimforhalf().getWidth();
-    int y_150 = (int) (imageSize.getDimforhalf().getHeight());
     setPreferredSize(imageSize.getDimforhalf());
     g2.setBackground(Color.red);
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
