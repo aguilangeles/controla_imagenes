@@ -9,8 +9,6 @@ import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,7 +25,6 @@ public class Ventana extends javax.swing.JFrame {
   private boolean pdf;
   private boolean tif;
   private final TablaCheckBox tablaCheckBox;
-//  private Dimension panelDimension;
 
   /**
    * Creates new form Ventana
@@ -37,6 +34,7 @@ public class Ventana extends javax.swing.JFrame {
   public Ventana(TrazaDao trazadao) {
     iniciar(trazadao);
     setExtendedState(6);
+
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
     tabla.requestFocus();
@@ -74,14 +72,14 @@ public class Ventana extends javax.swing.JFrame {
     anterior = new javax.swing.JButton();
     combo = new javax.swing.JComboBox();
     jLabel1 = new javax.swing.JLabel();
-    terminar = new javax.swing.JButton();
+    entera = new javax.swing.JButton();
+    ampliar = new javax.swing.JButton();
     rutaLabel = new javax.swing.JLabel();
     pageLabel = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
     panelScroll = new javax.swing.JPanel();
     scrollImage = new javax.swing.JScrollPane();
-    ampliar = new javax.swing.JButton();
-    entera = new javax.swing.JButton();
+    terminar = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setBackground(new java.awt.Color(230, 252, 238));
@@ -140,29 +138,29 @@ public class Ventana extends javax.swing.JFrame {
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setText("Ver Imagen al");
 
-    terminar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    terminar.setMnemonic('t');
-    terminar.setText("Terminar");
-    terminar.setToolTipText("ALT+T");
-    terminar.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        terminarActionPerformed(evt);
-      }
-    });
+    entera.setIcon(new javax.swing.ImageIcon("C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\Logos\\1383002591_zoom-best-fit.png")); // NOI18N
+    entera.setToolTipText("Ajustar una pagina entera a la ventana");
+
+    ampliar.setIcon(new javax.swing.ImageIcon("C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\Logos\\1383001847_stock_zoom-page-width.png")); // NOI18N
+    ampliar.setToolTipText("Ajustar al ancho de ventana");
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+      .addGroup(jPanel1Layout.createSequentialGroup()
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(siguiente)
-          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGap(30, 30, 30)
+            .addComponent(ampliar)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(combo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-      .addComponent(terminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(entera)
+            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,8 +172,10 @@ public class Ventana extends javax.swing.JFrame {
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel1))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(entera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(ampliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
     rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
@@ -195,16 +195,22 @@ public class Ventana extends javax.swing.JFrame {
     panelScroll.setLayout(panelScrollLayout);
     panelScrollLayout.setHorizontalGroup(
       panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(scrollImage)
+      .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
     );
     panelScrollLayout.setVerticalGroup(
       panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(scrollImage, javax.swing.GroupLayout.Alignment.TRAILING)
+      .addComponent(scrollImage)
     );
 
-    ampliar.setText("Ancho");
-
-    entera.setText("Entera");
+    terminar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    terminar.setMnemonic('t');
+    terminar.setText("Terminar");
+    terminar.setToolTipText("ALT+T");
+    terminar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        terminarActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
@@ -221,16 +227,12 @@ public class Ventana extends javax.swing.JFrame {
           .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-          .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(terminar, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+          .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         .addContainerGap())
-      .addGroup(internalLayout.createSequentialGroup()
-        .addGap(167, 167, 167)
-        .addComponent(ampliar)
-        .addGap(43, 43, 43)
-        .addComponent(entera)
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     internalLayout.setVerticalGroup(
       internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,14 +245,13 @@ public class Ventana extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(7, 7, 7)
+            .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(ampliar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-          .addComponent(entera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .addGap(9, 9, 9))
     );
 
     internal.setBounds(0, 0, 960, 500);
