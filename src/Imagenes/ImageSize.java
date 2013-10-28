@@ -47,8 +47,8 @@ public class ImageSize {
       {
       double height = ((wipanel) * imgSize.getHeight() / imgSize.getWidth());
       double wight = (height * imgSize.getWidth() / imgSize.getHeight());
-      w = (int) (wight);
-      h = (int) (height)-80;
+      w = (int) (wight-20);
+      h = (int) (height)-30;
       }
     dimforPanel = new Dimension(w, h);
   }
