@@ -1,0 +1,14 @@
+Operador de Control: admin
+Fecha de Control: 2013-10-25 01:54:15.0
+Id Traza: 90
+Ruta Completa: C:\angeles\testeo\pdf
+Tamanio Lote: 412
+Cantidad muestreada: 8
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: uno
+Tipo de Documento: Recibo
+Estado: Rechazado
+Observaciones: 
+Versión  app: Qualitys 1.0.08

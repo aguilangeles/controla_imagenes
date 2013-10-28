@@ -1,0 +1,28 @@
+Operador de Control: admin
+Fecha de Control: 2013-10-25 03:36:32.0
+Id Traza: 147
+Ruta Completa: C:\angeles\testeo\gnd
+Tamanio Lote: 9128
+Cantidad muestreada: 18
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: uno
+Tipo de Documento: Recibo
+Estado: Aceptado
+Observaciones: 
+Versión  app: Qualitys 1.0.08
+Operador de Control: admin
+Fecha de Control: 2013-10-25 03:36:59.0
+Id Traza: 148
+Ruta Completa: C:\angeles\testeo\pdf
+Tamanio Lote: 487
+Cantidad muestreada: 18
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: uno
+Tipo de Documento: Recibo
+Estado: Aceptado
+Observaciones: 
+Versión  app: Qualitys 1.0.08

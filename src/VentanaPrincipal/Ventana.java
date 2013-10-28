@@ -25,6 +25,7 @@ public class Ventana extends javax.swing.JFrame {
   private boolean pdf;
   private boolean tif;
   private final TablaCheckBox tablaCheckBox;
+
   /**
    * Creates new form Ventana
    *
@@ -32,11 +33,12 @@ public class Ventana extends javax.swing.JFrame {
    */
   public Ventana(TrazaDao trazadao) {
     iniciar(trazadao);
+    setExtendedState(6);
+
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
     tabla.requestFocus();
     this.traza = trazadao;
-    setExtendedState(6);
     this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.tif = isImagenTif(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
@@ -45,8 +47,12 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
+
   }
 
+//  public Dimension getPanelDimension() {
+//    return panelScroll.getSize();
+//  }
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,12 +72,14 @@ public class Ventana extends javax.swing.JFrame {
     anterior = new javax.swing.JButton();
     combo = new javax.swing.JComboBox();
     jLabel1 = new javax.swing.JLabel();
-    terminar = new javax.swing.JButton();
+    entera = new javax.swing.JButton();
+    ampliar = new javax.swing.JButton();
     rutaLabel = new javax.swing.JLabel();
     pageLabel = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
-    jPanel2 = new javax.swing.JPanel();
+    panelScroll = new javax.swing.JPanel();
     scrollImage = new javax.swing.JScrollPane();
+    terminar = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setBackground(new java.awt.Color(230, 252, 238));
@@ -125,34 +133,34 @@ public class Ventana extends javax.swing.JFrame {
     });
 
     combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%" }));
+    combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
 
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setText("Ver Imagen al");
 
-    terminar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    terminar.setMnemonic('t');
-    terminar.setText("Terminar");
-    terminar.setToolTipText("ALT+T");
-    terminar.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        terminarActionPerformed(evt);
-      }
-    });
+    entera.setIcon(new javax.swing.ImageIcon("C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\Logos\\1383002591_zoom-best-fit.png")); // NOI18N
+    entera.setToolTipText("Ajustar una pagina entera a la ventana");
+
+    ampliar.setIcon(new javax.swing.ImageIcon("C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\Logos\\1383001847_stock_zoom-page-width.png")); // NOI18N
+    ampliar.setToolTipText("Ajustar al ancho de ventana");
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+      .addGroup(jPanel1Layout.createSequentialGroup()
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(siguiente)
-          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGap(30, 30, 30)
+            .addComponent(ampliar)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(combo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-      .addComponent(terminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(entera)
+            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,8 +172,10 @@ public class Ventana extends javax.swing.JFrame {
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel1))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(entera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(ampliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
     rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
@@ -179,18 +189,28 @@ public class Ventana extends javax.swing.JFrame {
     jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel2.setText("Tipos de Control");
 
-    scrollImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 0), 2));
+    panelScroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-    jPanel2.setLayout(jPanel2Layout);
-    jPanel2Layout.setHorizontalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    javax.swing.GroupLayout panelScrollLayout = new javax.swing.GroupLayout(panelScroll);
+    panelScroll.setLayout(panelScrollLayout);
+    panelScrollLayout.setHorizontalGroup(
+      panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+    );
+    panelScrollLayout.setVerticalGroup(
+      panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addComponent(scrollImage)
     );
-    jPanel2Layout.setVerticalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(scrollImage)
-    );
+
+    terminar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    terminar.setMnemonic('t');
+    terminar.setText("Terminar");
+    terminar.setToolTipText("ALT+T");
+    terminar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        terminarActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
@@ -204,12 +224,14 @@ public class Ventana extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(pageLabel)
             .addGap(11, 11, 11))
-          .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-          .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(terminar, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+          .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         .addContainerGap())
     );
     internalLayout.setVerticalGroup(
@@ -223,14 +245,16 @@ public class Ventana extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(7, 7, 7)
+            .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGap(9, 9, 9))
     );
 
-    internal.setBounds(0, 0, 960, 410);
+    internal.setBounds(0, 0, 960, 500);
     desktopPane.add(internal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     javax.swing.GroupLayout panelInicialLayout = new javax.swing.GroupLayout(panelInicial);
@@ -241,7 +265,7 @@ public class Ventana extends javax.swing.JFrame {
     );
     panelInicialLayout.setVerticalGroup(
       panelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+      .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -323,17 +347,19 @@ public class Ventana extends javax.swing.JFrame {
 //    });
 //  }
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton ampliar;
   private javax.swing.JButton anterior;
   private javax.swing.JComboBox combo;
   private javax.swing.JDesktopPane desktopPane;
+  private javax.swing.JButton entera;
   private javax.swing.JInternalFrame internal;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JPanel jPanel1;
-  private javax.swing.JPanel jPanel2;
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JLabel pageLabel;
   private javax.swing.JPanel panelInicial;
+  private javax.swing.JPanel panelScroll;
   private javax.swing.JLabel rutaLabel;
   private javax.swing.JScrollPane scrollImage;
   private javax.swing.JButton siguiente;
@@ -356,7 +382,8 @@ public class Ventana extends javax.swing.JFrame {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).mostrarPrimeraImagen(siguientes);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
   }
 
   private void getNextImage() {
@@ -365,7 +392,8 @@ public class Ventana extends javax.swing.JFrame {
     Imagen imagen1 = goImagen(contador);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).setNextImage(imagen1);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).setNextImage(imagen1);
   }
 
   private void setBackImage() {
@@ -374,13 +402,15 @@ public class Ventana extends javax.swing.JFrame {
     Imagen pr = backImagen(contador);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente).setBackImage(pr);
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).setBackImage(pr);
   }
 
   private void setFinalizar() {
     Guardar save = new Guardar();
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel, pdf);
-    GetNumerosImagenesRechazadas numeroRechazo = new GetNumerosImagenesRechazadas(traza.getId());
+    GetNumerosImagenesRechazadas numeroRechazo =
+            new GetNumerosImagenesRechazadas(traza.getId());
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {

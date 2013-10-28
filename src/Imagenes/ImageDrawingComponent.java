@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -34,16 +35,34 @@ public class ImageDrawingComponent extends JPanel {
   int opIndex;
   ReadImageTif tif = new ReadImageTif();
   private BufferedImage bi;
+  private Dimension dimensionPanel = new Dimension();
+  private ImageSize image;
 
   public ImageDrawingComponent() {
   }
 
-  public void cargarImage(String path, boolean pdf, boolean tif, final JComboBox combo) {
+  public void cargarImage(String path, boolean pdf, boolean tif,
+          final JComboBox combo, final JPanel panelscroll, JButton button, JButton entera) {
     loadImage(path, pdf, tif);
     combo.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         setOpIndex(combo.getSelectedIndex());
+        dimensionPanel.setSize(panelscroll.getSize());
+      }
+    });
+    button.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setOpIndex(6);
+        dimensionPanel.setSize(panelscroll.getSize());
+      }
+    });
+    entera.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setOpIndex(7);
+        dimensionPanel.setSize(panelscroll.getSize());
       }
     });
   }
@@ -54,25 +73,45 @@ public class ImageDrawingComponent extends JPanel {
 
   @Override
   public void paint(Graphics g) {
+    ImageSize image = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
     Graphics2D g2 = (Graphics2D) g;
     switch (opIndex)
       {
       case 0:
-        setCientoCincuenta(g2);
+        int ww = (int) ((bi.getWidth()) );
+        int hh = (int) ((bi.getHeight()));
+        //mostrar a ciento cincuenta
+        setValues(g2, image.getDimensionDefault());
         break;
       case 1:
-        setCientoVeintiCinco(g2);
+        //mostrar a 125 porciento
+        setValuesForNewDimension(g2, image.getDimensionFor125());
+        // setCientoVeintiCinco(g2);
         break;
       case 2:
-        setCien(g2);
+        setValues(g2, image.getDimforhalf());
         break;
       case 3:
-        setSetentaYCinco(g2);
+        setValuesForNewDimension(g2, image.getDimensionFor75());
         break;
-      default:
-        setCincuenta(g2);
+      case 4:
+        setValuesForNewDimension(g2, image.getDimensionFor50());
+        break;
+      case 5:
+        setValuesForNewDimension(g2, image.getDimensionFor25());
+        break;
+      case 6:
+        setValues(g2, image.getDimforhalf());
+        break;
+      case 7:
+        setValuesForNewDimension(g2, image.getDimforPanel());
         break;
       }
+
+  }
+
+  public Dimension getDimensionPanel() {
+    return dimensionPanel;
   }
 
   private void loadImage(String path, boolean pdf, boolean tif) {
@@ -104,84 +143,30 @@ public class ImageDrawingComponent extends JPanel {
       }
   }
 
-  private void setCincuenta(Graphics2D g2) {
-    /* cincuenta */
-    int w_50 = (int) ((bi.getWidth() / 2.7) / 2);
-    int y_50 = (int) ((bi.getHeight() / 2.7) / 2);
-    setPreferredSize(new Dimension(w_50, y_50));
-    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+  private void setValuesForNewDimension(Graphics2D g2, Dimension newdimension) {
+    Dimension dim = newdimension;
+    setPreferredSize(dim);
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+            RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.setBackground(Color.gray);
-
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
-            0, 0, w_50, y_50,
+            0, 0, (int) dim.getWidth(), (int) dim.getHeight(),
             null);
     scrollRectToVisible(new Rectangle(getPreferredSize()));
     revalidate();
     repaint();
   }
 
-  private void setSetentaYCinco(Graphics2D g2) {
-    //setentaycinco
-    int w_75 = (int) ((bi.getWidth() / 2.7) / 1.3);
-    int y_75 = (int) ((bi.getHeight() / 2.7) / 1.3);
-    setPreferredSize(new Dimension(w_75, y_75));
-    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-    g2.setBackground(Color.gray);
-
-    g2.clearRect(0, 0, getWidth(), getHeight());
-    g2.drawImage(bi,
-            0, 0, w_75, y_75, /* src area of image */
-            null);
-    scrollRectToVisible(new Rectangle(getPreferredSize()));
-    revalidate();
-    repaint();
-  }
-
-  private void setCien(Graphics2D g2) {
-    /*cien*/
-    int w_100 = (int) (bi.getWidth() / 2.7);
-    int y_100 = (int) (bi.getHeight() / 2.7);
-    setPreferredSize(new Dimension(w_100, y_100));
-    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-    g2.setBackground(Color.gray);
-
-    g2.clearRect(0, 0, getWidth(), getHeight());
-    g2.drawImage(bi,
-            0, 0, w_100, y_100, /* src area of image */
-            null);
-    scrollRectToVisible(new Rectangle(getPreferredSize()));
-    revalidate();
-    repaint();
-  }
-
-  private void setCientoVeintiCinco(Graphics2D g2) {
-    /*veinticinco*/
-    int w_125 = (int) ((bi.getWidth() / 2.7) * 1.25);
-    int y_125 = (int) ((bi.getHeight() / 2.7) * 1.25);
-    setPreferredSize(new Dimension(w_125, y_125));
-    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-    g2.setBackground(Color.gray);
-
-    g2.clearRect(0, 0, getWidth(), getHeight());
-    g2.drawImage(bi,
-            0, 0, w_125, y_125, /* src area of image */
-            null);
-    scrollRectToVisible(new Rectangle(getPreferredSize()));
-    revalidate();
-    repaint();
-  }
-
-  private void setCientoCincuenta(Graphics2D g2) {
-    /*veinticinco*/
-    int w_150 = (int) ((bi.getWidth() / 2.7) * 1.50);
-    int y_150 = (int) ((bi.getHeight() / 2.7) * 1.50);
-    setPreferredSize(new Dimension(w_150, y_150));
+  private void setValues(Graphics2D g2, Dimension dimension) {
+    // la diferencia es  que no uso la nueva dimension, para hacer el drawimage.
+    Dimension dim = new Dimension(dimension);
+    setPreferredSize(dim);
     g2.setBackground(Color.gray);
     g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2.clearRect(0, 0, getWidth(), getHeight());
     g2.drawImage(bi,
-            0, 0, w_150, y_150, /* src area of image */
+            0, 0, getWidth(), getHeight(), /* src area of image */
             null);
     scrollRectToVisible(new Rectangle(getPreferredSize()));
     revalidate();

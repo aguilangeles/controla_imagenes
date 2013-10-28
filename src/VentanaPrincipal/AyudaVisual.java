@@ -5,8 +5,6 @@
 package VentanaPrincipal;
 
 import java.io.File;
-import java.awt.Color;
-import javax.swing.SpinnerNumberModel;
 import Imagenes.ImageDrawingComponent;
 
 /**

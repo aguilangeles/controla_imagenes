@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -39,10 +40,15 @@ public class MostrarInternalFrames {
   private static ImageDrawingComponent imageDraw = new ImageDrawingComponent();
   private static Guardar save;
   private static SetChecksBox setCB;
+  private JPanel panelScroll;
+  private JButton botonAncho;
+  private JButton pEntera;
 
-  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane, JInternalFrame internal,
-          JButton anterior, boolean pdf, boolean tif, JComboBox combo, JScrollPane scrollImage,
-          int cantidad, int sizeRamdom, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente) {
+  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane,
+          JInternalFrame internal, JButton anterior, boolean pdf, boolean tif,
+          JComboBox combo, JScrollPane scrollImage, int cantidad, int sizeRamdom,
+          JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente,
+          JPanel panelSroll, JButton ancho, JButton pEntera) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -57,6 +63,9 @@ public class MostrarInternalFrames {
     this.pageLabel = pageLabel;
     this.tabla = tabla;
     this.siguiente = siguiente;
+    this.botonAncho = ancho;
+    this.pEntera = pEntera;
+    this.panelScroll = panelSroll;
     MostrarInternalFrames.save = new Guardar();// sa
     MostrarInternalFrames.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
   }
@@ -126,7 +135,7 @@ public class MostrarInternalFrames {
   private void setImagenes(Imagen siguientes) {
     String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
     setLabelPagina(pdf, siguientes);
-    imageDraw.cargarImage(ruta, pdf, tif, combo);
+    imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll, botonAncho, pEntera);
     scrollImage.getViewport().add(imageDraw);
   }
 }
