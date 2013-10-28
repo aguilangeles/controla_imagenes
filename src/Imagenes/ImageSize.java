@@ -59,6 +59,33 @@ public class ImageSize {
     dimforhalf = new Dimension(ww, hh);
   }
 
+  public Dimension getDimensionFor50() {
+    int ww = (int) (wipanel) / 2;
+    int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
+    Dimension dimension = new Dimension(ww, hh);
+    return dimension;
+  }
+
+  public Dimension getDimensionFor75() {
+    int ww = (int) ((int) (wipanel) / 1.3);
+    int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
+    Dimension dimension = new Dimension(ww, hh);
+    return dimension;
+  }
+
+  public Dimension getDimensionFor125() {
+    int ww = (int) ((int) (wipanel) * 1.25);
+    int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
+    Dimension dimension = new Dimension(ww, hh);
+    return dimension;
+  }
+  public Dimension getDimensionFor150() {
+    int ww = (int) ((int) (wipanel) * 1.50);
+    int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
+    Dimension dimension = new Dimension(ww, hh);
+    return dimension;
+  }
+
   public Dimension getDimforPanel() {
     return dimforPanel;
   }
