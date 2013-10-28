@@ -22,11 +22,11 @@ public class ImageSize {
     this.imgSize = imgSize;
     this.wipanel = dimPanel.getWidth();
     this.hepanel = dimPanel.getHeight();
-    alineacion();
-    adjustWidth();
+    verPaginaEnAncho();
+    verPaginaEntera();
   }
 
-  private boolean isWithanHe() {
+  private boolean isMasAnchoqueAlto() {
     if (imgSize.getWidth() <= imgSize.getHeight())
       {
       return true;
@@ -34,10 +34,10 @@ public class ImageSize {
     return false;
   }
 
-  private void alineacion() {
+  private void verPaginaEntera() {
     int w = 0;
     int h = 0;
-    if (isWithanHe())
+    if (isMasAnchoqueAlto())
       {
       double wight = hepanel * imgSize.getWidth() / imgSize.getHeight();
       double height = wight * imgSize.getHeight() / imgSize.getWidth();
@@ -45,22 +45,22 @@ public class ImageSize {
       h = (int) (height) - 20;
       } else
       {
-      double height = ((wipanel) * imgSize.getHeight() / imgSize.getWidth());
+      double height = ((wipanel) * imgSize.getHeight() / imgSize.getWidth() - 100);
       double wight = (height * imgSize.getWidth() / imgSize.getHeight());
-      w = (int) (wight-20);
-      h = (int) (height)-30;
+      w = (int) (wight - 20);
+      h = (int) (height) - 30;
       }
     dimforPanel = new Dimension(w, h);
   }
 
-  public Dimension getDimforPanel() {
-    return dimforPanel;
-  }
-
-  private void adjustWidth() {
+  private void verPaginaEnAncho() {
     int ww = (int) wipanel - 80;
     int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
     dimforhalf = new Dimension(ww, hh);
+  }
+
+  public Dimension getDimforPanel() {
+    return dimforPanel;
   }
 
   public Dimension getDimforhalf() {
