@@ -59,8 +59,35 @@ public class ImageSize {
     dimforhalf = new Dimension(ww, hh);
   }
 
+  public Dimension getDimensionDefault() {
+    Dimension dimension = new Dimension();
+    if (isMasAnchoqueAlto())
+      {
+      double wight = 1000 * imgSize.getWidth() / imgSize.getHeight();
+      double height = wight * imgSize.getHeight() / imgSize.getWidth();
+      int w = (int) ((int) (wight) * 1.50);
+      int h = (int) ((int) (height) * 1.50);
+      dimension.setSize(w, h);
+      } else
+      {
+      double height = ((1000) * imgSize.getHeight() / imgSize.getWidth());
+      double wight = (height * imgSize.getWidth() / imgSize.getHeight());
+      int w = (int) ((int) (wight) * 1.50);
+      int h = (int) ((int) (height) * 1.50);
+      dimension.setSize(w, h);
+      }
+    return dimension;
+  }
+
   public Dimension getDimensionFor50() {
     int ww = (int) (wipanel) / 2;
+    int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
+    Dimension dimension = new Dimension(ww, hh);
+    return dimension;
+  }
+
+  public Dimension getDimensionFor125() {
+    int ww = (int) ((int) (wipanel) * 1.25);
     int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
     Dimension dimension = new Dimension(ww, hh);
     return dimension;
@@ -73,14 +100,8 @@ public class ImageSize {
     return dimension;
   }
 
-  public Dimension getDimensionFor125() {
-    int ww = (int) ((int) (wipanel) * 1.25);
-    int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
-    Dimension dimension = new Dimension(ww, hh);
-    return dimension;
-  }
-  public Dimension getDimensionFor150() {
-    int ww = (int) ((int) (wipanel) * 1.50);
+  public Dimension getDimensionFor25() {
+    int ww = (int) ((int) (wipanel) / 3);
     int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
     Dimension dimension = new Dimension(ww, hh);
     return dimension;
