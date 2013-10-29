@@ -6,8 +6,6 @@ package ReporteLote;
 
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -39,8 +37,8 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
         DefaultTableModel modelo = poblarSegundatabla();
         tabla.setModel(modelo);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(360);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(400);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(30);
 
     }
