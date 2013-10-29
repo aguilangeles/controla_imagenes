@@ -8,6 +8,7 @@ import BasedeDatos.IdControlFromVerificacionList;
 import BasedeDatos.Conexion;
 import TratarFile.IdentificarExtension;
 import TratarFile.IdentificarParent;
+import java.awt.HeadlessException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class AceptarCargarLote {
   private int idUsuario;
   private JFrame cargarLoteFrame;
 //  private  int idVerificacion;
-  private  List<Integer> idTipoControl = new ArrayList<>();
+  private List<Integer> idTipoControl = new ArrayList<>();
 
   public AceptarCargarLote(JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox,
           JTextField rutaCarpeta, Conexion con, JButton aceptarSeleccion, JLabel informa, int idUsuario, JFrame frame) {
@@ -49,26 +50,24 @@ public class AceptarCargarLote {
   }
 
   private void getAceptar() {
-
     String ruta = rutaCarpeta.getText();//trae la ruta
     File file = new File(ruta);//busca el file
     if (file.exists())
       {// si el archivo existe
       File[] files = file.listFiles();//lista los mismos
       if (tipoDocumentoBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de documento"))
-        {//condicion obsoleta
-        JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de documentos sin seleccionar",//porque se posiciona el en index cero de los combos
-                "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
+        {
+        setMessageJcombotipodoc();
         } else if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de verificacion"))
         {
-        JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
-                "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
+        setMessageComboTipoVerificacion();
         } else
         {
         getControlesPorVerificacion();//controles de la verificacion seleccionada
         con.isConexionClose();////cierra conexion
 
         IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
+
         String rutaCompleta = parent.getParent();
         String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
 
@@ -77,7 +76,8 @@ public class AceptarCargarLote {
         idext.execute();
         aceptarSeleccion.setEnabled(false);
         }
-    } else {
+      } else
+      {
       JOptionPane.showMessageDialog(rutaCarpeta,
               "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
       rutaCarpeta.setText("");
@@ -112,5 +112,16 @@ public class AceptarCargarLote {
   private void getControlesPorVerificacion() {
     IdControlFromVerificacionList ctrls = new IdControlFromVerificacionList();
     idTipoControl = ctrls.idControlesByVerificacion(tipoVerificacionBox, con, idTipoControl);
+  }
+
+  private void setMessageJcombotipodoc() throws HeadlessException {
+    //condicion obsoleta
+    JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de documentos sin seleccionar",//porque se posiciona el en index cero de los combos
+            "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
+  }
+
+  private void setMessageComboTipoVerificacion() throws HeadlessException {
+    JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
+            "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
   }
 }

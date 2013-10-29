@@ -66,8 +66,8 @@ public class Reporte extends javax.swing.JFrame {
     tabladeTipos = new javax.swing.JTable();
     imagenesRechazadas = new javax.swing.JLabel();
     jLabel4 = new javax.swing.JLabel();
-    si = new javax.swing.JRadioButton();
-    no = new javax.swing.JRadioButton();
+    aceptar = new javax.swing.JRadioButton();
+    rechazar = new javax.swing.JRadioButton();
     jScrollPane3 = new javax.swing.JScrollPane();
     jTextArea1 = new javax.swing.JTextArea();
     jButton1 = new javax.swing.JButton();
@@ -119,18 +119,18 @@ public class Reporte extends javax.swing.JFrame {
     imagenesRechazadas.setText("Cantidad de imagenes rechazadas: xxx");
 
     jLabel4.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    jLabel4.setText("Se rechaza el lote?");
+    jLabel4.setText("Definir estado del Lote");
 
-    si.setText("SI");
-    si.setOpaque(false);
+    aceptar.setText("Aceptado");
+    aceptar.setOpaque(false);
 
-    no.setText("No");
-    no.setNextFocusableComponent(si);
-    no.setOpaque(false);
+    rechazar.setText("Rechazado");
+    rechazar.setNextFocusableComponent(aceptar);
+    rechazar.setOpaque(false);
 
     jTextArea1.setColumns(20);
     jTextArea1.setRows(5);
-    jTextArea1.setNextFocusableComponent(si);
+    jTextArea1.setNextFocusableComponent(aceptar);
     jScrollPane3.setViewportView(jTextArea1);
 
     jButton1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
@@ -163,38 +163,35 @@ public class Reporte extends javax.swing.JFrame {
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addGap(19, 19, 19)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(imagenesRechazadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(jPanel1Layout.createSequentialGroup()
-            .addComponent(jButton2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(59, 59, 59))
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(si)
-                .addGap(18, 18, 18)
-                .addComponent(no)
-                .addGap(46, 46, 46))
-              .addComponent(imagenesRechazadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
               .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-                  .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE)))
-            .addContainerGap())))
+                .addComponent(jButton2)
+                .addGap(148, 148, 148)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                  .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                  .addGap(45, 45, 45)
+                  .addComponent(aceptar)
+                  .addGap(35, 35, 35)
+                  .addComponent(rechazar))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(0, 0, Short.MAX_VALUE)))
+        .addContainerGap())
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(18, 18, 18)
         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(1, 1, 1)
         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,8 +200,8 @@ public class Reporte extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabel4)
-          .addComponent(si)
-          .addComponent(no))
+          .addComponent(aceptar)
+          .addComponent(rechazar))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -241,13 +238,14 @@ public class Reporte extends javax.swing.JFrame {
   }//GEN-LAST:event_jButton2ActionPerformed
   private void actionRadioButton() {
     bg = new ButtonGroup();
-    bg.add(si);
-    bg.add(no);
+    bg.add(aceptar);
+    bg.add(rechazar);
   }
   /**
    * @param args the command line arguments
    */
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JRadioButton aceptar;
   private javax.swing.JLabel imagenesRechazadas;
   private javax.swing.JButton jButton1;
   private javax.swing.JButton jButton2;
@@ -259,8 +257,7 @@ public class Reporte extends javax.swing.JFrame {
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JScrollPane jScrollPane3;
   private javax.swing.JTextArea jTextArea1;
-  private javax.swing.JRadioButton no;
-  private javax.swing.JRadioButton si;
+  private javax.swing.JRadioButton rechazar;
   private javax.swing.JTable tablaDetalles;
   private javax.swing.JTable tabladeTipos;
   // End of variables declaration//GEN-END:variables
@@ -276,7 +273,7 @@ public class Reporte extends javax.swing.JFrame {
         } else
         {
         UpdateEstadoLote updateEstadoLote =
-                new UpdateEstadoLote(conexion, idtraza, si.isSelected(),
+                new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
                 jTextArea1, tablaDetalles, jButton1);
         conexion.isConexionClose();
         System.exit(0);
@@ -299,7 +296,7 @@ public class Reporte extends javax.swing.JFrame {
         } else
         {
         UpdateEstadoLote updateEstadoLote =
-                new UpdateEstadoLote(conexion, idtraza, si.isSelected(),
+                new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
                 jTextArea1, tablaDetalles, jButton1);
         conexion.isConexionClose();
         this.dispose();

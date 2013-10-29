@@ -8,7 +8,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -25,7 +24,14 @@ public class EscribeInforme {
   private static final String UBICACION = "Reporte/" + new Time().getDateForTXT() + ".txt";
 
   public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar) {
-    String estadoS = (estado) ? "Aceptado" : "Rechazado";
+    String estadoS;
+    if (estado)
+      {
+      estadoS="Aceptado.";
+      }else{
+      estadoS="Rechazado.";
+    }
+    //String estadoS = (estado) ? "Rechazado XXX" : "AceptadoZZZ";
     write(tabla, estadoS, observaciones, finalizar);
   }
 

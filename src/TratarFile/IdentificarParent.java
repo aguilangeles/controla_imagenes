@@ -9,13 +9,14 @@ import java.io.File;
 
 /**
  *busca la Ruta Completa del Lote
- * 
+ *
  * @author MUTNPROD003
  */
 public final class IdentificarParent {
     private String parent;
     public IdentificarParent(File[] files) {
-        this.parent= encontrarParent2(files);
+//aca el filtro.
+      this.parent= encontrarParent2(files);
     }
 
   private String encontrarParent2(File[] files) {

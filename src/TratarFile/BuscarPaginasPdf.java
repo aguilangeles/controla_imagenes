@@ -8,7 +8,6 @@ import Entidades.NombrePaginaDelPDF;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -48,7 +47,8 @@ public class BuscarPaginasPdf {
         pddDocument.close();
         } catch (IOException ex)
         {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Encontrar Paginas PDF", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, ex.getMessage(),
+                "Encontrar Paginas PDF", JOptionPane.ERROR_MESSAGE);
         }
       }
   }
