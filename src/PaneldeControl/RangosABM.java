@@ -133,7 +133,7 @@ public class RangosABM extends javax.swing.JFrame {
         .addComponent(ABM, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
         .addComponent(mensajeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
         .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(29, 29, 29))
     );
@@ -222,8 +222,8 @@ public class RangosABM extends javax.swing.JFrame {
     principalInternalLayout.setVerticalGroup(
       principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(principalInternalLayout.createSequentialGroup()
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(18, 18, 18)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(principalInternalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -232,10 +232,10 @@ public class RangosABM extends javax.swing.JFrame {
           .addComponent(desactivar))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(salvar)
-        .addContainerGap(12, Short.MAX_VALUE))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
-    principalInternal.setBounds(10, 10, 480, 300);
+    principalInternal.setBounds(10, 10, 480, 350);
     desk.add(principalInternal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     scroll.setViewportView(desk);
@@ -248,19 +248,19 @@ public class RangosABM extends javax.swing.JFrame {
         .addGap(6, 6, 6)
         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+        .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
         .addContainerGap())
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(0, 6, Short.MAX_VALUE)
-            .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addGap(21, 21, 21))
+        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGap(49, 49, 49))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap())
     );
 
     getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);

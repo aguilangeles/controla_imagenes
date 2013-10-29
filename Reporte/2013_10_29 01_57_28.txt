@@ -1,0 +1,15 @@
+Operador de Control: admin
+Fecha de Control: 2013-10-29 01:57:00.0
+Id Traza: 264
+Ruta Completa: C:\Angeles\Testeo\gnd
+Tamanio Lote: 9128
+Cantidad muestreada: 5
+Limite Rechazos: 3
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: uno
+Tipo de Documento: Recibo
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 1.0.09
