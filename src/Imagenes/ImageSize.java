@@ -118,7 +118,7 @@ public class ImageSize {
       h = (int) (height);
       } else
       {
-      System.out.println("mas alto " + imgSize.getWidth() + " " + imgSize.getHeight());
+//      System.out.println("mas alto " + imgSize.getWidth() + " " + imgSize.getHeight());
       double height = ((wipanel) * imgSize.getHeight() / imgSize.getWidth() )/1.8;
       double wight = (height * imgSize.getWidth() / imgSize.getHeight());
       w = (int) (wight);
