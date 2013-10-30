@@ -5,7 +5,6 @@
 package ReporteLote;
 
 import Helpers.VersionEImageIcon;
-import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
@@ -72,6 +71,7 @@ public class Reporte extends javax.swing.JFrame {
     jScrollPane3 = new javax.swing.JScrollPane();
     jTextArea1 = new javax.swing.JTextArea();
     jButton1 = new javax.swing.JButton();
+    jButton2 = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle("Qualitys_v_1.00.01");
@@ -148,6 +148,14 @@ public class Reporte extends javax.swing.JFrame {
       }
     });
 
+    jButton2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    jButton2.setText("Volver al Panel");
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2ActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -155,29 +163,6 @@ public class Reporte extends javax.swing.JFrame {
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
-          .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(si)
-            .addGap(18, 18, 18)
-            .addComponent(no)
-            .addGap(46, 46, 46))
-          .addComponent(imagenesRechazadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-              .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-            .addGap(0, 0, Short.MAX_VALUE)))
-        .addContainerGap())
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(59, 59, 59))
-=======
           .addComponent(imagenesRechazadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(jLabel2)
@@ -197,7 +182,6 @@ public class Reporte extends javax.swing.JFrame {
           .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         .addContainerGap())
->>>>>>> NuevaVerificacion
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,15 +203,10 @@ public class Reporte extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-<<<<<<< HEAD
-        .addComponent(jButton1)
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-=======
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jButton1)
           .addComponent(jButton2))
         .addContainerGap())
->>>>>>> NuevaVerificacion
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -251,6 +230,10 @@ public class Reporte extends javax.swing.JFrame {
   private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
     getFinalizar();
   }//GEN-LAST:event_jButton1KeyPressed
+
+  private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+  nuevoQ();
+  }//GEN-LAST:event_jButton2ActionPerformed
   private void actionRadioButton() {
     bg = new ButtonGroup();
     bg.add(aceptar);
@@ -263,6 +246,7 @@ public class Reporte extends javax.swing.JFrame {
   private javax.swing.JRadioButton aceptar;
   private javax.swing.JLabel imagenesRechazadas;
   private javax.swing.JButton jButton1;
+  private javax.swing.JButton jButton2;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel4;
@@ -276,7 +260,7 @@ public class Reporte extends javax.swing.JFrame {
   private javax.swing.JTable tabladeTipos;
   // End of variables declaration//GEN-END:variables
 
-  private void getFinalizar() throws HeadlessException {
+  private void getFinalizar() {
     if (bg.getSelection() != null)
       {
       if (jTextArea1.getText().length() >= 500)
@@ -298,9 +282,6 @@ public class Reporte extends javax.swing.JFrame {
               "Debe aceptar o rechazar el lote antes de salir", "Selección de Lote",
               JOptionPane.ERROR_MESSAGE);
       }
-<<<<<<< HEAD
-  }
-=======
   }//
   private void nuevoQ() {
     if (bg.getSelection() != null)
@@ -326,5 +307,4 @@ public class Reporte extends javax.swing.JFrame {
               JOptionPane.ERROR_MESSAGE);
       }
   }//
->>>>>>> NuevaVerificacion
 }

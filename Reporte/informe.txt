@@ -1,28 +1,30 @@
 Operador de Control: admin
 
-Fecha de Control: 2013-09-09 09:35:09.0
+Fecha de Control: 2013-10-30 11:19:10.0
 
-Id Traza: 80
+Id Traza: 48
 
-Ruta Completa: c:\angeles\volreducido
+Ruta Completa: c:\angeles\testeo\gnd5
 
-Tamanio Lote: 40
+Tamanio Lote: 1895
 
-Cantidad muestreada: 39
+Cantidad muestreada: 16
 
-Total Rechazos: 0
+Limite Rechazos: 8
+
+Total Rechazos: 1
 
 Linea de captura: --/--
 
 Digitalizador: --/--
 
-Tipo de Verificacion: tes
+Tipo de Verificacion: Control de calidad de imagen
 
-Tipo de Documento: Recibo
+Tipo de Documento: FRP
 
-Estado: Aceptado
+Estado: Rechazado.
 
 Observaciones: 
 
-Versión  app: Qualitys 1.0.07
+Versión  app: Qualitys 1.0.09
 

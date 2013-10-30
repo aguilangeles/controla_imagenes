@@ -12,13 +12,9 @@ import javax.swing.JFrame;
  * @author aguilangeles@gmail.com
  */
 public final class VersionEImageIcon extends JFrame{
-<<<<<<< HEAD
-
-  public static final String VERSION ="Qualitys 1.0.07";
-=======
 //tiene boton de ampliar en ancho y mostrar pagina entera.
   public static final String VERSION ="Qualitys 1.0.09";
->>>>>>> NuevaVerificacion
+//>>>>>>> NuevaVerificacion
 
 
     public VersionEImageIcon() {
