@@ -138,10 +138,10 @@ public class Ventana extends javax.swing.JFrame {
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setText("Ver Imagen al");
 
-    entera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VentanaPrincipal/1383002591_zoom-best-fit.png"))); // NOI18N
+    entera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/1383002591_zoom-best-fit_1.png"))); // NOI18N
     entera.setToolTipText("Ajustar una pagina entera a la ventana");
 
-    ampliar.setIcon(new javax.swing.ImageIcon("C:\\Users\\MUTNPROD003\\Documents\\GitHub\\controla_imagenes\\Logos\\1383001847_stock_zoom-page-width.png")); // NOI18N
+    ampliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/1383001847_stock_zoom-page-width_1.png"))); // NOI18N
     ampliar.setToolTipText("Ajustar al ancho de ventana");
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -153,14 +153,15 @@ public class Ventana extends javax.swing.JFrame {
           .addComponent(siguiente)
           .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(30, 30, 30)
-            .addComponent(ampliar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(51, 51, 51)
+            .addComponent(ampliar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING)
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(entera)
-            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+          .addComponent(combo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(jPanel1Layout.createSequentialGroup()
+            .addComponent(entera, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())))
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
