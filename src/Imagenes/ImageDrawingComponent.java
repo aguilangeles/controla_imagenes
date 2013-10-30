@@ -73,6 +73,7 @@ public class ImageDrawingComponent extends JPanel {
 
   @Override
   public void paint(Graphics g) {
+//    System.out.println("--"+bi.getWidth()+"- "+bi.getHeight());
     ImageSize image = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
     Graphics2D g2 = (Graphics2D) g;
     switch (opIndex)
