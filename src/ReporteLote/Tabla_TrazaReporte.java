@@ -25,6 +25,7 @@ public class Tabla_TrazaReporte extends JFrame {
   private int ide;
   private int muestra;
   private int rechazo;
+  private int limite;
   private String rutaCompleta;
   private String resultados;
   private String verificacion;
@@ -54,56 +55,67 @@ public class Tabla_TrazaReporte extends JFrame {
   }
 
   private void consultaYCarga() {
-    try {
-      String query = "SELECT t.fecha_control "
-              + ", t.tamanio_lote "
+    try
+      {
+      String query = "SELECT t.fecha_control  "
+              + ", t.tamanio_lote  "
               + ", t.cantidad_muestreada "
-              + ", t.nro_rechazo  "
-              + ", v.descripcion "
-              + ", u.nombre "
-              + ", d.descripcion "
-              + ", t.id "
-              + ", t.rutaCompleta "
-              + "from traza t  "
-              + "join tipos_verificacion v "
-              + "on t.idVerificacion = v.id "
-              + "join usuarios u "
-              + "on t.idUsuarios = u.id "
-              + "join tipos_documentos d "
-              + "on t.idTipoDocumento = d.id "
-              + "where t.id =" + idtraza;
+              + ", ra.cant_rechazo "
+              + ", t.nro_rechazo "
+              + ", v.descripcion  "
+              + ", u.nombre  "
+              + ", d.descripcion  "
+              + ", t.id  "
+              + ", t.rutaCompleta  "
+              + "from traza t   "
+              + "join tipos_verificacion v  "
+              + "on t.idVerificacion = v.id  "
+              + "join usuarios u  "
+              + "on t.idUsuarios = u.id  "
+              + "join tipos_documentos d  "
+              + "on t.idTipoDocumento = d.id  "
+              + "join rangos_qs ra "
+              + "on t.idRango = ra.id "
+              + "where t.id = " + idtraza + "; ";
       conexion.executeQuery(query);
-      while (conexion.resulset.next()) {
+      while (conexion.resulset.next())
+        {
         fecha = conexion.resulset.getObject(1);
         tamanio = conexion.resulset.getInt(2);
         muestra = conexion.resulset.getInt(3);
-        rechazo = conexion.resulset.getInt(4);
-        verificacion = conexion.resulset.getString(5);
-        usuario = conexion.resulset.getString(6);
-        documento = conexion.resulset.getString(7);
-        ide = conexion.resulset.getInt(8);
-        rutaCompleta = conexion.resulset.getString(9);
+        limite = conexion.resulset.getInt(4);
+        rechazo = conexion.resulset.getInt(5);
+        verificacion = conexion.resulset.getString(6);
+        usuario = conexion.resulset.getString(7);
+        documento = conexion.resulset.getString(8);
+        ide = conexion.resulset.getInt(9);
+        rutaCompleta = conexion.resulset.getString(10);
         resultados = ordenarResultados();
-      }
-    } catch (SQLException ex) {
+        }
+      } catch (SQLException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Carga de Tabla Reporte", JOptionPane.ERROR_MESSAGE);
-    }
+      }
   }
 
   private void poblarTabla(DefaultTableModel modelo) {
     String titulos = "Operador de Control, Fecha de Control, Id Traza, Ruta Completa, "
-            + "Tamanio Lote, Cantidad muestreada, Total Rechazos, "
+            + "Tamanio Lote, Cantidad muestreada, Limite Rechazos, Total Rechazos, "
             + "Linea de captura, Digitalizador, Tipo de Verificacion, Tipo de Documento, ";
     String[] titulo = titulos.split(", ");
-    for (int t = 0; t < titulo.length; t++) {
-      modelo.addRow(new Object[]{titulo[t], 0});
-    }
+    for (int t = 0; t < titulo.length; t++)
+      {
+      modelo.addRow(new Object[]
+        {
+        titulo[t], 0
+        });
+      }
     resultadosEnTabla(modelo);
   }
 
   private String ordenarResultados() {
-    String ret = usuario + ", " + fecha + ", " + ide+ ", " + rutaCompleta +", " + tamanio
-            + ", " + muestra + ", " + rechazo
+    String ret = usuario + ", " + fecha + ", " + ide + ", " + rutaCompleta + ", " + tamanio
+            + ", " + muestra + ", " + limite + ", " + rechazo
             + ", --/--, --/--, " + verificacion + ", " + documento;
     return ret;
   }
@@ -118,9 +130,13 @@ public class Tabla_TrazaReporte extends JFrame {
 
   private void resultadosEnTabla(DefaultTableModel modelo) {
     String[] split = getResultados().split(", ");
-    for (int i = 0; i < split.length; i++) {
-      Object[] o = new Object[]{"", split[i]};
+    for (int i = 0; i < split.length; i++)
+      {
+      Object[] o = new Object[]
+        {
+        "", split[i]
+        };
       modelo.setValueAt(split[i], i, 1);
-    }
+      }
   }
 }

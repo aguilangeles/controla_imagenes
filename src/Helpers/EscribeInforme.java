@@ -23,7 +23,14 @@ public class EscribeInforme {
   private static final String UBICACION = "Reporte/informe.txt";
 
   public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar) {
-    String estadoS = (estado) ? "Aceptado" : "Rechazado";
+    String estadoS;
+    if (estado)
+      {
+      estadoS="Aceptado.";
+      }else{
+      estadoS="Rechazado.";
+    }
+    //String estadoS = (estado) ? "Rechazado XXX" : "AceptadoZZZ";
     write(tabla, estadoS, observaciones, finalizar);
   }
 
