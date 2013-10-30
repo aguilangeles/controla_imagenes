@@ -86,9 +86,10 @@ public class Login extends javax.swing.JFrame {
       }
     });
 
-    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login/test_100.png"))); // NOI18N
+    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test_100.png"))); // NOI18N
 
-    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login/unt100.png"))); // NOI18N
+    jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/unt100_1.png"))); // NOI18N
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
