@@ -65,7 +65,7 @@ public class Guardar {
           }
         }
       }
-      borrarTemp();
+//      borrarTemp();
     }
     conexion.isConexionClose();
 

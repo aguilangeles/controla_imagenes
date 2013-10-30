@@ -111,7 +111,7 @@ public class ImageSize {
     int h = 0;
     if (isMasAnchoqueAlto())
       {
-      System.out.println("mas ancho" + imgSize.getWidth() + " " + imgSize.getHeight());
+//      System.out.println("mas ancho" + imgSize.getWidth() + " " + imgSize.getHeight());
       double wight = hepanel * imgSize.getWidth() / imgSize.getHeight()-20;
       double height = wight * imgSize.getHeight() / imgSize.getWidth();
       w = (int) (wight);
