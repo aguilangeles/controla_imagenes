@@ -4,10 +4,12 @@
  */
 package PaneldeControl;
 
+import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
 import Helpers.VersionEImageIcon;
+import java.awt.HeadlessException;
 import java.beans.PropertyVetoException;
 import javax.swing.JTable;
 

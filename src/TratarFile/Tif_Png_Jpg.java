@@ -59,21 +59,7 @@ public class Tif_Png_Jpg {
       Runtime gar = Runtime.getRuntime();
       gar.gc();
       }
-    
-//  private void Tif_Png_Jpg() {
-//    sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
-//            tamanio, parent, ultimaCarpeta, muestra, idRango);
-//    List<Object> ramdomList = crearRamdom.getSeleccion();
-//    for (Object obj : ramdomList) {
-//      String aImagen = (String) obj;
-//      int parentlength = parent.length() + 1;
-//      String adaptarFile = aImagen.substring(parentlength);
-//      String filename = adaptarFile.replace("\\", "\\\\");
-//      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, 0, infoLabel);
-//      imagenyControl();
-//      Runtime gar = Runtime.getRuntime();
-//      gar.gc();
-//    }
+
   }
 
   private void imagenyControl() {

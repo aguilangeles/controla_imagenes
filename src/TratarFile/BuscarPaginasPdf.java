@@ -8,10 +8,7 @@ import Entidades.NombrePaginaDelPDF;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-//<<<<<<< HEAD
-//=======
 import java.util.Collections;
-//>>>>>>> NuevaVerificacion
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JLabel;
@@ -44,6 +41,7 @@ public class BuscarPaginasPdf {
           {
           NombrePaginaDelPDF page = new NombrePaginaDelPDF(ruta, i);
           listaPaginas.add(page);
+          Collections.shuffle(listaPaginas);
           infoLabel.setText("<html>" + page.toString() + "</html>");
           }
         pddDocument.close();

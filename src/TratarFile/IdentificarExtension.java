@@ -27,8 +27,9 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   private JLabel infoLabel;
   private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion;
+  private JFrame panelControl ;
   //
-  private static int tamanio, muestra, idRango;
+  private  int tamanio, muestra, idRango;
   private static String extension;
   private static List<Object> listaExtension;
   private static List<Object> listaResultado;
@@ -44,44 +45,55 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
+
+
   }
 
   @Override
   protected Void doInBackground()  {
+
     ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel,file);
+
     listaExtension = extensionImagen.getListaExtensionImagen();
+
     extension = extensionImagen.getExtension();
+
     listaResultado = new SwitchListaExtension(extension, listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();
-    GetMuestrafromRango muestraRango = new GetMuestrafromRango(tamanio);
-    muestra = muestraRango.getMuestra();
-    idRango = muestraRango.getIdRango();
+    GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
+    muestra =GetMuestrafromRango.getMuestra();
+    idRango = GetMuestrafromRango.getIdRango();
     return null;
   }
 
   @Override
   protected void done() {
-    if (!isCancelled()) {
-      if (isTamanioCompatibleConRango(getTamanio(), getMuestra())) {
+    if (!isCancelled())
+      {
+      if (isTamanioCompatibleConRango(getTamanio(), getMuestra()))
+        {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
             Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, parent,
-                    extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio,idRango);
+                    extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
             worker.execute();
           }
         });
-      } else {
+        } else
+        {
         JOptionPane.showMessageDialog(infoLabel, INCOMPATIBLE_TAMANIO_CON_RANGO,
                 getTamanio() + ">" + getMuestra(), JOptionPane.ERROR_MESSAGE);
         System.exit(0);
+        }
       }
-    }
   }
+
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
     boolean ret = (aTamanio > aRango) ? true : false;
     return ret;
   }
+
   public int getTamanio() {
     return tamanio;
   }

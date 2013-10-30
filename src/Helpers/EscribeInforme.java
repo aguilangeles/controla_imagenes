@@ -4,6 +4,7 @@
  */
 package Helpers;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +21,7 @@ import javax.swing.JTable;
  */
 public class EscribeInforme {
 
-  private static final String UBICACION = "Reporte/informe.txt";
+  private static final String UBICACION = "Reporte/" + new Time().getDateForTXT() + ".txt";
 
   public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar) {
     String estadoS;
@@ -39,15 +40,16 @@ public class EscribeInforme {
     PrintWriter pw = null;
     try
       {
-      fichero = new FileWriter(UBICACION);
-      pw = new PrintWriter(fichero);
+      fichero = new FileWriter(UBICACION, true);
+      pw = new PrintWriter(new BufferedWriter(fichero));
       for (int row = 0; row < tablaDetalles.getRowCount(); row++)
         {
-        pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1) + "\n");
+        pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1));
         }
-      pw.println("Estado: " + estado + "\n");
-      pw.println("Observaciones: " + observaciones + "\n");
-      pw.println("Versión  app: " + VersionEImageIcon.VERSION + "\n");
+      pw.println("Estado: " + estado);
+      pw.println("Observaciones: " + observaciones);
+      pw.println("Versión  app: " + VersionEImageIcon.VERSION);
+      pw.close();
       } catch (IOException ex)
       {
       JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(),
@@ -65,7 +67,8 @@ public class EscribeInforme {
                   + UBICACION + "\n", "Reporte final", JOptionPane.INFORMATION_MESSAGE);
           } catch (IOException ex)
           {
-          JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(), "Error al cerrar archivo informe.txt", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(),
+                  "Error al cerrar archivo informe.txt", JOptionPane.ERROR_MESSAGE);
           }
         }
       }

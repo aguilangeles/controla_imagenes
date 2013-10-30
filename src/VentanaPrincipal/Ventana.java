@@ -293,25 +293,26 @@ public class Ventana extends javax.swing.JFrame {
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
-   private Imagen goImagen(int contador) {
+  private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
     Imagen imagen = traza.getImagenList().get(contador);
-    if (contador == limiteSuperior) {
+    if (contador == limiteSuperior)
+      {
       siguiente.setEnabled(false);
       terminar.setEnabled(true);
-    }
+      }
     return imagen;
   }
 
   private Imagen backImagen(int contador) {
     int limiteInferior = 0;
     Imagen imagen = traza.getImagenList().get(contador);
-    if (limiteInferior == contador) {
+    if (limiteInferior == contador)
+      {
       anterior.setEnabled(false);
-    }
+      }
     return imagen;
   }
-
   /**
    * @param args the command line arguments
    */
@@ -368,9 +369,10 @@ public class Ventana extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private boolean isImagenTif(boolean pdf, String extension) {
-    if (!pdf && extension.equalsIgnoreCase(".tif")) {
+    if (!pdf && extension.equalsIgnoreCase(".tif"))
+      {
       return true;
-    }
+      }
     return false;
   }
 

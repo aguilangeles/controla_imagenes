@@ -65,7 +65,7 @@ public class Guardar {
           }
         }
       }
-//      borrarTemp();
+      borrarTemp();
     }
     conexion.isConexionClose();
 
@@ -91,14 +91,15 @@ public class Guardar {
     this.fin = fin;
   }
 
-//   private void borrarTemp() {
-//    File file = new File("temp\\");
-//    File[] files = file.listFiles();
-//    for (File f : files) {
-//      f.delete();
-//      System.gc();
-//    }
-//  }
+   private void borrarTemp() {
+    File file = new File("temp\\");
+    File[] files = file.listFiles();
+    for (File f : files) {
+      f.delete();
+      System.gc();
+    }
+
+  }
 
   private void getNumerodePagina(boolean pdf, JLabel pagina) {
     if (pdf) {
