@@ -73,7 +73,7 @@ public class Login extends javax.swing.JFrame {
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     entrar.setMnemonic('e');
-    entrar.setText("Entrar");
+    entrar.setText("Saludos");
     entrar.setToolTipText("alt + t");
     entrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +87,6 @@ public class Login extends javax.swing.JFrame {
     });
 
     jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test_100.png"))); // NOI18N
 
     jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/unt100_1.png"))); // NOI18N
