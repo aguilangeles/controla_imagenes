@@ -65,7 +65,7 @@ public class TablaCheckBox {
   private void setAnchoColumnas() {
     tablaCheck.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     tablaCheck.getColumnModel().getColumn(0).setPreferredWidth(20);
-    tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(216);
+    tablaCheck.getColumnModel().getColumn(1).setPreferredWidth(219);
     tablaCheck.getColumnModel().getColumn(2).setPreferredWidth(20);
   }
 }

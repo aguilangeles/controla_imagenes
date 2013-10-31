@@ -38,7 +38,7 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
         tabla.setModel(modelo);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(400);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(397);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(30);
 
     }
