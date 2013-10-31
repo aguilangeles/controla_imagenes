@@ -74,8 +74,8 @@ public class Login extends javax.swing.JFrame {
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     entrar.setMnemonic('e');
-    entrar.setText("Saludos");
-    entrar.setToolTipText("alt + t");
+    entrar.setText("Entrar");
+    entrar.setToolTipText("Alt+e");
     entrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         entrarActionPerformed(evt);
