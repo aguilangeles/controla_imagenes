@@ -41,7 +41,12 @@ public class AyudaVisual extends javax.swing.JFrame {
     vimg.visualizarImagen(ruta, jSlider1.getValue());
   }
 
-
+  public AyudaVisual(String image) {
+    this.imagen = image;
+    initComponents();
+    VisualizarImagen vig = new VisualizarImagen(scrollImage, jSlider1);
+    vig.visualizarImagen(imagen, jSlider1.getValue());
+  }
 
   /**
    * This method is called from within the constructor to initialize the form.

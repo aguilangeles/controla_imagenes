@@ -7,9 +7,9 @@ package VentanaPrincipal;
 import BasedeDatos.GetNumerosImagenesRechazadas;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
-import javax.imageio.ImageIO;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,6 +48,7 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
+    rutaLabel.addMouseListener(new RutaMouseListener(rutaLabel));
   }
 
 //  public Dimension getPanelDimension() {

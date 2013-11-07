@@ -7,6 +7,7 @@ package VentanaPrincipal;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.RutaMouseListener;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -133,9 +134,14 @@ public class MostrarInternalFrames {
   }
 
   private void setImagenes(Imagen siguientes) {
-    String ruta = rutadeimagen.siguienteImagen(pdf, siguientes);
+    String ruta = rutadeimagen.getImage(pdf, siguientes);
     setLabelPagina(pdf, siguientes);
     imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll, botonAncho, pEntera);
     scrollImage.getViewport().add(imageDraw);
+
+  }
+
+  private void mostrarHermanos(JLabel ruta, JLabel pagina) {
+    ruta.addMouseListener(new RutaMouseListener(ruta));
   }
 }
