@@ -138,10 +138,13 @@ public class MostrarInternalFrames {
     setLabelPagina(pdf, siguientes);
     imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll, botonAncho, pEntera);
     scrollImage.getViewport().add(imageDraw);
+    mostrarHermanos(siguientes, rutaLabel, pageLabel);
 
   }
 
-  private void mostrarHermanos(JLabel ruta, JLabel pagina) {
-    ruta.addMouseListener(new RutaMouseListener(ruta));
+  private void mostrarHermanos(Imagen imagen, JLabel ruta, JLabel pagina) {
+    // hay que diferenciar entre pdf y tif ( otra fackin vez)
+
+    ruta.addMouseListener(new RutaMouseListener(imagen.getRutaParaConversion()));
   }
 }

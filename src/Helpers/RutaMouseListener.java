@@ -5,11 +5,11 @@
 package Helpers;
 
 import Imagenes.AyudaVisual;
+import Imagenes.PanelVisual;
 import VentanaPrincipal.GetRutaDeImagen;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,17 +17,28 @@ import javax.swing.JOptionPane;
  */
 public class RutaMouseListener implements MouseListener {
 
-  private JLabel ruta;
+  private GetImagenesAdyacentes img;
 
-  public RutaMouseListener(JLabel ruta) {
-    this.ruta = ruta;
+  public RutaMouseListener(String ruta) {
+    System.out.println("recibi ruta " + ruta);
+    img = new GetImagenesAdyacentes(ruta);
   }
 
   @Override
   public void mouseClicked(MouseEvent e) {
+    //    System.out.println(GetRutaDeImagen.getRetmin());
+    //    new AyudaVisual(GetRutaDeImagen.getRetmin()).setVisible(true);
+    //pruebo en tif, y despues en png
+    System.out.println("ima anterior  " + img.getImagenAnterior());
+    System.out.println("ima posterior  " + img.getImagenPosterior());
+    System.out.println("ima nombre  an " + img.getNombreA());
+    System.out.println("ima nombre po " + img.getNombreP());
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      public void run() {
+        new PanelVisual(img.getImagenAnterior(), img.getImagenPosterior(), img.getNombreA(), img.getNombreP()).setVisible(true);
+      }
+    });
 
-    System.out.println(GetRutaDeImagen.getRetmin());
-    new AyudaVisual(GetRutaDeImagen.getRetmin()).setVisible(true);
   }
 
   @Override

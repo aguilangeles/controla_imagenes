@@ -48,7 +48,8 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
-    rutaLabel.addMouseListener(new RutaMouseListener(rutaLabel));
+
+//    rutaLabel.addMouseListener(new RutaMouseListener(rutaLabel.getText()));
   }
 
 //  public Dimension getPanelDimension() {

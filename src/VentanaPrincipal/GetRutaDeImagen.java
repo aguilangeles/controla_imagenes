@@ -6,7 +6,6 @@ package VentanaPrincipal;
 
 import Entidades.Imagen;
 import Imagenes.ImagenesWorker;
-import javax.swing.JOptionPane;
 
 /**
  *

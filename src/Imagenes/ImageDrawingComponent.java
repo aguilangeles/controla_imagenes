@@ -41,6 +41,12 @@ public class ImageDrawingComponent extends JPanel {
   public ImageDrawingComponent() {
   }
 
+  public ImageDrawingComponent(String imagen, JPanel panel, int opcion) {
+    loadImage(imagen, false, true);
+    dimensionPanel.setSize(panel.getSize());
+    setOpIndex(opcion);
+  }
+
   public void cargarImage(String path, boolean pdf, boolean tif,
           final JComboBox combo, final JPanel panelscroll, JButton button, JButton entera) {
     loadImage(path, pdf, tif);
@@ -79,7 +85,7 @@ public class ImageDrawingComponent extends JPanel {
     switch (opIndex)
       {
       case 0:
-        int ww = (int) ((bi.getWidth()) );
+        int ww = (int) ((bi.getWidth()));
         int hh = (int) ((bi.getHeight()));
         //mostrar a ciento cincuenta
         setValues(g2, image.getDimensionDefault());
