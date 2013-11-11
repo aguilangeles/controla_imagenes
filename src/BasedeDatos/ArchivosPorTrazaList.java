@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 public class ArchivosPorTrazaList {
 
   private List<Imagen> imagenProcesadaList = new ArrayList<>();
-  private ImagenesWorker imagenesWorker;
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf) {
     getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);

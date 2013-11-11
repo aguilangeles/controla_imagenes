@@ -28,7 +28,6 @@ public class Ventana extends javax.swing.JFrame {
   private boolean pdf;
   private boolean tif;
   private final TablaCheckBox tablaCheckBox;
-  private GetImagenesAdyacentes adyacentes;
 
   /**
    * Creates new form Ventana
@@ -50,7 +49,7 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
-    rutaLabel.addMouseListener( new RutaMouseListener());
+    rutaLabel.addMouseListener(new RutaMouseListener());
 //    listener();
 
   }
@@ -378,18 +377,13 @@ public class Ventana extends javax.swing.JFrame {
     return false;
   }
 
-  public void setAdyacentes(GetImagenesAdyacentes adyacentes) {
-    this.adyacentes = adyacentes;
-  }
-
   private void iniciar(TrazaDao traza) {
     traza.getImagenList();
   }
 
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
-    RutaMouseListener.getAdyacentes(siguientes.adyacentes());
-  //  setAdyacentes(siguientes.adyacentes());
+    RutaMouseListener.getAdyacentes(siguientes.adyacentes(), pdf, siguientes);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -400,8 +394,7 @@ public class Ventana extends javax.swing.JFrame {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
-    RutaMouseListener.getAdyacentes(imagen1.adyacentes());
-   // setAdyacentes(imagen1.adyacentes());
+    RutaMouseListener.getAdyacentes(imagen1.adyacentes(), pdf, imagen1);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -413,8 +406,7 @@ public class Ventana extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
-    RutaMouseListener.getAdyacentes(pr.adyacentes());
-    //setAdyacentes(pr.adyacentes());
+    RutaMouseListener.getAdyacentes(pr.adyacentes(), pdf, pr);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -436,15 +428,7 @@ public class Ventana extends javax.swing.JFrame {
     dispose();
   }
 
-//  private void listener() {
-//    new RutaMouseListener(rutaLabel, getAdyacentes());
-//  }
-
   private int getSizeRamdom() {
     return traza.getImagenList().size();
-  }
-
-  public GetImagenesAdyacentes getAdyacentes() {
-    return adyacentes;
   }
 }

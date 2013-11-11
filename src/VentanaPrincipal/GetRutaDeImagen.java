@@ -35,7 +35,6 @@ public final class GetRutaDeImagen {
   }
 
   public String getImage(boolean pdf, Imagen imagen) {
-    anteriorImagen(pdf, imagen);
     if (pdf)
       {
       ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),

@@ -4,6 +4,8 @@
  */
 package Helpers;
 
+import Entidades.Imagen;
+import Imagenes.ImagenesWorker;
 import Imagenes.PanelVisual;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,8 +25,26 @@ public class RutaMouseListener implements MouseListener {
   public RutaMouseListener() {
   }
 
-  public static void getAdyacentes(GetImagenesAdyacentes im) {
-    img = im;
+  public static void getAdyacentes(GetImagenesAdyacentes im, boolean pdf, Imagen imagen) {
+    if (pdf)
+      {
+      int newPage = imagen.getPagina() - 1;
+      int newPage2 = imagen.getPagina() + 1;
+      GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
+
+      ImagenesWorker iworker1 = new ImagenesWorker(imagenesAdyacentes.getImagenAnterior(), imagen.getParent(), imagenesAdyacentes.getPrevPage());
+      ImagenesWorker iworker2 = new ImagenesWorker(imagenesAdyacentes.getImagenPosterior(), imagen.getParent(), imagenesAdyacentes.getNextPage());
+      System.out.println(iworker2.doInBackground());
+
+//
+//      imagenesAdyacentes.setNombreA(imagen.getRutaInsertadaEnDB() + "--" + newPage);
+//      imagenesAdyacentes.setNombreP(imagen.getRutaInsertadaEnDB() + "-- " + newPage2);
+
+      //  System.out.println(imagenesAdyacentes);
+      } else
+      {
+      img = imagen.adyacentes();
+      }
   }
 
   public static GetImagenesAdyacentes getImg() {
