@@ -30,15 +30,17 @@ public class RutaMouseListener implements MouseListener {
       {
       int newPage = imagen.getPagina() - 1;
       int newPage2 = imagen.getPagina() + 1;
+      String pareng = imagen.getParent();
+
       GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
 
-      ImagenesWorker iworker1 = new ImagenesWorker(imagenesAdyacentes.getImagenAnterior(), imagen.getParent(), imagenesAdyacentes.getPrevPage());
-      ImagenesWorker iworker2 = new ImagenesWorker(imagenesAdyacentes.getImagenPosterior(), imagen.getParent(), imagenesAdyacentes.getNextPage());
-      System.out.println(iworker2.doInBackground());
+      ImagenesWorker iworker1 = new ImagenesWorker(imagenesAdyacentes.getImagenAnterior(), pareng, imagenesAdyacentes.getPrevPage());
+      String i = iworker1.doInBackground();
+      System.out.println("producto worker " + i);
+//      ImagenesWorker iworker2 = new ImagenesWorker(imagenesAdyacentes.getImagenPosterior(), imagen.getParent(), imagenesAdyacentes.getNextPage());
+//      System.out.println(iworker2.doInBackground());
 
 //
-//      imagenesAdyacentes.setNombreA(imagen.getRutaInsertadaEnDB() + "--" + newPage);
-//      imagenesAdyacentes.setNombreP(imagen.getRutaInsertadaEnDB() + "-- " + newPage2);
 
       //  System.out.println(imagenesAdyacentes);
       } else

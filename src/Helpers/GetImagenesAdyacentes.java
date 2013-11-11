@@ -55,7 +55,8 @@ public class GetImagenesAdyacentes {
         NombrePaginaDelPDF page = new NombrePaginaDelPDF(ruta, i);
         if (page.getNumeroPagina() == prevPage)
           {
-          this.imagenAnterior = page.toString();
+          this.imagenAnterior = page.getNombre();
+          System.out.println(" img ant "+imagenAnterior);
           this.nombreA = file.getName();
           } else if (page.getNumeroPagina() == nextPage)
           {
@@ -103,7 +104,6 @@ public class GetImagenesAdyacentes {
   public int getNextPage() {
     return nextPage;
   }
-
 
 //  @Override
 //  public String toString() {
