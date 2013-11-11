@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import Helpers.GetImagenesAdyacentes;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import javax.swing.JOptionPane;
@@ -41,6 +42,11 @@ public class Imagen {
               "Problemas en Encoding", JOptionPane.ERROR_MESSAGE);
       }
     return ret;
+  }
+
+  public GetImagenesAdyacentes adyacentes() {
+    GetImagenesAdyacentes imgsAdy = new GetImagenesAdyacentes(getRutaParaConversion());
+    return imgsAdy;
   }
 
   public String getRutaInsertadaEnDB() {

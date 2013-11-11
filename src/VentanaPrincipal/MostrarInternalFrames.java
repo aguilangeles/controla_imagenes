@@ -7,6 +7,7 @@ package VentanaPrincipal;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.GetImagenesAdyacentes;
 import Helpers.RutaMouseListener;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -78,6 +79,11 @@ public class MostrarInternalFrames {
       setTituloYRutaLabel(siguientes);
       setImagenes(siguientes);
       setCB.set(siguientes.getId());
+      GetImagenesAdyacentes img = siguientes.adyacentes();
+      System.out.println("ima anterior  " + img.getImagenAnterior());
+      System.out.println("ima posterior  " + img.getImagenPosterior());
+      System.out.println("ima nombre  an " + img.getNombreA());
+      System.out.println("ima nombre po " + img.getNombreP());
       } catch (PropertyVetoException ex)
       {
       Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,6 +100,12 @@ public class MostrarInternalFrames {
       setCB.set(imagen1.getId());
       setImagenes(imagen1);
       internal.setVisible(true);
+      GetImagenesAdyacentes img = imagen1.adyacentes();
+      System.out.println("ima anterior  " + img.getImagenAnterior());
+      System.out.println("ima posterior  " + img.getImagenPosterior());
+      System.out.println("ima nombre  an " + img.getNombreA());
+      System.out.println("ima nombre po " + img.getNombreP());
+      
       } catch (Exception ex)
       {
       Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,11 +120,19 @@ public class MostrarInternalFrames {
     setTituloYRutaLabel(pr);
     setImagenes(pr);
     setCB.set(pr.getId());
+    GetImagenesAdyacentes img = pr.adyacentes();
+
+    System.out.println("ima anterior  " + img.getImagenAnterior());
+    System.out.println("ima posterior  " + img.getImagenPosterior());
+    System.out.println("ima nombre  an " + img.getNombreA());
+    System.out.println("ima nombre po " + img.getNombreP());
   }
 
   private void setTituloYRutaLabel(Imagen siguientes) {
     internal.setTitle("Imagen " + cantidad + "/" + sizeRamdom);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
+    verAdyacentes(siguientes, rutaLabel, pageLabel);
+
   }
 
   private void setLabelPagina(boolean pdf, Imagen siguientes) {
@@ -138,13 +158,14 @@ public class MostrarInternalFrames {
     setLabelPagina(pdf, siguientes);
     imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll, botonAncho, pEntera);
     scrollImage.getViewport().add(imageDraw);
-    mostrarHermanos(siguientes, rutaLabel, pageLabel);
+
+//    verAdyacentes(siguientes, rutaLabel, pageLabel);
 
   }
 
-  private void mostrarHermanos(Imagen imagen, JLabel ruta, JLabel pagina) {
-    // hay que diferenciar entre pdf y tif ( otra fackin vez)
-
-    ruta.addMouseListener(new RutaMouseListener(imagen.getRutaParaConversion()));
+  public static void verAdyacentes(Imagen imagen, JLabel ruta, JLabel pagina) {
+    GetImagenesAdyacentes img = new GetImagenesAdyacentes(imagen.getRutaParaConversion());
+    RutaMouseListener rutaMouseListener = new RutaMouseListener(img);
+    ruta.addMouseListener(rutaMouseListener);
   }
 }

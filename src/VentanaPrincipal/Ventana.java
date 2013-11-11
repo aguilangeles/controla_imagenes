@@ -7,6 +7,7 @@ package VentanaPrincipal;
 import BasedeDatos.GetNumerosImagenesRechazadas;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.GetImagenesAdyacentes;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
@@ -48,8 +49,8 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
+//    System.out.println("Supersticion"+Imagen.getRutaMasParent());
 
-//    rutaLabel.addMouseListener(new RutaMouseListener(rutaLabel.getText()));
   }
 
 //  public Dimension getPanelDimension() {
@@ -388,6 +389,10 @@ public class Ventana extends javax.swing.JFrame {
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
+
+//    rutaLabel.addMouseListener(new RutaMouseListener());
+
+//    MostrarInternalFrames.verAdyacentes(siguientes, rutaLabel, pageLabel);
   }
 
   private void getNextImage() {
@@ -398,6 +403,7 @@ public class Ventana extends javax.swing.JFrame {
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setNextImage(imagen1);
+//    MostrarInternalFrames.verAdyacentes(imagen1, rutaLabel, pageLabel);
   }
 
   private void setBackImage() {
@@ -408,6 +414,7 @@ public class Ventana extends javax.swing.JFrame {
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setBackImage(pr);
+//    MostrarInternalFrames.verAdyacentes(pr, rutaLabel, pageLabel);
   }
 
   private void setFinalizar() {
