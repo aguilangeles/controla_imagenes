@@ -46,7 +46,7 @@ public class GetImagenesAdyacentes {
   public String getNombreP() {
     return nombreP;
   }
-  
+
 
   public String getImagenAnterior() {
     return imagenAnterior;
@@ -55,4 +55,10 @@ public class GetImagenesAdyacentes {
   public String getImagenPosterior() {
     return imagenPosterior;
   }
+
+  @Override
+  public String toString() {
+    return "GetImagenesAdyacentes{" + "nombreA=" + nombreA + ", nombreP=" + nombreP + '}';
+  }
+  
 }

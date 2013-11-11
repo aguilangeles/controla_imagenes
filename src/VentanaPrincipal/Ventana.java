@@ -11,6 +11,7 @@ import Helpers.GetImagenesAdyacentes;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
+import java.awt.event.MouseListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +28,7 @@ public class Ventana extends javax.swing.JFrame {
   private boolean pdf;
   private boolean tif;
   private final TablaCheckBox tablaCheckBox;
+  private GetImagenesAdyacentes adyacentes;
 
   /**
    * Creates new form Ventana
@@ -36,7 +38,6 @@ public class Ventana extends javax.swing.JFrame {
   public Ventana(TrazaDao trazadao) {
     iniciar(trazadao);
     setExtendedState(6);
-
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
     tabla.requestFocus();
@@ -49,13 +50,11 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
-//    System.out.println("Supersticion"+Imagen.getRutaMasParent());
+    rutaLabel.addMouseListener( new RutaMouseListener());
+//    listener();
 
   }
 
-//  public Dimension getPanelDimension() {
-//    return panelScroll.getSize();
-//  }
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -379,42 +378,48 @@ public class Ventana extends javax.swing.JFrame {
     return false;
   }
 
+  public void setAdyacentes(GetImagenesAdyacentes adyacentes) {
+    this.adyacentes = adyacentes;
+  }
+
   private void iniciar(TrazaDao traza) {
     traza.getImagenList();
   }
 
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
+    RutaMouseListener.veradyacente(siguientes.adyacentes());
+  //  setAdyacentes(siguientes.adyacentes());
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
-
-//    rutaLabel.addMouseListener(new RutaMouseListener());
-
-//    MostrarInternalFrames.verAdyacentes(siguientes, rutaLabel, pageLabel);
   }
 
   private void getNextImage() {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
+    RutaMouseListener.veradyacente(imagen1.adyacentes());
+   // setAdyacentes(imagen1.adyacentes());
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setNextImage(imagen1);
-//    MostrarInternalFrames.verAdyacentes(imagen1, rutaLabel, pageLabel);
+
   }
 
   private void setBackImage() {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
+    RutaMouseListener.veradyacente(pr.adyacentes());
+    //setAdyacentes(pr.adyacentes());
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setBackImage(pr);
-//    MostrarInternalFrames.verAdyacentes(pr, rutaLabel, pageLabel);
+
   }
 
   private void setFinalizar() {
@@ -431,7 +436,15 @@ public class Ventana extends javax.swing.JFrame {
     dispose();
   }
 
+//  private void listener() {
+//    new RutaMouseListener(rutaLabel, getAdyacentes());
+//  }
+
   private int getSizeRamdom() {
     return traza.getImagenList().size();
+  }
+
+  public GetImagenesAdyacentes getAdyacentes() {
+    return adyacentes;
   }
 }

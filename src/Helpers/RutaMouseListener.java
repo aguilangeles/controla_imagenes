@@ -7,6 +7,7 @@ package Helpers;
 import Imagenes.PanelVisual;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JLabel;
 
 /**
  *
@@ -14,23 +15,32 @@ import java.awt.event.MouseListener;
  */
 public class RutaMouseListener implements MouseListener {
 
-  private GetImagenesAdyacentes img;
+  private static GetImagenesAdyacentes img;
   private PanelVisual panelVisual;
+  private JLabel label;
+  private MouseListener mouseListener;
+  static String mm;
 
-  public RutaMouseListener(final GetImagenesAdyacentes img) {
-    this.img = img;
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        panelVisual = new PanelVisual(img.getImagenAnterior(), img.getImagenPosterior(), img.getNombreA(), img.getNombreP());
-      }
-    });
+  public RutaMouseListener() {
+    System.out.println("entro en la llamada de mouselistenr");
+  }
+
+  public static void veradyacente(GetImagenesAdyacentes im) {
+    img = im;
+  }
+
+  public static GetImagenesAdyacentes getImg() {
+    return img;
+  }
+
+  public static String getMm() {
+    return mm;
   }
 
   @Override
   public void mouseClicked(MouseEvent e) {
-
-    panelVisual.setVisible(true);
-
+     new PanelVisual(img.getImagenAnterior(), img.getImagenPosterior(), img.getNombreA(), img.getNombreP()).setVisible(true);
+//    System.out.println(getMm());
   }
 
   @Override
