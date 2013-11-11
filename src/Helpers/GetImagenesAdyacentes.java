@@ -36,9 +36,6 @@ public class GetImagenesAdyacentes {
       }
   }
 
-  private void sinImagenContigua() {
-  }
-
   public String getNombreA() {
     return nombreA;
   }
@@ -60,5 +57,5 @@ public class GetImagenesAdyacentes {
   public String toString() {
     return "GetImagenesAdyacentes{" + "nombreA=" + nombreA + ", nombreP=" + nombreP + '}';
   }
-  
+
 }

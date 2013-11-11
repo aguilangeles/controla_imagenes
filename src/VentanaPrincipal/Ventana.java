@@ -388,7 +388,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
-    RutaMouseListener.veradyacente(siguientes.adyacentes());
+    RutaMouseListener.getAdyacentes(siguientes.adyacentes());
   //  setAdyacentes(siguientes.adyacentes());
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
@@ -400,7 +400,7 @@ public class Ventana extends javax.swing.JFrame {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
-    RutaMouseListener.veradyacente(imagen1.adyacentes());
+    RutaMouseListener.getAdyacentes(imagen1.adyacentes());
    // setAdyacentes(imagen1.adyacentes());
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
@@ -413,7 +413,7 @@ public class Ventana extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
-    RutaMouseListener.veradyacente(pr.adyacentes());
+    RutaMouseListener.getAdyacentes(pr.adyacentes());
     //setAdyacentes(pr.adyacentes());
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,

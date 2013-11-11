@@ -44,9 +44,9 @@ public class Imagen {
     return ret;
   }
 
-  public  GetImagenesAdyacentes adyacentes() {
-    GetImagenesAdyacentes imgsAdy = new GetImagenesAdyacentes(getRutaParaConversion());
-    return imgsAdy;
+  public GetImagenesAdyacentes adyacentes() {
+    GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(getRutaParaConversion());
+    return imagenesAdyacentes;
   }
 
   public String getRutaInsertadaEnDB() {

@@ -19,13 +19,11 @@ public class RutaMouseListener implements MouseListener {
   private PanelVisual panelVisual;
   private JLabel label;
   private MouseListener mouseListener;
-  static String mm;
 
   public RutaMouseListener() {
-    System.out.println("entro en la llamada de mouselistenr");
   }
 
-  public static void veradyacente(GetImagenesAdyacentes im) {
+  public static void getAdyacentes(GetImagenesAdyacentes im) {
     img = im;
   }
 
@@ -33,14 +31,10 @@ public class RutaMouseListener implements MouseListener {
     return img;
   }
 
-  public static String getMm() {
-    return mm;
-  }
-
   @Override
   public void mouseClicked(MouseEvent e) {
-     new PanelVisual(img.getImagenAnterior(), img.getImagenPosterior(), img.getNombreA(), img.getNombreP()).setVisible(true);
-//    System.out.println(getMm());
+    new PanelVisual(img.getImagenAnterior(), img.getImagenPosterior(),
+            img.getNombreA(), img.getNombreP()).setVisible(true);
   }
 
   @Override
