@@ -51,7 +51,6 @@ public class GetImagenesAdyacentes {
   }
 
   public GetImagenesAdyacentes(String ruta, int pagina1) {
-
     iterarFilePdf(ruta);
     int anterior = (existPreviusPage(pagina1)) ? (pagina1 - 1) : -1;
     int post = pagina1 + 1;
@@ -59,16 +58,23 @@ public class GetImagenesAdyacentes {
     System.out.println("pagina " + pagina1);
     System.out.println("anterior es " + anterior);
     System.out.println("posterior es " + posterior);
-    if (anterior != -1 && posterior != -1)
+    //aca esta el problema
+    if (anterior != -1)
       {
       exitsPrevAndNext = true;
       ant = new ImagenAdyacente(mapa.get(anterior).getNombre(), mapa.get(anterior).getNumeroPagina(), null);
+      } else if (posterior != -1)
+      {
       pst = new ImagenAdyacente(mapa.get(posterior).getNombre(), mapa.get(posterior).getNumeroPagina(), null);
+
       } else
       {
       ant = null;
       pst = null;
       }
+  }
+
+  public GetImagenesAdyacentes() {
   }
 
   public ImagenAdyacente getAnt() {
@@ -79,7 +85,6 @@ public class GetImagenesAdyacentes {
     return pst;
   }
 
-  
   public boolean isExitsPrevAndNext() {
     return exitsPrevAndNext;
   }

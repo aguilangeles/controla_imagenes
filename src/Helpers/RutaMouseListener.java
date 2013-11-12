@@ -19,6 +19,30 @@ public class RutaMouseListener implements MouseListener {
 
   private static String filenotfound = "AyudaImagenes/imagen-no-encontrada.jpg";
   private static GetImagenesAdyacentes img;
+
+  private static String getWorkerForPreviusPage(GetImagenesAdyacentes ady, String pareng) {
+    String i = "";
+    ImagenAdyacente imgA = setimagenanterior(ady);
+    System.out.println(imgA);
+    if (!imgA.getName().equals(filenotfound))
+      {
+      ImagenesWorker iworker1 = new ImagenesWorker(imgA.getName(), pareng, imgA.getPage());
+      i = iworker1.doInBackground();
+
+      } else
+      {
+      i = imgA.getName();
+      }
+    return i;
+  }
+
+  private static String getWorkerForNextPAge(GetImagenesAdyacentes ady, String pareng) {
+    ImagenAdyacente imgP = setimagenposterior(ady);
+    System.out.println("imp " + imgP.getName());
+    ImagenesWorker iworker2 = new ImagenesWorker(imgP.getName(), pareng, imgP.getPage());
+    String b = (iworker2.doInBackground());
+    return b;
+  }
   private PanelVisual panelVisual;
   private JLabel label;
   private static boolean pdf, tiff;
@@ -33,28 +57,18 @@ public class RutaMouseListener implements MouseListener {
       {
       RutaMouseListener.pdf = true;
 
-      int newPage = imagen.getPagina() - 1;
-      int newPage2 = imagen.getPagina() + 1;
       String pareng = imagen.getParent();
+
       GetImagenesAdyacentes ady = new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
-      ImagenAdyacente imgA = setimagenanterior(ady);
 
-      ImagenesWorker iworker1 = new ImagenesWorker(imgA.getName(), pareng, imgA.getPage());
-      String i = iworker1.doInBackground();
-      ImagenAdyacente imgP = setimagenposterior(ady);
-
-
-      //   System.out.println("producto worker " + i);
-
-      ImagenesWorker iworker2 = new ImagenesWorker(imgP.getName(), pareng, imgP.getPage());
-      String b = (iworker2.doInBackground());
-      //  System.out.println("producto 2 worker " + b);
-
-      ady.setImagenAnterior(i);
-      ady.setImagenPosterior(b);
-      ady.setNombreA(imagen.getRutaInsertadaEnDB() + "_" + ady.getPrevPage());
-      ady.setNombreP(imagen.getRutaInsertadaEnDB() + "_" + ady.getNextPage());
-      img = ady;
+      String i = getWorkerForPreviusPage(ady, pareng);
+      String b = getWorkerForNextPAge(ady, pareng);
+      GetImagenesAdyacentes nadd = new GetImagenesAdyacentes();
+      nadd.setImagenAnterior(i);
+      nadd.setImagenPosterior(b);
+      nadd.setNombreA(imagen.getRutaInsertadaEnDB());
+      nadd.setNombreP(imagen.getRutaInsertadaEnDB());
+      img = nadd;
       } else
       {
       tiff = true;
