@@ -10,7 +10,6 @@ import Imagenes.PanelVisual;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,11 +17,13 @@ import javax.swing.JOptionPane;
  */
 public class RutaMouseListener implements MouseListener {
 
+  private static String filenotfound = "AyudaImagenes/imagen-no-encontrada.jpg";
   private static GetImagenesAdyacentes img;
   private PanelVisual panelVisual;
   private JLabel label;
   private static boolean pdf, tiff;
   private MouseListener mouseListener;
+  private static ImagenAdyacente ant, pst;
 
   public RutaMouseListener() {
   }
@@ -35,32 +36,25 @@ public class RutaMouseListener implements MouseListener {
       int newPage = imagen.getPagina() - 1;
       int newPage2 = imagen.getPagina() + 1;
       String pareng = imagen.getParent();
+      GetImagenesAdyacentes ady = new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
+      ImagenAdyacente imgA = setimagenanterior(ady);
 
-      GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
-      if(imagenesAdyacentes.getImagenAnterior()==null){
+      ImagenesWorker iworker1 = new ImagenesWorker(imgA.getName(), pareng, imgA.getPage());
+      String i = iworker1.doInBackground();
+      ImagenAdyacente imgP = setimagenposterior(ady);
 
-      JOptionPane.showMessageDialog(null, "hubo un error");
-      System.exit(0);
-      }
-      else{
-        System.out.println(imagenesAdyacentes.toString());
-      }
-//      ImagenesWorker iworker1 = new ImagenesWorker(imagenesAdyacentes.getImagenAnterior(), pareng, imagenesAdyacentes.getPrevPage());
-//      String i = iworker1.doInBackground();
-//      System.out.println("producto worker " + i);
-//
-//      ImagenesWorker iworker2 = new ImagenesWorker(imagenesAdyacentes.getImagenPosterior(), pareng, imagenesAdyacentes.getNextPage());
-//      String b = (iworker2.doInBackground());
-//      System.out.println("producto 2 worker " + b);
-//
-//      imagenesAdyacentes.setImagenAnterior(i);
-//      imagenesAdyacentes.setImagenPosterior(b);
-//      imagenesAdyacentes.setNombreA(imagen.getRutaInsertadaEnDB() + "_" + imagenesAdyacentes.getPrevPage());
-//      imagenesAdyacentes.setNombreP(imagen.getRutaInsertadaEnDB() + "_" + imagenesAdyacentes.getNextPage());
-////
-//
-//      //  System.out.println(imagenesAdyacentes);
-//      img = imagenesAdyacentes;
+
+      //   System.out.println("producto worker " + i);
+
+      ImagenesWorker iworker2 = new ImagenesWorker(imgP.getName(), pareng, imgP.getPage());
+      String b = (iworker2.doInBackground());
+      //  System.out.println("producto 2 worker " + b);
+
+      ady.setImagenAnterior(i);
+      ady.setImagenPosterior(b);
+      ady.setNombreA(imagen.getRutaInsertadaEnDB() + "_" + ady.getPrevPage());
+      ady.setNombreP(imagen.getRutaInsertadaEnDB() + "_" + ady.getNextPage());
+      img = ady;
       } else
       {
       tiff = true;
@@ -92,5 +86,27 @@ public class RutaMouseListener implements MouseListener {
 
   @Override
   public void mouseExited(MouseEvent e) {
+  }
+
+  private static ImagenAdyacente setimagenanterior(GetImagenesAdyacentes ady) {
+    if (ady.getAnt() == null)
+      {
+      ant = new ImagenAdyacente(filenotfound, 0, "sin imagen anterior");
+      } else
+      {
+      ant = ady.getAnt();
+      }
+    return ant;
+  }
+
+  private static ImagenAdyacente setimagenposterior(GetImagenesAdyacentes ady) {
+    if (ady.getPst() == null)
+      {
+      pst = new ImagenAdyacente(filenotfound, 0, "sin imagen posterior");
+      } else
+      {
+      pst = ady.getPst();
+      }
+    return pst;
   }
 }

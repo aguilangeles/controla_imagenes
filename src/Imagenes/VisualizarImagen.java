@@ -5,9 +5,6 @@
 package Imagenes;
 
 //import additems.ImageComponent;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
