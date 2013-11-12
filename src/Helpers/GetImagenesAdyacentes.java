@@ -60,7 +60,7 @@ public class GetImagenesAdyacentes {
           this.nombreA = file.getName();
           } else if (page.getNumeroPagina() == nextPage)
           {
-          this.imagenPosterior = page.toString();
+          this.imagenPosterior = page.getNombre();
           this.nombreP = file.getName();
           }
 
@@ -79,6 +79,15 @@ public class GetImagenesAdyacentes {
   public String getNombreP() {
     return nombreP;
   }
+
+  public void setImagenAnterior(String imagenAnterior) {
+    this.imagenAnterior = imagenAnterior;
+  }
+
+  public void setImagenPosterior(String imagenPosterior) {
+    this.imagenPosterior = imagenPosterior;
+  }
+
 
   public String getImagenAnterior() {
     return imagenAnterior;

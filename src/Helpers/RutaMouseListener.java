@@ -20,6 +20,7 @@ public class RutaMouseListener implements MouseListener {
   private static GetImagenesAdyacentes img;
   private PanelVisual panelVisual;
   private JLabel label;
+  private static boolean pdf, tiff;
   private MouseListener mouseListener;
 
   public RutaMouseListener() {
@@ -28,6 +29,8 @@ public class RutaMouseListener implements MouseListener {
   public static void getAdyacentes(GetImagenesAdyacentes im, boolean pdf, Imagen imagen) {
     if (pdf)
       {
+      RutaMouseListener.pdf = true;
+
       int newPage = imagen.getPagina() - 1;
       int newPage2 = imagen.getPagina() + 1;
       String pareng = imagen.getParent();
@@ -37,14 +40,22 @@ public class RutaMouseListener implements MouseListener {
       ImagenesWorker iworker1 = new ImagenesWorker(imagenesAdyacentes.getImagenAnterior(), pareng, imagenesAdyacentes.getPrevPage());
       String i = iworker1.doInBackground();
       System.out.println("producto worker " + i);
-//      ImagenesWorker iworker2 = new ImagenesWorker(imagenesAdyacentes.getImagenPosterior(), imagen.getParent(), imagenesAdyacentes.getNextPage());
-//      System.out.println(iworker2.doInBackground());
 
+      ImagenesWorker iworker2 = new ImagenesWorker(imagenesAdyacentes.getImagenPosterior(), pareng, imagenesAdyacentes.getNextPage());
+      String b = (iworker2.doInBackground());
+      System.out.println("producto 2 worker " + b);
+
+      imagenesAdyacentes.setImagenAnterior(i);
+      imagenesAdyacentes.setImagenPosterior(b);
+      imagenesAdyacentes.setNombreA(imagen.getRutaInsertadaEnDB() + "_" + imagenesAdyacentes.getPrevPage());
+      imagenesAdyacentes.setNombreP(imagen.getRutaInsertadaEnDB() + "_" + imagenesAdyacentes.getNextPage());
 //
 
       //  System.out.println(imagenesAdyacentes);
+      img = imagenesAdyacentes;
       } else
       {
+      tiff = true;
       img = imagen.adyacentes();
       }
   }
@@ -56,7 +67,7 @@ public class RutaMouseListener implements MouseListener {
   @Override
   public void mouseClicked(MouseEvent e) {
     new PanelVisual(img.getImagenAnterior(), img.getImagenPosterior(),
-            img.getNombreA(), img.getNombreP()).setVisible(true);
+            img.getNombreA(), img.getNombreP(), pdf, tiff).setVisible(true);
   }
 
   @Override

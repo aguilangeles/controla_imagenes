@@ -41,8 +41,8 @@ public class ImageDrawingComponent extends JPanel {
   public ImageDrawingComponent() {
   }
 
-  public ImageDrawingComponent(String imagen, JPanel panel, int opcion) {
-    loadImage(imagen, false, true);
+  public ImageDrawingComponent(String imagen, JPanel panel, int opcion, boolean pdf, boolean tif) {
+    loadImage(imagen, pdf, tif);
     dimensionPanel.setSize(panel.getSize());
     setOpIndex(opcion);
   }
