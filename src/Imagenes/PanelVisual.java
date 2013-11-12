@@ -19,6 +19,10 @@ public class PanelVisual extends javax.swing.JFrame {
    *
    * @param anterior
    * @param posterior
+   * @param nombreA
+   * @param nombreP
+   * @param pdf
+   * @param tiff
    */
   public PanelVisual(String anterior, String posterior, String nombreA, String nombreP, boolean pdf, boolean tiff) {
     initComponents();
@@ -26,7 +30,6 @@ public class PanelVisual extends javax.swing.JFrame {
     this.posterior = posterior;
     nameAnt.setText(nombreA);
     namePost.setText(nombreP);
-
     ImageDrawingComponent img = new ImageDrawingComponent(anterior, jPanel1, 2, pdf, tiff);
     jScrollPane1.getViewport().add(img);
     ImageDrawingComponent img2 = new ImageDrawingComponent(posterior, jPanel2, 2, pdf, tiff);

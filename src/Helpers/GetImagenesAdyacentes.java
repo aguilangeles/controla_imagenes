@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 /**
@@ -17,6 +18,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
  */
 public class GetImagenesAdyacentes {
 
+  private int uno = 1;
   private String imagenAnterior;
   private String imagenPosterior;
   private String prex;
@@ -41,35 +43,64 @@ public class GetImagenesAdyacentes {
         }
       }
   }
+//test and exceptions
 
   public GetImagenesAdyacentes(String ruta, int pagina1) {
-    this.prevPage = pagina1 - 1;
-    this.nextPage = pagina1 + 1;
-    try
+    if (existPreviusPage(pagina1))
       {
-      File file = new File(ruta);
-      PDDocument pddDocument = PDDocument.load(file.getAbsolutePath());
-      int pagina = pddDocument.getDocumentCatalog().getAllPages().size();
-      for (int i = 0; i < pagina; i++)
+      this.prevPage = getpreviuspage(pagina1);
+      this.nextPage = pagina1 + 1;
+      try
         {
-        NombrePaginaDelPDF page = new NombrePaginaDelPDF(ruta, i);
-        if (page.getNumeroPagina() == prevPage)
+        File file = new File(ruta);
+        PDDocument pddDocument = PDDocument.load(file.getAbsolutePath());
+        int pagina = pddDocument.getDocumentCatalog().getAllPages().size();
+        if (existNextPage(nextPage, pagina))
           {
-          this.imagenAnterior = page.getNombre();
-          System.out.println(" img ant "+imagenAnterior);
-          this.nombreA = file.getName();
-          } else if (page.getNumeroPagina() == nextPage)
+          for (int i = 0; i < pagina; i++)
+            {
+            NombrePaginaDelPDF page = new NombrePaginaDelPDF(ruta, i);
+            if (page.getNumeroPagina() == prevPage)
+              {
+              this.imagenAnterior = page.getNombre();
+              this.nombreA = file.getName();
+              } else if (page.getNumeroPagina() == nextPage)
+              {
+              this.imagenPosterior = page.getNombre();
+              this.nombreP = file.getName();
+              }
+
+            }
+          } else
           {
-          this.imagenPosterior = page.getNombre();
-          this.nombreP = file.getName();
+          JOptionPane.showMessageDialog(null, "no existe pagina posterior");
           }
 
+        pddDocument.close();
+        } catch (IOException ex)
+        {
+        System.out.println("io exception");
+        Logger.getLogger(GetImagenesAdyacentes.class.getName()).log(Level.SEVERE, null, ex);
         }
-      pddDocument.close();
-      } catch (IOException ex)
+      } else
       {
-      Logger.getLogger(GetImagenesAdyacentes.class.getName()).log(Level.SEVERE, null, ex);
+      JOptionPane.showMessageDialog(null, "no existe pagina anterior");
       }
+  }
+
+  private int getpreviuspage(int page) {
+    return page - uno;
+  }
+
+  private boolean existPreviusPage(int page) {
+    boolean previusexist = (page == 0) ? false : true;
+    return previusexist;
+  }
+
+  private boolean existNextPage(int aint, int page) {
+    boolean existenext = (aint >= page) ? false : true;
+    return existenext;
+
   }
 
   public String getNombreA() {
@@ -87,7 +118,6 @@ public class GetImagenesAdyacentes {
   public void setImagenPosterior(String imagenPosterior) {
     this.imagenPosterior = imagenPosterior;
   }
-
 
   public String getImagenAnterior() {
     return imagenAnterior;

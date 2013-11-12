@@ -10,6 +10,7 @@ import Imagenes.PanelVisual;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,23 +37,30 @@ public class RutaMouseListener implements MouseListener {
       String pareng = imagen.getParent();
 
       GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
+      if(imagenesAdyacentes.getImagenAnterior()==null){
 
-      ImagenesWorker iworker1 = new ImagenesWorker(imagenesAdyacentes.getImagenAnterior(), pareng, imagenesAdyacentes.getPrevPage());
-      String i = iworker1.doInBackground();
-      System.out.println("producto worker " + i);
-
-      ImagenesWorker iworker2 = new ImagenesWorker(imagenesAdyacentes.getImagenPosterior(), pareng, imagenesAdyacentes.getNextPage());
-      String b = (iworker2.doInBackground());
-      System.out.println("producto 2 worker " + b);
-
-      imagenesAdyacentes.setImagenAnterior(i);
-      imagenesAdyacentes.setImagenPosterior(b);
-      imagenesAdyacentes.setNombreA(imagen.getRutaInsertadaEnDB() + "_" + imagenesAdyacentes.getPrevPage());
-      imagenesAdyacentes.setNombreP(imagen.getRutaInsertadaEnDB() + "_" + imagenesAdyacentes.getNextPage());
+      JOptionPane.showMessageDialog(null, "hubo un error");
+      System.exit(0);
+      }
+      else{
+        System.out.println(imagenesAdyacentes.toString());
+      }
+//      ImagenesWorker iworker1 = new ImagenesWorker(imagenesAdyacentes.getImagenAnterior(), pareng, imagenesAdyacentes.getPrevPage());
+//      String i = iworker1.doInBackground();
+//      System.out.println("producto worker " + i);
 //
-
-      //  System.out.println(imagenesAdyacentes);
-      img = imagenesAdyacentes;
+//      ImagenesWorker iworker2 = new ImagenesWorker(imagenesAdyacentes.getImagenPosterior(), pareng, imagenesAdyacentes.getNextPage());
+//      String b = (iworker2.doInBackground());
+//      System.out.println("producto 2 worker " + b);
+//
+//      imagenesAdyacentes.setImagenAnterior(i);
+//      imagenesAdyacentes.setImagenPosterior(b);
+//      imagenesAdyacentes.setNombreA(imagen.getRutaInsertadaEnDB() + "_" + imagenesAdyacentes.getPrevPage());
+//      imagenesAdyacentes.setNombreP(imagen.getRutaInsertadaEnDB() + "_" + imagenesAdyacentes.getNextPage());
+////
+//
+//      //  System.out.println(imagenesAdyacentes);
+//      img = imagenesAdyacentes;
       } else
       {
       tiff = true;
