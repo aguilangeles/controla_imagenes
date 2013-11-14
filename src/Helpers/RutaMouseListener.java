@@ -17,24 +17,49 @@ import javax.swing.JLabel;
  */
 public class RutaMouseListener implements MouseListener {
 
+  private PanelVisual panelVisual;
+  private JLabel label;
+  private static boolean pdf, tiff;
+  private MouseListener mouseListener;
+
+  public RutaMouseListener() {
+  }
   private static String filenotfound = "AyudaImagenes/imagen-no-encontrada.jpg";
   private static GetImagenesAdyacentes img;
 
-  private static String getWorkerForPreviusPage(GetImagenesAdyacentes ady, String pareng) {
+  private static String getWorkerForPreviusPage(GetImagenesAdyacentes adyacente, String pareng, Imagen imagen) {
     String i = "";
-    ImagenAdyacente imgA = setimagenanterior(ady);
-    System.out.println(imgA);
-    if (!imgA.getName().equals(filenotfound))
-      {
-      ImagenesWorker iworker1 = new ImagenesWorker(imgA.getName(), pareng, imgA.getPage());
-      i = iworker1.doInBackground();
+    ImagenAdyacente nuevaImg = null;
+    ImagenAdyacente imgAdyPrevia = setimagenanterior(adyacente);
 
+    if (!imgAdyPrevia.getName().equals(filenotfound))
+      {
+      ImagenesWorker iworker1 = new ImagenesWorker(imgAdyPrevia.getName(), pareng, imgAdyPrevia.getPage());
+      i = iworker1.doInBackground();
+      nuevaImg = new ImagenAdyacente(imagen.getRutaInsertadaEnDB(), imagen.getPagina(), imagen.getParent());
       } else
       {
-      i = imgA.getName();
+      i = imgAdyPrevia.getName();
+      nuevaImg = imgAdyPrevia;
       }
+    System.out.println("Nueva imagen "+nuevaImg);
     return i;
   }
+//  private static String getWorkerForPreviusPage(GetImagenesAdyacentes adyacente, String pareng) {
+//    String i = "";
+//    ImagenAdyacente imgAdyPrevia = setimagenanterior(adyacente);
+//    System.out.println(imgAdyPrevia);
+//    if (!imgAdyPrevia.getName().equals(filenotfound))
+//      {
+//      ImagenesWorker iworker1 = new ImagenesWorker(imgAdyPrevia.getName(), pareng, imgAdyPrevia.getPage());
+//      i = iworker1.doInBackground();
+//
+//      } else
+//      {
+//      i = imgAdyPrevia.getName();
+//      }
+//    return i;
+//  }
 
   private static String getWorkerForNextPAge(GetImagenesAdyacentes ady, String pareng) {
     ImagenAdyacente imgP = setimagenposterior(ady);
@@ -43,25 +68,15 @@ public class RutaMouseListener implements MouseListener {
     String b = (iworker2.doInBackground());
     return b;
   }
-  private PanelVisual panelVisual;
-  private JLabel label;
-  private static boolean pdf, tiff;
-  private MouseListener mouseListener;
-  private static ImagenAdyacente ant, pst;
 
-  public RutaMouseListener() {
-  }
-
-  public static void getAdyacentes(GetImagenesAdyacentes im, boolean pdf, Imagen imagen) {
+  public static void getAdyacentes(boolean pdf, Imagen imagen) {
     if (pdf)
       {
       RutaMouseListener.pdf = true;
-
       String pareng = imagen.getParent();
-
       GetImagenesAdyacentes ady = new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
 
-      String i = getWorkerForPreviusPage(ady, pareng);
+      String i = getWorkerForPreviusPage(ady, pareng, imagen);
       String b = getWorkerForNextPAge(ady, pareng);
       GetImagenesAdyacentes nadd = new GetImagenesAdyacentes();
       nadd.setImagenAnterior(i);
@@ -103,9 +118,10 @@ public class RutaMouseListener implements MouseListener {
   }
 
   private static ImagenAdyacente setimagenanterior(GetImagenesAdyacentes ady) {
+    ImagenAdyacente ant = null;
     if (ady.getAnt() == null)
       {
-      ant = new ImagenAdyacente(filenotfound, 0, "sin imagen anterior");
+      ant = new ImagenAdyacente(filenotfound, 0, "Sin Imagen Anterior");
       } else
       {
       ant = ady.getAnt();
@@ -114,6 +130,7 @@ public class RutaMouseListener implements MouseListener {
   }
 
   private static ImagenAdyacente setimagenposterior(GetImagenesAdyacentes ady) {
+    ImagenAdyacente pst = null;
     if (ady.getPst() == null)
       {
       pst = new ImagenAdyacente(filenotfound, 0, "sin imagen posterior");

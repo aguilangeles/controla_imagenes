@@ -7,11 +7,9 @@ package VentanaPrincipal;
 import BasedeDatos.GetNumerosImagenesRechazadas;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
-import Helpers.GetImagenesAdyacentes;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
-import java.awt.event.MouseListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -383,7 +381,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
-    RutaMouseListener.getAdyacentes(siguientes.adyacentes(), pdf, siguientes);
+    RutaMouseListener.getAdyacentes(pdf, siguientes);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -394,7 +392,7 @@ public class Ventana extends javax.swing.JFrame {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
-    RutaMouseListener.getAdyacentes(imagen1.adyacentes(), pdf, imagen1);
+    RutaMouseListener.getAdyacentes(pdf, imagen1);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -406,7 +404,7 @@ public class Ventana extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
-    RutaMouseListener.getAdyacentes(pr.adyacentes(), pdf, pr);
+    RutaMouseListener.getAdyacentes(pdf, pr);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,

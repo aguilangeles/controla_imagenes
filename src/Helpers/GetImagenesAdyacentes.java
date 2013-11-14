@@ -32,6 +32,7 @@ public class GetImagenesAdyacentes {
   private boolean exitsPrevAndNext;
 
   public GetImagenesAdyacentes(String ruta) {
+    System.out.println("aca no deberia entrar si esta leyendo pdf");
     File file = new File(ruta);
     File dir = new File(file.getParent());
     File[] files = dir.listFiles();
@@ -58,18 +59,22 @@ public class GetImagenesAdyacentes {
     System.out.println("pagina " + pagina1);
     System.out.println("anterior es " + anterior);
     System.out.println("posterior es " + posterior);
-    //aca esta el problema
     if (anterior != -1)
       {
       exitsPrevAndNext = true;
-      ant = new ImagenAdyacente(mapa.get(anterior).getNombre(), mapa.get(anterior).getNumeroPagina(), null);
-      } else if (posterior != -1)
-      {
-      pst = new ImagenAdyacente(mapa.get(posterior).getNombre(), mapa.get(posterior).getNumeroPagina(), null);
-
+      ant = new ImagenAdyacente(mapa.get(anterior).getNombre(),
+              mapa.get(anterior).getNumeroPagina(), null);
       } else
       {
+
       ant = null;
+      }
+    if (posterior != -1)
+      {
+      pst = new ImagenAdyacente(mapa.get(posterior).getNombre(),
+              mapa.get(posterior).getNumeroPagina(), null);
+      } else
+      {
       pst = null;
       }
   }

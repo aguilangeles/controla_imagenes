@@ -1,0 +1,15 @@
+Operador de Control: admin
+Fecha de Control: 2013-11-14 02:42:04.0
+Id Traza: 6
+Ruta Completa: c:\angeles\testeo\notas
+Tamanio Lote: 144
+Cantidad muestreada: 20
+Limite Rechazos: 2
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: Control de calidad de imagen
+Tipo de Documento: FRP
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 1.0.09

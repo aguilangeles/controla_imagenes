@@ -49,6 +49,9 @@ public class Imagen {
     return imagenesAdyacentes;
   }
 
+  public void traerImagenAdyacente(boolean tiff) {
+  }
+
   public String getRutaInsertadaEnDB() {
     return rutaInsertadaEnDB;
   }
