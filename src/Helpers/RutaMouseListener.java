@@ -52,10 +52,22 @@ public class RutaMouseListener implements MouseListener {
     return imagenesAdyacentes;
   }
 
+  public static boolean isPdf() {
+    return pdf;
+  }
+
+  public static boolean isTiff() {
+    return tiff;
+  }
+
   @Override
   public void mouseClicked(MouseEvent e) {
-    new PanelVisual(imagenesAdyacentes.getImagenAnterior(), imagenesAdyacentes.getImagenPosterior(),
-            imagenesAdyacentes.getNombreA(), imagenesAdyacentes.getNombreP(), pdf, tiff).setVisible(true);
+    new PanelVisual(imagenesAdyacentes.getImagenAnterior(),
+            imagenesAdyacentes.getImagenPosterior(),
+            imagenesAdyacentes.getNombreA(),
+            imagenesAdyacentes.getNombreP(),
+            isPdf(),
+            isTiff()).setVisible(true);
   }
 
   @Override

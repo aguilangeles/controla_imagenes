@@ -32,7 +32,7 @@ public class GetImagenesAdyacentes {
   private boolean exitsPrevAndNext;
 
   public GetImagenesAdyacentes(String ruta) {
-    System.out.println("aca no deberia entrar si esta leyendo pdf");
+//    System.out.println("aca no deberia entrar si esta leyendo pdf");F
     File file = new File(ruta);
     File dir = new File(file.getParent());
     File[] files = dir.listFiles();
@@ -56,9 +56,6 @@ public class GetImagenesAdyacentes {
     int anterior = (existPreviusPage(pagina1)) ? (pagina1 - 1) : -1;
     int post = pagina1 + 1;
     int posterior = (existNextPage((post), mapa.size())) ? post : -1;
-    System.out.println("pagina " + pagina1);
-    System.out.println("anterior es " + anterior);
-    System.out.println("posterior es " + posterior);
     if (anterior != -1)
       {
       exitsPrevAndNext = true;
