@@ -19,8 +19,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
  */
 public class GetImagenesAdyacentes {
 
-  ImagenAdyacente ant = null;
-  ImagenAdyacente pst = null;
+  ImagenAdyacenteParaPdf ant = null;
+  ImagenAdyacenteParaPdf pst = null;
   private Map<Integer, NombrePaginaDelPDF> mapa = new HashMap<>();
   private boolean exitsPrevius, exitsNext;
   private int uno = 1;
@@ -62,7 +62,7 @@ public class GetImagenesAdyacentes {
     if (anterior != -1)
       {
       exitsPrevAndNext = true;
-      ant = new ImagenAdyacente(mapa.get(anterior).getNombre(),
+      ant = new ImagenAdyacenteParaPdf(mapa.get(anterior).getNombre(),
               mapa.get(anterior).getNumeroPagina(), null);
       } else
       {
@@ -71,7 +71,7 @@ public class GetImagenesAdyacentes {
       }
     if (posterior != -1)
       {
-      pst = new ImagenAdyacente(mapa.get(posterior).getNombre(),
+      pst = new ImagenAdyacenteParaPdf(mapa.get(posterior).getNombre(),
               mapa.get(posterior).getNumeroPagina(), null);
       } else
       {
@@ -82,11 +82,11 @@ public class GetImagenesAdyacentes {
   public GetImagenesAdyacentes() {
   }
 
-  public ImagenAdyacente getAnt() {
+  public ImagenAdyacenteParaPdf getAnt() {
     return ant;
   }
 
-  public ImagenAdyacente getPst() {
+  public ImagenAdyacenteParaPdf getPst() {
     return pst;
   }
 

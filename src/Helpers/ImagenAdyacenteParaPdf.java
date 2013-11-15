@@ -8,12 +8,12 @@ package Helpers;
  *
  * @author aguilangeles@gmail.com
  */
-public class ImagenAdyacente {
+public class ImagenAdyacenteParaPdf {
   private String name;
   private int page;
   private String nameforDb;
 
-  public ImagenAdyacente(String name, int page, String nameforDb) {
+  public ImagenAdyacenteParaPdf(String name, int page, String nameforDb) {
     this.name = name;
     this.page = page;
     this.nameforDb = nameforDb;
