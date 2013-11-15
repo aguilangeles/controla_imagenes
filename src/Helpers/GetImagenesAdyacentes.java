@@ -63,7 +63,8 @@ public class GetImagenesAdyacentes {
       {
       exitsPrevAndNext = true;
       ant = new ImagenAdyacenteParaPdf(mapa.get(anterior).getNombre(),
-              mapa.get(anterior).getNumeroPagina(), null);
+              mapa.get(anterior).getNumeroPagina(), "Imagen Anterior");
+      prevPage = mapa.get(anterior).getNumeroPagina() ;
       } else
       {
 
@@ -72,7 +73,8 @@ public class GetImagenesAdyacentes {
     if (posterior != -1)
       {
       pst = new ImagenAdyacenteParaPdf(mapa.get(posterior).getNombre(),
-              mapa.get(posterior).getNumeroPagina(), null);
+              mapa.get(posterior).getNumeroPagina(), "Imagen Posterior");
+      nextPage = mapa.get(posterior).getNumeroPagina() ;
       } else
       {
       pst = null;

@@ -9,6 +9,7 @@ package Helpers;
  * @author aguilangeles@gmail.com
  */
 public class ImagenAdyacenteParaPdf {
+
   private String name;
   private int page;
   private String nameforDb;
@@ -36,10 +37,12 @@ public class ImagenAdyacenteParaPdf {
   }
 
   public String getNameforDb() {
-    return nameforDb;
+//    return nameforDb + "_" + page;
+    return nameforDb ;
   }
 
   public void setNameforDb(String nameforDb) {
+
     this.nameforDb = nameforDb;
   }
 
@@ -47,6 +50,4 @@ public class ImagenAdyacenteParaPdf {
   public String toString() {
     return "ImagenAdyacente{" + "name=" + name + ", page=" + page + ", nameforDb=" + nameforDb + '}';
   }
-  
-
 }

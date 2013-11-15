@@ -9,7 +9,6 @@ import Imagenes.ImagenesWorker;
 import Imagenes.PanelVisual;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JLabel;
 
 /**
  *
@@ -18,14 +17,12 @@ import javax.swing.JLabel;
 public class RutaMouseListener implements MouseListener {
 
   private PanelVisual panelVisual;
-  private JLabel label;
   private static boolean pdf, tiff;
-  private MouseListener mouseListener;
+  private static String filenotfound = "AyudaImagenes/imagen-no-encontrada.jpg";
+  private static GetImagenesAdyacentes imagenesAdyacentes;
 
   public RutaMouseListener() {
   }
-  private static String filenotfound = "AyudaImagenes/imagen-no-encontrada.jpg";
-  private static GetImagenesAdyacentes imagenesAdyacentes;
 
   public static void getAdyacentes(boolean pdf, Imagen imagen) {
     if (pdf)
@@ -36,15 +33,17 @@ public class RutaMouseListener implements MouseListener {
               new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
       ImagenAdyacenteParaPdf previus = getWorkerForPreviusPage(adyacentes, pareng, imagen);
       ImagenAdyacenteParaPdf next = getWorkerForNextPAge(adyacentes, pareng, imagen);
+
       GetImagenesAdyacentes newAdd = new GetImagenesAdyacentes();
       newAdd.setImagenAnterior(previus.getName());
       newAdd.setImagenPosterior(next.getName());
-      newAdd.setNombreA(previus.getNameforDb() + " pag : " + previus.getPage());
-      newAdd.setNombreP(next.getNameforDb() + " pag: " + (next.getPage() + 2));
+      int paginalabel = 1 + imagen.getPagina();
+      newAdd.setNombreA("Anterior de " + previus.getNameforDb() + " (" + paginalabel + ")");
+      newAdd.setNombreP("Posterior de " + next.getNameforDb() + " (" + paginalabel + ")");
       imagenesAdyacentes = newAdd;
       } else
       {
-      tiff = true;
+      RutaMouseListener.tiff = true;
       imagenesAdyacentes = imagen.adyacentes();
       }
   }
@@ -111,6 +110,7 @@ public class RutaMouseListener implements MouseListener {
       nuevaImg = new ImagenAdyacenteParaPdf(i, imagen.getPagina(), imagen.getRutaInsertadaEnDB());
       } else
       {
+
       nuevaImg = imgAdyPrevia;
       }
     return nuevaImg;
