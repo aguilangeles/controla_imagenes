@@ -19,6 +19,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
  */
 public class GetImagenesAdyacentes {
 
+  private static String filenotfound = "AyudaImagenes/imagen-no-encontrada.jpg";
   ImagenAdyacenteParaPdf ant = null;
   ImagenAdyacenteParaPdf pst = null;
   private Map<Integer, NombrePaginaDelPDF> mapa = new HashMap<>();
@@ -31,22 +32,33 @@ public class GetImagenesAdyacentes {
   private int prevPage, nextPage;
   private boolean exitsPrevAndNext;
 
-  public GetImagenesAdyacentes(String ruta) {
-//    System.out.println("aca no deberia entrar si esta leyendo pdf");F
-    File file = new File(ruta);
+  public GetImagenesAdyacentes(String pathname) {
+
+    File file = new File(pathname);
     File dir = new File(file.getParent());
     File[] files = dir.listFiles();
+
     for (int i = 0; i < files.length; i++)
       {
-      File file1 = files[i];
-      if (file1.equals(file))
+      File aFile = files[i];
+
+      if (aFile.equals(file))
         {
-        int imin = i - 1;
-        int imas = i + 1;
-        this.imagenAnterior = (files[imin]).toString();
-        this.imagenPosterior = (files[imas]).toString();
-        this.nombreA = files[imin].getName().toString();
-        this.nombreP = files[imas].getName().toString();
+        try
+          {
+          int imin = i - 1;
+          int imas = i + 1;
+
+          getPrevisFile(files, imin);
+          getNextFile(files, imas);
+//          String aname = (files[imin].exists()) ? files[imin].getName() : "nathing ";
+
+          } catch (ArrayIndexOutOfBoundsException e)
+          {
+          System.out.println("exception !!!!");
+//          System.out.println(file);
+//          System.out.println(e.getMessage());
+          }
         }
       }
   }
@@ -61,7 +73,7 @@ public class GetImagenesAdyacentes {
       exitsPrevAndNext = true;
       ant = new ImagenAdyacenteParaPdf(mapa.get(anterior).getNombre(),
               mapa.get(anterior).getNumeroPagina(), "Imagen Anterior");
-      prevPage = mapa.get(anterior).getNumeroPagina() ;
+      prevPage = mapa.get(anterior).getNumeroPagina();
       } else
       {
 
@@ -71,7 +83,7 @@ public class GetImagenesAdyacentes {
       {
       pst = new ImagenAdyacenteParaPdf(mapa.get(posterior).getNombre(),
               mapa.get(posterior).getNumeroPagina(), "Imagen Posterior");
-      nextPage = mapa.get(posterior).getNumeroPagina() ;
+      nextPage = mapa.get(posterior).getNumeroPagina();
       } else
       {
       pst = null;
@@ -171,5 +183,35 @@ public class GetImagenesAdyacentes {
   @Override
   public String toString() {
     return "GetImagenesAdyacentes{" + "imagenAnterior=" + imagenAnterior + ", imagenPosterior=" + imagenPosterior + ", nombreA=" + nombreA + ", nombreP=" + nombreP + '}';
+  }
+
+  private void getPrevisFile(File[] files, int imin) {
+    try
+      {
+      this.imagenAnterior = (files[imin]).toString();
+      //System.out.println("imagen anterior " + imagenAnterior);
+      this.nombreA = files[imin].getName();
+      } catch (ArrayIndexOutOfBoundsException e)
+      {
+      this.imagenAnterior = filenotfound;
+      this.nombreA = "Sin imagen anterior";
+      System.out.println("exception Anterior !!!!");
+      }
+
+  }
+
+  private void getNextFile(File[] files, int imas) {
+
+    try
+      {
+      this.imagenPosterior = files[imas].toString();
+      this.nombreP = files[imas].getName();
+
+      } catch (ArrayIndexOutOfBoundsException ee)
+      {
+      System.out.println("exception posterior");
+      this.imagenPosterior = filenotfound;
+      this.nombreP = "Sin Imagen Posterior";
+      }
   }
 }
