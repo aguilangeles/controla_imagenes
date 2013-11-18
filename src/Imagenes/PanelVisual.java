@@ -5,7 +5,6 @@
 package Imagenes;
 
 import Helpers.VersionEImageIcon;
-import Imagenes.ImageDrawingComponent;
 import java.awt.Color;
 
 /**

@@ -10,6 +10,8 @@ import Entidades.TrazaDao;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,7 +36,7 @@ public class Ventana extends javax.swing.JFrame {
    */
   public Ventana(TrazaDao trazadao) {
     iniciar(trazadao);
-    //setExtendedState(6);
+    setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
     tabla.requestFocus();
@@ -48,8 +50,6 @@ public class Ventana extends javax.swing.JFrame {
     anterior.setEnabled(false);
     getFirstImage(pdf);
     rutaLabel.addMouseListener(new RutaMouseListener());
-//    listener();
-
   }
 
   /**
