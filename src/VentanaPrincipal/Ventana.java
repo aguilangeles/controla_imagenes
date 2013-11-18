@@ -12,6 +12,7 @@ import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -50,6 +51,39 @@ public class Ventana extends javax.swing.JFrame {
     anterior.setEnabled(false);
     getFirstImage(pdf);
     rutaLabel.addMouseListener(new RutaMouseListener());
+    siguiente.addKeyListener(keylistener());
+    anterior.addKeyListener(keylistener());
+  }
+
+  private KeyListener keylistener() {
+    KeyListener kl = new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+        myKeyEvt(e, "KeyTyped");
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        myKeyEvt(e, "keyReleased");
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+        myKeyEvt(e, "keyPressed");
+      }
+
+      private void myKeyEvt(KeyEvent e, String text) {
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_KP_LEFT || key == KeyEvent.VK_LEFT)
+          {
+          setBackImage();
+          } else if (key == KeyEvent.VK_KP_RIGHT || key == KeyEvent.VK_RIGHT)
+          {
+          getNextImage();
+          }
+      }
+    };
+    return kl;
   }
 
   /**
@@ -292,6 +326,7 @@ public class Ventana extends javax.swing.JFrame {
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
+
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
     Imagen imagen = traza.getImagenList().get(contador);
