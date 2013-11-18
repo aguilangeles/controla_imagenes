@@ -4,7 +4,9 @@
  */
 package Imagenes;
 
+import Helpers.VersionEImageIcon;
 import Imagenes.ImageDrawingComponent;
+import java.awt.Color;
 
 /**
  *
@@ -28,6 +30,8 @@ public class PanelVisual extends javax.swing.JFrame {
     initComponents();
     this.anterior = anterior;
     this.posterior = posterior;
+    VersionEImageIcon vi = new VersionEImageIcon(this);
+    this.setBackground(new Color(230, 252, 238));
     nameAnt.setText(nombreA);
     namePost.setText(nombreP);
     ImageDrawingComponent img = new ImageDrawingComponent(anterior, jPanel1, 2, pdf, tiff);
@@ -85,10 +89,12 @@ public class PanelVisual extends javax.swing.JFrame {
     nameAnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
     nameAnt.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     nameAnt.setText("Imagen anterior");
+    nameAnt.setOpaque(true);
 
     namePost.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
     namePost.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     namePost.setText("Imagen posterior");
+    namePost.setOpaque(true);
 
     javax.swing.GroupLayout panellabelLayout = new javax.swing.GroupLayout(panellabel);
     panellabel.setLayout(panellabelLayout);
