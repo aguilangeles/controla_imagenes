@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author aguilangeles@gmail.com
  */
-public class PanelVisual extends javax.swing.JFrame {
+public class PanelAdyacentes extends javax.swing.JFrame {
 
   private String anterior, posterior;
 
   /**
-   * Creates new form PanelVisual
+   * Creates new form PanelAdyacentes
    *
    * @param anterior
    * @param posterior
@@ -25,7 +25,7 @@ public class PanelVisual extends javax.swing.JFrame {
    * @param pdf
    * @param tiff
    */
-  public PanelVisual(String anterior, String posterior, String nombreA, String nombreP, boolean pdf, boolean tiff) {
+  public PanelAdyacentes(String anterior, String posterior, String nombreA, String nombreP, boolean pdf, boolean tiff) {
     initComponents();
     this.anterior = anterior;
     this.posterior = posterior;
@@ -160,23 +160,23 @@ public class PanelVisual extends javax.swing.JFrame {
 //        }
 //      } catch (ClassNotFoundException ex)
 //      {
-//      java.util.logging.Logger.getLogger(PanelVisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//      java.util.logging.Logger.getLogger(PanelAdyacentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //      } catch (InstantiationException ex)
 //      {
-//      java.util.logging.Logger.getLogger(PanelVisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//      java.util.logging.Logger.getLogger(PanelAdyacentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //      } catch (IllegalAccessException ex)
 //      {
-//      java.util.logging.Logger.getLogger(PanelVisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//      java.util.logging.Logger.getLogger(PanelAdyacentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //      } catch (javax.swing.UnsupportedLookAndFeelException ex)
 //      {
-//      java.util.logging.Logger.getLogger(PanelVisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//      java.util.logging.Logger.getLogger(PanelAdyacentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //      }
 //    //</editor-fold>
 //
 //    /* Create and display the form */
 //    java.awt.EventQueue.invokeLater(new Runnable() {
 //      public void run() {
-//        new PanelVisual().setVisible(true);
+//        new PanelAdyacentes().setVisible(true);
 //      }
 //    });
 //  }

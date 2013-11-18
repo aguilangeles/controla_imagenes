@@ -6,7 +6,7 @@ package Helpers;
 
 import Entidades.Imagen;
 import Imagenes.ImagenesWorker;
-import Imagenes.PanelVisual;
+import Imagenes.PanelAdyacentes;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,7 +16,7 @@ import java.awt.event.MouseListener;
  */
 public class RutaMouseListener implements MouseListener {
 
-  private PanelVisual panelVisual;
+  private PanelAdyacentes panelVisual;
   private static boolean pdf, tiff;
   private static String filenotfound = "AyudaImagenes/imagen-no-encontrada.jpg";
   private static GetImagenesAdyacentes imagenesAdyacentes;
@@ -62,7 +62,7 @@ public class RutaMouseListener implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    new PanelVisual(imagenesAdyacentes.getImagenAnterior(),
+    new PanelAdyacentes(imagenesAdyacentes.getImagenAnterior(),
             imagenesAdyacentes.getImagenPosterior(),
             imagenesAdyacentes.getNombreA(),
             imagenesAdyacentes.getNombreP(),
