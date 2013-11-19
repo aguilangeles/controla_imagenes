@@ -19,44 +19,52 @@ public class ListaRecursivaSublote {
   private JLabel infoLabel;
   private File file;
   private String extension;
-  private List<Object> listaExtension = new ArrayList<>();
+  private List<Object> listaIdc = new ArrayList<>();
+  private static boolean tif, pdf;
 
   public ListaRecursivaSublote(JLabel infoLabel, File file) {
     this.infoLabel = infoLabel;
-    buscarExtensiones(file);
+    buscarSublotes(file);
   }
 
-  private void buscarExtensiones(File aFile) {
+  private void buscarSublotes(File aFile) {
     File[] files = aFile.listFiles();
     for (int x = 0; x < files.length; x++)
       {
       String name = files[x].getName();
       infoLabel.setText("Analizando..." + name);
-
-      boolean ext = (name.endsWith(".tif")//
-              || name.endsWith(".pdf")
-              || name.endsWith(".jpg")
-              || name.endsWith(".png")) ? true : false;
+      boolean ext = (name.endsWith(".pdf")) ? true : false;
+      boolean numeral = (name.contains("#")) ? true : false;
       if (files[x].isDirectory())
         {
-          System.out.println("files x "+files[x]);
-        buscarExtensiones(files[x]);
+        buscarSublotes(files[x]);
         }
-      if (ext)
+      if (numeral)
         {
-        ExtensionImagen stringImage = new ExtensionImagen(name);
-        extension = (stringImage.getExtension());
-        listaExtension.add(files[x].getAbsolutePath());
-        Collections.shuffle(listaExtension);
+        pdf = false;
+        tif = true;
+        listaIdc.add(files[x].getAbsolutePath());
+        Collections.shuffle(listaIdc);
+        } else if (ext)
+        {
+        pdf = true;
+        tif = false;
+        listaIdc.add(files[x].getAbsolutePath());
+        Collections.shuffle(listaIdc);
         }
       }
   }
 
-  public String getExtension() {
-    return extension;
+  public List<Object> getListaIdc() {
+    return listaIdc;
   }
 
-  public List<Object> getListaExtensionImagen() {
-    return listaExtension;
+  public static boolean isTif() {
+    return tif;
   }
+
+  public static boolean isPdf() {
+    return pdf;
+  }
+  
 }
