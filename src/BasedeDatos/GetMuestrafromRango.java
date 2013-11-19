@@ -18,18 +18,19 @@ public class GetMuestrafromRango {
   private Conexion conexion = new Conexion();
   private static int muestra, idRango;
 
-  public GetMuestrafromRango(int tamanioLote) {
-    muestraRango(tamanioLote);
+  public GetMuestrafromRango(int tamanioLote, String muestra) {
+    //tocado para que funcione con muestra en imagenes o muestra en idc
+    muestraRango(tamanioLote, muestra);
   }
 
-  private void muestraRango(int aTamanioLote) {
+  private void muestraRango(int aTamanioLote, String astring) {
     if (conexion.isConexion())
       {
       try
         {
         String query = "select  minimo "
                 + ", maximo "
-                + ", muestra"
+                + ", " + astring
                 + ", id "
                 + " from rangos_qs";
         conexion.executeQuery(query);
@@ -59,6 +60,4 @@ public class GetMuestrafromRango {
   public static int getIdRango() {
     return idRango;
   }
-
-
 }

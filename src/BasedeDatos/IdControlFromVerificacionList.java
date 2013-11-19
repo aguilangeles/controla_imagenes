@@ -36,6 +36,7 @@ public class IdControlFromVerificacionList {
         con.executeQuery(query);
         while (con.resulset.next())
           {
+            System.out.println("controles: "+ con.resulset.getInt(1));
           idTipoControl.add(con.resulset.getInt(1));
           }
         } catch (SQLException ex)
@@ -58,5 +59,5 @@ public class IdControlFromVerificacionList {
     return idVerificacion;
   }
 
- 
+
 }

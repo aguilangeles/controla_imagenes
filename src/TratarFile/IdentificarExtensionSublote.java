@@ -17,7 +17,7 @@ import javax.swing.SwingWorker;
  *
  * @author MUTNPROD003
  */
-public class IdentificarExtension extends SwingWorker<Void, Object> {
+public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
 
   private static final String INCOMPATIBLE_TAMANIO_CON_RANGO = "<html>El tamanio del "
           + "lote es inferior al rango asignado para ese volumen. Edite tabla 'Rangos'.</html>";
@@ -27,15 +27,16 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   private JLabel infoLabel;
   private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion;
-  private JFrame panelControl ;
+  private JFrame panelControl;
   //
-  private  int tamanio, muestra, idRango;
+  private int tamanio, muestra, idRango;
   private static String extension;
   private static List<Object> listaExtension;
   private static List<Object> listaResultado;
 
-  public IdentificarExtension(JFrame frame, JLabel infoLabel,
-          List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
+  public IdentificarExtensionSublote(JFrame frame, JLabel infoLabel,
+          List<Integer> controlesList, File file, String parent,
+          String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
     this.controlesList = controlesList;
     this.file = file;
     this.frame = frame;
@@ -49,43 +50,35 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   }
 
   @Override
-  protected Void doInBackground()  {
+  protected Void doInBackground() {
 
-    ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel,file);
+    ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel, file);
 
     listaExtension = extensionImagen.getListaExtensionImagen();
 
     extension = extensionImagen.getExtension();
 
     listaResultado = new SwitchListaExtension(extension, listaExtension, infoLabel).switchExtension();
-    tamanio = listaResultado.size();
-    GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio, " muestra");
-    muestra =GetMuestrafromRango.getMuestra();
+    tamanio = listaResultado.size();///hasta aca, se puede usar
+    /*determinado el  tama?o del lote, hay que apelar a la cantidad de idc que es necesario analizar*/
+
+    GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio, "muestra_idc");
+    muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
+    System.out.println("muestra idc " + muestra + " rango id " + idRango);
     return null;
   }
 
   @Override
   protected void done() {
-    if (!isCancelled())
-      {
-      if (isTamanioCompatibleConRango(getTamanio(), getMuestra()))
-        {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-          @Override
-          public void run() {
-            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, parent,
-                    extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
-            worker.execute();
-          }
-        });
-        } else
-        {
-        JOptionPane.showMessageDialog(infoLabel, INCOMPATIBLE_TAMANIO_CON_RANGO,
-                getTamanio() + ">" + getMuestra(), JOptionPane.ERROR_MESSAGE);
-        System.exit(0);
-        }
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, parent,
+                extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
+        worker.execute();
       }
+    });
   }
 
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {

@@ -7,6 +7,7 @@ package PaneldeControl;
 import BasedeDatos.IdControlFromVerificacionList;
 import BasedeDatos.Conexion;
 import TratarFile.IdentificarExtension;
+import TratarFile.IdentificarExtensionSublote;
 import TratarFile.IdentificarParent;
 import java.awt.HeadlessException;
 import java.io.File;
@@ -49,29 +50,50 @@ public class AceptarCargarLote {
   }
 
   private void getAceptar() {
+
     String ruta = rutaCarpeta.getText();//trae la ruta
     File file = new File(ruta);//busca el file
     if (file.exists())
-      {// si el archivo existe
+      {
+      // si el archivo existe
       File[] files = file.listFiles();//lista los mismos
-      getControlesPorVerificacion();//controles de la verificacion seleccionada
-      con.isConexionClose();////cierra conexion
+      if (tipoVerificacionBox.getSelectedItem().toString().contains("Sublotes"))
+        {
+        System.out.println("Bienvenido al control de sublotes");
+        getControlesPorVerificacion();
+        con.isConexion();
+        IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
+        String rutaCompleta = parent.getParent();
+        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+//        System.out.println("ruta completa : " + ultimaCarpeta);
 
-      IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
+        IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file,
+                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+        idext.execute();
 
-      String rutaCompleta = parent.getParent();
-      String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
 
-      IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
-              rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
-      idext.execute();
-      aceptarSeleccion.setEnabled(false);
+//        System.exit(0);
+        } else
+        {
+
+        getControlesPorVerificacion();//controles de la verificacion seleccionada
+        con.isConexionClose();////cierra conexion
+        IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
+        String rutaCompleta = parent.getParent();
+        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+        IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
+                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+        idext.execute();
+        aceptarSeleccion.setEnabled(false);
+        }
       } else
       {
       JOptionPane.showMessageDialog(rutaCarpeta,
               "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
       rutaCarpeta.setText("");
       }
+
+
   }
 
   public List<Integer> getIdTipoControl() {
