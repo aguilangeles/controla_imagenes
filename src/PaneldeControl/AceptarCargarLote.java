@@ -33,7 +33,6 @@ public class AceptarCargarLote {
   private JLabel informa;
   private int idUsuario;
   private JFrame cargarLoteFrame;
-//  private  int idVerificacion;
   private List<Integer> idTipoControl = new ArrayList<>();
 
   public AceptarCargarLote(JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox,
@@ -55,27 +54,18 @@ public class AceptarCargarLote {
     if (file.exists())
       {// si el archivo existe
       File[] files = file.listFiles();//lista los mismos
-      if (tipoDocumentoBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de documento"))
-        {
-        setMessageJcombotipodoc();
-        } else if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("Seleccione el tipo de verificacion"))
-        {
-        setMessageComboTipoVerificacion();
-        } else
-        {
-        getControlesPorVerificacion();//controles de la verificacion seleccionada
-        con.isConexionClose();////cierra conexion
+      getControlesPorVerificacion();//controles de la verificacion seleccionada
+      con.isConexionClose();////cierra conexion
 
-        IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
+      IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
 
-        String rutaCompleta = parent.getParent();
-        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+      String rutaCompleta = parent.getParent();
+      String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
 
-        IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
-                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
-        idext.execute();
-        aceptarSeleccion.setEnabled(false);
-        }
+      IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
+              rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+      idext.execute();
+      aceptarSeleccion.setEnabled(false);
       } else
       {
       JOptionPane.showMessageDialog(rutaCarpeta,
