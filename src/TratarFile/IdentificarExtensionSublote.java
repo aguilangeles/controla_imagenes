@@ -73,8 +73,38 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
 
   @Override
   protected void done() {
-    System.out.println("File " + file);
     ListaRecursivaSublote lrs = new ListaRecursivaSublote(infoLabel, file);
+    CrearElRamdom newRamdom = new CrearElRamdom(lrs.getListaIdc(), muestra);
+    List<Object> ramdomList = newRamdom.getStack();
+    RecursiveFromIdc rec = new RecursiveFromIdc(ramdomList, ListaRecursivaSublote.isPdf(), ListaRecursivaSublote.isTif());
+//    for (Object obj : ramdomList)
+//      {
+//      File file1 = new File((String) obj);
+//      if (file1.isDirectory())
+//        {
+//        File[] listfiles = file1.listFiles();
+//        for (int i = 0; i < listfiles.length; i++)
+//          {
+//          Object object = listfiles[i];
+//          if (object.toString().endsWith("Imagenes"))
+//            {
+//            File file2 = new File(object.toString());
+//            File[] listfiles2 = file2.listFiles();
+//            for (int j = 0; j < listfiles2.length; j++)
+//              {
+//              File file3 = listfiles2[j];
+//              System.out.println(file3);
+//              }
+//
+//
+//
+//            }
+////          System.out.println(object);
+//
+//          }
+//        }
+//      }
+
 
 //    java.awt.EventQueue.invokeLater(new Runnable() {
 //      @Override
