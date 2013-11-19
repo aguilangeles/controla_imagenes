@@ -29,10 +29,10 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion;
   private JFrame panelControl;
-  //
   private int tamanio, muestra, idRango;
   private static String extension;
   private static List<Object> listaExtension;
+  private List<Object> listaIDC;
   private static List<Object> listaResultado;
 
   public IdentificarExtensionSublote(JFrame frame, JLabel infoLabel,
@@ -52,34 +52,21 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
 
   @Override
   protected Void doInBackground() {
-
-    ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel, file);
-
-    listaExtension = extensionImagen.getListaExtensionImagen();
-
-    extension = extensionImagen.getExtension();
-
-    listaResultado = new SwitchListaExtension(extension, listaExtension, infoLabel).switchExtension();
-    tamanio = listaResultado.size();///hasta aca, se puede usar
-    /*determinado el  tama?o del lote, hay que apelar a la cantidad de idc que es necesario analizar*/
-
-    GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio, "muestra_idc");
+    ListaRecursivaSublote lrs = new ListaRecursivaSublote(infoLabel, file);
+    listaIDC = lrs.getListaIdc();// trae la lista de los idc
+    tamanio = listaIDC.size(); ///hasta aca, se puede usar
+    GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
     muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
-
-    System.out.println("muestra idc " + muestra + " rango id " + idRango);
     return null;
   }
 
   @Override
   protected void done() {
-    ListaRecursivaSublote lrs = new ListaRecursivaSublote(infoLabel, file);
-    CrearElRamdom newRamdom = new CrearElRamdom(lrs.getListaIdc(), muestra);
+    CrearElRamdom newRamdom = new CrearElRamdom(listaIDC, muestra);
     List<Object> ramdomList = newRamdom.getStack();
     RecursiveFromIdc rec = new RecursiveFromIdc(ramdomList, ListaRecursivaSublote.isPdf(), ListaRecursivaSublote.isTif());
-//    for (Object obj : ramdomList)
-//      {
-//      File file1 = new File((String) obj);
+////      File file1 = new File((String) obj);
 //      if (file1.isDirectory())
 //        {
 //        File[] listfiles = file1.listFiles();

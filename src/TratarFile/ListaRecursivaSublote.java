@@ -32,6 +32,7 @@ public class ListaRecursivaSublote {
     for (int x = 0; x < files.length; x++)
       {
       String name = files[x].getName();
+//      System.out.println(name);
       infoLabel.setText("Analizando..." + name);
       boolean ext = (name.endsWith(".pdf")) ? true : false;
       boolean numeral = (name.contains("#")) ? true : false;
@@ -45,7 +46,8 @@ public class ListaRecursivaSublote {
         tif = true;
         listaIdc.add(files[x].getAbsolutePath());
         Collections.shuffle(listaIdc);
-        } else if (ext)
+        }
+      if (ext)
         {
         pdf = true;
         tif = false;
@@ -66,5 +68,4 @@ public class ListaRecursivaSublote {
   public static boolean isPdf() {
     return pdf;
   }
-  
 }

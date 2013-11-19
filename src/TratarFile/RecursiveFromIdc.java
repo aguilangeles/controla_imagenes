@@ -4,8 +4,13 @@
  */
 package TratarFile;
 
+import Entidades.NombrePaginaDelPDF;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.pdfbox.pdmodel.PDDocument;
 
 /**
  *
@@ -20,8 +25,16 @@ public class RecursiveFromIdc {
     for (Object obj : lista)
       {
       File file1 = new File((String) obj);
+      if (istif)
+        {
+        iterarIdcTif(file1);
+
+        }
+      if (ispdf)
+        {
+        iterarSubLotePdf(file1);
+        }
       /*aca el booleano */
-      iterarIdcTif(file1);
       }
   }
 
@@ -30,7 +43,9 @@ public class RecursiveFromIdc {
     for (int i = 0; i < listOfFiles.length; i++)
       {
       File file1 = listOfFiles[i];
-      boolean istif = (file1.getName().endsWith(".tif")) ? true : false;
+      boolean istif = (file1.getName().endsWith(".tif"))
+              || (file1.getName().endsWith(".jpg"))
+              || (file1.getName().endsWith(".png")) ? true : false;
       if (file1.isDirectory())
         {
         iterarIdcTif(file1);
@@ -40,6 +55,21 @@ public class RecursiveFromIdc {
         System.out.println(file1.getAbsolutePath());
         }
       }
+  }
 
+  private void iterarSubLotePdf(File file) {
+    try
+      {
+      PDDocument pddDocument = PDDocument.load(file.getAbsolutePath());
+      int pagina = pddDocument.getDocumentCatalog().getAllPages().size();
+      for (int i = 0; i < pagina; i++)
+        {
+        NombrePaginaDelPDF page = new NombrePaginaDelPDF(file.getName(), i);
+        System.out.println("page pdf " + page);
+        }
+      } catch (IOException ex)
+      {
+      Logger.getLogger(RecursiveFromIdc.class.getName()).log(Level.SEVERE, null, ex);
+      }
   }
 }
