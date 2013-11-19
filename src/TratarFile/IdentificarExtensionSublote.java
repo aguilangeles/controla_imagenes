@@ -6,6 +6,7 @@ package TratarFile;
 
 import BasedeDatos.GetMuestrafromRango;
 import VentanaPrincipal.Worker;
+import VentanaPrincipal.WorkerSubLote;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFrame;
@@ -65,20 +66,25 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio, "muestra_idc");
     muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
+
     System.out.println("muestra idc " + muestra + " rango id " + idRango);
     return null;
   }
 
   @Override
   protected void done() {
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, parent,
-                extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
-        worker.execute();
-      }
-    });
+    System.out.println("File " + file);
+    ListaRecursivaSublote lrs = new ListaRecursivaSublote(infoLabel, file);
+
+//    java.awt.EventQueue.invokeLater(new Runnable() {
+//      @Override
+//      public void run() {
+//        WorkerSubLote worker = new WorkerSubLote(frame, infoLabel, controlesList, listaResultado, parent,
+//                extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
+//        worker.execute();
+//      }
+//    });
+    System.exit(0);
   }
 
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
