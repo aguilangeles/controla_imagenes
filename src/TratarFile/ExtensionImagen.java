@@ -10,32 +10,31 @@ package TratarFile;
  */
 public class ExtensionImagen {
 
-    private String extension;
+  private String extension;
 
-    public ExtensionImagen(String extension) {
-        this.extension = buscarExt(extension);
-    }
+  public ExtensionImagen(String extension) {
+    this.extension = buscarExt(extension);
+  }
 
-    private String buscarExt(String extension){
-         String ret = "";
-        if (extension.endsWith(".tif")) {
-            ret = ".tif";
-        } else if (extension.endsWith(".pdf")) {
-            ret = ".pdf";
-        } else if (extension.endsWith(".jpg")) {
-            ret = ".jpg";
-        } else if (extension.endsWith(".png")) {
-            ret = ".png";
-        }
-        return ret;
-    }
-    public String getExtension() {
-     return extension;
-    }
+  private String buscarExt(String extension) {
+    String ret = "";
+    if (extension.endsWith(".tif"))
+      {
+      ret = ".tif";
+      } else if (extension.endsWith(".pdf"))
+      {
+      ret = ".pdf";
+      } else if (extension.endsWith(".jpg"))
+      {
+      ret = ".jpg";
+      } else if (extension.endsWith(".png"))
+      {
+      ret = ".png";
+      }
+    return ret;
+  }
 
-//    @Override
-//    public String toString() {
-//        return extension ;
-//    }
-
+  public String getExtension() {
+    return extension;
+  }
 }

@@ -10,7 +10,6 @@ import Entidades.TrazaDao;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.table.DefaultTableModel;

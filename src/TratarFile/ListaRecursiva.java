@@ -32,22 +32,25 @@ public class ListaRecursiva {
       {
       String name = files[x].getName();
       infoLabel.setText("Analizando..." + name);
-      boolean ext = (name.endsWith(".tif")//
-              || name.endsWith(".pdf")
-              || name.endsWith(".jpg")
-              || name.endsWith(".png")) ? true : false;
+      System.out.println(name);
+//      boolean ext = (name.endsWith(".TIF")//
+//              || name.endsWith(".pdf")
+//              || name.endsWith(".jpg")
+//              || name.endsWith(".png")) ? true : false;
       if (files[x].isDirectory())
         {
         buscarExtensiones(files[x]);
         }
-      if (ext)
-        {
-        ExtensionImagen stringImage = new ExtensionImagen(name);
-        extension = (stringImage.getExtension());
-        listaExtension.add(files[x].getAbsolutePath());
-        Collections.shuffle(listaExtension);
-        }
+      controlFinal(files[x].getAbsolutePath(), name);
+//      if (ext)
+//        {
+//        ExtensionImagen stringImage = new ExtensionImagen(name);
+//        extension = (stringImage.getExtension());
+//        listaExtension.add(files[x].getAbsolutePath());
+//        Collections.shuffle(listaExtension);
+//        }
       }
+//    System.out.println("lista\t" + listaExtension);
   }
 
   public String getExtension() {
@@ -56,5 +59,31 @@ public class ListaRecursiva {
 
   public List<Object> getListaExtensionImagen() {
     return listaExtension;
+  }
+
+  private List<String> endwith() {
+    List<String> end = new ArrayList<>();
+    end.add(".tif");
+    end.add(".tiff");
+    end.add(".TIFF");
+    end.add(".TIF");
+    end.add(".png");
+    end.add(".jpg");
+    end.add(".pdf");
+    return end;
+  }
+
+  private void controlFinal(Object o, String filename) {
+    for (String astring : endwith())
+      {
+      if (filename.endsWith(astring))
+        {
+//        ExtensionImagen stringImage = new ExtensionImagen(filename);
+        extension = (astring);
+          System.out.println("extension "+extension);
+        listaExtension.add(o);
+        Collections.shuffle(listaExtension);
+        }
+      }
   }
 }
