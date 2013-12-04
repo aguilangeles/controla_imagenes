@@ -32,25 +32,12 @@ public class ListaRecursiva {
       {
       String name = files[x].getName();
       infoLabel.setText("Analizando..." + name);
-      System.out.println(name);
-//      boolean ext = (name.endsWith(".TIF")//
-//              || name.endsWith(".pdf")
-//              || name.endsWith(".jpg")
-//              || name.endsWith(".png")) ? true : false;
       if (files[x].isDirectory())
         {
         buscarExtensiones(files[x]);
         }
       controlFinal(files[x].getAbsolutePath(), name);
-//      if (ext)
-//        {
-//        ExtensionImagen stringImage = new ExtensionImagen(name);
-//        extension = (stringImage.getExtension());
-//        listaExtension.add(files[x].getAbsolutePath());
-//        Collections.shuffle(listaExtension);
-//        }
       }
-//    System.out.println("lista\t" + listaExtension);
   }
 
   public String getExtension() {
@@ -78,9 +65,7 @@ public class ListaRecursiva {
       {
       if (filename.endsWith(astring))
         {
-//        ExtensionImagen stringImage = new ExtensionImagen(filename);
         extension = (astring);
-          System.out.println("extension "+extension);
         listaExtension.add(o);
         Collections.shuffle(listaExtension);
         }
