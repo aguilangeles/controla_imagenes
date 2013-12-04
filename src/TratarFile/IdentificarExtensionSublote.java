@@ -5,13 +5,10 @@
 package TratarFile;
 
 import BasedeDatos.GetMuestrafromRango;
-import VentanaPrincipal.Worker;
-import VentanaPrincipal.WorkerSubLote;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
