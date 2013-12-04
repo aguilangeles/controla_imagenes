@@ -1,0 +1,15 @@
+Operador de Control: admin
+Fecha de Control: 2013-12-04 12:53:42.0
+Id Traza: 3
+Ruta Completa: \\UTNNAS006\intercambio\Maria\MSNR103\I00005604
+Tamanio Lote: 47
+Cantidad muestreada: 8
+Limite Rechazos: 1
+Total Rechazos: 0
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: Control de calidad de imagen
+Tipo de Documento: FRP
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 1.0.09

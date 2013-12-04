@@ -75,9 +75,10 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
-//            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, parent,
-//                    extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
-//            worker.execute();
+            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, parent,
+                    extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion,
+                    muestra, tamanio, idRango);
+            worker.execute();
           }
         });
         } else

@@ -32,6 +32,9 @@ public class LlenarTrazaDao {
     this.extension = extension;
     switch (extension) {
       case ".tif":
+      case ".tiff":
+      case ".TIF":
+      case ".TIFF":
       case ".png":
       case ".jpg":
         this.pdfFile = false;

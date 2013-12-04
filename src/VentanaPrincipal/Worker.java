@@ -56,7 +56,10 @@ public class Worker extends SwingWorker<Object, Object> {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       switch (extension)
         {
+        case ".tiff":
         case ".tif":
+        case ".TIFF":
+        case ".TIF":
         case ".png":
         case ".jpg":
           Tif_Png_Jpg();
