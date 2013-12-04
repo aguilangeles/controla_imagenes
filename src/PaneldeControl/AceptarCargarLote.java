@@ -65,14 +65,10 @@ public class AceptarCargarLote {
         IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
         String rutaCompleta = parent.getParent();
         String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
-//        System.out.println("ruta completa : " + ultimaCarpeta);
 
         IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file,
                 rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
         idext.execute();
-
-
-//        System.exit(0);
         } else
         {
 
