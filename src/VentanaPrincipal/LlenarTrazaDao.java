@@ -31,10 +31,14 @@ public class LlenarTrazaDao {
     this.conexion = con;
     this.extension = extension;
     switch (extension) {
-      case ".tif":
+     case ".tif":
+      case ".tiff":
+      case ".TIF":
+      case ".TIFF":
       case ".png":
       case ".jpg":
         this.pdfFile = false;
+
         llenartraza();
         break;
       case ".pdf":

@@ -25,7 +25,11 @@ public class SwitchListaExtension {
 
   public List<Object> switchExtension() {
     switch (extension) {
+
       case ".tif":
+      case ".tiff":
+      case ".TIF":
+      case ".TIFF":
       case ".png":
       case ".jpg":
         lista = lista;

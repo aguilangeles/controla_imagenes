@@ -32,19 +32,44 @@ public class ListaRecursiva {
       {
       String name = files[x].getName();
       infoLabel.setText("Analizando..." + name);
-      boolean ext = (name.endsWith(".tif")//
-              || name.endsWith(".pdf")
-              || name.endsWith(".jpg")
-              || name.endsWith(".png")) ? true : false;
+//      boolean ext = (name.endsWith(".tif")//
+//              || name.endsWith(".pdf")
+//              || name.endsWith(".jpg")
+//              || name.endsWith(".png")) ? true : false;
       if (files[x].isDirectory())
         {
         buscarExtensiones(files[x]);
         }
-      if (ext)
+      controlFinal(files[x].getAbsolutePath(), name);
+//      if (ext)
+//        {
+//        ExtensionImagen stringImage = new ExtensionImagen(name);
+//        extension = (stringImage.getExtension());
+//        listaExtension.add(files[x].getAbsolutePath());
+//        Collections.shuffle(listaExtension);
+//        }
+      }
+  }
+
+  private List<String> endwith() {
+    List<String> end = new ArrayList<>();
+    end.add(".tif");
+    end.add(".tiff");
+    end.add(".TIFF");
+    end.add(".TIF");
+    end.add(".png");
+    end.add(".jpg");
+    end.add(".pdf");
+    return end;
+  }
+
+  private void controlFinal(Object o, String filename) {
+    for (String astring : endwith())
+      {
+      if (filename.endsWith(astring))
         {
-        ExtensionImagen stringImage = new ExtensionImagen(name);
-        extension = (stringImage.getExtension());
-        listaExtension.add(files[x].getAbsolutePath());
+        extension = (astring);
+        listaExtension.add(o);
         Collections.shuffle(listaExtension);
         }
       }
