@@ -54,6 +54,7 @@ public class ImagenyRechazo {
 
   @Override
   public String toString() {
-    return "Imagen=" + imagen + ", pagina=" + pagina + "\n\tcontroles=" + controles;
+    return imagen + ", pagina=" + pagina
+            + "\ncontroles=" + controles;
   }
 }

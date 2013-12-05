@@ -49,9 +49,9 @@ public class EscribeInforme {
         {
         pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1));
         }
+      pw.println("Imagenes rechazadas: ");
       for (ImagenyRechazo ii : GetRechazosPorImagen.getListaImg())
         {
-        System.out.println(ii);
         pw.println(ii);
         }
       pw.println("Estado: " + estado);
