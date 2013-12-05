@@ -31,7 +31,6 @@ public class Reporte extends javax.swing.JFrame {
    * @param idtraza
    */
   public Reporte(int idtraza) {
-
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
     this.idtraza = idtraza;
@@ -45,6 +44,13 @@ public class Reporte extends javax.swing.JFrame {
       actionRadioButton();
       imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  "
               + poblarTablaTraza.getRechazo());
+      GetRechazosPorImagen rechazosPorImagen = new GetRechazosPorImagen(conexion, idtraza);
+      for (ImagenyRechazo ii : rechazosPorImagen.getListaImg())
+        {
+
+        System.out.println(ii);
+
+        }
       }
   }
 
@@ -232,7 +238,7 @@ public class Reporte extends javax.swing.JFrame {
   }//GEN-LAST:event_jButton1KeyPressed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-  nuevoQ();
+    nuevoQ();
   }//GEN-LAST:event_jButton2ActionPerformed
   private void actionRadioButton() {
     bg = new ButtonGroup();
@@ -283,6 +289,7 @@ public class Reporte extends javax.swing.JFrame {
               JOptionPane.ERROR_MESSAGE);
       }
   }//
+
   private void nuevoQ() {
     if (bg.getSelection() != null)
       {

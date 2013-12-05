@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,6 +33,7 @@ public class Tabla_TrazaReporte extends JFrame {
   private String verificacion;
   private String usuario;
   private String documento;
+  private static List<ImagenyRechazo> listaRechazados = new ArrayList<>();
 
   public Tabla_TrazaReporte(Conexion conexion, int idtraza, JTable tabla) {
     this.conexion = conexion;
