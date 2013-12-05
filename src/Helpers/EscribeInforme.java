@@ -4,6 +4,8 @@
  */
 package Helpers;
 
+import ReporteLote.GetRechazosPorImagen;
+import ReporteLote.ImagenyRechazo;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,10 +29,11 @@ public class EscribeInforme {
     String estadoS;
     if (estado)
       {
-      estadoS="Aceptado.";
-      }else{
-      estadoS="Rechazado.";
-    }
+      estadoS = "Aceptado.";
+      } else
+      {
+      estadoS = "Rechazado.";
+      }
     //String estadoS = (estado) ? "Rechazado XXX" : "AceptadoZZZ";
     write(tabla, estadoS, observaciones, finalizar);
   }
@@ -45,6 +48,11 @@ public class EscribeInforme {
       for (int row = 0; row < tablaDetalles.getRowCount(); row++)
         {
         pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1));
+        }
+      for (ImagenyRechazo ii : GetRechazosPorImagen.getListaImg())
+        {
+        System.out.println(ii);
+        pw.println(ii);
         }
       pw.println("Estado: " + estado);
       pw.println("Observaciones: " + observaciones);

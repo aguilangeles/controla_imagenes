@@ -11,7 +11,8 @@ import java.util.List;
  *
  * @author aguilangeles@gmail.com
  */
-class ImagenyRechazo {
+public class ImagenyRechazo {
+
   private int id;
   private String imagen;
   private int pagina;
@@ -26,8 +27,6 @@ class ImagenyRechazo {
   public int getId() {
     return id;
   }
-
-
 
   public String getImagen() {
     return imagen;
@@ -55,7 +54,6 @@ class ImagenyRechazo {
 
   @Override
   public String toString() {
-    return "ImagenyRechazo{" + "imagen=" + imagen + ", pagina=" + pagina + ", controles=" + controles + '}';
+    return "Imagen=" + imagen + ", pagina=" + pagina + "\n\tcontroles=" + controles;
   }
-
 }

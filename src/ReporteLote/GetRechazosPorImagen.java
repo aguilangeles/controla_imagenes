@@ -17,11 +17,15 @@ import java.util.logging.Logger;
  */
 public class GetRechazosPorImagen {
 
-  List<ImagenyRechazo> listaImg;
+ private static List<ImagenyRechazo> listaImg;
 
   public GetRechazosPorImagen(Conexion conexion, int idtraza) {
-     listaImg = getImagenes(conexion, idtraza);
+    listaImg = getImagenes(conexion, idtraza);
 
+  }
+
+  public static List<ImagenyRechazo> getListaImg() {
+    return listaImg;
   }
 
   private List<ImagenyRechazo> getImagenes(Conexion conexion, int idtraza) {
@@ -65,13 +69,15 @@ public class GetRechazosPorImagen {
   private List<String> setControlesList(int idtraza, Conexion conexion) {
     List<String> listaControles = new ArrayList<>();
     String query = " SELECT "
-            + "c.descripcion "
-            + "FROM qualitys.archivo a "
-            + "join traza_archivo_controles tac "
-            + "on a.id = tac.idarchivo "
-            + "join controles c "
-            + "on tac.idcontrol = c.id "
-            + "where a.id =" + idtraza + ";";
+            + " c.descripcion "
+            + " FROM qualitys.archivo a "
+            + " join traza_archivo_controles tac "
+            + " on a.id = tac.idarchivo "
+            + " join controles c "
+            + " on tac.idcontrol = c.id "
+            + " where a.id ="  + idtraza
+            + " and tac.estado =1 ;";
+    System.out.println(query);
     if (conexion.isConexion())
       {
       try
@@ -90,8 +96,5 @@ public class GetRechazosPorImagen {
     return listaControles;
   }
 
-  public List<ImagenyRechazo> getListaImg() {
-    return listaImg;
-  }
-  
+
 }
