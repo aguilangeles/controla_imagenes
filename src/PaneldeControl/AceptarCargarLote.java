@@ -55,32 +55,27 @@ public class AceptarCargarLote {
     File file = new File(ruta);//busca el file
     if (file.exists())
       {
-      // si el archivo existe
-      File[] files = file.listFiles();//lista los mismos
       if (tipoVerificacionBox.getSelectedItem().toString().contains("Sublotes"))
         {
-        System.out.println("Bienvenido al control de sublotes");
-        getControlesPorVerificacion();
-        con.isConexion();
-        IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
-        String rutaCompleta = parent.getParent();
-        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
-
-        IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file,
-                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
-        idext.execute();
+        ContadorSublotes contadorSublotes = new ContadorSublotes(file);
+        System.out.println("Totalsublotes " + contadorSublotes.getLength1());
+//        File[] files = file.listFiles();//lista los mismos
+//
+//
+//        System.out.println("Bienvenido al control de sublotes");
+//        getControlesPorVerificacion();
+//        con.isConexion();
+//        IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
+//        String rutaCompleta = parent.getParent();
+//        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+//
+//        IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file,
+//                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+//        idext.execute();
+        System.exit(0);
         } else
         {
-
-        getControlesPorVerificacion();//controles de la verificacion seleccionada
-        con.isConexionClose();////cierra conexion
-        IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
-        String rutaCompleta = parent.getParent();
-        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
-        IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
-                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
-        idext.execute();
-        aceptarSeleccion.setEnabled(false);
+        GetFilesForVolumen(file);
         }
       } else
       {
@@ -131,5 +126,18 @@ public class AceptarCargarLote {
   private void setMessageComboTipoVerificacion() throws HeadlessException {
     JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
             "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
+  }
+
+  private void GetFilesForVolumen(File file) {
+    File[] files = file.listFiles();//lista los mismos
+    getControlesPorVerificacion();//controles de la verificacion seleccionada
+    con.isConexionClose();////cierra conexion
+    IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
+    String rutaCompleta = parent.getParent();
+    String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
+            rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+    idext.execute();
+    aceptarSeleccion.setEnabled(false);
   }
 }

@@ -35,7 +35,8 @@ public class ListaRecursivaSublote {
 //      System.out.println(name);
       infoLabel.setText("Analizando..." + name);
       boolean ext = (name.endsWith(".pdf")) ? true : false;
-      boolean numeral = (name.contains("#")) ? true : false;
+      boolean numeral = (name.contains("#")) ? true : false;//claaaá, para contar los sublotes
+      
       if (files[x].isDirectory())
         {
         buscarSublotes(files[x]);
