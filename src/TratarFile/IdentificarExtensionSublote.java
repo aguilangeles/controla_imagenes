@@ -56,26 +56,21 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     System.out.println("muestra " + muestra + ", tamanio " + tamanio + ", rango " + idRango);
     CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
     List<Object> ramdomList = newRamdom.getStack();
-    for (Iterator<Object> it = ramdomList.iterator(); it.hasNext();)
-      {
-      Object object = it.next();
-      System.out.println(object);
-
-      }
+//    for (Iterator<Object> it = ramdomList.iterator(); it.hasNext();)
+//      {
+//      Object object = it.next();
+//      System.out.println(object);
+//
+//      }
     return null;
   }
 
   @Override
   protected void done() {
-    System.out.println("entro en done");
-    CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
-    List<Object> ramdomList = newRamdom.getStack();
-    for (Iterator<Object> it = ramdomList.iterator(); it.hasNext();)
-      {
-      Object object = it.next();
-      System.out.println(object);
+    if(!isCancelled()){
 
-      }
+    System.out.println("entro en done ");
+    }
 
 //    java.awt.EventQueue.invokeLater(new Runnable() {
 //      @Override

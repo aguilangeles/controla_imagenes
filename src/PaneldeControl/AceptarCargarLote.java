@@ -66,7 +66,7 @@ public class AceptarCargarLote {
         IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file,
                 rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
         idext.execute();
-        System.exit(0);
+//        System.exit(0);
         } else
         {
         GetFilesForVolumen(file);
