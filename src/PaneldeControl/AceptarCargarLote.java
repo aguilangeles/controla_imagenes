@@ -7,7 +7,6 @@ package PaneldeControl;
 import BasedeDatos.IdControlFromVerificacionList;
 import BasedeDatos.Conexion;
 import TratarFile.IdentificarExtension;
-import TratarFile.IdentificarExtensionSublote;
 import TratarFile.IdentificarParent;
 import java.awt.HeadlessException;
 import java.io.File;
@@ -58,13 +57,10 @@ public class AceptarCargarLote {
       if (tipoVerificacionBox.getSelectedItem().toString().contains("Sublotes"))
         {
         ContadorSublotes contadorSublotes = new ContadorSublotes(file);
-        System.out.println("Totalsublotes " + contadorSublotes.getLength1());
-//        File[] files = file.listFiles();//lista los mismos
-//
-//
-//        System.out.println("Bienvenido al control de sublotes");
-//        getControlesPorVerificacion();
-//        con.isConexion();
+        System.out.println("Bienvenido al control de sublotes");
+        System.out.println("Totalsublotes " + contadorSublotes.getListaIDc().size());
+        getControlesPorVerificacion();
+        con.isConexion();
 //        IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
 //        String rutaCompleta = parent.getParent();
 //        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta

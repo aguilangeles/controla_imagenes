@@ -5,7 +5,8 @@
 package PaneldeControl;
 
 import java.io.File;
-import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,42 +14,53 @@ import java.io.FileFilter;
  */
 public class ContadorSublotes {
 
-  private int length1;
-  private int length2;
-  private FileFilter filefilter;
+  private List<String> listaIDc = new ArrayList<>();
 
   public ContadorSublotes(File file) {
-    this.filefilter = new FileFilter() {
-      @Override
-      public boolean accept(File pathname) {
-
-        return pathname.getName().endsWith(".pdf");
-      }
-    };
     getCantidadSublotes(file);
   }
 
   private void getCantidadSublotes(File file) {
-    int contador = 0;
     File[] files = file.listFiles();
     for (int i = 0; i < files.length; i++)
       {
       File file1 = files[i];
-      boolean ispdf = (file1.getName().endsWith(".pdf")) ? true : false;
       if (files[i].isDirectory())
         {
-        getCantidadSublotes(files[i]);
+        getCantidadSublotes(file1);
+        boolean isImagen = ignore(file1, "Imagenes");
+        boolean isBorrada = ignore(file1, "Borradas");
+        if (!isImagen && !isBorrada)
+          {
+          encontrarSublote(file1);
+          }
         }
-      
+      boolean ispdf = ignore(file1, ".pdf");
       if (ispdf)
         {
-        contador++;
-        System.out.println(file1.getAbsolutePath());
+        listaIDc.add(file1.getAbsolutePath());
         }
       }
   }
 
-  public int getLength1() {
-    return length1;
+  private boolean ignore(File file, String name) {
+    return file.getAbsolutePath().endsWith(name);
   }
+
+  private void encontrarSublote(File file) {
+    String name = file.getAbsolutePath();
+    if (name.contains("SL"))
+      {
+      listaIDc.add(name);
+      } else if (name.contains("#"))
+      {
+      listaIDc.add(name);
+      }
+  }
+
+  public List<String> getListaIDc() {
+    return listaIDc;
+  }
+
+
 }
