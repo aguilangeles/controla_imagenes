@@ -61,6 +61,9 @@ public class ContadorSublotes {
   public List<String> getListaIDc() {
     return listaIDc;
   }
-
+public String getParent(){
+  File file = new File(listaIDc.get(0));
+  return file.getParent();
+}
 
 }

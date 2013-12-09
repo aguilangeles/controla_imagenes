@@ -59,11 +59,11 @@ public class AceptarCargarLote {
         ContadorSublotes contadorSublotes = new ContadorSublotes(file);
         System.out.println("Bienvenido al control de sublotes");
         System.out.println("Totalsublotes " + contadorSublotes.getListaIDc().size());
+        String rutaCompleta = contadorSublotes.getParent();
         getControlesPorVerificacion();
         con.isConexion();
-//        IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
-//        String rutaCompleta = parent.getParent();
-//        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+        System.out.println(ultimaCarpeta);
 //
 //        IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file,
 //                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
