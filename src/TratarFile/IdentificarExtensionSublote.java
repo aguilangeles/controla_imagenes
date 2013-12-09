@@ -5,6 +5,7 @@
 package TratarFile;
 
 import BasedeDatos.GetMuestrafromRango;
+import VentanaPrincipal.WorkerSubLote;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
@@ -55,32 +56,24 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     idRango = GetMuestrafromRango.getIdRango();
     System.out.println("muestra " + muestra + ", tamanio " + tamanio + ", rango " + idRango);
     CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
-    List<Object> ramdomList = newRamdom.getStack();
-//    for (Iterator<Object> it = ramdomList.iterator(); it.hasNext();)
-//      {
-//      Object object = it.next();
-//      System.out.println(object);
-//
-//      }
+    listaResultado = newRamdom.getStack();
     return null;
   }
 
   @Override
   protected void done() {
-    if(!isCancelled()){
-
-    System.out.println("entro en done ");
-    }
-
-//    java.awt.EventQueue.invokeLater(new Runnable() {
-//      @Override
-//      public void run() {
-//        WorkerSubLote worker = new WorkerSubLote(frame, infoLabel, controlesList, listaResultado, parent,
-//                extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
-//        worker.execute();
-//      }
-//    });
-    //  System.exit(0);
+    if (!isCancelled())
+      {
+      System.out.println("entro en done ");
+//      java.awt.EventQueue.invokeLater(new Runnable() {
+//        @Override
+//        public void run() {
+//          WorkerSubLote worker = new WorkerSubLote(frame, infoLabel, controlesList, listaResultado, parent,
+//                  extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
+//          worker.execute();
+//        }
+//      });
+      }
   }
 
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
