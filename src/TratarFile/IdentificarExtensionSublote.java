@@ -54,13 +54,20 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
     System.out.println("muestra " + muestra + ", tamanio " + tamanio + ", rango " + idRango);
+    CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
+    List<Object> ramdomList = newRamdom.getStack();
+    for (Iterator<Object> it = ramdomList.iterator(); it.hasNext();)
+      {
+      Object object = it.next();
+      System.out.println(object);
+
+      }
     return null;
   }
 
-
   @Override
   protected void done() {
-    System.out.println("entro en donw");
+    System.out.println("entro en done");
     CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
     List<Object> ramdomList = newRamdom.getStack();
     for (Iterator<Object> it = ramdomList.iterator(); it.hasNext();)
@@ -97,6 +104,7 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   public List<Object> getListaIDC() {
     return listaIDC;
   }
+
   public int getIdRango() {
     return idRango;
   }

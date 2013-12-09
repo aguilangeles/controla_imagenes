@@ -6,6 +6,7 @@ package PaneldeControl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,6 +40,7 @@ public class ContadorSublotes {
       if (ispdf)
         {
         listaIDc.add(file1.getAbsolutePath());
+        Collections.shuffle(listaIDc);
         }
       }
   }
@@ -52,9 +54,11 @@ public class ContadorSublotes {
     if (name.contains("SL"))
       {
       listaIDc.add(name);
+      Collections.shuffle(listaIDc);
       } else if (name.contains("#"))
       {
       listaIDc.add(name);
+      Collections.shuffle(listaIDc);
       }
   }
 
