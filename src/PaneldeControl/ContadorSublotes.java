@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ContadorSublotes {
 
-  private List<String> listaIDc = new ArrayList<>();
+  private List<Object> listaIDc = new ArrayList<>();
 
   public ContadorSublotes(File file) {
     getCantidadSublotes(file);
@@ -58,12 +58,12 @@ public class ContadorSublotes {
       }
   }
 
-  public List<String> getListaIDc() {
+  public List<Object> getListaIDc() {
     return listaIDc;
   }
-public String getParent(){
-  File file = new File(listaIDc.get(0));
-  return file.getParent();
-}
 
+  public String getParent() {
+    File file = new File((String) listaIDc.get(0));
+    return file.getParent();
+  }
 }

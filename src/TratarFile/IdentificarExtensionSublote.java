@@ -6,6 +6,7 @@ package TratarFile;
 
 import BasedeDatos.GetMuestrafromRango;
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,9 +33,7 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   private List<Object> listaIDC;
   private static List<Object> listaResultado;
 
-  public IdentificarExtensionSublote(JFrame frame, JLabel infoLabel,
-          List<Integer> controlesList, File file, String parent,
-          String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
+  public IdentificarExtensionSublote(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion, List<Object> listaIdc) {
     this.controlesList = controlesList;
     this.file = file;
     this.frame = frame;
@@ -44,51 +43,32 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
+    this.listaIDC = listaIdc;
+    this.tamanio = listaIDC.size();
 
   }
 
   @Override
   protected Void doInBackground() {
-    ListaRecursivaSublote lrs = new ListaRecursivaSublote(infoLabel, file);
-    listaIDC = lrs.getListaIdc();// trae la lista de los idc
-    tamanio = listaIDC.size(); ///hasta aca, se puede usar
     GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
     muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
+    System.out.println("muestra " + muestra + ", tamanio " + tamanio + ", rango " + idRango);
     return null;
   }
 
+
   @Override
   protected void done() {
-    CrearElRamdom newRamdom = new CrearElRamdom(listaIDC, muestra);
+    System.out.println("entro en donw");
+    CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
     List<Object> ramdomList = newRamdom.getStack();
-    RecursiveFromIdc rec = new RecursiveFromIdc(ramdomList, ListaRecursivaSublote.isPdf(), ListaRecursivaSublote.isTif());
-////      File file1 = new File((String) obj);
-//      if (file1.isDirectory())
-//        {
-//        File[] listfiles = file1.listFiles();
-//        for (int i = 0; i < listfiles.length; i++)
-//          {
-//          Object object = listfiles[i];
-//          if (object.toString().endsWith("Imagenes"))
-//            {
-//            File file2 = new File(object.toString());
-//            File[] listfiles2 = file2.listFiles();
-//            for (int j = 0; j < listfiles2.length; j++)
-//              {
-//              File file3 = listfiles2[j];
-//              System.out.println(file3);
-//              }
-//
-//
-//
-//            }
-////          System.out.println(object);
-//
-//          }
-//        }
-//      }
+    for (Iterator<Object> it = ramdomList.iterator(); it.hasNext();)
+      {
+      Object object = it.next();
+      System.out.println(object);
 
+      }
 
 //    java.awt.EventQueue.invokeLater(new Runnable() {
 //      @Override
@@ -98,7 +78,7 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
 //        worker.execute();
 //      }
 //    });
-    System.exit(0);
+    //  System.exit(0);
   }
 
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
@@ -114,6 +94,9 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     return muestra;
   }
 
+  public List<Object> getListaIDC() {
+    return listaIDC;
+  }
   public int getIdRango() {
     return idRango;
   }
