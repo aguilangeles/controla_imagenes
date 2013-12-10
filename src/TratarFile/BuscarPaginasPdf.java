@@ -43,7 +43,6 @@ public class BuscarPaginasPdf {
           File filepdf = new File(page.getNombre());
           if (filepdf.exists())
             {
-            System.out.println(page);
             listaPaginas.add(page);
             Collections.shuffle(listaPaginas);
             infoLabel.setText("<html>" + page.toString() + "</html>");
