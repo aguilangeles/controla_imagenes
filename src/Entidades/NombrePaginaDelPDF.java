@@ -28,6 +28,7 @@ public class NombrePaginaDelPDF {
 
   @Override
   public String toString() {
+    String retname = nombre.replace(" ", "");
     return nombre + ": " + pagina;
   }
 }

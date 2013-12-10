@@ -30,31 +30,37 @@ public class LlenarTrazaDao {
     this.parent = encoder(parent + "\\");
     this.conexion = con;
     this.extension = extension;
-    switch (extension) {
+    switch (extension)
+      {
       case ".tif":
-      case ".tiff":
       case ".TIF":
+      case ".tiff":
       case ".TIFF":
       case ".png":
+      case ".PNG":
       case ".jpg":
+      case ".JPEG":
         this.pdfFile = false;
         llenartraza();
         break;
       case ".pdf":
+      case ".PDF":
         this.pdfFile = true;
         llenartraza();
         break;
-    }
+      }
   }
 
   public String encoder(String aString) {
     String ret = "";
-    try {
+    try
+      {
       ret = URLEncoder.encode(aString, "UTF-8");
-    } catch (UnsupportedEncodingException ex) {
+      } catch (UnsupportedEncodingException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(),
               "Llenar Traza : encoding", JOptionPane.ERROR_MESSAGE);
-    }
+      }
     return ret;
   }
 

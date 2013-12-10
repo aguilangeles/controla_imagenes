@@ -24,18 +24,26 @@ public class SwitchListaExtension {
   }
 
   public List<Object> switchExtension() {
-    switch (extension) {
+    switch (extension)
+      {
       case ".tif":
-      case ".tiff":
       case ".TIF":
+      case ".tiff":
       case ".TIFF":
       case ".png":
+      case ".PNG":
       case ".jpg":
+      case ".JPG":
+      case ".JPEG":
+      case ".jpeg":
         lista = lista;
+        System.out.println(lista.size());
         break;
       case ".pdf":
+      case ".PDF":
         BuscarPaginasPdf pagePdf = new BuscarPaginasPdf(lista, infoLabel);
         lista = pagePdf.getListaPaginas();
+        System.out.println("tamnio lista " + pagePdf.getListaPaginas().size());
         break;
       }
     return lista;

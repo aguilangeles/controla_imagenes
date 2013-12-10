@@ -40,9 +40,19 @@ public class BuscarPaginasPdf {
         for (int i = 0; i < pagina; i++)
           {
           NombrePaginaDelPDF page = new NombrePaginaDelPDF(ruta, i);
-          listaPaginas.add(page);
-          Collections.shuffle(listaPaginas);
-          infoLabel.setText("<html>" + page.toString() + "</html>");
+          File filepdf = new File(page.getNombre());
+          if (filepdf.exists())
+            {
+            System.out.println(page);
+            listaPaginas.add(page);
+            Collections.shuffle(listaPaginas);
+            infoLabel.setText("<html>" + page.toString() + "</html>");
+
+            }else{
+
+        JOptionPane.showMessageDialog(null, "FILE NOT FOUND",
+                "Encontrar Paginas PDF", JOptionPane.ERROR_MESSAGE);
+          }
           }
         pddDocument.close();
         } catch (IOException ex)

@@ -14,7 +14,6 @@ import java.util.Stack;
 public class CrearElRamdom {
 
   private List<Object> lista;
-//  private List<Object> seleccion = new ArrayList<>();
   private int muestra;
   private Stack<Object> stack = new Stack<>();
 

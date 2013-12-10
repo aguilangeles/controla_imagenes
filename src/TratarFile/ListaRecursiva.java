@@ -51,12 +51,17 @@ public class ListaRecursiva {
   private List<String> endwith() {
     List<String> end = new ArrayList<>();
     end.add(".tif");
+    end.add(".TIF");
     end.add(".tiff");
     end.add(".TIFF");
-    end.add(".TIF");
     end.add(".png");
+    end.add(".PNG");
     end.add(".jpg");
+    end.add(".JPG");
+    end.add(".jpeg");
+    end.add(".JPEG");
     end.add(".pdf");
+    end.add(".PDF");
     return end;
   }
 

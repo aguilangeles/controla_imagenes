@@ -91,6 +91,8 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   }
 
   private boolean isTamanioCompatibleConRango(int aTamanio, int aRango) {
+    System.out.println("recibio tamanio "+ aTamanio);
+    System.out.println("recibio rango "+ aRango);
     boolean ret = (aTamanio > aRango) ? true : false;
     return ret;
   }

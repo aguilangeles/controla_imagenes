@@ -79,6 +79,7 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel2.setText("Ruta");
 
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    rutaCarpeta.setText("\\\\UTNNAS006\\intercambio\\0 - AYSA\\Entregas para generar\\Como llegaron\\aysa noviembre utn\\AYSA nov");
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     aceptarSeleccion.setMnemonic('c');
