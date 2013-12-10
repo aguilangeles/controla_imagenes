@@ -6,6 +6,7 @@ package PaneldeControl;
 
 import BasedeDatos.IdControlFromVerificacionList;
 import BasedeDatos.Conexion;
+import Helpers.GetExtensionIdImagen;
 import TratarFile.IdentificarExtension;
 import TratarFile.IdentificarExtensionSublote;
 import TratarFile.IdentificarParent;
@@ -58,13 +59,18 @@ public class AceptarCargarLote {
       if (tipoVerificacionBox.getSelectedItem().toString().contains("Sublotes"))
         {
         ContadorSublotes contadorSublotes = new ContadorSublotes(file);
+        GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(contadorSublotes.getExtension());
         List<Object> listaIdc = contadorSublotes.getListaIDc();
-        String rutaCompleta = contadorSublotes.getParent();
+       // String rutaCompleta = contadorSublotes.getParent();
         getControlesPorVerificacion();
         con.isConexion();
-        String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
-        IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file,
-                rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
+      //  String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
+          System.out.println("tamanio "+ listaIdc.size());
+         // System.out.println("ruta completa "+ rutaCompleta);
+         // System.out.println("ultima carpeta "+ ultimaCarpeta);
+          System.out.println("extension "+ contadorSublotes.getExtension());
+          System.out.println("imagen "+ extensionIdImagen.getIdImagen());
+        IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
         idext.execute();
         } else
         {

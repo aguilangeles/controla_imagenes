@@ -18,6 +18,8 @@ import javax.swing.SwingWorker;
  * @author MUTNPROD003
  */
 public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
+// acabo de silenciar parent y ultima carpeta, creo que los puedo convocar
+  // en un a instancia mas adelante.
 
   private static final String INCOMPATIBLE_TAMANIO_CON_RANGO = "<html>El tamanio del "
           + "lote es inferior al rango asignado para ese volumen. Edite tabla 'Rangos'.</html>";
@@ -25,7 +27,7 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   private File file;
   private JFrame frame;
   private JLabel infoLabel;
-  private String parent, ultimaCarpeta;
+//  private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion;
   private JFrame panelControl;
   private int tamanio, muestra, idRango;
@@ -34,13 +36,13 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   private List<Object> listaIDC;
   private static List<Object> listaResultado;
 
-  public IdentificarExtensionSublote(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion, List<Object> listaIdc) {
+  public IdentificarExtensionSublote(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, int idUsuario, int idDocumento, int idVerificacion, List<Object> listaIdc) {
     this.controlesList = controlesList;
     this.file = file;
     this.frame = frame;
     this.infoLabel = infoLabel;
-    this.parent = parent;
-    this.ultimaCarpeta = ultimaCarpeta;
+//    this.parent = parent;
+//    this.ultimaCarpeta = ultimaCarpeta;
     this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
@@ -57,7 +59,7 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     System.out.println("muestra " + muestra + ", tamanio " + tamanio + ", rango " + idRango);
     CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
     List<Object> ramdomIDC = newRamdom.getStack();
-    new GetImagenesList(ramdomIDC);
+    GetImagenesList imagenesList = new GetImagenesList(ramdomIDC);
 
     //    listaResultado = newRamdom.getStack();
     return null;
