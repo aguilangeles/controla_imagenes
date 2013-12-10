@@ -41,7 +41,7 @@ public class Ventana extends javax.swing.JFrame {
     initComponents();
     tabla.requestFocus();
     this.traza = trazadao;
-    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
+    this.pdf = (traza.getExtension().equalsIgnoreCase(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.tif = isImagenTif(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
