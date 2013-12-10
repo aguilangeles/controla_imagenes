@@ -4,6 +4,7 @@
  */
 package TratarFile;
 
+import Helpers.GetExtensionIdImagen;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
 public class GetImagenesList {
 
   public GetImagenesList(List<Object> lista) {
+    System.out.println("idimagen " + GetExtensionIdImagen.getIdImagen());
+    System.out.println("extension " + GetExtensionIdImagen.getImgExt());
     getImagenes(lista);
   }
 
@@ -22,34 +25,16 @@ public class GetImagenesList {
     for (Iterator<Object> it = list.iterator(); it.hasNext();)
       {
       String object = (String) it.next();
-//      identificarPdf(object);
       iterarFiles(new File(object));
       }
   }
 
   private void iterarFiles(File file) {
-    if (file.getName().endsWith(".pdf"))
+    File[] files = file.listFiles();
+    for (int i = 0; i < files.length; i++)
       {
-      System.out.println("es pdf " + file);
-
-      } else
-      {
-
-      File[] files = file.listFiles();
-      for (int i = 0; i < files.length; i++)
-        {
-        File file1 = files[i];
-          System.out.println(file1.getName());
-        boolean isImage = isimage(file1.getName());
-        if (file1.isDirectory())
-          {
-          iterarFiles(file1);
-          }
-        if (isImage)
-          {
-          System.out.println("no pdf " + file1);
-          }
-        }
+      File file1 = files[i];
+      System.out.println(file1.getName());
       }
   }
 

@@ -13,7 +13,8 @@ import java.util.List;
  */
 public class GetExtensionIdImagen {
 
-  private int idImagen;
+  private static int idImagen;
+  private static String imgExt;
 
   public GetExtensionIdImagen(String extension) {
     identificarExtension(extension);
@@ -42,6 +43,7 @@ public class GetExtensionIdImagen {
       {
       if (nombre.equalsIgnoreCase(string))
         {
+        imgExt = string;
         switch (string)
           {
           case "pdf":
@@ -61,7 +63,12 @@ public class GetExtensionIdImagen {
       }
   }
 
-  public int getIdImagen() {
+  public static int getIdImagen() {
     return idImagen;
   }
+
+  public static String getImgExt() {
+    return imgExt;
+  }
+  
 }
