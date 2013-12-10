@@ -61,13 +61,9 @@ public class AceptarCargarLote {
         ContadorSublotes contadorSublotes = new ContadorSublotes(file);
         GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(contadorSublotes.getExtension());
         List<Object> listaIdc = contadorSublotes.getListaIDc();
-       // String rutaCompleta = contadorSublotes.getParent();
         getControlesPorVerificacion();
         con.isConexion();
-      //  String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
           System.out.println("tamanio "+ listaIdc.size());
-         // System.out.println("ruta completa "+ rutaCompleta);
-         // System.out.println("ultima carpeta "+ ultimaCarpeta);
           System.out.println("extension "+ contadorSublotes.getExtension());
           System.out.println("imagen "+ extensionIdImagen.getIdImagen());
         IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
