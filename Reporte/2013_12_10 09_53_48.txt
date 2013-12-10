@@ -1,0 +1,18 @@
+Operador de Control: admin
+Fecha de Control: 2013-12-10 09:53:25.0
+Id Traza: 8
+Ruta Completa: c:\angeles\testeo\gnd3
+Tamanio Lote: 5102
+Cantidad muestreada: 9
+Limite Rechazos: 11
+Total Rechazos: 1
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: Control de calidad de imagen
+Tipo de Documento: FRP
+Imagenes rechazadas: 
+GND#V201012V0000002#GEN00_000000040#49\Imagenes\49_0434_00014430.tif, pagina=0
+controles=[Imágenes con mal contraste]
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 1.2.02
