@@ -74,6 +74,7 @@ public final class InsertarNuevaTraza {
     //cambiar por booleano
     try
       {
+        System.out.println(insertar);
       conexion.executeUpdate(insertar);
       return true;
       } catch (SQLException ex)

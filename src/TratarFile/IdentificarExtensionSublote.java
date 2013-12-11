@@ -68,8 +68,6 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   protected void done() {
     if (!isCancelled())
       {
-      System.out.println("entro en done ");
-//      System.exit(0);
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {

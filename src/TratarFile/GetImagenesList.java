@@ -46,7 +46,6 @@ public class GetImagenesList {
         } else
         {
         contador++;
-        System.out.println("Contador " + contador);
         List<ImagenInsertada> lista = iterarFilesList(object, contador);
         sublote = new Sublote(contador, idTraza, object, 0, lista, lista.size());
         subloteList.add(sublote);
@@ -62,7 +61,6 @@ public class GetImagenesList {
     List<ImagenInsertada> lista = new ArrayList<>();
     ImagenInsertada imagenes = null;
     File file = new File(ruta);
-    System.out.println("parent " + file.getParent());
     File[] files = file.listFiles();
     for (int i = 0; i < files.length; i++)
       {

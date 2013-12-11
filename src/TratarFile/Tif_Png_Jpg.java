@@ -8,6 +8,7 @@ import BasedeDatos.InsertTrazaArchivoContolYEstado;
 import BasedeDatos.Conexion;
 import BasedeDatos.InsertarNuevoArchivo;
 import BasedeDatos.InsertarNuevaTraza;
+import PaneldeControl.ContadorSublotes;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -48,10 +49,7 @@ public class Tif_Png_Jpg {
     Tif_Png_Jpg();
   }
 
-  public Tif_Png_Jpg(InsertarNuevaTraza sTraza, Conexion conexion, int idUsuario,
-          int idDocumento, int idVerificacion, int idRango, int muestra, int tamanioLote,
-          int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
-    this.sTraza = sTraza;
+  public Tif_Png_Jpg(Conexion conexion, int idUsuario, int idDocumento, int idVerificacion, int idRango, int muestra, int tamanioLote, int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
     this.conexion = conexion;
     this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
@@ -63,6 +61,10 @@ public class Tif_Png_Jpg {
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.sublotes = sublotes;
+    String parents = ContadorSublotes.getParent();
+    String ultima = ContadorSublotes.getUltimaCarpeta();
+    this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+            tamanio, parents, ultima, muestra, idRango);
 
   }
 
