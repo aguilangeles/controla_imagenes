@@ -8,6 +8,7 @@ import Entidades.NombrePaginaDelPDF;
 import Helpers.GetExtensionIdImagen;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,37 +25,53 @@ public class GetImagenesList {
   int idtraza = 2;
 
   public GetImagenesList(List<Object> lista) {
-
     int id = GetExtensionIdImagen.getIdImagen();
     System.out.println("extension " + GetExtensionIdImagen.getImgExt());
+    System.out.println("id " + GetExtensionIdImagen.getIdImagen());
     getImagenes(lista, id);
   }
 
   private void getImagenes(List<Object> list, int id) {
+    Sublote sublote = null;
     for (Iterator<Object> it = list.iterator(); it.hasNext();)
       {
       String object = (String) it.next();
+      System.out.println(object);
       if (id == 1)
         {
-
         getPagesPDF(object);
         } else
         {
         contador++;
-        System.out.println("Objeto idc id" + contador
-                + " \ntraza " + idtraza + " \nruta " + object + "\n cantidad de imagenes ? " + "\nestado 0");
-        iterarFiles(new File(object));
+        System.out.println(contador);
+        List<ImagenInsertada> lista = iterarFilesList(new File(object), contador);
+        sublote = new Sublote(contador, idtraza, object, 0, lista, lista.size());
+        System.out.println(sublote);
+//        iterarFiles(new File(object));
         }
       }
   }
 
-  private void iterarFiles(File file) {
+//  private void iterarFiles(File file) {
+//    File[] files = file.listFiles();
+//    for (int i = 0; i < files.length; i++)
+//      {
+//      File file1 = files[i];
+//
+////      System.out.println(file1.getAbsolutePath());
+//      }
+//  }
+  private List<ImagenInsertada> iterarFilesList(File file, int idsubolote) {
+    List<ImagenInsertada> lista = new ArrayList<>();
+    ImagenInsertada imagenes = null;
     File[] files = file.listFiles();
     for (int i = 0; i < files.length; i++)
       {
       File file1 = files[i];
-//      System.out.println(file1.getAbsolutePath());
+      imagenes = new ImagenInsertada(i, idsubolote, file1.getName(), 0, 0);
+      lista.add(imagenes);
       }
+    return lista;
   }
 
   private void getPagesPDF(String astring) {

@@ -63,9 +63,6 @@ public class AceptarCargarLote {
         List<Object> listaIdc = contadorSublotes.getListaIDc();
         getControlesPorVerificacion();
         con.isConexion();
-          System.out.println("tamanio "+ listaIdc.size());
-          System.out.println("extension "+ contadorSublotes.getExtension());
-          System.out.println("imagen "+ GetExtensionIdImagen.getIdImagen());
         IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
         idext.execute();
         } else

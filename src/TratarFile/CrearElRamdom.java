@@ -27,10 +27,10 @@ public class CrearElRamdom {
     int posicion = 0;
     for (int i = 0; i < muestra; i++)
       {
-      posicion = (int) new java.util.Random().nextInt(muestra+1);
+      posicion = (int) new java.util.Random().nextInt(muestra + 1);
       while (stack.contains(lista.get(posicion)))
         {
-        posicion = (int) new java.util.Random().nextInt(muestra+1);
+        posicion = (int) new java.util.Random().nextInt(muestra + 1);
         }
       stack.push(lista.get(posicion));
       }

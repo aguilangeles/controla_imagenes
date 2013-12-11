@@ -5,6 +5,7 @@
 package TratarFile;
 
 import BasedeDatos.GetMuestrafromRango;
+import VentanaPrincipal.WorkerSubLote;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFrame;
@@ -29,7 +30,7 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   private int idUsuario, idDocumento, idVerificacion;
   private JFrame panelControl;
   private int tamanio, muestra, idRango;
-  private static String extension;
+  //private static String extension;
   private static List<Object> listaExtension;
   private List<Object> listaIDC;
   private static List<Object> listaResultado;
@@ -56,16 +57,12 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
     System.out.println("muestra " + muestra + ", tamanio " + tamanio + ", rango " + idRango);
-    CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
-    List<Object> ramdomIDC = newRamdom.getStack();
-    GetImagenesList imagenesList = new GetImagenesList(ramdomIDC);
 
-//
-//    System.out.println("tengo el ramdom de idc ");
-//    for (Object object : ramdomIDC)
-//      {
-//      System.out.println(object);
-//      }
+    CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
+    listaResultado = newRamdom.getStack();
+    System.out.println("Tamanio lista" + listaResultado.size());
+//    GetImagenesList imagenesList = new GetImagenesList(ramdomIDC);
+
     return null;
   }
 
@@ -74,15 +71,14 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     if (!isCancelled())
       {
       System.out.println("entro en done ");
-      System.exit(0);
-//      java.awt.EventQueue.invokeLater(new Runnable() {
-//        @Override
-//        public void run() {
-//          WorkerSubLote worker = new WorkerSubLote(frame, infoLabel, controlesList, listaResultado, parent,
-//                  extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
-//          worker.execute();
-//        }
-//      });
+//      System.exit(0);
+      java.awt.EventQueue.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+          WorkerSubLote worker = new WorkerSubLote(frame, infoLabel, controlesList, listaResultado, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
+          worker.execute();
+        }
+      });
       }
   }
 

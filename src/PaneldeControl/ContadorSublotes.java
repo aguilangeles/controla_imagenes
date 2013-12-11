@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ContadorSublotes {
 
-  private String extension;
+  private static String extension;
   private int idImagen;
   private List<Object> listaIDc = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class ContadorSublotes {
       }
   }
 
-  public String getExtension() {
+  public  static String getExtension() {
     return extension;
   }
 
@@ -70,8 +70,7 @@ public class ContadorSublotes {
     return listaIDc;
   }
 
-  public String getParent() {
-    File file = new File((String) listaIDc.get(0));
-    return file.getAbsolutePath();
-  }
+  
+
+
 }
