@@ -16,11 +16,14 @@ import java.util.List;
  */
 public class ContadorSublotes {
 
+  private static String parent, ultimaCarpeta;
   private static String extension;
   private int idImagen;
   private List<Object> listaIDc = new ArrayList<>();
 
   public ContadorSublotes(File file) {
+    parent = (file.getAbsolutePath());
+    ultimaCarpeta=getUltimaCarpeta(parent);
     getCantidadSublotes(file);
   }
 
@@ -36,7 +39,19 @@ public class ContadorSublotes {
       extraerExtensionImagen(file1);
       }
   }
-
+ private String getUltimaCarpeta(String aParent) {
+    String ret = "";
+    if (aParent.contains("\\"))
+      {
+      String replace = aParent.replace("\\", ", ");
+      String[] rsplit = replace.split(", ");
+      for (int i = 0; i < rsplit.length; i++)
+        {
+        ret = (rsplit[i]);
+        }
+      }
+    return ret;
+  }
   private void extraerExtensionImagen(File file) {
     String ends = file.getName();
     if (ends.contains("."))
@@ -62,15 +77,19 @@ public class ContadorSublotes {
       }
   }
 
-  public  static String getExtension() {
+  public static String getExtension() {
     return extension;
+  }
+
+  public static String getParent() {
+    return parent;
+  }
+
+  public static String getUltimaCarpeta() {
+    return ultimaCarpeta;
   }
 
   public List<Object> getListaIDc() {
     return listaIDc;
   }
-
-  
-
-
 }

@@ -36,22 +36,20 @@ public class GetImagenesList {
 
   private void getImagenes(List<Object> list, int id, int idTraza) {
     Sublote sublote = null;
-    if (conexion.isConexion())
+    contador = new GetUltimoIDInsertado(conexion, "sublotes").getUltimoID();
+    for (Iterator<Object> it = list.iterator(); it.hasNext();)
       {
-      contador = new GetUltimoIDInsertado(conexion, "sublotes").getUltimoID();
-      for (Iterator<Object> it = list.iterator(); it.hasNext();)
+      String object = (String) it.next();
+      if (id == 1)
         {
-        String object = (String) it.next();
-        if (id == 1)
-          {
-          getPagesPDF(object);
-          } else
-          {
-          contador++;
-          List<ImagenInsertada> lista = iterarFilesList(new File(object), contador);
-          sublote = new Sublote(contador, idTraza, object, 0, lista, lista.size());
-          subloteList.add(sublote);
-          }
+        getPagesPDF(object);
+        } else
+        {
+        contador++;
+        System.out.println("Contador " + contador);
+        List<ImagenInsertada> lista = iterarFilesList(object, contador);
+        sublote = new Sublote(contador, idTraza, object, 0, lista, lista.size());
+        subloteList.add(sublote);
         }
       }
   }//fin
@@ -59,9 +57,12 @@ public class GetImagenesList {
   public List<Sublote> getSubloteList() {
     return subloteList;
   }
-  private List<ImagenInsertada> iterarFilesList(File file, int idsubolote) {
+
+  private List<ImagenInsertada> iterarFilesList(String ruta, int idsubolote) {
     List<ImagenInsertada> lista = new ArrayList<>();
     ImagenInsertada imagenes = null;
+    File file = new File(ruta);
+    System.out.println("parent " + file.getParent());
     File[] files = file.listFiles();
     for (int i = 0; i < files.length; i++)
       {

@@ -57,12 +57,10 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
     System.out.println("muestra " + muestra + ", tamanio " + tamanio + ", rango " + idRango);
-
     CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
+
     listaResultado = newRamdom.getStack();
     System.out.println("Tamanio lista" + listaResultado.size());
-//    GetImagenesList imagenesList = new GetImagenesList(ramdomIDC);
-
     return null;
   }
 

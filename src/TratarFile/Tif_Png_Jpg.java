@@ -25,7 +25,11 @@ public class Tif_Png_Jpg {
   private JLabel infoLabel;
   private List<Integer> idControl;
 
-  public Tif_Png_Jpg(InsertarNuevaTraza sTraza, Conexion conexion, int idUsuario, int idDocumento, int idVerificacion, int idRango, int muestra, int tamanio, int idTraza, String parent, String ultimaCarpeta, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes) {
+  public Tif_Png_Jpg(InsertarNuevaTraza sTraza, Conexion conexion,
+          int idUsuario, int idDocumento, int idVerificacion,
+          int idRango, int muestra, int tamanio, int idTraza,
+          String parent, String ultimaCarpeta, JLabel infoLabel,
+          List<Integer> idControl, List<Object> listaImagenes) {
     this.sTraza = sTraza;
     this.conexion = conexion;
     this.idUsuario = idUsuario;

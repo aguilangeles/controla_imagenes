@@ -45,8 +45,9 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     this.muestra = muestra;
     this.tamanioLote = tamanioLote;
     this.idRango = idRango;
-    this.parent = ";";
-    this.ultimaCarpeta = "";
+    this.parent = ContadorSublotes.getParent();
+    this.ultimaCarpeta = ContadorSublotes.getUltimaCarpeta();
+//    System.out.println(parent+" - "+ultimaCarpeta);
   }
 
   @Override
@@ -57,17 +58,18 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
       {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion, idTraza);
-      //      switch (extension)
-      //        {
-      //        case ".tif":
-      //        case ".png":
-      //        case ".jpg":
-      //          Tif_Png_Jpg();
-      //          break;
-      //        case ".pdf":
-      //          OnlyPdf();
-      //          break;
-      //        }
+
+      switch (extension)
+        {
+        case ".tif":
+        case ".png":
+        case ".jpg":
+          Tif_Png_Jpg();
+          break;
+        case ".pdf":
+          OnlyPdf();
+          break;
+        }
       }
     return null;
   }
