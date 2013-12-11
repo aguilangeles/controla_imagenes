@@ -84,6 +84,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     if (con.isConexion())
       {
       int resultado = new GetUltimoIDInsertado(con, "traza").getUltimoID();
+
       trazaID = (resultado == 0) ? 1 : resultado;
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
       new Ventana(trazaDao.getTraza()).setVisible(true);

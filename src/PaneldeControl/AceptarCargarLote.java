@@ -65,7 +65,7 @@ public class AceptarCargarLote {
         con.isConexion();
           System.out.println("tamanio "+ listaIdc.size());
           System.out.println("extension "+ contadorSublotes.getExtension());
-          System.out.println("imagen "+ extensionIdImagen.getIdImagen());
+          System.out.println("imagen "+ GetExtensionIdImagen.getIdImagen());
         IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
         idext.execute();
         } else
@@ -124,6 +124,7 @@ public class AceptarCargarLote {
   }
 
   private void GetFilesForVolumen(File file) {
+    System.out.println("Insertando Volumenes");
     File[] files = file.listFiles();//lista los mismos
     getControlesPorVerificacion();//controles de la verificacion seleccionada
     con.isConexionClose();////cierra conexion

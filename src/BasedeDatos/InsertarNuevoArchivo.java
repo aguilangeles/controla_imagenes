@@ -20,7 +20,8 @@ public class InsertarNuevoArchivo {
   private String ruta;
   private int page;
 
-  public InsertarNuevoArchivo(Conexion conexion, int id, String ruta, int page, JLabel procesando) {
+  public InsertarNuevoArchivo(Conexion conexion, int id, String ruta, int page,
+          JLabel procesando) {
     this.conexion = conexion;
     this.id += id;
     this.ruta = ruta;
@@ -30,6 +31,8 @@ public class InsertarNuevoArchivo {
 
   private boolean archivo_Insertar(JLabel procesando) {
     int estado = 0;
+    //un elemento que llame a este
+    // agregar que inserte idsublote cero
     String insertar = "Insert into qualitys.archivo (idTraza"
             + ", ruta_archivo "
             + ", pagina_pdf "

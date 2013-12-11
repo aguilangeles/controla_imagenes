@@ -8,7 +8,6 @@ import Entidades.NombrePaginaDelPDF;
 import Helpers.GetExtensionIdImagen;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,6 +20,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 public class GetImagenesList {
 
   private static String parent;
+  int contador = 0;
+  int idtraza = 2;
 
   public GetImagenesList(List<Object> lista) {
 
@@ -35,9 +36,13 @@ public class GetImagenesList {
       String object = (String) it.next();
       if (id == 1)
         {
+
         getPagesPDF(object);
         } else
         {
+        contador++;
+        System.out.println("Objeto idc id" + contador
+                + " \ntraza " + idtraza + " \nruta " + object + "\n cantidad de imagenes ? " + "\nestado 0");
         iterarFiles(new File(object));
         }
       }
@@ -48,7 +53,7 @@ public class GetImagenesList {
     for (int i = 0; i < files.length; i++)
       {
       File file1 = files[i];
-      System.out.println(file1.getAbsolutePath());
+//      System.out.println(file1.getAbsolutePath());
       }
   }
 
@@ -74,11 +79,9 @@ public class GetImagenesList {
       JOptionPane.showMessageDialog(null, ex.getMessage(),
               "Encontrar Paginas PDF", JOptionPane.ERROR_MESSAGE);
       }
-
   }
 
   public static String getParent() {
     return parent;
   }
-  
 }
