@@ -5,6 +5,7 @@
 package TratarFile;
 
 import BasedeDatos.Conexion;
+import BasedeDatos.GetUltimoIDInsertado;
 import Entidades.NombrePaginaDelPDF;
 import Helpers.GetExtensionIdImagen;
 import java.io.File;
@@ -23,42 +24,41 @@ public class GetImagenesList {
 
   private static String parent;
   int contador = 0;
+  private List<Sublote> subloteList = new ArrayList<>();
+  private Conexion conexion;
 
   public GetImagenesList(List<Object> lista, Conexion conexion, int idTraza) {
     int idImagen = GetExtensionIdImagen.getIdImagen();
     int traza = idTraza + 1;
+    this.conexion = conexion;
     getImagenes(lista, idImagen, traza);
   }
 
   private void getImagenes(List<Object> list, int id, int idTraza) {
     Sublote sublote = null;
-    for (Iterator<Object> it = list.iterator(); it.hasNext();)
+    if (conexion.isConexion())
       {
-      String object = (String) it.next();
-      if (id == 1)
+      contador = new GetUltimoIDInsertado(conexion, "sublotes").getUltimoID();
+      for (Iterator<Object> it = list.iterator(); it.hasNext();)
         {
-        getPagesPDF(object);
-        } else
-        {
-
-        contador++;
-        List<ImagenInsertada> lista = iterarFilesList(new File(object), contador);
-        sublote = new Sublote(contador, idTraza, object, 0, lista, lista.size());
-        System.out.println(sublote);
-//        iterarFiles(new File(object));
+        String object = (String) it.next();
+        if (id == 1)
+          {
+          getPagesPDF(object);
+          } else
+          {
+          contador++;
+          List<ImagenInsertada> lista = iterarFilesList(new File(object), contador);
+          sublote = new Sublote(contador, idTraza, object, 0, lista, lista.size());
+          subloteList.add(sublote);
+          }
         }
       }
-  }
+  }//fin
 
-//  private void iterarFiles(File file) {
-//    File[] files = file.listFiles();
-//    for (int i = 0; i < files.length; i++)
-//      {
-//      File file1 = files[i];
-//
-////      System.out.println(file1.getAbsolutePath());
-//      }
-//  }
+  public List<Sublote> getSubloteList() {
+    return subloteList;
+  }
   private List<ImagenInsertada> iterarFilesList(File file, int idsubolote) {
     List<ImagenInsertada> lista = new ArrayList<>();
     ImagenInsertada imagenes = null;
