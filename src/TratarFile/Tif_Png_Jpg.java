@@ -24,6 +24,7 @@ public class Tif_Png_Jpg {
   private static CrearElRamdom ramdom;
   private JLabel infoLabel;
   private List<Integer> idControl;
+  private List<Sublote> sublotes;
 
   public Tif_Png_Jpg(InsertarNuevaTraza sTraza, Conexion conexion,
           int idUsuario, int idDocumento, int idVerificacion,
@@ -45,6 +46,24 @@ public class Tif_Png_Jpg {
     this.idControl = idControl;
     ramdom = new CrearElRamdom(listaImagenes, muestra);
     Tif_Png_Jpg();
+  }
+
+  public Tif_Png_Jpg(InsertarNuevaTraza sTraza, Conexion conexion, int idUsuario,
+          int idDocumento, int idVerificacion, int idRango, int muestra, int tamanioLote,
+          int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
+    this.sTraza = sTraza;
+    this.conexion = conexion;
+    this.idUsuario = idUsuario;
+    this.idDocumento = idDocumento;
+    this.idVerificacion = idVerificacion;
+    this.idRango = idRango;
+    this.muestra = muestra;
+    this.tamanio = tamanioLote;
+    this.idTraza = idTraza;
+    this.infoLabel = infoLabel;
+    this.idControl = idControl;
+    this.sublotes = sublotes;
+
   }
 
   private void Tif_Png_Jpg() {

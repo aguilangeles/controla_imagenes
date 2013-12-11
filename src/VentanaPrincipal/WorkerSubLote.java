@@ -10,6 +10,7 @@ import BasedeDatos.InsertarNuevaTraza;
 import PaneldeControl.ContadorSublotes;
 import TratarFile.GetImagenesList;
 import TratarFile.OnlyPdf;
+import TratarFile.Sublote;
 import TratarFile.Tif_Png_Jpg;
 import java.util.List;
 import javax.swing.JFrame;
@@ -32,6 +33,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   private int idRango, contador;
   private int idTraza;
   private static InsertarNuevaTraza sTraza;
+  private List<Sublote> sublotes;
 
   public WorkerSubLote(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
     this.cargaLote = controles;
@@ -58,6 +60,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
       {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion, idTraza);
+      sublotes = imagenesList.getSubloteList();
 
       switch (extension)
         {
@@ -100,10 +103,13 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   }
 
   private void Tif_Png_Jpg() {
-    Tif_Png_Jpg tif_Png_Jpg =
-            new Tif_Png_Jpg(sTraza, conexion, idUsuario, idDocumento,
-            idVerificacion, idRango, muestra, tamanioLote, idTraza,
-            parent, ultimaCarpeta, infoLabel, idControl, listaImagenes);
+    /*cambiar el constructor*/
+//    Tif_Png_Jpg tif_Png_Jpg =
+//            new Tif_Png_Jpg(sTraza, conexion, idUsuario, idDocumento,
+//            idVerificacion, idRango, muestra, tamanioLote, idTraza,
+//            parent, ultimaCarpeta, infoLabel, idControl, listaImagenes);
+    Tif_Png_Jpg varios = new Tif_Png_Jpg(sTraza, conexion, idUsuario, idDocumento, idVerificacion, idRango, muestra, tamanioLote, idTraza, infoLabel, idControl, sublotes);
+
   }
 
   private void OnlyPdf() {
