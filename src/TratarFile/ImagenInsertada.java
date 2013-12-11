@@ -46,9 +46,9 @@ public class ImagenInsertada {
 
   @Override
   public String toString() {
-    return "\n idsubolote=" + idsubolote
-            + "\n nombre=" + nombre
-            + "\n  pagina=" + pagina
+    return "idsubolote=" + idsubolote
+            + ", nombre=" + nombre
+            + ", pagina=" + pagina
             + "\n ";
   }
 }

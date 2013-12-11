@@ -26,9 +26,7 @@ public class GetImagenesList {
 
   public GetImagenesList(List<Object> lista, Conexion conexion, int idTraza) {
     int idImagen = GetExtensionIdImagen.getIdImagen();
-    int traza = idTraza+1;
-    System.out.println("extension " + GetExtensionIdImagen.getImgExt());
-    System.out.println("id " + GetExtensionIdImagen.getIdImagen());
+    int traza = idTraza + 1;
     getImagenes(lista, idImagen, traza);
   }
 
@@ -37,12 +35,12 @@ public class GetImagenesList {
     for (Iterator<Object> it = list.iterator(); it.hasNext();)
       {
       String object = (String) it.next();
-      System.out.println(object);
       if (id == 1)
         {
         getPagesPDF(object);
         } else
         {
+
         contador++;
         List<ImagenInsertada> lista = iterarFilesList(new File(object), contador);
         sublote = new Sublote(contador, idTraza, object, 0, lista, lista.size());
