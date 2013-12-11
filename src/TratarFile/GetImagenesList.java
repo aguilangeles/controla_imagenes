@@ -4,6 +4,7 @@
  */
 package TratarFile;
 
+import BasedeDatos.Conexion;
 import Entidades.NombrePaginaDelPDF;
 import Helpers.GetExtensionIdImagen;
 import java.io.File;
@@ -22,16 +23,16 @@ public class GetImagenesList {
 
   private static String parent;
   int contador = 0;
-  int idtraza = 2;
 
-  public GetImagenesList(List<Object> lista) {
-    int id = GetExtensionIdImagen.getIdImagen();
+  public GetImagenesList(List<Object> lista, Conexion conexion, int idTraza) {
+    int idImagen = GetExtensionIdImagen.getIdImagen();
+    int traza = idTraza+1;
     System.out.println("extension " + GetExtensionIdImagen.getImgExt());
     System.out.println("id " + GetExtensionIdImagen.getIdImagen());
-    getImagenes(lista, id);
+    getImagenes(lista, idImagen, traza);
   }
 
-  private void getImagenes(List<Object> list, int id) {
+  private void getImagenes(List<Object> list, int id, int idTraza) {
     Sublote sublote = null;
     for (Iterator<Object> it = list.iterator(); it.hasNext();)
       {
@@ -43,9 +44,8 @@ public class GetImagenesList {
         } else
         {
         contador++;
-        System.out.println(contador);
         List<ImagenInsertada> lista = iterarFilesList(new File(object), contador);
-        sublote = new Sublote(contador, idtraza, object, 0, lista, lista.size());
+        sublote = new Sublote(contador, idTraza, object, 0, lista, lista.size());
         System.out.println(sublote);
 //        iterarFiles(new File(object));
         }
@@ -68,7 +68,7 @@ public class GetImagenesList {
     for (int i = 0; i < files.length; i++)
       {
       File file1 = files[i];
-      imagenes = new ImagenInsertada(i, idsubolote, file1.getName(), 0, 0);
+      imagenes = new ImagenInsertada(idsubolote, file1.getName(), 0);
       lista.add(imagenes);
       }
     return lista;

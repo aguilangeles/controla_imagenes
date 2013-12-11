@@ -10,26 +10,14 @@ package TratarFile;
  */
 public class ImagenInsertada {
 
-  private int id;
   private int idsubolote;
   private String nombre;
   private int pagina;
-  private int estado;
 
-  public ImagenInsertada(int id, int idsubolote, String nombre, int pagina, int estado) {
-    this.id = id;
+  public ImagenInsertada(int idsubolote, String nombre, int pagina) {
     this.idsubolote = idsubolote;
     this.nombre = nombre;
     this.pagina = pagina;
-    this.estado = estado;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public int getIdsubolote() {
@@ -56,21 +44,11 @@ public class ImagenInsertada {
     this.pagina = pagina;
   }
 
-  public int getEstado() {
-    return estado;
-  }
-
-  public void setEstado(int estado) {
-    this.estado = estado;
-  }
-
   @Override
   public String toString() {
-    return "\nid=" + id
-            + "\n idsubolote=" + idsubolote
+    return "\n idsubolote=" + idsubolote
             + "\n nombre=" + nombre
             + "\n  pagina=" + pagina
-            + "\n  estado=" + estado
             + "\n ";
   }
 }

@@ -49,16 +49,14 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     this.ultimaCarpeta = "";
   }
 
-
-
   @Override
   protected String doInBackground() {
     System.out.println("do in background worker");
     /*DEBERIA INSERTAR ACA EL CONTENIDO DE SUBLOTES*/
     if (conexion.isConexion())
       {
-      GetImagenesList imagenesList = new GetImagenesList(listaImagenes);
-      //      idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
+      idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
+      GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion, idTraza);
       //      switch (extension)
       //        {
       //        case ".tif":
