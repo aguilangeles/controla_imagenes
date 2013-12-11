@@ -65,6 +65,7 @@ public class Tif_Png_Jpg {
     String ultima = ContadorSublotes.getUltimaCarpeta();
     this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanio, parents, ultima, muestra, idRango);
+    new InsertarEnSublotes(conexion, null);// lista de sublotes
 
   }
 
