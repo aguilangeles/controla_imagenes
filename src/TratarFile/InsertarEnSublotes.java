@@ -5,6 +5,8 @@
 package TratarFile;
 
 import BasedeDatos.Conexion;
+import BasedeDatos.GetUltimoIDInsertado;
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,20 +18,20 @@ import javax.swing.JOptionPane;
 class InsertarEnSublotes {
 
   private Conexion conexion;
+  private List<ImagenInsertada> listaimagens;
 
   public InsertarEnSublotes(Conexion conexion, List<Sublote> sublotes) {
-    //insertar(conexion, sublotes);
-    llenarTraza(conexion, sublotes);
+    llenarSublote(conexion, sublotes);
   }
 
-  private void llenarTraza(Conexion conexion, List<Sublote> sl) {
+  private void llenarSublote(Conexion conexion, List<Sublote> sl) {
     for (Sublote sub : sl)
       {
-      insertar(conexion, sub);
+      insertarSublote(conexion, sub);
       }
   }
 
-  private boolean insertar(Conexion conexion, Sublote sl) {
+  private boolean insertarSublote(Conexion conexion, Sublote sl) {
     int estado = 0;
     //un elemento que llame a este
     // agregar que inserte idsublote cero
@@ -46,7 +48,7 @@ class InsertarEnSublotes {
             + ");";
     try
       {
-      System.out.println(insertar);
+      System.out.println("insertar sublote " + insertar);
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {
@@ -54,5 +56,35 @@ class InsertarEnSublotes {
               InsertarEnSublotes.class.getName(), JOptionPane.ERROR_MESSAGE);
       }
     return false;
+  }
+
+  private void insertarimagenes(Sublote sub) {
+    int estado = 0;
+    for (ImagenInsertada img : listaimagens)
+      {
+      try
+        {
+        String insertar = "Insert into qualitys.archivo "
+                + "(idTraza"
+                + ", ruta_archivo "
+                + ", estado"
+                + ", pagina_pdf "
+                + ", idsublote "
+                + ")"
+                + " VALUES ("
+                + sub.getIdtraza()
+                + ", '" + img.getNombre()
+                + "', " + estado
+                + ", " + img.getPagina()
+                + ", " + img.getIdsubolote()
+                + ");";
+
+        System.out.println(insertar);
+        conexion.executeUpdate(insertar);
+        } catch (SQLException ex)
+        {
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Archivo Insertar", JOptionPane.ERROR_MESSAGE);
+        }
+      }
   }
 }

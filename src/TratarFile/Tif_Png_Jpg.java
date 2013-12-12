@@ -68,7 +68,7 @@ public class Tif_Png_Jpg {
     this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanio, parents, ultima, muestra, idRango);
     InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes); // lista de sublotes
-
+//    imagenyControl();
   }
 
   private void Tif_Png_Jpg() {

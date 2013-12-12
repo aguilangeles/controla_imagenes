@@ -31,8 +31,6 @@ public class InsertarNuevoArchivo {
 
   private boolean archivo_Insertar(JLabel procesando) {
     int estado = 0;
-    //un elemento que llame a este
-    // agregar que inserte idsublote cero
     String insertar = "Insert into qualitys.archivo (idTraza"
             + ", ruta_archivo "
             + ", pagina_pdf "
