@@ -9,7 +9,10 @@ import BasedeDatos.Conexion;
 import BasedeDatos.InsertarNuevoArchivo;
 import BasedeDatos.InsertarNuevaTraza;
 import PaneldeControl.ContadorSublotes;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -69,6 +72,7 @@ public class Tif_Png_Jpg {
             tamanio, parents, ultima, muestra, idRango);
     InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes); // lista de sublotes
 //    imagenyControl();
+    pruebainsertarImagen();
   }
 
   private void Tif_Png_Jpg() {
@@ -88,6 +92,44 @@ public class Tif_Png_Jpg {
       gar.gc();
       }
 
+  }
+
+  private void pruebainsertarImagen() {
+    int estado = 0;
+    for (Sublote s : sublotes)
+      {
+      for (ImagenInsertada img : s.getImagenes())
+        {
+        cargarimagen(img, s.getIdtraza());
+        imagenyControl();
+        }
+      }
+  }
+  private void cargarimagen(ImagenInsertada img, int idtraza) {
+    try
+      {
+      int estado = 0;
+
+      String insertar = "Insert into qualitys.archivo "
+              + "(idTraza"
+              + ", ruta_archivo "
+              + ", estado"
+              + ", pagina_pdf "
+              + ", idsublote "
+              + ")"
+              + " VALUES ("
+              + idtraza
+              + ", '" + img.getNombre()
+              + "', " + estado
+              + ", " + img.getPagina()
+              + ", " + img.getIdsubolote()
+              + ");";
+      System.out.println(insertar);
+      conexion.executeUpdate(insertar);
+      } catch (SQLException ex)
+      {
+      Logger.getLogger(Tif_Png_Jpg.class.getName()).log(Level.SEVERE, null, ex);
+      }
   }
 
   private void imagenyControl() {
