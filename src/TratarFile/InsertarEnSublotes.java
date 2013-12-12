@@ -57,34 +57,4 @@ class InsertarEnSublotes {
       }
     return false;
   }
-
-  private void insertarimagenes(Sublote sub) {
-    int estado = 0;
-    for (ImagenInsertada img : listaimagens)
-      {
-      try
-        {
-        String insertar = "Insert into qualitys.archivo "
-                + "(idTraza"
-                + ", ruta_archivo "
-                + ", estado"
-                + ", pagina_pdf "
-                + ", idsublote "
-                + ")"
-                + " VALUES ("
-                + sub.getIdtraza()
-                + ", '" + img.getNombre()
-                + "', " + estado
-                + ", " + img.getPagina()
-                + ", " + img.getIdsubolote()
-                + ");";
-
-        System.out.println(insertar);
-        conexion.executeUpdate(insertar);
-        } catch (SQLException ex)
-        {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Archivo Insertar", JOptionPane.ERROR_MESSAGE);
-        }
-      }
-  }
 }

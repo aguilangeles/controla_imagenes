@@ -71,7 +71,6 @@ public class Tif_Png_Jpg {
     this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanio, parents, ultima, muestra, idRango);
     InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes); // lista de sublotes
-//    imagenyControl();
     pruebainsertarImagen();
   }
 
@@ -105,26 +104,25 @@ public class Tif_Png_Jpg {
         }
       }
   }
+
   private void cargarimagen(ImagenInsertada img, int idtraza) {
     try
       {
       int estado = 0;
-
       String insertar = "Insert into qualitys.archivo "
               + "(idTraza"
               + ", ruta_archivo "
               + ", estado"
               + ", pagina_pdf "
-              + ", idsublote "
+              + ", idCategoria "
               + ")"
               + " VALUES ("
               + idtraza
               + ", '" + img.getNombre()
               + "', " + estado
               + ", " + img.getPagina()
-              + ", " + img.getIdsubolote()
+              + ", " + 2
               + ");";
-      System.out.println(insertar);
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {
@@ -135,5 +133,21 @@ public class Tif_Png_Jpg {
   private void imagenyControl() {
     InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado =
             new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion);
+  }
+
+  private void archivoSublote() {
+    String insert = "INSERT INTO qualitys.archivo_sublote"
+            + "idcategoria,"
+            + "idtraza,"
+            + "idarchivo,"
+            + "idsublote)"
+            + "VALUES"
+            + "("
+            + " 2 "
+            + ", " + idTraza
+            + ", "//qeu noseco mosa careli dearchivo posoye
+            + "<{idsublote: }>"
+            + ");";
+
   }
 }
