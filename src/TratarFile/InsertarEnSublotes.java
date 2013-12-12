@@ -5,8 +5,6 @@
 package TratarFile;
 
 import BasedeDatos.Conexion;
-import BasedeDatos.GetUltimoIDInsertado;
-import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,6 +19,7 @@ class InsertarEnSublotes {
   private List<ImagenInsertada> listaimagens;
 
   public InsertarEnSublotes(Conexion conexion, List<Sublote> sublotes) {
+    System.out.println("entro en sublotes ");
     llenarSublote(conexion, sublotes);
   }
 
