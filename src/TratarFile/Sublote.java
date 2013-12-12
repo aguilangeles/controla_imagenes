@@ -45,7 +45,8 @@ public class Sublote {
   }
 
   public String getNombre() {
-    return nombre;
+    String replace = nombre.replace("\\", "\\\\");
+    return replace;
   }
 
   public void setNombre(String nombre) {

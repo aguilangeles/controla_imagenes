@@ -61,6 +61,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion, idTraza);
       sublotes = imagenesList.getSubloteList();
+      System.out.println("sublotes " + sublotes.size());
       switch (idImagen)
         {
         case 1:

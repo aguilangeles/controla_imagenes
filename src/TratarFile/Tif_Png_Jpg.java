@@ -49,7 +49,9 @@ public class Tif_Png_Jpg {
     Tif_Png_Jpg();
   }
 
-  public Tif_Png_Jpg(Conexion conexion, int idUsuario, int idDocumento, int idVerificacion, int idRango, int muestra, int tamanioLote, int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
+  public Tif_Png_Jpg(Conexion conexion, int idUsuario, int idDocumento,
+          int idVerificacion, int idRango, int muestra, int tamanioLote,
+          int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
     this.conexion = conexion;
     this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
@@ -65,7 +67,7 @@ public class Tif_Png_Jpg {
     String ultima = ContadorSublotes.getUltimaCarpeta();
     this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanio, parents, ultima, muestra, idRango);
-    new InsertarEnSublotes(conexion, null);// lista de sublotes
+    InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes); // lista de sublotes
 
   }
 

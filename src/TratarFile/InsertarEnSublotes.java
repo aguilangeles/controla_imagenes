@@ -6,6 +6,7 @@ package TratarFile;
 
 import BasedeDatos.Conexion;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,8 +15,18 @@ import javax.swing.JOptionPane;
  */
 class InsertarEnSublotes {
 
-  public InsertarEnSublotes(Conexion conexion, Sublote sublote) {
-    insertar(conexion , sublote);
+  private Conexion conexion;
+
+  public InsertarEnSublotes(Conexion conexion, List<Sublote> sublotes) {
+    //insertar(conexion, sublotes);
+    llenarTraza(conexion, sublotes);
+  }
+
+  private void llenarTraza(Conexion conexion, List<Sublote> sl) {
+    for (Sublote sub : sl)
+      {
+      insertar(conexion, sub);
+      }
   }
 
   private boolean insertar(Conexion conexion, Sublote sl) {
@@ -25,20 +36,23 @@ class InsertarEnSublotes {
     String insertar = "INSERT INTO qualitys.sublotes "
             + "( idtraza "
             + ", ruta "
-            + ", total_img ) "
+            + ", total_img "
+            + ", estado ) "
             + "VALUES "
-            + "( "+sl.getIdtraza()
-            + ", '"+sl.getNombre()
-            + "', "+sl.getTamanio()
+            + "( " + sl.getIdtraza()
+            + ", '" + sl.getNombre()
+            + "', " + sl.getTamanio()
+            + ", " + estado
             + ");";
     try
       {
+      System.out.println(insertar);
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Archivo Insertar", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, ex.getMessage(),
+              InsertarEnSublotes.class.getName(), JOptionPane.ERROR_MESSAGE);
       }
     return false;
   }
 }
-
