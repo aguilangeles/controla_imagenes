@@ -51,13 +51,9 @@ public class GetImagenesAdyacentes {
 
           getPrevisFile(files, imin);
           getNextFile(files, imas);
-//          String aname = (files[imin].exists()) ? files[imin].getName() : "nathing ";
-
           } catch (ArrayIndexOutOfBoundsException e)
           {
           System.out.println("exception !!!!");
-//          System.out.println(file);
-//          System.out.println(e.getMessage());
           }
         }
       }

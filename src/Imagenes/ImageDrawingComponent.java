@@ -40,9 +40,9 @@ public class ImageDrawingComponent extends JPanel {
 
   public ImageDrawingComponent() {
   }
+//lo uso para ayuda imagenes?
 
   public ImageDrawingComponent(String imagen, JPanel panel, int opcion, boolean pdf, boolean tif) {
-    System.out.println("draw imagen " + imagen);
     loadImage(imagen, pdf, tif);
     dimensionPanel.setSize(panel.getSize());
     setOpIndex(opcion);
@@ -50,6 +50,8 @@ public class ImageDrawingComponent extends JPanel {
 
   public void cargarImage(String path, boolean pdf, boolean tif,
           final JComboBox combo, final JPanel panelscroll, JButton button, JButton entera) {
+    System.out.println("Imagen en drawimagen " + path);
+    String p ="c:\\angeles\\testeo\\gnd3\\GND#V201012V0000002#GEN00_00000054#55\\Imagenes\\GND#V201012V0000002#GEN00_000000040#49\\Imagenes\\49_0002_00013998.tif";
     loadImage(path, pdf, tif);
     combo.addActionListener(new ActionListener() {
       @Override

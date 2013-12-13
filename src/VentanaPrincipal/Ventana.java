@@ -7,7 +7,7 @@ package VentanaPrincipal;
 import BasedeDatos.GetNumerosImagenesRechazadas;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
-import Helpers.RutaMouseListener;
+//import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
 import java.awt.event.KeyEvent;
@@ -49,7 +49,7 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
-    rutaLabel.addMouseListener(new RutaMouseListener());
+   // rutaLabel.addMouseListener(new RutaMouseListener());
     siguiente.addKeyListener(keylistener());
     anterior.addKeyListener(keylistener());
   }
@@ -402,11 +402,12 @@ public class Ventana extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private boolean isImagenTif(boolean pdf, String extension) {
-    if (!pdf && extension.equalsIgnoreCase(".tif"))
-      {
-      return true;
-      }
-    return false;
+//    System.out.println("extension " +extension);
+//    if (!pdf && extension.equalsIgnoreCase(".tif"))
+//      {
+//      return true;
+//      }
+    return true;
   }
 
   private void iniciar(TrazaDao traza) {
@@ -415,7 +416,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
-    RutaMouseListener.getAdyacentes(pdf, siguientes);
+   // RutaMouseListener.getAdyacentes(pdf, siguientes);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -426,7 +427,7 @@ public class Ventana extends javax.swing.JFrame {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
-    RutaMouseListener.getAdyacentes(pdf, imagen1);
+    //RutaMouseListener.getAdyacentes(pdf, imagen1);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -438,7 +439,7 @@ public class Ventana extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
-    RutaMouseListener.getAdyacentes(pdf, pr);
+   // RutaMouseListener.getAdyacentes(pdf, pr);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,

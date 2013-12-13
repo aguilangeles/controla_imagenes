@@ -7,6 +7,7 @@ package Entidades;
 import Helpers.GetImagenesAdyacentes;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,7 +37,7 @@ public class Imagen {
   public Imagen(int id, String ruta_archivo, int pagina, int idsublote) {
     this.id = id;
     this.pagina = pagina;
-    this.rutaParaConversion = decodear(ruta_archivo);
+    this.rutaParaConversion = (ruta_archivo);
     this.idSublote = idsublote;
   }
 
@@ -53,10 +54,24 @@ public class Imagen {
     return ret;
   }
 
-  public GetImagenesAdyacentes adyacentes() {
-    GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(getRutaParaConversion());
-    return imagenesAdyacentes;
+  public String encoder(String aString) {
+    String ret = "";
+    try
+      {
+      ret = URLEncoder.encode(aString, "UTF-8");
+      } catch (UnsupportedEncodingException ex)
+      {
+      JOptionPane.showMessageDialog(null, ex.getMessage(),
+              "Llenar Traza : encoding", JOptionPane.ERROR_MESSAGE);
+      }
+    return ret;
   }
+
+//  public GetImagenesAdyacentes adyacentes() {
+//    String ad = decodear(getRutaParaConversion());
+//    GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(getRutaParaConversion());
+//    return imagenesAdyacentes;
+//  }
 
   public void traerImagenAdyacente(boolean tiff) {
   }
@@ -131,6 +146,4 @@ public class Imagen {
   public String toString() {
     return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
   }
-
-
 }
