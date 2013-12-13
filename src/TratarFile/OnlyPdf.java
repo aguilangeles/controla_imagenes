@@ -63,7 +63,7 @@ public class OnlyPdf {
       String adaptarFile = pagina.getNombre().substring(parentlength);
       String filename = adaptarFile.replace("\\", "\\\\");
       int page = pagina.getNumeroPagina();
-      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, page, infoLabel);
+      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, page, infoLabel, 1);
       imagenyControl();
       Runtime gar = Runtime.getRuntime();
       gar.gc();

@@ -17,20 +17,21 @@ class InsertarEnSublotes {
 
   private Conexion conexion;
   private List<ImagenInsertada> listaimagens;
+  private int idtraza;
 
-  public InsertarEnSublotes(Conexion conexion, List<Sublote> sublotes) {
-    System.out.println("entro en sublotes ");
-    llenarSublote(conexion, sublotes);
+  public InsertarEnSublotes(Conexion conexion, List<Sublote> sublotes, int idtraza) {
+    llenarSublote(conexion, sublotes, idtraza);
   }
 
-  private void llenarSublote(Conexion conexion, List<Sublote> sl) {
+  private void llenarSublote(Conexion conexion, List<Sublote> sl, int idtraza) {
     for (Sublote sub : sl)
       {
-      insertarSublote(conexion, sub);
+      insertarSublote(conexion, sub, idtraza);
       }
   }
 
-  private boolean insertarSublote(Conexion conexion, Sublote sl) {
+  private boolean insertarSublote(Conexion conexion, Sublote sl, int idtraza) {
+    idtraza = sl.getIdtraza();
     int estado = 0;
     //un elemento que llame a este
     // agregar que inserte idsublote cero
@@ -40,7 +41,7 @@ class InsertarEnSublotes {
             + ", total_img "
             + ", estado ) "
             + "VALUES "
-            + "( " + sl.getIdtraza()
+            + "( " + idtraza
             + ", '" + sl.getNombre()
             + "', " + sl.getTamanio()
             + ", " + estado

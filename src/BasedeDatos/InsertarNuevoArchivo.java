@@ -17,35 +17,43 @@ public class InsertarNuevoArchivo {
 
   private Conexion conexion;
   private int id = 1;
+  private int idcategoria;
   private String ruta;
   private int page;
 
-  public InsertarNuevoArchivo(Conexion conexion, int id, String ruta, int page,
-          JLabel procesando) {
+  public InsertarNuevoArchivo(Conexion conexion,
+          int id, String ruta, int page, JLabel procesando, int idcategoria) {
     this.conexion = conexion;
+    System.out.println("traza recibida " + id);
     this.id += id;
+    System.out.println("\te incrementada " + this.id);
     this.ruta = ruta;
     this.page = page;
+    this.idcategoria = idcategoria;
     archivo_Insertar(procesando);
   }
 
   private boolean archivo_Insertar(JLabel procesando) {
     int estado = 0;
-    String insertar = "Insert into qualitys.archivo (idTraza"
+    String insertar = "Insert into qualitys.archivo "
+            + "( idTraza"
             + ", ruta_archivo "
+            + ", estado"
             + ", pagina_pdf "
-            + ", estado)"
+            + ", idCategoria) "
             + " VALUES (" + id
             + ", '" + ruta
-            + "', " + page
-            + ", " + estado + ");";
+            + "', " + estado
+            + ", " + page
+            + ", " + idcategoria
+            + ");";
     procesando.setText("Insertando en DB " + ruta);
     try
       {
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Archivo Insertar", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, ex.getMessage(), InsertarNuevoArchivo.class.getName(), JOptionPane.ERROR_MESSAGE);
       }
     return false;
   }

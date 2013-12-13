@@ -71,7 +71,7 @@ public class Tif_Png_Jpg {
     String ultima = ContadorSublotes.getUltimaCarpeta();
     this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanio, parents, ultima, muestra, idRango);
-    InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes); // lista de sublotes
+    InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza); // lista de sublotes
     pruebainsertarImagen();
   }
 
@@ -86,12 +86,11 @@ public class Tif_Png_Jpg {
       int parentlength = parent.length() + 1;
       String adaptarFile = aImagen.substring(parentlength);
       String filename = adaptarFile.replace("\\", "\\\\");
-      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, 0, infoLabel);
+      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, 0, infoLabel, 1);
       imagenyControl();
       Runtime gar = Runtime.getRuntime();
       gar.gc();
       }
-
   }
 
   private void pruebainsertarImagen() {
@@ -107,34 +106,37 @@ public class Tif_Png_Jpg {
   }
 
   private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
-    try
-      {
-      int estado = 0;
-      String insertar = "Insert into qualitys.archivo "
-              + "(idTraza"
-              + ", ruta_archivo "
-              + ", estado"
-              + ", pagina_pdf "
-              + ", idCategoria "
-              + ")"
-              + " VALUES ("
-              + idtraza
-              + ", '" + img.getNombre()
-              + "', " + estado
-              + ", " + img.getPagina()
-              + ", " + 2
-              + ");";
-      conexion.executeUpdate(insertar);
-      int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
-      System.out.println("ultimo id archivo " + ultimoid);
-      archivoSublote(idtraza, ultimoid, idsublote);
-      } catch (SQLException ex)
-      {
-      Logger.getLogger(Tif_Png_Jpg.class.getName()).log(Level.SEVERE, null, ex);
-      }
+//    try
+//      {
+    int estado = 0;
+    //      String insertar = "Insert into qualitys.archivo "
+    //              + "(idTraza"
+    //              + ", ruta_archivo "
+    //              + ", estado"
+    //              + ", pagina_pdf "
+    //              + ", idCategoria "
+    //              + ")"
+    //              + " VALUES ("
+    //              + idtraza
+    //              + ", '" + img.getNombre()
+    //              + "', " + estado
+    //              + ", " + img.getPagina()
+    //              + ", " + 2
+    //              + ");";
+    //      conexion.executeUpdate(insertar);
+    int nuevatraza = idtraza-1;
+    InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, nuevatraza, img.getNombre(), img.getPagina(), infoLabel, 2);
+    int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
+    System.out.println("ultimo id archivo " + ultimoid);
+    archivoSublote(idtraza, ultimoid, idsublote);
+//      } catch (SQLException ex)
+//      {
+//      Logger.getLogger(Tif_Png_Jpg.class.getName()).log(Level.SEVERE, null, ex);
+//      }
   }
 
   private void archivoSublote(int idtraza, int idarchivo, int idsublote) {
+    int nuevatraza = idtraza;
     try
       {
       String insert = "INSERT INTO qualitys.archivo_sublote"
@@ -145,7 +147,7 @@ public class Tif_Png_Jpg {
               + "VALUES"
               + "("
               + " 2 "
-              + ", " + idtraza
+              + ", " + nuevatraza
               + ", " + idarchivo
               + ", " + idsublote
               + ");";

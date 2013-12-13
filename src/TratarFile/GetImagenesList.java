@@ -29,7 +29,7 @@ public class GetImagenesList {
 
   public GetImagenesList(List<Object> lista, Conexion conexion, int idTraza) {
     int idImagen = GetExtensionIdImagen.getIdImagen();
-    int traza = idTraza + 1;
+    int traza = idTraza;
     this.conexion = conexion;
     getImagenes(lista, idImagen, traza);
   }

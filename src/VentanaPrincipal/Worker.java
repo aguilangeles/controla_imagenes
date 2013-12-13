@@ -54,6 +54,7 @@ public class Worker extends SwingWorker<Object, Object> {
     if (conexion.isConexion())
       {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
+      System.out.println("idtraza en worker imagens " + idTraza);
       switch (extension)
         {
         case ".tiff":
