@@ -10,10 +10,7 @@ import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevoArchivo;
 import BasedeDatos.InsertarNuevaTraza;
 import PaneldeControl.ContadorSublotes;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -106,7 +103,7 @@ public class Tif_Png_Jpg {
 
   private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
     int estado = 0;
-    int nuevatraza = idtraza - 1;
+    int nuevatraza = idtraza;
     InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, nuevatraza, img.getNombre(), img.getPagina(), infoLabel, 2);
     int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
     archivoSublote(idtraza, ultimoid, idsublote);

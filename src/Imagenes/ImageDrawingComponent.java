@@ -50,8 +50,6 @@ public class ImageDrawingComponent extends JPanel {
 
   public void cargarImage(String path, boolean pdf, boolean tif,
           final JComboBox combo, final JPanel panelscroll, JButton button, JButton entera) {
-    System.out.println("Imagen en drawimagen " + path);
-    String p ="c:\\angeles\\testeo\\gnd3\\GND#V201012V0000002#GEN00_00000054#55\\Imagenes\\GND#V201012V0000002#GEN00_000000040#49\\Imagenes\\49_0002_00013998.tif";
     loadImage(path, pdf, tif);
     combo.addActionListener(new ActionListener() {
       @Override

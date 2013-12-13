@@ -53,10 +53,9 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   @Override
   protected String doInBackground() {
     int idImagen = GetExtensionIdImagen.getIdImagen();
-    /*DEBERIA INSERTAR ACA EL CONTENIDO DE SUBLOTES*/
     if (conexion.isConexion())
       {
-      int resultado = new GetUltimoIDInsertado(conexion, "traza").getUltimoID() + 1;
+      int resultado = new GetUltimoIDInsertado(conexion, "traza").getUltimoID() ;
       idTraza = (resultado == 0) ? 1 : resultado;
       GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion, idTraza);
       sublotes = imagenesList.getSubloteList();

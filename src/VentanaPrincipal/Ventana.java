@@ -7,7 +7,7 @@ package VentanaPrincipal;
 import BasedeDatos.GetNumerosImagenesRechazadas;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
-//import Helpers.RutaMouseListener;
+import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
 import java.awt.event.KeyEvent;
@@ -49,7 +49,7 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(pdf);
-   // rutaLabel.addMouseListener(new RutaMouseListener());
+    rutaLabel.addMouseListener(new RutaMouseListener());
     siguiente.addKeyListener(keylistener());
     anterior.addKeyListener(keylistener());
   }
@@ -402,11 +402,10 @@ public class Ventana extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private boolean isImagenTif(boolean pdf, String extension) {
-//    System.out.println("extension " +extension);
-//    if (!pdf && extension.equalsIgnoreCase(".tif"))
-//      {
-//      return true;
-//      }
+    if (!pdf && extension.equalsIgnoreCase(".tif"))
+      {
+      return true;
+      }
     return true;
   }
 

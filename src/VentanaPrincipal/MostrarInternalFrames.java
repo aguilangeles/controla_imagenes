@@ -137,7 +137,6 @@ public class MostrarInternalFrames {
 
   private void setImagenes(Imagen siguientes) {
     String ruta = rutadeimagen.getImage(pdf, siguientes);
-    System.out.println("ruta en set imagenes " + ruta);
     setLabelPagina(pdf, siguientes);
     imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll, botonAncho, pEntera);
     scrollImage.getViewport().add(imageDraw);

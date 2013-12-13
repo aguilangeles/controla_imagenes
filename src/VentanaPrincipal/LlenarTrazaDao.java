@@ -49,7 +49,6 @@ public final class LlenarTrazaDao {
   }
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con, String extension, boolean issublote) {
-    System.out.println("bienvenido al nuevo constructor");
     this.id = trazaID;
     this.parent = encoder(parent + "\\");
     this.conexion = con;
@@ -87,7 +86,8 @@ public final class LlenarTrazaDao {
 
   private TrazaDao llenartraza() {
     System.out.println("llego a llenar traza ");
-    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
+    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
+//    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
             extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;
   }

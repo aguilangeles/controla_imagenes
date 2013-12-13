@@ -67,11 +67,11 @@ public class Imagen {
     return ret;
   }
 
-//  public GetImagenesAdyacentes adyacentes() {
-//    String ad = decodear(getRutaParaConversion());
-//    GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(getRutaParaConversion());
-//    return imagenesAdyacentes;
-//  }
+  public GetImagenesAdyacentes adyacentes() {
+    String ad = decodear(getRutaParaConversion());
+    GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(getRutaParaConversion());
+    return imagenesAdyacentes;
+  }
 
   public void traerImagenAdyacente(boolean tiff) {
   }
