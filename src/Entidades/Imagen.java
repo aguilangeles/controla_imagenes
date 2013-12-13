@@ -22,6 +22,8 @@ public class Imagen {
   private String rutaCarpetaTemp;
   private String rutaInsertadaEnDB;
   private int estado;
+  private int idcategoria;
+  private int idSublote;
 
   public Imagen(int id, String ruta_archivo, String parent, int pagina) {
     this.id = id;
@@ -31,12 +33,11 @@ public class Imagen {
     this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
-  public Imagen(int id, String ruta_archivo, String parent, int pagina, boolean isdocumento) {
+  public Imagen(int id, String ruta_archivo, int pagina, int idsublote) {
     this.id = id;
-    this.parent = parent;
     this.pagina = pagina;
-    this.rutaInsertadaEnDB = decodear(ruta_archivo);
-    this.rutaParaConversion = decodear(ruta_archivo);
+    this.rutaParaConversion = (ruta_archivo);
+    this.idSublote = idsublote;
   }
 
   private static String decodear(String aString) {
@@ -100,6 +101,14 @@ public class Imagen {
     return id;
   }
 
+  public int getIdSublote() {
+    return idSublote;
+  }
+
+  public void setIdSublote(int idSublote) {
+    this.idSublote = idSublote;
+  }
+
   public void setId(int id) {
     this.id = id;
   }
@@ -112,10 +121,16 @@ public class Imagen {
     this.estado = estado;
   }
 
+  //  @Override
+  //  public String toString() {
+  //    return "id=" + id
+  //            + ", " + rutaInsertadaEnDB
+  //            + ", pagina=" + pagina;
+  //  }
   @Override
   public String toString() {
-    return "id=" + id
-            + ", " + rutaInsertadaEnDB
-            + ", pagina=" + pagina;
+    return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
   }
+
+ 
 }

@@ -9,6 +9,8 @@ import Entidades.Imagen;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,21 +28,40 @@ public class ArchivosPorTrazaList {
   }
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf, boolean isdocumento) {
-    getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);
+    consulta(conexion, idTraza, parent);
   }
 
-  private void consulta() {
-    String query = "SELECT"
-            + "a.id"
-            + ", concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
-            + ", a.pagina_pdf"
-            + ", asub.idsublote"
-            + "FROM qualitys.archivo a"
-            + "join archivo_sublote asub"
-            + "on a.id= asub.id"
-            + "join sublotes subl"
-            + "on subl.id=asub.idsublote"
-            + "where subl.idtraza  =1";
+  private void consulta(Conexion conexion, int idTraza, String parent) {
+    try
+      {
+      Imagen imagen;
+      String query = "SELECT"
+              + " a.id"
+              + ", concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
+              + ", a.pagina_pdf"
+              + ", asub.idsublote"
+              + " FROM qualitys.archivo a"
+              + " join archivo_sublote asub"
+              + " on a.id= asub.id"
+              + " join sublotes subl"
+              + " on subl.id=asub.idsublote"
+              + " where subl.idtraza  =" + idTraza + ";";
+      conexion.executeQuery(query);
+      while (conexion.resulset.next())
+        {
+        int id = conexion.resulset.getInt(1);
+        String ruta = conexion.resulset.getString(2);
+        int pagina = conexion.resulset.getInt(3);
+        int idSublote = conexion.resulset.getInt(4);
+        //System.out.println(id + ", " + ruta + ", " + pagina + ", " + idSublote);
+         imagen = new Imagen(id, ruta, pagina, idSublote);
+         imagenProcesadaList.add(imagen);
+//         System.out.println(imagen.toString());
+        }
+      } catch (SQLException ex)
+      {
+      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
+      }
   }
 
   private void getImagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
