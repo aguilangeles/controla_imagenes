@@ -23,7 +23,7 @@ public class ContadorSublotes {
 
   public ContadorSublotes(File file) {
     parent = (file.getAbsolutePath());
-    ultimaCarpeta=getUltimaCarpeta(parent);
+    ultimaCarpeta = getUltimaCarpeta(parent);
     getCantidadSublotes(file);
   }
 
@@ -39,7 +39,8 @@ public class ContadorSublotes {
       extraerExtensionImagen(file1);
       }
   }
- private String getUltimaCarpeta(String aParent) {
+
+  private String getUltimaCarpeta(String aParent) {
     String ret = "";
     if (aParent.contains("\\"))
       {
@@ -52,6 +53,7 @@ public class ContadorSublotes {
       }
     return ret;
   }
+
   private void extraerExtensionImagen(File file) {
     String ends = file.getName();
     if (ends.contains("."))

@@ -8,6 +8,7 @@ import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import Entidades.NombrePaginaDelPDF;
 import Helpers.GetExtensionIdImagen;
+import VentanaPrincipal.WorkerSubLote;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,9 +28,9 @@ public class GetImagenesList {
   private List<Sublote> subloteList = new ArrayList<>();
   private Conexion conexion;
 
-  public GetImagenesList(List<Object> lista, Conexion conexion, int idTraza) {
+  public GetImagenesList(List<Object> lista, Conexion conexion) {
     int idImagen = GetExtensionIdImagen.getIdImagen();
-    int traza = idTraza;
+    int traza = WorkerSubLote.getIdTraza();
     this.conexion = conexion;
     getImagenes(lista, idImagen, traza);
   }
@@ -39,16 +40,13 @@ public class GetImagenesList {
     contador = new GetUltimoIDInsertado(conexion, "sublotes").getUltimoID();
     for (Iterator<Object> it = list.iterator(); it.hasNext();)
       {
-      String object = (String) it.next();
+      String path = (String) it.next();
       if (id == 1)
         {
-        getPagesPDF(object);
+        getPagesPDF(path);
         } else
         {
-        contador++;
-        List<ImagenInsertada> lista = iterarFilesList(object, contador);
-        sublote = new Sublote(contador, idTraza, object, 0, lista, lista.size());
-        subloteList.add(sublote);
+        getImagesOfDocument(path, idTraza);
         }
       }
   }//fin
@@ -97,5 +95,13 @@ public class GetImagenesList {
 
   public static String getParent() {
     return parent;
+  }
+
+  private void getImagesOfDocument(String path, int idTraza) {
+    Sublote sublote;
+    contador++;
+    List<ImagenInsertada> lista = iterarFilesList(path, contador);
+    sublote = new Sublote(contador, idTraza, path, 0, lista, lista.size());
+    subloteList.add(sublote);
   }
 }

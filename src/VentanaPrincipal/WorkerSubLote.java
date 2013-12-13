@@ -31,7 +31,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   private String parent, extension, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
-  private int idTraza;
+  private static int idTraza;
   private List<Sublote> sublotes;
 
   public WorkerSubLote(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
@@ -55,9 +55,9 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     int idImagen = GetExtensionIdImagen.getIdImagen();
     if (conexion.isConexion())
       {
-      int resultado = new GetUltimoIDInsertado(conexion, "traza").getUltimoID() ;
+      int resultado = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       idTraza = (resultado == 0) ? 1 : resultado;
-      GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion, idTraza);
+      GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion);
       sublotes = imagenesList.getSubloteList();
       switch (idImagen)
         {
@@ -107,7 +107,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
             parent, ultimaCarpeta, listaImagenes, infoLabel, idControl);
   }
 
-  public int getIdTraza() {
+  public static int getIdTraza() {
     return idTraza;
   }
 
