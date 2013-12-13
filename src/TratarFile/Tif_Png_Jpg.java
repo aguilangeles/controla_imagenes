@@ -146,7 +146,7 @@ public class Tif_Png_Jpg {
               + "("
               + " 2 "
               + ", " + idtraza
-              + ", " + idarchivo//qeu noseco mosa careli dearchivo posoye
+              + ", " + idarchivo
               + ", " + idsublote
               + ");";
       System.out.println(insert);

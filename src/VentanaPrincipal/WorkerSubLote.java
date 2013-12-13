@@ -6,7 +6,6 @@ package VentanaPrincipal;
 
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
-import BasedeDatos.InsertarNuevaTraza;
 import Helpers.GetExtensionIdImagen;
 import PaneldeControl.ContadorSublotes;
 import TratarFile.GetImagenesList;
@@ -79,9 +78,8 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   protected void done() {
     if (!isCancelled())
       {
-      System.out.println("========done worker============");
-//      conexion.isConexionClose();
-//      crearNuevoWorker();
+      conexion.isConexionClose();
+      crearNuevoWorker();
       }
   }
 
@@ -93,8 +91,9 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
       int resultado = new GetUltimoIDInsertado(con, "traza").getUltimoID();
 
       trazaID = (resultado == 0) ? 1 : resultado;
+      System.out.println(trazaID + ", " + parent + ", " + con + ", " + getExtension());
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
-      new Ventana(trazaDao.getTraza()).setVisible(true);
+     // new Ventana(trazaDao.getTraza()).setVisible(true);
       }
     con.isConexionClose();
     cargaLote.dispose();
