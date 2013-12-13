@@ -42,6 +42,7 @@ public class ImageDrawingComponent extends JPanel {
   }
 
   public ImageDrawingComponent(String imagen, JPanel panel, int opcion, boolean pdf, boolean tif) {
+    System.out.println("draw imagen " + imagen);
     loadImage(imagen, pdf, tif);
     dimensionPanel.setSize(panel.getSize());
     setOpIndex(opcion);
@@ -79,7 +80,6 @@ public class ImageDrawingComponent extends JPanel {
 
   @Override
   public void paint(Graphics g) {
-//    System.out.println("--"+bi.getWidth()+"- "+bi.getHeight());
     ImageSize image = new ImageSize(new Dimension(bi.getWidth(), bi.getHeight()), getDimensionPanel());
     Graphics2D g2 = (Graphics2D) g;
     switch (opIndex)

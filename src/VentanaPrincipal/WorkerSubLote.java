@@ -90,7 +90,6 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
       int resultado = new GetUltimoIDInsertado(con, "traza").getUltimoID();
       trazaID = (resultado == 0) ? 1 : resultado;
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension(), true);
-      System.out.println(trazaDao.getTraza());
       new Ventana(trazaDao.getTraza()).setVisible(true);
       }
     con.isConexionClose();
@@ -114,7 +113,8 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   }
 
   public String getExtension() {
-    return extension;
+    String ext = (extension.contains("\\.") ? extension : "." + extension);
+    return ext;
   }
 
   public String getParent() {
