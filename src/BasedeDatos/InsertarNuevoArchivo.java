@@ -24,9 +24,7 @@ public class InsertarNuevoArchivo {
   public InsertarNuevoArchivo(Conexion conexion,
           int id, String ruta, int page, JLabel procesando, int idcategoria) {
     this.conexion = conexion;
-    System.out.println("traza recibida " + id);
     this.id += id;
-    System.out.println("\te incrementada " + this.id);
     this.ruta = ruta;
     this.page = page;
     this.idcategoria = idcategoria;

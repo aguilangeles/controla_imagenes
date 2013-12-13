@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class LlenarTrazaDao {
+public final class LlenarTrazaDao {
 
   private int id;
   private Conexion conexion;
@@ -30,36 +30,65 @@ public class LlenarTrazaDao {
     this.parent = encoder(parent + "\\");
     this.conexion = con;
     this.extension = extension;
-    switch (extension) {
-     case ".tif":
+    switch (extension)
+      {
+      case ".tif":
       case ".tiff":
       case ".TIF":
       case ".TIFF":
       case ".png":
       case ".jpg":
         this.pdfFile = false;
-
         llenartraza();
         break;
       case ".pdf":
         this.pdfFile = true;
         llenartraza();
         break;
-    }
+      }
+  }
+
+  public LlenarTrazaDao(int trazaID, String parent, Conexion con, String extension, boolean issublote) {
+    System.out.println("bienvenido al nuevo constructor");
+    this.id = trazaID;
+    this.parent = encoder(parent + "\\");
+    this.conexion = con;
+    this.extension = "." + extension;
+    switch (this.extension)
+      {
+      case ".tif":
+      case ".tiff":
+      case ".TIF":
+      case ".TIFF":
+      case ".png":
+      case ".jpg":
+        this.pdfFile = false;
+        llenartraza();
+        break;
+      case ".pdf":
+        this.pdfFile = true;
+        llenartraza();
+        break;
+      }
   }
 
   public String encoder(String aString) {
     String ret = "";
-    try {
+    try
+      {
       ret = URLEncoder.encode(aString, "UTF-8");
-    } catch (UnsupportedEncodingException ex) {
+      } catch (UnsupportedEncodingException ex)
+      {
       JOptionPane.showMessageDialog(null, ex.getMessage(),
               "Llenar Traza : encoding", JOptionPane.ERROR_MESSAGE);
-    }
+      }
     return ret;
   }
 
   private TrazaDao llenartraza() {
+    System.out.println("llego a llenar traza ");
+
+    System.out.println(new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList());
     traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
             extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;

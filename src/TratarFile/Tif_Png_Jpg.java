@@ -76,7 +76,6 @@ public class Tif_Png_Jpg {
   }
 
   private void Tif_Png_Jpg() {
-    //todo replace for stack
     sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanio, parent, ultimaCarpeta, muestra, idRango);
     List<Object> ramdomList = ramdom.getStack();
@@ -114,28 +113,7 @@ public class Tif_Png_Jpg {
   }
 
   private void archivoSublote(int idtraza, int idarchivo, int idsublote) {
-    new Insertar_archivo_sublote(conexion,idtraza, idarchivo, idsublote);
-//    int nuevatraza = idtraza;
-//    try
-//      {
-//      String insert = "INSERT INTO qualitys.archivo_sublote"
-//              + " ( idcategoria"
-//              + ", idtraza"
-//              + ", idarchivo"
-//              + ", idsublote)"
-//              + "VALUES"
-//              + "("
-//              + " 2 "
-//              + ", " + nuevatraza
-//              + ", " + idarchivo
-//              + ", " + idsublote
-//              + ");";
-//      System.out.println(insert);
-//      conexion.executeUpdate(insert);
-//      } catch (SQLException ex)
-//      {
-//      Logger.getLogger(Tif_Png_Jpg.class.getName()).log(Level.SEVERE, null, ex);
-//      }
+    Insertar_archivo_sublote insertar_archivo_sublote = new Insertar_archivo_sublote(conexion, idtraza, idarchivo, idsublote);
   }
 
   private void imagenyControl() {

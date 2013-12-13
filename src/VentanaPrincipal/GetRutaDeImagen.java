@@ -26,12 +26,10 @@ public final class GetRutaDeImagen {
       ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
               imagen.getParent(), minus);
       retmin = worker.doInBackground();
-      // imagen.setRutaCarpetaTemp(anteriorRuta);
       } else if (!pdf)
       {
       retmin = imagen.getRutaParaConversion();
       }
-//    System.out.println(imagen.getRutaParaConversion());
   }
 
   public String getImage(boolean pdf, Imagen imagen) {

@@ -31,6 +31,14 @@ public class Imagen {
     this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
+  public Imagen(int id, String ruta_archivo, String parent, int pagina, boolean isdocumento) {
+    this.id = id;
+    this.parent = parent;
+    this.pagina = pagina;
+    this.rutaInsertadaEnDB = decodear(ruta_archivo);
+    this.rutaParaConversion = decodear(ruta_archivo);
+  }
+
   private static String decodear(String aString) {
     String ret = "";
     try

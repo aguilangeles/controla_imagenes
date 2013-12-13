@@ -25,6 +25,24 @@ public class ArchivosPorTrazaList {
     getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);
   }
 
+  public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf, boolean isdocumento) {
+    getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);
+  }
+
+  private void consulta() {
+    String query = "SELECT"
+            + "a.id"
+            + ", concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
+            + ", a.pagina_pdf"
+            + ", asub.idsublote"
+            + "FROM qualitys.archivo a"
+            + "join archivo_sublote asub"
+            + "on a.id= asub.id"
+            + "join sublotes subl"
+            + "on subl.id=asub.idsublote"
+            + "where subl.idtraza  =1";
+  }
+
   private void getImagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
     Runtime gar = Runtime.getRuntime();
     Imagen imagen;
@@ -64,6 +82,7 @@ public class ArchivosPorTrazaList {
       imagenProcesadaList.add(imagen);
       }
   }
+
   public List<Imagen> getImagenesList() {
     return imagenProcesadaList;
   }
