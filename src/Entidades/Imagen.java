@@ -36,7 +36,7 @@ public class Imagen {
   public Imagen(int id, String ruta_archivo, int pagina, int idsublote) {
     this.id = id;
     this.pagina = pagina;
-    this.rutaParaConversion = (ruta_archivo);
+    this.rutaParaConversion = decodear(ruta_archivo);
     this.idSublote = idsublote;
   }
 
@@ -132,5 +132,5 @@ public class Imagen {
     return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
   }
 
- 
+
 }

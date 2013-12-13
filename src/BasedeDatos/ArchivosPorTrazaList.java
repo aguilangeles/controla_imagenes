@@ -53,10 +53,8 @@ public class ArchivosPorTrazaList {
         String ruta = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
         int idSublote = conexion.resulset.getInt(4);
-        //System.out.println(id + ", " + ruta + ", " + pagina + ", " + idSublote);
-         imagen = new Imagen(id, ruta, pagina, idSublote);
-         imagenProcesadaList.add(imagen);
-//         System.out.println(imagen.toString());
+        imagen = new Imagen(id, ruta, pagina, idSublote);
+        imagenProcesadaList.add(imagen);
         }
       } catch (SQLException ex)
       {
