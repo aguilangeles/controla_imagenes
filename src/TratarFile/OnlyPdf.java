@@ -9,6 +9,7 @@ import Entidades.NombrePaginaDelPDF;
 import BasedeDatos.Conexion;
 import BasedeDatos.InsertarNuevoArchivo;
 import BasedeDatos.InsertarNuevaTraza;
+import PaneldeControl.ContadorSublotes;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -49,6 +50,30 @@ public class OnlyPdf {
     this.idControl = idControl;
     ramdom = new CrearElRamdom(listaImagenes, muestra);
     OnlyPdf();
+  }
+
+  public OnlyPdf(Conexion conexion, int idUsuario,
+          int idDocumento, int idVerificacion, int tamanioLote, int muestra,
+          int idRango, int idTraza,
+          List<Object> listaImagenes, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
+    this.parent = ContadorSublotes.getParent();
+    this.ultimaCarpeta = ContadorSublotes.getUltimaCarpeta();
+    this.sTraza = sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+            tamanioLote, this.parent, this.ultimaCarpeta, muestra, idRango);;
+    this.conexion = conexion;
+    this.idUsuario = idUsuario;
+    this.idDocumento = idDocumento;
+    this.idVerificacion = idVerificacion;
+    this.tamanioLote = tamanioLote;
+    this.muestra = muestra;
+    this.idRango = idRango;
+    this.idTraza = idTraza;
+    this.listaImagenes = listaImagenes;
+    this.infoLabel = infoLabel;
+    this.idControl = idControl;
+//    ramdom = new CrearElRamdom(listaImagenes, muestra);
+//    OnlyPdf();
+    InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza);
   }
 
   private void OnlyPdf() {//voy a cambiar por stack

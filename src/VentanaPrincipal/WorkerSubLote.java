@@ -102,9 +102,9 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
 
   private void OnlyPdf() {
     OnlyPdf onlyPdf =
-            new OnlyPdf(null, conexion, idUsuario, idDocumento,
+            new OnlyPdf(conexion, idUsuario, idDocumento,
             idVerificacion, tamanioLote, muestra, idRango, idTraza,
-            parent, ultimaCarpeta, listaImagenes, infoLabel, idControl);
+            listaImagenes, infoLabel, idControl, sublotes);
   }
 
   public static int getIdTraza() {
@@ -112,8 +112,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   }
 
   public String getExtension() {
-    String ext = (extension.contains("\\.") ? extension : "." + extension);
-    return ext;
+    return extension;
   }
 
   public String getParent() {
