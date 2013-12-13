@@ -106,57 +106,36 @@ public class Tif_Png_Jpg {
   }
 
   private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
-//    try
-//      {
     int estado = 0;
-    //      String insertar = "Insert into qualitys.archivo "
-    //              + "(idTraza"
-    //              + ", ruta_archivo "
-    //              + ", estado"
-    //              + ", pagina_pdf "
-    //              + ", idCategoria "
-    //              + ")"
-    //              + " VALUES ("
-    //              + idtraza
-    //              + ", '" + img.getNombre()
-    //              + "', " + estado
-    //              + ", " + img.getPagina()
-    //              + ", " + 2
-    //              + ");";
-    //      conexion.executeUpdate(insertar);
-    int nuevatraza = idtraza-1;
+    int nuevatraza = idtraza - 1;
     InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, nuevatraza, img.getNombre(), img.getPagina(), infoLabel, 2);
     int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
-    System.out.println("ultimo id archivo " + ultimoid);
     archivoSublote(idtraza, ultimoid, idsublote);
+  }
+
+  private void archivoSublote(int idtraza, int idarchivo, int idsublote) {
+    new Insertar_archivo_sublote(conexion,idtraza, idarchivo, idsublote);
+//    int nuevatraza = idtraza;
+//    try
+//      {
+//      String insert = "INSERT INTO qualitys.archivo_sublote"
+//              + " ( idcategoria"
+//              + ", idtraza"
+//              + ", idarchivo"
+//              + ", idsublote)"
+//              + "VALUES"
+//              + "("
+//              + " 2 "
+//              + ", " + nuevatraza
+//              + ", " + idarchivo
+//              + ", " + idsublote
+//              + ");";
+//      System.out.println(insert);
+//      conexion.executeUpdate(insert);
 //      } catch (SQLException ex)
 //      {
 //      Logger.getLogger(Tif_Png_Jpg.class.getName()).log(Level.SEVERE, null, ex);
 //      }
-  }
-
-  private void archivoSublote(int idtraza, int idarchivo, int idsublote) {
-    int nuevatraza = idtraza;
-    try
-      {
-      String insert = "INSERT INTO qualitys.archivo_sublote"
-              + " ( idcategoria"
-              + ", idtraza"
-              + ", idarchivo"
-              + ", idsublote)"
-              + "VALUES"
-              + "("
-              + " 2 "
-              + ", " + nuevatraza
-              + ", " + idarchivo
-              + ", " + idsublote
-              + ");";
-      System.out.println(insert);
-      conexion.executeUpdate(insert);
-      } catch (SQLException ex)
-      {
-      Logger.getLogger(Tif_Png_Jpg.class.getName()).log(Level.SEVERE, null, ex);
-      }
   }
 
   private void imagenyControl() {
