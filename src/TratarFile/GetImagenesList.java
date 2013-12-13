@@ -43,7 +43,8 @@ public class GetImagenesList {
       String path = (String) it.next();
       if (id == 1)
         {
-        getPagesPDF(path);
+//        getPagesPDF(path);
+        getPagesOfDocument(path, idTraza);
         } else
         {
         getImagesOfDocument(path, idTraza);
@@ -69,7 +70,9 @@ public class GetImagenesList {
     return lista;
   }
 
-  private void getPagesPDF(String astring) {
+  private List<ImagenInsertada> getPagesPDF(String astring, int contador) {
+    List<ImagenInsertada> lista = new ArrayList<>();
+    ImagenInsertada imagenes;
     try
       {
       String ruta = astring;
@@ -79,11 +82,9 @@ public class GetImagenesList {
       int pagina = pddDocument.getDocumentCatalog().getAllPages().size();
       for (int i = 0; i < pagina; i++)
         {
-        NombrePaginaDelPDF page = new NombrePaginaDelPDF(ruta, i);
-        System.out.println(page);
-//          listaPaginas.add(page);
-//          Collections.shuffle(listaPaginas);
-//          infoLabel.setText("<html>" + page.toString() + "</html>");
+        NombrePaginaDelPDF page = new NombrePaginaDelPDF(file.getName(), i);
+        imagenes = new ImagenInsertada(contador, file.getName(), i);
+        lista.add(imagenes);
         }
       pddDocument.close();
       } catch (IOException ex)
@@ -91,10 +92,19 @@ public class GetImagenesList {
       JOptionPane.showMessageDialog(null, ex.getMessage(),
               "Encontrar Paginas PDF", JOptionPane.ERROR_MESSAGE);
       }
+    return lista;
   }
 
   public static String getParent() {
     return parent;
+  }
+
+  private void getPagesOfDocument(String path, int idtraza) {
+    Sublote sublote;
+    contador++;
+    List<ImagenInsertada> lista = getPagesPDF(path, contador);
+    sublote = new Sublote(contador, idtraza, path, 0, lista, lista.size());
+    subloteList.add(sublote);
   }
 
   private void getImagesOfDocument(String path, int idTraza) {
