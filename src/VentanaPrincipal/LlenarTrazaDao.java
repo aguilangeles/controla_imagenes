@@ -51,6 +51,8 @@ public final class LlenarTrazaDao {
   }
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con, String extension, boolean issublote) {
+
+    System.out.println("entro al contructor de traza");
     this.id = trazaID;
     this.parent = encoder(parent + "\\");
     this.conexion = con;
@@ -60,10 +62,12 @@ public final class LlenarTrazaDao {
       {
       case 1:
         this.pdfFile = false;
+        System.out.println("case 1");
         llenartrazaDocumento();
         break;
       case 2:
       case 3:
+        System.out.println("case 2-3");
         this.pdfFile = true;
         llenartrazaDocumento();
         break;
@@ -84,18 +88,19 @@ public final class LlenarTrazaDao {
   }
 
   private TrazaDao llenartraza() {
-    System.out.println("llego a llenar traza ");
     traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
-            //    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
             extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;
   }
 
   private TrazaDao llenartrazaDocumento() {
     System.out.println("llego a llenar traza ");
-    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
-            //    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
-            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
+    /*int id, List<Imagen> imagenList, String extension, List<TiposDeControl> tiposList*/
+
+    new ArchivosPorTrazaList(conexion, id, parent).getImagenesList();
+//    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
+//            //    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
+//            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;
   }
 

@@ -27,7 +27,7 @@ public class ArchivosPorTrazaList {
     getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);
   }
 
-  public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf, boolean isdocumento) {
+  public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent) {
     consulta(conexion, idTraza, parent);
   }
 
@@ -45,7 +45,7 @@ public class ArchivosPorTrazaList {
               + " on a.id= asub.id"
               + " join sublotes subl"
               + " on subl.id=asub.idsublote"
-              + " where subl.idtraza  =" + idTraza + ";";
+              + " where a.idtraza  =" + idTraza + ";";
       conexion.executeQuery(query);
       while (conexion.resulset.next())
         {
@@ -54,7 +54,8 @@ public class ArchivosPorTrazaList {
         int pagina = conexion.resulset.getInt(3);
         int idSublote = conexion.resulset.getInt(4);
         imagen = new Imagen(id, ruta, pagina, idSublote);
-        imagenProcesadaList.add(imagen);
+        System.out.println(id+"-"+ ruta+"-"+ pagina+"-"+ idSublote);
+//        imagenProcesadaList.add(imagen);
         }
       } catch (SQLException ex)
       {
