@@ -53,10 +53,7 @@ public class ArchivosPorTrazaList {
         String ruta = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
         int idSublote = conexion.resulset.getInt(4);
-        imagen = new Imagen(id, ruta, pagina, idSublote, parent);
-        System.out.println(imagen.toString());
-//        System.out.println(id+"-"+ ruta+"-"+ pagina+"-"+ idSublote+", "+ parent);
-//        imagenProcesadaList.add(imagen);
+        archivoConNumeroDePagina(id, ruta, parent, pagina, true, idSublote);
         }
       } catch (SQLException ex)
       {
@@ -80,7 +77,7 @@ public class ArchivosPorTrazaList {
         int id = conexion.resulset.getInt(1);
         String ruta_archivo = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
-        archivoConNumeroDePagina(isPdf, id, ruta_archivo, parent, pagina);
+        archivoConNumeroDePagina(id, ruta_archivo, parent, pagina, false, 0);
         }
       } catch (SQLException ex)
       {
@@ -90,13 +87,19 @@ public class ArchivosPorTrazaList {
     gar.gc();
   }
 
-  private void archivoConNumeroDePagina(boolean isPdf, int id, String ruta_archivo, String parent, int pagina) {
-    /*discrima segun sea pdf o no, para tener en cuenta el numero de pagina,
-     el numero de pagina es cero si la imagen es tif, porque eso inserta por default*/
+  private void archivoConNumeroDePagina(int id, String ruta_archivo, String parent, int pagina, boolean isDocumento, int idSublote) {
     Imagen imagen;
-    imagen = new Imagen(id, ruta_archivo, parent, pagina);
-    System.out.println(imagen.toString());
-    imagenProcesadaList.add(imagen);
+    if (!isDocumento)
+      {
+      imagen = new Imagen(id, ruta_archivo, parent, pagina);
+      System.out.println(imagen.toString());
+      imagenProcesadaList.add(imagen);
+      } else
+      {
+      imagen = new Imagen(id, ruta_archivo, pagina, idSublote, parent);
+      System.out.println(imagen.toString());
+      imagenProcesadaList.add(imagen);
+      }
   }
 
   public List<Imagen> getImagenesList() {
