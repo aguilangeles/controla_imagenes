@@ -8,6 +8,8 @@ import BasedeDatos.ControlesporVerificacionList;
 import BasedeDatos.ArchivosPorTrazaList;
 import BasedeDatos.Conexion;
 import Entidades.TrazaDao;
+import Helpers.GetExtensionIdImagen;
+import PaneldeControl.ContadorSublotes;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.swing.JOptionPane;
@@ -53,20 +55,17 @@ public final class LlenarTrazaDao {
     this.parent = encoder(parent + "\\");
     this.conexion = con;
     this.extension = "." + extension;
-    switch (extension)
+    int idImagen = GetExtensionIdImagen.getIdImagen();
+    switch (idImagen)
       {
-      case ".tif":
-      case ".tiff":
-      case ".TIF":
-      case ".TIFF":
-      case ".png":
-      case ".jpg":
+      case 1:
         this.pdfFile = false;
-        llenartraza();
+        llenartrazaDocumento();
         break;
-      case ".pdf":
+      case 2:
+      case 3:
         this.pdfFile = true;
-        llenartraza();
+        llenartrazaDocumento();
         break;
       }
   }
@@ -87,7 +86,15 @@ public final class LlenarTrazaDao {
   private TrazaDao llenartraza() {
     System.out.println("llego a llenar traza ");
     traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
-//    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
+            //    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
+            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
+    return traza;
+  }
+
+  private TrazaDao llenartrazaDocumento() {
+    System.out.println("llego a llenar traza ");
+    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
+            //    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
             extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;
   }

@@ -43,7 +43,6 @@ public class GetImagenesList {
       String path = (String) it.next();
       if (id == 1)
         {
-//        getPagesPDF(path);
         getPagesOfDocument(path, idTraza);
         } else
         {
