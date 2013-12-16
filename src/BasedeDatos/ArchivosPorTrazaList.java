@@ -53,8 +53,9 @@ public class ArchivosPorTrazaList {
         String ruta = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
         int idSublote = conexion.resulset.getInt(4);
-        imagen = new Imagen(id, ruta, pagina, idSublote);
-        System.out.println(id+"-"+ ruta+"-"+ pagina+"-"+ idSublote);
+        imagen = new Imagen(id, ruta, pagina, idSublote, parent);
+        System.out.println(imagen.toString());
+//        System.out.println(id+"-"+ ruta+"-"+ pagina+"-"+ idSublote+", "+ parent);
 //        imagenProcesadaList.add(imagen);
         }
       } catch (SQLException ex)
@@ -90,17 +91,12 @@ public class ArchivosPorTrazaList {
   }
 
   private void archivoConNumeroDePagina(boolean isPdf, int id, String ruta_archivo, String parent, int pagina) {
-    /*discrima segun sea pdf o no, para tener en cuenta el numero de pagina*/
+    /*discrima segun sea pdf o no, para tener en cuenta el numero de pagina,
+     el numero de pagina es cero si la imagen es tif, porque eso inserta por default*/
     Imagen imagen;
-    if (isPdf)
-      {
-      imagen = new Imagen(id, ruta_archivo, parent, pagina);
-      imagenProcesadaList.add(imagen);
-      } else
-      {
-      imagen = new Imagen(id, ruta_archivo, parent, 0);
-      imagenProcesadaList.add(imagen);
-      }
+    imagen = new Imagen(id, ruta_archivo, parent, pagina);
+    System.out.println(imagen.toString());
+    imagenProcesadaList.add(imagen);
   }
 
   public List<Imagen> getImagenesList() {

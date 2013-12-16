@@ -54,7 +54,7 @@ public final class LlenarTrazaDao {
 
     System.out.println("entro al contructor de traza");
     this.id = trazaID;
-    this.parent = encoder(parent + "\\");
+    this.parent = (parent + "\\");
     this.conexion = con;
     this.extension = "." + extension;
     int idImagen = GetExtensionIdImagen.getIdImagen();

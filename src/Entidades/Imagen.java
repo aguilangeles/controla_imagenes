@@ -34,9 +34,10 @@ public class Imagen {
     this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
-  public Imagen(int id, String ruta_archivo, int pagina, int idsublote) {
+  public Imagen(int id, String ruta_archivo, int pagina, int idsublote, String parent) {
     this.id = id;
     this.pagina = pagina;
+    this.rutaInsertadaEnDB = ruta_archivo.substring(parent.length());
     this.rutaParaConversion = (ruta_archivo);
     this.idSublote = idsublote;
   }
@@ -68,7 +69,7 @@ public class Imagen {
   }
 
   public GetImagenesAdyacentes adyacentes() {
-    String ad = decodear(getRutaParaConversion());
+//    String ad = decodear(getRutaParaConversion());
     GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(getRutaParaConversion());
     return imagenesAdyacentes;
   }
@@ -144,6 +145,6 @@ public class Imagen {
   //  }
   @Override
   public String toString() {
-    return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
+    return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", rutaInsertadaEnDb " + rutaInsertadaEnDB + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
   }
 }
