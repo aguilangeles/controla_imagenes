@@ -71,6 +71,7 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {
+          //control de tamanio con sublote.
           WorkerSubLote worker = new WorkerSubLote(frame, infoLabel, controlesList, listaResultado, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
           worker.execute();
         }

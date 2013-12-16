@@ -59,7 +59,7 @@ public class AceptarCargarLote {
       if (tipoVerificacionBox.getSelectedItem().toString().contains("Sublotes"))
         {
         ContadorSublotes contadorSublotes = new ContadorSublotes(file);
-        GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(contadorSublotes.getExtension());
+        GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(ContadorSublotes.getExtension());
         List<Object> listaIdc = contadorSublotes.getListaIDc();
         getControlesPorVerificacion();
         con.isConexion();
