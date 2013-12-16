@@ -96,7 +96,6 @@ public class ArchivosPorTrazaList {
       } else
       {
       imagen = new Imagen(id, ruta_archivo, pagina, idSublote, parent);
-      System.out.println("imagen " + imagen);
       imagenProcesadaList.add(imagen);
       }
   }

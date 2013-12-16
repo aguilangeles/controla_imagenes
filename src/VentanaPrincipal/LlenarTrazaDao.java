@@ -54,7 +54,6 @@ public final class LlenarTrazaDao {
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con, String extension, boolean issublote) {
 
-    System.out.println("entro al contructor de traza");
     this.id = trazaID;
     this.parent = (parent + "\\");
     this.conexion = con;
@@ -97,14 +96,13 @@ public final class LlenarTrazaDao {
 
   private TrazaDao llenartrazaDocumento() {
     List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, id, parent).getImagenesList();
-    System.out.println("lista de imagenes ");
+//    System.out.println("lista de imagenes ");
 //    for (Imagen im : imagenesList)
 //      {
 //      System.out.println(im.getRutaParaConversion() + "- " + im.getIdSublote());
 //      }
-//    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
-//            //    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
-//            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
+    traza = new TrazaDao(id, imagenesList,
+            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;
   }
 
