@@ -10,8 +10,10 @@ import Entidades.TrazaDao;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
+import TratarFile.Sublote;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,17 +30,20 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private boolean pdf;
   private boolean tif;
   private final TablaCheckBox tablaCheckBox;
+  private List<Sublote> sublotes;
 
   /**
    * Creates new form Ventana
    *
    * @param trazadao
+   * @param sublotes
    */
-  public VentanaDocumentos(TrazaDao trazadao) {
+  public VentanaDocumentos(TrazaDao trazadao, List<Sublote> sublotes) {
     iniciar(trazadao);
     setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
+    this.sublotes = sublotes;
     tabla.requestFocus();
     this.traza = trazadao;
     this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
@@ -415,7 +420,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
-   // RutaMouseListener.getAdyacentes(pdf, siguientes);
+    // RutaMouseListener.getAdyacentes(pdf, siguientes);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -438,7 +443,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
-   // RutaMouseListener.getAdyacentes(pdf, pr);
+    // RutaMouseListener.getAdyacentes(pdf, pr);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,

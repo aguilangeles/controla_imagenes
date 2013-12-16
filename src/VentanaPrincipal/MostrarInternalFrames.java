@@ -78,6 +78,7 @@ public class MostrarInternalFrames {
       {
       internal.setMaximum(true);
       setTituloYRutaLabel(siguientes);
+      System.out.println("id de sublote " + siguientes.getIdSublote());
       setImagenes(siguientes);
       setCB.set(siguientes.getId());
       } catch (PropertyVetoException ex)
@@ -93,6 +94,8 @@ public class MostrarInternalFrames {
       {
       desktopPane.add(internal);
       setTituloYRutaLabel(imagen1);
+      System.out.println("id de sublote " + imagen1.getIdSublote());
+
       setCB.set(imagen1.getId());
       setImagenes(imagen1);
       internal.setVisible(true);
