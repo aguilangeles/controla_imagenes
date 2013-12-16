@@ -37,12 +37,12 @@ public class ArchivosPorTrazaList {
       Imagen imagen;
       String query = "SELECT"
               + " a.id"
-              + ", concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
-              + ", a.pagina_pdf"
-              + ", asub.idsublote"
+              + " , concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
+              + " , a.pagina_pdf"
+              + " , asub.idsublote"
               + " FROM qualitys.archivo a"
               + " join archivo_sublote asub"
-              + " on a.id= asub.id"
+              + " on a.id= asub.idarchivo"
               + " join sublotes subl"
               + " on subl.id=asub.idsublote"
               + " where a.idtraza  =" + idTraza + ";";

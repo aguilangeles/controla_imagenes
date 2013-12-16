@@ -10,7 +10,6 @@ import BasedeDatos.Conexion;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.GetExtensionIdImagen;
-import PaneldeControl.ContadorSublotes;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;

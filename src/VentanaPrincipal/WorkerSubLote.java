@@ -55,8 +55,9 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     int idImagen = GetExtensionIdImagen.getIdImagen();
     if (conexion.isConexion())
       {
-      int resultado = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
-      idTraza = (resultado == 0) ? 1 : resultado;
+        int resultado = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
+        idTraza = resultado;
+        System.out.println("id traza de worker" + idTraza);
       GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion);
       sublotes = imagenesList.getSubloteList();
       switch (idImagen)
@@ -88,9 +89,9 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
       {
       int resultado = new GetUltimoIDInsertado(con, "traza").getUltimoID();
       trazaID = (resultado == 0) ? 1 : resultado;
+      System.out.println("ide crear new worker " + trazaID);
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension(), true);
-      System.out.println(trazaDao);
-      // new Ventana(trazaDao.getTraza()).setVisible(true);
+      new Ventana(trazaDao.getTraza()).setVisible(true);
       }
     con.isConexionClose();
     cargaLote.dispose();

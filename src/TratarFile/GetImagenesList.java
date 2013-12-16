@@ -36,6 +36,7 @@ public class GetImagenesList {
   }
 
   private void getImagenes(List<Object> list, int id, int idTraza) {
+
     Sublote sublote = null;
     contador = new GetUltimoIDInsertado(conexion, "sublotes").getUltimoID();
     for (Iterator<Object> it = list.iterator(); it.hasNext();)

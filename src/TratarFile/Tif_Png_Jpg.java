@@ -10,6 +10,7 @@ import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevoArchivo;
 import BasedeDatos.InsertarNuevaTraza;
 import PaneldeControl.ContadorSublotes;
+import VentanaPrincipal.WorkerSubLote;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -68,6 +69,7 @@ public class Tif_Png_Jpg {
     String ultima = ContadorSublotes.getUltimaCarpeta();
     this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
             tamanio, parents, ultima, muestra, idRango);
+    System.out.println("idtraza " + idTraza);
     InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza); // lista de sublotes
     pruebainsertarImagen();
   }
@@ -95,7 +97,8 @@ public class Tif_Png_Jpg {
       {
       for (ImagenInsertada img : s.getImagenes())
         {
-        cargarimagen(img, s.getIdtraza(), s.getId());
+        System.out.println(WorkerSubLote.getIdTraza());
+        cargarimagen(img, WorkerSubLote.getIdTraza(), s.getId());
         imagenyControl();
         }
       }
@@ -115,6 +118,6 @@ public class Tif_Png_Jpg {
 
   private void imagenyControl() {
     InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado =
-            new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion);
+            new InsertTrazaArchivoContolYEstado(WorkerSubLote.getIdTraza(), idControl, conexion);
   }
 }
