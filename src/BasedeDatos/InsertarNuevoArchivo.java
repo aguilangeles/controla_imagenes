@@ -30,6 +30,15 @@ public class InsertarNuevoArchivo {
     this.idcategoria = idcategoria;
     archivo_Insertar(procesando);
   }
+  public InsertarNuevoArchivo(Conexion conexion,
+          int id, String ruta, int page, JLabel procesando, int idcategoria, boolean isdocumento) {
+    this.conexion = conexion;
+    this.id = id;
+    this.ruta = ruta;
+    this.page = page;
+    this.idcategoria = idcategoria;
+    archivo_Insertar(procesando);
+  }
 
   private boolean archivo_Insertar(JLabel procesando) {
     int estado = 0;
@@ -48,6 +57,7 @@ public class InsertarNuevoArchivo {
     procesando.setText("Insertando en DB " + ruta);
     try
       {
+      System.out.println(insertar);
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {

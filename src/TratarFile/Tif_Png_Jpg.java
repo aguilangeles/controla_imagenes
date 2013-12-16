@@ -65,11 +65,13 @@ public class Tif_Png_Jpg {
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.sublotes = sublotes;
-    String parents = ContadorSublotes.getParent();
-    String ultima = ContadorSublotes.getUltimaCarpeta();
-    this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
-            tamanio, parents, ultima, muestra, idRango);
-    System.out.println("idtraza " + idTraza);
+    System.out.println("idtraza "+ idTraza);
+//    String parents = ContadorSublotes.getParent();
+//    String ultima = ContadorSublotes.getUltimaCarpeta();
+//    this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+//            tamanio, parents, ultima, muestra, idRango);
+//    int idtr = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
+//    System.out.println("idtraza " + idtr);
     InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza); // lista de sublotes
     pruebainsertarImagen();
   }
@@ -97,8 +99,7 @@ public class Tif_Png_Jpg {
       {
       for (ImagenInsertada img : s.getImagenes())
         {
-        System.out.println(WorkerSubLote.getIdTraza());
-        cargarimagen(img, WorkerSubLote.getIdTraza(), s.getId());
+        cargarimagen(img, idTraza, s.getId());
         imagenyControl();
         }
       }
@@ -106,8 +107,8 @@ public class Tif_Png_Jpg {
 
   private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
     int estado = 0;
-    int nuevatraza = idtraza;
-    InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, nuevatraza, img.getNombre(), img.getPagina(), infoLabel, 2);
+
+    InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2, true);
     int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
     archivoSublote(idtraza, ultimoid, idsublote);
   }
@@ -118,6 +119,6 @@ public class Tif_Png_Jpg {
 
   private void imagenyControl() {
     InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado =
-            new InsertTrazaArchivoContolYEstado(WorkerSubLote.getIdTraza(), idControl, conexion);
+            new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion);
   }
 }

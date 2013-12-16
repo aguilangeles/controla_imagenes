@@ -6,6 +6,7 @@ package VentanaPrincipal;
 
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
+import BasedeDatos.InsertarNuevaTraza;
 import Helpers.GetExtensionIdImagen;
 import PaneldeControl.ContadorSublotes;
 import TratarFile.GetImagenesList;
@@ -55,9 +56,11 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     int idImagen = GetExtensionIdImagen.getIdImagen();
     if (conexion.isConexion())
       {
-        int resultado = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
-        idTraza = resultado;
-        System.out.println("id traza de worker" + idTraza);
+      String parents = ContadorSublotes.getParent();
+      String ultima = ContadorSublotes.getUltimaCarpeta();
+      InsertarNuevaTraza insertarNuevaTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+              tamanioLote, parents, ultima, muestra, idRango);
+      idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion);
       sublotes = imagenesList.getSubloteList();
       switch (idImagen)
@@ -66,7 +69,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
           OnlyPdf();
           break;
         case 2:
-          Tif_Png_Jpg();
+             Tif_Png_Jpg();
           break;
         }
       }
@@ -78,7 +81,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     if (!isCancelled())
       {
       conexion.isConexionClose();
-      crearNuevoWorker();
+      //    crearNuevoWorker();
       }
   }
 
@@ -98,8 +101,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   }
 
   private void Tif_Png_Jpg() {
-    Tif_Png_Jpg varios = new Tif_Png_Jpg(conexion, idUsuario, idDocumento, idVerificacion, idRango, muestra, tamanioLote, idTraza, infoLabel, idControl, sublotes);
-
+       Tif_Png_Jpg varios = new Tif_Png_Jpg(conexion, idUsuario, idDocumento, idVerificacion, idRango, muestra, tamanioLote, idTraza, infoLabel, idControl, sublotes);
   }
 
   private void OnlyPdf() {
@@ -109,15 +111,15 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
             listaImagenes, infoLabel, idControl, sublotes);
   }
 
-  public static int getIdTraza() {
-    return idTraza;
-  }
-
   public String getExtension() {
     return extension;
   }
 
   public String getParent() {
     return parent;
+  }
+
+  public static int getIdTraza() {
+    return idTraza;
   }
 }
