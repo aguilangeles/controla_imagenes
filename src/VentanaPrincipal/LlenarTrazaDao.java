@@ -7,11 +7,13 @@ package VentanaPrincipal;
 import BasedeDatos.ControlesporVerificacionList;
 import BasedeDatos.ArchivosPorTrazaList;
 import BasedeDatos.Conexion;
+import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.GetExtensionIdImagen;
 import PaneldeControl.ContadorSublotes;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -94,10 +96,12 @@ public final class LlenarTrazaDao {
   }
 
   private TrazaDao llenartrazaDocumento() {
-    System.out.println("llego a llenar traza ");
-    /*int id, List<Imagen> imagenList, String extension, List<TiposDeControl> tiposList*/
-
-    new ArchivosPorTrazaList(conexion, id, parent).getImagenesList();
+    List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, id, parent).getImagenesList();
+    System.out.println("lista de imagenes ");
+//    for (Imagen im : imagenesList)
+//      {
+//      System.out.println(im.getRutaParaConversion() + "- " + im.getIdSublote());
+//      }
 //    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
 //            //    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile(),true).getImagenesList(),
 //            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());

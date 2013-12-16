@@ -24,14 +24,14 @@ public class ArchivosPorTrazaList {
   private List<Imagen> imagenProcesadaList = new ArrayList<>();
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf) {
-    getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent, isPdf);
+    getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent);
   }
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent) {
-    consulta(conexion, idTraza, parent);
+    getImagenPaginaSublote(conexion, idTraza, parent);
   }
 
-  private void consulta(Conexion conexion, int idTraza, String parent) {
+  private void getImagenPaginaSublote(Conexion conexion, int idTraza, String parent) {
     try
       {
       Imagen imagen;
@@ -61,7 +61,7 @@ public class ArchivosPorTrazaList {
       }
   }
 
-  private void getImagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent, boolean isPdf) {
+  private void getImagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent) {
     Runtime gar = Runtime.getRuntime();
     Imagen imagen;
     try
@@ -92,12 +92,11 @@ public class ArchivosPorTrazaList {
     if (!isDocumento)
       {
       imagen = new Imagen(id, ruta_archivo, parent, pagina);
-      System.out.println(imagen.toString());
       imagenProcesadaList.add(imagen);
       } else
       {
       imagen = new Imagen(id, ruta_archivo, pagina, idSublote, parent);
-      System.out.println(imagen.toString());
+      System.out.println("imagen " + imagen);
       imagenProcesadaList.add(imagen);
       }
   }
