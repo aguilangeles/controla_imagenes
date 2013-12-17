@@ -22,7 +22,6 @@ public class LlenarControles {
   private List<ControlPorImagen> controlesList = new ArrayList<>();
 
   public LlenarControles(int idTraza, int idImagen, Conexion conexion) {
-//    System.out.println("entro en llenar controles ");
     this.idTraza = idTraza;
     this.idImagen = idImagen;
     llenarControles(conexion);
@@ -40,7 +39,6 @@ public class LlenarControles {
               + " on c.id = tac.idcontrol "
               + " where tac.idtraza = " + idTraza
               + " and tac.idarchivo = " + idImagen + ";";
-//        System.out.println(query);
       conexion.executeQuery(query);
       while (conexion.resulset.next())
         {
@@ -48,8 +46,6 @@ public class LlenarControles {
         int controlidArchivo = conexion.resulset.getInt(2);
         String descripcion = conexion.resulset.getString(3);
         control = new ControlPorImagen(idImagen, trzaArchivo, controlidArchivo, descripcion, false);
-        System.out.println("llenar controles ");
-        System.out.println(" control " + control);
         controlesList.add(control);
         }
       } catch (SQLException ex)
