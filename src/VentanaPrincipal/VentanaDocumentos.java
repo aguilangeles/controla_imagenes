@@ -31,6 +31,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private boolean tif;
   private final TablaCheckBox tablaCheckBox;
   private List<Sublote> sublotes;
+  private String nombresub;
 
   /**
    * Creates new form Ventana
@@ -421,6 +422,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
+    nombresub = siguientes.getRutaSublote();
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -437,14 +439,24 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void getNextImage() {
     contador++;
-    cantidad++;
     Imagen imagen1 = goImagen(contador);
+    String nombre = imagen1.getRutaSublote();
     //RutaMouseListener.getAdyacentes(pdf, imagen1);
+    if (!nombre.equalsIgnoreCase(nombresub))
+      {
+      cantidad++;
+      setNombresub(nombre);
+
+      }
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setNextImage(imagen1);
 
+  }
+
+  public void setNombresub(String nombresub) {
+    this.nombresub = nombresub;
   }
 
   private void setBackImage() {

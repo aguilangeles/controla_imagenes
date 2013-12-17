@@ -4,6 +4,7 @@
  */
 package VentanaPrincipal;
 
+import BasedeDatos.ArchivosPorTrazaList;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
@@ -115,14 +116,9 @@ public class MostrarInternalFrames {
 
   private void setTituloYRutaLabel(Imagen siguientes) {
     int tamanio = siguientes.getTotalSublote();
-    String sublote = siguientes.getRutaSublote() + "( " + tamanio + " imagenes)";
-
+    String sublote = "Documento " + cantidad + " de " + ArchivosPorTrazaList.getDocumentos();
     internal.setTitle(sublote);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
-  }
-
-  public int getCantidad() {
-    return cantidad;
   }
 
   private void setLabelPagina(boolean pdf, Imagen siguientes) {

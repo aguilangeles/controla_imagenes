@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class ArchivosPorTrazaList {
 
+  private static int documentos;
   private List<Imagen> imagenProcesadaList = new ArrayList<>();
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf) {
@@ -35,6 +36,8 @@ public class ArchivosPorTrazaList {
     try
       {
       Imagen imagen;
+
+      documentos = consultarTamanioDocumento(conexion, idTraza);
       String query = "SELECT"
               + " a.id"
               + " , concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
@@ -63,6 +66,10 @@ public class ArchivosPorTrazaList {
       {
       Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
       }
+  }
+
+  public static int getDocumentos() {
+    return documentos;
   }
 
   private void getImagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent) {
@@ -99,12 +106,29 @@ public class ArchivosPorTrazaList {
       imagenProcesadaList.add(imagen);
       } else
       {
-      imagen = new Imagen(id, ruta_archivo, pagina, idSublote, parent, rutaSub, cant_img);
+      imagen = new Imagen(id, ruta_archivo, pagina, idSublote, parent, rutaSub, cant_img, 0);
       imagenProcesadaList.add(imagen);
       }
   }
 
   public List<Imagen> getImagenesList() {
     return imagenProcesadaList;
+  }
+
+  private int consultarTamanioDocumento(Conexion conexion, int idTraza) {
+    int ret = 0;
+    try
+      {
+      String query = "SELECT count(*) FROM qualitys.sublotes where idtraza =" + idTraza + ";";
+      conexion.executeQuery(query);
+      while (conexion.resulset.next())
+        {
+        ret = conexion.resulset.getInt(1);
+        }
+      } catch (SQLException ex)
+      {
+      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    return ret;
   }
 }
