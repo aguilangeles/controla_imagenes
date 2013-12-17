@@ -5,6 +5,8 @@
 package BasedeDatos;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +16,8 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public class GetNumerosDocumentosRechazados {
+
+  private List<Integer> idSubloteRechazado = new ArrayList<>();
 
   public GetNumerosDocumentosRechazados(int idTraza) {
     int contador = 0;
@@ -37,7 +41,7 @@ public class GetNumerosDocumentosRechazados {
           {
           contador++;
           numero = c.resulset.getInt(1);
-          System.out.println("id sublote estado 1 " + numero);
+          idSubloteRechazado.add(numero);
           }
         String update = "UPDATE `qualitys`.`traza` "
                 + "SET `nro_rechazo` = " + contador
@@ -49,6 +53,14 @@ public class GetNumerosDocumentosRechazados {
         JOptionPane.showMessageDialog(null, ex.getMessage(),
                 "Numero de Rechazo", JOptionPane.ERROR_MESSAGE);
         }
+      }
+    iterar();
+  }
+
+  private void iterar() {
+    for (Integer in : idSubloteRechazado)
+      {
+      System.out.println(" set id sublote "+in);
       }
   }
 }
