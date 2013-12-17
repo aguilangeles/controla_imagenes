@@ -101,15 +101,15 @@ public class ArchivosPorTrazaList {
     gar.gc();
   }
 
-  private void archivoConNumeroDePagina(int id, String ruta_archivo, String parent, int pagina, boolean isDocumento, int idSublote, String rutaSub, int cant_img) {
+  private void archivoConNumeroDePagina(int id, String rutaImagen, String parent, int pagina, boolean isDocumento, int idSublote, String rutaSublote, int cant_img) {
     Imagen imagen;
     if (!isDocumento)
       {
-      imagen = new Imagen(id, ruta_archivo, parent, pagina);
+      imagen = new Imagen(id, rutaImagen, parent, pagina);
       imagenProcesadaList.add(imagen);
       } else
       {
-      imagen = new Imagen(id, rutaSub, pagina, idSublote, parent, ruta_archivo, cant_img, 0);
+      imagen = new Imagen(id, rutaSublote, pagina, idSublote, parent, rutaImagen, cant_img);
       imagenProcesadaList.add(imagen);
       }
   }

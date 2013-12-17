@@ -24,7 +24,7 @@ public class Imagen {
   private String rutaInsertadaEnDB;
   private int estado;
   private int idcategoria;
-  private int idSublote, docum;
+  private int idSublote;
   private String rutaSublote;
   int totalSublote;
 
@@ -36,25 +36,14 @@ public class Imagen {
     this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
-  public Imagen(int id, String ruta_archivo, int pagina, int idsublote, String parent, String rutasub, int cant_img, int docum) {
+  public Imagen(int id, String rutaSublote, int pagina, int idsublote, String parent, String rutaImagen, int cant_img) {
     this.id = id;
     this.pagina = pagina;
-    this.rutaInsertadaEnDB = rutasub;
-    System.out.println("ruta insertada en db" + rutaInsertadaEnDB);
-    this.rutaParaConversion = (ruta_archivo + "\\" + rutasub);
-    System.out.println("conversion " + rutaParaConversion);
+    this.rutaInsertadaEnDB = rutaImagen;
+    this.rutaParaConversion = (rutaSublote + "\\" + rutaImagen);
     this.idSublote = idsublote;
-    this.rutaSublote = ruta_archivo;
+    this.rutaSublote = rutaSublote;
     this.totalSublote = cant_img;
-    this.docum = docum;
-  }
-
-  public int getDocum() {
-    return docum;
-  }
-
-  public void setDocum(int docum) {
-    this.docum = docum;
   }
 
   public String getRutaSublote() {
