@@ -28,7 +28,6 @@ public final class GetRutaDeImagen {
       retmin = worker.doInBackground();
       } else if (!pdf)
       {
-      System.out.println("ruta para la conversion " + retmin);
       retmin = imagen.getRutaParaConversion();
       }
   }

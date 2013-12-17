@@ -423,7 +423,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
     nombresub = siguientes.getRutaSublote();
-    new MostrarInternalFrames(traza, desktopPane, internal,
+    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
@@ -447,7 +447,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad++;
       setNombresub(nombre);
       }
-    new MostrarInternalFrames(traza, desktopPane, internal,
+    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setNextImage(imagen1);
@@ -469,7 +469,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad--;
       setNombresub(nombre);
       }
-    new MostrarInternalFrames(traza, desktopPane, internal,
+    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setBackImage(pr);

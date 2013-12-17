@@ -26,7 +26,7 @@ import javax.swing.JTable;
  *
  * @author aguilangeles@gmail.com
  */
-public class MostrarInternalFrames {
+public class MostrarInternalFramesForDocument {
 
   private int cantidadSublote = 1;
   private TrazaDao traza;
@@ -48,7 +48,7 @@ public class MostrarInternalFrames {
   private JButton botonAncho;
   private JButton pEntera;
 
-  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane,
+  public MostrarInternalFramesForDocument(TrazaDao traza, JDesktopPane desktopPane,
           JInternalFrame internal, JButton anterior, boolean pdf, boolean tif,
           JComboBox combo, JScrollPane scrollImage, int cantidad, int sizeRamdom,
           JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente,
@@ -70,8 +70,8 @@ public class MostrarInternalFrames {
     this.botonAncho = ancho;
     this.pEntera = pEntera;
     this.panelScroll = panelSroll;
-    MostrarInternalFrames.save = new Guardar();// sa
-    MostrarInternalFrames.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
+    MostrarInternalFramesForDocument.save = new Guardar();// sa
+    MostrarInternalFramesForDocument.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
 
   }
 
@@ -116,8 +116,8 @@ public class MostrarInternalFrames {
 
   private void setTituloYRutaLabel(Imagen siguientes) {
     int tamanio = siguientes.getTotalSublote();
-    String imagenw = "Imagen " + cantidad +"/"+ sizeRamdom;
-    internal.setTitle(imagenw);
+    String sublote = "Documento " + cantidad + " de " + ArchivosPorTrazaList.getDocumentos();
+    internal.setTitle(sublote);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
   }
 

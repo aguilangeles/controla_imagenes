@@ -57,7 +57,7 @@ public class InsertarNuevoArchivo {
     procesando.setText("Insertando en DB " + ruta);
     try
       {
-      System.out.println(insertar);
+//      System.out.println(insertar);
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {

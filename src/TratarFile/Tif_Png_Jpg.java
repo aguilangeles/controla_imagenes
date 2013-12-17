@@ -9,8 +9,6 @@ import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevoArchivo;
 import BasedeDatos.InsertarNuevaTraza;
-import PaneldeControl.ContadorSublotes;
-import VentanaPrincipal.WorkerSubLote;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -65,7 +63,7 @@ public class Tif_Png_Jpg {
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.sublotes = sublotes;
-    System.out.println("idtraza "+ idTraza);
+//    System.out.println("idtraza "+ idTraza);
 //    String parents = ContadorSublotes.getParent();
 //    String ultima = ContadorSublotes.getUltimaCarpeta();
 //    this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
