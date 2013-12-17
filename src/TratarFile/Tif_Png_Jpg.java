@@ -63,13 +63,6 @@ public class Tif_Png_Jpg {
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.sublotes = sublotes;
-//    System.out.println("idtraza "+ idTraza);
-//    String parents = ContadorSublotes.getParent();
-//    String ultima = ContadorSublotes.getUltimaCarpeta();
-//    this.sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
-//            tamanio, parents, ultima, muestra, idRango);
-//    int idtr = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
-//    System.out.println("idtraza " + idtr);
     InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza); // lista de sublotes
     pruebainsertarImagen();
   }
@@ -98,7 +91,8 @@ public class Tif_Png_Jpg {
       for (ImagenInsertada img : s.getImagenes())
         {
         cargarimagen(img, idTraza, s.getId());
-        imagenyControl();
+        System.out.println("CARGAR imagen \t"+idTraza);
+        new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion,true);
         }
       }
   }

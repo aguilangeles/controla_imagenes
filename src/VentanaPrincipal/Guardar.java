@@ -46,7 +46,7 @@ public class Guardar {
       getNumerodePagina(pdf, pagina);
       /*Trae la imagen desde la base de datos, junto con la pagina*/
       Imagen imagen = traza.getImageByNameAndPage(nombre, page);
-      System.out.println("imagen coincidente " + imagen.getId() + " - " + imagen.getRutaInsertadaEnDB());
+//      System.out.println("imagen coincidente " + imagen.getId() + " - " + imagen.getRutaInsertadaEnDB());
       /*trae los controles asignados a esa imagen*/
       LlenarControles controles = new LlenarControles(traza.getId(), imagen.getId(), conexion);
       /*itera las posibilidades*/

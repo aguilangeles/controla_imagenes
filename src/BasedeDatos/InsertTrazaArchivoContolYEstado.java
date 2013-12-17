@@ -16,13 +16,20 @@ import javax.swing.JOptionPane;
  */
 public class InsertTrazaArchivoContolYEstado {
 
-  public InsertTrazaArchivoContolYEstado(int idTraza, List<Integer> idControl, Conexion conexion) {
+  private int idtraza;
 
-    insert(idTraza, idControl, conexion);
+  public InsertTrazaArchivoContolYEstado(int idtr, List<Integer> idControl, Conexion conexion) {
+    this.idtraza = idtr + 1;
+    insert(idControl, conexion);
   }
 
-  private void insert(int idTraza, List<Integer> idControl, Conexion conexion) {
-    int id = idTraza + 1;
+  public InsertTrazaArchivoContolYEstado(int idtrz, List<Integer> idControl, Conexion conexion, boolean isdoc) {
+    this.idtraza = idtrz;
+    insert(idControl, conexion);
+  }
+
+  private void insert(List<Integer> idControl, Conexion conexion) {
+    int id = idtraza;
     for (Integer idarchivo : idControl)
       {
       int lasid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
@@ -39,6 +46,7 @@ public class InsertTrazaArchivoContolYEstado {
       try
         {
         conexion.executeUpdate(insertar);
+        System.out.println(insertar);
         } catch (SQLException ex)
         {
         JOptionPane.showMessageDialog(null, ex.getMessage(),
