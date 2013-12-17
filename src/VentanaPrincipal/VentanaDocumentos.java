@@ -4,6 +4,7 @@
  */
 package VentanaPrincipal;
 
+import BasedeDatos.GetNumerosDocumentosRechazados;
 import BasedeDatos.GetNumerosImagenesRechazadas;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
@@ -464,7 +465,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     Imagen pr = backImagen(contador);
     // RutaMouseListener.getAdyacentes(pdf, pr);
     String nombre = pr.getRutaSublote();
-     if (!nombre.equalsIgnoreCase(nombresub))
+    if (!nombre.equalsIgnoreCase(nombresub))
       {
       cantidad--;
       setNombresub(nombre);
@@ -478,12 +479,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void setFinalizar() {
     Guardar save = new Guardar();
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel, pdf);
-    GetNumerosImagenesRechazadas numeroRechazo =
-            new GetNumerosImagenesRechazadas(traza.getId());
+    GetNumerosDocumentosRechazados numeroRechazo =
+            new GetNumerosDocumentosRechazados(traza.getId());
+
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        new Reporte(traza.getId()).setVisible(true);
+      //  new Reporte(traza.getId()).setVisible(true);
       }
     });
     dispose();
