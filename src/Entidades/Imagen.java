@@ -25,6 +25,8 @@ public class Imagen {
   private int estado;
   private int idcategoria;
   private int idSublote;
+  private String rutaSublote;
+  int totalSublote;
 
   public Imagen(int id, String ruta_archivo, String parent, int pagina) {
     this.id = id;
@@ -34,13 +36,24 @@ public class Imagen {
     this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
-  public Imagen(int id, String ruta_archivo, int pagina, int idsublote, String parent) {
+  public Imagen(int id, String ruta_archivo, int pagina, int idsublote, String parent, String rutasub, int cant_img) {
     this.id = id;
     this.pagina = pagina;
     this.rutaInsertadaEnDB = ruta_archivo.substring(parent.length());
     this.rutaParaConversion = (ruta_archivo);
     this.idSublote = idsublote;
+    this.rutaSublote = rutasub.substring(parent.length());
+    this.totalSublote=cant_img;
   }
+
+  public String getRutaSublote() {
+    return rutaSublote;
+  }
+
+  public int getTotalSublote() {
+    return totalSublote;
+  }
+
 
   private static String decodear(String aString) {
     String ret = "";

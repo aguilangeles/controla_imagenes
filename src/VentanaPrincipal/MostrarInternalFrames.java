@@ -27,6 +27,7 @@ import javax.swing.JTable;
  */
 public class MostrarInternalFrames {
 
+  private int cantidadSublote = 1;
   private TrazaDao traza;
   private JDesktopPane desktopPane;
   private JInternalFrame internal;
@@ -78,7 +79,6 @@ public class MostrarInternalFrames {
       {
       internal.setMaximum(true);
       setTituloYRutaLabel(siguientes);
-      System.out.println("id de sublote " + siguientes.getIdSublote());
       setImagenes(siguientes);
       setCB.set(siguientes.getId());
       } catch (PropertyVetoException ex)
@@ -94,8 +94,6 @@ public class MostrarInternalFrames {
       {
       desktopPane.add(internal);
       setTituloYRutaLabel(imagen1);
-      System.out.println("id de sublote " + imagen1.getIdSublote());
-
       setCB.set(imagen1.getId());
       setImagenes(imagen1);
       internal.setVisible(true);
@@ -116,8 +114,15 @@ public class MostrarInternalFrames {
   }
 
   private void setTituloYRutaLabel(Imagen siguientes) {
-    internal.setTitle("Imagen " + cantidad + "/" + sizeRamdom);
+    int tamanio = siguientes.getTotalSublote();
+    String sublote = siguientes.getRutaSublote() + "( " + tamanio + " imagenes)";
+
+    internal.setTitle(sublote);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
+  }
+
+  public int getCantidad() {
+    return cantidad;
   }
 
   private void setLabelPagina(boolean pdf, Imagen siguientes) {
@@ -143,5 +148,17 @@ public class MostrarInternalFrames {
     setLabelPagina(pdf, siguientes);
     imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll, botonAncho, pEntera);
     scrollImage.getViewport().add(imageDraw);
+  }
+
+  public int getCantidadSublote() {
+    return cantidadSublote;
+  }
+
+  public void setCantidad(int cantidad) {
+    this.cantidad = cantidad;
+  }
+
+  public void setCantidadSublote(int cantidadSublote) {
+    this.cantidadSublote = cantidadSublote;
   }
 }

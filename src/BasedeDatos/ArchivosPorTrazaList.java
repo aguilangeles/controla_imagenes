@@ -40,6 +40,8 @@ public class ArchivosPorTrazaList {
               + " , concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
               + " , a.pagina_pdf"
               + " , asub.idsublote"
+              + ", subl.ruta "
+              + ", subl.total_img "
               + " FROM qualitys.archivo a"
               + " join archivo_sublote asub"
               + " on a.id= asub.idarchivo"
@@ -53,7 +55,9 @@ public class ArchivosPorTrazaList {
         String ruta = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
         int idSublote = conexion.resulset.getInt(4);
-        archivoConNumeroDePagina(id, ruta, parent, pagina, true, idSublote);
+        String rutasub = conexion.resulset.getString(5);
+        int cant_img = conexion.resulset.getInt(6);
+        archivoConNumeroDePagina(id, ruta, parent, pagina, true, idSublote, rutasub, cant_img);
         }
       } catch (SQLException ex)
       {
@@ -77,7 +81,7 @@ public class ArchivosPorTrazaList {
         int id = conexion.resulset.getInt(1);
         String ruta_archivo = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
-        archivoConNumeroDePagina(id, ruta_archivo, parent, pagina, false, 0);
+        archivoConNumeroDePagina(id, ruta_archivo, parent, pagina, false, 0, null, 0);
         }
       } catch (SQLException ex)
       {
@@ -87,7 +91,7 @@ public class ArchivosPorTrazaList {
     gar.gc();
   }
 
-  private void archivoConNumeroDePagina(int id, String ruta_archivo, String parent, int pagina, boolean isDocumento, int idSublote) {
+  private void archivoConNumeroDePagina(int id, String ruta_archivo, String parent, int pagina, boolean isDocumento, int idSublote, String rutaSub, int cant_img) {
     Imagen imagen;
     if (!isDocumento)
       {
@@ -95,7 +99,7 @@ public class ArchivosPorTrazaList {
       imagenProcesadaList.add(imagen);
       } else
       {
-      imagen = new Imagen(id, ruta_archivo, pagina, idSublote, parent);
+      imagen = new Imagen(id, ruta_archivo, pagina, idSublote, parent, rutaSub, cant_img);
       imagenProcesadaList.add(imagen);
       }
   }

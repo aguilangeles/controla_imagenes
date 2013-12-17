@@ -40,7 +40,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
    */
   public VentanaDocumentos(TrazaDao trazadao, List<Sublote> sublotes) {
     iniciar(trazadao);
-    setExtendedState(6);
+//    setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
     this.sublotes = sublotes;
@@ -425,6 +425,14 @@ public class VentanaDocumentos extends javax.swing.JFrame {
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
+  }
+
+  public int getCantidad() {
+    return cantidad;
+  }
+
+  public void setCantidad(int cantidad) {
+    this.cantidad = cantidad;
   }
 
   private void getNextImage() {
