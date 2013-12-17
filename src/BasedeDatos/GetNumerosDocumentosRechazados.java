@@ -7,6 +7,8 @@ package BasedeDatos;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -60,7 +62,28 @@ public class GetNumerosDocumentosRechazados {
   private void iterar() {
     for (Integer in : idSubloteRechazado)
       {
-      System.out.println(" set id sublote "+in);
+      System.out.println(" set id sublote " + in);
+      //setearEstadoDocumento(in);
+      }
+  }
+
+  private void setearEstadoDocumento(int idSublote) {
+    Conexion conexion = new Conexion();
+    if (conexion.isConexion())
+      {
+
+      try
+        {
+        String update = "UPDATE `qualitys`.`sublotes`"
+                + " SET"
+                + "`estado` = 1"
+                + "WHERE id= " + idSublote + ";";
+        conexion.executeUpdate(update);
+        conexion.isConexionClose();
+        } catch (SQLException ex)
+        {
+        Logger.getLogger(GetNumerosDocumentosRechazados.class.getName()).log(Level.SEVERE, null, ex);
+        }
       }
   }
 }
