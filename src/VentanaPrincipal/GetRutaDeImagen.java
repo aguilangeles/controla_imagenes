@@ -43,7 +43,7 @@ public final class GetRutaDeImagen {
       } else if (!pdf)
       {
       proximaRuta = imagen.getRutaParaConversion();
-      System.out.println("ruta para la conversion p " + proximaRuta);
+//      System.out.println("ruta para la conversion p " + proximaRuta);
       }
     return proximaRuta;
   }

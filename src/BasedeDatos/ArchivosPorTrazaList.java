@@ -42,7 +42,7 @@ public class ArchivosPorTrazaList {
               + " a.id"
               + ", subl.ruta "
               + ", a.ruta_archivo "
-            //  + " , concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
+              //  + " , concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
               + " , a.pagina_pdf"
               + " , asub.idsublote"
               + ", subl.total_img "
@@ -61,8 +61,6 @@ public class ArchivosPorTrazaList {
         int pagina = conexion.resulset.getInt(4);
         int idSublote = conexion.resulset.getInt(5);
         int cant_img = conexion.resulset.getInt(6);
-        /*int id, String ruta_archivo, String parent, int pagina, boolean isDocumento, int idSublote, String rutaSub, int cant_img*/
-          System.out.println("<<<<"+ rutasub+", "+ rutaImagen);
         archivoConNumeroDePagina(id, rutaImagen, parent, pagina, true, idSublote, rutasub, cant_img);
         }
       } catch (SQLException ex)
