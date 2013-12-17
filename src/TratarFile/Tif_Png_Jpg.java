@@ -91,8 +91,7 @@ public class Tif_Png_Jpg {
       for (ImagenInsertada img : s.getImagenes())
         {
         cargarimagen(img, idTraza, s.getId());
-        System.out.println("CARGAR imagen \t"+idTraza);
-        new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion,true);
+        InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado = new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion, true);
         }
       }
   }
