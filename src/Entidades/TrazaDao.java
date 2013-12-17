@@ -57,12 +57,15 @@ public class TrazaDao {
   public List<TiposDeControl> getTiposList() {
     return tiposList;
   }
+
   public Imagen getImageByNameAndPage(String nombre, int page) {
     /*va a iterar en la lista hasta encontrar coincidencias*/
     Imagen tif = null;
     for (Iterator<Imagen> it = imagenList.iterator(); it.hasNext();)
       {
       Imagen temp = it.next();
+//      System.out.println("ruta insertada en db " + temp.getRutaInsertadaEnDB());
+//      System.out.println("igual" + nombre);
       if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page)
         {
         tif = temp;

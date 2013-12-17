@@ -133,6 +133,7 @@ public class MostrarInternalFramesForDocument {
   }
 
   private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina, boolean pdf) {
+    System.out.println("Recibe numero de traza "+traza.getId());
     save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
     internal.dispose();
     desktopPane.removeAll();
