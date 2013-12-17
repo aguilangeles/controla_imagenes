@@ -446,7 +446,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       {
       cantidad++;
       setNombresub(nombre);
-
       }
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
@@ -461,14 +460,19 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void setBackImage() {
     contador--;
-    cantidad--;
+//    cantidad--;
     Imagen pr = backImagen(contador);
     // RutaMouseListener.getAdyacentes(pdf, pr);
+    String nombre = pr.getRutaSublote();
+     if (!nombre.equalsIgnoreCase(nombresub))
+      {
+      cantidad--;
+      setNombresub(nombre);
+      }
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setBackImage(pr);
-
   }
 
   private void setFinalizar() {
