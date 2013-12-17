@@ -39,10 +39,12 @@ public class Imagen {
   public Imagen(int id, String ruta_archivo, int pagina, int idsublote, String parent, String rutasub, int cant_img, int docum) {
     this.id = id;
     this.pagina = pagina;
-    this.rutaInsertadaEnDB = ruta_archivo.substring(parent.length());
-    this.rutaParaConversion = (ruta_archivo);
+    this.rutaInsertadaEnDB = rutasub;
+    System.out.println("ruta insertada en db" + rutaInsertadaEnDB);
+    this.rutaParaConversion = (ruta_archivo + "\\" + rutasub);
+    System.out.println("conversion " + rutaParaConversion);
     this.idSublote = idsublote;
-    this.rutaSublote = rutasub.substring(parent.length());
+    this.rutaSublote = ruta_archivo;
     this.totalSublote = cant_img;
     this.docum = docum;
   }

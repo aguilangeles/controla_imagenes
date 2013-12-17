@@ -40,10 +40,11 @@ public class ArchivosPorTrazaList {
       documentos = consultarTamanioDocumento(conexion, idTraza);
       String query = "SELECT"
               + " a.id"
-              + " , concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
+              + ", subl.ruta "
+              + ", a.ruta_archivo "
+            //  + " , concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
               + " , a.pagina_pdf"
               + " , asub.idsublote"
-              + ", subl.ruta "
               + ", subl.total_img "
               + " FROM qualitys.archivo a"
               + " join archivo_sublote asub"
@@ -55,12 +56,14 @@ public class ArchivosPorTrazaList {
       while (conexion.resulset.next())
         {
         int id = conexion.resulset.getInt(1);
-        String ruta = conexion.resulset.getString(2);
-        int pagina = conexion.resulset.getInt(3);
-        int idSublote = conexion.resulset.getInt(4);
-        String rutasub = conexion.resulset.getString(5);
+        String rutasub = conexion.resulset.getString(2);
+        String rutaImagen = conexion.resulset.getString(3);
+        int pagina = conexion.resulset.getInt(4);
+        int idSublote = conexion.resulset.getInt(5);
         int cant_img = conexion.resulset.getInt(6);
-        archivoConNumeroDePagina(id, ruta, parent, pagina, true, idSublote, rutasub, cant_img);
+        /*int id, String ruta_archivo, String parent, int pagina, boolean isDocumento, int idSublote, String rutaSub, int cant_img*/
+          System.out.println("<<<<"+ rutasub+", "+ rutaImagen);
+        archivoConNumeroDePagina(id, rutaImagen, parent, pagina, true, idSublote, rutasub, cant_img);
         }
       } catch (SQLException ex)
       {
@@ -106,7 +109,7 @@ public class ArchivosPorTrazaList {
       imagenProcesadaList.add(imagen);
       } else
       {
-      imagen = new Imagen(id, ruta_archivo, pagina, idSublote, parent, rutaSub, cant_img, 0);
+      imagen = new Imagen(id, rutaSub, pagina, idSublote, parent, ruta_archivo, cant_img, 0);
       imagenProcesadaList.add(imagen);
       }
   }
