@@ -5,12 +5,10 @@
 package VentanaPrincipal;
 
 import BasedeDatos.GetNumerosDocumentosRechazados;
-import BasedeDatos.GetNumerosImagenesRechazadas;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
-import ReporteLote.Reporte;
 import ReporteLote.ReporteDocumento;
 import TratarFile.Sublote;
 import java.awt.event.KeyEvent;

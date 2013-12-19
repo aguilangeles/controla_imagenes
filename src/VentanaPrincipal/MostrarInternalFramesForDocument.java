@@ -116,7 +116,8 @@ public class MostrarInternalFramesForDocument {
 
   private void setTituloYRutaLabel(Imagen siguientes) {
     int tamanio = siguientes.getTotalSublote();
-    String sublote = "Documento " + cantidad + " de " + ArchivosPorTrazaList.getDocumentos();
+    String rutasublote = (siguientes.getRutaSublote());
+    String sublote = rutasublote + "(" + cantidad + "/ " + ArchivosPorTrazaList.getDocumentos() + ")";
     internal.setTitle(sublote);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
   }
@@ -133,7 +134,7 @@ public class MostrarInternalFramesForDocument {
   }
 
   private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina, boolean pdf) {
-    System.out.println("Recibe numero de traza "+traza.getId());
+    System.out.println("Recibe numero de traza " + traza.getId());
     save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
     internal.dispose();
     desktopPane.removeAll();
