@@ -11,6 +11,7 @@ import Entidades.TrazaDao;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
+import ReporteLote.ReporteDocumento;
 import TratarFile.Sublote;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -485,7 +486,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-      //  new Reporte(traza.getId()).setVisible(true);
+        new ReporteDocumento(traza.getId()).setVisible(true);
       }
     });
     dispose();

@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author MUTNPROD003
  */
-public class Reporte extends javax.swing.JFrame {
+public class ReporteDocumento extends javax.swing.JFrame {
 
   private BasedeDatos.Conexion conexion = new BasedeDatos.Conexion();
   private int idtraza;
@@ -30,7 +30,7 @@ public class Reporte extends javax.swing.JFrame {
    *
    * @param idtraza
    */
-  public Reporte(int idtraza) {
+  public ReporteDocumento(int idtraza) {
 
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
@@ -40,8 +40,8 @@ public class Reporte extends javax.swing.JFrame {
       {
       Tabla_TrazaReporte poblarTablaTraza =
               new Tabla_TrazaReporte(conexion, idtraza, tablaDetalles);
-      Tabla_TiposDeControlCantidad poblarTablaDiscriminacionTipos =
-              new Tabla_TiposDeControlCantidad(idtraza, conexion, tabladeTipos);
+      Tabla_TiposDeControlEnDocumento poblarTablaDiscriminacionTipos =
+              new Tabla_TiposDeControlEnDocumento(idtraza, conexion, tabladeTipos);
       actionRadioButton();
       imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  "
               + poblarTablaTraza.getRechazo());
@@ -101,7 +101,7 @@ public class Reporte extends javax.swing.JFrame {
 
       },
       new String [] {
-        "idSub", "Sublote", "Ctrl"
+        "Defecto id", "Descripcion", "Cantidad hallazgos"
       }
     ) {
       boolean[] canEdit = new boolean [] {
@@ -232,7 +232,7 @@ public class Reporte extends javax.swing.JFrame {
   }//GEN-LAST:event_jButton1KeyPressed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-  nuevoQ();
+    nuevoQ();
   }//GEN-LAST:event_jButton2ActionPerformed
   private void actionRadioButton() {
     bg = new ButtonGroup();
@@ -283,6 +283,7 @@ public class Reporte extends javax.swing.JFrame {
               JOptionPane.ERROR_MESSAGE);
       }
   }//
+
   private void nuevoQ() {
     if (bg.getSelection() != null)
       {

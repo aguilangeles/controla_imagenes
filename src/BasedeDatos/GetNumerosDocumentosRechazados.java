@@ -62,7 +62,6 @@ public class GetNumerosDocumentosRechazados {
   private void iterar() {
     for (Integer in : idSubloteRechazado)
       {
-
       setearEstadoDocumento(in);
       }
   }
