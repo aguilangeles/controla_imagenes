@@ -14,6 +14,7 @@ import TratarFile.Sublote;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -325,10 +326,20 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }//GEN-LAST:event_terminarActionPerformed
 
   private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
+
     setBackImage();
   }//GEN-LAST:event_anteriorActionPerformed
 
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+    for (int i = 0; i < tabla.getRowCount(); i++)
+      {
+      if (tabla.getValueAt(i, 0) == true)
+        {
+        JOptionPane.showMessageDialog(null, "Saltar al proximo documento ?");
+        }
+      System.out.println(tabla.getValueAt(i, 0));
+
+      }
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
 
