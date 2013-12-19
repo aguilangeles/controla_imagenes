@@ -39,7 +39,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private Map<Integer, Imagen> mapa;
   private int contadorsublote;
 
-
   /**
    * Creates new form Ventana
    *
@@ -473,31 +472,20 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     for (int i = 0; i < tabla.getRowCount(); i++)
       {
       boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-      if (!ischeck)
-        {
-        }else{
-        System.out.println("");
-//        JOptionPane.showMessageDialog(null, "Saltar al próximo documento ?");
-//        contadorsublote++;
-//        System.out.println("<<<<<" + contadorsublote + ">>>>>");
-        //int newcontador = contador + 15;//inicio del nuevo sublote;
-        //setContador(newcontador);
-        // go = goImagen(getContador());
-
+      controlar(ischeck);
       }
-        Imagen imagen1 = goImagen(contador);
-        String nombre = imagen1.getRutaSublote();
-        //RutaMouseListener.getAdyacentes(pdf, imagen1);
-        if (!nombre.equalsIgnoreCase(nombresub))
-          {
-          cantidad++;
-          setNombresub(nombre);
-          }
-        new MostrarInternalFramesForDocument(traza, desktopPane, internal,
-                anterior, pdf, tif, combo, scrollImage,
-                cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-                panelScroll, ampliar, entera).setNextImage(imagen1);
-        }
+    Imagen imagen1 = goImagen(contador);
+    String nombre = imagen1.getRutaSublote();
+    //RutaMouseListener.getAdyacentes(pdf, imagen1);
+    if (!nombre.equalsIgnoreCase(nombresub))
+      {
+      cantidad++;
+      setNombresub(nombre);
+      }
+    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
+            anterior, pdf, tif, combo, scrollImage,
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).setNextImage(imagen1);
 
 
   }
@@ -508,6 +496,15 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   public int getContador() {
     return contador;
+  }
+
+  private void controlar(boolean ischeck) {
+    if (ischeck)
+      {
+
+      JOptionPane.showMessageDialog(null, "?Continuar al siguiente documento?");
+      
+      }
   }
 
   public void setContador(int contador) {
