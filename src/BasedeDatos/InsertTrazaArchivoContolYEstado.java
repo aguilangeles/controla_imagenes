@@ -46,7 +46,6 @@ public class InsertTrazaArchivoContolYEstado {
       try
         {
         conexion.executeUpdate(insertar);
-        System.out.println(insertar);
         } catch (SQLException ex)
         {
         JOptionPane.showMessageDialog(null, ex.getMessage(),
