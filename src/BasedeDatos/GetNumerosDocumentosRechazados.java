@@ -62,8 +62,8 @@ public class GetNumerosDocumentosRechazados {
   private void iterar() {
     for (Integer in : idSubloteRechazado)
       {
-      System.out.println(" set id sublote " + in);
-      //setearEstadoDocumento(in);
+
+      setearEstadoDocumento(in);
       }
   }
 
@@ -71,13 +71,12 @@ public class GetNumerosDocumentosRechazados {
     Conexion conexion = new Conexion();
     if (conexion.isConexion())
       {
-
       try
         {
         String update = "UPDATE `qualitys`.`sublotes`"
                 + " SET"
                 + "`estado` = 1"
-                + "WHERE id= " + idSublote + ";";
+                + " WHERE id= " + idSublote + ";";
         conexion.executeUpdate(update);
         conexion.isConexionClose();
         } catch (SQLException ex)
