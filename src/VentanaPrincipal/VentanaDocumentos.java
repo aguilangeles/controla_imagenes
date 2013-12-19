@@ -434,8 +434,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
         {
         nombres.add(numero);
         }
-
-
       mapa.put(i, traza.getImagenList().get(i));
       }
   }
@@ -503,7 +501,9 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       {
 
       JOptionPane.showMessageDialog(null, "?Continuar al siguiente documento?");
-      
+      contadorsublote++;
+      System.out.println("-- " + contadorsublote);
+
       }
   }
 
