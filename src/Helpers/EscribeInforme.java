@@ -31,7 +31,6 @@ public class EscribeInforme {
       }else{
       estadoS="Rechazado.";
     }
-    //String estadoS = (estado) ? "Rechazado XXX" : "AceptadoZZZ";
     write(tabla, estadoS, observaciones, finalizar);
   }
 

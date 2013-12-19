@@ -85,8 +85,6 @@ public class Tabla_TiposDeControlEnDocumento extends JFrame {
       } catch (SQLException ex)
       {
       JOptionPane.showMessageDialog(null, ex.getMessage(), "Cantidad de errores por TDC", JOptionPane.ERROR_MESSAGE);
-
-//            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
       }
   }
 }

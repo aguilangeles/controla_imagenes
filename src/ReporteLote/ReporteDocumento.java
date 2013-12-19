@@ -43,7 +43,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
       Tabla_TiposDeControlEnDocumento poblarTablaDiscriminacionTipos =
               new Tabla_TiposDeControlEnDocumento(idtraza, conexion, tabladeTipos);
       actionRadioButton();
-      imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  "
+      imagenesRechazadas.setText("Cantidad de documentos rechazados:  "
               + poblarTablaTraza.getRechazo());
       }
   }
