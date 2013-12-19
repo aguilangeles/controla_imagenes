@@ -39,6 +39,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private Map<Integer, Imagen> mapa;
   private int contadorsublote;
 
+
   /**
    * Creates new form Ventana
    *
@@ -468,20 +469,22 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void getNextImage() {
     contador++;
-    Imagen go = null;
+    //Imagen go = null;
     for (int i = 0; i < tabla.getRowCount(); i++)
       {
       boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-      if (ischeck)
+      if (!ischeck)
         {
-        JOptionPane.showMessageDialog(null, "Saltar al próximo documento ?");
-        contadorsublote++;
-        System.out.println("<<<<<" + contadorsublote + ">>>>>");
-        int newcontador = contador + 15;//inicio del nuevo sublote;
-        setContador(newcontador);
-        go = goImagen(getContador());
-        } else
-        {
+        }else{
+        System.out.println("");
+//        JOptionPane.showMessageDialog(null, "Saltar al próximo documento ?");
+//        contadorsublote++;
+//        System.out.println("<<<<<" + contadorsublote + ">>>>>");
+        //int newcontador = contador + 15;//inicio del nuevo sublote;
+        //setContador(newcontador);
+        // go = goImagen(getContador());
+
+      }
         Imagen imagen1 = goImagen(contador);
         String nombre = imagen1.getRutaSublote();
         //RutaMouseListener.getAdyacentes(pdf, imagen1);
@@ -496,7 +499,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
                 panelScroll, ampliar, entera).setNextImage(imagen1);
         }
 
-      }
+
   }
 
   public void setNombresub(String nombresub) {
