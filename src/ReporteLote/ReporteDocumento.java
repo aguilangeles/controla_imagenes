@@ -4,6 +4,7 @@
  */
 package ReporteLote;
 
+import Helpers.EscribeInformeDocumento;
 import Helpers.VersionEImageIcon;
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -270,9 +271,11 @@ public class ReporteDocumento extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
         } else
         {
+        /*new EscribeInforme(tabla, estado, mensaje.getText(), finalizar)*/
         UpdateEstadoLote updateEstadoLote =
                 new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
-                jTextArea1, tablaDetalles, jButton1);
+                jTextArea1, tablaDetalles, jButton1, true);
+        new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos);
         conexion.isConexionClose();
         System.exit(0);
         }
