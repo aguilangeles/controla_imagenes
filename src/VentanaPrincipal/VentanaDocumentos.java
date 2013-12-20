@@ -343,6 +343,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
+    System.out.println("imagen numero " + contador);
     Imagen imagen = mapa.get(contador);
     if (contador == limiteSuperior)
       {
@@ -426,7 +427,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void iniciar(TrazaDao traza, List<Sublote> sublotes) {
     traza.getImagenList();
-    int totalcant = 1;
+    int totalcant = 0;
     listaFlag = new ArrayList<>();
     mapa = new HashMap<>();
     for (int i = 0; i < sublotes.size(); i++)
@@ -504,7 +505,9 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       {
       JOptionPane.showMessageDialog(null, "?Continuar al siguiente documento?");
       contadorsublote++;
-      System.out.println("IRE A LA IMAGEN NRO "+getListaFlag().get(contadorsublote));
+      int seter = getListaFlag().get(contadorsublote);
+      setContador(seter);
+      
       }
   }
 
