@@ -37,7 +37,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private List<Sublote> sublotes;
   private String nombresub;
   private Map<Integer, Imagen> mapa;
-  private int contadorsublote;
+  private int contadorsublote = -1;
   private ArrayList<Integer> listaFlag;
 
   /**
@@ -477,13 +477,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       controlar(ischeck);
       }
     Imagen imagen1 = goImagen(contador);
-    String nombre = imagen1.getRutaSublote();
-    //RutaMouseListener.getAdyacentes(pdf, imagen1);
-    if (!nombre.equalsIgnoreCase(nombresub))
-      {
-      cantidad++;
-      setNombresub(nombre);
-      }
+//    String nombre = imagen1.getRutaSublote();
+//    //RutaMouseListener.getAdyacentes(pdf, imagen1);
+//    if (!nombre.equalsIgnoreCase(nombresub))
+//      {
+//      cantidad++;
+//      setNombresub(nombre);
+//      }
     new MostrarInternalFramesForDocument(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -504,15 +504,19 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     if (ischeck)
       {
       JOptionPane.showMessageDialog(null, "?Continuar al siguiente documento?");
+      System.out.println(getListaFlag());
       contadorsublote++;
       int seter = getListaFlag().get(contadorsublote);
+      System.out.println(seter);
       setContador(seter);
-      System.out.println(contadorsublote + "--" + getListaFlag().size());
-      if (seter > getSizeRamdom())
+      if (seter >= getSizeRamdom() - 1)
         {
-        siguiente.setEnabled(true);
-        //  setFinalizar();
+        setContador(getSizeRamdom() - 1);
+        //setFinalizar();
+        System.out.println("sise ramdom " + getSizeRamdom());
+        System.out.println("seter " + seter);
         }
+
 
       }
   }
