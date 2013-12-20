@@ -62,12 +62,10 @@ public final class LlenarTrazaDao {
       {
       case 1:
         this.pdfFile = false;
-        System.out.println("case 1");
         llenartrazaDocumento();
         break;
       case 2:
       case 3:
-        System.out.println("case 2-3");
         this.pdfFile = true;
         llenartrazaDocumento();
         break;

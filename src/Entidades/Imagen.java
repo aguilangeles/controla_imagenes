@@ -36,7 +36,8 @@ public class Imagen {
     this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
-  public Imagen(int id, String rutaSublote, int pagina, int idsublote, String parent, String rutaImagen, int cant_img) {
+  public Imagen(int id, String rutaSublote, int pagina, int idsublote,
+          String parent, String rutaImagen, int cant_img) {
     this.id = id;
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;

@@ -38,6 +38,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private String nombresub;
   private Map<Integer, Imagen> mapa;
   private int contadorsublote;
+  private ArrayList<Integer> listaFlag;
 
   /**
    * Creates new form Ventana
@@ -46,7 +47,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
    * @param sublotes
    */
   public VentanaDocumentos(TrazaDao trazadao, List<Sublote> sublotes) {
-    iniciar(trazadao);
+    iniciar(trazadao, sublotes);
 //    setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
@@ -423,17 +424,19 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     return true;
   }
 
-  private void iniciar(TrazaDao traza) {
+  private void iniciar(TrazaDao traza, List<Sublote> sublotes) {
     traza.getImagenList();
+    int totalcant = 1;
+    listaFlag = new ArrayList<>();
     mapa = new HashMap<>();
-    List<String> nombres = new ArrayList<>();
+    for (int i = 0; i < sublotes.size(); i++)
+      {
+      Sublote sublote = sublotes.get(i);
+      totalcant += sublote.getTamanio();
+      listaFlag.add(totalcant);
+      }
     for (int i = 0; i < traza.getImagenList().size(); i++)
       {
-      String numero = traza.getImagenList().get(i).getRutaSublote();
-      if (!nombres.contains(numero))
-        {
-        nombres.add(numero);
-        }
       mapa.put(i, traza.getImagenList().get(i));
       }
   }
@@ -499,12 +502,14 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void controlar(boolean ischeck) {
     if (ischeck)
       {
-
       JOptionPane.showMessageDialog(null, "?Continuar al siguiente documento?");
       contadorsublote++;
-      System.out.println("-- " + contadorsublote);
-
+      System.out.println("IRE A LA IMAGEN NRO "+getListaFlag().get(contadorsublote));
       }
+  }
+
+  public ArrayList<Integer> getListaFlag() {
+    return listaFlag;
   }
 
   public void setContador(int contador) {

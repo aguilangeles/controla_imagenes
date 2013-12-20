@@ -42,7 +42,6 @@ public class ArchivosPorTrazaList {
               + " a.id"
               + ", subl.ruta "
               + ", a.ruta_archivo "
-              //  + " , concat_ws('',subl.ruta,'\\\\',a.ruta_archivo) "
               + " , a.pagina_pdf"
               + " , asub.idsublote"
               + ", subl.total_img "
