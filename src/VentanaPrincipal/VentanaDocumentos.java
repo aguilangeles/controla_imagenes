@@ -507,7 +507,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       contadorsublote++;
       int seter = getListaFlag().get(contadorsublote);
       setContador(seter);
-      
+      System.out.println(contadorsublote + "--" + getListaFlag().size());
+      if (seter > getSizeRamdom())
+        {
+        siguiente.setEnabled(true);
+        //  setFinalizar();
+        }
+
       }
   }
 
