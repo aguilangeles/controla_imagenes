@@ -442,14 +442,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
   }
 
-  public Map<Integer, Imagen> getMapa() {
-    return mapa;
-  }
-
-  public void setMapa(Map<Integer, Imagen> mapa) {
-    this.mapa = mapa;
-  }
-
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
@@ -513,17 +505,26 @@ public class VentanaDocumentos extends javax.swing.JFrame {
         }
       }
   }
+
   private void backDocument(boolean ischeck) {
     if (ischeck)
       {
       contadorsublote--;
       int seter = getListaFlag().get(contadorsublote);
-      setCantidad(contadorsublote -1);
+      setCantidad(contadorsublote + 3);
       setContador(seter);
-      if (seter <= getSizeRamdom() - 1)
+      System.out.println("back document");
+      System.out.println(getListaFlag());
+      System.out.println(contador);
+      System.out.println(seter);
+      System.out.println(contadorsublote);
+      if (seter == getListaFlag().get(0))
         {
-        setContador(getSizeRamdom() - 1);
+        JOptionPane.showMessageDialog(rootPane, "STOP");
         }
+//        {
+//        setContador(getSizeRamdom() - 1);
+//        }
       }
   }
 
@@ -538,10 +539,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void setBackImage() {
     contador--;
     Imagen pr = backImagen(contador);
-     for (int i = 0; i < tabla.getRowCount(); i++)
+    System.out.println("volvio a la imagen " + contador);
+    for (int i = 0; i < tabla.getRowCount(); i++)
       {
       boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-//      goDocument(ischeck);
+      backDocument(ischeck);
       }
     // RutaMouseListener.getAdyacentes(pdf, pr);
     String nombre = pr.getRutaSublote();
@@ -573,5 +575,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private int getSizeRamdom() {
     return traza.getImagenList().size();
+  }
+
+  public Map<Integer, Imagen> getMapa() {
+    return mapa;
+  }
+
+  public void setMapa(Map<Integer, Imagen> mapa) {
+    this.mapa = mapa;
   }
 }
