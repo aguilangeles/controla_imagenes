@@ -474,16 +474,16 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     for (int i = 0; i < tabla.getRowCount(); i++)
       {
       boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-      controlar(ischeck);
+      goDocument(ischeck);
       }
     Imagen imagen1 = goImagen(contador);
-//    String nombre = imagen1.getRutaSublote();
-//    //RutaMouseListener.getAdyacentes(pdf, imagen1);
-//    if (!nombre.equalsIgnoreCase(nombresub))
-//      {
-//      cantidad++;
-//      setNombresub(nombre);
-//      }
+    String nombre = imagen1.getRutaSublote();
+    //RutaMouseListener.getAdyacentes(pdf, imagen1);
+    if (!nombre.equalsIgnoreCase(nombresub))
+      {
+      cantidad++;
+      setNombresub(nombre);
+      }
     new MostrarInternalFramesForDocument(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
@@ -500,24 +500,30 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     return contador;
   }
 
-  private void controlar(boolean ischeck) {
+  private void goDocument(boolean ischeck) {
     if (ischeck)
       {
-      JOptionPane.showMessageDialog(null, "?Continuar al siguiente documento?");
-      System.out.println(getListaFlag());
       contadorsublote++;
       int seter = getListaFlag().get(contadorsublote);
-      System.out.println(seter);
+      setCantidad(contadorsublote + 1);
       setContador(seter);
       if (seter >= getSizeRamdom() - 1)
         {
         setContador(getSizeRamdom() - 1);
-        //setFinalizar();
-        System.out.println("sise ramdom " + getSizeRamdom());
-        System.out.println("seter " + seter);
         }
-
-
+      }
+  }
+  private void backDocument(boolean ischeck) {
+    if (ischeck)
+      {
+      contadorsublote--;
+      int seter = getListaFlag().get(contadorsublote);
+      setCantidad(contadorsublote -1);
+      setContador(seter);
+      if (seter <= getSizeRamdom() - 1)
+        {
+        setContador(getSizeRamdom() - 1);
+        }
       }
   }
 
@@ -531,8 +537,12 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void setBackImage() {
     contador--;
-//    cantidad--;
     Imagen pr = backImagen(contador);
+     for (int i = 0; i < tabla.getRowCount(); i++)
+      {
+      boolean ischeck = (boolean) tabla.getValueAt(i, 0);
+//      goDocument(ischeck);
+      }
     // RutaMouseListener.getAdyacentes(pdf, pr);
     String nombre = pr.getRutaSublote();
     if (!nombre.equalsIgnoreCase(nombresub))
