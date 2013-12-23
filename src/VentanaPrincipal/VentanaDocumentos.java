@@ -37,7 +37,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private List<Sublote> sublotes;
   private String nombresub;
   private Map<Integer, Imagen> mapa;
-  private int contadorsublote = -1;
+  private int contadorsublote = 0;
   private ArrayList<Integer> listaFlag;
 
   /**
@@ -355,6 +355,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private Imagen backImagen(int contador) {
     int limiteInferior = 0;
+    System.out.println("volvio a imagen " + contador);
     Imagen imagen = traza.getImagenList().get(contador);
     if (limiteInferior == contador)
       {
@@ -429,6 +430,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     traza.getImagenList();
     int totalcant = 0;
     listaFlag = new ArrayList<>();
+    listaFlag.add(0);
     mapa = new HashMap<>();
     for (int i = 0; i < sublotes.size(); i++)
       {
@@ -481,15 +483,27 @@ public class VentanaDocumentos extends javax.swing.JFrame {
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setNextImage(imagen1);
 
-
   }
 
-  public void setNombresub(String nombresub) {
-    this.nombresub = nombresub;
-  }
-
-  public int getContador() {
-    return contador;
+  private void setBackImage() {
+    contador--;
+    for (int i = 0; i < tabla.getRowCount(); i++)
+      {
+      boolean ischeck = (boolean) tabla.getValueAt(i, 0);
+      backDocument(ischeck);
+      }
+    Imagen pr = backImagen(contador);
+    // RutaMouseListener.getAdyacentes(pdf, pr);
+    String nombre = pr.getRutaSublote();
+    if (!nombre.equalsIgnoreCase(nombresub))
+      {
+      cantidad--;
+      setNombresub(nombre);
+      }
+    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
+            anterior, pdf, tif, combo, scrollImage,
+            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).setBackImage(pr);
   }
 
   private void goDocument(boolean ischeck) {
@@ -497,10 +511,14 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       {
       contadorsublote++;
       int seter = getListaFlag().get(contadorsublote);
-      setCantidad(contadorsublote + 1);
+      int newCantidad = contadorsublote;
+      setCantidad(newCantidad);
       setContador(seter);
       if (seter >= getSizeRamdom() - 1)
         {
+        terminar.setEnabled(true);
+        JOptionPane.showMessageDialog(rootPane, "No existe siguiente documento"
+                + "\n Se mostrará la última imágen antes de finalizar");
         setContador(getSizeRamdom() - 1);
         }
       }
@@ -511,17 +529,14 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       {
       contadorsublote--;
       int seter = getListaFlag().get(contadorsublote);
-      setCantidad(contadorsublote + 3);
       setContador(seter);
-      System.out.println("back document");
-      System.out.println(getListaFlag());
-      System.out.println(contador);
-      System.out.println(seter);
-      System.out.println(contadorsublote);
+      setCantidad(contadorsublote + 1);
       if (seter == getListaFlag().get(0))
         {
-        JOptionPane.showMessageDialog(rootPane, "STOP");
+        JOptionPane.showMessageDialog(rootPane, "Primer documento");
+        setContador(0);
         }
+
 //        {
 //        setContador(getSizeRamdom() - 1);
 //        }
@@ -536,26 +551,20 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     this.contador = contador;
   }
 
-  private void setBackImage() {
-    contador--;
-    Imagen pr = backImagen(contador);
-    System.out.println("volvio a la imagen " + contador);
-    for (int i = 0; i < tabla.getRowCount(); i++)
-      {
-      boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-      backDocument(ischeck);
-      }
-    // RutaMouseListener.getAdyacentes(pdf, pr);
-    String nombre = pr.getRutaSublote();
-    if (!nombre.equalsIgnoreCase(nombresub))
-      {
-      cantidad--;
-      setNombresub(nombre);
-      }
-    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).setBackImage(pr);
+  public void setNombresub(String nombresub) {
+    this.nombresub = nombresub;
+  }
+
+  public int getContador() {
+    return contador;
+  }
+
+  public int getContadorsublote() {
+    return contadorsublote;
+  }
+
+  public void setContadorsublote(int contadorsublote) {
+    this.contadorsublote = contadorsublote;
   }
 
   private void setFinalizar() {
