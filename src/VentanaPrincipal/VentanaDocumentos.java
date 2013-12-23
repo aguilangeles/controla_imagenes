@@ -530,7 +530,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       contadorsublote--;
       int seter = getListaFlag().get(contadorsublote);
       setContador(seter);
-      setCantidad(contadorsublote + 1);
+      setCantidad(contadorsublote);
       if (seter == getListaFlag().get(0))
         {
         JOptionPane.showMessageDialog(rootPane, "Primer documento");
