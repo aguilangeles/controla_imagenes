@@ -343,7 +343,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
-    System.out.println("imagen numero " + contador);
     Imagen imagen = mapa.get(contador);
     if (contador == limiteSuperior)
       {
@@ -355,7 +354,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private Imagen backImagen(int contador) {
     int limiteInferior = 0;
-    System.out.println("volvio a imagen " + contador);
     Imagen imagen = traza.getImagenList().get(contador);
     if (limiteInferior == contador)
       {
@@ -454,14 +452,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
             panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
   }
 
-  public int getCantidad() {
-    return cantidad;
-  }
-
-  public void setCantidad(int cantidad) {
-    this.cantidad = cantidad;
-  }
-
   private void getNextImage() {
     contador++;
     //Imagen go = null;
@@ -480,7 +470,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
     new MostrarInternalFramesForDocument(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            getCantidad(), getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setNextImage(imagen1);
 
   }
@@ -502,7 +492,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
     new MostrarInternalFramesForDocument(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            getCantidad(), getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).setBackImage(pr);
   }
 
@@ -511,8 +501,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       {
       contadorsublote++;
       int seter = getListaFlag().get(contadorsublote);
-      int newCantidad = contadorsublote;
-      setCantidad(newCantidad);
+      // setCantidad(contadorsublote);
       setContador(seter);
       if (seter >= getSizeRamdom() - 1)
         {
@@ -524,22 +513,25 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
   }
 
+  public int getCantidad() {
+    return cantidad;
+  }
+
+  public void setCantidad(int cantidad) {
+    this.cantidad = cantidad;
+  }
+
   private void backDocument(boolean ischeck) {
     if (ischeck)
       {
       contadorsublote--;
       int seter = getListaFlag().get(contadorsublote);
       setContador(seter);
-      setCantidad(contadorsublote);
       if (seter == getListaFlag().get(0))
         {
         JOptionPane.showMessageDialog(rootPane, "Primer documento");
         setContador(0);
         }
-
-//        {
-//        setContador(getSizeRamdom() - 1);
-//        }
       }
   }
 

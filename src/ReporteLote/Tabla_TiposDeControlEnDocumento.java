@@ -58,7 +58,7 @@ public class Tabla_TiposDeControlEnDocumento extends JFrame {
     try
       {
       String query = "SELECT "
-              + "ss.id"
+              + "distinct(ss.id)"
               + ", ss.ruta"
               + ", ct.descripcion"
               + " FROM qualitys.sublotes ss"
