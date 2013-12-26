@@ -42,8 +42,9 @@ public class Imagen {
     this.id = id;
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;
+    this.parent = parent;
 
-    this.rutaParaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : rutaImagen;
+    this.rutaParaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : parent + "\\" + rutaImagen;
     this.idSublote = idsublote;
     this.rutaSublote = rutaSublote;
     this.totalSublote = cant_img;

@@ -7,6 +7,7 @@ package VentanaPrincipal;
 import BasedeDatos.GetNumerosDocumentosRechazados;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.GetExtensionIdImagen;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.ReporteDocumento;
@@ -54,8 +55,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     this.sublotes = sublotes;
     tabla.requestFocus();
     this.traza = trazadao;
-    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
-    this.tif = isImagenTif(pdf, traza.getExtension());
+    int idImagen = GetExtensionIdImagen.getIdImagen();
+    this.pdf = (idImagen == 1) ? true : false;// discrimina entre pdf y otros
+//    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
+    this.tif = (idImagen == 2) ? true : false;
+    //isImagenTif(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -337,7 +341,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }//GEN-LAST:event_anteriorActionPerformed
 
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
 

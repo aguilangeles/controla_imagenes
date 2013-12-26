@@ -81,7 +81,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     if (!isCancelled())
       {
       conexion.isConexionClose();
-       crearNuevoWorker();
+      crearNuevoWorker();
       }
   }
 
@@ -90,6 +90,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     Conexion con = new Conexion();
     if (con.isConexion())
       {
+      System.out.println(parent);
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(idTraza, parent, con, getExtension(), true);
       new VentanaDocumentos(trazaDao.getTraza(), sublotes).setVisible(true);
       }

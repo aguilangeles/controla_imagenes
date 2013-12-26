@@ -78,6 +78,7 @@ public class MostrarInternalFramesForDocument {
   public void mostrarPrimeraImagen(Imagen siguientes) {
     try
       {
+ 
       internal.setMaximum(true);
       setTituloYRutaLabel(siguientes);
       setImagenes(siguientes);

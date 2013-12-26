@@ -29,7 +29,6 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
   private int pagina;
 
   public ImagenesWorker(String ruta_archivo, String parent, int pagina) {
-    System.out.println(ruta_archivo + " - " + parent + " - " + pagina);
     this.rutaConPagina = ruta_archivo + "[" + pagina + "]";
     this.ruta_archivo = ruta_archivo;
     this.parent = parent;

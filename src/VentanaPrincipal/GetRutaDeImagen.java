@@ -33,17 +33,18 @@ public final class GetRutaDeImagen {
   }
 
   public String getImage(boolean pdf, Imagen imagen) {
+
     if (pdf)
       {
       ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
               imagen.getParent(), imagen.getPagina());
+
       proximaRuta = worker.doInBackground();
       imagen.setRutaCarpetaTemp(proximaRuta);
 
       } else if (!pdf)
       {
       proximaRuta = imagen.getRutaParaConversion();
-//      System.out.println("ruta para la conversion p " + proximaRuta);
       }
     return proximaRuta;
   }
