@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class ExtensionTemporal {
 
   private String rutaTemporal;
-  private  String aParent;
+  private String aParent;
 
   public ExtensionTemporal(String nombre, String parent, int numero) {
     this.aParent = decoder(parent);
@@ -36,6 +36,7 @@ public class ExtensionTemporal {
       }
     return ret;
   }
+
   public String getRutaTemporal() {
     return rutaTemporal;
   }

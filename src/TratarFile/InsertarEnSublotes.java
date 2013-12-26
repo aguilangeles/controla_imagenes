@@ -50,7 +50,7 @@ class InsertarEnSublotes {
             + ");";
     try
       {
-//      System.out.println("insertar sublote " + insertar);
+      System.out.println("insertar sublote " + insertar);
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {

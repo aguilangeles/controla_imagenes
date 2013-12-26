@@ -45,6 +45,7 @@ public class InsertTrazaArchivoContolYEstado {
               + ");";
       try
         {
+        System.out.println(insertar);
         conexion.executeUpdate(insertar);
         } catch (SQLException ex)
         {

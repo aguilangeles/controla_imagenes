@@ -98,7 +98,6 @@ public class Tif_Png_Jpg {
 
   private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
     int estado = 0;
-
     InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2, true);
     int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
     archivoSublote(idtraza, ultimoid, idsublote);

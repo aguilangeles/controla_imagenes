@@ -81,7 +81,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     if (!isCancelled())
       {
       conexion.isConexionClose();
-      crearNuevoWorker();
+       crearNuevoWorker();
       }
   }
 
@@ -98,6 +98,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   }
 
   private void Tif_Png_Jpg() {
+
     Tif_Png_Jpg varios = new Tif_Png_Jpg(conexion, idUsuario, idDocumento, idVerificacion, idRango, muestra, tamanioLote, idTraza, infoLabel, idControl, sublotes);
   }
 
