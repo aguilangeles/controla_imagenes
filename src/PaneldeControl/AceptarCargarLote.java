@@ -56,7 +56,7 @@ public class AceptarCargarLote {
     File file = new File(ruta);//busca el file
     if (file.exists())
       {
-      if (tipoVerificacionBox.getSelectedItem().toString().contains("Sublotes"))
+      if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("2-Control Básico de Documento"))
         {
         ContadorSublotes contadorSublotes = new ContadorSublotes(file);
         GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(ContadorSublotes.getExtension());
