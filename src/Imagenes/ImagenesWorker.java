@@ -29,6 +29,7 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
   private int pagina;
 
   public ImagenesWorker(String ruta_archivo, String parent, int pagina) {
+      System.out.println(ruta_archivo + " - " + parent + " - " + pagina);
     this.rutaConPagina = ruta_archivo + "[" + pagina + "]";
     this.ruta_archivo = ruta_archivo;
     this.parent = parent;
@@ -41,6 +42,7 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
     File outputTemp = null;
     try
       {
+
       String rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal() + "_t_";
       outputTemp = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
       try

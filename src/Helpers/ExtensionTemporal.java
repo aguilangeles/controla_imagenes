@@ -22,6 +22,7 @@ public class ExtensionTemporal {
     this.aParent = decoder(parent);
     String ret = nombre.substring(aParent.length(), nombre.length() - 4) + "_" + numero;
     this.rutaTemporal = ret.replace("\\", "_");
+
   }
 
   private String decoder(String sString) {
