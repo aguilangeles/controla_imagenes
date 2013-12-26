@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import Helpers.GetExtensionIdImagen;
 import Helpers.GetImagenesAdyacentes;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -36,12 +37,13 @@ public class Imagen {
     this.rutaParaConversion = decodear(parent + ruta_archivo);
   }
 
-  public Imagen(int id, String rutaSublote, int pagina, int idsublote,
-          String parent, String rutaImagen, int cant_img) {
+  public Imagen(int id, String rutaSublote, int pagina, int idsublote, String parent, String rutaImagen, int cant_img) {
+    int idImagen = GetExtensionIdImagen.getIdImagen();
     this.id = id;
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;
-    this.rutaParaConversion = (rutaSublote + "\\" + rutaImagen);
+
+    this.rutaParaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : rutaImagen;
     this.idSublote = idsublote;
     this.rutaSublote = rutaSublote;
     this.totalSublote = cant_img;

@@ -93,12 +93,9 @@ public final class LlenarTrazaDao {
 
   private TrazaDao llenartrazaDocumento() {
     List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, id, parent).getImagenesList();
-    for (Imagen ii : imagenesList)
-      {
-      System.out.println(ii);
-      }
-//    traza = new TrazaDao(id, imagenesList,
-//            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
+    
+    traza = new TrazaDao(id, imagenesList,
+            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
     return traza;
   }
 
