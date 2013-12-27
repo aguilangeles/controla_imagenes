@@ -58,7 +58,7 @@ public class AceptarCargarLote {
       {
       if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("2-Control Básico de Documento"))
         {
-        getAceptarDocumentos(file);
+        getDocumentos(file);
         } else
         {
         getFilesForVolumen(file);
@@ -69,7 +69,27 @@ public class AceptarCargarLote {
               "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
       pathnameJtext.setText("");
       }
+  }
 
+  private void getFilesForVolumen(File file) {
+    File[] files = file.listFiles();//lista los mismos
+    getControlesPorVerificacion();//controles de la verificacion seleccionada
+    conexion.isConexionClose();////cierra conexion
+    GetParentName parent = new GetParentName(files); // trae la ruta completa
+    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, infoJLabel, idtipoControlList, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+    idext.execute();
+    aceptarButton.setEnabled(false);
+  }
+
+  private void getDocumentos(File file) {
+    ContadorSublotes contadorSublotes = new ContadorSublotes(file);
+    GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(ContadorSublotes.getExtension());
+    List<Object> listaIdc = contadorSublotes.getDocumentoList();
+    getControlesPorVerificacion();
+    conexion.isConexion();
+    IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, infoJLabel, idtipoControlList, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
+    idext.execute();
+    aceptarButton.setEnabled(false);
 
   }
 
@@ -87,25 +107,5 @@ public class AceptarCargarLote {
   private void getControlesPorVerificacion() {
     IdControlFromVerificacionList ctrls = new IdControlFromVerificacionList();
     idtipoControlList = ctrls.idControlesByVerificacion(tipoVerificacionBox, conexion, idtipoControlList);
-  }
-
-  private void getFilesForVolumen(File file) {
-    File[] files = file.listFiles();//lista los mismos
-    getControlesPorVerificacion();//controles de la verificacion seleccionada
-    conexion.isConexionClose();////cierra conexion
-    GetParentName parent = new GetParentName(files); // trae la ruta completa
-    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, infoJLabel, idtipoControlList, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
-    idext.execute();
-    aceptarButton.setEnabled(false);
-  }
-
-  private void getAceptarDocumentos(File file) {
-    ContadorSublotes contadorSublotes = new ContadorSublotes(file);
-    GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(ContadorSublotes.getExtension());
-    List<Object> listaIdc = contadorSublotes.getDocumentoList();
-    getControlesPorVerificacion();
-    conexion.isConexion();
-    IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, infoJLabel, idtipoControlList, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
-    idext.execute();
   }
 }
