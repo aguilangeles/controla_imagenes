@@ -4,6 +4,7 @@
  */
 package TratarFile;
 
+import Helpers.GetExtensionIdImagen;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,8 +18,6 @@ import javax.swing.JLabel;
 public class ListaRecursiva {
 
   private JLabel infoLabel;
-  private File file;
-  private String extension;
   private List<Object> listaExtension = new ArrayList<>();
 
   public ListaRecursiva(JLabel infoLabel, File file) {
@@ -32,52 +31,58 @@ public class ListaRecursiva {
       {
       String name = files[x].getName();
       infoLabel.setText("Analizando..." + name);
-//      boolean ext = (name.endsWith(".tif")//
-//              || name.endsWith(".pdf")
-//              || name.endsWith(".jpg")
-//              || name.endsWith(".png")) ? true : false;
       if (files[x].isDirectory())
         {
         buscarExtensiones(files[x]);
         }
-      controlFinal(files[x].getAbsolutePath(), name);
-//      if (ext)
-//        {
-//        ExtensionImagen stringImage = new ExtensionImagen(name);
-//        extension = (stringImage.getExtension());
-//        listaExtension.add(files[x].getAbsolutePath());
-//        Collections.shuffle(listaExtension);
-//        }
+      extraerExtensionImagen(files[x]);
       }
   }
 
-  private List<String> endwith() {
-    List<String> end = new ArrayList<>();
-    end.add(".tif");
-    end.add(".tiff");
-    end.add(".TIFF");
-    end.add(".TIF");
-    end.add(".png");
-    end.add(".jpg");
-    end.add(".pdf");
-    return end;
-  }
-
-  private void controlFinal(Object o, String filename) {
-    for (String astring : endwith())
+  private void extraerExtensionImagen(File file) {
+    String fin = file.getName();
+    if (fin.contains("."))
       {
-      if (filename.endsWith(astring))
+      String[] spl = fin.split("\\.");
+      String exts = spl[1];
+      if (!exts.equalsIgnoreCase("txt") && !exts.equalsIgnoreCase("xml"))
         {
-        extension = (astring);
-        listaExtension.add(o);
+        // eliminacion del punto y cambio del swith string por idimaen
+//        extension = "." + exts;
+        GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(exts);
+        listaExtension.add(file.getAbsolutePath());
         Collections.shuffle(listaExtension);
         }
       }
   }
 
-  public String getExtension() {
-    return extension;
-  }
+//  private List<String> endwith() {
+//    List<String> end = new ArrayList<>();
+//    end.add(".tif");
+//    end.add(".tiff");
+//    end.add(".TIFF");
+//    end.add(".TIF");
+//    end.add(".png");
+//    end.add(".jpg");
+//    end.add(".pdf");
+//    return end;
+//  }
+//
+//  private void controlFinal(Object o, String filename) {
+//    for (String astring : endwith())
+//      {
+//      if (filename.endsWith(astring))
+//        {
+//        extension = (astring);
+//        listaExtension.add(o);
+//        Collections.shuffle(listaExtension);
+//        }
+//      }
+//  }
+
+//  public String getExtension() {
+//    return extension;
+//  }
 
   public List<Object> getListaExtensionImagen() {
     return listaExtension;
