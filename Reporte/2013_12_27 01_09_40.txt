@@ -1,15 +1,15 @@
 Operador de Control: admin
-Fecha de Control: 2013-12-27 11:36:22.0
-Id Traza: 28
-Ruta Completa: c:\angeles\testeo\gnd
-Tamanio Lote: 9128
-Cantidad muestreada: 9
-Limite Rechazos: 11
-Total Rechazos: 2
+Fecha de Control: 2013-12-27 01:09:23.0
+Id Traza: 7
+Ruta Completa: c:\angeles\testeo\gnd4
+Tamanio Lote: 1498
+Cantidad muestreada: 8
+Limite Rechazos: 8
+Total Rechazos: 1
 Linea de captura: --/--
 Digitalizador: --/--
 Tipo de Verificacion: Control de calidad de imagen
 Tipo de Documento: FRP
-Estado: Aceptado.
+Estado: Rechazado.
 Observaciones: 
 Versión  app: Qualitys 2.0.0

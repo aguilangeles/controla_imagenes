@@ -56,7 +56,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     tabla.requestFocus();
     this.traza = trazadao;
     int idImagen = GetExtensionIdImagen.getIdImagen();
-    this.pdf = (idImagen == 1) ? true : false;// discrimina entre pdf y otros
+    this.pdf = (idImagen == 1 || idImagen == 3) ? true : false;// discrimina entre pdf y otros
 //    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
     this.tif = (idImagen == 2) ? true : false;
     //isImagenTif(pdf, traza.getExtension());

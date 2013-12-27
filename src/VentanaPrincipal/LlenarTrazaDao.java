@@ -8,6 +8,7 @@ import BasedeDatos.ControlesporVerificacionList;
 import BasedeDatos.ArchivosPorTrazaList;
 import BasedeDatos.Conexion;
 import Entidades.Imagen;
+import Entidades.TiposDeControl;
 import Entidades.TrazaDao;
 import Helpers.GetExtensionIdImagen;
 import java.io.UnsupportedEncodingException;
@@ -21,27 +22,23 @@ import javax.swing.JOptionPane;
  */
 public final class LlenarTrazaDao {
 
-  private int id;
+  private int idTraza;
   private Conexion conexion;
   private TrazaDao traza;
   private String parent;
-  private String extension;
   private boolean pdfFile;
   private int idImg = GetExtensionIdImagen.getIdImagen();
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con) {
-    this.id = trazaID;
     this.parent = encoder(parent + "\\");
-    this.conexion = con;
-    this.extension = GetExtensionIdImagen.getImgExt();
-    llenartraza();
+    llenartraza(con, trazaID, this.parent);
   }
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con, String extension, boolean issublote) {
-    this.id = trazaID;
+    this.idTraza = trazaID;
     this.parent = (parent + "\\");
     this.conexion = con;
-    this.extension = "." + extension;
+//    this.extension = "." + extension;
     int idImagen = GetExtensionIdImagen.getIdImagen();
     switch (idImagen)
       {
@@ -68,34 +65,21 @@ public final class LlenarTrazaDao {
     return ret;
   }
 
-  private TrazaDao llenartraza() {
-    List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, id, parent, true).getImagenesList();
-    traza = new TrazaDao(id, imagenesList, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList(), idImg);
+  private TrazaDao llenartraza(Conexion conexion, int idTraza, String parent) {
+    List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent, true).getImagenesList();
+    List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getlTiposDeControlList();
+    traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
     return traza;
   }
 
   private TrazaDao llenartrazaDocumento() {
-
-    List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, id, parent).getImagenesList();
-
-    traza = new TrazaDao(id, imagenesList, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList(), idImg);
+    List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent).getImagenesList();
+    List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getlTiposDeControlList();
+    traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
     return traza;
   }
 
   public TrazaDao getTraza() {
     return traza;
-  }
-
-  public boolean isPdfFile() {
-    return pdfFile;
-  }
-
-  public void setPdfFile(boolean pdfFile) {
-    this.pdfFile = pdfFile;
-  }
-
-  @Override
-  public String toString() {
-    return "LlenarTrazaDao{" + "id=" + id + ", traza=" + traza + '}';
   }
 }

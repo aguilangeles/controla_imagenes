@@ -19,7 +19,7 @@ public class TrazaDao {
   private int estado;
   private int idImagen;
 
-  public TrazaDao(int id, List<Imagen> imagenList, List<TiposDeControl> tiposList, int idImagen) {
+  public TrazaDao(int id, int idImagen, List<TiposDeControl> tiposList, List<Imagen> imagenList) {
     this.id = id;
     this.imagenList = imagenList;
     this.tiposList = tiposList;
