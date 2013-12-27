@@ -7,6 +7,7 @@ package PaneldeControl;
 import BasedeDatos.IdControlFromVerificacionList;
 import BasedeDatos.Conexion;
 import Helpers.GetExtensionIdImagen;
+import Helpers.GetUltimaCarpeta;
 import TratarFile.IdentificarExtension;
 import TratarFile.IdentificarExtensionSublote;
 import TratarFile.IdentificarParent;
@@ -29,22 +30,22 @@ public class AceptarCargarLote {
 
   private JComboBox tipoDocumentoBox;
   private JComboBox tipoVerificacionBox;
-  private JTextField rutaCarpeta;
-  private Conexion con;
-  private JButton aceptarSeleccion;
-  private JLabel informa;
+  private JTextField pathnameJtext;
+  private Conexion conexion;
+  private JButton aceptarButton;
+  private JLabel infoJLabel;
   private int idUsuario;
   private JFrame cargarLoteFrame;
-  private List<Integer> idTipoControl = new ArrayList<>();
+  private List<Integer> idtipoControlList = new ArrayList<>();
 
   public AceptarCargarLote(JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox,
-          JTextField rutaCarpeta, Conexion con, JButton aceptarSeleccion, JLabel informa, int idUsuario, JFrame frame) {
+          JTextField pathJtext, Conexion conexion, JButton aceptarJButton, JLabel infoLabel, int idUsuario, JFrame frame) {
     this.tipoDocumentoBox = tipoDocumentoBox;
     this.tipoVerificacionBox = tipoVerificacionBox;
-    this.rutaCarpeta = rutaCarpeta;
-    this.con = con;
-    this.aceptarSeleccion = aceptarSeleccion;
-    this.informa = informa;
+    this.pathnameJtext = pathJtext;
+    this.conexion = conexion;
+    this.aceptarButton = aceptarJButton;
+    this.infoJLabel = infoLabel;
     this.idUsuario = idUsuario;
     this.cargarLoteFrame = frame;
     getAceptar();
@@ -52,51 +53,44 @@ public class AceptarCargarLote {
 
   private void getAceptar() {
 
-    String ruta = rutaCarpeta.getText();//trae la ruta
+    String ruta = pathnameJtext.getText();//trae la ruta
     File file = new File(ruta);//busca el file
     if (file.exists())
       {
       if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("2-Control Básico de Documento"))
         {
-        ContadorSublotes contadorSublotes = new ContadorSublotes(file);
-        GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(ContadorSublotes.getExtension());
-        List<Object> listaIdc = contadorSublotes.getListaIDc();
-        getControlesPorVerificacion();
-        con.isConexion();
-        IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, informa, idTipoControl, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
-        idext.execute();
+        getAceptarDocumentos(file);
         } else
         {
-        GetFilesForVolumen(file);
+        getFilesForVolumen(file);
         }
       } else
       {
-      JOptionPane.showMessageDialog(rutaCarpeta,
+      JOptionPane.showMessageDialog(pathnameJtext,
               "Ruta incorrecta", "Error en el ingreso de la ruta", JOptionPane.ERROR_MESSAGE);
-      rutaCarpeta.setText("");
+      pathnameJtext.setText("");
       }
 
 
   }
 
-  public List<Integer> getIdTipoControl() {
-    return idTipoControl;
+  public List<Integer> getIdTipoControlList() {
+    return idtipoControlList;
   }
 
-  private String getUltimaCarpeta(String aParent) {
-    String ret = "";
-    if (aParent.contains("\\"))
-      {
-      String replace = aParent.replace("\\", ", ");
-      String[] rsplit = replace.split(", ");
-      for (int i = 0; i < rsplit.length; i++)
-        {
-        ret = (rsplit[i]);
-        }
-      }
-    return ret;
-  }
-
+//  private String getUltimaCarpeta(String aParent) {
+//    String ret = "";
+//    if (aParent.contains("\\"))
+//      {
+//      String replace = aParent.replace("\\", ", ");
+//      String[] rsplit = replace.split(", ");
+//      for (int i = 0; i < rsplit.length; i++)
+//        {
+//        ret = (rsplit[i]);
+//        }
+//      }
+//    return ret;
+//  }
   private int getTipoDocumento() {
     String result = (String) tipoDocumentoBox.getSelectedItem();
     String[] dos = result.split("-");
@@ -106,31 +100,40 @@ public class AceptarCargarLote {
 
   private void getControlesPorVerificacion() {
     IdControlFromVerificacionList ctrls = new IdControlFromVerificacionList();
-    idTipoControl = ctrls.idControlesByVerificacion(tipoVerificacionBox, con, idTipoControl);
+    idtipoControlList = ctrls.idControlesByVerificacion(tipoVerificacionBox, conexion, idtipoControlList);
   }
 
-  private void setMessageJcombotipodoc() throws HeadlessException {
-    //condicion obsoleta
-    JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de documentos sin seleccionar",//porque se posiciona el en index cero de los combos
-            "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-  }
-
-  private void setMessageComboTipoVerificacion() throws HeadlessException {
-    JOptionPane.showMessageDialog(rutaCarpeta, "Tipo de Verificacion sin seleccionar",
-            "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-  }
-
-  private void GetFilesForVolumen(File file) {
-    System.out.println("Insertando Volumenes");
+//  private void setMessageJcombotipodoc() throws HeadlessException {
+//    //condicion obsoleta
+//    JOptionPane.showMessageDialog(pathnameJtext, "Tipo de documentos sin seleccionar",//porque se posiciona el en index cero de los combos
+//            "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
+//  }
+//
+//  private void setMessageComboTipoVerificacion() throws HeadlessException {
+//    JOptionPane.showMessageDialog(pathnameJtext, "Tipo de Verificacion sin seleccionar",
+//            "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
+//  }
+  private void getFilesForVolumen(File file) {
     File[] files = file.listFiles();//lista los mismos
     getControlesPorVerificacion();//controles de la verificacion seleccionada
-    con.isConexionClose();////cierra conexion
+    conexion.isConexionClose();////cierra conexion
     IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
     String rutaCompleta = parent.getParent();
-    String ultimaCarpeta = getUltimaCarpeta(rutaCompleta);//trae la ultima carpeta
-    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, informa, idTipoControl, file,
+    String ultimaCarpeta = GetUltimaCarpeta.getLastFolder(rutaCompleta);//trae la ultima carpeta
+    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, infoJLabel, idtipoControlList, file,
             rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
     idext.execute();
-    aceptarSeleccion.setEnabled(false);
+    aceptarButton.setEnabled(false);
+  }
+
+  private void getAceptarDocumentos(File file) {
+
+    ContadorSublotes contadorSublotes = new ContadorSublotes(file);
+    GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(ContadorSublotes.getExtension());
+    List<Object> listaIdc = contadorSublotes.getDocumentoList();
+    getControlesPorVerificacion();
+    conexion.isConexion();
+    IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, infoJLabel, idtipoControlList, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
+    idext.execute();
   }
 }

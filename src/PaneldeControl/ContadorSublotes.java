@@ -4,6 +4,7 @@
  */
 package PaneldeControl;
 
+import Helpers.GetUltimaCarpeta;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,14 +17,12 @@ import java.util.List;
  */
 public class ContadorSublotes {
 
-  private static String parent, ultimaCarpeta;
+  private static String parent;
   private static String extension;
-  private int idImagen;
-  private List<Object> listaIDc = new ArrayList<>();
+  private List<Object> documentoList = new ArrayList<>();
 
   public ContadorSublotes(File file) {
     parent = (file.getAbsolutePath());
-    ultimaCarpeta = getUltimaCarpeta(parent);
     getCantidadSublotes(file);
   }
 
@@ -40,39 +39,25 @@ public class ContadorSublotes {
       }
   }
 
-  private String getUltimaCarpeta(String aParent) {
-    String ret = "";
-    if (aParent.contains("\\"))
-      {
-      String replace = aParent.replace("\\", ", ");
-      String[] rsplit = replace.split(", ");
-      for (int i = 0; i < rsplit.length; i++)
-        {
-        ret = (rsplit[i]);
-        }
-      }
-    return ret;
-  }
-
   private void extraerExtensionImagen(File file) {
     String ends = file.getName();
     if (ends.contains("."))
       {
       String[] splits = ends.split("\\.");
-      String string = splits[1];
-      if (!string.equalsIgnoreCase("txt") && !string.equalsIgnoreCase("xml"))
+      String extString = splits[1];
+      if (!extString.equalsIgnoreCase("txt") && !extString.equalsIgnoreCase("xml"))
         {
-        extension = string;
-        if (file.getName().endsWith(string))
+        extension = extString;
+        if (file.getName().endsWith(extString))
           {
           if (getExtension().equalsIgnoreCase("pdf"))
             {
-            listaIDc.add(file.getAbsolutePath());
-            Collections.shuffle(listaIDc);
-            } else if (!listaIDc.contains(file.getParent()))
+            documentoList.add(file.getAbsolutePath());
+            Collections.shuffle(documentoList);
+            } else if (!documentoList.contains(file.getParent()))
             {
-            listaIDc.add(file.getParent());
-            Collections.shuffle(listaIDc);
+            documentoList.add(file.getParent());
+            Collections.shuffle(documentoList);
             }
           }
         }
@@ -88,10 +73,10 @@ public class ContadorSublotes {
   }
 
   public static String getUltimaCarpeta() {
-    return ultimaCarpeta;
+    return GetUltimaCarpeta.getLastFolder(parent);
   }
 
-  public List<Object> getListaIDc() {
-    return listaIDc;
+  public List<Object> getDocumentoList() {
+    return documentoList;
   }
 }

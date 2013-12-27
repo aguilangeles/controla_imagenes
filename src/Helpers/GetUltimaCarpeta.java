@@ -5,7 +5,7 @@
 package Helpers;
 
 /**
- *
+ * obtiene la ultima carpeta del volumen
  * @author aguilangeles@gmail.com
  */
 public class GetUltimaCarpeta {
