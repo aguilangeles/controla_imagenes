@@ -17,21 +17,22 @@ public class TrazaDao {
   private List<TiposDeControl> tiposList;
   private List<Imagen> imagenList;
   private int estado;
-  private String extension;
+  private int idImagen;
 
-  public TrazaDao(int id, List<Imagen> imagenList, String extension, List<TiposDeControl> tiposList) {
+  public TrazaDao(int id, List<Imagen> imagenList, List<TiposDeControl> tiposList, int idImagen) {
     this.id = id;
     this.imagenList = imagenList;
-    this.extension = extension;
     this.tiposList = tiposList;
+    this.idImagen=idImagen;
+
   }
 
-  public String getExtension() {
-    return extension;
+  public int getIdImagen() {
+    return idImagen;
   }
 
-  public void setExtension(String extension) {
-    this.extension = extension;
+  public void setIdImagen(int idImagen) {
+    this.idImagen = idImagen;
   }
 
   public int getId() {
@@ -64,8 +65,6 @@ public class TrazaDao {
     for (Iterator<Imagen> it = imagenList.iterator(); it.hasNext();)
       {
       Imagen temp = it.next();
-//      System.out.println("ruta insertada en db " + temp.getRutaInsertadaEnDB());
-//      System.out.println("igual" + nombre);
       if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page)
         {
         tif = temp;

@@ -4,6 +4,7 @@
  */
 package Imagenes;
 
+import Helpers.GetExtensionIdImagen;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -40,7 +41,6 @@ public class ImageDrawingComponent extends JPanel {
 
   public ImageDrawingComponent() {
   }
-//lo uso para ayuda imagenes?
 
   public ImageDrawingComponent(String imagen, JPanel panel, int opcion, boolean pdf, boolean tif) {
     loadImage(imagen, pdf, tif);
@@ -122,32 +122,62 @@ public class ImageDrawingComponent extends JPanel {
   }
 
   private void loadImage(String path, boolean pdf, boolean tif) {
-    if (pdf || !tif)
+    int idImagen = GetExtensionIdImagen.getIdImagen();
+    switch (idImagen)
       {
-      try
-        {
-        File arch = new File(path);
-        bi = ImageIO.read(arch);
-        } catch (MalformedURLException mue)
-        {
-        System.out.println("URL trouble: " + mue.getMessage());
-        } catch (IOException ioe)
-        {
-        System.out.println("read trouble: " + ioe.getMessage());
-        }
-      } else
-      {
-      try
-        {
-        bi = (BufferedImage) this.tif.getImagen(path);
-        } catch (FileNotFoundException ex)
-        {
-        Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex)
-        {
-        Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      case 1:
+      case 3:
+        try
+          {
+          File arch = new File(path);
+          bi = ImageIO.read(arch);
+          } catch (MalformedURLException mue)
+          {
+          System.out.println("URL trouble: " + mue.getMessage());
+          } catch (IOException ioe)
+          {
+          System.out.println("read trouble: " + ioe.getMessage());
+          }
+        break;
+      case 2:
+        try
+          {
+          bi = (BufferedImage) this.tif.getImagen(path);
+          } catch (FileNotFoundException ex)
+          {
+          Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (IOException ex)
+          {
+          Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        break;
       }
+//    if (pdf || !tif)
+//      {
+//      try
+//        {
+//        File arch = new File(path);
+//        bi = ImageIO.read(arch);
+//        } catch (MalformedURLException mue)
+//        {
+//        System.out.println("URL trouble: " + mue.getMessage());
+//        } catch (IOException ioe)
+//        {
+//        System.out.println("read trouble: " + ioe.getMessage());
+//        }
+//      } else
+//      {
+//      try
+//        {
+//        bi = (BufferedImage) this.tif.getImagen(path);
+//        } catch (FileNotFoundException ex)
+//        {
+//        Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex)
+//        {
+//        Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//      }
   }
 
   private void setValuesForNewDimension(Graphics2D g2, Dimension newdimension) {

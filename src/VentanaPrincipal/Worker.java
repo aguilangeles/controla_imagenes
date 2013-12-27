@@ -7,6 +7,7 @@ package VentanaPrincipal;
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevaTraza;
+import Helpers.GetExtensionIdImagen;
 import Helpers.GetUltimaCarpeta;
 import TratarFile.GetParentName;
 import TratarFile.OnlyPdf;
@@ -27,19 +28,18 @@ public class Worker extends SwingWorker<Object, Object> {
   private JLabel infoLabel;
   private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
   private List<Object> listaImagenes;
-  private String parent, extension, ultimaCarpeta;
+  private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
   private int idTraza;
   private static InsertarNuevaTraza sTraza;
 
-  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, String extension, int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
+  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
     this.cargaLote = controles;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.listaImagenes = listaImagenes;
     this.parent = GetParentName.getParent();
-    this.extension = extension;
     this.ultimaCarpeta = GetUltimaCarpeta.getLastFolder(parent);
     this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
@@ -55,18 +55,15 @@ public class Worker extends SwingWorker<Object, Object> {
       {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       System.out.println("idtraza en worker imagens " + idTraza);
-      switch (extension)
+      int idImagen = GetExtensionIdImagen.getIdImagen();
+      switch (idImagen)
         {
-        case ".tiff":
-        case ".tif":
-        case ".TIFF":
-        case ".TIF":
-        case ".png":
-        case ".jpg":
-          Tif_Png_Jpg();
-          break;
-        case ".pdf":
+        case 1:
           OnlyPdf();
+          break;
+        case 2:
+        case 3:
+          Tif_Png_Jpg();
           break;
         }
       }
@@ -89,7 +86,7 @@ public class Worker extends SwingWorker<Object, Object> {
       {
       int resultado = new GetUltimoIDInsertado(con, "traza").getUltimoID();
       trazaID = (resultado == 0) ? 1 : resultado;
-      LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, getExtension());
+      LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con);
       new Ventana(trazaDao.getTraza()).setVisible(true);
       }
     con.isConexionClose();
@@ -114,9 +111,9 @@ public class Worker extends SwingWorker<Object, Object> {
     return idTraza;
   }
 
-  public String getExtension() {
-    return extension;
-  }
+//  public String getExtension() {
+//    return extension;
+//  }
 
   public String getParent() {
     return parent;

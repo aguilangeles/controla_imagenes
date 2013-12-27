@@ -51,8 +51,6 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
 
     listaExtension = extensionImagen.getListaExtensionImagen();
 
-//    extension = extensionImagen.getExtension();
-
     listaResultado = new SwitchListaExtension(listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();
     GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
@@ -70,8 +68,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
-            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado,
-                    ".pdf", idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
+            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
             worker.execute();
           }
         });

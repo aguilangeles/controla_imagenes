@@ -27,32 +27,17 @@ public final class LlenarTrazaDao {
   private String parent;
   private String extension;
   private boolean pdfFile;
+  private int idImg = GetExtensionIdImagen.getIdImagen();
 
-  public LlenarTrazaDao(int trazaID, String parent, Conexion con, String extension) {
+  public LlenarTrazaDao(int trazaID, String parent, Conexion con) {
     this.id = trazaID;
     this.parent = encoder(parent + "\\");
     this.conexion = con;
-    this.extension = extension;
-    switch (extension)
-      {
-      case ".tif":
-      case ".tiff":
-      case ".TIF":
-      case ".TIFF":
-      case ".png":
-      case ".jpg":
-        this.pdfFile = false;
-        llenartraza();
-        break;
-      case ".pdf":
-        this.pdfFile = true;
-        llenartraza();
-        break;
-      }
+    this.extension = GetExtensionIdImagen.getImgExt();
+    llenartraza();
   }
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con, String extension, boolean issublote) {
-
     this.id = trazaID;
     this.parent = (parent + "\\");
     this.conexion = con;
@@ -61,12 +46,10 @@ public final class LlenarTrazaDao {
     switch (idImagen)
       {
       case 1:
-        this.pdfFile = false;
         llenartrazaDocumento();
         break;
       case 2:
       case 3:
-        this.pdfFile = true;
         llenartrazaDocumento();
         break;
       }
@@ -86,16 +69,16 @@ public final class LlenarTrazaDao {
   }
 
   private TrazaDao llenartraza() {
-    traza = new TrazaDao(id, new ArchivosPorTrazaList(conexion, id, parent, isPdfFile()).getImagenesList(),
-            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
+    List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, id, parent, true).getImagenesList();
+    traza = new TrazaDao(id, imagenesList, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList(), idImg);
     return traza;
   }
 
   private TrazaDao llenartrazaDocumento() {
+
     List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, id, parent).getImagenesList();
-    
-    traza = new TrazaDao(id, imagenesList,
-            extension, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList());
+
+    traza = new TrazaDao(id, imagenesList, new ControlesporVerificacionList(conexion, id).getlTiposDeControlList(), idImg);
     return traza;
   }
 
