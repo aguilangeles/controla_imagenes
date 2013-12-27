@@ -8,6 +8,7 @@ import BasedeDatos.ArchivosPorTrazaList;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.GetExtensionIdImagen;
 //import Helpers.GetImagenesAdyacentes;
 //import Helpers.RutaMouseListener;
 import java.beans.PropertyVetoException;
@@ -116,7 +117,7 @@ public class MostrarInternalFrames {
 
   private void setTituloYRutaLabel(Imagen siguientes) {
     int tamanio = siguientes.getTotalSublote();
-    String imagenw = "Imagen " + cantidad +"/"+ sizeRamdom;
+    String imagenw = "Imagen " + cantidad + "/" + sizeRamdom;
     internal.setTitle(imagenw);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
   }
@@ -142,7 +143,8 @@ public class MostrarInternalFrames {
   private void setImagenes(Imagen siguientes) {
     String ruta = rutadeimagen.getImage(pdf, siguientes);
     setLabelPagina(pdf, siguientes);
-    imageDraw.cargarImage(ruta, pdf, tif, combo, panelScroll, botonAncho, pEntera);
+    int idImg = GetExtensionIdImagen.getIdImagen();
+    imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImg);
     scrollImage.getViewport().add(imageDraw);
   }
 

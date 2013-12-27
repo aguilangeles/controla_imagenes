@@ -33,9 +33,9 @@ public class PanelVisual extends javax.swing.JFrame {
     this.setBackground(new Color(230, 252, 238));
     nameAnt.setText(nombreA);
     namePost.setText(nombreP);
-    ImageDrawingComponent img = new ImageDrawingComponent(anterior, jPanel1, 2, pdf, tiff);
+    ImageDrawingComponent img = new ImageDrawingComponent(anterior, jPanel1, 2, 3);
     jScrollPane1.getViewport().add(img);
-    ImageDrawingComponent img2 = new ImageDrawingComponent(posterior, jPanel2, 2, pdf, tiff);
+    ImageDrawingComponent img2 = new ImageDrawingComponent(posterior, jPanel2, 2, 3);
     jScrollPane2.getViewport().add(img2);
   }
 

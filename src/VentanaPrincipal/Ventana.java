@@ -401,13 +401,6 @@ public class Ventana extends javax.swing.JFrame {
   private javax.swing.JButton terminar;
   // End of variables declaration//GEN-END:variables
 
-//  private boolean isImagenTif(boolean pdf, String extension) {
-//    if (!pdf && extension.equalsIgnoreCase(".tif"))
-//      {
-//      return true;
-//      }
-//    return true;
-//  }
   private void iniciar(TrazaDao traza) {
     traza.getImagenList();
   }
@@ -415,8 +408,6 @@ public class Ventana extends javax.swing.JFrame {
   private void getFirstImage(boolean pdf) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
-    System.out.println("pdf ventana " + pdf);
-    System.out.println("tif ventana " + tif);
     new MostrarInternalFrames(traza, desktopPane, internal,
             anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,

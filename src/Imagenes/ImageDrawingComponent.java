@@ -42,15 +42,14 @@ public class ImageDrawingComponent extends JPanel {
   public ImageDrawingComponent() {
   }
 
-  public ImageDrawingComponent(String imagen, JPanel panel, int opcion, boolean pdf, boolean tif) {
-    loadImage(imagen, pdf, tif);
+  public ImageDrawingComponent(String imagen, JPanel panel, int opcion, int idImg) {
+    loadImage(imagen, idImg);
     dimensionPanel.setSize(panel.getSize());
     setOpIndex(opcion);
   }
 
-  public void cargarImage(String path, boolean pdf, boolean tif,
-          final JComboBox combo, final JPanel panelscroll, JButton button, JButton entera) {
-    loadImage(path, pdf, tif);
+  public void cargarImage(String path, final JComboBox combo, final JPanel panelscroll, JButton button, JButton entera, int idImg) {
+    loadImage(path, idImg);
     combo.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -121,9 +120,9 @@ public class ImageDrawingComponent extends JPanel {
     return dimensionPanel;
   }
 
-  private void loadImage(String path, boolean pdf, boolean tif) {
-    int idImagen = GetExtensionIdImagen.getIdImagen();
-    switch (idImagen)
+  private void loadImage(String path, int idImag) {
+//    int idImagen = GetExtensionIdImagen.getIdImagen();
+    switch (idImag)
       {
       case 1:
       case 3:
@@ -152,32 +151,6 @@ public class ImageDrawingComponent extends JPanel {
           }
         break;
       }
-//    if (pdf || !tif)
-//      {
-//      try
-//        {
-//        File arch = new File(path);
-//        bi = ImageIO.read(arch);
-//        } catch (MalformedURLException mue)
-//        {
-//        System.out.println("URL trouble: " + mue.getMessage());
-//        } catch (IOException ioe)
-//        {
-//        System.out.println("read trouble: " + ioe.getMessage());
-//        }
-//      } else
-//      {
-//      try
-//        {
-//        bi = (BufferedImage) this.tif.getImagen(path);
-//        } catch (FileNotFoundException ex)
-//        {
-//        Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex)
-//        {
-//        Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//      }
   }
 
   private void setValuesForNewDimension(Graphics2D g2, Dimension newdimension) {
