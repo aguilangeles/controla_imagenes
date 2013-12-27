@@ -95,16 +95,15 @@ public class Worker extends SwingWorker<Object, Object> {
   }
 
   private void Tif_Png_Jpg() {
-    Tif_Png_Jpg tif_Png_Jpg =
+    Tif_Png_Jpg insertarFormatos_tifPngJpg =
             new Tif_Png_Jpg(infoLabel, conexion, muestra, idTraza,
             parent, idControl, listaImagenes);
   }
 
   private void OnlyPdf() {
     OnlyPdf onlyPdf =
-            new OnlyPdf(sTraza, conexion, 0, idDocumento,
-            idVerificacion, tamanioLote, muestra, idRango, idTraza,
-            parent, ultimaCarpeta, listaImagenes, infoLabel, idControl);
+            new OnlyPdf(infoLabel, conexion, muestra, idTraza,
+            parent, idControl, listaImagenes);
   }
 
   public int getIdTraza() {
