@@ -78,7 +78,7 @@ public class OnlyPdf {
   }
 
   private void OnlyPdf() {//voy a cambiar por stack
-    sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+    sTraza = new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
             tamanioLote, parent, ultimaCarpeta, muestra, idRango);
 
     List<Object> ramdomPdf = ramdom.getStack();

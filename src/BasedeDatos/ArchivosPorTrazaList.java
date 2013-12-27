@@ -24,9 +24,10 @@ public class ArchivosPorTrazaList {
   private static int documentos;
   private List<Imagen> imagenProcesadaList = new ArrayList<>();
 
-  public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isPdf) {
+  public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isVolume) {
     getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent);
   }
+
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent) {
     getImagenPaginaSublote(conexion, idTraza, parent);
@@ -36,7 +37,6 @@ public class ArchivosPorTrazaList {
     try
       {
       Imagen imagen;
-
       documentos = consultarTamanioDocumento(conexion, idTraza);
       String query = "SELECT"
               + " a.id"

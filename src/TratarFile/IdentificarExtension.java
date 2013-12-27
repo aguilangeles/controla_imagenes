@@ -25,7 +25,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   private File file;
   private JFrame frame;
   private JLabel infoLabel;
-  private int idUsuario, idDocumento, idVerificacion;
+  private int  idDocumento, idVerificacion;
   private JFrame panelControl;
   //
   private int tamanio, muestra, idRango;
@@ -38,7 +38,6 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     this.file = file;
     this.frame = frame;
     this.infoLabel = infoLabel;
-    this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
 
@@ -48,14 +47,10 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   protected Void doInBackground() {
 
     ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel, file);
-
     listaExtension = extensionImagen.getListaExtensionImagen();
-
     listaResultado = new SwitchListaExtension(listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();
     GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
-    muestra = GetMuestrafromRango.getMuestra();
-    idRango = GetMuestrafromRango.getIdRango();
     return null;
   }
 
@@ -68,7 +63,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
-            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
+            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, idDocumento, idVerificacion);
             worker.execute();
           }
         });
@@ -94,7 +89,4 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     return muestra;
   }
 
-  public int getIdRango() {
-    return idRango;
-  }
 }

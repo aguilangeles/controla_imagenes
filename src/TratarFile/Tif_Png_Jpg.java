@@ -8,7 +8,6 @@ import BasedeDatos.InsertTrazaArchivoContolYEstado;
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevoArchivo;
-import BasedeDatos.InsertarNuevaTraza;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -18,31 +17,19 @@ import javax.swing.JLabel;
  */
 public class Tif_Png_Jpg {
 
-  private InsertarNuevaTraza sTraza;
   private Conexion conexion;
-  private int idUsuario, idDocumento, idVerificacion, idRango, muestra, tamanio, idTraza;
-  private String parent, ultimaCarpeta;
-  private static CrearElRamdom ramdom;
+  private int muestra, idTraza;
+  private String parent;
   private JLabel infoLabel;
   private List<Integer> idControl;
   private List<Sublote> sublotes;
+  private static CrearElRamdom ramdom;
 
-  public Tif_Png_Jpg(InsertarNuevaTraza sTraza, Conexion conexion,
-          int idUsuario, int idDocumento, int idVerificacion,
-          int idRango, int muestra, int tamanio, int idTraza,
-          String parent, String ultimaCarpeta, JLabel infoLabel,
-          List<Integer> idControl, List<Object> listaImagenes) {
-    this.sTraza = sTraza;
+  public Tif_Png_Jpg(JLabel infoLabel, Conexion conexion, int muestra, int idTraza, String parent, List<Integer> idControl, List<Object> listaImagenes) {
     this.conexion = conexion;
-    this.idUsuario = idUsuario;
-    this.idDocumento = idDocumento;
-    this.idVerificacion = idVerificacion;
-    this.idRango = idRango;
     this.muestra = muestra;
-    this.tamanio = tamanio;
     this.idTraza = idTraza;
     this.parent = parent;
-    this.ultimaCarpeta = ultimaCarpeta;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     ramdom = new CrearElRamdom(listaImagenes, muestra);
@@ -53,12 +40,7 @@ public class Tif_Png_Jpg {
           int idVerificacion, int idRango, int muestra, int tamanioLote,
           int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
     this.conexion = conexion;
-    this.idUsuario = idUsuario;
-    this.idDocumento = idDocumento;
-    this.idVerificacion = idVerificacion;
-    this.idRango = idRango;
     this.muestra = muestra;
-    this.tamanio = tamanioLote;
     this.idTraza = idTraza;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
@@ -68,8 +50,6 @@ public class Tif_Png_Jpg {
   }
 
   private void Tif_Png_Jpg() {
-    sTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
-            tamanio, parent, ultimaCarpeta, muestra, idRango);
     List<Object> ramdomList = ramdom.getStack();
     for (Object obj : ramdomList)
       {
@@ -79,8 +59,6 @@ public class Tif_Png_Jpg {
       String filename = adaptarFile.replace("\\", "\\\\");
       InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, 0, infoLabel, 1);
       imagenyControl();
-      Runtime gar = Runtime.getRuntime();
-      gar.gc();
       }
   }
 

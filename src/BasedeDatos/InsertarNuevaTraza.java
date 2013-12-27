@@ -5,6 +5,8 @@
 package BasedeDatos;
 
 import Helpers.Time;
+import Login.Login;
+import PaneldeControl.AceptarCargarLote;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -32,10 +34,9 @@ public final class InsertarNuevaTraza {
   private int muestra;
   private int idRango;
 
-  public InsertarNuevaTraza(Conexion conexion, int idUsuario, int idTipoDocumento,
-          int idVerificacion, int tamanioLote, String rutaCompleta, String ultimaCarpeta, int muestra, int idRango) {
+  public InsertarNuevaTraza(Conexion conexion, int idTipoDocumento, int idVerificacion, int tamanioLote, String rutaCompleta, String ultimaCarpeta, int muestra, int idRango) {
     this.conexion = conexion;
-    this.idUsuario = idUsuario;
+    this.idUsuario = Login.getUsuario().getId();
     this.idTipoDocumento = idTipoDocumento;
     this.idVerificacion = idVerificacion;
     this.tamanioLote = tamanioLote;

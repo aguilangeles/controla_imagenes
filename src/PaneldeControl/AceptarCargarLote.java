@@ -7,11 +7,9 @@ package PaneldeControl;
 import BasedeDatos.IdControlFromVerificacionList;
 import BasedeDatos.Conexion;
 import Helpers.GetExtensionIdImagen;
-import Helpers.GetUltimaCarpeta;
 import TratarFile.IdentificarExtension;
 import TratarFile.IdentificarExtensionSublote;
 import TratarFile.GetParentName;
-import java.awt.HeadlessException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,7 @@ public class AceptarCargarLote {
   private Conexion conexion;
   private JButton aceptarButton;
   private JLabel infoJLabel;
-  private int idUsuario;
+  private static int idUsuario;
   private JFrame cargarLoteFrame;
   private List<Integer> idtipoControlList = new ArrayList<>();
 
@@ -45,7 +43,7 @@ public class AceptarCargarLote {
     this.conexion = conexion;
     this.aceptarButton = aceptarJButton;
     this.infoJLabel = infoLabel;
-    this.idUsuario = idUsuario;
+//    idUsuario = idUsuario;
     this.cargarLoteFrame = frame;
     getAceptar();
   }

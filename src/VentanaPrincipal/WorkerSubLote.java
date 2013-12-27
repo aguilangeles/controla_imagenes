@@ -58,7 +58,8 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
       {
       String parents = ContadorSublotes.getParent();
       String ultima = ContadorSublotes.getUltimaCarpeta();
-      InsertarNuevaTraza insertarNuevaTraza = new InsertarNuevaTraza(conexion, idUsuario, idDocumento, idVerificacion,
+
+      InsertarNuevaTraza insertarNuevaTraza = new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
               tamanioLote, parents, ultima, muestra, idRango);
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion);

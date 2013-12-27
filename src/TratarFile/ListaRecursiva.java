@@ -47,42 +47,12 @@ public class ListaRecursiva {
       String exts = spl[1];
       if (!exts.equalsIgnoreCase("txt") && !exts.equalsIgnoreCase("xml"))
         {
-        // eliminacion del punto y cambio del swith string por idimaen
-//        extension = "." + exts;
         GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(exts);
         listaExtension.add(file.getAbsolutePath());
         Collections.shuffle(listaExtension);
         }
       }
   }
-
-//  private List<String> endwith() {
-//    List<String> end = new ArrayList<>();
-//    end.add(".tif");
-//    end.add(".tiff");
-//    end.add(".TIFF");
-//    end.add(".TIF");
-//    end.add(".png");
-//    end.add(".jpg");
-//    end.add(".pdf");
-//    return end;
-//  }
-//
-//  private void controlFinal(Object o, String filename) {
-//    for (String astring : endwith())
-//      {
-//      if (filename.endsWith(astring))
-//        {
-//        extension = (astring);
-//        listaExtension.add(o);
-//        Collections.shuffle(listaExtension);
-//        }
-//      }
-//  }
-
-//  public String getExtension() {
-//    return extension;
-//  }
 
   public List<Object> getListaExtensionImagen() {
     return listaExtension;

@@ -5,6 +5,7 @@
 package VentanaPrincipal;
 
 import BasedeDatos.Conexion;
+import BasedeDatos.GetMuestrafromRango;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevaTraza;
 import Helpers.GetExtensionIdImagen;
@@ -29,24 +30,23 @@ public class Worker extends SwingWorker<Object, Object> {
   private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
   private List<Object> listaImagenes;
   private String parent, ultimaCarpeta;
-  private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
+  private int idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
   private int idTraza;
   private static InsertarNuevaTraza sTraza;
 
-  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
+  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion) {
     this.cargaLote = controles;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.listaImagenes = listaImagenes;
-    this.parent = GetParentName.getParent();
-    this.ultimaCarpeta = GetUltimaCarpeta.getLastFolder(parent);
-    this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
-    this.muestra = muestra;
-    this.tamanioLote = tamanioLote;
-    this.idRango = idRango;
+    this.tamanioLote = listaImagenes.size();
+    this.parent = GetParentName.getParent();
+    this.ultimaCarpeta = GetUltimaCarpeta.getLastFolder(parent);
+    this.muestra = GetMuestrafromRango.getMuestra();
+    this.idRango = GetMuestrafromRango.getIdRango();
   }
 
   @Override
@@ -54,6 +54,8 @@ public class Worker extends SwingWorker<Object, Object> {
     if (conexion.isConexion())
       {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
+      sTraza = new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
+              tamanioLote, parent, ultimaCarpeta, muestra, idRango);
       int idImagen = GetExtensionIdImagen.getIdImagen();
       switch (idImagen)
         {
@@ -94,14 +96,13 @@ public class Worker extends SwingWorker<Object, Object> {
 
   private void Tif_Png_Jpg() {
     Tif_Png_Jpg tif_Png_Jpg =
-            new Tif_Png_Jpg(sTraza, conexion, idUsuario, idDocumento,
-            idVerificacion, idRango, muestra, tamanioLote, idTraza,
-            parent, ultimaCarpeta, infoLabel, idControl, listaImagenes);
+            new Tif_Png_Jpg(infoLabel, conexion, muestra, idTraza,
+            parent, idControl, listaImagenes);
   }
 
   private void OnlyPdf() {
     OnlyPdf onlyPdf =
-            new OnlyPdf(sTraza, conexion, idUsuario, idDocumento,
+            new OnlyPdf(sTraza, conexion, 0, idDocumento,
             idVerificacion, tamanioLote, muestra, idRango, idTraza,
             parent, ultimaCarpeta, listaImagenes, infoLabel, idControl);
   }
@@ -113,7 +114,6 @@ public class Worker extends SwingWorker<Object, Object> {
 //  public String getExtension() {
 //    return extension;
 //  }
-
   public String getParent() {
     return parent;
   }
