@@ -25,23 +25,19 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   private File file;
   private JFrame frame;
   private JLabel infoLabel;
-  private String parent, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion;
-  private JFrame panelControl ;
+  private JFrame panelControl;
   //
-  private  int tamanio, muestra, idRango;
+  private int tamanio, muestra, idRango;
   private static String extension;
   private static List<Object> listaExtension;
   private static List<Object> listaResultado;
 
-  public IdentificarExtension(JFrame frame, JLabel infoLabel,
-          List<Integer> controlesList, File file, String parent, String ultimaCarpeta, int idUsuario, int idDocumento, int idVerificacion) {
+  public IdentificarExtension(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, int idUsuario, int idDocumento, int idVerificacion) {
     this.controlesList = controlesList;
     this.file = file;
     this.frame = frame;
     this.infoLabel = infoLabel;
-    this.parent = parent;
-    this.ultimaCarpeta = ultimaCarpeta;
     this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
@@ -49,9 +45,9 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   }
 
   @Override
-  protected Void doInBackground()  {
+  protected Void doInBackground() {
 
-    ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel,file);
+    ListaRecursiva extensionImagen = new ListaRecursiva(infoLabel, file);
 
     listaExtension = extensionImagen.getListaExtensionImagen();
 
@@ -60,7 +56,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     listaResultado = new SwitchListaExtension(extension, listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();
     GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
-    muestra =GetMuestrafromRango.getMuestra();
+    muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
     return null;
   }
@@ -74,8 +70,8 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
-            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, parent,
-                    extension, ultimaCarpeta, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
+            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado,
+                    extension, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
             worker.execute();
           }
         });

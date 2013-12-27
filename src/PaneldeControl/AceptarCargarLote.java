@@ -10,7 +10,7 @@ import Helpers.GetExtensionIdImagen;
 import Helpers.GetUltimaCarpeta;
 import TratarFile.IdentificarExtension;
 import TratarFile.IdentificarExtensionSublote;
-import TratarFile.IdentificarParent;
+import TratarFile.GetParentName;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.util.ArrayList;
@@ -38,8 +38,7 @@ public class AceptarCargarLote {
   private JFrame cargarLoteFrame;
   private List<Integer> idtipoControlList = new ArrayList<>();
 
-  public AceptarCargarLote(JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox,
-          JTextField pathJtext, Conexion conexion, JButton aceptarJButton, JLabel infoLabel, int idUsuario, JFrame frame) {
+  public AceptarCargarLote(JFrame frame, JTextField pathJtext, JButton aceptarJButton, JComboBox tipoDocumentoBox, JComboBox tipoVerificacionBox, JLabel infoLabel, Conexion conexion, int idUsuario) {
     this.tipoDocumentoBox = tipoDocumentoBox;
     this.tipoVerificacionBox = tipoVerificacionBox;
     this.pathnameJtext = pathJtext;
@@ -78,19 +77,6 @@ public class AceptarCargarLote {
     return idtipoControlList;
   }
 
-//  private String getUltimaCarpeta(String aParent) {
-//    String ret = "";
-//    if (aParent.contains("\\"))
-//      {
-//      String replace = aParent.replace("\\", ", ");
-//      String[] rsplit = replace.split(", ");
-//      for (int i = 0; i < rsplit.length; i++)
-//        {
-//        ret = (rsplit[i]);
-//        }
-//      }
-//    return ret;
-//  }
   private int getTipoDocumento() {
     String result = (String) tipoDocumentoBox.getSelectedItem();
     String[] dos = result.split("-");
@@ -103,31 +89,17 @@ public class AceptarCargarLote {
     idtipoControlList = ctrls.idControlesByVerificacion(tipoVerificacionBox, conexion, idtipoControlList);
   }
 
-//  private void setMessageJcombotipodoc() throws HeadlessException {
-//    //condicion obsoleta
-//    JOptionPane.showMessageDialog(pathnameJtext, "Tipo de documentos sin seleccionar",//porque se posiciona el en index cero de los combos
-//            "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-//  }
-//
-//  private void setMessageComboTipoVerificacion() throws HeadlessException {
-//    JOptionPane.showMessageDialog(pathnameJtext, "Tipo de Verificacion sin seleccionar",
-//            "Error en la seleccion del ComboBox", JOptionPane.ERROR_MESSAGE);
-//  }
   private void getFilesForVolumen(File file) {
     File[] files = file.listFiles();//lista los mismos
     getControlesPorVerificacion();//controles de la verificacion seleccionada
     conexion.isConexionClose();////cierra conexion
-    IdentificarParent parent = new IdentificarParent(files); // trae la ruta completa
-    String rutaCompleta = parent.getParent();
-    String ultimaCarpeta = GetUltimaCarpeta.getLastFolder(rutaCompleta);//trae la ultima carpeta
-    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, infoJLabel, idtipoControlList, file,
-            rutaCompleta, ultimaCarpeta, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+    GetParentName parent = new GetParentName(files); // trae la ruta completa
+    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, infoJLabel, idtipoControlList, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
     idext.execute();
     aceptarButton.setEnabled(false);
   }
 
   private void getAceptarDocumentos(File file) {
-
     ContadorSublotes contadorSublotes = new ContadorSublotes(file);
     GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(ContadorSublotes.getExtension());
     List<Object> listaIdc = contadorSublotes.getDocumentoList();

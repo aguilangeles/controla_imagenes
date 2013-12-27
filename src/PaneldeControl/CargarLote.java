@@ -253,8 +253,8 @@ public class CargarLote extends javax.swing.JFrame {
 
   private void getAceptar() {
     AceptarCargarLote acc =
-            new AceptarCargarLote(tipoDocumentoBox, tipoVerificacionBox,
-            rutaCarpeta, con, aceptarSeleccion, informa, usarioTipo.getId(), this);
+            new AceptarCargarLote(this,
+            rutaCarpeta, aceptarSeleccion, tipoDocumentoBox, tipoVerificacionBox, informa, con, usarioTipo.getId());
     panelControl.dispose();
   }
 }

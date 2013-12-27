@@ -7,6 +7,8 @@ package VentanaPrincipal;
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevaTraza;
+import Helpers.GetUltimaCarpeta;
+import TratarFile.GetParentName;
 import TratarFile.OnlyPdf;
 import TratarFile.Tif_Png_Jpg;
 import java.util.List;
@@ -31,16 +33,14 @@ public class Worker extends SwingWorker<Object, Object> {
   private int idTraza;
   private static InsertarNuevaTraza sTraza;
 
-  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl,
-          List<Object> listaImagenes, String parent, String extension, String ultimaCarpeta,
-          int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
+  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, String extension, int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
     this.cargaLote = controles;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.listaImagenes = listaImagenes;
-    this.parent = parent;
+    this.parent = GetParentName.getParent();
     this.extension = extension;
-    this.ultimaCarpeta = ultimaCarpeta;
+    this.ultimaCarpeta = GetUltimaCarpeta.getLastFolder(parent);
     this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
