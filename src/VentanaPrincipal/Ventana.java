@@ -43,7 +43,6 @@ public class Ventana extends javax.swing.JFrame {
     this.traza = trazadao;
     this.pdf = (traza.getIdImagen() == 1 || traza.getIdImagen() == 3) ? true : false;// discrimina entre pdf y otros
     this.tif = (traza.getIdImagen() == 2) ? true : false;
-//    this.tif = isImagenTif(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -402,14 +401,13 @@ public class Ventana extends javax.swing.JFrame {
   private javax.swing.JButton terminar;
   // End of variables declaration//GEN-END:variables
 
-  private boolean isImagenTif(boolean pdf, String extension) {
-    if (!pdf && extension.equalsIgnoreCase(".tif"))
-      {
-      return true;
-      }
-    return true;
-  }
-
+//  private boolean isImagenTif(boolean pdf, String extension) {
+//    if (!pdf && extension.equalsIgnoreCase(".tif"))
+//      {
+//      return true;
+//      }
+//    return true;
+//  }
   private void iniciar(TrazaDao traza) {
     traza.getImagenList();
   }
@@ -420,7 +418,7 @@ public class Ventana extends javax.swing.JFrame {
     System.out.println("pdf ventana " + pdf);
     System.out.println("tif ventana " + tif);
     new MostrarInternalFrames(traza, desktopPane, internal,
-            anterior, true, false, combo, scrollImage,
+            anterior, pdf, tif, combo, scrollImage,
             cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
             panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
   }
