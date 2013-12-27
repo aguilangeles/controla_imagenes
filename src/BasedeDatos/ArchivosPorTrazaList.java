@@ -25,11 +25,12 @@ public class ArchivosPorTrazaList {
   private List<Imagen> imagenProcesadaList = new ArrayList<>();
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isVolume) {
-    getImagen_y_pagina_desde_Archivo(conexion, idTraza, parent);
+    //constructor para volumenes
+    getImagenNombrePagina(conexion, idTraza, parent);
   }
 
-
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent) {
+    //constructor para Documentos
     getImagenPaginaSublote(conexion, idTraza, parent);
   }
 
@@ -68,12 +69,8 @@ public class ArchivosPorTrazaList {
       }
   }
 
-  public static int getDocumentos() {
-    return documentos;
-  }
 
-  private void getImagen_y_pagina_desde_Archivo(Conexion conexion, int idTraza, String parent) {
-    Runtime gar = Runtime.getRuntime();
+  private void getImagenNombrePagina(Conexion conexion, int idTraza, String parent) {
     Imagen imagen;
     try
       {
@@ -95,7 +92,6 @@ public class ArchivosPorTrazaList {
       JOptionPane.showMessageDialog(null, ex.getMessage(),
               "Error en la consulta de ruta archivo", JOptionPane.ERROR_MESSAGE);
       }
-    gar.gc();
   }
 
   private void archivoConNumeroDePagina(int id, String rutaImagen, String parent, int pagina, boolean isDocumento, int idSublote, String rutaSublote, int cant_img) {
@@ -111,6 +107,9 @@ public class ArchivosPorTrazaList {
       }
   }
 
+  public static int getDocumentos() {
+    return documentos;
+  }
   public List<Imagen> getImagenesList() {
     return imagenProcesadaList;
   }

@@ -34,11 +34,10 @@ public final class LlenarTrazaDao {
     llenartraza(con, trazaID, this.parent);
   }
 
-  public LlenarTrazaDao(int trazaID, String parent, Conexion con, String extension, boolean issublote) {
+  public LlenarTrazaDao(int trazaID, String parent, Conexion con, boolean issublote) {
     this.idTraza = trazaID;
     this.parent = (parent + "\\");
     this.conexion = con;
-//    this.extension = "." + extension;
     int idImagen = GetExtensionIdImagen.getIdImagen();
     switch (idImagen)
       {

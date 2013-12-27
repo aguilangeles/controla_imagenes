@@ -33,7 +33,6 @@ public class Worker extends SwingWorker<Object, Object> {
   private int idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
   private int idTraza;
-  private static InsertarNuevaTraza sTraza;
 
   public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion) {
     this.cargaLote = controles;
@@ -54,8 +53,8 @@ public class Worker extends SwingWorker<Object, Object> {
     if (conexion.isConexion())
       {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
-      sTraza = new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
-              tamanioLote, parent, ultimaCarpeta, muestra, idRango);
+      InsertarNuevaTraza insertarNuevaTraza = new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
+                                                     tamanioLote, parent, ultimaCarpeta, muestra, idRango);
       int idImagen = GetExtensionIdImagen.getIdImagen();
       switch (idImagen)
         {

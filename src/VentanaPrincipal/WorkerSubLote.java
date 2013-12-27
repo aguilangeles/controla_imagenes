@@ -70,6 +70,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
           OnlyPdf();
           break;
         case 2:
+        case 3:
           Tif_Png_Jpg();
           break;
         }
@@ -91,7 +92,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     Conexion con = new Conexion();
     if (con.isConexion())
       {
-      LlenarTrazaDao trazaDao = new LlenarTrazaDao(idTraza, parent, con, getExtension(), true);
+      LlenarTrazaDao trazaDao = new LlenarTrazaDao(idTraza, parent, con, true);
       new VentanaDocumentos(trazaDao.getTraza(), sublotes).setVisible(true);
       }
     con.isConexionClose();
