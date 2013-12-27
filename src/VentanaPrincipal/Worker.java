@@ -110,9 +110,6 @@ public class Worker extends SwingWorker<Object, Object> {
     return idTraza;
   }
 
-//  public String getExtension() {
-//    return extension;
-//  }
   public String getParent() {
     return parent;
   }
