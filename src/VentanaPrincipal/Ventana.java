@@ -426,7 +426,6 @@ public class Ventana extends javax.swing.JFrame {
             anterior, ampliar, entera, cantidad, getSizeRamdom()).setBackImage(pr);
 
   }
-
   private void setFinalizar() {
     Guardar save = new Guardar();
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel);
