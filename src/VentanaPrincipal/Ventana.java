@@ -26,6 +26,7 @@ public class Ventana extends javax.swing.JFrame {
   private DefaultTableModel model;
   private TrazaDao traza;
   private final TablaCheckBox tablaCheckBox;
+  private MostrarInternalFrames miframes;
 
   /**
    * Creates new form Ventana
@@ -403,8 +404,9 @@ public class Ventana extends javax.swing.JFrame {
   private void getFirstImage() {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
-    new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
-            anterior, ampliar, entera, cantidad, getSizeRamdom()).mostrarPrimeraImagen(siguientes);
+    miframes = new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
+            anterior, ampliar, entera, getSizeRamdom());
+    miframes.mostrarPrimeraImagen(siguientes, cantidad);
   }
 
   private void getNextImage() {
@@ -412,8 +414,7 @@ public class Ventana extends javax.swing.JFrame {
     cantidad++;
     Imagen imagen1 = goImagen(contador);
     //RutaMouseListener.getAdyacentes(pdf, imagen1);
-    new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
-            anterior, ampliar, entera, cantidad, getSizeRamdom()).setNextImage(imagen1);
+    miframes.setNextImage(imagen1, cantidad);
 
   }
 
@@ -422,10 +423,10 @@ public class Ventana extends javax.swing.JFrame {
     cantidad--;
     Imagen pr = backImagen(contador);
     // RutaMouseListener.getAdyacentes(pdf, pr);
-    new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
-            anterior, ampliar, entera, cantidad, getSizeRamdom()).setBackImage(pr);
+            miframes.setBackImage(pr, cantidad);
 
   }
+
   private void setFinalizar() {
     Guardar save = new Guardar();
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel);
