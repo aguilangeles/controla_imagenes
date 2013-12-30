@@ -36,9 +36,7 @@ public class Tif_Png_Jpg {
     Tif_Png_Jpg();
   }
 
-  public Tif_Png_Jpg(Conexion conexion, int idUsuario, int idDocumento,
-          int idVerificacion, int idRango, int muestra, int tamanioLote,
-          int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
+  public Tif_Png_Jpg(Conexion conexion, int muestra, int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
     this.conexion = conexion;
     this.muestra = muestra;
     this.idTraza = idTraza;
@@ -69,14 +67,14 @@ public class Tif_Png_Jpg {
       for (ImagenInsertada img : s.getImagenes())
         {
         cargarimagen(img, idTraza, s.getId());
-        InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado = new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion, true);
+        imagenyControl();
         }
       }
   }
 
   private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
     int estado = 0;
-    InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2, true);
+    InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2);
     int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
     archivoSublote(idtraza, ultimoid, idsublote);
   }

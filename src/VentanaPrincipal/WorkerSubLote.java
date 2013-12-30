@@ -32,7 +32,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   private String parent, extension, ultimaCarpeta;
   private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
-  private static int idTraza;
+  private int idTraza;
   private List<Sublote> sublotes;
 
   public WorkerSubLote(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
@@ -53,16 +53,14 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
 
   @Override
   protected String doInBackground() {
-    int idImagen = GetExtensionIdImagen.getIdImagen();
     if (conexion.isConexion())
       {
-      String parents = ContadorSublotes.getParent();
-      String ultima = ContadorSublotes.getUltimaCarpeta();
-
-      InsertarNuevaTraza insertarNuevaTraza = new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
-              tamanioLote, parents, ultima, muestra, idRango);
+      int idImagen = GetExtensionIdImagen.getIdImagen();
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
-      GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion);
+      InsertarNuevaTraza insertarNuevaTraza =
+              new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
+              tamanioLote, parent, ultimaCarpeta, muestra, idRango);
+      GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion, idTraza);
       sublotes = imagenesList.getSubloteList();
       switch (idImagen)
         {
@@ -92,7 +90,9 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
     Conexion con = new Conexion();
     if (con.isConexion())
       {
-      LlenarTrazaDao trazaDao = new LlenarTrazaDao(idTraza, parent, con, true);
+      int resultado = idTraza;
+      trazaID = (resultado == 0) ? 1 : resultado;
+      LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, true);
       new VentanaDocumentos(trazaDao.getTraza(), sublotes).setVisible(true);
       }
     con.isConexionClose();
@@ -100,14 +100,12 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   }
 
   private void Tif_Png_Jpg() {
-
-    Tif_Png_Jpg varios = new Tif_Png_Jpg(conexion, idUsuario, idDocumento, idVerificacion, idRango, muestra, tamanioLote, idTraza, infoLabel, idControl, sublotes);
+    Tif_Png_Jpg varios = new Tif_Png_Jpg(conexion, muestra, idTraza, infoLabel, idControl, sublotes);
   }
 
   private void OnlyPdf() {
     OnlyPdf onlyPdf =
-            new OnlyPdf(conexion, idUsuario, idDocumento,
-            idVerificacion, tamanioLote, muestra, idRango, idTraza,
+            new OnlyPdf(conexion, muestra, idTraza,
             listaImagenes, infoLabel, idControl, sublotes);
   }
 
@@ -118,8 +116,7 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   public String getParent() {
     return parent;
   }
-
-  public static int getIdTraza() {
-    return idTraza;
-  }
+//  public  int getIdTraza() {
+//    return idTraza;
+//  }
 }

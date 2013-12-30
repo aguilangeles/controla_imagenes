@@ -53,6 +53,7 @@ public class ArchivosPorTrazaList {
               + " on subl.id=asub.idsublote"
               + " where a.idtraza  =" + idTraza + ";";
       conexion.executeQuery(query);
+//      System.out.println("query imagen subl " + query);
       while (conexion.resulset.next())
         {
         int id = conexion.resulset.getInt(1);
@@ -68,7 +69,6 @@ public class ArchivosPorTrazaList {
       Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
       }
   }
-
 
   private void getImagenNombrePagina(Conexion conexion, int idTraza, String parent) {
     Imagen imagen;
@@ -110,6 +110,7 @@ public class ArchivosPorTrazaList {
   public static int getDocumentos() {
     return documentos;
   }
+
   public List<Imagen> getImagenesList() {
     return imagenProcesadaList;
   }

@@ -8,7 +8,6 @@ import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import Entidades.NombrePaginaDelPDF;
 import Helpers.GetExtensionIdImagen;
-import VentanaPrincipal.WorkerSubLote;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,9 +27,9 @@ public class GetImagenesList {
   private List<Sublote> subloteList = new ArrayList<>();
   private Conexion conexion;
 
-  public GetImagenesList(List<Object> lista, Conexion conexion) {
+  public GetImagenesList(List<Object> lista, Conexion conexion, int idtraza) {
     int idImagen = GetExtensionIdImagen.getIdImagen();
-    int traza = WorkerSubLote.getIdTraza();
+    int traza = idtraza;
     this.conexion = conexion;
     getImagenes(lista, idImagen, traza);
   }

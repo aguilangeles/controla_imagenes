@@ -5,7 +5,6 @@
 package TratarFile;
 
 import BasedeDatos.Conexion;
-import VentanaPrincipal.WorkerSubLote;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -18,10 +17,10 @@ class InsertarEnSublotes {
 
   private Conexion conexion;
   private List<ImagenInsertada> listaimagens;
-  private int idTraza;
+  // private int idTraza;
 
   public InsertarEnSublotes(Conexion conexion, List<Sublote> sublotes, int idtraza) {
-    this.idTraza= WorkerSubLote.getIdTraza();
+    int idTraza = idtraza + 1;
     llenarSublote(conexion, sublotes, idTraza);
   }
 
@@ -33,7 +32,8 @@ class InsertarEnSublotes {
   }
 
   private boolean insertarSublote(Conexion conexion, Sublote sl, int idtraza) {
-    idtraza = sl.getIdtraza();
+    //idtraza = sl.getIdtraza();
+    ;
     int estado = 0;
     //un elemento que llame a este
     // agregar que inserte idsublote cero
@@ -50,7 +50,7 @@ class InsertarEnSublotes {
             + ");";
     try
       {
-      System.out.println("insertar sublote " + insertar);
+//      System.out.println("insertar sublote " + insertar);
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {

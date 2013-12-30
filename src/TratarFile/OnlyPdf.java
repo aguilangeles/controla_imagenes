@@ -9,7 +9,6 @@ import Entidades.NombrePaginaDelPDF;
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevoArchivo;
-import BasedeDatos.InsertarNuevaTraza;
 import PaneldeControl.ContadorSublotes;
 import java.util.List;
 import javax.swing.JLabel;
@@ -43,10 +42,7 @@ public class OnlyPdf {
     insertPagePdf();
   }
 
-  public OnlyPdf(Conexion conexion, int idUsuario,
-          int idDocumento, int idVerificacion, int tamanioLote, int muestra,
-          int idRango, int idTraza,
-          List<Object> listaImagenes, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
+  public OnlyPdf(Conexion conexion, int muestra, int idTraza, List<Object> listaImagenes, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
     this.parent = ContadorSublotes.getParent();
     this.conexion = conexion;
     this.muestra = muestra;
@@ -54,7 +50,6 @@ public class OnlyPdf {
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.sublotes = sublotes;
-    System.out.println("constructor documentos");
     InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza);
     pruebainsertarImagen();
   }
@@ -81,14 +76,14 @@ public class OnlyPdf {
       for (ImagenInsertada img : s.getImagenes())
         {
         cargarimagen(img, idTraza, s.getId());
-        InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado = new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion, true);
+        imagenyControl();
         }
       }
   }
 
   private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
     int estado = 0;
-    InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2, true);
+    InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2);
     int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
     archivoSublote(idtraza, ultimoid, idsublote);
   }

@@ -51,7 +51,9 @@ public class Worker extends SwingWorker<Object, Object> {
     if (conexion.isConexion())
       {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
-      InsertarNuevaTraza insertarNuevaTraza = new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
+      System.out.println("get ultimo id " + idTraza);
+      InsertarNuevaTraza insertarNuevaTraza =
+              new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
               tamanioLote, parent, ultimaCarpeta, muestra, idRango);
       int idImagen = GetExtensionIdImagen.getIdImagen();
       switch (idImagen)

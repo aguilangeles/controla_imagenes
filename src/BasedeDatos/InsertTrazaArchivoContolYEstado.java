@@ -23,10 +23,6 @@ public class InsertTrazaArchivoContolYEstado {
     insert(idControl, conexion);
   }
 
-  public InsertTrazaArchivoContolYEstado(int idtrz, List<Integer> idControl, Conexion conexion, boolean isdoc) {
-    this.idtraza = idtrz;
-    insert(idControl, conexion);
-  }
 
   private void insert(List<Integer> idControl, Conexion conexion) {
     int id = idtraza;

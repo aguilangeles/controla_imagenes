@@ -6,7 +6,6 @@ package BasedeDatos;
 
 import Helpers.Time;
 import Login.Login;
-import PaneldeControl.AceptarCargarLote;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 

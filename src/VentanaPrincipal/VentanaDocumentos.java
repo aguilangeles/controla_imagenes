@@ -32,14 +32,15 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private int cantidad = 1;
   private DefaultTableModel model;
   private TrazaDao traza;
-  private boolean pdf;
-  private boolean tif;
+//  private boolean pdf;
+//  private boolean tif;
   private final TablaCheckBox tablaCheckBox;
   private List<Sublote> sublotes;
   private String nombresub;
   private Map<Integer, Imagen> mapa;
   private int contadorsublote = 0;
   private ArrayList<Integer> listaFlag;
+  private MostrarInternalFramesForDocument mostDoc;
 
   /**
    * Creates new form Ventana
@@ -56,16 +57,16 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     tabla.requestFocus();
     this.traza = trazadao;
     int idImagen = GetExtensionIdImagen.getIdImagen();
-    this.pdf = (idImagen == 1 || idImagen == 3) ? true : false;// discrimina entre pdf y otros
-//    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
-    this.tif = (idImagen == 2) ? true : false;
+//    this.pdf = (idImagen == 1 || idImagen == 3) ? true : false;// discrimina entre pdf y otros
+////    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
+//    this.tif = (idImagen == 2) ? true : false;
     //isImagenTif(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
     //TODO pdf versus tif,png y jpg
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     anterior.setEnabled(false);
-    getFirstImage(pdf);
+    getFirstImage();
     rutaLabel.addMouseListener(new RutaMouseListener());
     siguiente.addKeyListener(keylistener());
     anterior.addKeyListener(keylistener());
@@ -381,10 +382,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad++;
       setNombresub(nombre);
       }
-    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            getCantidad(), getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).setNextImage(imagen1);
+    mostDoc.setNextImage(imagen1, getCantidad());
   }//GEN-LAST:event_nextDocumActionPerformed
 
   private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
@@ -396,10 +394,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad--;
       setNombresub(nombre);
       }
-    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            getCantidad(), getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).setBackImage(pr);
+    mostDoc.setBackImage(pr, getCantidad());
   }//GEN-LAST:event_prevDocumActionPerformed
 
   private Imagen goImagen(int contador) {
@@ -497,14 +492,14 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
   }
 
-  private void getFirstImage(boolean pdf) {
+  private void getFirstImage() {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
     nombresub = siguientes.getRutaSublote();
-    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
+    mostDoc = new MostrarInternalFramesForDocument(traza, desktopPane, internal,
+            anterior, combo, scrollImage, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera);
+    mostDoc.mostrarPrimeraImagen(siguientes, getCantidad());
   }
 
   private void getNextImage() {
@@ -521,10 +516,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad++;
       setNombresub(nombre);
       }
-    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            getCantidad(), getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).setNextImage(imagen1);
+    mostDoc.setNextImage(imagen1, getCantidad());
 
   }
 
@@ -542,10 +534,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad--;
       setNombresub(nombre);
       }
-    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            getCantidad(), getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).setBackImage(pr);
+    mostDoc.setBackImage(pr, getCantidad());
   }
 
   private void goDocument(boolean ischeck) {

@@ -35,7 +35,7 @@ public class MostrarInternalFramesForDocument {
   private JInternalFrame internal;
   private Imagen siguientes;
   private JButton anterior, siguiente;
-  private boolean pdf, tif;
+//  private boolean pdf, tif;
   private JComboBox combo;
   private JScrollPane scrollImage;
   private int cantidad, sizeRamdom;
@@ -48,21 +48,19 @@ public class MostrarInternalFramesForDocument {
   private JPanel panelScroll;
   private JButton botonAncho;
   private JButton pEntera;
+  private int idImagen;
 
-  public MostrarInternalFramesForDocument(TrazaDao traza, JDesktopPane desktopPane,
-          JInternalFrame internal, JButton anterior, boolean pdf, boolean tif,
-          JComboBox combo, JScrollPane scrollImage, int cantidad, int sizeRamdom,
-          JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente,
-          JPanel panelSroll, JButton ancho, JButton pEntera) {
+  public MostrarInternalFramesForDocument(TrazaDao traza, JDesktopPane desktopPane, JInternalFrame internal, JButton anterior, JComboBox combo, JScrollPane scrollImage, int sizeRamdom, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente, JPanel panelSroll, JButton ancho, JButton pEntera) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
     this.anterior = anterior;
-    this.pdf = pdf;
-    this.tif = tif;
+    this.idImagen = traza.getIdImagen();
+//    this.pdf = pdf;
+//    this.tif = tif;
     this.combo = combo;
     this.scrollImage = scrollImage;
-    this.cantidad = cantidad;
+//    this.cantidad = cantidad;
     this.sizeRamdom = sizeRamdom;
     this.rutaLabel = rutaLabel;
     this.pageLabel = pageLabel;
@@ -76,12 +74,12 @@ public class MostrarInternalFramesForDocument {
 
   }
 
-  public void mostrarPrimeraImagen(Imagen siguientes) {
+  public void mostrarPrimeraImagen(Imagen siguientes, int cantidad) {
     try
       {
 
       internal.setMaximum(true);
-      setTituloYRutaLabel(siguientes);
+      setTituloYRutaLabel(siguientes, cantidad);
       setImagenes(siguientes);
       setCB.set(siguientes.getId());
       } catch (PropertyVetoException ex)
@@ -90,13 +88,13 @@ public class MostrarInternalFramesForDocument {
       }
   }//
 
-  public void setNextImage(Imagen imagen1) {
+  public void setNextImage(Imagen imagen1, int cantidad) {
     anterior.setEnabled(true);
-    guardarYLimpiar(rutaLabel, tabla, pageLabel, pdf);
+    guardarYLimpiar(rutaLabel, tabla, pageLabel);
     try
       {
       desktopPane.add(internal);
-      setTituloYRutaLabel(imagen1);
+      setTituloYRutaLabel(imagen1, cantidad);
       setCB.set(imagen1.getId());
       setImagenes(imagen1);
       internal.setVisible(true);
@@ -106,17 +104,17 @@ public class MostrarInternalFramesForDocument {
       }
   }
 
-  public void setBackImage(Imagen pr) {
-    guardarYLimpiar(rutaLabel, tabla, pageLabel, pdf);
+  public void setBackImage(Imagen pr, int cantidad) {
+    guardarYLimpiar(rutaLabel, tabla, pageLabel);
     siguiente.setEnabled(true);
     desktopPane.add(internal);
     internal.setVisible(true);
-    setTituloYRutaLabel(pr);
+    setTituloYRutaLabel(pr, cantidad);
     setImagenes(pr);
     setCB.set(pr.getId());
   }
 
-  private void setTituloYRutaLabel(Imagen siguientes) {
+  private void setTituloYRutaLabel(Imagen siguientes, int cantidad) {
     int tamanio = siguientes.getTotalSublote();
     String rutasublote = (siguientes.getRutaSublote());
     String sublote = rutasublote + "(" + cantidad + "/ " + ArchivosPorTrazaList.getDocumentos() + ")";
@@ -124,18 +122,21 @@ public class MostrarInternalFramesForDocument {
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
   }
 
-  private void setLabelPagina(boolean pdf, Imagen siguientes) {
-    if (pdf)
+  private void setLabelPagina(Imagen siguientes) {
+    switch (idImagen)
       {
-      int page1 = siguientes.getPagina() + 1;
-      pageLabel.setText("Pagina: " + page1);
-      } else
-      {
-      pageLabel.setVisible(false);
+      case 1:
+        int page1 = siguientes.getPagina() + 1;
+        pageLabel.setText("Pagina: " + page1);
+        break;
+      case 2:
+        pageLabel.setVisible(false);
+      case 3:
+        break;
       }
   }
 
-  private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina, boolean pdf) {
+  private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina) {
     save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina);
     internal.dispose();
     desktopPane.removeAll();
@@ -144,9 +145,8 @@ public class MostrarInternalFramesForDocument {
 
   private void setImagenes(Imagen siguientes) {
     //todo cambiar el booleano por el id de imagen
-    String ruta = rutadeimagen.getImage(siguientes, 1);
-    setLabelPagina(pdf, siguientes);
-    int idImagen = GetExtensionIdImagen.getIdImagen();
+    String ruta = rutadeimagen.getImage(siguientes, idImagen);
+    setLabelPagina(siguientes);
     imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImagen);
     scrollImage.getViewport().add(imageDraw);
   }

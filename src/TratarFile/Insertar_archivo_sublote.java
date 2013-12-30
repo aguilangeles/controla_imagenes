@@ -14,7 +14,8 @@ import java.sql.SQLException;
 public class Insertar_archivo_sublote {
 
   public Insertar_archivo_sublote(Conexion conexion, int idtraza, int idarchivo, int idsublote) {
-  insertar(conexion, idtraza, idarchivo, idsublote);
+    int idTraza = (idtraza == 0) ? 1 : idtraza;
+    insertar(conexion, idTraza, idarchivo, idsublote);
   }
 
   private void insertar(Conexion conexion, int idtraza, int idarchivo, int idsublote) {
@@ -32,7 +33,6 @@ public class Insertar_archivo_sublote {
               + ", " + idarchivo
               + ", " + idsublote
               + ");";
-      //System.out.println(insert);
       conexion.executeUpdate(insert);
       } catch (SQLException ex)
       {
