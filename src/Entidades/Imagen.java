@@ -4,12 +4,9 @@
  */
 package Entidades;
 
+import Helpers.Decoder;
 import Helpers.GetExtensionIdImagen;
 import Helpers.GetImagenesAdyacentes;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import javax.swing.JOptionPane;
 
 /**
  * @author MUTNPROD003
@@ -33,8 +30,8 @@ public class Imagen {
     this.id = id;
     this.parent = parent;
     this.pagina = pagina;
-    this.rutaInsertadaEnDB = decodear(ruta_archivo);
-    this.rutaParaConversion = decodear(parent + ruta_archivo);
+    this.rutaInsertadaEnDB = Decoder.decoder(ruta_archivo, Imagen.class.getName());
+    this.rutaParaConversion = Decoder.decoder(parent + ruta_archivo, Imagen.class.getName());
   }
 
   public Imagen(int id, String rutaSublote, int pagina, int idsublote, String parent, String rutaImagen, int cant_img) {
@@ -43,7 +40,6 @@ public class Imagen {
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;
     this.parent = parent;
-
     this.rutaParaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : parent + "\\" + rutaImagen;
     this.idSublote = idsublote;
     this.rutaSublote = rutaSublote;
@@ -56,32 +52,6 @@ public class Imagen {
 
   public int getTotalSublote() {
     return totalSublote;
-  }
-
-  private static String decodear(String aString) {
-    String ret = "";
-    try
-      {
-      ret = URLDecoder.decode(aString, "UTF-8");
-      } catch (UnsupportedEncodingException ex)
-      {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              "Problemas en Encoding", JOptionPane.ERROR_MESSAGE);
-      }
-    return ret;
-  }
-
-  public String encoder(String aString) {
-    String ret = "";
-    try
-      {
-      ret = URLEncoder.encode(aString, "UTF-8");
-      } catch (UnsupportedEncodingException ex)
-      {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              "Llenar Traza : encoding", JOptionPane.ERROR_MESSAGE);
-      }
-    return ret;
   }
 
   public GetImagenesAdyacentes adyacentes() {
@@ -153,12 +123,6 @@ public class Imagen {
     this.estado = estado;
   }
 
-  //  @Override
-  //  public String toString() {
-  //    return "id=" + id
-  //            + ", " + rutaInsertadaEnDB
-  //            + ", pagina=" + pagina;
-  //  }
   @Override
   public String toString() {
     return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", rutaInsertadaEnDb " + rutaInsertadaEnDB + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
