@@ -34,7 +34,7 @@ public class MostrarInternalFrames {
   private JInternalFrame internal;
   private JComboBox combo;
   private JScrollPane scrollImage;
-  private int cantidad, sizeRamdom, idImagen;
+  private int  sizeRamdom, idImagen;
   private JLabel rutaLabel, pageLabel;
   private JTable tabla;
   private static GetRutaDeImagen rutadeimagen = new GetRutaDeImagen();
@@ -44,7 +44,7 @@ public class MostrarInternalFrames {
   private JPanel panelScroll;
   private JButton anterior, siguiente, botonAncho, pEntera;
 
-  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, int cantidad, int sizeRamdom) {
+  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, int sizeRamdom) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -52,7 +52,6 @@ public class MostrarInternalFrames {
     this.idImagen = traza.getIdImagen();
     this.combo = combo;
     this.scrollImage = scrollImage;
-    this.cantidad = cantidad;
     this.sizeRamdom = sizeRamdom;
     this.rutaLabel = rutaLabel;
     this.pageLabel = pageLabel;
@@ -65,11 +64,11 @@ public class MostrarInternalFrames {
     MostrarInternalFrames.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
   }
 
-  public void mostrarPrimeraImagen(Imagen siguientes) {
+  public void mostrarPrimeraImagen(Imagen siguientes, int cantidad) {
     try
       {
       internal.setMaximum(true);
-      setTituloYRutaLabel(siguientes);
+      setTituloYRutaLabel(siguientes, cantidad);
       setImagenes(siguientes);
       setCB.set(siguientes.getId());
       } catch (PropertyVetoException ex)
@@ -78,27 +77,27 @@ public class MostrarInternalFrames {
       }
   }//
 
-  public void setNextImage(Imagen imagen1) {
+  public void setNextImage(Imagen imagen1, int cantidad) {
     anterior.setEnabled(true);
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
     desktopPane.add(internal);
-    setTituloYRutaLabel(imagen1);
+    setTituloYRutaLabel(imagen1, cantidad);
     setCB.set(imagen1.getId());
     setImagenes(imagen1);
     internal.setVisible(true);
   }
 
-  public void setBackImage(Imagen pr) {
+  public void setBackImage(Imagen pr, int cantidad) {
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
     siguiente.setEnabled(true);
     desktopPane.add(internal);
     internal.setVisible(true);
-    setTituloYRutaLabel(pr);
+    setTituloYRutaLabel(pr, cantidad);
     setImagenes(pr);
     setCB.set(pr.getId());
   }
 
-  private void setTituloYRutaLabel(Imagen siguientes) {
+  private void setTituloYRutaLabel(Imagen siguientes, int cantidad) {
     int tamanio = siguientes.getTotalSublote();
     String imagenw = "Imagen " + cantidad + "/" + sizeRamdom;
     internal.setTitle(imagenw);
