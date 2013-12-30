@@ -423,7 +423,7 @@ public class Ventana extends javax.swing.JFrame {
     cantidad--;
     Imagen pr = backImagen(contador);
     // RutaMouseListener.getAdyacentes(pdf, pr);
-            miframes.setBackImage(pr, cantidad);
+    miframes.setBackImage(pr, cantidad);
 
   }
 

@@ -4,13 +4,9 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.ArchivosPorTrazaList;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
-import Helpers.GetExtensionIdImagen;
-//import Helpers.GetImagenesAdyacentes;
-//import Helpers.RutaMouseListener;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +30,7 @@ public class MostrarInternalFrames {
   private JInternalFrame internal;
   private JComboBox combo;
   private JScrollPane scrollImage;
-  private int  sizeRamdom, idImagen;
+  private int sizeRamdom, idImagen;
   private JLabel rutaLabel, pageLabel;
   private JTable tabla;
   private static GetRutaDeImagen rutadeimagen = new GetRutaDeImagen();
