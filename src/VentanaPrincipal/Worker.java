@@ -30,9 +30,7 @@ public class Worker extends SwingWorker<Object, Object> {
   private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
   private List<Object> listaImagenes;
   private String parent, ultimaCarpeta;
-  private int idDocumento, idVerificacion, muestra, tamanioLote;
-  private int idRango, contador;
-  private int idTraza;
+  private int idTraza, idDocumento, idVerificacion, muestra, tamanioLote, idRango;
 
   public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion) {
     this.cargaLote = controles;
@@ -54,7 +52,7 @@ public class Worker extends SwingWorker<Object, Object> {
       {
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       InsertarNuevaTraza insertarNuevaTraza = new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
-                                                     tamanioLote, parent, ultimaCarpeta, muestra, idRango);
+              tamanioLote, parent, ultimaCarpeta, muestra, idRango);
       int idImagen = GetExtensionIdImagen.getIdImagen();
       switch (idImagen)
         {
@@ -84,7 +82,7 @@ public class Worker extends SwingWorker<Object, Object> {
     Conexion con = new Conexion();
     if (con.isConexion())
       {
-      int resultado = new GetUltimoIDInsertado(con, "traza").getUltimoID();
+      int resultado = idTraza + 1;
       trazaID = (resultado == 0) ? 1 : resultado;
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con);
       new Ventana(trazaDao.getTraza()).setVisible(true);
@@ -103,13 +101,5 @@ public class Worker extends SwingWorker<Object, Object> {
     OnlyPdf onlyPdf =
             new OnlyPdf(infoLabel, conexion, muestra, idTraza,
             parent, idControl, listaImagenes);
-  }
-
-  public int getIdTraza() {
-    return idTraza;
-  }
-
-  public String getParent() {
-    return parent;
   }
 }

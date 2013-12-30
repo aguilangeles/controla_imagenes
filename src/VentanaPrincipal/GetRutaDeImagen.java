@@ -19,32 +19,32 @@ public final class GetRutaDeImagen {
   public GetRutaDeImagen() {
   }
 
-  public static void anteriorImagen(boolean pdf, Imagen imagen) {
-    if (pdf)
-      {
-      int minus = imagen.getPagina() - 1;
-      ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
-              imagen.getParent(), minus);
-      retmin = worker.doInBackground();
-      } else if (!pdf)
-      {
-      retmin = imagen.getRutaParaConversion();
-      }
-  }
+//  public static void anteriorImagen(boolean pdf, Imagen imagen) {
+//    if (pdf)
+//      {
+//      int minus = imagen.getPagina() - 1;
+//      ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
+//              imagen.getParent(), minus);
+//      retmin = worker.doInBackground();
+//      } else if (!pdf)
+//      {
+//      retmin = imagen.getRutaParaConversion();
+//      }
+//  }
 
-  public String getImage(boolean pdf, Imagen imagen) {
-
-    if (pdf)
+  public String getImage(Imagen imagen, int idImg) {
+    switch (idImg)
       {
-      ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
-              imagen.getParent(), imagen.getPagina());
-
-      proximaRuta = worker.doInBackground();
-      imagen.setRutaCarpetaTemp(proximaRuta);
-
-      } else if (!pdf)
-      {
-      proximaRuta = imagen.getRutaParaConversion();
+      case 1:
+        ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
+                imagen.getParent(), imagen.getPagina());
+        proximaRuta = worker.doInBackground();
+        imagen.setRutaCarpetaTemp(proximaRuta);
+        break;
+      case 2:
+      case 3:
+        proximaRuta = imagen.getRutaParaConversion();
+        break;
       }
     return proximaRuta;
   }

@@ -390,7 +390,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
     backDocument(true);
     Imagen pr = backImagen(contador);
-    // RutaMouseListener.getAdyacentes(pdf, pr);
     String nombre = pr.getRutaSublote();
     if (!nombre.equalsIgnoreCase(nombresub))
       {
@@ -480,13 +479,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private javax.swing.JButton terminar;
   // End of variables declaration//GEN-END:variables
 
-//  private boolean isImagenTif(boolean pdf, String extension) {
-//    if (!pdf && extension.equalsIgnoreCase(".tif"))
-//      {
-//      return true;
-//      }
-//    return true;
-//  }
   private void iniciar(TrazaDao traza, List<Sublote> sublotes) {
     traza.getImagenList();
     int totalcant = 0;
@@ -517,7 +509,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void getNextImage() {
     contador++;
-    //Imagen go = null;
     for (int i = 0; i < tabla.getRowCount(); i++)
       {
       boolean ischeck = (boolean) tabla.getValueAt(i, 0);
@@ -525,7 +516,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
     Imagen imagen1 = goImagen(contador);
     String nombre = imagen1.getRutaSublote();
-    //RutaMouseListener.getAdyacentes(pdf, imagen1);
     if (!nombre.equalsIgnoreCase(nombresub))
       {
       cantidad++;
@@ -546,7 +536,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       backDocument(ischeck);
       }
     Imagen pr = backImagen(contador);
-    // RutaMouseListener.getAdyacentes(pdf, pr);
     String nombre = pr.getRutaSublote();
     if (!nombre.equalsIgnoreCase(nombresub))
       {
@@ -564,7 +553,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       {
       contadorsublote++;
       int seter = getListaFlag().get(contadorsublote);
-      // setCantidad(contadorsublote);
       setContador(seter);
       if (seter >= getSizeRamdom() - 1)
         {
@@ -624,7 +612,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void setFinalizar() {
     Guardar save = new Guardar();
-    save.guardar(traza, rutaLabel.getText(), tabla, pageLabel, pdf);
+    save.guardar(traza, rutaLabel.getText(), tabla, pageLabel);
     GetNumerosDocumentosRechazados numeroRechazo =
             new GetNumerosDocumentosRechazados(traza.getId());
 

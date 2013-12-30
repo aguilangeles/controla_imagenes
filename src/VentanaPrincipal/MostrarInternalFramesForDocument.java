@@ -136,14 +136,15 @@ public class MostrarInternalFramesForDocument {
   }
 
   private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina, boolean pdf) {
-    save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
+    save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina);
     internal.dispose();
     desktopPane.removeAll();
     desktopPane.repaint();
   }
 
   private void setImagenes(Imagen siguientes) {
-    String ruta = rutadeimagen.getImage(pdf, siguientes);
+    //todo cambiar el booleano por el id de imagen
+    String ruta = rutadeimagen.getImage(siguientes, 1);
     setLabelPagina(pdf, siguientes);
     int idImagen = GetExtensionIdImagen.getIdImagen();
     imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImagen);

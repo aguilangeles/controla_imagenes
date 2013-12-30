@@ -65,7 +65,7 @@ public class ControlesporVerificacionList {
     return tiposdeControlList;
   }
 
-  public List<TiposDeControl> getlTiposDeControlList() {
+  public List<TiposDeControl> getTiposDeControlList() {
     return tiposdeControlList;
   }
 }

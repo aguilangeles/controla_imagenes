@@ -25,8 +25,6 @@ public class Ventana extends javax.swing.JFrame {
   private int cantidad = 1;
   private DefaultTableModel model;
   private TrazaDao traza;
-  private boolean pdf;
-  private boolean tif;
   private final TablaCheckBox tablaCheckBox;
 
   /**
@@ -41,14 +39,11 @@ public class Ventana extends javax.swing.JFrame {
     initComponents();
     tabla.requestFocus();
     this.traza = trazadao;
-    this.pdf = (traza.getIdImagen() == 1 || traza.getIdImagen() == 3) ? true : false;// discrimina entre pdf y otros
-    this.tif = (traza.getIdImagen() == 2) ? true : false;
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
-    //TODO pdf versus tif,png y jpg
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     anterior.setEnabled(false);
-    getFirstImage(pdf);
+    getFirstImage();
     rutaLabel.addMouseListener(new RutaMouseListener());
     siguiente.addKeyListener(keylistener());
     anterior.addKeyListener(keylistener());
@@ -405,13 +400,11 @@ public class Ventana extends javax.swing.JFrame {
     traza.getImagenList();
   }
 
-  private void getFirstImage(boolean pdf) {
+  private void getFirstImage() {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
-    new MostrarInternalFrames(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).mostrarPrimeraImagen(siguientes);
+    new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
+            anterior, ampliar, entera, cantidad, getSizeRamdom()).mostrarPrimeraImagen(siguientes);
   }
 
   private void getNextImage() {
@@ -419,10 +412,8 @@ public class Ventana extends javax.swing.JFrame {
     cantidad++;
     Imagen imagen1 = goImagen(contador);
     //RutaMouseListener.getAdyacentes(pdf, imagen1);
-    new MostrarInternalFrames(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).setNextImage(imagen1);
+    new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
+            anterior, ampliar, entera, cantidad, getSizeRamdom()).setNextImage(imagen1);
 
   }
 
@@ -431,16 +422,14 @@ public class Ventana extends javax.swing.JFrame {
     cantidad--;
     Imagen pr = backImagen(contador);
     // RutaMouseListener.getAdyacentes(pdf, pr);
-    new MostrarInternalFrames(traza, desktopPane, internal,
-            anterior, pdf, tif, combo, scrollImage,
-            cantidad, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera).setBackImage(pr);
+    new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
+            anterior, ampliar, entera, cantidad, getSizeRamdom()).setBackImage(pr);
 
   }
 
   private void setFinalizar() {
     Guardar save = new Guardar();
-    save.guardar(traza, rutaLabel.getText(), tabla, pageLabel, pdf);
+    save.guardar(traza, rutaLabel.getText(), tabla, pageLabel);
     GetNumerosImagenesRechazadas numeroRechazo =
             new GetNumerosImagenesRechazadas(traza.getId());
     java.awt.EventQueue.invokeLater(new Runnable() {
