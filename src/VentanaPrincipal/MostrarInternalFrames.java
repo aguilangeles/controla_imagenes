@@ -29,13 +29,10 @@ import javax.swing.JTable;
  */
 public class MostrarInternalFrames {
 
-  private int cantidadSublote = 1;
   private TrazaDao traza;
   private JDesktopPane desktopPane;
   private JInternalFrame internal;
   private Imagen siguientes;
-  private JButton anterior, siguiente;
-  private boolean pdf, tif;
   private JComboBox combo;
   private JScrollPane scrollImage;
   private int cantidad, sizeRamdom;
@@ -46,20 +43,15 @@ public class MostrarInternalFrames {
   private static Guardar save;
   private static SetChecksBox setCB;
   private JPanel panelScroll;
-  private JButton botonAncho;
-  private JButton pEntera;
+  private JButton anterior, siguiente, botonAncho, pEntera;
+  private int idImagen;
 
-  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane,
-          JInternalFrame internal, JButton anterior, boolean pdf, boolean tif,
-          JComboBox combo, JScrollPane scrollImage, int cantidad, int sizeRamdom,
-          JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente,
-          JPanel panelSroll, JButton ancho, JButton pEntera) {
+  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane, JInternalFrame internal, JButton anterior, JComboBox combo, JScrollPane scrollImage, int cantidad, int sizeRamdom, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente, JPanel panelSroll, JButton ancho, JButton pEntera) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
     this.anterior = anterior;
-    this.pdf = pdf;
-    this.tif = tif;
+    this.idImagen = traza.getIdImagen();
     this.combo = combo;
     this.scrollImage = scrollImage;
     this.cantidad = cantidad;
@@ -91,7 +83,7 @@ public class MostrarInternalFrames {
 
   public void setNextImage(Imagen imagen1) {
     anterior.setEnabled(true);
-    guardarYLimpiar(rutaLabel, tabla, pageLabel, pdf);
+    guardarYLimpiar(rutaLabel, tabla, pageLabel);
     try
       {
       desktopPane.add(internal);
@@ -106,7 +98,7 @@ public class MostrarInternalFrames {
   }
 
   public void setBackImage(Imagen pr) {
-    guardarYLimpiar(rutaLabel, tabla, pageLabel, pdf);
+    guardarYLimpiar(rutaLabel, tabla, pageLabel);
     siguiente.setEnabled(true);
     desktopPane.add(internal);
     internal.setVisible(true);
@@ -122,41 +114,31 @@ public class MostrarInternalFrames {
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
   }
 
-  private void setLabelPagina(boolean pdf, Imagen siguientes) {
-    if (pdf)
+  private void setLabelPagina(Imagen siguientes) {
+    switch (idImagen)
       {
-      int page1 = siguientes.getPagina() + 1;
-      pageLabel.setText("Pagina: " + page1);
-      } else
-      {
-      pageLabel.setVisible(false);
+      case 1:
+        int page1 = siguientes.getPagina() + 1;
+        pageLabel.setText("Pagina: " + page1);
+        break;
+      case 2:
+        pageLabel.setVisible(false);
+      case 3:
+        break;
       }
   }
 
-  private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina, boolean pdf) {
-    save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina, pdf);
+  private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina) {
+    save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina);
     internal.dispose();
     desktopPane.removeAll();
     desktopPane.repaint();
   }
 
   private void setImagenes(Imagen siguientes) {
-    String ruta = rutadeimagen.getImage(pdf, siguientes);
-    setLabelPagina(pdf, siguientes);
-    int idImg = GetExtensionIdImagen.getIdImagen();
-    imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImg);
+    String ruta = rutadeimagen.getImage(siguientes, idImagen);
+    setLabelPagina(siguientes);
+    imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImagen);
     scrollImage.getViewport().add(imageDraw);
-  }
-
-  public int getCantidadSublote() {
-    return cantidadSublote;
-  }
-
-  public void setCantidad(int cantidad) {
-    this.cantidad = cantidad;
-  }
-
-  public void setCantidadSublote(int cantidadSublote) {
-    this.cantidadSublote = cantidadSublote;
   }
 }
