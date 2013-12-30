@@ -32,10 +32,9 @@ public class MostrarInternalFrames {
   private TrazaDao traza;
   private JDesktopPane desktopPane;
   private JInternalFrame internal;
-  private Imagen siguientes;
   private JComboBox combo;
   private JScrollPane scrollImage;
-  private int cantidad, sizeRamdom;
+  private int cantidad, sizeRamdom, idImagen;
   private JLabel rutaLabel, pageLabel;
   private JTable tabla;
   private static GetRutaDeImagen rutadeimagen = new GetRutaDeImagen();
@@ -44,9 +43,8 @@ public class MostrarInternalFrames {
   private static SetChecksBox setCB;
   private JPanel panelScroll;
   private JButton anterior, siguiente, botonAncho, pEntera;
-  private int idImagen;
 
-  public MostrarInternalFrames(TrazaDao traza, JDesktopPane desktopPane, JInternalFrame internal, JButton anterior, JComboBox combo, JScrollPane scrollImage, int cantidad, int sizeRamdom, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JButton siguiente, JPanel panelSroll, JButton ancho, JButton pEntera) {
+  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, int cantidad, int sizeRamdom) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -65,7 +63,6 @@ public class MostrarInternalFrames {
     this.panelScroll = panelSroll;
     MostrarInternalFrames.save = new Guardar();// sa
     MostrarInternalFrames.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
-
   }
 
   public void mostrarPrimeraImagen(Imagen siguientes) {
@@ -84,17 +81,11 @@ public class MostrarInternalFrames {
   public void setNextImage(Imagen imagen1) {
     anterior.setEnabled(true);
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
-    try
-      {
-      desktopPane.add(internal);
-      setTituloYRutaLabel(imagen1);
-      setCB.set(imagen1.getId());
-      setImagenes(imagen1);
-      internal.setVisible(true);
-      } catch (Exception ex)
-      {
-      Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-      }
+    desktopPane.add(internal);
+    setTituloYRutaLabel(imagen1);
+    setCB.set(imagen1.getId());
+    setImagenes(imagen1);
+    internal.setVisible(true);
   }
 
   public void setBackImage(Imagen pr) {
