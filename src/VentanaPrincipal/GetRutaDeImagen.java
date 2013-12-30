@@ -14,24 +14,8 @@ import Imagenes.ImagenesWorker;
 public final class GetRutaDeImagen {
 
   private String proximaRuta;
-  private static String retmin;
-
   public GetRutaDeImagen() {
   }
-
-//  public static void anteriorImagen(boolean pdf, Imagen imagen) {
-//    if (pdf)
-//      {
-//      int minus = imagen.getPagina() - 1;
-//      ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
-//              imagen.getParent(), minus);
-//      retmin = worker.doInBackground();
-//      } else if (!pdf)
-//      {
-//      retmin = imagen.getRutaParaConversion();
-//      }
-//  }
-
   public String getImage(Imagen imagen, int idImg) {
     switch (idImg)
       {
@@ -47,9 +31,5 @@ public final class GetRutaDeImagen {
         break;
       }
     return proximaRuta;
-  }
-
-  public static String getRetmin() {
-    return retmin;
   }
 }
