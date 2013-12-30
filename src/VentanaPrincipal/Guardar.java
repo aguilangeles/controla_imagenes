@@ -29,24 +29,19 @@ public class Guardar {
   private JLabel pagina;
   private Conexion conexion = new Conexion();
   private boolean fin;
+  private boolean pdf;
 
   public Guardar() {
   }
 
-  public Guardar(TrazaDao traza, String nombre, JTable tablaCheck, JLabel pagina, boolean pdf) {
-    this.traza = traza;
-    this.nombre = nombre;
-    this.tablaCheck = tablaCheck;
-  }
-
-  public void guardar(TrazaDao traza, String nombre, JTable tabla, JLabel pagina, boolean pdf) {
+  public void guardar(TrazaDao traza, String nombre, JTable tabla, JLabel pagina) {
     if (conexion.isConexion())
       {
+      pdf = (traza.getIdImagen() == 1) ? true : false;// discrimina entre pdf y otros
       /*diferencia entre pdf y otros y obtiene el numero de pagina*/
       getNumerodePagina(pdf, pagina);
       /*Trae la imagen desde la base de datos, junto con la pagina*/
       Imagen imagen = traza.getImageByNameAndPage(nombre, page);
-//      System.out.println("imagen coincidente " + imagen.getId() + " - " + imagen.getRutaInsertadaEnDB());
       /*trae los controles asignados a esa imagen*/
       LlenarControles controles = new LlenarControles(traza.getId(), imagen.getId(), conexion);
       /*itera las posibilidades*/
@@ -71,7 +66,6 @@ public class Guardar {
             }
           }
         }
-//      borrarTemp();
       }
     conexion.isConexionClose();
 
@@ -87,27 +81,7 @@ public class Guardar {
       {
       JOptionPane.showMessageDialog(null, e.getMessage(), "Setear numero Pagina PDF", JOptionPane.ERROR_MESSAGE);
 
-//      System.out.println(e.getMessage());
       }
-  }
-
-  public boolean isFin() {
-    return fin;
-  }
-
-  public void setFin(boolean fin) {
-    this.fin = fin;
-  }
-
-  private void borrarTemp() {
-    File file = new File("temp\\");
-    File[] files = file.listFiles();
-    for (File f : files)
-      {
-      f.delete();
-      System.gc();
-      }
-
   }
 
   private void getNumerodePagina(boolean pdf, JLabel pagina) {
