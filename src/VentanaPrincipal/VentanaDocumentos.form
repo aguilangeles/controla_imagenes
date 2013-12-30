@@ -114,9 +114,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jScrollPane2" pref="271" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" min="-2" pref="190" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel1" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="terminar" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
@@ -187,15 +187,23 @@
                                       <Component id="ampliar" min="-2" pref="44" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="44" max="32767" attributes="0"/>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="anterior" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="combo" min="-2" pref="97" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="entera" min="-2" pref="44" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="combo" min="-2" pref="97" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="nextDocum" min="-2" pref="105" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="prevDocum" min="-2" pref="97" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -206,12 +214,17 @@
                                   <Component id="anterior" min="-2" pref="40" max="-2" attributes="0"/>
                                   <Component id="siguiente" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="9" pref="9" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="combo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="nextDocum" pref="32" max="32767" attributes="0"/>
+                                  <Component id="prevDocum" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="7" max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="combo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="entera" alignment="1" min="-2" pref="34" max="-2" attributes="0"/>
                                   <Component id="ampliar" alignment="1" min="-2" pref="34" max="-2" attributes="0"/>
@@ -287,6 +300,22 @@
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="Ajustar al ancho de ventana"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="nextDocum">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Sig. Doc."/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextDocumActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="prevDocum">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Ant. Doc."/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prevDocumActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

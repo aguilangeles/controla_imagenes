@@ -123,6 +123,8 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     jLabel1 = new javax.swing.JLabel();
     entera = new javax.swing.JButton();
     ampliar = new javax.swing.JButton();
+    nextDocum = new javax.swing.JButton();
+    prevDocum = new javax.swing.JButton();
     rutaLabel = new javax.swing.JLabel();
     pageLabel = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
@@ -193,6 +195,20 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     ampliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/1383001847_stock_zoom-page-width_1.png"))); // NOI18N
     ampliar.setToolTipText("Ajustar al ancho de ventana");
 
+    nextDocum.setText("Sig. Doc.");
+    nextDocum.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        nextDocumActionPerformed(evt);
+      }
+    });
+
+    prevDocum.setText("Ant. Doc.");
+    prevDocum.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        prevDocumActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -204,13 +220,19 @@ public class VentanaDocumentos extends javax.swing.JFrame {
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addGap(33, 33, 33)
             .addComponent(ampliar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
             .addComponent(entera, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(21, 21, 21))))
+            .addGap(21, 21, 21))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())))
+      .addGroup(jPanel1Layout.createSequentialGroup()
+        .addComponent(nextDocum, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(prevDocum, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,11 +240,15 @@ public class VentanaDocumentos extends javax.swing.JFrame {
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(9, 9, 9)
+        .addGap(24, 24, 24)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(nextDocum, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+          .addComponent(prevDocum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel1))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+          .addComponent(jLabel1)
+          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(18, 18, 18)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(entera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(ampliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -294,9 +320,9 @@ public class VentanaDocumentos extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(terminar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -343,6 +369,39 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
+
+  private void nextDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDocumActionPerformed
+    // TODO add your handling code here:
+    goDocument(true);
+    Imagen imagen1 = goImagen(contador);
+    String nombre = imagen1.getRutaSublote();
+    //RutaMouseListener.getAdyacentes(pdf, imagen1);
+    if (!nombre.equalsIgnoreCase(nombresub))
+      {
+      cantidad++;
+      setNombresub(nombre);
+      }
+    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
+            anterior, pdf, tif, combo, scrollImage,
+            getCantidad(), getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).setNextImage(imagen1);
+  }//GEN-LAST:event_nextDocumActionPerformed
+
+  private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
+    backDocument(true);
+    Imagen pr = backImagen(contador);
+    // RutaMouseListener.getAdyacentes(pdf, pr);
+    String nombre = pr.getRutaSublote();
+    if (!nombre.equalsIgnoreCase(nombresub))
+      {
+      cantidad--;
+      setNombresub(nombre);
+      }
+    new MostrarInternalFramesForDocument(traza, desktopPane, internal,
+            anterior, pdf, tif, combo, scrollImage,
+            getCantidad(), getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
+            panelScroll, ampliar, entera).setBackImage(pr);
+  }//GEN-LAST:event_prevDocumActionPerformed
 
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
@@ -409,9 +468,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel2;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JScrollPane jScrollPane2;
+  private javax.swing.JButton nextDocum;
   private javax.swing.JLabel pageLabel;
   private javax.swing.JPanel panelInicial;
   private javax.swing.JPanel panelScroll;
+  private javax.swing.JButton prevDocum;
   private javax.swing.JLabel rutaLabel;
   private javax.swing.JScrollPane scrollImage;
   private javax.swing.JButton siguiente;
@@ -419,14 +480,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private javax.swing.JButton terminar;
   // End of variables declaration//GEN-END:variables
 
-  private boolean isImagenTif(boolean pdf, String extension) {
-    if (!pdf && extension.equalsIgnoreCase(".tif"))
-      {
-      return true;
-      }
-    return true;
-  }
-
+//  private boolean isImagenTif(boolean pdf, String extension) {
+//    if (!pdf && extension.equalsIgnoreCase(".tif"))
+//      {
+//      return true;
+//      }
+//    return true;
+//  }
   private void iniciar(TrazaDao traza, List<Sublote> sublotes) {
     traza.getImagenList();
     int totalcant = 0;
