@@ -40,7 +40,8 @@ public class Imagen {
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;
     this.parent = parent;
-    this.rutaParaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : parent + "\\" + rutaImagen;
+    String decRutaparaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : parent + "\\" + rutaImagen;
+    this.rutaParaConversion = Decoder.decoder(decRutaparaConversion, Imagen.class.getName());
     this.idSublote = idsublote;
     this.rutaSublote = rutaSublote;
     this.totalSublote = cant_img;
