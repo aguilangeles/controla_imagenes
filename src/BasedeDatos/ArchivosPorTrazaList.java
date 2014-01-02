@@ -5,6 +5,8 @@
 package BasedeDatos;
 
 import Entidades.Imagen;
+import Helpers.MensajeJoptionPane;
+import Login.SetFechaDeIngreso;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,7 +68,10 @@ public class ArchivosPorTrazaList {
         }
       } catch (SQLException ex)
       {
-      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
+
+      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ArchivosPorTrazaList.class.getName(), JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage();
+//      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
       }
   }
 
@@ -89,8 +94,11 @@ public class ArchivosPorTrazaList {
         }
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              "Error en la consulta de ruta archivo", JOptionPane.ERROR_MESSAGE);
+
+      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ArchivosPorTrazaList.class.getName(), JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage();
+//      JOptionPane.showMessageDialog(null, ex.getMessage(),
+//              "Error en la consulta de ruta archivo", JOptionPane.ERROR_MESSAGE);
       }
   }
 
@@ -127,7 +135,10 @@ public class ArchivosPorTrazaList {
         }
       } catch (SQLException ex)
       {
-      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
+
+      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ArchivosPorTrazaList.class.getName(), JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage();
+//      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
       }
     return ret;
   }
