@@ -4,8 +4,10 @@
  */
 package Login;
 
+import ArchivoConfig.SetConfigFile;
 import BasedeDatos.Conexion;
 import Entidades.Usuario;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -29,16 +31,18 @@ public class SetFechaDeIngreso {
       {
       try
         {
-        String ret = "UPDATE `qualitys`.`usuarios` "
+        String update = "UPDATE `qualitys`.`usuarios` "
                 + "SET`fecha_ingreso` = '"
                 + usuario.getFechaUltimoIngreso()
                 + "' WHERE id = "
                 + usuario.getId() + ";";
-        conexion.executeUpdate(ret);
+        conexion.executeUpdate(update);
         conexion.isConexionClose();
         } catch (SQLException ex)
         {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en Seteo de Fecha", JOptionPane.ERROR_MESSAGE);
+        MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), SetFechaDeIngreso.class.getName(), JOptionPane.ERROR_MESSAGE);
+        mensaje.getMessage();
+//        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en Seteo de Fecha", JOptionPane.ERROR_MESSAGE);
         }
       }
   }
