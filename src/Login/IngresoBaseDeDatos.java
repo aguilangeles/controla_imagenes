@@ -26,6 +26,7 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
   public IngresoBaseDeDatos(boolean isAdministrador) {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon();
+    versionEImageIcon.newColorFromPanel(panel);
     setResizable(false);
     setInputVerifier();
     aceptar.setText("Test");
@@ -41,6 +42,8 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
 
   public IngresoBaseDeDatos() {
     initComponents();
+    VersionEImageIcon versionEImageIcon = new VersionEImageIcon();
+    versionEImageIcon.newColorFromPanel(panel);
     setInputVerifier();
   }
 
@@ -53,7 +56,7 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jPanel1 = new javax.swing.JPanel();
+    panel = new javax.swing.JPanel();
     jLabel1 = new javax.swing.JLabel();
     usuario = new javax.swing.JTextField();
     jLabel2 = new javax.swing.JLabel();
@@ -66,8 +69,6 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Conexion");
-
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,13 +109,13 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
 
     url.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
+    javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+    panel.setLayout(panelLayout);
+    panelLayout.setHorizontalGroup(
+      panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelLayout.createSequentialGroup()
         .addGap(29, 29, 29)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(password)
           .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -124,14 +125,14 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
           .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(url))
         .addGap(28, 28, 28))
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
         .addContainerGap(65, Short.MAX_VALUE)
         .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(63, 63, 63))
     );
-    jPanel1Layout.setVerticalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
+    panelLayout.setVerticalGroup(
+      panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelLayout.createSequentialGroup()
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,11 +158,11 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
 
     pack();
@@ -234,7 +235,7 @@ public class IngresoBaseDeDatos extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
-  private javax.swing.JPanel jPanel1;
+  private javax.swing.JPanel panel;
   private javax.swing.JTextField password;
   private javax.swing.JTextField url;
   private javax.swing.JTextField usuario;
