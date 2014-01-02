@@ -41,7 +41,6 @@ public class MostrarInternalFramesForDocument {
   private static Guardar save;
   private static SetChecksBox setCB;
   private JPanel panelScroll;
-  private Imagen siguientes;
   private JButton anterior, siguiente, botonAncho, pEntera;
 
   public MostrarInternalFramesForDocument(JDesktopPane desktopPane, JInternalFrame internal, JLabel rutaLabel, JLabel pageLabel, JPanel panelSroll, JTable tabla, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom) {

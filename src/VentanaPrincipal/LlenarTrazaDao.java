@@ -20,14 +20,12 @@ import java.util.List;
  */
 public final class LlenarTrazaDao {
 
-  private int idTraza;
-  private Conexion conexion;
   private TrazaDao traza;
   private int idImg = GetExtensionIdImagen.getIdImagen();
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con) {
     String parent1 = Encoder.encoder(parent + "\\", LlenarTrazaDao.class.getName());
-    llenartraza(con, trazaID, parent1);
+    llenarTrazaVolumen(con, trazaID, parent1);
   }
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con, boolean issublote) {
@@ -35,7 +33,7 @@ public final class LlenarTrazaDao {
     llenartrazaDocumento(parent1, con, trazaID);
   }
 
-  private TrazaDao llenartraza(Conexion conexion, int idTraza, String parent) {
+  private TrazaDao llenarTrazaVolumen(Conexion conexion, int idTraza, String parent) {
     List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent, true).getImagenesList();
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);

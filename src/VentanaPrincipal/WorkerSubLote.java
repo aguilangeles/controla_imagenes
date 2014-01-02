@@ -116,7 +116,4 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   public String getParent() {
     return parent;
   }
-//  public  int getIdTraza() {
-//    return idTraza;
-//  }
 }
