@@ -6,6 +6,7 @@ package PaneldeControl;
 
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.VersionEImageIcon;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,19 +29,21 @@ public class VerificacionABM extends javax.swing.JFrame {
    */
   public VerificacionABM() {
     initComponents();
-    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-    ImageIcon im = new ImageIcon(rutaImagen);
-    setIconImage(im.getImage());
+    VersionEImageIcon vic = new VersionEImageIcon(this, "Alta y Baja de Verificación.");
+    vic.newColorFromPanel(jPanel1);
+    principalInternal.setBackground(vic.getColor());
     verificacion = new VerificacionDao(tablaV, conexion);
     principalInternal.setVisible(true);
     modelo = (DefaultTableModel) tablaV.getModel();
     agregar.setVisible(false);
     desactivar.setVisible(false);
-    try {
+    try
+      {
       principalInternal.setMaximum(true);
-    } catch (PropertyVetoException ex) {
+      } catch (PropertyVetoException ex)
+      {
       Logger.getLogger(VerificacionABM.class.getName()).log(Level.SEVERE, null, ex);
-    }
+      }
 
   }
 
@@ -70,8 +73,6 @@ public class VerificacionABM extends javax.swing.JFrame {
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Alta y Baja de Verificacion");
     setResizable(false);
-
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     jPanel2.setBackground(new java.awt.Color(230, 252, 238));
     jPanel2.setOpaque(false);
@@ -130,7 +131,6 @@ public class VerificacionABM extends javax.swing.JFrame {
         .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
-    principalInternal.setBackground(new java.awt.Color(230, 252, 238));
     principalInternal.setTitle("Para Editar los contenidos presione Activar ABM");
     principalInternal.setVisible(true);
 
