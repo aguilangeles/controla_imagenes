@@ -10,6 +10,7 @@ import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
 import Entidades.Usuario;
 import BasedeDatos.GetUsuarioyCategoriaQs;
+import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
 
 /**
@@ -197,7 +198,9 @@ public class Login extends javax.swing.JFrame {
       dispose();
       } else
       {
-      JOptionPane.showMessageDialog(entrar, USER_INVALID, "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+      MensajeJoptionPane joptionPane = new MensajeJoptionPane(entrar, USER_INVALID, "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+//      JOptionPane.showMessageDialog(entrar, USER_INVALID, "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+      joptionPane.getMessage();
       user.setText("");
       password.setText("");
       }
