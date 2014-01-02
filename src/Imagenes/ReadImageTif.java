@@ -4,6 +4,7 @@
  */
 package Imagenes;
 
+import Helpers.MensajeJoptionPane;
 import com.sun.media.jai.codec.ByteArraySeekableStream;
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
@@ -22,6 +23,10 @@ import javax.swing.*;
 
 public final class ReadImageTif extends JComponent {
 
+  private static final String className = ReadImageTif.class.getName();
+  private static int type = JOptionPane.ERROR_MESSAGE;
+  static MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
+
   public ReadImageTif() {
   }
 
@@ -39,7 +44,8 @@ public final class ReadImageTif extends JComponent {
       image.flush();
       } catch (IOException ex)
       {
-      Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
+      msg.getMessage(ex.getMessage(), className);
+//      Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
       } finally
       {
       try
@@ -47,7 +53,7 @@ public final class ReadImageTif extends JComponent {
         stream.close();
         } catch (IOException ex)
         {
-        Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
+        msg.getMessage(ex.getMessage(), className);
         }
       }
     return image;

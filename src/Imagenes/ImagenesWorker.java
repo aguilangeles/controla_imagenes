@@ -5,6 +5,7 @@
 package Imagenes;
 
 import Helpers.ExtensionTemporal;
+import Helpers.MensajeJoptionPane;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
@@ -21,7 +22,9 @@ import org.im4java.core.InfoException;
  * @author MUTNPROD003
  */
 public class ImagenesWorker extends SwingWorker<Object, String> {
-
+ private static final String className = ImagenesWorker.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private static final String IM4JAVA_TOOLPATH = "C:\\Program Files (x86)\\ImageMagick-6.8.6-Q16";
   private String rutaConPagina;
   private String ruta_archivo;
@@ -64,11 +67,11 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
 
         } catch (IOException | InterruptedException | IM4JavaException ex)
         {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imagenes desde PDF", JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), className);
         }
       } catch (IOException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Construcción de imágenes desde PDF", JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), className);
       }
     outputTemp.deleteOnExit();
     return outputTemp.getAbsolutePath();

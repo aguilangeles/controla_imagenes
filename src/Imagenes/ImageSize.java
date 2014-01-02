@@ -34,29 +34,6 @@ public class ImageSize {
     return false;
   }
 
-//  public void verPaginaEntera() {
-//    int w = 0;
-//    int h = 0;
-//    if (isMasAnchoqueAlto())
-//      {
-//      double wight = hepanel * imgSize.getWidth() / imgSize.getHeight();
-//      double height = wight * imgSize.getHeight() / imgSize.getWidth();
-//      w = (int) (wight);
-//      h = (int) (height);
-//      } else
-//      {
-//      double height = ((wipanel) * imgSize.getHeight() / imgSize.getWidth() - 100);
-//      double wight = (height * imgSize.getWidth() / imgSize.getHeight());
-//      w = (int) (wight - 20);
-//      h = (int) (height) - 30;
-//      }
-//    dimforPanel = new Dimension(w, h);
-//  }
-//  private void verPaginaEnAncho() {
-//    int ww = (int) wipanel - 80;
-//    int hh = (int) (ww * imgSize.getHeight() / imgSize.getWidth());
-//    dimforhalf = new Dimension(ww, hh);
-//  }
   public Dimension getDimensionDefault() {
     Dimension dimension = new Dimension();
     if (isMasAnchoqueAlto())

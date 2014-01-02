@@ -4,7 +4,7 @@
  */
 package Imagenes;
 
-import Helpers.GetExtensionIdImagen;
+import Helpers.MensajeJoptionPane;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,11 +18,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -33,6 +32,9 @@ import javax.swing.JPanel;
  */
 public class ImageDrawingComponent extends JPanel {
 
+  private static final String className = ImageDrawingComponent.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(this, type);
   int opIndex;
   ReadImageTif tif = new ReadImageTif();
   private BufferedImage bi;
@@ -132,10 +134,10 @@ public class ImageDrawingComponent extends JPanel {
           bi = ImageIO.read(arch);
           } catch (MalformedURLException mue)
           {
-          System.out.println("URL trouble: " + mue.getMessage());
+          msg.getMessage(mue.getMessage(), className);
           } catch (IOException ioe)
           {
-          System.out.println("read trouble: " + ioe.getMessage());
+          msg.getMessage(ioe.getMessage(), className);
           }
         break;
       case 2:
@@ -144,10 +146,10 @@ public class ImageDrawingComponent extends JPanel {
           bi = (BufferedImage) this.tif.getImagen(path);
           } catch (FileNotFoundException ex)
           {
-          Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
+          msg.getMessage(ex.getMessage(), className);
           } catch (IOException ex)
           {
-          Logger.getLogger(ImageDrawingComponent.class.getName()).log(Level.SEVERE, null, ex);
+          msg.getMessage(ex.getMessage(), className);
           }
         break;
       }

@@ -4,6 +4,7 @@
  */
 package Imagenes;
 
+import Helpers.MensajeJoptionPane;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,14 +14,18 @@ import javax.swing.*;
 
 public final class ImageComponent extends JPanel {
 
+  private static final String className = ImageComponent.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(this, type);
   final BufferedImage img;
   private Dimension dim;
 
-  public ImageComponent(String location, double zoom, JScrollPane scrollPane)  {
+  public ImageComponent(String location, double zoom, JScrollPane scrollPane) {
 
     img = image(location);
     setZoom(zoom, scrollPane);
   }
+
   private BufferedImage image(String path) {
     BufferedImage buffimg = null;
     try
@@ -34,7 +39,7 @@ public final class ImageComponent extends JPanel {
         buffimg = ImageIO.read(new File("AyudaImagenes/imagen-no-encontrada.jpg"));
         } catch (IOException ex1)
         {
-        JOptionPane.showMessageDialog(this, ex1, "Imagen de Error no encontrada", JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex1.getMessage(), className);
         }
       }
     return buffimg;
