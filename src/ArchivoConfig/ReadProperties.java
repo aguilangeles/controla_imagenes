@@ -9,8 +9,6 @@ import Helpers.MensajeJoptionPane;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +17,10 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public class ReadProperties {
+
+  private String className = ReadProperties.class.getName();
+  private int messageType = JOptionPane.ERROR_MESSAGE;
+  private MensajeJoptionPane mensaje = new MensajeJoptionPane(null, messageType);
 
   public LogQualitys getUser() {
     LogQualitys user = null;
@@ -35,8 +37,7 @@ public class ReadProperties {
       user = new LogQualitys(url, base, usuario, password);
       } catch (IOException ex)
       {
-      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ReadProperties.class.getName(), JOptionPane.ERROR_MESSAGE);
-      mensaje.getMessage();
+      mensaje.getMessage(ex.getMessage(), className);
 //      JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties", JOptionPane.ERROR_MESSAGE);
       } finally
       {
@@ -48,15 +49,10 @@ public class ReadProperties {
           super.finalize();
           } catch (IOException ex)
           {
-          MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ReadProperties.class.getName() + ", finally", JOptionPane.ERROR_MESSAGE);
-          mensaje.getMessage();
-//          JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties finally", JOptionPane.ERROR_MESSAGE);
+          mensaje.getMessage(ex.getMessage(), className);
           } catch (Throwable ex)
           {
-
-          MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ReadProperties.class.getName() + ", throwable", JOptionPane.ERROR_MESSAGE);
-          mensaje.getMessage();
-//          Logger.getLogger(ReadProperties.class.getName()).log(Level.SEVERE, null, ex);
+          mensaje.getMessage(ex.getMessage(), className);
           }
         }
       }
