@@ -21,7 +21,7 @@ public class InsertarFilasABM {
   private Conexion conexion;
   private DefaultTableModel modelo;
   public static final String BD_FAIL = "Error en los contenidos ingresados";
-    private static final String className = ControlesporVerificacionList.class.getName();
+  private static final String className = ControlesporVerificacionList.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
 
@@ -75,6 +75,7 @@ public class InsertarFilasABM {
       return false;
       }
   }
+
   public boolean nuevoUsuario(int id) {
     String up = "INSERT INTO `qualitys`.`usuarios`"
             + "(`nombre`"
@@ -110,7 +111,7 @@ public class InsertarFilasABM {
         break;
       default:
         String valorInput = JOptionPane.showInputDialog(null, "El estado debe ser '"
-                + "'1' activo, '2' inactivo", JOptionPane.QUESTION_MESSAGE);
+                + "'1' activo, '2' inactivo","Estado inválido", JOptionPane.QUESTION_MESSAGE);
         ret = Integer.parseInt(valorInput);
         break;
       }
@@ -129,7 +130,7 @@ public class InsertarFilasABM {
         break;
       default:
         String valorInput = JOptionPane.showInputDialog(null, "El usuario debe ser '"
-                + "'1' admin, '2' carga", JOptionPane.QUESTION_MESSAGE);
+                + "'1' admin, '2' carga", "Tipo de usuario inválido", JOptionPane.QUESTION_MESSAGE);
         ret = Integer.parseInt(valorInput);
         break;
       }
