@@ -4,7 +4,7 @@
  */
 package BasedeDatos;
 
-import PaneldeControl.CargarLote;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
  */
 public class IdControlFromVerificacionList {
 
+  private static final String className = IdControlFromVerificacionList.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private static int idVerificacion;
 
   public IdControlFromVerificacionList() {
@@ -36,13 +39,11 @@ public class IdControlFromVerificacionList {
         con.executeQuery(query);
         while (con.resulset.next())
           {
-            System.out.println("controles: "+ con.resulset.getInt(1));
           idTipoControl.add(con.resulset.getInt(1));
           }
         } catch (SQLException ex)
         {
-        JOptionPane.showMessageDialog(tipoVerificacionBox, ex.getMessage(),
-                CargarLote.class.getName(), JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), className);
         }
       }
     return idTipoControl;
@@ -58,6 +59,4 @@ public class IdControlFromVerificacionList {
   public static int getIdVerificacion() {
     return idVerificacion;
   }
-
-
 }
