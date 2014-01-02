@@ -33,6 +33,8 @@ public class RangosABM extends javax.swing.JFrame {
   public RangosABM() {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
+    versionEImageIcon.newColorFromPanel(jPanel1);
+    principalInternal.setBackground(versionEImageIcon.getColor());
     setResizable(true);
     rangosDao = new RangosDao(conexion, tablaContenido);
     principalInternal.setVisible(true);
@@ -41,12 +43,14 @@ public class RangosABM extends javax.swing.JFrame {
     agregar.setVisible(false);
     editar.setVisible(false);
     desactivar.setVisible(false);
-    try {
+    try
+      {
       principalInternal.setMaximum(true);
-    } catch (PropertyVetoException ex) {
+      } catch (PropertyVetoException ex)
+      {
 
       JOptionPane.showMessageDialog(this, ex.getMessage(), "Ajuste Internal Frame", JOptionPane.ERROR_MESSAGE);
-    }
+      }
   }
 
   /**
@@ -77,8 +81,6 @@ public class RangosABM extends javax.swing.JFrame {
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Alta, Baja y Modificacion de Rangos");
     setResizable(false);
-
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     jPanel2.setOpaque(false);
 
@@ -138,7 +140,6 @@ public class RangosABM extends javax.swing.JFrame {
         .addGap(29, 29, 29))
     );
 
-    principalInternal.setBackground(new java.awt.Color(230, 252, 238));
     principalInternal.setTitle("Para Editar los contenidos presione Activar ABM");
     principalInternal.setVisible(true);
 
@@ -292,47 +293,56 @@ public class RangosABM extends javax.swing.JFrame {
     }//GEN-LAST:event_ABMActionPerformed
 
   private void ABMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ABMKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+      {
       activarABM();
-    }
+      }
   }//GEN-LAST:event_ABMKeyPressed
 
   private void cerrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cerrarKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+      {
       dispose();
-    }
+      }
   }//GEN-LAST:event_cerrarKeyPressed
   private void botonGuardar() {
-    switch (evento) {
+    switch (evento)
+      {
       case "Agregar":
         boolean insertado;
         tablaContenido.editCellAt(-1, -1);
-        try {
-          if (isRowEmpty(tablaContenido, getIde())) {
+        try
+          {
+          if (isRowEmpty(tablaContenido, getIde()))
+            {
             insertado = rangosDao.getInsertar().nuevoRango(getIde());
             mensajeUpdate(insertado, "Rango");
-          }
-        } catch (RuntimeException e) {
+            }
+          } catch (RuntimeException e)
+          {
           mensajeLabel.setText("<html>Rango<br>Rechazado</html>");
           JOptionPane.showMessageDialog(null, e.getMessage(), "fila vacia", JOptionPane.ERROR_MESSAGE);
-        }
+          }
         break;
       case "Editar":
         boolean update;
         tablaContenido.editCellAt(-1, -1);
         int row = tablaContenido.getSelectedRow();
         int idjtext = (row);
-        try {
-          if (isRowEmpty(tablaContenido, idjtext)) {
+        try
+          {
+          if (isRowEmpty(tablaContenido, idjtext))
+            {
             update = rangosDao.getEditar().rangos_SetRow(idjtext);
             mensajeUpdate(update, "Rango");
-          }
-        } catch (RuntimeException e) {
+            }
+          } catch (RuntimeException e)
+          {
           mensajeLabel.setText("<html>Rango<br>Rechazado</html>");
           JOptionPane.showMessageDialog(null, e.getMessage(), "Insert", JOptionPane.ERROR_MESSAGE);
-        }
+          }
         break;
-    }
+      }
   }
 
   public int getIde() {
@@ -345,25 +355,29 @@ public class RangosABM extends javax.swing.JFrame {
 
   private boolean isRowEmpty(JTable tablaContenido, int id) {
     boolean ret = true;
-    for (int i = 0; i < tablaContenido.getColumnCount(); i++) {
+    for (int i = 0; i < tablaContenido.getColumnCount(); i++)
+      {
       Object inspect = tablaContenido.getValueAt(id, i);
-      if (inspect == null || inspect.equals("")) {
+      if (inspect == null || inspect.equals(""))
+        {
         ret = false;
         throw new RuntimeException(ROW_EMPTY);
+        }
       }
-    }
     return ret;
   }
 
   private void mensajeUpdate(boolean insertado, String mensajeJl) {
-    if (insertado) {
+    if (insertado)
+      {
       mensajeLabel.setText("<html>" + mensajeJl + "<br>Aceptado</html>");
       tablaContenido.repaint();
       salvar.setVisible(false);
-    } else {
+      } else
+      {
       mensajeLabel.setText("<html>" + mensajeJl + "<br>Rechazado</html>");
       salvar.setVisible(true);
-    }
+      }
   }
   /**
    * @param args the command line arguments
@@ -421,7 +435,10 @@ public class RangosABM extends javax.swing.JFrame {
     rangosDao.setEditable(true);
     int idNew = getIde() + 1;
     int nuevoMin = (minimo.minimoMasUno(getIde()));
-    Object[] ob = new Object[]{idNew, nuevoMin, 0, 0, 0, 1};
+    Object[] ob = new Object[]
+      {
+      idNew, nuevoMin, 0, 0, 0, 1
+      };
     new AgregarBoton(modelo, tablaContenido, salvar, ob);
     evento = "Agregar";
   }
