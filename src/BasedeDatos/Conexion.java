@@ -4,6 +4,7 @@
  */
 package BasedeDatos;
 
+import Helpers.MensajeJoptionPane;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,6 +30,9 @@ public class Conexion {
   public ResultSet resulset = null;
   private PreparedStatement prepareStatement;
   private int filasAfectadas;
+  private int messageType = JOptionPane.ERROR_MESSAGE;
+  private String className = Conexion.class.getName();
+  MensajeJoptionPane mensaje = new MensajeJoptionPane(null, messageType);
 
   public Conexion() {
   }
@@ -53,20 +57,17 @@ public class Conexion {
         }
       } catch (SQLException ex)
       {
-      System.out.println(ex.getMessage());
-//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+
+      mensaje.getMessage(null, null);
       } catch (ClassNotFoundException ex)
       {
-      System.out.println(ex.getMessage());
-//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+      mensaje.getMessage(ex.getMessage(), className);
       } catch (IOException ex)
       {
-      System.out.println(ex.getMessage());
-//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+      mensaje.getMessage(ex.getMessage(), className);
       } catch (Exception ex)
       {
-      System.out.println(ex.getMessage());
-//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+      mensaje.getMessage(ex.getMessage(), className);
       } finally
       {
       try
@@ -75,10 +76,10 @@ public class Conexion {
         finalize();
         } catch (IOException ex)
         {
-        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        mensaje.getMessage(ex.getMessage(), className);
         } catch (Throwable ex)
         {
-        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        mensaje.getMessage(ex.getMessage(), className);
         }
       }
     return false;
@@ -92,7 +93,7 @@ public class Conexion {
         resulset.close();
         } catch (SQLException ex)
         {
-        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        mensaje.getMessage(ex.getMessage(), className);
         }
       }
     if (statement != null)
@@ -102,7 +103,7 @@ public class Conexion {
         statement.close();
         } catch (SQLException ex)
         {
-        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        mensaje.getMessage(ex.getMessage(), className);
         }
       }
     if (conexion != null)
@@ -118,13 +119,13 @@ public class Conexion {
             return true;
             } catch (SQLException ex)
             {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "error en base de datos", JOptionPane.ERROR_MESSAGE);
+            mensaje.getMessage(ex.getMessage(), className);
             return false;
             }
           }
         } catch (SQLException ex)
         {
-        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        mensaje.getMessage(ex.getMessage(), className);
         }
       }
     return false;
