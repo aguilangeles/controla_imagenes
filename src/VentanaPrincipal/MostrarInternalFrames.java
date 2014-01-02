@@ -7,6 +7,8 @@ package VentanaPrincipal;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.VersionEImageIcon;
+import java.awt.Color;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,8 +41,9 @@ public class MostrarInternalFrames {
   private static SetChecksBox setCB;
   private JPanel panelScroll;
   private JButton anterior, siguiente, botonAncho, pEntera;
+  private VersionEImageIcon vic;
 
-  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, int sizeRamdom) {
+  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, int sizeRamdom, VersionEImageIcon version) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -56,6 +59,7 @@ public class MostrarInternalFrames {
     this.botonAncho = ancho;
     this.pEntera = pEntera;
     this.panelScroll = panelSroll;
+    this.vic = version;
     MostrarInternalFrames.save = new Guardar();// sa
     MostrarInternalFrames.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
   }
@@ -64,6 +68,8 @@ public class MostrarInternalFrames {
     try
       {
       internal.setMaximum(true);
+      vic.newColorFromPanel(panelScroll);
+      internal.setBackground(vic.getColor());
       setTituloYRutaLabel(siguientes, cantidad);
       setImagenes(siguientes);
       setCB.set(siguientes.getId());
