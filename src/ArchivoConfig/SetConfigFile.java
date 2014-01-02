@@ -20,6 +20,8 @@ public class SetConfigFile {
 
   private static final String CONFIG = "config.properties";
   private Properties properties = new Properties();
+  private MensajeJoptionPane mensaje = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+  private String className = SetConfigFile.class.getName();
 
   public SetConfigFile() {
     removerCamposYAbrirNuevoLog();
@@ -46,9 +48,7 @@ public class SetConfigFile {
       });
       } catch (IOException e)
       {
-      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, e.getMessage(), SetConfigFile.class.getName(), JOptionPane.ERROR_MESSAGE);
-      mensaje.getMessage();
-//      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear archivo de configuración", JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage(e.getMessage(), className);
       }
   }
 
@@ -63,10 +63,7 @@ public class SetConfigFile {
       properties.store(new FileOutputStream(CONFIG), null);
       } catch (IOException e)
       {
-      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, e.getMessage(), SetConfigFile.class.getName(), JOptionPane.ERROR_MESSAGE);
-      mensaje.getMessage();
-//      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear desde JTextField", JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage(e.getMessage(), className);
       }
-
   }
 }
