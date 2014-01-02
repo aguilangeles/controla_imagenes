@@ -4,6 +4,7 @@
  */
 package BasedeDatos;
 
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -14,6 +15,9 @@ import javax.swing.JOptionPane;
  */
 public class GetUltimoIDInsertado {
 
+  private static final String className = ControlesporVerificacionList.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private Conexion conexion;
   private String tabla;
 
@@ -33,10 +37,8 @@ public class GetUltimoIDInsertado {
         }
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              "Obtener Ultimo ID", JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), className);
       }
-
     return ret;
   }
 }
