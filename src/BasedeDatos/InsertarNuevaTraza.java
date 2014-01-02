@@ -4,6 +4,7 @@
  */
 package BasedeDatos;
 
+import Helpers.MensajeJoptionPane;
 import Helpers.Time;
 import Login.Login;
 import java.sql.SQLException;
@@ -16,6 +17,9 @@ import javax.swing.JOptionPane;
  */
 public final class InsertarNuevaTraza {
 
+  private static final String className = InsertarNuevaTraza.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private static String MENSAJE_SQL = "Cannot add or update a child row: "
           + "a foreign key constraint fails (`qualitys`.`traza`, CONSTRAINT "
           + "`fk_traza_rango` FOREIGN KEY (`idRango`) REFERENCES `rangos_qs` "
@@ -80,14 +84,12 @@ public final class InsertarNuevaTraza {
       {
       if (ex.getMessage().equals(MENSAJE_SQL))
         {
-        JOptionPane.showMessageDialog(null, RANGO_INEXISTENTE,
-                "Sin rangos que aplicar al volumen", JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(RANGO_INEXISTENTE, className);
         System.exit(0);
         return false;
         } else
         {
-        JOptionPane.showMessageDialog(null, ex.getMessage(),
-                "Insertar Traza", JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), className);
         return false;
         }
       }

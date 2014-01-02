@@ -40,9 +40,8 @@ public class SetFechaDeIngreso {
         conexion.isConexionClose();
         } catch (SQLException ex)
         {
-        MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), SetFechaDeIngreso.class.getName(), JOptionPane.ERROR_MESSAGE);
-        mensaje.getMessage();
-//        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en Seteo de Fecha", JOptionPane.ERROR_MESSAGE);
+        MensajeJoptionPane mensaje = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+        mensaje.getMessage(null, null);
         }
       }
   }

@@ -17,15 +17,11 @@ import javax.swing.plaf.ColorUIResource;
 public class MensajeJoptionPane {
 
   private Component component;
-  private String mensaje;
-  private String titulo;
   private int mensajeType;
   private ImageIcon imgIcon;
 
-  public MensajeJoptionPane(Component comp, String mensaje, String titulo, int mensajeType) {
+  public MensajeJoptionPane(Component comp, int mensajeType) {
     this.component = comp;
-    this.mensaje = mensaje;
-    this.titulo = titulo;
     this.mensajeType = mensajeType;
     UIManager UI = new UIManager();
     UIManager.put("OptionPane.background", new ColorUIResource(230, 252, 238));
@@ -33,7 +29,7 @@ public class MensajeJoptionPane {
     this.imgIcon = new ImageIcon("Logos\\test_50.png");
   }
 
-  public void getMessage() {
+  public void getMessage(String mensaje, String titulo) {
     JOptionPane.showMessageDialog(component, mensaje, titulo, mensajeType, imgIcon);
   }
 }

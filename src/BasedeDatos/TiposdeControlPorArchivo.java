@@ -5,6 +5,7 @@
 package BasedeDatos;
 
 import Entidades.TiposDeControl;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,9 @@ import javax.swing.JTable;
  */
 public class TiposdeControlPorArchivo {
 
+  private static final String className = TiposdeControlPorArchivo.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private static Conexion conexion = new Conexion();
   private int idArchivo;
   private int idTraza;
@@ -55,8 +59,7 @@ public class TiposdeControlPorArchivo {
 
         } catch (SQLException ex)
         {
-        JOptionPane.showMessageDialog(null, ex.getMessage(),
-                "Obtener control por Imagen", JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), className);
         }
       }
     return tiposControlList;

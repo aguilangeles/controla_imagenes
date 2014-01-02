@@ -198,9 +198,8 @@ public class Login extends javax.swing.JFrame {
       dispose();
       } else
       {
-      MensajeJoptionPane joptionPane = new MensajeJoptionPane(entrar, USER_INVALID, "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
-//      JOptionPane.showMessageDialog(entrar, USER_INVALID, "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
-      joptionPane.getMessage();
+      MensajeJoptionPane mensaje = new MensajeJoptionPane(entrar, JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage(null, null);
       user.setText("");
       password.setText("");
       }

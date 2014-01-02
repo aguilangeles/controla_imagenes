@@ -7,8 +7,6 @@ package BasedeDatos;
 import Helpers.MensajeJoptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +19,7 @@ public class InsertarFilasABM {
   private Conexion conexion;
   private DefaultTableModel modelo;
   public static final String BD_FAIL = "Error en los contenidos ingresados";
-  private static final String className = ControlesporVerificacionList.class.getName();
+  private static final String className = InsertarFilasABM.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
 
@@ -111,7 +109,7 @@ public class InsertarFilasABM {
         break;
       default:
         String valorInput = JOptionPane.showInputDialog(null, "El estado debe ser '"
-                + "'1' activo, '2' inactivo","Estado inválido", JOptionPane.QUESTION_MESSAGE);
+                + "'1' activo, '2' inactivo", "Estado inválido", JOptionPane.QUESTION_MESSAGE);
         ret = Integer.parseInt(valorInput);
         break;
       }

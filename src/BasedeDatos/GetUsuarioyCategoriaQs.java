@@ -58,8 +58,8 @@ public final class GetUsuarioyCategoriaQs {
       conexion.isConexionClose();
       } catch (SQLException e)
       {
-        MensajeJoptionPane mensaje = new MensajeJoptionPane(null, e.getMessage(), GetUsuarioyCategoriaQs.class.getName(), JOptionPane.ERROR_MESSAGE);
-        mensaje.getMessage();
+        MensajeJoptionPane mensaje = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+        mensaje.getMessage(null, null);
 //      JOptionPane.showMessageDialog(null, e.getMessage(),
 //              "Error en la Validación del Usuario", JOptionPane.ERROR_MESSAGE);
       }

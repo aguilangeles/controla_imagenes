@@ -4,6 +4,7 @@
  */
 package BasedeDatos;
 
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -15,6 +16,9 @@ import javax.swing.JOptionPane;
  */
 public class UpdateCheckBoxs {
 
+  private static final String className = UpdateCheckBoxs.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private int estado;
   private int idtrazaArchivo;
   private Conexion conexion;
@@ -34,8 +38,7 @@ public class UpdateCheckBoxs {
       conexion.executeUpdate(update);
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              "Setear estado archivo controles", JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), className);
       }
   }
 
@@ -46,8 +49,7 @@ public class UpdateCheckBoxs {
       conexion.executeUpdate(update);
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              "Setear estado archivo", JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), className);
       }
   }
 }

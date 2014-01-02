@@ -23,9 +23,9 @@ public class ControlesporVerificacionList {
 
   private static final String className = ControlesporVerificacionList.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private Conexion conexion;
   private int idTraza;
-  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
 //    private static int cantidadControles; borrar
   private List<TiposDeControl> tiposdeControlList = new ArrayList<>();
 

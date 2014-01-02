@@ -5,6 +5,7 @@
 package BasedeDatos;
 
 import Entidades.ControlPorImagen;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,9 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public class LlenarControles {
-
+  private static final String className = LlenarControles.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private int idTraza;
   private int idImagen;
   private List<ControlPorImagen> controlesList = new ArrayList<>();
@@ -50,7 +53,7 @@ public class LlenarControles {
         }
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Controles ", JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), className);
       }
     return controlesList;
   }

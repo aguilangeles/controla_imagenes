@@ -4,6 +4,7 @@
  */
 package BasedeDatos;
 
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,6 +16,9 @@ import javax.swing.JOptionPane;
  */
 public class InsertarNuevoArchivo {
 
+  private static final String className = InsertarNuevoArchivo.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private Conexion conexion;
   private int id = 1;
   private int idcategoria;
@@ -30,7 +34,6 @@ public class InsertarNuevoArchivo {
     this.idcategoria = idcategoria;
     archivo_Insertar(procesando);
   }
-
 
   private boolean archivo_Insertar(JLabel procesando) {
     int estado = 0;
@@ -52,7 +55,7 @@ public class InsertarNuevoArchivo {
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), InsertarNuevoArchivo.class.getName(), JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), className);
       }
     return false;
   }
