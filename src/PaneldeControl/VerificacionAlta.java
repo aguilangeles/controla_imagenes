@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.VersionEImageIcon;
 import javax.swing.ImageIcon;
 
 /**
@@ -38,9 +39,11 @@ public class VerificacionAlta extends javax.swing.JFrame {
    */
   public VerificacionAlta(Conexion conexion, DefaultTableModel abmModel, JTable tabla) {
     initComponents();
-    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-    ImageIcon im = new ImageIcon(rutaImagen);
-    setIconImage(im.getImage());
+//    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
+//    ImageIcon im = new ImageIcon(rutaImagen);
+//    setIconImage(im.getImage());
+    VersionEImageIcon vic = new VersionEImageIcon(this, "Alta Nueva Verificación. ");
+    vic.newColorFromPanel(jPanel1);
     nombreQs.setInputVerifier((new InputVerifier().inputVerifierT()));
     descripcionQs.setInputVerifier((new InputVerifier().inputVerifierT()));
     mensajeL.setText("<html>Seleccione un TdC y presione Agregar. "
@@ -80,7 +83,6 @@ public class VerificacionAlta extends javax.swing.JFrame {
     setTitle("Creacion de Tipos de Verificacion");
     setResizable(false);
 
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
     jPanel1.setNextFocusableComponent(nombreQs);
 
     jLabel2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
