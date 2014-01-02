@@ -29,6 +29,7 @@ public class Login extends javax.swing.JFrame {
   public Login() {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this, "Ingreso de Usuario");
+    versionEImageIcon.newColorFromPanel(jPanel1);
     setResizable(false);
     user.requestFocusInWindow();
     user.setInputVerifier(new InputVerifier().inputVerifierT());
@@ -56,8 +57,6 @@ public class Login extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("Ingreso de Usuario");
-
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
