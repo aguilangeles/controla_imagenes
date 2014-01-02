@@ -5,6 +5,7 @@
 package ArchivoConfig;
 
 import Entidades.LogQualitys;
+import Helpers.MensajeJoptionPane;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Lee el archivo de configuracion.
+ *
  * @author MUTNPROD003
  */
 public class ReadProperties {
@@ -33,7 +35,9 @@ public class ReadProperties {
       user = new LogQualitys(url, base, usuario, password);
       } catch (IOException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties", JOptionPane.ERROR_MESSAGE);
+      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ReadProperties.class.getName(), JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage();
+//      JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties", JOptionPane.ERROR_MESSAGE);
       } finally
       {
       if (in != null)
@@ -44,10 +48,15 @@ public class ReadProperties {
           super.finalize();
           } catch (IOException ex)
           {
-          JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties finally", JOptionPane.ERROR_MESSAGE);
+          MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ReadProperties.class.getName() + ", finally", JOptionPane.ERROR_MESSAGE);
+          mensaje.getMessage();
+//          JOptionPane.showMessageDialog(null, ex.getMessage(), "Read Properties finally", JOptionPane.ERROR_MESSAGE);
           } catch (Throwable ex)
           {
-          Logger.getLogger(ReadProperties.class.getName()).log(Level.SEVERE, null, ex);
+
+          MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ReadProperties.class.getName() + ", throwable", JOptionPane.ERROR_MESSAGE);
+          mensaje.getMessage();
+//          Logger.getLogger(ReadProperties.class.getName()).log(Level.SEVERE, null, ex);
           }
         }
       }
