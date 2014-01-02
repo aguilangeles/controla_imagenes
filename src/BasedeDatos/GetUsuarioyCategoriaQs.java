@@ -5,6 +5,7 @@
 package BasedeDatos;
 
 import Entidades.Usuario;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -57,8 +58,10 @@ public final class GetUsuarioyCategoriaQs {
       conexion.isConexionClose();
       } catch (SQLException e)
       {
-      JOptionPane.showMessageDialog(null, e.getMessage(),
-              "Error en la Validación del Usuario", JOptionPane.ERROR_MESSAGE);
+        MensajeJoptionPane mensaje = new MensajeJoptionPane(null, e.getMessage(), GetUsuarioyCategoriaQs.class.getName(), JOptionPane.ERROR_MESSAGE);
+        mensaje.getMessage();
+//      JOptionPane.showMessageDialog(null, e.getMessage(),
+//              "Error en la Validación del Usuario", JOptionPane.ERROR_MESSAGE);
       }
   }
 
