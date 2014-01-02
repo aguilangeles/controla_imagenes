@@ -4,6 +4,7 @@
  */
 package ArchivoConfig;
 
+import Helpers.MensajeJoptionPane;
 import Login.IngresoBaseDeDatos;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -45,7 +46,9 @@ public class SetConfigFile {
       });
       } catch (IOException e)
       {
-      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear archivo de configuración", JOptionPane.ERROR_MESSAGE);
+      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, e.getMessage(), SetConfigFile.class.getName(), JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage();
+//      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear archivo de configuración", JOptionPane.ERROR_MESSAGE);
       }
   }
 
@@ -60,7 +63,9 @@ public class SetConfigFile {
       properties.store(new FileOutputStream(CONFIG), null);
       } catch (IOException e)
       {
-      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear desde JTextField", JOptionPane.ERROR_MESSAGE);
+      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, e.getMessage(), SetConfigFile.class.getName(), JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage();
+//      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear desde JTextField", JOptionPane.ERROR_MESSAGE);
       }
 
   }
