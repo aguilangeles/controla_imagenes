@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.VersionEImageIcon;
 import static PaneldeControl.ControlesABM.ROW_EMPTY;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -32,10 +33,9 @@ public class UsuariosABM extends javax.swing.JFrame {
    */
   public UsuariosABM() {
     initComponents();
-    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-    ImageIcon im = new ImageIcon(rutaImagen);
-    setIconImage(im.getImage());
-    setTitle("Alta, Baja y Modificacion de Usuarios");
+    VersionEImageIcon vic = new VersionEImageIcon(this, "Alta, Baja y Modificacion de Usuarios");
+    vic.newColorFromPanel(jPanel1);
+    principalInternal.setBackground(vic.getColor());
     setResizable(false);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     usuario = new UsuariosDao(tablaUsuarios, conexion);
@@ -45,11 +45,13 @@ public class UsuariosABM extends javax.swing.JFrame {
     agregar.setVisible(false);
     editar.setVisible(false);
     desactivar.setVisible(false);
-    try {
+    try
+      {
       principalInternal.setMaximum(true);
-    } catch (PropertyVetoException ex) {
+      } catch (PropertyVetoException ex)
+      {
       Logger.getLogger(UsuariosABM.class.getName()).log(Level.SEVERE, null, ex);
-    }
+      }
   }
 
   /**
@@ -281,21 +283,25 @@ public class UsuariosABM extends javax.swing.JFrame {
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
       botonGuardar();
     }//GEN-LAST:event_salvarActionPerformed
-  
-    private void botonGuardar() {
-    switch (evento) {
+
+  private void botonGuardar() {
+    switch (evento)
+      {
       case "Agregar":
         boolean insertad;
-        try {
+        try
+          {
           tablaUsuarios.editCellAt(-1, -1);
-          if (isRowEmpty(tablaUsuarios, getIde())) {
+          if (isRowEmpty(tablaUsuarios, getIde()))
+            {
             insertad = usuario.getInsertar().nuevoUsuario(getIde());
             mensajeUpdate(insertad, "Usuario");
-          }
-        } catch (RuntimeException e) {
+            }
+          } catch (RuntimeException e)
+          {
           mensajeLabel.setText("<html>usuario<br>Rechazado</html>");
           JOptionPane.showMessageDialog(null, e.getMessage(), "Rango vacia", JOptionPane.ERROR_MESSAGE);
-        }
+          }
         break;
       case "Editar":
         boolean update;
@@ -304,19 +310,22 @@ public class UsuariosABM extends javax.swing.JFrame {
         int idjtext = (row);
 
         tablaUsuarios.repaint();
-        try {
-          if (isRowEmpty(tablaUsuarios, idjtext)) {
+        try
+          {
+          if (isRowEmpty(tablaUsuarios, idjtext))
+            {
             update =
                     usuario.getEditar().usuarios_setRow(idjtext);
             mensajeUpdate(update, "Usuario");
 
-          }
-        } catch (RuntimeException e) {
+            }
+          } catch (RuntimeException e)
+          {
           mensajeLabel.setText("<html>Usuario<br>Rechazado</html>");
           JOptionPane.showMessageDialog(null, e.getMessage(), "Edit  Usuario", JOptionPane.ERROR_MESSAGE);
-        }
+          }
         break;
-    }
+      }
   }
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
       getABM();
@@ -340,25 +349,29 @@ public class UsuariosABM extends javax.swing.JFrame {
 
   private boolean isRowEmpty(JTable tablaContenido, int id) {
     boolean ret = true;
-    for (int i = 0; i < tablaContenido.getColumnCount(); i++) {
+    for (int i = 0; i < tablaContenido.getColumnCount(); i++)
+      {
       Object inspect = tablaContenido.getValueAt(id, i);
-      if (inspect == null || inspect.equals("")) {
+      if (inspect == null || inspect.equals(""))
+        {
         ret = false;
         throw new RuntimeException(ROW_EMPTY);
+        }
       }
-    }
     return ret;
   }
 
   private void mensajeUpdate(boolean insertado, String mensajeJl) {
-    if (insertado) {
+    if (insertado)
+      {
       mensajeLabel.setText("<html>" + mensajeJl + "<br>Aceptado</html>");
       tablaUsuarios.repaint();
       salvar.setVisible(false);
-    } else {
+      } else
+      {
       mensajeLabel.setText("<html>" + mensajeJl + "<br>Rechazado</html>");
       salvar.setVisible(true);
-    }
+      }
   }
   /**
    * @param args the command line arguments
@@ -425,7 +438,10 @@ public class UsuariosABM extends javax.swing.JFrame {
   private void AgregarBoton() {
     usuario.setEditable(true);
     int idNew = getIde() + 1;
-    Object[] ob = new Object[]{idNew, "ingrese nombre", "ingrese passw", 1, 1};
+    Object[] ob = new Object[]
+      {
+      idNew, "ingrese nombre", "ingrese passw", 1, 1
+      };
     new AgregarBoton(modelo, tablaUsuarios, salvar, ob);
     evento = "Agregar";
   }
