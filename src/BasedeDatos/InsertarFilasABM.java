@@ -4,6 +4,7 @@
  */
 package BasedeDatos;
 
+import Helpers.MensajeJoptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,6 +21,9 @@ public class InsertarFilasABM {
   private Conexion conexion;
   private DefaultTableModel modelo;
   public static final String BD_FAIL = "Error en los contenidos ingresados";
+    private static final String className = ControlesporVerificacionList.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
 
   public InsertarFilasABM(Conexion conexion, DefaultTableModel modelo) {
     this.conexion = conexion;
@@ -45,11 +49,9 @@ public class InsertarFilasABM {
       return true;
       } catch (SQLException ex)
       {
-      System.out.println(ex.getMessage());
-      Logger.getLogger(InsertarFilasABM.class.getName()).log(Level.SEVERE, null, ex);
+      msg.getMessage(ex.getMessage(), BD_FAIL);
       return false;
       }
-
   }
 
   public boolean nuevoControl(int id) {
@@ -69,7 +71,7 @@ public class InsertarFilasABM {
       return true;
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), BD_FAIL, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), BD_FAIL);
       return false;
       }
   }
@@ -92,7 +94,7 @@ public class InsertarFilasABM {
       return true;
       } catch (SQLException ex)
       {
-      Logger.getLogger(InsertarFilasABM.class.getName()).log(Level.SEVERE, null, ex);
+      msg.getMessage(ex.getMessage(), BD_FAIL);
       return false;
       }
   }
