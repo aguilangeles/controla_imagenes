@@ -7,7 +7,6 @@ package VentanaPrincipal;
 import BasedeDatos.GetNumerosDocumentosRechazados;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
-import Helpers.GetExtensionIdImagen;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.ReporteDocumento;
@@ -32,8 +31,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private int cantidad = 1;
   private DefaultTableModel model;
   private TrazaDao traza;
-//  private boolean pdf;
-//  private boolean tif;
   private final TablaCheckBox tablaCheckBox;
   private List<Sublote> sublotes;
   private String nombresub;
@@ -56,13 +53,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     this.sublotes = sublotes;
     tabla.requestFocus();
     this.traza = trazadao;
-    int idImagen = GetExtensionIdImagen.getIdImagen();
-//    this.pdf = (idImagen == 1 || idImagen == 3) ? true : false;// discrimina entre pdf y otros
-////    this.pdf = (traza.getExtension().equals(".pdf")) ? true : false;// discrimina entre pdf y otros
-//    this.tif = (idImagen == 2) ? true : false;
-    //isImagenTif(pdf, traza.getExtension());
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
-    //TODO pdf versus tif,png y jpg
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     anterior.setEnabled(false);
@@ -372,17 +363,15 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }//GEN-LAST:event_siguienteActionPerformed
 
   private void nextDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDocumActionPerformed
-    // TODO add your handling code here:
     goDocument(true);
     Imagen imagen1 = goImagen(contador);
     String nombre = imagen1.getRutaSublote();
-    //RutaMouseListener.getAdyacentes(pdf, imagen1);
     if (!nombre.equalsIgnoreCase(nombresub))
       {
       cantidad++;
       setNombresub(nombre);
       }
-    mostDoc.setNextImage(imagen1, getCantidad());
+    mostDoc.setNextImage(imagen1, cantidad);
   }//GEN-LAST:event_nextDocumActionPerformed
 
   private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
@@ -394,7 +383,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad--;
       setNombresub(nombre);
       }
-    mostDoc.setBackImage(pr, getCantidad());
+    mostDoc.setBackImage(pr, cantidad);
   }//GEN-LAST:event_prevDocumActionPerformed
 
   private Imagen goImagen(int contador) {
@@ -496,10 +485,9 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
     nombresub = siguientes.getRutaSublote();
-    mostDoc = new MostrarInternalFramesForDocument(traza, desktopPane, internal,
-            anterior, combo, scrollImage, getSizeRamdom(), rutaLabel, pageLabel, tabla, siguiente,
-            panelScroll, ampliar, entera);
-    mostDoc.mostrarPrimeraImagen(siguientes, getCantidad());
+    mostDoc = new MostrarInternalFramesForDocument(desktopPane, internal, rutaLabel, pageLabel, panelScroll, tabla, combo, traza, siguiente,
+            anterior, ampliar, entera, scrollImage, getSizeRamdom());
+    mostDoc.mostrarPrimeraImagen(siguientes, cantidad);
   }
 
   private void getNextImage() {
@@ -516,7 +504,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad++;
       setNombresub(nombre);
       }
-    mostDoc.setNextImage(imagen1, getCantidad());
+    mostDoc.setNextImage(imagen1, cantidad);
 
   }
 
@@ -534,7 +522,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       cantidad--;
       setNombresub(nombre);
       }
-    mostDoc.setBackImage(pr, getCantidad());
+    mostDoc.setBackImage(pr, cantidad);
   }
 
   private void goDocument(boolean ischeck) {

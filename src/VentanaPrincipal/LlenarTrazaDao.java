@@ -31,11 +31,8 @@ public final class LlenarTrazaDao {
   }
 
   public LlenarTrazaDao(int trazaID, String parent, Conexion con, boolean issublote) {
-    this.idTraza = trazaID;
     String parent1 = Encoder.encoder(parent + "\\", LlenarTrazaDao.class.getName());
-    this.conexion = con;
-    int idImagen = GetExtensionIdImagen.getIdImagen();
-    llenartrazaDocumento(parent1);
+    llenartrazaDocumento(parent1, con, trazaID);
   }
 
   private TrazaDao llenartraza(Conexion conexion, int idTraza, String parent) {
@@ -45,11 +42,10 @@ public final class LlenarTrazaDao {
     return traza;
   }
 
-  private TrazaDao llenartrazaDocumento(String parent) {
+  private TrazaDao llenartrazaDocumento(String parent, Conexion conexion, int idTraza) {
     List<Imagen> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent).getImagenesList();
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
-    System.out.println(traza);
     return traza;
   }
 
