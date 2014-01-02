@@ -94,7 +94,6 @@ public class MostrarInternalFrames {
   }
 
   private void setTituloYRutaLabel(Imagen siguientes, int cantidad) {
-    int tamanio = siguientes.getTotalSublote();
     String imagenw = "Imagen " + cantidad + "/" + sizeRamdom;
     internal.setTitle(imagenw);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
