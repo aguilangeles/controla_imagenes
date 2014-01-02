@@ -5,7 +5,6 @@
 package Helpers;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import javax.swing.JOptionPane;
 
@@ -22,8 +21,7 @@ public class Encoder {
       ret = URLEncoder.encode(aString, "UTF-8");
       } catch (UnsupportedEncodingException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              clase, JOptionPane.ERROR_MESSAGE);
+      new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE).getMessage(aString, clase);
       }
     return ret;
   }

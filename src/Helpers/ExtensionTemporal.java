@@ -15,27 +15,17 @@ import javax.swing.JOptionPane;
  */
 public class ExtensionTemporal {
 
+  private static final String className = ExtensionTemporal.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  private MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private String rutaTemporal;
   private String aParent;
 
   public ExtensionTemporal(String nombre, String parent, int numero) {
-    this.aParent = decoder(parent);
+    this.aParent = Decoder.decoder(parent, className);
     String ret = nombre.substring(aParent.length(), nombre.length() - 4) + "_" + numero;
     this.rutaTemporal = ret.replace("\\", "_");
 
-  }
-
-  private String decoder(String sString) {
-    String ret = "";
-    try
-      {
-      ret = URLDecoder.decode(sString, "UTF-8");
-      } catch (UnsupportedEncodingException ex)
-      {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              "Extension Temporal: encoding", JOptionPane.ERROR_MESSAGE);
-      }
-    return ret;
   }
 
   public String getRutaTemporal() {

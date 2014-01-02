@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -21,6 +22,9 @@ import javax.swing.JTable;
  */
 public class EscribeInformeDocumento {
 
+  private static final String className = EscribeInformeDocumento.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  private MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private static final String UBICACION = "Reporte/" + new Time().getDateForTXT() + ".txt";
 
   public EscribeInformeDocumento(JTable tablaDetalles, boolean estado, String observaciones, JButton finalizar, JTable descripcion) {
@@ -59,10 +63,7 @@ public class EscribeInformeDocumento {
       pw.close();
       } catch (IOException ex)
       {
-      JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(),
-              "Excepción en la escritura del reporte", JOptionPane.ERROR_MESSAGE);
-
-      Logger.getLogger(EscribeInformeDocumento.class.getName()).log(Level.SEVERE, null, ex);
+      msg.getMessage(ex.getMessage(), className);
       } finally
       {
       if (null != fichero)
@@ -70,12 +71,12 @@ public class EscribeInformeDocumento {
         try
           {
           fichero.close();
+          ImageIcon icon = new ImageIcon("Logos\\test_50.png");
           JOptionPane.showMessageDialog(null, "Podrá visualizar una síntesis del reporte en\n\t"
-                  + UBICACION + "\n", "Reporte final", JOptionPane.INFORMATION_MESSAGE);
+                  + UBICACION + "\n", "Informe Final", JOptionPane.INFORMATION_MESSAGE, icon);
           } catch (IOException ex)
           {
-          JOptionPane.showMessageDialog(tablaDetalles, ex.getMessage(),
-                  "Error al cerrar archivo informe.txt", JOptionPane.ERROR_MESSAGE);
+          msg.getMessage(ex.getMessage(), className);
           }
         }
       }

@@ -6,8 +6,7 @@ package Helpers;
 
 import BasedeDatos.Conexion;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,7 +32,7 @@ public class Minimo {
           }
         } catch (SQLException ex)
         {
-        Logger.getLogger(Minimo.class.getName()).log(Level.SEVERE, null, ex);
+        new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE).getMessage(ex.getMessage(), Minimo.class.getName());
         }
       }
     conexion.isConexionClose();
