@@ -23,8 +23,11 @@ import javax.swing.JOptionPane;
  */
 public class ArchivosPorTrazaList {
 
+  private String className = ArchivosPorTrazaList.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
   private static int documentos;
   private List<Imagen> imagenProcesadaList = new ArrayList<>();
+  MensajeJoptionPane mensaje = new MensajeJoptionPane(null, type);
 
   public ArchivosPorTrazaList(Conexion conexion, int idTraza, String parent, boolean isVolume) {
     //constructor para volumenes
@@ -55,7 +58,6 @@ public class ArchivosPorTrazaList {
               + " on subl.id=asub.idsublote"
               + " where a.idtraza  =" + idTraza + ";";
       conexion.executeQuery(query);
-//      System.out.println("query imagen subl " + query);
       while (conexion.resulset.next())
         {
         int id = conexion.resulset.getInt(1);
@@ -68,10 +70,7 @@ public class ArchivosPorTrazaList {
         }
       } catch (SQLException ex)
       {
-
-      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ArchivosPorTrazaList.class.getName(), JOptionPane.ERROR_MESSAGE);
-      mensaje.getMessage();
-//      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
+      mensaje.getMessage(ex.getMessage(), className);
       }
   }
 
@@ -94,11 +93,7 @@ public class ArchivosPorTrazaList {
         }
       } catch (SQLException ex)
       {
-
-      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ArchivosPorTrazaList.class.getName(), JOptionPane.ERROR_MESSAGE);
-      mensaje.getMessage();
-//      JOptionPane.showMessageDialog(null, ex.getMessage(),
-//              "Error en la consulta de ruta archivo", JOptionPane.ERROR_MESSAGE);
+      mensaje.getMessage(ex.getMessage(), className);
       }
   }
 
@@ -135,10 +130,7 @@ public class ArchivosPorTrazaList {
         }
       } catch (SQLException ex)
       {
-
-      MensajeJoptionPane mensaje = new MensajeJoptionPane(null, ex.getMessage(), ArchivosPorTrazaList.class.getName(), JOptionPane.ERROR_MESSAGE);
-      mensaje.getMessage();
-//      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
+      mensaje.getMessage(ex.getMessage(), className);
       }
     return ret;
   }
