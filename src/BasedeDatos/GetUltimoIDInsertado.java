@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class GetUltimoIDInsertado {
 
-  private static final String className = ControlesporVerificacionList.class.getName();
+  private static final String className = GetUltimoIDInsertado.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private Conexion conexion;

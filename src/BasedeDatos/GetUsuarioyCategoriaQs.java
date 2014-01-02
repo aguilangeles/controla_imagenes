@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
  */
 public final class GetUsuarioyCategoriaQs {
 
+  private static final String className = GetUsuarioyCategoriaQs.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private Usuario usuarioValidado = null;
   private boolean usuario;
 
@@ -58,10 +61,7 @@ public final class GetUsuarioyCategoriaQs {
       conexion.isConexionClose();
       } catch (SQLException e)
       {
-        MensajeJoptionPane mensaje = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
-        mensaje.getMessage(null, null);
-//      JOptionPane.showMessageDialog(null, e.getMessage(),
-//              "Error en la Validación del Usuario", JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(e.getMessage(), className);
       }
   }
 

@@ -4,6 +4,7 @@
  */
 package BasedeDatos;
 
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -14,6 +15,10 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public class GetNumerosImagenesRechazadas {
+
+  private static final String className = GetNumerosImagenesRechazadas.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
 
   public GetNumerosImagenesRechazadas(int idTraza) {
     int numero = 0;
@@ -38,8 +43,7 @@ public class GetNumerosImagenesRechazadas {
         c.isConexionClose();
         } catch (SQLException ex)
         {
-        JOptionPane.showMessageDialog(null, ex.getMessage(),
-                "Numero de Rechazo", JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), className);
         }
       }
   }

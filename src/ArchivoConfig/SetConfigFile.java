@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
  */
 public class SetConfigFile {
 
+  private String className = SetConfigFile.class.getName();
   private static final String CONFIG = "config.properties";
   private Properties properties = new Properties();
   private MensajeJoptionPane mensaje = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
-  private String className = SetConfigFile.class.getName();
 
   public SetConfigFile() {
     removerCamposYAbrirNuevoLog();
