@@ -26,11 +26,6 @@
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ee" green="fc" red="e6" type="rgb"/>
-        </Property>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="First"/>
@@ -51,7 +46,10 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="scroll" alignment="1" pref="514" max="32767" attributes="0"/>
-              <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -67,11 +65,10 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ABM" max="32767" attributes="0"/>
+                          <Component id="ABM" pref="131" max="32767" attributes="0"/>
                           <Component id="cerrar" alignment="0" max="32767" attributes="0"/>
                           <Component id="mensajLab" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -82,7 +79,7 @@
                       <Component id="ABM" min="-2" pref="44" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="mensajLab" min="-2" pref="252" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="50" max="32767" attributes="0"/>
                       <Component id="cerrar" min="-2" pref="44" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
@@ -136,9 +133,6 @@
               <SubComponents>
                 <Container class="javax.swing.JInternalFrame" name="principalInternal">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ee" green="fc" red="e6" type="rgb"/>
-                    </Property>
                     <Property name="title" type="java.lang.String" value="Para Editar los contenidos presione Activar ABM"/>
                     <Property name="visible" type="boolean" value="true"/>
                   </Properties>

@@ -32,7 +32,10 @@ public class ControlesABM extends javax.swing.JFrame {
    */
   public ControlesABM() {
     initComponents();
-    new VersionEImageIcon().setImagenIcon(this);
+    VersionEImageIcon versionEImageIcon = new VersionEImageIcon();
+    versionEImageIcon.setImagenIcon(this);
+    versionEImageIcon.newColorFromPanel(jPanel1);
+    principalInternal.setBackground(versionEImageIcon.getColor());
     controles = new ControlesDao(tablaContenido, conexion);
     principalInternal.setVisible(true);
     modelo = (DefaultTableModel) tablaContenido.getModel();
@@ -40,12 +43,14 @@ public class ControlesABM extends javax.swing.JFrame {
     agregar.setVisible(false);
     editar.setVisible(false);
     desactivar.setVisible(false);
-    try {
+    try
+      {
       principalInternal.setMaximum(true);
-    } catch (PropertyVetoException ex) {
+      } catch (PropertyVetoException ex)
+      {
       JOptionPane.showMessageDialog(principalInternal, ex.getMessage(), "Error ajuste JInternalFrame", JOptionPane.ERROR_MESSAGE);
 //      Logger.getLogger(ControlesABM.class.getName()).log(Level.SEVERE, null, ex);
-    }
+      }
 
   }
 
@@ -77,8 +82,6 @@ public class ControlesABM extends javax.swing.JFrame {
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Alta, Baja y Modificacion de Controles");
     setResizable(false);
-
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     jPanel2.setOpaque(false);
 
@@ -120,10 +123,9 @@ public class ControlesABM extends javax.swing.JFrame {
       .addGroup(jPanel2Layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(ABM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(ABM, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
           .addComponent(cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(mensajLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addContainerGap())
+          .addComponent(mensajLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,12 +134,11 @@ public class ControlesABM extends javax.swing.JFrame {
         .addComponent(ABM, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(41, 41, 41)
         .addComponent(mensajLab, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
         .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(32, 32, 32))
     );
 
-    principalInternal.setBackground(new java.awt.Color(230, 252, 238));
     principalInternal.setTitle("Para Editar los contenidos presione Activar ABM");
     principalInternal.setVisible(true);
 
@@ -261,7 +262,9 @@ public class ControlesABM extends javax.swing.JFrame {
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-      .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addGroup(jPanel1Layout.createSequentialGroup()
+        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(0, 0, Short.MAX_VALUE))
     );
 
     getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -294,36 +297,43 @@ public class ControlesABM extends javax.swing.JFrame {
       botonGuardar();
     }//GEN-LAST:event_salvarActionPerformed
   private void botonGuardar() {
-    switch (evento) {
+    switch (evento)
+      {
       case "Agregar":
         boolean insertado;
         tablaContenido.editCellAt(-1, -1);
-        try {
-          if (isRowEmpty(tablaContenido, getIde())) {
+        try
+          {
+          if (isRowEmpty(tablaContenido, getIde()))
+            {
             insertado = controles.getInsertar().nuevoControl(getIde());
             mensajeUpdate(insertado, "Control");
-          }
-        } catch (RuntimeException e) {
+            }
+          } catch (RuntimeException e)
+          {
           mensajLab.setText("<html>Control<br>Rechazado</html>");
           JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+          }
         break;
       case "Editar":
         boolean update;
         tablaContenido.editCellAt(-1, -1);
         int row = tablaContenido.getSelectedRow();
         int idjtext = (row);
-        try {
-          if (isRowEmpty(tablaContenido, idjtext)) {
+        try
+          {
+          if (isRowEmpty(tablaContenido, idjtext))
+            {
             update = controles.getEditar().controles_SetRow(idjtext);
             mensajeUpdate(update, "Control");
-          }
-        } catch (RuntimeException e) {
+            }
+          } catch (RuntimeException e)
+          {
           mensajLab.setText("<html>Control<br>Rechazado</html>");
           JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+          }
         break;
-    }
+      }
   }
 
     private void ABMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABMActionPerformed
@@ -369,25 +379,29 @@ public class ControlesABM extends javax.swing.JFrame {
 //
   private boolean isRowEmpty(JTable tablaContenido, int id) {
     boolean ret = true;
-    for (int i = 0; i < tablaContenido.getColumnCount(); i++) {
+    for (int i = 0; i < tablaContenido.getColumnCount(); i++)
+      {
       Object inspect = tablaContenido.getValueAt(id, i);
-      if (inspect == null || inspect.equals("")) {
+      if (inspect == null || inspect.equals(""))
+        {
         ret = false;
         throw new RuntimeException(ROW_EMPTY);
+        }
       }
-    }
     return ret;
   }
 
   private void mensajeUpdate(boolean insertado, String mensajeJl) {
-    if (insertado) {
+    if (insertado)
+      {
       mensajLab.setText("<html>" + mensajeJl + "<br>Aceptado</html>");
       tablaContenido.repaint();
       salvar.setVisible(false);
-    } else {
+      } else
+      {
       mensajLab.setText("<html>" + mensajeJl + "<br>Rechazado</html>");
       salvar.setVisible(true);
-    }
+      }
   }
 
   private void getABM() {
@@ -405,7 +419,10 @@ public class ControlesABM extends javax.swing.JFrame {
   private void getAgregarBoton() {
     controles.setEditable(true);
     int idTable = getIde() + 1;
-    Object[] ob = new Object[]{idTable, "Ingrese nombre", "Ingrese descripción", "ejemplo.jpg", 1};
+    Object[] ob = new Object[]
+      {
+      idTable, "Ingrese nombre", "Ingrese descripción", "ejemplo.jpg", 1
+      };
     new AgregarBoton().addWithRectangle(ob, modelo, tablaContenido, salvar);
     evento = "Agregar";
   }
