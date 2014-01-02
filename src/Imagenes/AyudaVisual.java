@@ -4,6 +4,7 @@
  */
 package Imagenes;
 
+import Helpers.VersionEImageIcon;
 import java.io.File;
 
 /**
@@ -15,6 +16,7 @@ public class AyudaVisual extends javax.swing.JFrame {
   private String descripcion;
   private String texto;
   private String imagen;
+  private VersionEImageIcon vic = new VersionEImageIcon();
 
   /**
    * Creates new form AyudaVisual
@@ -28,6 +30,7 @@ public class AyudaVisual extends javax.swing.JFrame {
     this.texto = texto;
     this.imagen = imagen;
     initComponents();
+    vic.newColorFromPanel(jPanel1);
     cerrar.requestFocus();
     setTitle(this.descripcion);
     jLabel1.setText(descripcion);
@@ -44,6 +47,7 @@ public class AyudaVisual extends javax.swing.JFrame {
   public AyudaVisual(String image) {
     this.imagen = image;
     initComponents();
+    vic.newColorFromPanel(jPanel1);
     VisualizarImagen vig = new VisualizarImagen(scrollImage, jSlider1);
     vig.visualizarImagen(imagen, jSlider1.getValue());
   }
@@ -67,7 +71,6 @@ public class AyudaVisual extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
     jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 102), 2));
 
     scrollImage.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
