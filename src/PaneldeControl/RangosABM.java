@@ -32,7 +32,7 @@ public class RangosABM extends javax.swing.JFrame {
    */
   public RangosABM() {
     initComponents();
-    VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
+    VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this, "Alta, Baja y Modificación Rangos");
     versionEImageIcon.newColorFromPanel(jPanel1);
     principalInternal.setBackground(versionEImageIcon.getColor());
     setResizable(true);
@@ -48,7 +48,6 @@ public class RangosABM extends javax.swing.JFrame {
       principalInternal.setMaximum(true);
       } catch (PropertyVetoException ex)
       {
-
       JOptionPane.showMessageDialog(this, ex.getMessage(), "Ajuste Internal Frame", JOptionPane.ERROR_MESSAGE);
       }
   }
