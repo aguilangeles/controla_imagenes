@@ -4,6 +4,7 @@
  */
 package BasedeDatos;
 
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,9 @@ import javax.swing.JOptionPane;
  */
 public class GetNumerosDocumentosRechazados {
 
+  private static final String className = GetNumerosDocumentosRechazados.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private List<Integer> idSubloteRechazado = new ArrayList<>();
 
   public GetNumerosDocumentosRechazados(int idTraza) {
@@ -52,8 +56,7 @@ public class GetNumerosDocumentosRechazados {
         c.isConexionClose();
         } catch (SQLException ex)
         {
-        JOptionPane.showMessageDialog(null, ex.getMessage(),
-                "Numero de Rechazo", JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), className);
         }
       }
     iterar();
@@ -80,7 +83,7 @@ public class GetNumerosDocumentosRechazados {
         conexion.isConexionClose();
         } catch (SQLException ex)
         {
-        Logger.getLogger(GetNumerosDocumentosRechazados.class.getName()).log(Level.SEVERE, null, ex);
+        msg.getMessage(ex.getMessage(), className);
         }
       }
   }
