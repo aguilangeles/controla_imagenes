@@ -6,6 +6,7 @@
 package BasedeDatos;
 
 import Entidades.TiposDeControl;
+import Helpers.MensajeJoptionPane;
 //import VentanaPrincipal.CantidadControlesPorVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,8 +21,11 @@ import javax.swing.JOptionPane;
  */
 public class ControlesporVerificacionList {
 
+  private static final String className = ControlesporVerificacionList.class.getName();
+  private int type = JOptionPane.ERROR_MESSAGE;
   private Conexion conexion;
   private int idTraza;
+  MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
 //    private static int cantidadControles; borrar
   private List<TiposDeControl> tiposdeControlList = new ArrayList<>();
 
@@ -60,7 +64,7 @@ public class ControlesporVerificacionList {
       gar.gc();
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Tipos", JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), className);
       }
     return tiposdeControlList;
   }
