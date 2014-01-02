@@ -57,7 +57,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     anterior.setEnabled(false);
-    getFirstImage();
+    getFirstImage(version);
     rutaLabel.addMouseListener(new RutaMouseListener());
     siguiente.addKeyListener(keylistener());
     anterior.addKeyListener(keylistener());
@@ -464,7 +464,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private void iniciar(TrazaDao traza, List<Sublote> sublotes) {
-    traza.getImagenList();
     int totalcant = 0;
     listaFlag = new ArrayList<>();
     listaFlag.add(0);
@@ -481,12 +480,12 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
   }
 
-  private void getFirstImage() {
+  private void getFirstImage(VersionEImageIcon version) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
     nombresub = siguientes.getRutaSublote();
     mostDoc = new MostrarInternalFramesForDocument(desktopPane, internal, rutaLabel, pageLabel, panelScroll, tabla, combo, traza, siguiente,
-            anterior, ampliar, entera, scrollImage, getSizeRamdom());
+            anterior, ampliar, entera, scrollImage, getSizeRamdom(), version);
     mostDoc.mostrarPrimeraImagen(siguientes, cantidad);
   }
 

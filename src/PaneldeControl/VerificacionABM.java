@@ -323,6 +323,6 @@ public class VerificacionABM extends javax.swing.JFrame {
   }
 
   private void getDesactivarBoton() {
-    new DesactivarBoton(tablaV, conexion, modelo, "Tipos_verificacion", 4, mensajeLabel);
+    DesactivarBoton desactivarBoton = new DesactivarBoton(tablaV, conexion, modelo, "Tipos_verificacion", 4, mensajeLabel);
   }
 }

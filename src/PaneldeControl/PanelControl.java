@@ -30,6 +30,7 @@ public class PanelControl extends javax.swing.JFrame {
   public PanelControl() {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon();
+    versionEImageIcon.newColorFromPanel(panelColor);
     jLabel1.setText(INFO_LABEL);
     Usuario usuarioTipo = Login.getUsuario();
     this.administrador = usuarioTipo.isAdmin();
@@ -54,7 +55,7 @@ public class PanelControl extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jPanel1 = new javax.swing.JPanel();
+    panelColor = new javax.swing.JPanel();
     jLabel1 = new javax.swing.JLabel();
     base_datos = new javax.swing.JButton();
     rangos = new javax.swing.JButton();
@@ -66,8 +67,6 @@ public class PanelControl extends javax.swing.JFrame {
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Panel de Control");
     setResizable(false);
-
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     jLabel1.setBackground(new java.awt.Color(204, 255, 204));
     jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -163,13 +162,13 @@ public class PanelControl extends javax.swing.JFrame {
       }
     });
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
+    javax.swing.GroupLayout panelColorLayout = new javax.swing.GroupLayout(panelColor);
+    panelColor.setLayout(panelColorLayout);
+    panelColorLayout.setHorizontalGroup(
+      panelColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelColorLayout.createSequentialGroup()
         .addGap(54, 54, 54)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addGroup(panelColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(base_datos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(controles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(rangos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -177,14 +176,14 @@ public class PanelControl extends javax.swing.JFrame {
           .addComponent(alta_usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(cargar_lote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap(56, Short.MAX_VALUE))
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelColorLayout.createSequentialGroup()
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap())
     );
-    jPanel1Layout.setVerticalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
+    panelColorLayout.setVerticalGroup(
+      panelColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(panelColorLayout.createSequentialGroup()
         .addContainerGap()
         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
@@ -206,11 +205,11 @@ public class PanelControl extends javax.swing.JFrame {
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(panelColor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(panelColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
 
     pack();
@@ -272,7 +271,7 @@ public class PanelControl extends javax.swing.JFrame {
   private javax.swing.JButton cargar_lote;
   private javax.swing.JButton controles;
   private javax.swing.JLabel jLabel1;
-  private javax.swing.JPanel jPanel1;
+  private javax.swing.JPanel panelColor;
   private javax.swing.JButton rangos;
   private javax.swing.JButton verificacion;
   // End of variables declaration//GEN-END:variables
@@ -338,7 +337,6 @@ public class PanelControl extends javax.swing.JFrame {
         break;
       case "Controles":
         getControles();
-
         break;
       case "Verificación":
         getVerificacion();

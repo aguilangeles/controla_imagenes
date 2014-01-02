@@ -10,7 +10,6 @@ import Entidades.ControlPorImagen;
 import BasedeDatos.Conexion;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
-import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;

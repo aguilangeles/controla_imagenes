@@ -36,7 +36,8 @@ public class CargarLote extends javax.swing.JFrame {
 
   public CargarLote(DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion, JFrame panelControl) {
     initComponents();
-    VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
+    VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this, "Carga de Volumen.");
+    versionEImageIcon.newColorFromPanel(jPanel1);
     this.usarioTipo = Login.Login.getUsuario();
     rutaCarpeta.setInputVerifier(new Helpers.InputVerifier().inputVerifierT());
     this.tipoDocumentoBox.setModel(documentos);
@@ -68,8 +69,6 @@ public class CargarLote extends javax.swing.JFrame {
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Carga de lote");
     setResizable(false);
-
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

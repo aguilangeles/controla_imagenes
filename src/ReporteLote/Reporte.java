@@ -34,6 +34,7 @@ public class Reporte extends javax.swing.JFrame {
 
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this);
+    versionEImageIcon.newColorFromPanel(jPanel1);
     this.idtraza = idtraza;
     setResizable(false);
     if (conexion.isConexion())
@@ -75,8 +76,6 @@ public class Reporte extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle("Qualitys_v_1.00.01");
-
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
 
     tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {

@@ -13,7 +13,6 @@ import static PaneldeControl.ControlesABM.ROW_EMPTY;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
 /**

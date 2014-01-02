@@ -8,6 +8,7 @@ import BasedeDatos.ArchivosPorTrazaList;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.VersionEImageIcon;
 //import Helpers.GetImagenesAdyacentes;
 //import Helpers.RutaMouseListener;
 import java.beans.PropertyVetoException;
@@ -42,8 +43,9 @@ public class MostrarInternalFramesForDocument {
   private static SetChecksBox setCB;
   private JPanel panelScroll;
   private JButton anterior, siguiente, botonAncho, pEntera;
+  private VersionEImageIcon vic;
 
-  public MostrarInternalFramesForDocument(JDesktopPane desktopPane, JInternalFrame internal, JLabel rutaLabel, JLabel pageLabel, JPanel panelSroll, JTable tabla, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom) {
+  public MostrarInternalFramesForDocument(JDesktopPane desktopPane, JInternalFrame internal, JLabel rutaLabel, JLabel pageLabel, JPanel panelSroll, JTable tabla, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom, VersionEImageIcon version) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -59,6 +61,7 @@ public class MostrarInternalFramesForDocument {
     this.pEntera = pEntera;
     this.panelScroll = panelSroll;
     this.sizeRamdom = sizeRamdom;
+    this.vic = version;
     MostrarInternalFramesForDocument.save = new Guardar();// sa
     MostrarInternalFramesForDocument.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
   }
@@ -67,6 +70,8 @@ public class MostrarInternalFramesForDocument {
     try
       {
       internal.setMaximum(true);
+      vic.newColorFromPanel(panelScroll);
+      internal.setBackground(vic.getColor());
       setTituloYRutaLabel(siguientes, cantidad);
       setImagenes(siguientes);
       setCB.set(siguientes.getId());

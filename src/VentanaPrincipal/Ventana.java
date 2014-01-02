@@ -37,6 +37,8 @@ public class Ventana extends javax.swing.JFrame {
     iniciar(trazadao);
     setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
+    //version.newColorFromPanel(jPanel1);
+ //   internal.setBackground(version.getColor());
     initComponents();
     tabla.requestFocus();
     this.traza = trazadao;
@@ -44,7 +46,7 @@ public class Ventana extends javax.swing.JFrame {
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     anterior.setEnabled(false);
-    getFirstImage();
+    getFirstImage(version);
     rutaLabel.addMouseListener(new RutaMouseListener());
     siguiente.addKeyListener(keylistener());
     anterior.addKeyListener(keylistener());
@@ -114,7 +116,6 @@ public class Ventana extends javax.swing.JFrame {
 
     panelInicial.setBackground(new java.awt.Color(230, 252, 238));
 
-    internal.setBackground(new java.awt.Color(230, 252, 238));
     internal.setIconifiable(true);
     internal.setMaximizable(true);
     internal.setResizable(true);
@@ -401,11 +402,11 @@ public class Ventana extends javax.swing.JFrame {
     traza.getImagenList();
   }
 
-  private void getFirstImage() {
+  private void getFirstImage(VersionEImageIcon version) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
     miframes = new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
-            anterior, ampliar, entera, getSizeRamdom());
+            anterior, ampliar, entera, getSizeRamdom(), version);
     miframes.mostrarPrimeraImagen(siguientes, cantidad);
   }
 

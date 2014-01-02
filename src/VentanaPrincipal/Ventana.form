@@ -62,9 +62,6 @@
           <SubComponents>
             <Container class="javax.swing.JInternalFrame" name="internal">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ee" green="fc" red="e6" type="rgb"/>
-                </Property>
                 <Property name="iconifiable" type="boolean" value="true"/>
                 <Property name="maximizable" type="boolean" value="true"/>
                 <Property name="resizable" type="boolean" value="true"/>
