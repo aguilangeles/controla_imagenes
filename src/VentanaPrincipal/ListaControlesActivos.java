@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,20 +29,25 @@ public class ListaControlesActivos {
 
   private List<TiposDeControl> poblarLista() {
     TiposDeControl tipos;
-    if (conexion.isConexion()) {
-      try {
+    if (conexion.isConexion())
+      {
+      try
+        {
         conexion.executeQuery("Select id, descripcion from controles where estado = 1 ");
-        while (conexion.resulset.next()) {
+        while (conexion.resulset.next())
+          {
           int id = conexion.resulset.getInt(1);
           String descripcion = conexion.resulset.getString(2);
-          tipos = new TiposDeControl(id,  descripcion);
+          tipos = new TiposDeControl(id, descripcion);
           lista.add(tipos);
-        }
-      } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Lista de controles Activos", JOptionPane.ERROR_MESSAGE);
+          }
+        } catch (SQLException ex)
+        {
+        MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), ListaControlesActivos.class.getName());
 
+        }
       }
-    }
     return lista;
   }
 

@@ -7,8 +7,8 @@ package VentanaPrincipal;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
-import java.awt.Color;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -75,7 +76,8 @@ public class MostrarInternalFrames {
       setCB.set(siguientes.getId());
       } catch (PropertyVetoException ex)
       {
-      Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+      MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), MostrarInternalFrames.class.getName());
       }
   }//
 

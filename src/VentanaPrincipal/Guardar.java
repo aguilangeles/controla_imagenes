@@ -10,6 +10,7 @@ import Entidades.ControlPorImagen;
 import BasedeDatos.Conexion;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
+import Helpers.MensajeJoptionPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -78,8 +79,8 @@ public class Guardar {
       this.page = numeroPagina;
       } catch (NumberFormatException e)
       {
-      JOptionPane.showMessageDialog(null, e.getMessage(), "Setear numero Pagina PDF", JOptionPane.ERROR_MESSAGE);
-
+      MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(e.getMessage(), Guardar.class.getName());
       }
   }
 
