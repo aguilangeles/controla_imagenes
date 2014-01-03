@@ -4,12 +4,11 @@
  */
 package PaneldeControl;
 
-import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
-import java.awt.HeadlessException;
 import java.beans.PropertyVetoException;
 import javax.swing.JTable;
 
@@ -18,6 +17,9 @@ import javax.swing.JTable;
  * @author MUTNPROD003
  */
 public class ControlesABM extends javax.swing.JFrame {
+  private final String className = ControlesABM.class.getName();
+  private MensajeJoptionPane msg ;
+
 
   public static final String ROW_EMPTY = "No deben quedar filas vacías";
   private String evento;
@@ -48,8 +50,10 @@ public class ControlesABM extends javax.swing.JFrame {
       principalInternal.setMaximum(true);
       } catch (PropertyVetoException ex)
       {
-      JOptionPane.showMessageDialog(principalInternal, ex.getMessage(), "Error ajuste JInternalFrame", JOptionPane.ERROR_MESSAGE);
-//      Logger.getLogger(ControlesABM.class.getName()).log(Level.SEVERE, null, ex);
+      msg = new MensajeJoptionPane(this, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), className);
+//      JOptionPane.showMessageDialog(principalInternal, ex.getMessage(), "Error ajuste JInternalFrame", JOptionPane.ERROR_MESSAGE);
+////      Logger.getLogger(ControlesABM.class.getName()).log(Level.SEVERE, null, ex);
       }
 
   }
@@ -312,7 +316,8 @@ public class ControlesABM extends javax.swing.JFrame {
           } catch (RuntimeException e)
           {
           mensajLab.setText("<html>Control<br>Rechazado</html>");
-          JOptionPane.showMessageDialog(null, e.getMessage());
+          msg.getMessage(e.getMessage(), className);
+//          JOptionPane.showMessageDialog(null, e.getMessage());
           }
         break;
       case "Editar":
@@ -330,7 +335,8 @@ public class ControlesABM extends javax.swing.JFrame {
           } catch (RuntimeException e)
           {
           mensajLab.setText("<html>Control<br>Rechazado</html>");
-          JOptionPane.showMessageDialog(null, e.getMessage());
+          msg.getMessage(e.getMessage(), className);
+//          JOptionPane.showMessageDialog(null, e.getMessage());
           }
         break;
       }
