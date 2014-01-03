@@ -197,7 +197,7 @@ public class Login extends javax.swing.JFrame {
       } else
       {
       MensajeJoptionPane mensaje = new MensajeJoptionPane(entrar, JOptionPane.ERROR_MESSAGE);
-      mensaje.getMessage(null, null);
+      mensaje.getMessage("Campos vacíos o incorrectos", Login.class.getName());
       user.setText("");
       password.setText("");
       }
