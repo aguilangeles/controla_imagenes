@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
 import static PaneldeControl.ControlesABM.ROW_EMPTY;
 import java.beans.PropertyVetoException;
@@ -21,6 +22,8 @@ import javax.swing.JTable;
  */
 public class UsuariosABM extends javax.swing.JFrame {
 
+  private String classname = UsuariosABM.class.getName();
+  private MensajeJoptionPane msg;
   private Conexion conexion = new Conexion();
   private DefaultTableModel modelo;
   private UsuariosDao usuario;
@@ -49,7 +52,8 @@ public class UsuariosABM extends javax.swing.JFrame {
       principalInternal.setMaximum(true);
       } catch (PropertyVetoException ex)
       {
-      Logger.getLogger(UsuariosABM.class.getName()).log(Level.SEVERE, null, ex);
+      msg = new MensajeJoptionPane(tablaUsuarios, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), classname);
       }
   }
 
@@ -299,7 +303,7 @@ public class UsuariosABM extends javax.swing.JFrame {
           } catch (RuntimeException e)
           {
           mensajeLabel.setText("<html>usuario<br>Rechazado</html>");
-          JOptionPane.showMessageDialog(null, e.getMessage(), "Rango vacia", JOptionPane.ERROR_MESSAGE);
+          msg.getMessage(e.getMessage(), classname);
           }
         break;
       case "Editar":
@@ -321,7 +325,7 @@ public class UsuariosABM extends javax.swing.JFrame {
           } catch (RuntimeException e)
           {
           mensajeLabel.setText("<html>Usuario<br>Rechazado</html>");
-          JOptionPane.showMessageDialog(null, e.getMessage(), "Edit  Usuario", JOptionPane.ERROR_MESSAGE);
+          msg.getMessage(e.getMessage(), classname);
           }
         break;
       }

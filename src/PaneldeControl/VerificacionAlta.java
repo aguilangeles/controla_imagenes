@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -238,7 +238,8 @@ public class VerificacionAlta extends javax.swing.JFrame {
         modeloOrigen.remove(index);
         idTipoControl.add(o);
       } catch (ArrayIndexOutOfBoundsException e) {
-        JOptionPane.showMessageDialog(origen, "Debe seleccionar por lo menos un tipo de control", "Sin controles asignados al Qs", JOptionPane.ERROR_MESSAGE);
+        MensajeJoptionPane msg = new MensajeJoptionPane(this, JOptionPane.ERROR_MESSAGE);
+        msg.getMessage("Debe seleccionar por lo menos un tipo de control", VerificacionAlta.class.getName());
       }
     }//GEN-LAST:event_agregarActionPerformed
 

@@ -6,11 +6,12 @@ package PaneldeControl;
 
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,7 +43,8 @@ public class VerificacionABM extends javax.swing.JFrame {
       principalInternal.setMaximum(true);
       } catch (PropertyVetoException ex)
       {
-      Logger.getLogger(VerificacionABM.class.getName()).log(Level.SEVERE, null, ex);
+      MensajeJoptionPane msg = new MensajeJoptionPane(tablaV, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), VerificacionABM.class.getName());
       }
 
   }

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -21,6 +22,9 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public class Verificacion_AltaNuevaVerificacion {
+
+  private String classname = Verificacion_AltaNuevaVerificacion.class.getName();
+  private MensajeJoptionPane msg;
   private String nombre;
   private String descripcion;
   private List<Object> tablaDestinoSeleccionado;
@@ -42,13 +46,16 @@ public class Verificacion_AltaNuevaVerificacion {
   public boolean inserTipos_verificacion() {
     String insertar = "INSERT INTO `qualitys`.`tipos_verificacion`(`nombre`,`descripcion`,`estado`)VALUES"
             + "('" + nombre + "', '" + descripcion + "',1);";
-    try {
+    try
+      {
       conexion.executeUpdate(insertar);
       return true;
-    } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Insercion Tipos Verificacion", JOptionPane.ERROR_MESSAGE);
+      } catch (SQLException ex)
+      {
+      msg = new MensajeJoptionPane(tabla, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), classname);
       return false;
-    }
+      }
   }
 
   public boolean insertarTipos_Control() {
@@ -56,32 +63,39 @@ public class Verificacion_AltaNuevaVerificacion {
     GetUltimoIDInsertado lastid = new GetUltimoIDInsertado(conexion, "tipos_verificacion");
     int id = lastid.getUltimoID();
     tipos_verificacion = new TiposVerificacion(id, getNombre(), getDescripcion(), 1, null);
-    for (Object o : tablaDestinoSeleccionado) {
+    for (Object o : tablaDestinoSeleccionado)
+      {
       TiposDeControl tipo = (TiposDeControl) o;
       String insertar = "INSERT INTO `qualitys`.`controles_verificacion`(`idVerificacion`,`idControl`)"
               + "VALUES(" + id + "," + tipo.getId() + ")";
-      try {
+      try
+        {
         conexion.executeUpdate(insertar);
         ret = true;
-      } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Insertar Controles Verificacion", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex)
+        {
+        msg.getMessage(ex.getMessage(), classname);
         ret = false;
+        }
       }
-    }
     return ret;
   }
 
   public void insertarModelo() {
     List<TiposDeControl> tiposControlVerificacionList = new ArrayList<>();
-    for (Object object : tablaDestinoSeleccionado) {
+    for (Object object : tablaDestinoSeleccionado)
+      {
       TiposDeControl tc = (TiposDeControl) object;/*int id, String nombre, boolean check, String texto, String imagen*/
       TiposDeControl control = new TiposDeControl(tc.getId(), tc.getTexto());
       tiposControlVerificacionList.add(control);
-    }
+      }
     tipos_verificacion.setListaControles(tiposControlVerificacionList);
     String ret = tipos_verificacion.getListaControles().toString();
     String trat = ret.substring(1, ret.length() - 1).replace(", ", "\n");
-    modelo.addRow(new Object[]{tipos_verificacion.getId(), tipos_verificacion.getNombre(), tipos_verificacion.getDescripcion(), trat, tipos_verificacion.getEstado()});
+    modelo.addRow(new Object[]
+      {
+      tipos_verificacion.getId(), tipos_verificacion.getNombre(), tipos_verificacion.getDescripcion(), trat, tipos_verificacion.getEstado()
+      });
     int row = tabla.getRowCount() - 1;
     Rectangle rect = tabla.getCellRect(row, 0, true);
     tabla.scrollRectToVisible(rect);

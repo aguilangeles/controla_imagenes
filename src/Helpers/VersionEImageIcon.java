@@ -51,4 +51,7 @@ public final class VersionEImageIcon extends JFrame {
   public Color getColor() {
     return color;
   }
+  public static String getIcon(){
+    return "Logos\\test_50.png";
+  }
 }

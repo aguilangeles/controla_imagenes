@@ -7,6 +7,7 @@ package PaneldeControl;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import Helpers.Minimo;
 import Helpers.VersionEImageIcon;
 import java.awt.event.KeyEvent;
@@ -19,6 +20,8 @@ import javax.swing.JTable;
  */
 public class RangosABM extends javax.swing.JFrame {
 
+  private String classname = RangosABM.class.getName();
+  private MensajeJoptionPane msg;
   public static final String ROW_EMPTY = "No pueden quedar filas vacías";
   private Conexion conexion = new Conexion();
   private final RangosDao rangosDao;
@@ -48,7 +51,8 @@ public class RangosABM extends javax.swing.JFrame {
       principalInternal.setMaximum(true);
       } catch (PropertyVetoException ex)
       {
-      JOptionPane.showMessageDialog(this, ex.getMessage(), "Ajuste Internal Frame", JOptionPane.ERROR_MESSAGE);
+      msg = new MensajeJoptionPane(this, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), classname);
       }
   }
 
@@ -320,7 +324,7 @@ public class RangosABM extends javax.swing.JFrame {
           } catch (RuntimeException e)
           {
           mensajeLabel.setText("<html>Rango<br>Rechazado</html>");
-          JOptionPane.showMessageDialog(null, e.getMessage(), "fila vacia", JOptionPane.ERROR_MESSAGE);
+          msg.getMessage(e.getMessage(), classname);
           }
         break;
       case "Editar":
@@ -338,7 +342,7 @@ public class RangosABM extends javax.swing.JFrame {
           } catch (RuntimeException e)
           {
           mensajeLabel.setText("<html>Rango<br>Rechazado</html>");
-          JOptionPane.showMessageDialog(null, e.getMessage(), "Insert", JOptionPane.ERROR_MESSAGE);
+          msg.getMessage(e.getMessage(), classname);
           }
         break;
       }

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,8 @@ import javax.swing.JOptionPane;
  */
 public class VerificacionDao extends ABMPaneles {
 
+  private String classname = VerificacionDao.class.getName();
+  private MensajeJoptionPane msg;
   private Conexion aConexion;
   private JTable aTable;
   private boolean editable;
@@ -44,15 +47,17 @@ public class VerificacionDao extends ABMPaneles {
     DefaultTableModel model = new DefaultTableModel() {
       @Override
       public boolean isCellEditable(int fila, int columna) {
-        if (columna == 0) {
+        if (columna == 0)
+          {
           return false;
-        }
+          }
         return isEditable();
       }
 
       @Override
       public Class getColumnClass(int col) {
-        switch (getColumnName(col)) {
+        switch (getColumnName(col))
+          {
           case "id":
             return Integer.class;
           case "nombre"://nombre
@@ -63,7 +68,7 @@ public class VerificacionDao extends ABMPaneles {
             return String.class;
           default://estado
             return Integer.class;
-        }
+          }
       }
     };
     setTitulos(model);
@@ -73,53 +78,64 @@ public class VerificacionDao extends ABMPaneles {
   }
 
   private void llenarListaTiposVerificacion() {
-    if (aConexion.isConexion()) {
-      try {
+    if (aConexion.isConexion())
+      {
+      try
+        {
         aConexion.executeQuery("SELECT * FROM tipos_verificacion;");
-        while (aConexion.resulset.next()) {
+        while (aConexion.resulset.next())
+          {
           int id = aConexion.resulset.getInt(1);
           String nombre = aConexion.resulset.getString(2);
           String descripcion = aConexion.resulset.getString(3);
           int estado = aConexion.resulset.getInt(4);
           verificacion = new TiposVerificacion(id, nombre, descripcion, estado, null);
           listaV.add(verificacion);
+          }
+        } catch (SQLException ex)
+        {
+        msg = new MensajeJoptionPane(tabla, JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), classname);
         }
-      } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Llenar Tabla Verificación", JOptionPane.ERROR_MESSAGE);
-
-//        Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);
       }
-    }
   }
 
   private void llenarTabla(DefaultTableModel model) {
     List<Object[]> lista = new ArrayList<>();
-    for (TiposVerificacion t : listaV) {
-      t.setListaControles( listaTiposControl(t.getId()));
+    for (TiposVerificacion t : listaV)
+      {
+      t.setListaControles(listaTiposControl(t.getId()));
       String ret = t.getListaControles().toString();
       String trat = ret.substring(1, ret.length() - 1).replace(", ", "\n");
-      lista.add(new Object[]{t.getId(), t.getNombre(), t.getDescripcion(), trat, t.getEstado()});
-    }
+      lista.add(new Object[]
+        {
+        t.getId(), t.getNombre(), t.getDescripcion(), trat, t.getEstado()
+        });
+      }
     consulta(model, lista);
   }
 
   public List<TiposDeControl> listaTiposControl(int id) {
     List<TiposDeControl> tipos = new ArrayList<>();
     TiposDeControl tcv;
-    if (aConexion.isConexion()) {
-      try {
+    if (aConexion.isConexion())
+      {
+      try
+        {
         String ret = "SELECT  v.idControl, c.descripcion "
                 + "FROM controles_verificacion v join controles c on v.idControl = c.id "
                 + "where v.idVerificacion =" + id + ";";
         aConexion.executeQuery(ret);
-        while (aConexion.resulset.next()) {
+        while (aConexion.resulset.next())
+          {
           tcv = new TiposDeControl(aConexion.resulset.getInt(1), aConexion.resulset.getString(2));
           tipos.add(tcv);
+          }
+        } catch (SQLException ex)
+        {
+        msg.getMessage(ex.getMessage(), classname);
         }
-      } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Lista Tipos de Control", JOptionPane.ERROR_MESSAGE);
       }
-    }
     return tipos;
   }
 

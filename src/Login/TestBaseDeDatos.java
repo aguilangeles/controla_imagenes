@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import BasedeDatos.Conexion;
 import Entidades.LogQualitys;
+import Helpers.MensajeJoptionPane;
+import Helpers.VersionEImageIcon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +22,8 @@ import Entidades.LogQualitys;
  */
 public class TestBaseDeDatos {
 
+  private static final String className = TestBaseDeDatos.class.getName();
+  private MensajeJoptionPane msg;
   private static final String STRING_VALIDO = "El campo no puede estar vacío";
   private static final String CONEXION_EXITOSA = "La conexión ha sido exitosa.\nEl programa se cerrará\nPara ingresar al panel de "
           + "control deberá ingresar\n su usuario y password validado en la DB";
@@ -35,11 +40,14 @@ public class TestBaseDeDatos {
       testConexion(userQualitys, conexion, aceptar, isTest, validarUsuario);
       } catch (RuntimeException aRuntimeExc)
       {
-      JOptionPane.showMessageDialog(null, aRuntimeExc.getMessage(), "Campo sin valor", JOptionPane.ERROR_MESSAGE);
+      msg=new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(aRuntimeExc.getMessage(), className);
+//      JOptionPane.showMessageDialog(null, aRuntimeExc.getMessage(), "Campo sin valor", JOptionPane.ERROR_MESSAGE);
       }
   }
 
   private void testConexion(LogQualitys aUsuario, Conexion conexion, JButton aceptar, boolean test, JFrame validarUsuario) {
+    ImageIcon icon = new ImageIcon(VersionEImageIcon.getIcon());
     SetConfigFile setProperties = new SetConfigFile(aUsuario.getUrl(), aUsuario.getBase(), aUsuario.getUsuario(), aUsuario.getPassword());
     if (conexion.isConexion())
       {
@@ -47,15 +55,16 @@ public class TestBaseDeDatos {
       aceptar.setText("OK");
       if (!test)
         {
+
         JOptionPane.showMessageDialog(validarUsuario, CONEXION_EXITOSA,
-                "Configuración inicial", JOptionPane.INFORMATION_MESSAGE);
+                "Configuración inicial", JOptionPane.INFORMATION_MESSAGE,icon);
         conexion.isConexionClose();
         System.exit(0);
         } else
         {
         aceptar.setText("Test OK");
         JOptionPane.showMessageDialog(validarUsuario, "Conexión exitosa",
-                "Test de Conexión", JOptionPane.INFORMATION_MESSAGE);
+                "Test de Conexión", JOptionPane.INFORMATION_MESSAGE, icon);
         conexion.isConexionClose();
         validarUsuario.dispose();
         }

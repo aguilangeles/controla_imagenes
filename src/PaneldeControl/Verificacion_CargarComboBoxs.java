@@ -8,6 +8,7 @@ import Entidades.TiposDeControl;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -19,6 +20,8 @@ import javax.swing.JOptionPane;
  */
 public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
 
+  private String classname = Verificacion_CargarComboBoxs.class.getName();
+  private MensajeJoptionPane msg;
   private DefaultComboBoxModel tipoDocumento = new DefaultComboBoxModel();
   private DefaultComboBoxModel tipoVerificacion = new DefaultComboBoxModel();
   private Conexion conexion = new Conexion();
@@ -29,42 +32,51 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
   }
 
   public void llenarQualitys() {
-    if (conexion.isConexion()) {
-      try {
+    if (conexion.isConexion())
+      {
+      try
+        {
         String ret = "SELECT id, nombre FROM qualitys.tipos_verificacion  where estado = 1;";
         conexion.executeQuery(ret);
-        while (conexion.resulset.next()) {
+        while (conexion.resulset.next())
+          {
           int id = conexion.resulset.getInt(1);
           String nombre = conexion.resulset.getString(2);
           TiposDeControl t = new TiposDeControl(id, nombre);
           verificacionList.add(t.newToString());
           tipoVerificacion.addElement(t.newToString());
 
-        }
+          }
         conexion.isConexionClose();
-      } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la carga de JComboBox ", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex)
+        {
+        msg = new MensajeJoptionPane(this, JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), classname);
+        }
       }
-    }
   }
 
   public void llenarDocumentos() {
-    try {
-      if (conexion.isConexion()) {
+    try
+      {
+      if (conexion.isConexion())
+        {
         String ret = "SELECT * FROM qualitys.tipos_documentos;";
         conexion.executeQuery(ret);
-        while (conexion.resulset.next()) {
+        while (conexion.resulset.next())
+          {
           int id = conexion.resulset.getInt(1);
           String nombre = conexion.resulset.getString(2);
           TiposDeControl t = new TiposDeControl(id, nombre);
-          documentoList.add(t.getId()+"-"+t.getTexto());
-          tipoDocumento.addElement(t.getId()+"-"+t.getTexto());
+          documentoList.add(t.getId() + "-" + t.getTexto());
+          tipoDocumento.addElement(t.getId() + "-" + t.getTexto());
+          }
         }
-      }
       conexion.isConexionClose();
-    } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Error en la carga de JComboBox ", JOptionPane.ERROR_MESSAGE);
-    }
+      } catch (SQLException ex)
+      {
+      msg.getMessage(ex.getMessage(), classname);
+      }
 
   }
 
