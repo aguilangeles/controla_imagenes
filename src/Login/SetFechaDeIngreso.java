@@ -41,7 +41,7 @@ public class SetFechaDeIngreso {
         } catch (SQLException ex)
         {
         MensajeJoptionPane mensaje = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
-        mensaje.getMessage(null, null);
+        mensaje.getMessage(ex.getMessage(), SetFechaDeIngreso.class.getName());
         }
       }
   }
