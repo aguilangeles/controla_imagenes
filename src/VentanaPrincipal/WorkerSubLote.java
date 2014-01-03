@@ -30,24 +30,23 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
   private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
   private List<Object> listaImagenes;
   private String parent, extension, ultimaCarpeta;
-  private int idUsuario, idDocumento, idVerificacion, muestra, tamanioLote;
+  private int idDocumento, idVerificacion, muestra, tamanioLote;
   private int idRango, contador;
   private int idTraza;
   private List<Sublote> sublotes;
 
-  public WorkerSubLote(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idUsuario, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
+  public WorkerSubLote(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
     this.cargaLote = controles;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.listaImagenes = listaImagenes;
-    this.extension = ContadorSublotes.getExtension();
-    this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
-    this.muestra = muestra;
-    this.tamanioLote = tamanioLote;
-    this.idRango = idRango;
+    this.tamanioLote = tamanioLote;//
     this.parent = ContadorSublotes.getParent();
+    this.extension = ContadorSublotes.getExtension();//la uso_
+    this.muestra = muestra;
+    this.idRango = idRango;
     this.ultimaCarpeta = ContadorSublotes.getUltimaCarpeta();
   }
 

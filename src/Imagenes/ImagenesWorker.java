@@ -22,7 +22,8 @@ import org.im4java.core.InfoException;
  * @author MUTNPROD003
  */
 public class ImagenesWorker extends SwingWorker<Object, String> {
- private static final String className = ImagenesWorker.class.getName();
+
+  private static final String className = ImagenesWorker.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private static final String IM4JAVA_TOOLPATH = "C:\\Program Files (x86)\\ImageMagick-6.8.6-Q16";
@@ -44,10 +45,9 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
     File outputTemp = null;
     try
       {
-
       String rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal() + "_t_";
       outputTemp = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
-      System.out.println(outputTemp);
+      System.out.println("temp\t" + outputTemp);
       try
         {
 //        getInfoOriginalImage(input);
@@ -68,10 +68,11 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
         } catch (IOException | InterruptedException | IM4JavaException ex)
         {
         msg.getMessage(ex.getMessage(), className);
+        System.exit(0);
         }
       } catch (IOException ex)
       {
-        msg.getMessage(ex.getMessage(), className);
+      msg.getMessage(ex.getMessage(), className);
       }
     outputTemp.deleteOnExit();
     return outputTemp.getAbsolutePath();

@@ -25,7 +25,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   private File file;
   private JFrame frame;
   private JLabel infoLabel;
-  private int  idDocumento, idVerificacion;
+  private int idDocumento, idVerificacion;
   private JFrame panelControl;
   //
   private int tamanio, muestra, idRango;
@@ -33,7 +33,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
   private static List<Object> listaExtension;
   private static List<Object> listaResultado;
 
-  public IdentificarExtension(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, int idUsuario, int idDocumento, int idVerificacion) {
+  public IdentificarExtension(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, int idDocumento, int idVerificacion) {
     this.controlesList = controlesList;
     this.file = file;
     this.frame = frame;
@@ -51,6 +51,10 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     listaResultado = new SwitchListaExtension(listaExtension, infoLabel).switchExtension();
     tamanio = listaResultado.size();
     GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
+    muestra = GetMuestrafromRango.getMuestra();
+    idRango = GetMuestrafromRango.getIdRango();
+    infoLabel.setText("Tamanio " + tamanio + ", muestra " + muestra + ", rango id " + idRango);
+
     return null;
   }
 
@@ -63,7 +67,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
-            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, idDocumento, idVerificacion);
+            Worker worker = new Worker(frame, infoLabel, controlesList, listaResultado, idDocumento, idVerificacion, getMuestra(), getIdRango());
             worker.execute();
           }
         });
@@ -89,4 +93,7 @@ public class IdentificarExtension extends SwingWorker<Void, Object> {
     return muestra;
   }
 
+  public int getIdRango() {
+    return idRango;
+  }
 }

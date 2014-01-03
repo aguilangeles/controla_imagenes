@@ -74,7 +74,7 @@ public class AceptarCargarLote {
     getControlesPorVerificacion();//controles de la verificacion seleccionada
     conexion.isConexionClose();////cierra conexion
     GetParentName parent = new GetParentName(files); // trae la ruta completa
-    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, infoJLabel, idtipoControlList, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, infoJLabel, idtipoControlList, file, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
     idext.execute();
     aceptarButton.setEnabled(false);
   }
@@ -85,7 +85,7 @@ public class AceptarCargarLote {
     List<Object> listaIdc = contadorSublotes.getDocumentoList();
     getControlesPorVerificacion();
     conexion.isConexion();
-    IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, infoJLabel, idtipoControlList, file, idUsuario, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
+    IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, infoJLabel, idtipoControlList, file, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
     idext.execute();
     aceptarButton.setEnabled(false);
 

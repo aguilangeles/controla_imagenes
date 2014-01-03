@@ -10,11 +10,7 @@ import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
-//import Helpers.GetImagenesAdyacentes;
-//import Helpers.RutaMouseListener;
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
@@ -106,7 +102,7 @@ public class MostrarInternalFramesForDocument {
 
   private void setTituloYRutaLabel(Imagen siguientes, int cantidad) {
     String rutasublote = siguientes.getRutaSublote();
-    String sublote = rutasublote + "(" + cantidad + "/ " + ArchivosPorTrazaList.getDocumentos() + ")";
+    String sublote = rutasublote + " (" + cantidad + "/ " + ArchivosPorTrazaList.getDocumentos() + ")";
     internal.setTitle(sublote);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
   }

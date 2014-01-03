@@ -32,7 +32,7 @@ public class Worker extends SwingWorker<Object, Object> {
   private String parent, ultimaCarpeta;
   private int idTraza, idDocumento, idVerificacion, muestra, tamanioLote, idRango;
 
-  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion) {
+  public Worker(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion, int muestra, int idRango) {
     this.cargaLote = controles;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
@@ -42,8 +42,8 @@ public class Worker extends SwingWorker<Object, Object> {
     this.tamanioLote = listaImagenes.size();
     this.parent = GetParentName.getParent();
     this.ultimaCarpeta = GetUltimaCarpeta.getLastFolder(parent);
-    this.muestra = GetMuestrafromRango.getMuestra();
-    this.idRango = GetMuestrafromRango.getIdRango();
+    this.muestra = muestra;
+    this.idRango = idRango;
   }
 
   @Override

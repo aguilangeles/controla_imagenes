@@ -14,8 +14,10 @@ import Imagenes.ImagenesWorker;
 public final class GetRutaDeImagen {
 
   private String proximaRuta;
+
   public GetRutaDeImagen() {
   }
+
   public String getImage(Imagen imagen, int idImg) {
     switch (idImg)
       {

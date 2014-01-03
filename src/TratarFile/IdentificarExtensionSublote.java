@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
@@ -26,22 +27,18 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   private File file;
   private JFrame frame;
   private JLabel infoLabel;
-//  private String parent, ultimaCarpeta;
-  private int idUsuario, idDocumento, idVerificacion;
+  private int idDocumento, idVerificacion;
   private JFrame panelControl;
   private int tamanio, muestra, idRango;
-  //private static String extension;
   private static List<Object> listaExtension;
   private List<Object> listaIDC;
   private static List<Object> listaResultado;
 
-  public IdentificarExtensionSublote(JFrame frame, JLabel infoLabel,
-          List<Integer> controlesList, File file, int idUsuario, int idDocumento, int idVerificacion, List<Object> listaIdc) {
+  public IdentificarExtensionSublote(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, int idDocumento, int idVerificacion, List<Object> listaIdc) {
     this.controlesList = controlesList;
     this.file = file;
     this.frame = frame;
     this.infoLabel = infoLabel;
-    this.idUsuario = idUsuario;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
     this.listaIDC = listaIdc;
@@ -54,8 +51,7 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
     GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
     muestra = GetMuestrafromRango.getMuestra();
     idRango = GetMuestrafromRango.getIdRango();
-    infoLabel.setText("Tamanio " + tamanio +", muestra " + muestra + ", rango id " + idRango);
-    System.out.println("Tamanio " + tamanio +", muestra " + muestra + ", rango " + idRango);
+    infoLabel.setText("Tamanio " + tamanio + ", muestra " + muestra + ", rango id " + idRango);
     CrearElRamdom newRamdom = new CrearElRamdom(getListaIDC(), getMuestra());
     listaResultado = newRamdom.getStack();
     return null;
@@ -65,14 +61,23 @@ public class IdentificarExtensionSublote extends SwingWorker<Void, Object> {
   protected void done() {
     if (!isCancelled())
       {
-      java.awt.EventQueue.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          //control de tamanio con sublote.
-          WorkerSubLote worker = new WorkerSubLote(frame, infoLabel, controlesList, listaResultado, idUsuario, idDocumento, idVerificacion, muestra, tamanio, idRango);
-          worker.execute();
+      if (isTamanioCompatibleConRango(getTamanio(), getMuestra()))
+        {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+          @Override
+          public void run() {
+            //control de tamanio con sublote.
+            WorkerSubLote worker = new WorkerSubLote(frame, infoLabel, controlesList, listaResultado, idDocumento, idVerificacion, muestra, tamanio, idRango);
+            worker.execute();
+          }
+        });
+        } else
+        {
+        JOptionPane.showMessageDialog(infoLabel, INCOMPATIBLE_TAMANIO_CON_RANGO,
+                getTamanio() + ">" + getMuestra(), JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
         }
-      });
       }
   }
 
