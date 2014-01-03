@@ -8,6 +8,7 @@ import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import Entidades.NombrePaginaDelPDF;
 import Helpers.GetExtensionIdImagen;
+import Helpers.MensajeJoptionPane;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,8 +89,8 @@ public class GetImagenesList {
       pddDocument.close();
       } catch (IOException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              "Encontrar Paginas PDF", JOptionPane.ERROR_MESSAGE);
+      MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), GetImagenesList.class.getName());
       }
     return lista;
   }

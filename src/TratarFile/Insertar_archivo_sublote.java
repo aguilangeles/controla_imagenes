@@ -5,7 +5,9 @@
 package TratarFile;
 
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,8 +38,8 @@ public class Insertar_archivo_sublote {
       conexion.executeUpdate(insert);
       } catch (SQLException ex)
       {
-      System.out.println(Insertar_archivo_sublote.class.getName());
-      System.out.println(ex.getMessage());
+      MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), Insertar_archivo_sublote.class.getName());
       }
   }
 }

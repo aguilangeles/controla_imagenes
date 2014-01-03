@@ -5,6 +5,8 @@
 package TratarFile;
 
 import Entidades.NombrePaginaDelPDF;
+import Helpers.MensajeJoptionPane;
+import ReporteLote.UpdateEstadoLote;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,8 +49,8 @@ public class BuscarPaginasPdf {
         pddDocument.close();
         } catch (IOException ex)
         {
-        JOptionPane.showMessageDialog(null, ex.getMessage(),
-                "Encontrar Paginas PDF", JOptionPane.ERROR_MESSAGE);
+        MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+        msg.getMessage(ex.getMessage(), BuscarPaginasPdf.class.getName());
         }
       }
   }

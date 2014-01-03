@@ -5,6 +5,7 @@
 package TratarFile;
 
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -50,12 +51,11 @@ class InsertarEnSublotes {
             + ");";
     try
       {
-//      System.out.println("insertar sublote " + insertar);
       conexion.executeUpdate(insertar);
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(),
-              InsertarEnSublotes.class.getName(), JOptionPane.ERROR_MESSAGE);
+      MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), InsertarEnSublotes.class.getName());
       }
     return false;
   }
