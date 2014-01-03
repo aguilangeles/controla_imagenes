@@ -7,7 +7,7 @@ package ReporteLote;
 import javax.swing.JTextArea;
 import BasedeDatos.Conexion;
 import Helpers.EscribeInforme;
-import Helpers.EscribeInformeDocumento;
+import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -33,6 +33,7 @@ public class UpdateEstadoLote {
     update();
     EscribeInforme escribeInforme = new EscribeInforme(tabla, estado, mensaje.getText(), finalizar);
   }
+
   public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado,
           JTextArea mensaje, JTable tabla, JButton finalizar, boolean isdocumento) {
     this.conexion = conexion;
@@ -53,7 +54,8 @@ public class UpdateEstadoLote {
       conexion.executeUpdate(update);
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Seteo Estado Lote", JOptionPane.ERROR_MESSAGE);
+      MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), UpdateEstadoLote.class.getName());
       }
   }
 }

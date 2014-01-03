@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
+import Helpers.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -94,7 +95,8 @@ public class Tabla_TrazaReporte extends JFrame {
         }
       } catch (SQLException ex)
       {
-      JOptionPane.showMessageDialog(null, ex.getMessage(), "Carga de Tabla Reporte", JOptionPane.ERROR_MESSAGE);
+      MensajeJoptionPane msg = new MensajeJoptionPane(this, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage(ex.getMessage(), Tabla_TrazaReporte.class.getName());
       }
   }
 
