@@ -6,12 +6,15 @@ package ReporteLote;
 
 import Helpers.EscribeInformeDocumento;
 import Helpers.GetRechazosPorImagen;
+import Helpers.MensajeJoptionPane;
 import Helpers.Time;
 import Helpers.VersionEImageIcon;
+import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -25,7 +28,6 @@ public class Reporte extends javax.swing.JFrame {
   private DefaultTableModel modelTipos;
   private List<Object> lista;
   private String detalles;
-  private String discrininacion;
   private ButtonGroup bg;
   private String UBICACION;
 
@@ -51,7 +53,7 @@ public class Reporte extends javax.swing.JFrame {
       imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  "
               + poblarTablaTraza.getRechazo());
       GetRechazosPorImagen rechazosximagen = new GetRechazosPorImagen(conexion, idtraza);
-      this.UBICACION = "Reporte/Traza_" + idtraza + "  " + new Time().getDateForTXT() + ".txt";;
+      this.UBICACION = "Reporte/Traza_" + idtraza + "  " + new Time().getDateForTXT() + ".txt";
       }
   }
 
@@ -229,15 +231,15 @@ public class Reporte extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      getFinalizar();
+      getFinalizar(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
   private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
-    getFinalizar();
+    getFinalizar(false);
   }//GEN-LAST:event_jButton1KeyPressed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    nuevoQ();
+    getFinalizar(true);
   }//GEN-LAST:event_jButton2ActionPerformed
   private void actionRadioButton() {
     bg = new ButtonGroup();
@@ -265,54 +267,43 @@ public class Reporte extends javax.swing.JFrame {
   private javax.swing.JTable tabladeTipos;
   // End of variables declaration//GEN-END:variables
 
-  private void getFinalizar() {
+  private void getFinalizar(boolean isNewQs) {
     if (bg.getSelection() != null)
       {
-      if (jTextArea1.getText().length() >= 500)
-        {
-        JOptionPane.showMessageDialog(jTextArea1,
-                "Reduzca el texto a 500 caracteres", "Limite de texto permitido",
-                JOptionPane.ERROR_MESSAGE);
-        } else
-        {
-        UpdateEstadoLote updateEstadoLote =
-                new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
-                jTextArea1, tablaDetalles, jButton1, false);
-        new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
-        conexion.isConexionClose();
-        System.exit(0);
-        }
+      largoMensajeYUpdate(isNewQs);
       } else
       {
-      JOptionPane.showMessageDialog(null,
-              "Debe aceptar o rechazar el lote antes de salir", "Selección de Lote",
-              JOptionPane.ERROR_MESSAGE);
+      getMensajeEstado();
       }
   }//
 
-  private void nuevoQ() {
-    if (bg.getSelection() != null)
+  private void largoMensajeYUpdate(boolean isnewQ) throws HeadlessException {
+    if (jTextArea1.getText().length() >= 500)
       {
-      if (jTextArea1.getText().length() >= 500)
-        {
-        JOptionPane.showMessageDialog(jTextArea1,
-                "Reduzca el texto a 500 caracteres", "Limite de texto permitido",
-                JOptionPane.ERROR_MESSAGE);
-        } else
-        {
-        UpdateEstadoLote updateEstadoLote =
-                new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
-                jTextArea1, tablaDetalles, jButton1, false);
-        new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
-        conexion.isConexionClose();
-        this.dispose();
-        new PaneldeControl.PanelControl().setVisible(true);
-        }
+      JOptionPane.showMessageDialog(jTextArea1,
+              "Reduzca el texto a 500 caracteres", "Limite de texto permitido",
+              JOptionPane.INFORMATION_MESSAGE);
       } else
       {
-      JOptionPane.showMessageDialog(null,
-              "Debe aceptar o rechazar el lote antes de salir", "Selección de Lote",
-              JOptionPane.ERROR_MESSAGE);
+      UpdateEstadoLote updateEstadoLote =
+              new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
+              jTextArea1, tablaDetalles, jButton1, false);
+      EscribeInformeDocumento escribeInformeDocumento = new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
+      conexion.isConexionClose();
+      if (!isnewQ)
+        {
+        System.exit(0);
+        } else
+        {
+        dispose();
+        new PaneldeControl.PanelControl().setVisible(true);
+        }
       }
-  }//
+
+  }
+
+  private void getMensajeEstado() {
+    MensajeJoptionPane msg = new MensajeJoptionPane(this, JOptionPane.INFORMATION_MESSAGE);
+    msg.getMessage("Debe aceptar o rechazar el lote antes de salir", "Estado del Lote");
+  }
 }

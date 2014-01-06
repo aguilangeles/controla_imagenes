@@ -25,16 +25,6 @@ public class UpdateEstadoLote {
   private int setEstado;
 
   public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado,
-          JTextArea mensaje, JTable tabla, JButton finalizar) {
-    this.conexion = conexion;
-    this.idtraza = idtraza;
-    this.mensaje = mensaje;
-    this.setEstado = (!estado) ? 0 : 1;
-    update();
-    EscribeInforme escribeInforme = new EscribeInforme(tabla, estado, mensaje.getText(), finalizar, idtraza);
-  }
-
-  public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado,
           JTextArea mensaje, JTable tabla, JButton finalizar, boolean isdocumento) {
     this.conexion = conexion;
     this.idtraza = idtraza;
