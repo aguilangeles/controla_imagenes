@@ -4,6 +4,7 @@
  */
 package ReporteLote;
 
+import Helpers.EscribeInforme;
 import Helpers.EscribeInformeDocumento;
 import Helpers.GetRechazosPorImagen;
 import Helpers.MensajeJoptionPane;
@@ -14,7 +15,6 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -288,7 +288,7 @@ public class Reporte extends javax.swing.JFrame {
       UpdateEstadoLote updateEstadoLote =
               new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
               jTextArea1, tablaDetalles, jButton1, false);
-      EscribeInformeDocumento escribeInformeDocumento = new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
+      EscribeInforme escribeInformeDocumento = new EscribeInforme(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, UBICACION);
       conexion.isConexionClose();
       if (!isnewQ)
         {

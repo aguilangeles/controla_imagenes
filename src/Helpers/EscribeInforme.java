@@ -23,9 +23,9 @@ public class EscribeInforme {
   private static final String className = EscribeInforme.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   private MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
-  private String UBICACION = "Reporte/" + new Time().getDateForTXT() + ".txt";
+  private String UBICACION;
 
-  public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar, int idTraza) {
+  public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar, String UBICACION) {
     String estadoS;
     if (estado)
       {
@@ -34,6 +34,7 @@ public class EscribeInforme {
       {
       estadoS = "Rechazado.";
       }
+    this.UBICACION = UBICACION;
     write(tabla, estadoS, observaciones, finalizar);
   }
 
