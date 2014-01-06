@@ -45,12 +45,6 @@ public class Reporte extends javax.swing.JFrame {
       imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  "
               + poblarTablaTraza.getRechazo());
       GetRechazosPorImagen rechazosPorImagen = new GetRechazosPorImagen(conexion, idtraza);
-//      for (ImagenyRechazo ii : rechazosPorImagen.getListaImg())
-//        {
-//
-//        System.out.println(ii);
-//
-//        }
       }
   }
 
