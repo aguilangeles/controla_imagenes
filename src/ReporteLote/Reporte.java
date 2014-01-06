@@ -4,6 +4,7 @@
  */
 package ReporteLote;
 
+import Helpers.GetRechazosPorImagen;
 import Helpers.VersionEImageIcon;
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -46,6 +47,7 @@ public class Reporte extends javax.swing.JFrame {
       actionRadioButton();
       imagenesRechazadas.setText("Cantidad de imagenes rechazadas:  "
               + poblarTablaTraza.getRechazo());
+        GetRechazosPorImagen rechazosximagen = new GetRechazosPorImagen(conexion, idtraza);
       }
   }
 
