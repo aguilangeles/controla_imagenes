@@ -46,6 +46,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
       actionRadioButton();
       imagenesRechazadas.setText("Cantidad de documentos rechazados:  "
               + poblarTablaTraza.getRechazo());
+      
       }
   }
 
