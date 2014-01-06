@@ -31,7 +31,7 @@ public class UpdateEstadoLote {
     this.mensaje = mensaje;
     this.setEstado = (!estado) ? 0 : 1;
     update();
-    EscribeInforme escribeInforme = new EscribeInforme(tabla, estado, mensaje.getText(), finalizar);
+    EscribeInforme escribeInforme = new EscribeInforme(tabla, estado, mensaje.getText(), finalizar, idtraza);
   }
 
   public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado,
@@ -41,7 +41,6 @@ public class UpdateEstadoLote {
     this.mensaje = mensaje;
     this.setEstado = (!estado) ? 0 : 1;
     update();
-//    EscribeInforme escribeInforme = new EscribeInforme(tabla, estado, mensaje.getText(), finalizar);
   }
 
   private void update() {

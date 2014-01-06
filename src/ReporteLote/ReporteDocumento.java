@@ -5,6 +5,7 @@
 package ReporteLote;
 
 import Helpers.EscribeInformeDocumento;
+import Helpers.Time;
 import Helpers.VersionEImageIcon;
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -25,6 +26,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
   private String detalles;
   private String discrininacion;
   private ButtonGroup bg;
+  private String UBICACION ;
 
   /**
    * Creates new form Reporte
@@ -46,7 +48,8 @@ public class ReporteDocumento extends javax.swing.JFrame {
       actionRadioButton();
       imagenesRechazadas.setText("Cantidad de documentos rechazados:  "
               + poblarTablaTraza.getRechazo());
-      
+      UBICACION = "Reporte/Traza_" + idtraza + "  " + new Time().getDateForTXT() + ".txt";
+
       }
   }
 
@@ -276,7 +279,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
         UpdateEstadoLote updateEstadoLote =
                 new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
                 jTextArea1, tablaDetalles, jButton1, true);
-        new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos);
+        new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
         conexion.isConexionClose();
         System.exit(0);
         }
@@ -300,7 +303,8 @@ public class ReporteDocumento extends javax.swing.JFrame {
         {
         UpdateEstadoLote updateEstadoLote =
                 new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
-                jTextArea1, tablaDetalles, jButton1);
+                jTextArea1, tablaDetalles, jButton1, true);
+        new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
         conexion.isConexionClose();
         this.dispose();
         new PaneldeControl.PanelControl().setVisible(true);

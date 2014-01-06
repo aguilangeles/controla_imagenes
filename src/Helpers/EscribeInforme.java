@@ -23,9 +23,9 @@ public class EscribeInforme {
   private static final String className = EscribeInforme.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   private MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
-  private static final String UBICACION = "Reporte/" + new Time().getDateForTXT() + ".txt";
+  private String UBICACION = "Reporte/" + new Time().getDateForTXT() + ".txt";
 
-  public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar) {
+  public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar, int idTraza) {
     String estadoS;
     if (estado)
       {
@@ -66,10 +66,10 @@ public class EscribeInforme {
         {
         try
           {
-          fichero.close();
           ImageIcon img = new ImageIcon("Logos\\test_50.png");
           JOptionPane.showMessageDialog(null, "Podrá visualizar una síntesis del reporte en\n\t"
                   + UBICACION + "\n", "Generación de Informe  en .txt", JOptionPane.INFORMATION_MESSAGE, img);
+          fichero.close();
           } catch (IOException ex)
           {
           msg.getMessage(ex.getMessage(), className);

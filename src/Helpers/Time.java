@@ -36,8 +36,8 @@ public class Time {
     this.datetime = datetime;
   }
   public String getDateForTXT() {
-    String ret = datetime.replace("-", "_");
-    return ret.replace(":", "_");
+    String ret = datetime;
+    return ret.replace(":", "-");
   }
   @Override
   public String toString() {
