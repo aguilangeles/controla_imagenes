@@ -49,11 +49,11 @@ public class EscribeInforme {
         {
         pw.println(tablaDetalles.getValueAt(row, 0) + ": " + tablaDetalles.getValueAt(row, 1));
         }
-      pw.println("Imagenes rechazadas: ");
-      for (ImagenyRechazo ii : GetRechazosPorImagen.getListaImg())
-        {
-        pw.println(ii);
-        }
+        pw.println("Imagenes rechazadas: ");
+        for (ImagenyRechazo ii : GetRechazosPorImagen.getListaImg())
+          {
+          pw.println(ii);
+          }
       pw.println("Estado: " + estado);
       pw.println("Observaciones: " + observaciones);
       pw.println("Versión  app: " + VersionEImageIcon.VERSION);
