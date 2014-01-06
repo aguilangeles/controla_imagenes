@@ -42,7 +42,6 @@ public final class VersionEImageIcon extends JFrame {
   }
 
   public void newColorFromPanel(JPanel panel) {
-//     color = new Color(255, 252, 238);
     color = new Color(230, 252, 238);
     panel.setBackground(color);
 //    return color;
