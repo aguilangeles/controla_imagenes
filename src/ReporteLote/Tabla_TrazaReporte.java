@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
 import Helpers.MensajeJoptionPane;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +46,10 @@ public class Tabla_TrazaReporte extends JFrame {
     DefaultTableModel modelo = new DefaultTableModel() {
       @Override
       public boolean isCellEditable(int fila, int columna) {
+        if (fila == 8 || fila ==9)
+          {
+          return true;
+          }
         return false;
       }
     };
@@ -116,9 +121,11 @@ public class Tabla_TrazaReporte extends JFrame {
   }
 
   private String ordenarResultados() {
+    String captura ="";
+    String digitalizador ="";
     String ret = usuario + ", " + fecha + ", " + ide + ", " + rutaCompleta + ", " + tamanio
-            + ", " + muestra + ", " + limite + ", " + rechazo
-            + ", --/--, --/--, " + verificacion + ", " + documento;
+            + ", " + muestra + ", " + limite + ", " + rechazo+ ", " + captura+ ", " + digitalizador
+            + ", " + verificacion + ", " + documento;
     return ret;
   }
 
