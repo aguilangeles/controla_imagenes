@@ -5,7 +5,6 @@
 package ReporteLote;
 
 import Helpers.EscribeInforme;
-import Helpers.EscribeInformeDocumento;
 import Helpers.GetRechazosPorImagen;
 import Helpers.MensajeJoptionPane;
 import Helpers.Time;
@@ -273,7 +272,8 @@ public class Reporte extends javax.swing.JFrame {
       largoMensajeYUpdate(isNewQs);
       } else
       {
-      getMensajeEstado();
+      MensajeJoptionPane msg = new MensajeJoptionPane(this, JOptionPane.INFORMATION_MESSAGE);
+      msg.getMessage("Debe aceptar o rechazar el lote antes de salir", "Estado del Lote");
       }
   }//
 
@@ -288,7 +288,8 @@ public class Reporte extends javax.swing.JFrame {
       UpdateEstadoLote updateEstadoLote =
               new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
               jTextArea1, tablaDetalles, jButton1, false);
-      EscribeInforme escribeInformeDocumento = new EscribeInforme(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, UBICACION);
+      EscribeInforme escribeInformeDocumento =
+              new EscribeInforme(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, UBICACION);
       conexion.isConexionClose();
       if (!isnewQ)
         {
@@ -300,10 +301,5 @@ public class Reporte extends javax.swing.JFrame {
         }
       }
 
-  }
-
-  private void getMensajeEstado() {
-    MensajeJoptionPane msg = new MensajeJoptionPane(this, JOptionPane.INFORMATION_MESSAGE);
-    msg.getMessage("Debe aceptar o rechazar el lote antes de salir", "Estado del Lote");
   }
 }
