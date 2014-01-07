@@ -6,7 +6,6 @@ package ReporteLote;
 
 import javax.swing.JTextArea;
 import BasedeDatos.Conexion;
-import Helpers.EscribeInforme;
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JButton;
@@ -23,6 +22,8 @@ public class UpdateEstadoLote {
   private int idtraza;
   private JTextArea mensaje;
   private int setEstado;
+  private String captura;
+  private String digitalizador;
 
   public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado,
           JTextArea mensaje, JTable tabla, JButton finalizar, boolean isdocumento) {
@@ -30,17 +31,23 @@ public class UpdateEstadoLote {
     this.idtraza = idtraza;
     this.mensaje = mensaje;
     this.setEstado = (!estado) ? 0 : 1;
-    update();
+    this.captura = (String) tabla.getValueAt(8, 1);
+    this.digitalizador = (String) tabla.getValueAt(9, 1);
+    updateEstado();
   }
 
-  private void update() {
+  private void updateEstado() {
     String observaciones = mensaje.getText();
-    String update = "UPDATE `qualitys`.`traza` "
-            + "SET `estadoLote` = " + setEstado + ", `observaciones` = '" + observaciones + "' "
+
+    String update2 = "UPDATE `qualitys`.`traza` "
+            + "SET `estadoLote` = " + setEstado
+            + ", `observaciones` = '" + observaciones + "'"
+            + ", `linea_captura` = '" + captura
+            + "', `digitalizador` ='" + digitalizador + "'"
             + "WHERE id =" + idtraza + ";";
     try
       {
-      conexion.executeUpdate(update);
+      conexion.executeUpdate(update2);
       } catch (SQLException ex)
       {
       MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
