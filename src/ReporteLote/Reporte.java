@@ -9,7 +9,6 @@ import Helpers.GetRechazosPorImagen;
 import Helpers.MensajeJoptionPane;
 import Helpers.Time;
 import Helpers.VersionEImageIcon;
-import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;

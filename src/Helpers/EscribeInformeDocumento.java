@@ -70,9 +70,10 @@ public class EscribeInformeDocumento {
         {
         try
           {
+          String path = "C:/_App/Qualitys/";
           ImageIcon icon = new ImageIcon("Logos\\test_50.png");
           JOptionPane.showMessageDialog(null, "Podrá visualizar una síntesis del reporte en\n\t"
-                  + UBICACION + "\n", "Informe Final", JOptionPane.INFORMATION_MESSAGE, icon);
+                  + path + UBICACION + "\n", "Informe Final", JOptionPane.INFORMATION_MESSAGE, icon);
           fichero.close();
           } catch (IOException ex)
           {

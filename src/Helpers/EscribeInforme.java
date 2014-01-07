@@ -67,9 +67,10 @@ public class EscribeInforme {
         {
         try
           {
+          String path = "C:/_App/Qualitys/";
           ImageIcon img = new ImageIcon("Logos\\test_50.png");
           JOptionPane.showMessageDialog(null, "Podrá visualizar una síntesis del reporte en\n\t"
-                  + UBICACION + "\n", "Generación de Informe  en .txt", JOptionPane.INFORMATION_MESSAGE, img);
+                  + path + UBICACION + "\n", "Generación de Informe  en .txt", JOptionPane.INFORMATION_MESSAGE, img);
           fichero.close();
           } catch (IOException ex)
           {
