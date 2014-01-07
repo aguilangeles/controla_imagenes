@@ -8,8 +8,6 @@ import BasedeDatos.InsertarFilasABM;
 import Entidades.ColumnaTamanio;
 import BasedeDatos.GetUltimoIDInsertado;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
@@ -129,7 +127,6 @@ public class ControlesDao extends ABMPaneles {
         {
        msg=new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
        msg.getMessage(ex.getMessage(), className);
-//        Logger.getLogger(ControlesDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
       }

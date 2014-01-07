@@ -266,6 +266,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private void getFinalizar(boolean isNewQs) {
+    tablaDetalles.editCellAt(-1, -1);
     if (bg.getSelection() != null)
       {
       setMensajeYUpdate(isNewQs);
@@ -283,11 +284,23 @@ public class ReporteDocumento extends javax.swing.JFrame {
       JOptionPane.showMessageDialog(jTextArea1,
               "Reduzca el texto a 500 caracteres", "Limite de texto permitido",
               JOptionPane.INFORMATION_MESSAGE);
+      } else if (tablaDetalles.getValueAt(8, 1).toString().equals(""))
+      {
+      JOptionPane.showMessageDialog(tablaDetalles,
+              "Debe completar Linea de Captura", "campo vacio no permitido",
+              JOptionPane.INFORMATION_MESSAGE);
+      } else if (tablaDetalles.getValueAt(9, 1).toString().equals(""))
+      {
+      JOptionPane.showMessageDialog(tablaDetalles,
+              "Debe completar Digitalizador", "campo vacio no permitido",
+              JOptionPane.INFORMATION_MESSAGE);
       } else
       {
+      String captura = (String) tablaDetalles.getValueAt(8, 1);
+      String digitalizador = (String) tablaDetalles.getValueAt(9, 1);
       UpdateEstadoLote updateEstadoLote =
               new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
-              jTextArea1, tablaDetalles, jButton1, true);
+              jTextArea1, captura, digitalizador);
       EscribeInformeDocumento escribeInformeDocumento =
               new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
       conexion.isConexionClose();

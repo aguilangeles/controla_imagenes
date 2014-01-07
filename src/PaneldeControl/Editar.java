@@ -9,8 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
