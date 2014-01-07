@@ -91,6 +91,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
         "Title 1", "Title 2"
       }
     ));
+    tablaDetalles.setToolTipText("Línea de captura y digitalizador no deben quedar vacíos");
     tablaDetalles.setFocusable(false);
     jScrollPane1.setViewportView(tablaDetalles);
 
@@ -140,8 +141,8 @@ public class ReporteDocumento extends javax.swing.JFrame {
 
     jButton1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jButton1.setMnemonic('f');
-    jButton1.setText("Finalizar");
-    jButton1.setToolTipText("alt+f");
+    jButton1.setText("Terminar y Cerrar");
+    jButton1.setToolTipText("Cierra el reporte y la aplicación");
     jButton1.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButton1ActionPerformed(evt);
@@ -154,7 +155,8 @@ public class ReporteDocumento extends javax.swing.JFrame {
     });
 
     jButton2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    jButton2.setText("Volver al Panel");
+    jButton2.setText("Volver al Panel de Control");
+    jButton2.setToolTipText("Cierra el reporte y retorna al panel de control");
     jButton2.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButton2ActionPerformed(evt);
@@ -169,23 +171,23 @@ public class ReporteDocumento extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(imagenesRechazadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addComponent(jLabel2)
-            .addGap(0, 0, Short.MAX_VALUE))
           .addComponent(jScrollPane3)
-          .addGroup(jPanel1Layout.createSequentialGroup()
-            .addComponent(jButton2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGap(39, 39, 39)
             .addComponent(aceptar)
             .addGap(41, 41, 41)
             .addComponent(rechazar))
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+          .addComponent(jScrollPane1)
           .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+          .addComponent(jScrollPane2)
+          .addGroup(jPanel1Layout.createSequentialGroup()
+            .addComponent(jLabel2)
+            .addGap(0, 0, Short.MAX_VALUE))
+          .addGroup(jPanel1Layout.createSequentialGroup()
+            .addComponent(jButton2)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton1)))
         .addContainerGap())
     );
     jPanel1Layout.setVerticalGroup(
