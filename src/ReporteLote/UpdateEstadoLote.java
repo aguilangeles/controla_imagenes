@@ -26,19 +26,18 @@ public class UpdateEstadoLote {
   private String digitalizador;
 
   public UpdateEstadoLote(Conexion conexion, int idtraza, boolean estado,
-          JTextArea mensaje, JTable tabla, JButton finalizar, boolean isdocumento) {
+          JTextArea mensaje, String captura, String digitalizador) {
     this.conexion = conexion;
     this.idtraza = idtraza;
     this.mensaje = mensaje;
     this.setEstado = (!estado) ? 0 : 1;
-    this.captura = (String) tabla.getValueAt(8, 1);
-    this.digitalizador = (String) tabla.getValueAt(9, 1);
+    this.captura = captura;
+    this.digitalizador = digitalizador;
     updateEstado();
   }
 
   private void updateEstado() {
     String observaciones = mensaje.getText();
-
     String update2 = "UPDATE `qualitys`.`traza` "
             + "SET `estadoLote` = " + setEstado
             + ", `observaciones` = '" + observaciones + "'"
@@ -53,5 +52,14 @@ public class UpdateEstadoLote {
       MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
       msg.getMessage(ex.getMessage(), UpdateEstadoLote.class.getName());
       }
+  }
+
+  private String filtroNull(String astring, JTable tabla) {
+    if (astring.isEmpty())
+      {
+      MensajeJoptionPane msg = new MensajeJoptionPane(tabla, JOptionPane.ERROR_MESSAGE);
+      msg.getMessage("Completar linea de captura y digitalizador", UpdateEstadoLote.class.getName());
+      }
+    return astring;
   }
 }
