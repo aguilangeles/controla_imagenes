@@ -140,7 +140,7 @@ public class Reporte extends javax.swing.JFrame {
 
     jButton1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jButton1.setMnemonic('f');
-    jButton1.setText("Terminar y Cerrar");
+    jButton1.setText("Salir");
     jButton1.setToolTipText("Cierra el reporte y la aplicación.");
     jButton1.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +154,7 @@ public class Reporte extends javax.swing.JFrame {
     });
 
     jButton2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    jButton2.setText("Volver al Panel de Control");
+    jButton2.setText("Realizar otro Control");
     jButton2.setToolTipText("Cierra el reporte y retorna al panel de control.");
     jButton2.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {

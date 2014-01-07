@@ -81,8 +81,6 @@ public class ReporteDocumento extends javax.swing.JFrame {
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle("Qualitys_v_1.00.01");
 
-    jPanel1.setBackground(new java.awt.Color(230, 252, 238));
-
     tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
 
@@ -141,7 +139,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
 
     jButton1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jButton1.setMnemonic('f');
-    jButton1.setText("Terminar y Cerrar");
+    jButton1.setText("Salir");
     jButton1.setToolTipText("Cierra el reporte y la aplicación");
     jButton1.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +153,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
     });
 
     jButton2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    jButton2.setText("Volver al Panel de Control");
+    jButton2.setText("Realizar otro Control");
     jButton2.setToolTipText("Cierra el reporte y retorna al panel de control");
     jButton2.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +185,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(jButton2)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1)))
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     jPanel1Layout.setVerticalGroup(
