@@ -32,8 +32,6 @@ public class Imagen {
     this.pagina = pagina;
     this.rutaInsertadaEnDB = Decoder.decoder(ruta_archivo, Imagen.class.getName());
     this.rutaParaConversion = Decoder.decoder(parent + ruta_archivo, Imagen.class.getName());
-    System.out.println("ruta conversion");
-    System.out.println(rutaParaConversion);
   }
 
   public Imagen(int id, String rutaSublote, int pagina, int idsublote, String parent, String rutaImagen, int cant_img) {
@@ -44,8 +42,6 @@ public class Imagen {
     this.parent =parent;
     String decRutaparaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : rutaSublote;
     this.rutaParaConversion = Decoder.decoder(decRutaparaConversion, Imagen.class.getName());
-    System.out.println("ruta conversion");
-    System.out.println(rutaParaConversion);
     this.idSublote = idsublote;
     this.rutaSublote = rutaSublote;
     this.totalSublote = cant_img;

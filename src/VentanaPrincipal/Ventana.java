@@ -37,8 +37,6 @@ public class Ventana extends javax.swing.JFrame {
     iniciar(trazadao);
     setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
-    //version.newColorFromPanel(jPanel1);
- //   internal.setBackground(version.getColor());
     initComponents();
     tabla.requestFocus();
     this.traza = trazadao;
@@ -325,7 +323,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
-    Imagen imagen = traza.getImagenList().get(contador);
+    Imagen imagen = (Imagen) traza.getImagenList().get(contador);
     if (contador == limiteSuperior)
       {
       siguiente.setEnabled(false);
@@ -336,7 +334,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private Imagen backImagen(int contador) {
     int limiteInferior = 0;
-    Imagen imagen = traza.getImagenList().get(contador);
+    Imagen imagen = (Imagen) traza.getImagenList().get(contador);
     if (limiteInferior == contador)
       {
       anterior.setEnabled(false);

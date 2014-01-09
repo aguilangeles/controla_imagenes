@@ -15,11 +15,11 @@ public class TrazaDao {
 
   private int id;
   private List<TiposDeControl> tiposList;
-  private List<Imagen> imagenList;
+  private List<Object> imagenList;
   private int estado;
   private int idImagen;
 
-  public TrazaDao(int id, int idImagen, List<TiposDeControl> tiposList, List<Imagen> imagenList) {
+  public TrazaDao(int id, int idImagen, List<TiposDeControl> tiposList, List<Object> imagenList) {
     this.id = id;
     this.imagenList = imagenList;
     this.tiposList = tiposList;
@@ -43,7 +43,7 @@ public class TrazaDao {
     this.id = id;
   }
 
-  public List<Imagen> getImagenList() {
+  public List<Object> getImagenList() {
     return imagenList;
   }
 
@@ -62,9 +62,9 @@ public class TrazaDao {
   public Imagen getImageByNameAndPage(String nombre, int page) {
     /*va a iterar en la lista hasta encontrar coincidencias*/
     Imagen tif = null;
-    for (Iterator<Imagen> it = imagenList.iterator(); it.hasNext();)
+    for (Iterator<Object> it = imagenList.iterator(); it.hasNext();)
       {
-      Imagen temp = it.next();
+      Imagen temp = (Imagen) it.next();
       if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page)
         {
         tif = temp;

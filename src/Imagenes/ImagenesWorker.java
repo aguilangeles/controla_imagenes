@@ -47,7 +47,6 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
       {
       String rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal() + "_t_";
       outputTemp = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
-      System.out.println("temp\t" + outputTemp);
       try
         {
 //        getInfoOriginalImage(input);

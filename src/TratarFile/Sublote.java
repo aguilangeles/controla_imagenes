@@ -18,6 +18,7 @@ public class Sublote {
   private int estado;
   private List<ImagenInsertada> imagenes;
   private int tamanio;
+  private List<Object> imagenList;
 
   public Sublote(int id, int idtraza, String nombre, int estado, List<ImagenInsertada> imagenes, int tamanio) {
     this.id = id;
@@ -26,6 +27,23 @@ public class Sublote {
     this.estado = estado;
     this.imagenes = imagenes;
     this.tamanio = tamanio;
+  }
+
+  public Sublote(int id, int idtraza, String nombre, int estado, int tamanio, List<Object> imagenList) {
+    this.id = id;
+    this.idtraza = idtraza;
+    this.nombre = nombre;
+    this.estado = estado;
+    this.tamanio = tamanio;
+    this.imagenList = imagenList;
+  }
+
+  public List<Object> getImagenList() {
+    return imagenList;
+  }
+
+  public void setImagenList(List<Object> imagenList) {
+    this.imagenList = imagenList;
   }
 
   public int getId() {
@@ -65,6 +83,10 @@ public class Sublote {
     return imagenes;
   }
 
+  public Sublote getSubloteByName(String name) {
+    return null;
+  }
+
   public void setImagenes(List<ImagenInsertada> imagenes) {
     this.imagenes = imagenes;
   }
@@ -79,13 +101,8 @@ public class Sublote {
 
   @Override
   public String toString() {
-    return "Sublote{"
-            + "id=" + id
-            + "\n idtraza=" + idtraza
-            + "\n nombre=" + nombre
-            + "\n estado=" + estado
-            + "\n\t imagenes=" + imagenes
-            + "\n tamanio=" + tamanio
-            + '}';
+    return "Sublote{" + "id=" + id + ", idtraza=" + idtraza + ", nombre=" + nombre + ", estado=" + estado + ", imagenes=" + imagenes + ", tamanio=" + tamanio + ", imagenList=" + imagenList + '}';
   }
+
+ 
 }

@@ -41,7 +41,7 @@ public class Guardar {
       /*diferencia entre pdf y otros y obtiene el numero de pagina*/
       getNumerodePagina(pdf, pagina);
       /*Trae la imagen desde la base de datos, junto con la pagina*/
-      Imagen imagen = traza.getImageByNameAndPage(nombre, page);
+      Imagen imagen = (Imagen) traza.getImageByNameAndPage(nombre, page);
       /*trae los controles asignados a esa imagen*/
       LlenarControles controles = new LlenarControles(traza.getId(), imagen.getId(), conexion);
       /*itera las posibilidades*/

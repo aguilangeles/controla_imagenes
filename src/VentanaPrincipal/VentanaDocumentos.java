@@ -13,11 +13,9 @@ import ReporteLote.ReporteDocumento;
 import TratarFile.Sublote;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,11 +30,9 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private DefaultTableModel model;
   private TrazaDao traza;
   private final TablaCheckBox tablaCheckBox;
-  private List<Sublote> sublotes;
   private String nombresub;
   private Map<Integer, Imagen> mapa;
   private int contadorsublote = 0;
-  private ArrayList<Integer> listaFlag;
   private MostrarInternalFramesForDocument mostDoc;
 
   /**
@@ -46,11 +42,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
    * @param sublotes
    */
   public VentanaDocumentos(TrazaDao trazadao, List<Sublote> sublotes) {
-    iniciar(trazadao, sublotes);
+    iniciar(trazadao);
 //    setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
-    this.sublotes = sublotes;
+//    this.sublotes = sublotes;
     tabla.requestFocus();
     this.traza = trazadao;
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
@@ -363,7 +359,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }//GEN-LAST:event_siguienteActionPerformed
 
   private void nextDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDocumActionPerformed
-    goDocument(true);
+    // goDocument(true);
     Imagen imagen1 = goImagen(contador);
     String nombre = imagen1.getRutaSublote();
     if (!nombre.equalsIgnoreCase(nombresub))
@@ -375,7 +371,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }//GEN-LAST:event_nextDocumActionPerformed
 
   private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
-    backDocument(true);
+//    backDocument(true);
     Imagen pr = backImagen(contador);
     String nombre = pr.getRutaSublote();
     if (!nombre.equalsIgnoreCase(nombresub))
@@ -388,7 +384,8 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
-    Imagen imagen = mapa.get(contador);
+    Imagen imagen = (Imagen) mapa.get(contador);
+    System.out.println(imagen );
     if (contador == limiteSuperior)
       {
       siguiente.setEnabled(false);
@@ -399,7 +396,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private Imagen backImagen(int contador) {
     int limiteInferior = 0;
-    Imagen imagen = traza.getImagenList().get(contador);
+    Imagen imagen = (Imagen) traza.getImagenList().get(contador);
     if (limiteInferior == contador)
       {
       anterior.setEnabled(false);
@@ -463,30 +460,48 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private javax.swing.JButton terminar;
   // End of variables declaration//GEN-END:variables
 
-  private void iniciar(TrazaDao traza, List<Sublote> sublotes) {
+  private void iniciar(TrazaDao traza) {
     int totalcant = 0;
-    listaFlag = new ArrayList<>();
-    listaFlag.add(0);
+//    listaFlag = new ArrayList<>();
+//    listaFlag.add(0);
     mapa = new HashMap<>();
-    for (int i = 0; i < sublotes.size(); i++)
+    List<Object> objList = traza.getImagenList();
+    for (int i = 0; i < objList.size(); i++)
       {
-      Sublote sublote = sublotes.get(i);
-      totalcant += sublote.getTamanio();
-      listaFlag.add(totalcant);
-      }
-    for (int i = 0; i < traza.getImagenList().size(); i++)
-      {
-      mapa.put(i, traza.getImagenList().get(i));
+      Sublote sublote1 = (Sublote) objList.get(i);
+      List<Object> imagens = sublote1.getImagenList();
+      for (int j = 0; j < imagens.size(); j++)
+        {
+        Object object = imagens.get(j);
+        mapa.put(i, (Imagen) object);
+        }
       }
   }
 
+//  private void iniciar(TrazaDao traza, List<Sublote> sublotes) {
+//    int totalcant = 0;
+//    listaFlag = new ArrayList<>();
+//    listaFlag.add(0);
+//    mapa = new HashMap<>();
+//    for (int i = 0; i < sublotes.size(); i++)
+//      {
+//      sublote = sublotes.get(i);
+//      totalcant += sublote.getTamanio();
+//      listaFlag.add(totalcant);
+//      }
+//    for (int i = 0; i < traza.getImagenList().size(); i++)
+//      {
+//      mapa.put(i, (Imagen) traza.getImagenList().get(i));
+//      }
+//  }
   private void getFirstImage(VersionEImageIcon version) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
     // RutaMouseListener.getAdyacentes(pdf, siguientes);
-    nombresub = siguientes.getRutaSublote();
-    mostDoc = new MostrarInternalFramesForDocument(desktopPane, internal, rutaLabel, pageLabel, panelScroll, tabla, combo, traza, siguiente,
-            anterior, ampliar, entera, scrollImage, getSizeRamdom(), version);
-    mostDoc.mostrarPrimeraImagen(siguientes, cantidad);
+//    nombresub = siguientes.getRutaSublote();
+//
+//    mostDoc = new MostrarInternalFramesForDocument(desktopPane, internal, rutaLabel, pageLabel, panelScroll, tabla, combo, traza, siguiente,
+//            anterior, ampliar, entera, scrollImage, getSizeRamdom(), version);
+//    mostDoc.mostrarPrimeraImagen(siguientes, cantidad);
   }
 
   private void getNextImage() {
@@ -494,17 +509,17 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     for (int i = 0; i < tabla.getRowCount(); i++)
       {
       boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-      goDocument(ischeck);
+      //  goDocument(ischeck);
       }
     Imagen imagen1 = goImagen(contador);
+    System.out.println(imagen1);
     String nombre = imagen1.getRutaSublote();
     if (!nombre.equalsIgnoreCase(nombresub))
       {
       cantidad++;
       setNombresub(nombre);
       }
-    mostDoc.setNextImage(imagen1, cantidad);
-
+    //mostDoc.setNextImage(imagen1, cantidad);
   }
 
   private void setBackImage() {
@@ -512,34 +527,34 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     for (int i = 0; i < tabla.getRowCount(); i++)
       {
       boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-      backDocument(ischeck);
+  //    backDocument(ischeck);
       }
     Imagen pr = backImagen(contador);
+    System.out.println(pr);
     String nombre = pr.getRutaSublote();
     if (!nombre.equalsIgnoreCase(nombresub))
       {
       cantidad--;
       setNombresub(nombre);
       }
-    mostDoc.setBackImage(pr, cantidad);
+   // mostDoc.setBackImage(pr, cantidad);
   }
 
-  private void goDocument(boolean ischeck) {
-    if (ischeck)
-      {
-      contadorsublote++;
-      int seter = getListaFlag().get(contadorsublote);
-      setContador(seter);
-      if (seter >= getSizeRamdom() - 1)
-        {
-        terminar.setEnabled(true);
-        JOptionPane.showMessageDialog(rootPane, "No existe siguiente documento"
-                + "\n Se mostrará la última imágen antes de finalizar");
-        setContador(getSizeRamdom() - 1);
-        }
-      }
-  }
-
+//  private void goDocument(boolean ischeck) {
+//    if (ischeck)
+//      {
+//      contadorsublote++;
+//      int seter = getListaFlag().get(contadorsublote);
+//      setContador(seter);
+//      if (seter >= getSizeRamdom() - 1)
+//        {
+//        terminar.setEnabled(true);
+//        JOptionPane.showMessageDialog(rootPane, "No existe siguiente documento"
+//                + "\n Se mostrará la última imágen antes de finalizar");
+//        setContador(getSizeRamdom() - 1);
+//        }
+//      }
+//  }
   public int getCantidad() {
     return cantidad;
   }
@@ -548,24 +563,19 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     this.cantidad = cantidad;
   }
 
-  private void backDocument(boolean ischeck) {
-    if (ischeck)
-      {
-      contadorsublote--;
-      int seter = getListaFlag().get(contadorsublote);
-      setContador(seter);
-      if (seter == getListaFlag().get(0))
-        {
-        JOptionPane.showMessageDialog(rootPane, "Primer documento");
-        setContador(0);
-        }
-      }
-  }
-
-  public ArrayList<Integer> getListaFlag() {
-    return listaFlag;
-  }
-
+//  private void backDocument(boolean ischeck) {
+//    if (ischeck)
+//      {
+//      contadorsublote--;
+//      int seter = getListaFlag().get(contadorsublote);
+//      setContador(seter);
+//      if (seter == getListaFlag().get(0))
+//        {
+//        JOptionPane.showMessageDialog(rootPane, "Primer documento");
+//        setContador(0);
+//        }
+//      }
+//  }
   public void setContador(int contador) {
     this.contador = contador;
   }
