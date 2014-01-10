@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import TratarFile.Sublote;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class TrazaDao {
   private int id;
   private List<TiposDeControl> tiposList;
   private List<Object> imagenList;
+  private List<Object> ObjetoList;
   private int estado;
   private int idImagen;
 
@@ -23,8 +26,26 @@ public class TrazaDao {
     this.id = id;
     this.imagenList = imagenList;
     this.tiposList = tiposList;
-    this.idImagen=idImagen;
+    this.idImagen = idImagen;
 
+  }
+
+  public TrazaDao(int id, int idImagen, List<TiposDeControl> tiposList, List<Object> objList, boolean isdocumento) {
+    this.id = id;
+    this.ObjetoList = objList;
+    this.imagenList = new ArrayList<>();
+    for (Object object : objList)
+      {
+      Sublote sub = (Sublote) object;
+      List<Object> ob = sub.getImagenList();
+      for (int i = 0; i < ob.size(); i++)
+        {
+        Object object1 = ob.get(i);
+        imagenList.add(object1);
+        }
+      }
+    this.tiposList = tiposList;
+    this.idImagen = idImagen;
   }
 
   public int getIdImagen() {
@@ -45,6 +66,10 @@ public class TrazaDao {
 
   public List<Object> getImagenList() {
     return imagenList;
+  }
+
+  public List<Object> getObjetoList() {
+    return ObjetoList;
   }
 
   public int getEstado() {
