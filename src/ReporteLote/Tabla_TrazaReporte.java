@@ -10,7 +10,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import BasedeDatos.Conexion;
 import Helpers.MensajeJoptionPane;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import javax.swing.JOptionPane;
 
 /**
@@ -68,7 +67,7 @@ public class Tabla_TrazaReporte extends JFrame {
               + ", t.cantidad_muestreada "
               + ", ra.cant_rechazo "
               + ", t.nro_rechazo "
-              + ", v.descripcion  "
+              + ", v.nombre  "
               + ", u.nombre  "
               + ", d.descripcion  "
               + ", t.id  "
