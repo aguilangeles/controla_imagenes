@@ -43,11 +43,7 @@ public class MostrarInternalFramesForDocument {
   private JButton anterior, siguiente, botonAncho, pEntera, nextDoc, prevDoc;
   private VersionEImageIcon vic;
 
-  public MostrarInternalFramesForDocument(JDesktopPane desktopPane
-          , JInternalFrame internal
-          , JLabel rutaLabel, JLabel pageLabel
-          , JPanel panelSroll, JTable tabla
-          , JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom, VersionEImageIcon version, JButton nextDocum, JButton prevDocum) {
+  public MostrarInternalFramesForDocument(JDesktopPane desktopPane, JInternalFrame internal, JLabel rutaLabel, JLabel pageLabel, JPanel panelSroll, JTable tabla, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom, VersionEImageIcon version, JButton nextDocum, JButton prevDocum) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -76,9 +72,7 @@ public class MostrarInternalFramesForDocument {
       internal.setMaximum(true);
       vic.newColorFromPanel(panelScroll);
       internal.setBackground(vic.getColor());
-      setTituloYRutaLabel(imagen, nroImagen, sublote);
-      setImagenes(imagen, nroImagen, sublote);
-      setCB.set(imagen.getId());
+      adaptarFrame(imagen, nroImagen, sublote, numSublote);
       } catch (PropertyVetoException ex)
       {
       MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
@@ -86,14 +80,12 @@ public class MostrarInternalFramesForDocument {
       }
   }//
 
-  public void setNextImage(Imagen imagen1, int cantidadSublote, Sublote sublote, int numSublote) {
+  public void setNextImage(Imagen imagen1, int nroImagen, Sublote sublote, int numSublote) {
     anterior.setEnabled(true);
     prevDoc.setEnabled(true);
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
     desktopPane.add(internal);
-    setTituloYRutaLabel(imagen1, numSublote, sublote);
-    setCB.set(imagen1.getId());
-    setImagenes(imagen1, cantidadSublote, sublote);
+    adaptarFrame(imagen1, nroImagen, sublote, numSublote);
     internal.setVisible(true);
   }
 
@@ -103,9 +95,7 @@ public class MostrarInternalFramesForDocument {
     nextDoc.setEnabled(true);
     desktopPane.add(internal);
     internal.setVisible(true);
-    setTituloYRutaLabel(pr, numSublote, sublote);
-    setImagenes(pr, cantidad, sublote);
-    setCB.set(pr.getId());
+    adaptarFrame(pr, cantidad, sublote, numSublote);
   }
 
   private void setTituloYRutaLabel(Imagen imagen, int cantSublote, Sublote sublotes) {
@@ -142,5 +132,11 @@ public class MostrarInternalFramesForDocument {
     setLabelPagina(siguientes, cantidad, sublote);
     imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImagen);
     scrollImage.getViewport().add(imageDraw);
+  }
+
+  private void adaptarFrame(Imagen imagen, int nroImagen, Sublote sublote, int nroSublote) {
+    setTituloYRutaLabel(imagen, nroSublote, sublote);
+    setImagenes(imagen, nroImagen, sublote);
+    setCB.set(imagen.getId());
   }
 }
