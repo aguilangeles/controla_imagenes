@@ -33,7 +33,7 @@ public class MostrarInternalFramesForDocument {
   private JComboBox combo;
   private JScrollPane scrollImage;
   private int totalDocumento, idImagen;
-  private JLabel rutaLabel, pageLabel;
+  private JLabel rutaLabel, pageLabel, totales;
   private JTable tabla;
   private static GetRutaDeImagen rutadeimagen = new GetRutaDeImagen();
   private static ImageDrawingComponent imageDraw = new ImageDrawingComponent();
@@ -43,7 +43,7 @@ public class MostrarInternalFramesForDocument {
   private JButton anterior, siguiente, botonAncho, pEntera, nextDoc, prevDoc;
   private VersionEImageIcon vic;
 
-  public MostrarInternalFramesForDocument(JDesktopPane desktopPane, JInternalFrame internal, JLabel rutaLabel, JLabel pageLabel, JPanel panelSroll, JTable tabla, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom, VersionEImageIcon version, JButton nextDocum, JButton prevDocum) {
+  public MostrarInternalFramesForDocument(JDesktopPane desktopPane, JInternalFrame internal, JLabel rutaLabel, JLabel pageLabel, JPanel panelSroll, JTable tabla, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom, VersionEImageIcon version, JButton nextDocum, JButton prevDocum, JLabel totales) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -61,6 +61,7 @@ public class MostrarInternalFramesForDocument {
     this.totalDocumento = sizeRamdom;
     this.vic = version;
     this.nextDoc = nextDocum;
+    this.totales = totales;
     this.prevDoc = prevDocum;
     MostrarInternalFramesForDocument.save = new Guardar();// sa
     MostrarInternalFramesForDocument.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
@@ -110,11 +111,12 @@ public class MostrarInternalFramesForDocument {
       {
       case 1:
         int page1 = imagen.getPagina() + 1;
-        pageLabel.setText("Pagina: " + page1 + "/" + sublote.getTamanio());
+        pageLabel.setText(page1 + "");
+        totales.setText("/ " + sublote.getTamanio());
         break;
       case 2:
-        pageLabel.setText("(" + nroImagen + "/" + sublote.getTamanio() + ")");
-//        pageLabel.setVisible(false);
+        pageLabel.setText(nroImagen + "");
+        totales.setText("/ " + sublote.getTamanio());
       case 3:
         break;
       }
