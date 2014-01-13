@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaDocumentos extends javax.swing.JFrame {
 
   private int idArchivo = 0;
-  private int idSublote;
+  private int idSublote=0;
   private int nrodeImagen = 1;
   private int nroSublote = 1;
   private DefaultTableModel model;
@@ -33,7 +33,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private Map<Integer, Imagen> mapa;
   private MostrarInternalFramesForDocument mostDoc;
   private Map<Integer, Sublote> mapSublote;
-  private List<Integer> listIdSublote = new ArrayList<>();
 
   /**
    * Creates new form Ventana
@@ -354,7 +353,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }
 
   private int getLastIdArchivo() {
-    int sizeSub = getMapSublote().size() - 1;
+    int sizeSub = mapSublote.size() - 1;
     Sublote sublote = mapSublote.get(sizeSub);
     int ultimo = sublote.getImagenList().size() - 1;
     Imagen im = (Imagen) sublote.getImagenList().get(ultimo);
@@ -374,7 +373,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     int id = imagen.getId() - 1;
     setIdArchivo(id);
     setNumerosublote(nextdoc);
-
     getNextImage();
   }
 
@@ -386,7 +384,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     setIdArchivo(imgPrevius.getId());
     setNumerodeImagen(2);
     nroSublote--;
-
     getBackImage();
   }
   /**
@@ -463,9 +460,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
   }
 
-  public Map<Integer, Sublote> getMapSublote() {
-    return mapSublote;
-  }
 
   private void getFirstImage(VersionEImageIcon version) {
     Sublote sublote = mapSublote.get(0);
@@ -477,6 +471,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
             anterior, ampliar, entera, scrollImage, getTotalDocumentos(), version, nextDocum, prevDocum);
     mostDoc.mostrarPrimeraImagen(siguientes, nrodeImagen, sublote, nroSublote);
   }
+
 
   private void getNextImage() {
     idArchivo++;

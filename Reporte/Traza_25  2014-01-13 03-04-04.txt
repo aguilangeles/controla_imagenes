@@ -1,0 +1,16 @@
+Operador de Control: admin
+Fecha de Control: 2014-01-13 03:03:09.0
+Id Traza: 25
+Ruta Completa: c:\angeles\testeo\gnd3
+Tamanio Lote: 8
+Cantidad muestreada: 7
+Limite Rechazos: 1
+Total Rechazos: 0
+Linea de captura: c
+Digitalizador: c
+Tipo de Verificacion: Detección de conflictos que afecten a la integridad y coherencia del documento digitalizado.
+Tipo de Documento: FRP
+Documentos rechazados  
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 2.0.0_beta
