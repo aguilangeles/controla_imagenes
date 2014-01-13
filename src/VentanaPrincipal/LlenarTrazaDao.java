@@ -52,7 +52,7 @@ public final class LlenarTrazaDao {
 //      System.out.println(i);
 //      }
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
-    traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
+    traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList, true);
     return traza;
   }
 

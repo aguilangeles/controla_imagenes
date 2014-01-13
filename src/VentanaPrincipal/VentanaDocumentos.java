@@ -11,8 +11,6 @@ import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.ReporteDocumento;
 import TratarFile.Sublote;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,16 +22,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaDocumentos extends javax.swing.JFrame {
 
-  private int sizeRamdom;
-  private int contador = 0;
-  private int cantidad = 1;
+  private int idArchivo = 0;
+  private int cantidadSublote = 1;
+  private int contadorsublote = 0;
+  private int idSublote;
+  private int numerosublote = 1;
   private DefaultTableModel model;
   private TrazaDao traza;
   private final TablaCheckBox tablaCheckBox;
-  private String nombresub;
   private Map<Integer, Imagen> mapa;
-  private int contadorsublote = 0;
   private MostrarInternalFramesForDocument mostDoc;
+  private Map<Integer, Sublote> mapSublote;
 
   /**
    * Creates new form Ventana
@@ -46,7 +45,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 //    setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
-//    this.sublotes = sublotes;
     tabla.requestFocus();
     this.traza = trazadao;
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
@@ -55,39 +53,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     anterior.setEnabled(false);
     getFirstImage(version);
     rutaLabel.addMouseListener(new RutaMouseListener());
-    siguiente.addKeyListener(keylistener());
-    anterior.addKeyListener(keylistener());
-  }
-
-  private KeyListener keylistener() {
-    KeyListener kl = new KeyListener() {
-      @Override
-      public void keyTyped(KeyEvent e) {
-        myKeyEvt(e, "KeyTyped");
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e) {
-        myKeyEvt(e, "keyReleased");
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-        myKeyEvt(e, "keyPressed");
-      }
-
-      private void myKeyEvt(KeyEvent e, String text) {
-        int key = e.getKeyCode();
-        if (key == KeyEvent.VK_KP_LEFT || key == KeyEvent.VK_LEFT)
-          {
-          setBackImage();
-          } else if (key == KeyEvent.VK_KP_RIGHT || key == KeyEvent.VK_RIGHT)
-          {
-          getNextImage();
-          }
-      }
-    };
-    return kl;
   }
 
   /**
@@ -350,7 +315,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }//GEN-LAST:event_terminarActionPerformed
 
   private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-
     setBackImage();
   }//GEN-LAST:event_anteriorActionPerformed
 
@@ -359,34 +323,24 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }//GEN-LAST:event_siguienteActionPerformed
 
   private void nextDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDocumActionPerformed
-    // goDocument(true);
-    Imagen imagen1 = goImagen(contador);
-    String nombre = imagen1.getRutaSublote();
-    if (!nombre.equalsIgnoreCase(nombresub))
-      {
-      cantidad++;
-      setNombresub(nombre);
-      }
-    mostDoc.setNextImage(imagen1, cantidad);
+    nextDocument();
   }//GEN-LAST:event_nextDocumActionPerformed
 
   private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
 //    backDocument(true);
-    Imagen pr = backImagen(contador);
-    String nombre = pr.getRutaSublote();
-    if (!nombre.equalsIgnoreCase(nombresub))
-      {
-      cantidad--;
-      setNombresub(nombre);
-      }
-    mostDoc.setBackImage(pr, cantidad);
+//    Imagen pr = backImagen(contador);
+//    String nombre = pr.getRutaSublote();
+//    if (!nombre.equalsIgnoreCase(nombresub))
+//      {
+//      cantidad--;
+//      setNombresub(nombre);
+//      }
+//    mostDoc.setBackImage(pr, cantidad);
   }//GEN-LAST:event_prevDocumActionPerformed
 
-  private Imagen goImagen(int contador) {
-    int limiteSuperior = getSizeRamdom() - 1;
-    Imagen imagen = (Imagen) mapa.get(contador);
-    System.out.println(imagen );
-    if (contador == limiteSuperior)
+  private Imagen getImagenWithSublote(int contador) {
+    Imagen imagen = mapa.get(contador);
+    if (contador == getLastIdArchivo())
       {
       siguiente.setEnabled(false);
       terminar.setEnabled(true);
@@ -395,13 +349,38 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }
 
   private Imagen backImagen(int contador) {
-    int limiteInferior = 0;
-    Imagen imagen = (Imagen) traza.getImagenList().get(contador);
-    if (limiteInferior == contador)
+    Imagen imagen = mapa.get(contador);
+    if (contador == getFirstIdArchivo())
       {
       anterior.setEnabled(false);
       }
     return imagen;
+  }
+
+  private int getLastIdArchivo() {
+    int sizeSub = getMapSublote().size() - 1;
+    Sublote sublote = mapSublote.get(sizeSub);
+    int ultimo = sublote.getImagenList().size() - 1;
+    Imagen im = (Imagen) sublote.getImagenList().get(ultimo);
+    return im.getId();
+  }
+
+  private int getFirstIdArchivo() {
+    int sizeSub = getMapSublote().size() - 1;
+    Sublote sublote = mapSublote.get(0);
+    int ultimo = sublote.getImagenList().size() - 1;
+    Imagen im = (Imagen) sublote.getImagenList().get(0);
+    return im.getId();
+  }
+
+  private void nextDocument() {
+    int nextdoc = getNumerosublote();
+    Sublote s = mapSublote.get(nextdoc);
+    Imagen imagen = (Imagen) s.getImagenList().get(0);
+    int id = imagen.getId() - 1;
+    setIdArchivo(id);
+    setContadorsublote(nextdoc);
+    getNextImage();
   }
   /**
    * @param args the command line arguments
@@ -461,83 +440,96 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private void iniciar(TrazaDao traza) {
-    int totalcant = 0;
-//    listaFlag = new ArrayList<>();
-//    listaFlag.add(0);
     mapa = new HashMap<>();
-    List<Object> objList = traza.getImagenList();
+    mapSublote = new HashMap<>();
+    List<Object> objList = traza.getObjetoList();
     for (int i = 0; i < objList.size(); i++)
       {
       Sublote sublote1 = (Sublote) objList.get(i);
-      List<Object> imagens = sublote1.getImagenList();
-      for (int j = 0; j < imagens.size(); j++)
+      mapSublote.put(i, sublote1);
+      for (int j = 0; j < sublote1.getImagenList().size(); j++)
         {
-        Object object = imagens.get(j);
-        mapa.put(i, (Imagen) object);
+        Object object = sublote1.getImagenList().get(j);
+        Imagen imagen = (Imagen) object;
+        mapa.put(imagen.getId(), imagen);
         }
       }
   }
 
-//  private void iniciar(TrazaDao traza, List<Sublote> sublotes) {
-//    int totalcant = 0;
-//    listaFlag = new ArrayList<>();
-//    listaFlag.add(0);
-//    mapa = new HashMap<>();
-//    for (int i = 0; i < sublotes.size(); i++)
-//      {
-//      sublote = sublotes.get(i);
-//      totalcant += sublote.getTamanio();
-//      listaFlag.add(totalcant);
-//      }
-//    for (int i = 0; i < traza.getImagenList().size(); i++)
-//      {
-//      mapa.put(i, (Imagen) traza.getImagenList().get(i));
-//      }
-//  }
+  public Map<Integer, Sublote> getMapSublote() {
+    return mapSublote;
+  }
+
+  public void setMapSublote(Map<Integer, Sublote> mapSublote) {
+    this.mapSublote = mapSublote;
+  }
+
   private void getFirstImage(VersionEImageIcon version) {
-    Imagen siguientes = goImagen(contador);//trae el ramdom
-    // RutaMouseListener.getAdyacentes(pdf, siguientes);
-//    nombresub = siguientes.getRutaSublote();
-//
-//    mostDoc = new MostrarInternalFramesForDocument(desktopPane, internal, rutaLabel, pageLabel, panelScroll, tabla, combo, traza, siguiente,
-//            anterior, ampliar, entera, scrollImage, getSizeRamdom(), version);
-//    mostDoc.mostrarPrimeraImagen(siguientes, cantidad);
+    Sublote sublote = mapSublote.get(0);
+    Imagen im = (Imagen) sublote.getImagenList().get(0);
+    idArchivo = im.getId();
+    idSublote = sublote.getId();
+    Imagen siguientes = getImagenWithSublote(idArchivo);//trae el ramdom
+    mostDoc = new MostrarInternalFramesForDocument(desktopPane, internal, rutaLabel, pageLabel, panelScroll, tabla, combo, traza, siguiente,
+            anterior, ampliar, entera, scrollImage, mapSublote.size(), version);
+    mostDoc.mostrarPrimeraImagen(siguientes, cantidadSublote, sublote, numerosublote, mapSublote.size());
   }
 
   private void getNextImage() {
-    contador++;
-    for (int i = 0; i < tabla.getRowCount(); i++)
+    idArchivo++;
+    cantidadSublote++;
+    Imagen imagen1 = getImagenWithSublote(idArchivo);
+    Sublote sublote = getsublotebyId(imagen1.getIdSublote());
+    int idsub = sublote.getId();
+    if (idsub != idSublote)
       {
-      boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-      //  goDocument(ischeck);
+      numerosublote++;
+      setCantidad(1);
+      setSubNumero(idsub);
       }
-    Imagen imagen1 = goImagen(contador);
-    System.out.println(imagen1);
-    String nombre = imagen1.getRutaSublote();
-    if (!nombre.equalsIgnoreCase(nombresub))
+    if (numerosublote == mapSublote.size())
       {
-      cantidad++;
-      setNombresub(nombre);
+      setNumerosublote(mapSublote.size());
+      nextDocum.setEnabled(false);
+      terminar.setEnabled(true);
       }
-    //mostDoc.setNextImage(imagen1, cantidad);
+    mostDoc.setNextImage(imagen1, cantidadSublote, sublote, numerosublote, mapSublote.size());
   }
 
   private void setBackImage() {
-    contador--;
-    for (int i = 0; i < tabla.getRowCount(); i++)
+    idArchivo--;
+    cantidadSublote--;
+    Imagen pr = backImagen(idArchivo);
+    Sublote sb = getsublotebyId(pr.getIdSublote());
+    int idsub = sb.getId();
+    if (idsub != idSublote)
       {
-      boolean ischeck = (boolean) tabla.getValueAt(i, 0);
-  //    backDocument(ischeck);
+      numerosublote--;
+      setCantidad(sb.getImagenList().size());
+      setSubNumero(idsub);
       }
-    Imagen pr = backImagen(contador);
-    System.out.println(pr);
-    String nombre = pr.getRutaSublote();
-    if (!nombre.equalsIgnoreCase(nombresub))
+    if (numerosublote == 1)
       {
-      cantidad--;
-      setNombresub(nombre);
+      setNumerosublote(1);
+
       }
-   // mostDoc.setBackImage(pr, cantidad);
+    mostDoc.setBackImage(pr, cantidadSublote, sb, numerosublote, mapSublote.size());
+  }
+
+  public int getNumerosublote() {
+    return numerosublote;
+  }
+
+  public void setNumerosublote(int numerosublote) {
+    this.numerosublote = numerosublote;
+  }
+
+  public int getSubNumero() {
+    return idSublote;
+  }
+
+  public void setSubNumero(int subNumero) {
+    this.idSublote = subNumero;
   }
 
 //  private void goDocument(boolean ischeck) {
@@ -545,47 +537,49 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 //      {
 //      contadorsublote++;
 //      int seter = getListaFlag().get(contadorsublote);
-//      setContador(seter);
+//      setIdArchivo(seter);
 //      if (seter >= getSizeRamdom() - 1)
 //        {
 //        terminar.setEnabled(true);
 //        JOptionPane.showMessageDialog(rootPane, "No existe siguiente documento"
 //                + "\n Se mostrará la última imágen antes de finalizar");
-//        setContador(getSizeRamdom() - 1);
+//        setIdArchivo(getSizeRamdom() - 1);
 //        }
 //      }
 //  }
-  public int getCantidad() {
-    return cantidad;
+  private Sublote getsublotebyId(int idsublote) {
+    Sublote sublote = null;
+    for (Map.Entry<Integer, Sublote> entry : mapSublote.entrySet())
+      {
+      Integer integer = entry.getKey();
+      Sublote sub = entry.getValue();
+      if (sub.getId() == idsublote)
+        {
+        sublote = sub;
+        }
+      }
+    return sublote;
   }
-
-  public void setCantidad(int cantidad) {
-    this.cantidad = cantidad;
-  }
-
 //  private void backDocument(boolean ischeck) {
 //    if (ischeck)
 //      {
 //      contadorsublote--;
 //      int seter = getListaFlag().get(contadorsublote);
-//      setContador(seter);
+//      setIdArchivo(seter);
 //      if (seter == getListaFlag().get(0))
 //        {
 //        JOptionPane.showMessageDialog(rootPane, "Primer documento");
-//        setContador(0);
+//        setIdArchivo(0);
 //        }
 //      }
 //  }
-  public void setContador(int contador) {
-    this.contador = contador;
+
+  public void setIdArchivo(int contador) {
+    this.idArchivo = contador;
   }
 
-  public void setNombresub(String nombresub) {
-    this.nombresub = nombresub;
-  }
-
-  public int getContador() {
-    return contador;
+  public int getIdArchivo() {
+    return idArchivo;
   }
 
   public int getContadorsublote() {
@@ -611,15 +605,19 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     dispose();
   }
 
-  private int getSizeRamdom() {
-    return traza.getImagenList().size();
-  }
-
   public Map<Integer, Imagen> getMapa() {
     return mapa;
   }
 
   public void setMapa(Map<Integer, Imagen> mapa) {
     this.mapa = mapa;
+  }
+
+  public int getCantidadSublote() {
+    return cantidadSublote;
+  }
+
+  public void setCantidad(int cantidad) {
+    this.cantidadSublote = cantidad;
   }
 }

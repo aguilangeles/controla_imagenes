@@ -39,7 +39,7 @@ public class Imagen {
     int idImagen = GetExtensionIdImagen.getIdImagen();
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;
-    this.parent =parent;
+    this.parent = parent;
     String decRutaparaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : rutaSublote;
     this.rutaParaConversion = Decoder.decoder(decRutaparaConversion, Imagen.class.getName());
     this.idSublote = idsublote;
@@ -126,6 +126,7 @@ public class Imagen {
 
   @Override
   public String toString() {
-    return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", rutaInsertadaEnDb " + rutaInsertadaEnDB + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
+    return "Imagen{" + "id=" + id + ", pagina=" + pagina
+            + ", rutaInsertadaEnDb " + rutaInsertadaEnDB + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
   }
 }

@@ -4,12 +4,12 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.ArchivosPorTrazaList;
 import Imagenes.ImageDrawingComponent;
 import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
+import TratarFile.Sublote;
 import java.beans.PropertyVetoException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -64,14 +64,14 @@ public class MostrarInternalFramesForDocument {
     MostrarInternalFramesForDocument.setCB = new SetChecksBox(tabla);//trae los estados desde la base de datos
   }
 
-  public void mostrarPrimeraImagen(Imagen siguientes, int cantidad) {
+  public void mostrarPrimeraImagen(Imagen siguientes, int cantidad, Sublote sublote, int numSublote, int size) {
     try
       {
       internal.setMaximum(true);
       vic.newColorFromPanel(panelScroll);
       internal.setBackground(vic.getColor());
-      setTituloYRutaLabel(siguientes, cantidad);
-      setImagenes(siguientes);
+      setTituloYRutaLabel(siguientes, cantidad, sublote, size);
+      setImagenes(siguientes, cantidad, sublote);
       setCB.set(siguientes.getId());
       } catch (PropertyVetoException ex)
       {
@@ -80,42 +80,43 @@ public class MostrarInternalFramesForDocument {
       }
   }//
 
-  public void setNextImage(Imagen imagen1, int cantidad) {
+  public void setNextImage(Imagen imagen1, int cantidad, Sublote sublote, int numSublote, int size) {
     anterior.setEnabled(true);
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
     desktopPane.add(internal);
-    setTituloYRutaLabel(imagen1, cantidad);
+    setTituloYRutaLabel(imagen1, numSublote, sublote, size);
     setCB.set(imagen1.getId());
-    setImagenes(imagen1);
+    setImagenes(imagen1, cantidad, sublote);
     internal.setVisible(true);
   }
 
-  public void setBackImage(Imagen pr, int cantidad) {
+  public void setBackImage(Imagen pr, int cantidad, Sublote sublote, int numSublote, int size) {
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
     siguiente.setEnabled(true);
     desktopPane.add(internal);
     internal.setVisible(true);
-    setTituloYRutaLabel(pr, cantidad);
-    setImagenes(pr);
+    setTituloYRutaLabel(pr, numSublote, sublote, size);
+    setImagenes(pr, cantidad, sublote);
     setCB.set(pr.getId());
   }
 
-  private void setTituloYRutaLabel(Imagen siguientes, int cantidad) {
-    String rutasublote = siguientes.getRutaSublote();
-    String sublote = rutasublote + " (" + cantidad + "/ " + ArchivosPorTrazaList.getDocumentos() + ")";
+  private void setTituloYRutaLabel(Imagen siguientes, int cantidad, Sublote sublotes, int total) {
+    String rutasublote = sublotes.getNombre();
+    String sublote = rutasublote + " (" + cantidad + "/ " + total + ")";
     internal.setTitle(sublote);
     rutaLabel.setText(siguientes.getRutaInsertadaEnDB());
   }
 
-  private void setLabelPagina(Imagen siguientes) {
+  private void setLabelPagina(Imagen siguientes, int cantidad, Sublote sublote) {
     switch (idImagen)
       {
       case 1:
         int page1 = siguientes.getPagina() + 1;
-        pageLabel.setText("Pagina: " + page1);
+        pageLabel.setText("Pagina: " + page1+"/"+sublote.getTamanio());
         break;
       case 2:
-        pageLabel.setVisible(false);
+        pageLabel.setText("(" + cantidad + "/" + sublote.getTamanio() + ")");
+//        pageLabel.setVisible(false);
       case 3:
         break;
       }
@@ -124,13 +125,14 @@ public class MostrarInternalFramesForDocument {
   private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina) {
     save.guardar(traza, rutaJlabel.getText(), tablaCheck, pagina);
     internal.dispose();
-    desktopPane.removeAll();
-    desktopPane.repaint();
+
+        desktopPane.removeAll();
+       desktopPane.repaint();
   }
 
-  private void setImagenes(Imagen siguientes) {
+  private void setImagenes(Imagen siguientes, int cantidad, Sublote sublote) {
     String ruta = rutadeimagen.getImage(siguientes, idImagen);
-    setLabelPagina(siguientes);
+    setLabelPagina(siguientes, cantidad, sublote);
     imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImagen);
     scrollImage.getViewport().add(imageDraw);
   }
