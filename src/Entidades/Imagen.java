@@ -7,6 +7,7 @@ package Entidades;
 import Helpers.Decoder;
 import Helpers.GetExtensionIdImagen;
 import Helpers.GetImagenesAdyacentes;
+import TratarFile.Sublote;
 
 /**
  * @author MUTNPROD003
@@ -24,7 +25,7 @@ public class Imagen {
   private int idcategoria;
   private int idSublote;
   private String rutaSublote;
-  int totalSublote;
+  int cantImagenes;
 
   public Imagen(int id, String ruta_archivo, String parent, int pagina) {
     this.id = id;
@@ -34,17 +35,16 @@ public class Imagen {
     this.rutaParaConversion = Decoder.decoder(parent + ruta_archivo, Imagen.class.getName());
   }
 
-  public Imagen(int id, String rutaSublote, int pagina, int idsublote, String parent, String rutaImagen, int cant_img) {
+  public Imagen(int id, String rutaImagen, int pagina, String parent, Sublote sublote) {
     this.id = id;
     int idImagen = GetExtensionIdImagen.getIdImagen();
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;
     this.parent = parent;
-    String decRutaparaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : rutaSublote;
-    this.rutaParaConversion = decRutaparaConversion;
-    this.idSublote = idsublote;
-    this.rutaSublote = rutaSublote;
-    this.totalSublote = cant_img;
+    this.rutaParaConversion = (idImagen == 2) ? (sublote.getNombre() + "\\" + rutaImagen) : sublote.getNombre();
+    this.idSublote = sublote.getId();
+    this.rutaSublote = sublote.getNombre();
+    this.cantImagenes = sublote.getTamanio();
   }
 
   public String getRutaSublote() {
@@ -52,7 +52,7 @@ public class Imagen {
   }
 
   public int getTotalSublote() {
-    return totalSublote;
+    return cantImagenes;
   }
 
   public GetImagenesAdyacentes adyacentes() {

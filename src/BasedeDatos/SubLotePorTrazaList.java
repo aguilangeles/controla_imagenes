@@ -40,10 +40,10 @@ public class SubLotePorTrazaList {
 
   private List<Sublote> getSubloteList() {
     List<Sublote> subList = new ArrayList<>();
+    Imagen imagen;
+    Sublote sublote;
     try
       {
-      Imagen imagen;
-      Sublote sublote;
       documentos = GetTamanioDocumento.consultarTamanioDocumento(conexion, idTraza);
       String query = "SELECt id "
               + ",ruta "
@@ -70,13 +70,13 @@ public class SubLotePorTrazaList {
     Sublote sublote;
     for (Sublote ss : subloteList)
       {
-      List<Object> imgList = llenarListadeImagenes(ss.getId(), ss.getNombre(), ss.getTamanio());
+      List<Object> imgList = llenarListadeImagenes(ss);
       sublote = new Sublote(ss.getId(), ss.getIdtraza(), ss.getNombre(), 0, ss.getTamanio(), imgList);
       imagenProcesadaList.add(sublote);
       }
   }
 
-  private List<Object> llenarListadeImagenes(int idSublote, String rutaSublote, int cantimagen) {
+  private List<Object> llenarListadeImagenes(Sublote sublote) {
     List<Object> listaImagen = new ArrayList<>();
     try
       {
@@ -91,14 +91,14 @@ public class SubLotePorTrazaList {
               + " join sublotes subl "
               + " on subl.id=asub.idsublote "
               + " where a.idtraza  =" + idTraza
-              + " and subl.id =" + idSublote + ";";
+              + " and subl.id =" + sublote.getId() + ";";
       conexion.executeQuery(query);
       while (conexion.resulset.next())
         {
         int idImagen = conexion.resulset.getInt(1);
         String ruta = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
-        imagen = new Imagen(idImagen, ruta, pagina, parent, idSublote, rutaSublote, cantimagen);
+        imagen = new Imagen(idImagen, ruta, pagina, parent, sublote);
         listaImagen.add(imagen);
         }
       } catch (SQLException ex)
