@@ -24,6 +24,7 @@ public class Imagen {
   private int idcategoria;
   private int idSublote;
   private String rutaSublote;
+  
   int totalSublote;
 
   public Imagen(int id, String ruta_archivo, String parent, int pagina) {
