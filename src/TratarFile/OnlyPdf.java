@@ -19,15 +19,12 @@ import javax.swing.JLabel;
  */
 public class OnlyPdf {
 
-//  private InsertarNuevaTraza sTraza;
   private Conexion conexion;
-  private int muestra,
-          idTraza;
+  private int muestra,idTraza;
   private String parent;
   private CrearElRamdom crearRamdom;
   private JLabel infoLabel;
   private List<Integer> idControl;
-  //private List<Object> listaImagenes;
   private static CrearElRamdom ramdom;
   private List<Sublote> sublotes;
 
