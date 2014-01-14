@@ -43,7 +43,8 @@ public class MostrarInternalFramesForDocument {
   private JButton anterior, siguiente, botonAncho, pEntera, nextDoc, prevDoc;
   private VersionEImageIcon vic;
 
-  public MostrarInternalFramesForDocument(JDesktopPane desktopPane, JInternalFrame internal, JLabel rutaLabel, JLabel pageLabel, JPanel panelSroll, JTable tabla, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom, VersionEImageIcon version, JButton nextDocum, JButton prevDocum, JLabel totales) {
+  public MostrarInternalFramesForDocument(JDesktopPane desktopPane,
+          JInternalFrame internal, JLabel rutaLabel, JLabel pageLabel, JPanel panelSroll, JTable tabla, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JScrollPane scrollImage, int sizeRamdom, VersionEImageIcon version, JButton nextDocum, JButton prevDocum, JLabel totales) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;

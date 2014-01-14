@@ -41,7 +41,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
    */
   public VentanaDocumentos(TrazaDao trazadao, List<Sublote> sublotes) {
     iniciar(trazadao);
-//    setExtendedState(6);
+    setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
     tabla.requestFocus();
