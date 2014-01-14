@@ -21,7 +21,6 @@ public class Imagen {
   private String rutaParaConversion;
   private String rutaCarpetaTemp;
   private String rutaInsertadaEnDB;
-  private int estado;
   private int idSublote;
   private String rutaSublote;
   private int cantImagenes;
@@ -100,14 +99,6 @@ public class Imagen {
     this.rutaInsertadaEnDB = rutaInsertadaEnDB;
   }
 
-  public int getEstado() {
-    return estado;
-  }
-
-  public void setEstado(int estado) {
-    this.estado = estado;
-  }
-
   public int getIdSublote() {
     return idSublote;
   }
@@ -137,7 +128,7 @@ public class Imagen {
     return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", parent=" + parent
             + ", rutaParaConversion=" + rutaParaConversion + ", rutaCarpetaTemp="
             + rutaCarpetaTemp + ", rutaInsertadaEnDB=" + rutaInsertadaEnDB
-            + ", estado=" + estado + ", idSublote=" + idSublote + ", rutaSublote="
+            + ", idSublote=" + idSublote + ", rutaSublote="
             + rutaSublote + ", cantImagenes=" + cantImagenes + '}';
   }
 }
