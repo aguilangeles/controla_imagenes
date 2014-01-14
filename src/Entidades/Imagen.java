@@ -22,10 +22,9 @@ public class Imagen {
   private String rutaCarpetaTemp;
   private String rutaInsertadaEnDB;
   private int estado;
-  private int idcategoria;
   private int idSublote;
   private String rutaSublote;
-  int cantImagenes;
+  private int cantImagenes;
 
   public Imagen(int id, String ruta_archivo, String parent, int pagina) {
     this.id = id;
@@ -47,37 +46,18 @@ public class Imagen {
     this.cantImagenes = sublote.getTamanio();
   }
 
-  public String getRutaSublote() {
-    return rutaSublote;
-  }
-
-  public int getTotalSublote() {
-    return cantImagenes;
-  }
-
   public GetImagenesAdyacentes adyacentes() {
 //    String ad = decodear(getRutaParaConversion());
     GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(getRutaParaConversion());
     return imagenesAdyacentes;
   }
 
-  public void traerImagenAdyacente(boolean tiff) {
+  public int getId() {
+    return id;
   }
 
-  public String getRutaInsertadaEnDB() {
-    return rutaInsertadaEnDB;
-  }
-
-  public void setRutaInsertadaEnDB(String rutaDb) {
-    this.rutaInsertadaEnDB = rutaDb;
-  }
-
-  public String getRutaCarpetaTemp() {
-    return rutaCarpetaTemp;
-  }
-
-  public void setRutaCarpetaTemp(String rutaTemp) {
-    this.rutaCarpetaTemp = rutaTemp;
+  public void setId(int id) {
+    this.id = id;
   }
 
   public int getPagina() {
@@ -100,20 +80,24 @@ public class Imagen {
     return rutaParaConversion;
   }
 
-  public int getId() {
-    return id;
+  public void setRutaParaConversion(String rutaParaConversion) {
+    this.rutaParaConversion = rutaParaConversion;
   }
 
-  public int getIdSublote() {
-    return idSublote;
+  public String getRutaCarpetaTemp() {
+    return rutaCarpetaTemp;
   }
 
-  public void setIdSublote(int idSublote) {
-    this.idSublote = idSublote;
+  public void setRutaCarpetaTemp(String rutaCarpetaTemp) {
+    this.rutaCarpetaTemp = rutaCarpetaTemp;
   }
 
-  public void setId(int id) {
-    this.id = id;
+  public String getRutaInsertadaEnDB() {
+    return rutaInsertadaEnDB;
+  }
+
+  public void setRutaInsertadaEnDB(String rutaInsertadaEnDB) {
+    this.rutaInsertadaEnDB = rutaInsertadaEnDB;
   }
 
   public int getEstado() {
@@ -124,9 +108,36 @@ public class Imagen {
     this.estado = estado;
   }
 
+  public int getIdSublote() {
+    return idSublote;
+  }
+
+  public void setIdSublote(int idSublote) {
+    this.idSublote = idSublote;
+  }
+
+  public String getRutaSublote() {
+    return rutaSublote;
+  }
+
+  public void setRutaSublote(String rutaSublote) {
+    this.rutaSublote = rutaSublote;
+  }
+
+  public int getCantImagenes() {
+    return cantImagenes;
+  }
+
+  public void setCantImagenes(int cantImagenes) {
+    this.cantImagenes = cantImagenes;
+  }
+
   @Override
   public String toString() {
-    return "Imagen{" + "id=" + id + ", pagina=" + pagina
-            + ", rutaInsertadaEnDb " + rutaInsertadaEnDB + ", rutaParaConversion=" + rutaParaConversion + ", idSublote=" + idSublote + '}';
+    return "Imagen{" + "id=" + id + ", pagina=" + pagina + ", parent=" + parent
+            + ", rutaParaConversion=" + rutaParaConversion + ", rutaCarpetaTemp="
+            + rutaCarpetaTemp + ", rutaInsertadaEnDB=" + rutaInsertadaEnDB
+            + ", estado=" + estado + ", idSublote=" + idSublote + ", rutaSublote="
+            + rutaSublote + ", cantImagenes=" + cantImagenes + '}';
   }
 }
