@@ -6,6 +6,7 @@ package VentanaPrincipal;
 
 import BasedeDatos.ControlesporVerificacionList;
 import BasedeDatos.ArchivosPorTrazaList;
+import BasedeDatos.ArchivosPorTrazaListDoc;
 import BasedeDatos.Conexion;
 import Entidades.TiposDeControl;
 import Entidades.TrazaDao;
@@ -34,23 +35,13 @@ public final class LlenarTrazaDao {
 
   private TrazaDao llenarTrazaVolumen(Conexion conexion, int idTraza, String parent) {
     List<Object> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent, true).getImagenesList();
-//    for (Object im : imagenesList)
-//      {
-//      Imagen i = (Imagen) im;
-//      System.out.println(i);
-//      }
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
     return traza;
   }
 
   private TrazaDao llenartrazaDocumento(String parent, Conexion conexion, int idTraza) {
-    List<Object> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent).getImagenesList();
-//    for (Object im : imagenesList)
-//      {
-//      Sublote i = (Sublote) im;
-//      System.out.println(i);
-//      }
+    List<Object> imagenesList = new ArchivosPorTrazaListDoc(conexion, idTraza, parent).getImagenesList();
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList, true);
     return traza;
