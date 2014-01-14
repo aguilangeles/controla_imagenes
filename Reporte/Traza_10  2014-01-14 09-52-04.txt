@@ -1,0 +1,16 @@
+Operador de Control: carga
+Fecha de Control: 2014-01-14 09:51:21.0
+Id Traza: 10
+Ruta Completa: c:\angeles\testeo\notas
+Tamanio Lote: 18
+Cantidad muestreada: 7
+Limite Rechazos: 1
+Total Rechazos: 0
+Linea de captura: c
+Digitalizador: c
+Tipo de Verificacion: Control Básico de Documento
+Tipo de Documento: FRP
+Documentos rechazados  
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 2.0.1_beta

@@ -41,7 +41,7 @@ public class Imagen {
     this.rutaInsertadaEnDB = rutaImagen;
     this.parent = parent;
     String decRutaparaConversion = (idImagen == 2) ? (rutaSublote + "\\" + rutaImagen) : rutaSublote;
-    this.rutaParaConversion = Decoder.decoder(decRutaparaConversion, Imagen.class.getName());
+    this.rutaParaConversion = decRutaparaConversion;
     this.idSublote = idsublote;
     this.rutaSublote = rutaSublote;
     this.totalSublote = cant_img;

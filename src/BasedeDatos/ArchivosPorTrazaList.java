@@ -5,10 +5,8 @@
 package BasedeDatos;
 
 import Entidades.Imagen;
-//import Entidades.Sublote;
 import Helpers.MensajeJoptionPane;
 import TratarFile.Sublote;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,49 +98,14 @@ public class ArchivosPorTrazaList {
         String ruta = conexion.resulset.getString(2);
         int pagina = conexion.resulset.getInt(3);
         imagen = new Imagen(id, rutaSublote, pagina, idSublote, parent, ruta, cantimagen);
-//        imagen = new Imagen(id, ruta, parent, pagina);
         listaImagen.add(imagen);
         }
       } catch (SQLException ex)
       {
-      Logger.getLogger(ArchivosPorTrazaList.class.getName()).log(Level.SEVERE, null, ex);
+      mensaje.getMessage(ex.getMessage(), className);
       }
     return listaImagen;
   }
-//  private void getImagenPaginaSublote(Conexion conexion, int idTraza, String parent) {
-//    try
-//      {
-//      Imagen imagen;
-//      documentos = consultarTamanioDocumento(conexion, idTraza);
-//      String query = "SELECT"
-//              + " a.id"
-//              + ", subl.ruta "
-//              + ", a.ruta_archivo "
-//              + " , a.pagina_pdf"
-//              + " , asub.idsublote"
-//              + ", subl.total_img "
-//              + " FROM qualitys.archivo a"
-//              + " join archivo_sublote asub"
-//              + " on a.id= asub.idarchivo"
-//              + " join sublotes subl"
-//              + " on subl.id=asub.idsublote"
-//              + " where a.idtraza  =" + idTraza + ";";
-//      conexion.executeQuery(query);
-//      while (conexion.resulset.next())
-//        {
-//        int id = conexion.resulset.getInt(1);
-//        String rutasub = conexion.resulset.getString(2);
-//        String rutaImagen = conexion.resulset.getString(3);
-//        int pagina = conexion.resulset.getInt(4);
-//        int idSublote = conexion.resulset.getInt(5);
-//        int cant_img = conexion.resulset.getInt(6);
-//        archivoConNumeroDePagina(id, rutaImagen, parent, pagina, true, idSublote, rutasub, cant_img);
-//        }
-//      } catch (SQLException ex)
-//      {
-//      mensaje.getMessage(ex.getMessage(), className);
-//      }
-//  }
 
   private void getImagenNombrePagina(Conexion conexion, int idTraza, String parent) {
     Imagen imagen;

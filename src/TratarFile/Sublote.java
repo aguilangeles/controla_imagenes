@@ -104,5 +104,5 @@ public class Sublote {
     return "Sublote{" + "id=" + id + ", idtraza=" + idtraza + ", nombre=" + nombre + ", estado=" + estado + ", imagenes=" + imagenes + ", tamanio=" + tamanio + ", imagenList=" + imagenList + '}';
   }
 
- 
+
 }

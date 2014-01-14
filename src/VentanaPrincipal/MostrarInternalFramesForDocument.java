@@ -100,7 +100,7 @@ public class MostrarInternalFramesForDocument {
   }
 
   private void setTituloYRutaLabel(Imagen imagen, int cantSublote, Sublote sublotes) {
-    String rutasublote = sublotes.getNombre();
+    String rutasublote = sublotes.getNombre().replace("\\\\", "\\");
     String sublote = rutasublote + " (" + cantSublote + "/ " + totalDocumento + ")";
     internal.setTitle(sublote);
     rutaLabel.setText(imagen.getRutaInsertadaEnDB());

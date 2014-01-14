@@ -1,0 +1,18 @@
+Operador de Control: carga
+Fecha de Control: 2014-01-14 10:03:36.0
+Id Traza: 14
+Ruta Completa: c:\angeles\testeo\facturas
+Tamanio Lote: 45446
+Cantidad muestreada: 11
+Limite Rechazos: 22
+Total Rechazos: 1
+Linea de captura: ho
+Digitalizador: la
+Tipo de Verificacion: Control Calidad Básico
+Tipo de Documento: FRP
+Imagenes rechazadas: 
+00598567.pdf, pagina=9
+controles=[Imágenes con mal contraste]
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 2.0.1_beta
