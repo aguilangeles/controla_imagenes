@@ -4,9 +4,9 @@
  */
 package ReporteLote;
 
-import Helpers.EscribeInformeDocumento;
-import Helpers.Time;
-import Helpers.VersionEImageIcon;
+import helper.EscribeInformeDocumento;
+import helper.Time;
+import helper.VersionEImageIcon;
 import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.ButtonGroup;

@@ -10,7 +10,7 @@ import entidad.ControlPorImagen;
 import database.Conexion;
 import entidad.Imagen;
 import entidad.TrazaDao;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;

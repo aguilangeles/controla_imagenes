@@ -7,7 +7,7 @@ package Login;
 import archivoConfiguracion.SetConfigFile;
 import database.Conexion;
 import entidad.Usuario;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 

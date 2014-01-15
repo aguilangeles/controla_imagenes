@@ -5,7 +5,7 @@
 package database;
 
 import entidad.Usuario;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 

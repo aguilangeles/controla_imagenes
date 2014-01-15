@@ -7,9 +7,9 @@ package PaneldeControl;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import database.Conexion;
-import Helpers.MensajeJoptionPane;
-import Helpers.Minimo;
-import Helpers.VersionEImageIcon;
+import helper.MensajeJoptionPane;
+import helper.Minimo;
+import helper.VersionEImageIcon;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import javax.swing.JTable;
@@ -28,7 +28,7 @@ public class RangosABM extends javax.swing.JFrame {
   private DefaultTableModel modelo;
   private int ide;
   private String evento;
-  private Helpers.Minimo minimo = new Minimo();
+  private helper.Minimo minimo = new Minimo();
 
   /**
    * Creates new form RangosABM

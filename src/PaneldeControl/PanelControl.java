@@ -5,7 +5,7 @@
 package PaneldeControl;
 
 import entidad.Usuario;
-import Helpers.VersionEImageIcon;
+import helper.VersionEImageIcon;
 import VentanaPrincipal.ControlDocumentosyVerificaciones;
 import Login.IngresoBaseDeDatos;
 import Login.Login;

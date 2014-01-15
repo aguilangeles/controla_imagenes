@@ -6,7 +6,7 @@ package PaneldeControl;
 
 import entidad.ColumnaTamanio;
 import database.Conexion;
-import Helpers.TextAreaRenderer;
+import helper.TextAreaRenderer;
 import java.awt.Rectangle;
 import java.util.List;
 import javax.swing.JTable;

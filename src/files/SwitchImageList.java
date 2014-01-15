@@ -4,7 +4,7 @@
  */
 package files;
 
-import Helpers.GetIdandExtensionImg;
+import helper.GetIdandExtensionImg;
 import java.util.List;
 import javax.swing.JLabel;
 

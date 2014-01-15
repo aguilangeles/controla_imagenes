@@ -9,7 +9,7 @@ import entidad.ImagenInsertada;
 import entidad.Sublote;
 import database.Conexion;
 import database.SelectLastID;
-import Helpers.GetIdandExtensionImg;
+import helper.GetIdandExtensionImg;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

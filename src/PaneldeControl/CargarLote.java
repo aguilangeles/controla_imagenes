@@ -8,7 +8,7 @@ import VentanaPrincipal.WorkerImage;
 import java.util.ArrayList;
 import java.util.List;
 import entidad.Usuario;
-import Helpers.VersionEImageIcon;
+import helper.VersionEImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -39,7 +39,7 @@ public class CargarLote extends javax.swing.JFrame {
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this, "Carga de Volumen.");
     versionEImageIcon.newColorFromPanel(jPanel1);
     this.usarioTipo = Login.Login.getUsuario();
-    rutaCarpeta.setInputVerifier(new Helpers.InputVerifier().inputVerifierT());
+    rutaCarpeta.setInputVerifier(new helper.InputVerifier().inputVerifierT());
     this.tipoDocumentoBox.setModel(documentos);
     this.tipoVerificacionBox.setModel(verificacion);
     this.panelControl = panelControl;

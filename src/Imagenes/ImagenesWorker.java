@@ -4,8 +4,8 @@
  */
 package Imagenes;
 
-import Helpers.ExtensionTemporal;
-import Helpers.MensajeJoptionPane;
+import helper.ExtensionTemporal;
+import helper.MensajeJoptionPane;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;

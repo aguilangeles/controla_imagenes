@@ -4,7 +4,7 @@
  */
 package Imagenes;
 
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import com.sun.media.jai.codec.ByteArraySeekableStream;
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;

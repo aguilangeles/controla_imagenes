@@ -13,7 +13,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import database.Conexion;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 

@@ -4,7 +4,7 @@
  */
 package archivoConfiguracion;
 
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import Login.IngresoBaseDeDatos;
 import java.io.FileOutputStream;
 import java.io.IOException;

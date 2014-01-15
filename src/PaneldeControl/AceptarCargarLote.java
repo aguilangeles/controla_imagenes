@@ -6,10 +6,10 @@ package PaneldeControl;
 
 import database.SelectIdControlfromVerificacionList;
 import database.Conexion;
-import Helpers.GetIdandExtensionImg;
+import helper.GetIdandExtensionImg;
 import files.GetFinalListOfImages;
 import documents.GetFinalListOfDocuments;
-import Helpers.GetParent;
+import helper.GetParent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

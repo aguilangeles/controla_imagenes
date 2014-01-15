@@ -4,8 +4,8 @@
  */
 package database;
 
-import Helpers.MensajeJoptionPane;
-import Helpers.Time;
+import helper.MensajeJoptionPane;
+import helper.Time;
 import Login.Login;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;

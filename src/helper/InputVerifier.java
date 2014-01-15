@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Helpers;
+package helper;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;

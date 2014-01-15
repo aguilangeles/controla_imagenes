@@ -5,7 +5,7 @@
 package database;
 
 import entidad.Imagen;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import entidad.Sublote;
 import java.sql.SQLException;
 import java.util.ArrayList;

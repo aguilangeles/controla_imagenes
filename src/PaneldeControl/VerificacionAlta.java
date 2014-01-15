@@ -6,7 +6,7 @@ package PaneldeControl;
 
 import entidad.TiposDeControl;
 import VentanaPrincipal.ListaControlesActivos;
-import Helpers.InputVerifier;
+import helper.InputVerifier;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import database.Conexion;
-import Helpers.MensajeJoptionPane;
-import Helpers.VersionEImageIcon;
+import helper.MensajeJoptionPane;
+import helper.VersionEImageIcon;
 
 /**
  *

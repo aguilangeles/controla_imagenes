@@ -6,7 +6,7 @@ package documents;
 
 import entidad.ImagenInsertada;
 import entidad.NombrePaginaDelPDF;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

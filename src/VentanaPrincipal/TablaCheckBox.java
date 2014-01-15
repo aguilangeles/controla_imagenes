@@ -6,8 +6,8 @@ package VentanaPrincipal;
 
 import entidad.TiposDeControl;
 import entidad.TrazaDao;
-import Helpers.ButtonEditor;
-import Helpers.ButtonRenderer;
+import helper.ButtonEditor;
+import helper.ButtonRenderer;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;

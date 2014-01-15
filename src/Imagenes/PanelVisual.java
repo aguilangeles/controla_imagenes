@@ -4,7 +4,7 @@
  */
 package Imagenes;
 
-import Helpers.VersionEImageIcon;
+import helper.VersionEImageIcon;
 import java.awt.Color;
 
 /**

@@ -4,7 +4,7 @@
  */
 package files;
 
-import Helpers.GetIdandExtensionImg;
+import helper.GetIdandExtensionImg;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;

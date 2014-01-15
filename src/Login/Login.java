@@ -6,12 +6,12 @@ package Login;
 
 import PaneldeControl.PanelControl;
 import archivoConfiguracion.SetConfigFile;
-import Helpers.InputVerifier;
+import helper.InputVerifier;
 import javax.swing.JOptionPane;
 import entidad.Usuario;
 import database.SelectUsuarioyCategoria;
-import Helpers.MensajeJoptionPane;
-import Helpers.VersionEImageIcon;
+import helper.MensajeJoptionPane;
+import helper.VersionEImageIcon;
 
 /**
  *

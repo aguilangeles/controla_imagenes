@@ -2,23 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Helpers;
+package helper;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.net.URLDecoder;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author aguilangeles@gmail.com
  */
-public class Encoder {
+public class Decoder extends URLDecoder {
 
-  public static String encoder(String aString, String clase) {
+  public Decoder() {
+  }
+
+  public static String decoder(String aString, String clase) {
     String ret = "";
     try
       {
-      ret = URLEncoder.encode(aString, "UTF-8");
+      ret = URLDecoder.decode(aString, "UTF-8");
       } catch (UnsupportedEncodingException ex)
       {
       new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE).getMessage(aString, clase);

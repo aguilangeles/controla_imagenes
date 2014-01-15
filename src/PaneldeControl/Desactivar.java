@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import database.Conexion;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 
 /**

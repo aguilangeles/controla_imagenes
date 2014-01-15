@@ -5,7 +5,7 @@
 package database;
 
 import entidad.ControlPorImagen;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

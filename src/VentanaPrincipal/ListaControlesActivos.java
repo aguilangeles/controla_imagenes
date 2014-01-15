@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import database.Conexion;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 
 /**

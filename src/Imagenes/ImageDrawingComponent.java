@@ -4,7 +4,7 @@
  */
 package Imagenes;
 
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;

@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import database.Conexion;
-import Helpers.MensajeJoptionPane;
+import helper.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 
 /**

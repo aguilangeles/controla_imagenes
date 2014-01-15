@@ -4,9 +4,9 @@
  */
 package entidad;
 
-import Helpers.Decoder;
-import Helpers.GetIdandExtensionImg;
-import Helpers.GetImagenesAdyacentes;
+import helper.Decoder;
+import helper.GetIdandExtensionImg;
+import helper.GetImagenesAdyacentes;
 
 /**
  * @author MUTNPROD003

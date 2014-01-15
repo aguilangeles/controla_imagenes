@@ -4,11 +4,11 @@
  */
 package Login;
 
-import Helpers.InputVerifier;
+import helper.InputVerifier;
 import database.Conexion;
 import archivoConfiguracion.ReadProperties;
 import entidad.LogQualitys;
-import Helpers.VersionEImageIcon;
+import helper.VersionEImageIcon;
 
 /**
  *

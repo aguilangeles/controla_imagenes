@@ -10,8 +10,8 @@ import database.SelectSubloteporTrazaList;
 import database.Conexion;
 import entidad.TiposDeControl;
 import entidad.TrazaDao;
-import Helpers.Encoder;
-import Helpers.GetIdandExtensionImg;
+import helper.Encoder;
+import helper.GetIdandExtensionImg;
 import java.util.List;
 
 /**

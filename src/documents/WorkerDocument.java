@@ -7,7 +7,7 @@ package documents;
 import database.Conexion;
 import database.SelectLastID;
 import database.InsertarNuevaTraza;
-import Helpers.GetIdandExtensionImg;
+import helper.GetIdandExtensionImg;
 import PaneldeControl.ContadorSublotes;
 import documents.GetListOfImagesForDoc;
 import files.OnlyPdf;

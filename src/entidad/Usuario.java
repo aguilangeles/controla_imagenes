@@ -4,7 +4,7 @@
  */
 package entidad;
 
-import Helpers.Time;
+import helper.Time;
 
 /**
  *define el tipo de usuario que ingreso al sistema.

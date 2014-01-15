@@ -4,11 +4,11 @@
  */
 package ReporteLote;
 
-import Helpers.EscribeInforme;
-import Helpers.GetRechazosPorImagen;
-import Helpers.MensajeJoptionPane;
-import Helpers.Time;
-import Helpers.VersionEImageIcon;
+import helper.EscribeInforme;
+import helper.GetRechazosPorImagen;
+import helper.MensajeJoptionPane;
+import helper.Time;
+import helper.VersionEImageIcon;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
