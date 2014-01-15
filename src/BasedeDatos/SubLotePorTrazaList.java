@@ -22,13 +22,13 @@ public class SubLotePorTrazaList {
 
   private String className = SubLotePorTrazaList.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
-  private static int documentos;
-  private List<Object> imagenProcesadaList = new ArrayList<>();
-  private List<Sublote> subloteList;
   MensajeJoptionPane mensaje = new MensajeJoptionPane(null, type);
+
   private Conexion conexion;
   private int idTraza;
   private String parent;
+  private List<Object> imagenProcesadaList = new ArrayList<>();
+  private List<Sublote> subloteList;
 
   public SubLotePorTrazaList(Conexion conexion, int idTraza, String parent) {
     this.conexion = conexion;
@@ -44,7 +44,6 @@ public class SubLotePorTrazaList {
     Sublote sublote;
     try
       {
-      documentos = GetTamanioDocumento.consultarTamanioDocumento(conexion, idTraza);
       String query = "SELECt id "
               + ",ruta "
               + ",total_img "

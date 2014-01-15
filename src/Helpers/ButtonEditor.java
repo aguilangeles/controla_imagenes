@@ -5,7 +5,7 @@
 package Helpers;
 
 import Imagenes.AyudaVisual;
-import Entidades.TiposDeControl;
+import entidad.TiposDeControl;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

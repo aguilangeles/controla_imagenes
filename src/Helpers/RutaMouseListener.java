@@ -4,7 +4,7 @@
  */
 package Helpers;
 
-import Entidades.Imagen;
+import entidad.Imagen;
 import Imagenes.ImagenesWorker;
 import Imagenes.PanelVisual;
 import java.awt.event.MouseEvent;

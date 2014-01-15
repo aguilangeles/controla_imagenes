@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class GetNumerosImagenesRechazadas {
+public class SelectImagenesRechazadas {
 
-  private static final String className = GetNumerosImagenesRechazadas.class.getName();
+  private static final String className = SelectImagenesRechazadas.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
 
-  public GetNumerosImagenesRechazadas(int idTraza) {
+  public SelectImagenesRechazadas(int idTraza) {
     int numero = 0;
     Conexion c = new Conexion();
     if (c.isConexion())

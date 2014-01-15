@@ -4,8 +4,8 @@
  */
 package PaneldeControl;
 
-import Entidades.ColumnaTamanio;
-import Entidades.TiposDeControl;
+import entidad.ColumnaTamanio;
+import entidad.TiposDeControl;
 import VentanaPrincipal.TiposVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;

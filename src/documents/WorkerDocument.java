@@ -11,7 +11,7 @@ import Helpers.GetIdandExtensionImg;
 import PaneldeControl.ContadorSublotes;
 import documents.GetListOfImagesForDoc;
 import files.OnlyPdf;
-import Entidades.Sublote;
+import entidad.Sublote;
 import VentanaPrincipal.LlenarTrazaDao;
 import VentanaPrincipal.VentanaDocumentos;
 import files.Tif_Png_Jpg;

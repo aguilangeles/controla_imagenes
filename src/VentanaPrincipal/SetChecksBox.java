@@ -5,7 +5,7 @@
 package VentanaPrincipal;
 
 import BasedeDatos.TiposdeControlPorArchivo;
-import Entidades.TiposDeControl;
+import entidad.TiposDeControl;
 import javax.swing.JTable;
 
 /**

@@ -4,7 +4,7 @@
  */
 package documents;
 
-import BasedeDatos.GetMuestrafromRango;
+import BasedeDatos.SelectTamanioMuestra;
 import files.CreateRamdom;
 import java.io.File;
 import java.util.List;
@@ -45,9 +45,9 @@ public class GetFinalListOfDocuments extends SwingWorker<Void, Object> {
 
   @Override
   protected Void doInBackground() {
-    GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
-    muestra = GetMuestrafromRango.getMuestra();
-    idRango = GetMuestrafromRango.getIdRango();
+    SelectTamanioMuestra muestrafromRango = new SelectTamanioMuestra(tamanio);
+    muestra = SelectTamanioMuestra.getMuestra();
+    idRango = SelectTamanioMuestra.getIdRango();
     infoLabel.setText("Tamanio " + tamanio + ", muestra " + muestra + ", rango id " + idRango);
     CreateRamdom newRamdom = new CreateRamdom(documentList, getMuestra());
     finalDocumentList = newRamdom.getStack();

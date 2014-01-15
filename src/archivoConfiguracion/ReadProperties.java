@@ -4,7 +4,7 @@
  */
 package archivoConfiguracion;
 
-import Entidades.LogQualitys;
+import entidad.LogQualitys;
 import Helpers.MensajeJoptionPane;
 import java.io.FileInputStream;
 import java.io.IOException;

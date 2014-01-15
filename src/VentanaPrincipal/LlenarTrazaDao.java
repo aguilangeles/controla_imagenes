@@ -4,12 +4,12 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.ControlesporVerificacionList;
-import BasedeDatos.ArchivosPorTrazaList;
+import BasedeDatos.SelectControlesporVerificacionList;
+import BasedeDatos.SelectArchivobyTrazaList;
 import BasedeDatos.SubLotePorTrazaList;
 import BasedeDatos.Conexion;
-import Entidades.TiposDeControl;
-import Entidades.TrazaDao;
+import entidad.TiposDeControl;
+import entidad.TrazaDao;
 import Helpers.Encoder;
 import Helpers.GetIdandExtensionImg;
 import java.util.List;
@@ -42,14 +42,14 @@ public final class LlenarTrazaDao {
   }
 
   private TrazaDao llenarTrazaVolumen() {
-    List<Object> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent, true).getImagenesList();
-    List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
+    List<Object> imagenesList = new SelectArchivobyTrazaList(conexion, idTraza, parent, true).getImagenesList();
+    List<TiposDeControl> tiposList = new SelectControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     this.traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
     return traza;
   }
   private TrazaDao llenartrazaDocumento() {
     List<Object> imagenesList = new SubLotePorTrazaList(conexion, idTraza, parent).getImagenesList();
-    List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
+    List<TiposDeControl> tiposList = new SelectControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     this.traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList, true);
     return traza;
   }

@@ -4,7 +4,7 @@
  */
 package PaneldeControl;
 
-import Entidades.TiposDeControl;
+import entidad.TiposDeControl;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import BasedeDatos.Conexion;

@@ -4,7 +4,7 @@
  */
 package PaneldeControl;
 
-import Entidades.TiposDeControl;
+import entidad.TiposDeControl;
 import VentanaPrincipal.ListaControlesActivos;
 import Helpers.InputVerifier;
 import java.util.ArrayList;

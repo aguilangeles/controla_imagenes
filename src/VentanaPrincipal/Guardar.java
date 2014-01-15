@@ -6,10 +6,10 @@ package VentanaPrincipal;
 
 import BasedeDatos.UpdateCheckBoxs;
 import BasedeDatos.LlenarControles;
-import Entidades.ControlPorImagen;
+import entidad.ControlPorImagen;
 import BasedeDatos.Conexion;
-import Entidades.Imagen;
-import Entidades.TrazaDao;
+import entidad.Imagen;
+import entidad.TrazaDao;
 import Helpers.MensajeJoptionPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

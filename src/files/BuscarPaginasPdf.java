@@ -4,7 +4,7 @@
  */
 package files;
 
-import Entidades.NombrePaginaDelPDF;
+import entidad.NombrePaginaDelPDF;
 import Helpers.MensajeJoptionPane;
 import java.io.File;
 import java.io.IOException;

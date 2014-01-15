@@ -4,13 +4,13 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.GetNumerosDocumentosRechazados;
-import Entidades.Imagen;
-import Entidades.TrazaDao;
+import BasedeDatos.SelectDocsRechazados;
+import entidad.Imagen;
+import entidad.TrazaDao;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.ReporteDocumento;
-import Entidades.Sublote;
+import entidad.Sublote;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -557,8 +557,8 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void setFinalizar() {
     Guardar save = new Guardar();
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel);
-    GetNumerosDocumentosRechazados numeroRechazo =
-            new GetNumerosDocumentosRechazados(traza.getId());
+    SelectDocsRechazados numeroRechazo =
+            new SelectDocsRechazados(traza.getId());
 
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override

@@ -4,9 +4,9 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.GetNumerosImagenesRechazadas;
-import Entidades.Imagen;
-import Entidades.TrazaDao;
+import BasedeDatos.SelectImagenesRechazadas;
+import entidad.Imagen;
+import entidad.TrazaDao;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.Reporte;
@@ -429,8 +429,8 @@ public class Ventana extends javax.swing.JFrame {
   private void setFinalizar() {
     Guardar save = new Guardar();
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel);
-    GetNumerosImagenesRechazadas numeroRechazo =
-            new GetNumerosImagenesRechazadas(traza.getId());
+    SelectImagenesRechazadas numeroRechazo =
+            new SelectImagenesRechazadas(traza.getId());
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {

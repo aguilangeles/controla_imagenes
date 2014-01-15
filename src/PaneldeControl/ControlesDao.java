@@ -5,7 +5,7 @@
 package PaneldeControl;
 
 import BasedeDatos.InsertarFilasABM;
-import Entidades.ColumnaTamanio;
+import entidad.ColumnaTamanio;
 import BasedeDatos.GetUltimoIDInsertado;
 import java.sql.SQLException;
 import javax.swing.JTable;

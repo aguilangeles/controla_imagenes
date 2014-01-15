@@ -4,7 +4,7 @@
  */
 package VentanaPrincipal;
 
-import Entidades.Imagen;
+import entidad.Imagen;
 import Imagenes.ImagenesWorker;
 
 /**

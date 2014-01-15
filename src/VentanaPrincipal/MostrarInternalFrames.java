@@ -5,8 +5,8 @@
 package VentanaPrincipal;
 
 import Imagenes.ImageDrawingComponent;
-import Entidades.Imagen;
-import Entidades.TrazaDao;
+import entidad.Imagen;
+import entidad.TrazaDao;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
 import java.beans.PropertyVetoException;

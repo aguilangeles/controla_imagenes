@@ -4,7 +4,7 @@
  */
 package VentanaPrincipal;
 
-import Entidades.TiposDeControl;
+import entidad.TiposDeControl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

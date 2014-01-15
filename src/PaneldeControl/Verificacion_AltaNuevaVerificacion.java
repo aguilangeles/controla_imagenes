@@ -4,7 +4,7 @@
  */
 package PaneldeControl;
 
-import Entidades.TiposDeControl;
+import entidad.TiposDeControl;
 import BasedeDatos.GetUltimoIDInsertado;
 import VentanaPrincipal.TiposVerificacion;
 import java.awt.Rectangle;

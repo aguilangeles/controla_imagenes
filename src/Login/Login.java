@@ -8,7 +8,7 @@ import PaneldeControl.PanelControl;
 import archivoConfiguracion.SetConfigFile;
 import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
-import Entidades.Usuario;
+import entidad.Usuario;
 import BasedeDatos.GetUsuarioyCategoriaQs;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;

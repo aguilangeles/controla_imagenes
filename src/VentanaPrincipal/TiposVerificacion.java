@@ -4,8 +4,8 @@
  */
 package VentanaPrincipal;
 
-import Entidades.Control;
-import Entidades.TiposDeControl;
+import entidad.Control;
+import entidad.TiposDeControl;
 import java.util.List;
 
 /**

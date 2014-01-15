@@ -4,8 +4,8 @@
  */
 package VentanaPrincipal;
 
-import Entidades.TiposDeControl;
-import Entidades.TrazaDao;
+import entidad.TiposDeControl;
+import entidad.TrazaDao;
 import Helpers.ButtonEditor;
 import Helpers.ButtonRenderer;
 import java.awt.event.ActionEvent;

@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import BasedeDatos.Conexion;
-import Entidades.LogQualitys;
+import entidad.LogQualitys;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
 import javax.swing.ImageIcon;

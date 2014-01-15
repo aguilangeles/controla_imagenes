@@ -4,7 +4,7 @@
  */
 package files;
 
-import BasedeDatos.GetMuestrafromRango;
+import BasedeDatos.SelectTamanioMuestra;
 import VentanaPrincipal.WorkerImage;
 import java.io.File;
 import java.util.List;
@@ -50,9 +50,9 @@ public class GetFinalListOfImages extends SwingWorker<Void, Object> {
     imageList = searchImages.getImageList();
     finalImageList = new SwitchImageList(infoLabel).switchExtension(imageList);
     tamanio = finalImageList.size();
-    GetMuestrafromRango muestrafromRango = new GetMuestrafromRango(tamanio);
-    muestra = GetMuestrafromRango.getMuestra();
-    idRango = GetMuestrafromRango.getIdRango();
+    SelectTamanioMuestra muestrafromRango = new SelectTamanioMuestra(tamanio);
+    muestra = SelectTamanioMuestra.getMuestra();
+    idRango = SelectTamanioMuestra.getIdRango();
     infoLabel.setText("Tamanio " + tamanio + ", muestra " + muestra + ", rango id " + idRango);
     return null;
   }

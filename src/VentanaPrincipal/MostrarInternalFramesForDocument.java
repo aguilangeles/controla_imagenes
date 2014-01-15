@@ -5,11 +5,11 @@
 package VentanaPrincipal;
 
 import Imagenes.ImageDrawingComponent;
-import Entidades.Imagen;
-import Entidades.TrazaDao;
+import entidad.Imagen;
+import entidad.TrazaDao;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
-import Entidades.Sublote;
+import entidad.Sublote;
 import java.beans.PropertyVetoException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;

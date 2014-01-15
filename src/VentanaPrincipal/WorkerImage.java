@@ -5,7 +5,7 @@
 package VentanaPrincipal;
 
 import BasedeDatos.Conexion;
-import BasedeDatos.GetMuestrafromRango;
+import BasedeDatos.SelectTamanioMuestra;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevaTraza;
 import Helpers.GetIdandExtensionImg;

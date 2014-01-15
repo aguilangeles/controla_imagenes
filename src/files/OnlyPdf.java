@@ -4,10 +4,12 @@
  */
 package files;
 
-import Entidades.ImagenInsertada;
-import Entidades.Sublote;
+import BasedeDatos.InsertarArchivoSublote;
+import BasedeDatos.InsertarEnSublotes;
+import entidad.ImagenInsertada;
+import entidad.Sublote;
 import BasedeDatos.InsertTrazaArchivoContolYEstado;
-import Entidades.NombrePaginaDelPDF;
+import entidad.NombrePaginaDelPDF;
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevoArchivo;
@@ -87,7 +89,7 @@ public class OnlyPdf {
   }
 
   private void archivoSublote(int idtraza, int idarchivo, int idsublote) {
-    Insertar_archivo_sublote insertar_archivo_sublote = new Insertar_archivo_sublote(conexion, idtraza, idarchivo, idsublote);
+    InsertarArchivoSublote insertar_archivo_sublote = new InsertarArchivoSublote(conexion, idtraza, idarchivo, idsublote);
   }
 
   private void imagenyControl() {

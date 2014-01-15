@@ -7,7 +7,7 @@ package PaneldeControl;
 import VentanaPrincipal.WorkerImage;
 import java.util.ArrayList;
 import java.util.List;
-import Entidades.Usuario;
+import entidad.Usuario;
 import Helpers.VersionEImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;

@@ -5,8 +5,8 @@
 package documents;
 
 import documents.SwitchImagesForDocument;
-import Entidades.ImagenInsertada;
-import Entidades.Sublote;
+import entidad.ImagenInsertada;
+import entidad.Sublote;
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import Helpers.GetIdandExtensionImg;

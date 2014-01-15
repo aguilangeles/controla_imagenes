@@ -4,8 +4,8 @@
  */
 package documents;
 
-import Entidades.ImagenInsertada;
-import Entidades.NombrePaginaDelPDF;
+import entidad.ImagenInsertada;
+import entidad.NombrePaginaDelPDF;
 import Helpers.MensajeJoptionPane;
 import java.io.File;
 import java.io.IOException;
