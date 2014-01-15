@@ -4,9 +4,9 @@
  */
 package BasedeDatos;
 
-import Entidades.Imagen;
+import entidad.Imagen;
 import Helpers.MensajeJoptionPane;
-import Entidades.Sublote;
+import entidad.Sublote;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

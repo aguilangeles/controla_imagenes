@@ -16,22 +16,27 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class GetNumerosDocumentosRechazados {
+public class SelectDocsRechazados {
 
-  private static final String className = GetNumerosDocumentosRechazados.class.getName();
+  private static final String className = SelectDocsRechazados.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
+  //
   private List<Integer> idSubloteRechazado = new ArrayList<>();
 
-  public GetNumerosDocumentosRechazados(int idTraza) {
+  public SelectDocsRechazados(int idTraza) {
+    getDocumentsValue1(idTraza);
+  }
+
+  private void getDocumentsValue1(int idTraza) {
     int contador = 0;
     int numero = 0;
-    Conexion c = new Conexion();
-    if (c.isConexion())
+    Conexion conexion = new Conexion();
+    if (conexion.isConexion())
       {
       try
         {
-        String q = "SELECT  distinct "
+        String query = "SELECT  distinct "
                 + " ars.idsublote "
                 + " from archivo a "
                 + " join qualitys.archivo_sublote ars "
@@ -40,49 +45,21 @@ public class GetNumerosDocumentosRechazados {
                 + " on ars.idsublote= ss.id "
                 + " where a.idtraza = " + idTraza
                 + " and a.estado = 1;";
-        c.executeQuery(q);
-        while (c.resulset.next())
+        conexion.executeQuery(query);
+        while (conexion.resulset.next())
           {
           contador++;
-          numero = c.resulset.getInt(1);
+          numero = conexion.resulset.getInt(1);
           idSubloteRechazado.add(numero);
           }
-        String update = "UPDATE `qualitys`.`traza` "
-                + "SET `nro_rechazo` = " + contador
-                + " WHERE id = " + idTraza + ";";
-        c.executeUpdate(update);
-        c.isConexionClose();
-        } catch (SQLException ex)
-        {
-        msg.getMessage(ex.getMessage(), className);
-        }
-      }
-    iterar();
-  }
-
-  private void iterar() {
-    for (Integer in : idSubloteRechazado)
-      {
-      setearEstadoDocumento(in);
-      }
-  }
-
-  private void setearEstadoDocumento(int idSublote) {
-    Conexion conexion = new Conexion();
-    if (conexion.isConexion())
-      {
-      try
-        {
-        String update = "UPDATE `qualitys`.`sublotes`"
-                + " SET"
-                + "`estado` = 1"
-                + " WHERE id= " + idSublote + ";";
-        conexion.executeUpdate(update);
+        UpdateNroRechazoDocsInTraza updateNroRechazoDocsInTraza =
+                new UpdateNroRechazoDocsInTraza(conexion, idTraza, contador);
         conexion.isConexionClose();
         } catch (SQLException ex)
         {
         msg.getMessage(ex.getMessage(), className);
         }
       }
+    SetEstadoDocumentoInSublote setEstadoDocumentoInSublote = new SetEstadoDocumentoInSublote(idSubloteRechazado);
   }
 }

@@ -4,7 +4,7 @@
  */
 package BasedeDatos;
 
-import Entidades.ControlPorImagen;
+import entidad.ControlPorImagen;
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;

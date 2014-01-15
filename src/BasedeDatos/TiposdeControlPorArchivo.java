@@ -4,7 +4,7 @@
  */
 package BasedeDatos;
 
-import Entidades.TiposDeControl;
+import entidad.TiposDeControl;
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;

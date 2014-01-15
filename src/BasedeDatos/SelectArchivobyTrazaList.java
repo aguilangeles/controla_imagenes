@@ -25,10 +25,10 @@ public class SelectArchivobyTrazaList {
   MensajeJoptionPane mensaje = new MensajeJoptionPane(null, type);
 
   public SelectArchivobyTrazaList(Conexion conexion, int idTraza, String parent, boolean isVolume) {
-    getImagenNombrePagina(conexion, idTraza, parent);
+    getArchivo(conexion, idTraza, parent);
   }
 
-  private void getImagenNombrePagina(Conexion conexion, int idTraza, String parent) {
+  private void getArchivo(Conexion conexion, int idTraza, String parent) {
     Imagen imagen;
     try
       {
