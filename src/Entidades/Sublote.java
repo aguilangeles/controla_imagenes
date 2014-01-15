@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package TratarFile;
+package Entidades;
 
 import java.util.List;
 
 /**
- *
+ * Clase para el control básico de documento.
  * @author aguilangeles@gmail.com
  */
 public class Sublote {
@@ -18,7 +18,7 @@ public class Sublote {
   private int estado;
   private List<ImagenInsertada> imagenes;
   private int tamanio;
-  private List<Object> imagenList;
+  private List<Object> objectList;
 
   public Sublote(int id, int idtraza, String nombre, int estado, List<ImagenInsertada> imagenes, int tamanio) {
     this.id = id;
@@ -29,21 +29,21 @@ public class Sublote {
     this.tamanio = tamanio;
   }
 
-  public Sublote(int id, int idtraza, String nombre, int estado, int tamanio, List<Object> imagenList) {
+  public Sublote(int id, int idtraza, String nombre, int estado, int tamanio, List<Object> objectList) {
     this.id = id;
     this.idtraza = idtraza;
     this.nombre = nombre;
     this.estado = estado;
     this.tamanio = tamanio;
-    this.imagenList = imagenList;
+    this.objectList = objectList;
   }
 
-  public List<Object> getImagenList() {
-    return imagenList;
+  public List<Object> objectList() {
+    return objectList;
   }
 
-  public void setImagenList(List<Object> imagenList) {
-    this.imagenList = imagenList;
+  public void setImagenList(List<Object> objectList) {
+    this.objectList = objectList;
   }
 
   public int getId() {
@@ -101,7 +101,7 @@ public class Sublote {
 
   @Override
   public String toString() {
-    return "Sublote{" + "id=" + id + ", idtraza=" + idtraza + ", nombre=" + nombre + ", estado=" + estado + ", imagenes=" + imagenes + ", tamanio=" + tamanio + ", imagenList=" + imagenList + '}';
+    return "Sublote{" + "id=" + id + ", idtraza=" + idtraza + ", nombre=" + nombre + ", estado=" + estado + ", imagenes=" + imagenes + ", tamanio=" + tamanio + ", imagenList=" + objectList + '}';
   }
 
 

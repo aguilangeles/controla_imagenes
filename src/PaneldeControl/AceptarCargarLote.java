@@ -6,10 +6,10 @@ package PaneldeControl;
 
 import BasedeDatos.IdControlFromVerificacionList;
 import BasedeDatos.Conexion;
-import Helpers.GetExtensionIdImagen;
-import TratarFile.IdentificarExtension;
-import TratarFile.IdentificarExtensionSublote;
-import TratarFile.GetParentName;
+import Helpers.GetIdandExtensionImg;
+import files.GetFinalListOfImages;
+import documents.GetFinalListOfDocuments;
+import Helpers.GetParent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,19 +73,19 @@ public class AceptarCargarLote {
     File[] files = file.listFiles();//lista los mismos
     getControlesPorVerificacion();//controles de la verificacion seleccionada
     conexion.isConexionClose();////cierra conexion
-    GetParentName parent = new GetParentName(files); // trae la ruta completa
-    IdentificarExtension idext = new IdentificarExtension(cargarLoteFrame, infoJLabel, idtipoControlList, file, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+    GetParent parent = new GetParent(files); // trae la ruta completa
+    GetFinalListOfImages idext = new GetFinalListOfImages(cargarLoteFrame, infoJLabel, idtipoControlList, file, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
     idext.execute();
     aceptarButton.setEnabled(false);
   }
 
   private void getDocumentos(File file) {
     ContadorSublotes contadorSublotes = new ContadorSublotes(file);
-    GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(ContadorSublotes.getExtension());
+    GetIdandExtensionImg extensionIdImagen = new GetIdandExtensionImg(ContadorSublotes.getExtension());
     List<Object> listaIdc = contadorSublotes.getDocumentoList();
     getControlesPorVerificacion();
     conexion.isConexion();
-    IdentificarExtensionSublote idext = new IdentificarExtensionSublote(cargarLoteFrame, infoJLabel, idtipoControlList, file, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), listaIdc);
+    GetFinalListOfDocuments idext = new GetFinalListOfDocuments(cargarLoteFrame, infoJLabel, file, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), idtipoControlList, listaIdc);
     idext.execute();
     aceptarButton.setEnabled(false);
 

@@ -2,12 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package TratarFile;
+package files;
 
+import Entidades.ImagenInsertada;
+import Entidades.Sublote;
 import BasedeDatos.InsertTrazaArchivoContolYEstado;
+import Entidades.NombrePaginaDelPDF;
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevoArchivo;
+import PaneldeControl.ContadorSublotes;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -15,47 +19,51 @@ import javax.swing.JLabel;
  *
  * @author aguilangeles@gmail.com
  */
-public class Tif_Png_Jpg {
+public class OnlyPdf {
 
   private Conexion conexion;
-  private int muestra, idTraza;
+  private int muestra,idTraza;
   private String parent;
+  private CreateRamdom crearRamdom;
   private JLabel infoLabel;
   private List<Integer> idControl;
+  private static CreateRamdom ramdom;
   private List<Sublote> sublotes;
-  private static CrearElRamdom ramdom;
 
-  public Tif_Png_Jpg(JLabel infoLabel, Conexion conexion, int muestra, int idTraza, String parent, List<Integer> idControl, List<Object> listaImagenes) {
+  public OnlyPdf(JLabel infoLabel, Conexion conexion, int muestra, int idTraza, String parent, List<Integer> idControl, List<Object> listaImagenes) {
+    this.infoLabel = infoLabel;
     this.conexion = conexion;
     this.muestra = muestra;
     this.idTraza = idTraza;
     this.parent = parent;
-    this.infoLabel = infoLabel;
     this.idControl = idControl;
-    ramdom = new CrearElRamdom(listaImagenes, muestra);
-    Tif_Png_Jpg();
+    ramdom = new CreateRamdom(listaImagenes, muestra);
+    insertPagePdf();
   }
 
-  public Tif_Png_Jpg(Conexion conexion, int muestra, int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
+  public OnlyPdf(Conexion conexion, int muestra, int idTraza, List<Object> listaImagenes, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
+    this.parent = ContadorSublotes.getParent();
     this.conexion = conexion;
     this.muestra = muestra;
     this.idTraza = idTraza;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.sublotes = sublotes;
-    InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza); // lista de sublotes
+    InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza);
     pruebainsertarImagen();
   }
 
-  private void Tif_Png_Jpg() {
-    List<Object> ramdomList = ramdom.getStack();
-    for (Object obj : ramdomList)
+  private void insertPagePdf() {//voy a cambiar por stack
+
+    List<Object> ramdomPdf = ramdom.getStack();
+    for (Object o : ramdomPdf)
       {
-      String aImagen = (String) obj;
+      NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
       int parentlength = parent.length() + 1;
-      String adaptarFile = aImagen.substring(parentlength);
+      String adaptarFile = pagina.getNombre().substring(parentlength);
       String filename = adaptarFile.replace("\\", "\\\\");
-      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, 0, infoLabel, 1);
+      int page = pagina.getNumeroPagina();
+      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, page, infoLabel, 1);
       imagenyControl();
       }
   }
@@ -66,14 +74,13 @@ public class Tif_Png_Jpg {
       {
       for (ImagenInsertada img : s.getImagenes())
         {
-        cargarimagen(img, idTraza, s.getId());
+        cargarImagen(img, idTraza, s.getId());
         imagenyControl();
         }
       }
   }
 
-  private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
-    int estado = 0;
+  private void cargarImagen(ImagenInsertada img, int idtraza, int idsublote) {
     InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2);
     int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
     archivoSublote(idtraza, ultimoid, idsublote);

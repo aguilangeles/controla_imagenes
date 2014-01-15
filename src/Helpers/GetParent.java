@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package TratarFile;
+package Helpers;
 
 import java.io.File;
 
@@ -11,15 +11,15 @@ import java.io.File;
  *
  * @author MUTNPROD003
  */
-public final class GetParentName {
+public final class GetParent {
 
   private static String parent;
 
-  public GetParentName(File[] files) {
-    parent = encontrarParent2(files);
+  public GetParent(File[] files) {
+    parent = searchParent(files);
   }
 
-  private static String encontrarParent2(File[] files) {
+  private static String searchParent(File[] files) {
     String ret = (files[0].getParent());
     for (int x = 0; x < files.length; x++)
       {

@@ -10,7 +10,7 @@ import Entidades.TrazaDao;
 import Helpers.RutaMouseListener;
 import Helpers.VersionEImageIcon;
 import ReporteLote.ReporteDocumento;
-import TratarFile.Sublote;
+import Entidades.Sublote;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,9 +37,8 @@ public class VentanaDocumentos extends javax.swing.JFrame {
    * Creates new form Ventana
    *
    * @param trazadao
-   * @param sublotes
    */
-  public VentanaDocumentos(TrazaDao trazadao, List<Sublote> sublotes) {
+  public VentanaDocumentos(TrazaDao trazadao) {
     iniciar(trazadao);
     setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
@@ -357,21 +356,21 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private int getLastIdArchivo() {
     int sizeSub = mapSublote.size() - 1;
     Sublote sublote = mapSublote.get(sizeSub);
-    int ultimo = sublote.getImagenList().size() - 1;
-    Imagen im = (Imagen) sublote.getImagenList().get(ultimo);
+    int ultimo = sublote.objectList().size() - 1;
+    Imagen im = (Imagen) sublote.objectList().get(ultimo);
     return im.getId();
   }
 
   private int getFirstIdArchivo() {
     Sublote sublote = mapSublote.get(0);
-    Imagen im = (Imagen) sublote.getImagenList().get(0);
+    Imagen im = (Imagen) sublote.objectList().get(0);
     return im.getId();
   }
 
   private void nextDocument() {
     int nextdoc = getNumerosublote();
     Sublote s = mapSublote.get(nextdoc);
-    Imagen imagen = (Imagen) s.getImagenList().get(0);
+    Imagen imagen = (Imagen) s.objectList().get(0);
     int id = imagen.getId() - 1;
     setIdArchivo(id);
     setNumerosublote(nextdoc);
@@ -381,7 +380,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void backDocument() {
     int previus = getSubNumero() - 1;
     Sublote subPrevius = getsublotebyId(previus);
-    Imagen imgPrevius = (Imagen) subPrevius.getImagenList().get(1);
+    Imagen imgPrevius = (Imagen) subPrevius.objectList().get(1);
     setSubNumero(previus);
     setIdArchivo(imgPrevius.getId());
     setNumerodeImagen(2);
@@ -454,9 +453,9 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       {
       Sublote sublote1 = (Sublote) objList.get(i);
       mapSublote.put(i, sublote1);
-      for (int j = 0; j < sublote1.getImagenList().size(); j++)
+      for (int j = 0; j < sublote1.objectList().size(); j++)
         {
-        Object object = sublote1.getImagenList().get(j);
+        Object object = sublote1.objectList().get(j);
         Imagen imagen = (Imagen) object;
         mapa.put(imagen.getId(), imagen);
         }
@@ -466,7 +465,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
   private void getFirstImage(VersionEImageIcon version) {
     Sublote sublote = mapSublote.get(0);
-    Imagen im = (Imagen) sublote.getImagenList().get(0);
+    Imagen im = (Imagen) sublote.objectList().get(0);
     idArchivo = im.getId();
     idSublote = sublote.getId();
     Imagen siguientes = getImagenWithSublote(idArchivo);//trae el ramdom
@@ -506,7 +505,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     if (idsub != idSublote)
       {
       nroSublote--;
-      setNumerodeImagen(sb.getImagenList().size());
+      setNumerodeImagen(sb.objectList().size());
       setSubNumero(idsub);
       }
     if (nroSublote == 1)

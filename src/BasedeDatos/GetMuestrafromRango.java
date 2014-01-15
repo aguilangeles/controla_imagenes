@@ -15,15 +15,14 @@ import javax.swing.JOptionPane;
  * @author MUTNPROD003
  */
 public class GetMuestrafromRango {
-
-  private Conexion conexion = new Conexion();
-  private static int muestra, idRango;
   private static final String className = GetMuestrafromRango.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
+//
+  private Conexion conexion = new Conexion();
+  private static int muestra, idRango;
 
   public GetMuestrafromRango(int tamanioLote) {
-    //tocado para que funcione con muestra en imagenes o muestra en idc
     muestraRango(tamanioLote);
   }
 

@@ -5,9 +5,8 @@
 package Entidades;
 
 import Helpers.Decoder;
-import Helpers.GetExtensionIdImagen;
+import Helpers.GetIdandExtensionImg;
 import Helpers.GetImagenesAdyacentes;
-import TratarFile.Sublote;
 
 /**
  * @author MUTNPROD003
@@ -35,7 +34,7 @@ public class Imagen {
 
   public Imagen(int id, String rutaImagen, int pagina, String parent, Sublote sublote) {
     this.id = id;
-    int idImagen = GetExtensionIdImagen.getIdImagen();
+    int idImagen = GetIdandExtensionImg.getIdImagen();
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;
     this.parent = parent;

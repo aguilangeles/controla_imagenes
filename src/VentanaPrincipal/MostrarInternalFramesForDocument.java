@@ -9,7 +9,7 @@ import Entidades.Imagen;
 import Entidades.TrazaDao;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
-import TratarFile.Sublote;
+import Entidades.Sublote;
 import java.beans.PropertyVetoException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;

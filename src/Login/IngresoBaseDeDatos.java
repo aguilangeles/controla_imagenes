@@ -6,7 +6,7 @@ package Login;
 
 import Helpers.InputVerifier;
 import BasedeDatos.Conexion;
-import ArchivoConfig.ReadProperties;
+import archivoConfiguracion.ReadProperties;
 import Entidades.LogQualitys;
 import Helpers.VersionEImageIcon;
 

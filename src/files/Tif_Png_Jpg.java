@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package TratarFile;
+package files;
 
+import Entidades.ImagenInsertada;
+import Entidades.Sublote;
 import BasedeDatos.InsertTrazaArchivoContolYEstado;
-import Entidades.NombrePaginaDelPDF;
 import BasedeDatos.Conexion;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevoArchivo;
-import PaneldeControl.ContadorSublotes;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -17,51 +17,47 @@ import javax.swing.JLabel;
  *
  * @author aguilangeles@gmail.com
  */
-public class OnlyPdf {
+public class Tif_Png_Jpg {
 
   private Conexion conexion;
-  private int muestra,idTraza;
+  private int muestra, idTraza;
   private String parent;
-  private CrearElRamdom crearRamdom;
   private JLabel infoLabel;
   private List<Integer> idControl;
-  private static CrearElRamdom ramdom;
   private List<Sublote> sublotes;
+  private static CreateRamdom ramdom;
 
-  public OnlyPdf(JLabel infoLabel, Conexion conexion, int muestra, int idTraza, String parent, List<Integer> idControl, List<Object> listaImagenes) {
-    this.infoLabel = infoLabel;
+  public Tif_Png_Jpg(JLabel infoLabel, Conexion conexion, int muestra, int idTraza, String parent, List<Integer> idControl, List<Object> listaImagenes) {
     this.conexion = conexion;
     this.muestra = muestra;
     this.idTraza = idTraza;
     this.parent = parent;
+    this.infoLabel = infoLabel;
     this.idControl = idControl;
-    ramdom = new CrearElRamdom(listaImagenes, muestra);
-    insertPagePdf();
+    ramdom = new CreateRamdom(listaImagenes, muestra);
+    Tif_Png_Jpg();
   }
 
-  public OnlyPdf(Conexion conexion, int muestra, int idTraza, List<Object> listaImagenes, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
-    this.parent = ContadorSublotes.getParent();
+  public Tif_Png_Jpg(Conexion conexion, int muestra, int idTraza, JLabel infoLabel, List<Integer> idControl, List<Sublote> sublotes) {
     this.conexion = conexion;
     this.muestra = muestra;
     this.idTraza = idTraza;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.sublotes = sublotes;
-    InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza);
+    InsertarEnSublotes insertarEnSublotes = new InsertarEnSublotes(conexion, sublotes, idTraza); // lista de sublotes
     pruebainsertarImagen();
   }
 
-  private void insertPagePdf() {//voy a cambiar por stack
-
-    List<Object> ramdomPdf = ramdom.getStack();
-    for (Object o : ramdomPdf)
+  private void Tif_Png_Jpg() {
+    List<Object> ramdomList = ramdom.getStack();
+    for (Object obj : ramdomList)
       {
-      NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
+      String aImagen = (String) obj;
       int parentlength = parent.length() + 1;
-      String adaptarFile = pagina.getNombre().substring(parentlength);
+      String adaptarFile = aImagen.substring(parentlength);
       String filename = adaptarFile.replace("\\", "\\\\");
-      int page = pagina.getNumeroPagina();
-      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, page, infoLabel, 1);
+      InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, 0, infoLabel, 1);
       imagenyControl();
       }
   }

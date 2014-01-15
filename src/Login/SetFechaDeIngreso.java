@@ -4,7 +4,7 @@
  */
 package Login;
 
-import ArchivoConfig.SetConfigFile;
+import archivoConfiguracion.SetConfigFile;
 import BasedeDatos.Conexion;
 import Entidades.Usuario;
 import Helpers.MensajeJoptionPane;

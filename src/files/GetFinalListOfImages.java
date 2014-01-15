@@ -5,7 +5,7 @@
 package files;
 
 import BasedeDatos.GetMuestrafromRango;
-import VentanaPrincipal.Worker;
+import VentanaPrincipal.WorkerImage;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFrame;
@@ -66,7 +66,7 @@ public class GetFinalListOfImages extends SwingWorker<Void, Object> {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
-            Worker worker = new Worker(frame, infoLabel, controlesList, finalImageList, idDocumento, idVerificacion, getMuestra(), getIdRango());
+            WorkerImage worker = new WorkerImage(frame, infoLabel, controlesList, finalImageList, idDocumento, idVerificacion, getMuestra(), getIdRango());
             worker.execute();
           }
         });

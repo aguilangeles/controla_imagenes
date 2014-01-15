@@ -5,14 +5,14 @@
 package VentanaPrincipal;
 
 import BasedeDatos.Conexion;
+import BasedeDatos.GetMuestrafromRango;
 import BasedeDatos.GetUltimoIDInsertado;
 import BasedeDatos.InsertarNuevaTraza;
-import Helpers.GetExtensionIdImagen;
-import PaneldeControl.ContadorSublotes;
-import TratarFile.GetImagenesList;
-import TratarFile.OnlyPdf;
-import TratarFile.Sublote;
-import TratarFile.Tif_Png_Jpg;
+import Helpers.GetIdandExtensionImg;
+import Helpers.GetUltimaCarpeta;
+import Helpers.GetParent;
+import files.OnlyPdf;
+import files.Tif_Png_Jpg;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,45 +22,39 @@ import javax.swing.SwingWorker;
  *
  * @author MUTNPROD003
  */
-public class WorkerSubLote extends SwingWorker<Object, Object> {
+public class WorkerImage extends SwingWorker<Object, Object> {
 
   private Conexion conexion = new Conexion();
   private JFrame cargaLote;// lo necesito para mostrar el conteo
   private JLabel infoLabel;
   private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
   private List<Object> listaImagenes;
-  private String parent, extension, ultimaCarpeta;
-  private int idDocumento, idVerificacion, muestra, tamanioLote;
-  private int idRango, contador;
-  private int idTraza;
-  private List<Sublote> sublotes;
+  private String parent, ultimaCarpeta;
+  private int idTraza, idDocumento, idVerificacion, muestra, tamanioLote, idRango;
 
-  public WorkerSubLote(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion, int muestra, int tamanioLote, int idRango) {
+  public WorkerImage(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion, int muestra, int idRango) {
     this.cargaLote = controles;
     this.infoLabel = infoLabel;
     this.idControl = idControl;
     this.listaImagenes = listaImagenes;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
-    this.tamanioLote = tamanioLote;//
-    this.parent = ContadorSublotes.getParent();
-    this.extension = ContadorSublotes.getExtension();//la uso_
+    this.tamanioLote = listaImagenes.size();
+    this.parent = GetParent.getParent();
+    this.ultimaCarpeta = GetUltimaCarpeta.getLastFolder(parent);
     this.muestra = muestra;
     this.idRango = idRango;
-    this.ultimaCarpeta = ContadorSublotes.getUltimaCarpeta();
   }
 
   @Override
   protected String doInBackground() {
     if (conexion.isConexion())
       {
-      int idImagen = GetExtensionIdImagen.getIdImagen();
       idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
       InsertarNuevaTraza insertarNuevaTraza =
               new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
               tamanioLote, parent, ultimaCarpeta, muestra, idRango);
-      GetImagenesList imagenesList = new GetImagenesList(listaImagenes, conexion, idTraza);
-      sublotes = imagenesList.getSubloteList();
+      int idImagen = GetIdandExtensionImg.getIdImagen();
       switch (idImagen)
         {
         case 1:
@@ -91,28 +85,22 @@ public class WorkerSubLote extends SwingWorker<Object, Object> {
       {
       int resultado = idTraza + 1;
       trazaID = (resultado == 0) ? 1 : resultado;
-      LlenarTrazaDao trazaDao = new LlenarTrazaDao(trazaID, parent, con, true);
-      new VentanaDocumentos(trazaDao.getTraza(), sublotes).setVisible(true);
+      LlenarTrazaDao trazaDao = new LlenarTrazaDao(con, trazaID, parent);
+      new Ventana(trazaDao.getTraza()).setVisible(true);
       }
     con.isConexionClose();
     cargaLote.dispose();
   }
 
   private void Tif_Png_Jpg() {
-    Tif_Png_Jpg varios = new Tif_Png_Jpg(conexion, muestra, idTraza, infoLabel, idControl, sublotes);
+    Tif_Png_Jpg insertarFormatos_tifPngJpg =
+            new Tif_Png_Jpg(infoLabel, conexion, muestra, idTraza,
+            parent, idControl, listaImagenes);
   }
 
   private void OnlyPdf() {
     OnlyPdf onlyPdf =
-            new OnlyPdf(conexion, muestra, idTraza,
-            listaImagenes, infoLabel, idControl, sublotes);
-  }
-
-  public String getExtension() {
-    return extension;
-  }
-
-  public String getParent() {
-    return parent;
+            new OnlyPdf(infoLabel, conexion, muestra, idTraza,
+            parent, idControl, listaImagenes);
   }
 }

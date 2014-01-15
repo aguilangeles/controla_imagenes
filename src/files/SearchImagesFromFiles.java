@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package TratarFile;
+package files;
 
-import Helpers.GetExtensionIdImagen;
+import Helpers.GetIdandExtensionImg;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,12 +15,12 @@ import javax.swing.JLabel;
  *
  * @author aguilangeles@gmail.com
  */
-public class ListaRecursiva {
+public class SearchImagesFromFiles {
 
   private JLabel infoLabel;
-  private List<Object> listaExtension = new ArrayList<>();
+  private List<Object> imageList = new ArrayList<>();
 
-  public ListaRecursiva(JLabel infoLabel, File file) {
+  public SearchImagesFromFiles(JLabel infoLabel, File file) {
     this.infoLabel = infoLabel;
     buscarExtensiones(file);
   }
@@ -47,14 +47,14 @@ public class ListaRecursiva {
       String exts = spl[1];
       if (!exts.equalsIgnoreCase("txt") && !exts.equalsIgnoreCase("xml"))
         {
-        GetExtensionIdImagen extensionIdImagen = new GetExtensionIdImagen(exts);
-        listaExtension.add(file.getAbsolutePath());
-        Collections.shuffle(listaExtension);
+        GetIdandExtensionImg extensionIdImagen = new GetIdandExtensionImg(exts);
+        imageList.add(file.getAbsolutePath());
+        Collections.shuffle(imageList);
         }
       }
   }
 
-  public List<Object> getListaExtensionImagen() {
-    return listaExtension;
+  public List<Object> getImageList() {
+    return imageList;
   }
 }

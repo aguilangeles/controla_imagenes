@@ -20,10 +20,11 @@ import java.util.List;
  */
 public final class LlenarTrazaDao {
 
-  private TrazaDao traza;
   private Conexion conexion;
   private int idTraza;
   private String parent;
+  //
+  private TrazaDao traza;
   private int idImg = GetIdandExtensionImg.getIdImagen();
 
   public LlenarTrazaDao(Conexion con, int trazaID, String parent) {
@@ -43,13 +44,13 @@ public final class LlenarTrazaDao {
   private TrazaDao llenarTrazaVolumen() {
     List<Object> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent, true).getImagenesList();
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
-    traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
+    this.traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
     return traza;
   }
   private TrazaDao llenartrazaDocumento() {
     List<Object> imagenesList = new SubLotePorTrazaList(conexion, idTraza, parent).getImagenesList();
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
-    traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList, true);
+    this.traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList, true);
     return traza;
   }
 

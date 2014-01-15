@@ -4,7 +4,7 @@
  */
 package PaneldeControl;
 
-import VentanaPrincipal.Worker;
+import VentanaPrincipal.WorkerImage;
 import java.util.ArrayList;
 import java.util.List;
 import Entidades.Usuario;
@@ -23,7 +23,7 @@ public class CargarLote extends javax.swing.JFrame {
   private BasedeDatos.Conexion con = new BasedeDatos.Conexion();
   private List<Integer> idTipoControl = new ArrayList<>();
   private int idVerificacion;
-  private Worker worker;
+  private WorkerImage worker;
   private JComboBox documentos, verificacion;
   private JFrame panelControl;
 
@@ -78,6 +78,7 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel2.setText("Ruta");
 
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    rutaCarpeta.setText("c:/angeles/testeo/gnd3");
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     aceptarSeleccion.setMnemonic('c');

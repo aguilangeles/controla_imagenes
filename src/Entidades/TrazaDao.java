@@ -4,7 +4,6 @@
  */
 package Entidades;
 
-import TratarFile.Sublote;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -37,7 +36,7 @@ public class TrazaDao {
     for (Object object : objList)
       {
       Sublote sub = (Sublote) object;
-      List<Object> ob = sub.getImagenList();
+      List<Object> ob = sub.objectList();
       for (int i = 0; i < ob.size(); i++)
         {
         Object object1 = ob.get(i);

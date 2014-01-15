@@ -5,7 +5,7 @@
 package Login;
 
 import PaneldeControl.PanelControl;
-import ArchivoConfig.SetConfigFile;
+import archivoConfiguracion.SetConfigFile;
 import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
 import Entidades.Usuario;
@@ -68,9 +68,11 @@ public class Login extends javax.swing.JFrame {
     jLabel2.setText("Password");
 
     user.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    user.setText("carga");
     user.setNextFocusableComponent(password);
 
     password.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    password.setText("carga");
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     entrar.setMnemonic('e');
