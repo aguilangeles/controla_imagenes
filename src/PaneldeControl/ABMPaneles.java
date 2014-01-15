@@ -5,7 +5,7 @@
 package PaneldeControl;
 
 import entidad.ColumnaTamanio;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import Helpers.TextAreaRenderer;
 import java.awt.Rectangle;
 import java.util.List;

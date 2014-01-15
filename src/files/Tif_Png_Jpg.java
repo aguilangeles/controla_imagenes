@@ -4,14 +4,14 @@
  */
 package files;
 
-import BasedeDatos.InsertarArchivoSublote;
-import BasedeDatos.InsertarEnSublotes;
+import database.InsertarArchivoSublote;
+import database.InsertarEnSublotes;
 import entidad.ImagenInsertada;
 import entidad.Sublote;
-import BasedeDatos.InsertTrazaArchivoContolYEstado;
-import BasedeDatos.Conexion;
-import BasedeDatos.GetUltimoIDInsertado;
-import BasedeDatos.InsertarNuevoArchivo;
+import database.InsertTrazaArchivoContol;
+import database.Conexion;
+import database.SelectLastID;
+import database.InsertarNuevoArchivo;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -79,7 +79,7 @@ public class Tif_Png_Jpg {
   private void cargarimagen(ImagenInsertada img, int idtraza, int idsublote) {
     int estado = 0;
     InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2);
-    int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
+    int ultimoid = new SelectLastID(conexion, "archivo").getUltimoID();
     archivoSublote(idtraza, ultimoid, idsublote);
   }
 
@@ -88,7 +88,7 @@ public class Tif_Png_Jpg {
   }
 
   private void imagenyControl() {
-    InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado =
-            new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion);
+    InsertTrazaArchivoContol insertTrazaArchivoContolYEstado =
+            new InsertTrazaArchivoContol(idTraza, idControl, conexion);
   }
 }

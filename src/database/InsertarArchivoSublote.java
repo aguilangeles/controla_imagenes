@@ -2,16 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
-import BasedeDatos.Conexion;
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
  * completa la tabla qualitys.archivo_sublote
- * 
+ *
  * @author aguilangeles@gmail.com
  */
 public class InsertarArchivoSublote {

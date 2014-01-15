@@ -4,15 +4,15 @@
  */
 package files;
 
-import BasedeDatos.InsertarArchivoSublote;
-import BasedeDatos.InsertarEnSublotes;
+import database.InsertarArchivoSublote;
+import database.InsertarEnSublotes;
 import entidad.ImagenInsertada;
 import entidad.Sublote;
-import BasedeDatos.InsertTrazaArchivoContolYEstado;
+import database.InsertTrazaArchivoContol;
 import entidad.NombrePaginaDelPDF;
-import BasedeDatos.Conexion;
-import BasedeDatos.GetUltimoIDInsertado;
-import BasedeDatos.InsertarNuevoArchivo;
+import database.Conexion;
+import database.SelectLastID;
+import database.InsertarNuevoArchivo;
 import PaneldeControl.ContadorSublotes;
 import java.util.List;
 import javax.swing.JLabel;
@@ -84,7 +84,7 @@ public class OnlyPdf {
 
   private void cargarImagen(ImagenInsertada img, int idtraza, int idsublote) {
     InsertarNuevoArchivo insertarNuevoArchivo = new InsertarNuevoArchivo(conexion, idtraza, img.getNombre(), img.getPagina(), infoLabel, 2);
-    int ultimoid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
+    int ultimoid = new SelectLastID(conexion, "archivo").getUltimoID();
     archivoSublote(idtraza, ultimoid, idsublote);
   }
 
@@ -93,7 +93,7 @@ public class OnlyPdf {
   }
 
   private void imagenyControl() {
-    InsertTrazaArchivoContolYEstado insertTrazaArchivoContolYEstado =
-            new InsertTrazaArchivoContolYEstado(idTraza, idControl, conexion);
+    InsertTrazaArchivoContol insertTrazaArchivoContolYEstado =
+            new InsertTrazaArchivoContol(idTraza, idControl, conexion);
   }
 }

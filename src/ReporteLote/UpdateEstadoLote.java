@@ -5,7 +5,7 @@
 package ReporteLote;
 
 import javax.swing.JTextArea;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JButton;

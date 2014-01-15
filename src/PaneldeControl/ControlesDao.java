@@ -4,13 +4,13 @@
  */
 package PaneldeControl;
 
-import BasedeDatos.InsertarFilasABM;
+import database.InsertarFilasABM;
 import entidad.ColumnaTamanio;
-import BasedeDatos.GetUltimoIDInsertado;
+import database.SelectLastID;
 import java.sql.SQLException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import Helpers.MensajeJoptionPane;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +138,7 @@ public class ControlesDao extends ABMPaneles {
   }
 
   public int getLastId() {
-    return new GetUltimoIDInsertado(aConexion, NOMBRE_TABLA).getUltimoID();
+    return new SelectLastID(aConexion, NOMBRE_TABLA).getUltimoID();
   }
 
   public Editar getEditar() {

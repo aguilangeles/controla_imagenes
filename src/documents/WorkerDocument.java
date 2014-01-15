@@ -4,9 +4,9 @@
  */
 package documents;
 
-import BasedeDatos.Conexion;
-import BasedeDatos.GetUltimoIDInsertado;
-import BasedeDatos.InsertarNuevaTraza;
+import database.Conexion;
+import database.SelectLastID;
+import database.InsertarNuevaTraza;
 import Helpers.GetIdandExtensionImg;
 import PaneldeControl.ContadorSublotes;
 import documents.GetListOfImagesForDoc;
@@ -56,7 +56,7 @@ public class WorkerDocument extends SwingWorker<Object, Object> {
     if (conexion.isConexion())
       {
       int idImagen = GetIdandExtensionImg.getIdImagen();
-      idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
+      idTraza = new SelectLastID(conexion, "traza").getUltimoID();
       InsertarNuevaTraza insertarNuevaTraza =
               new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
               tamanioLote, parent, ultimaCarpeta, muestra, idRango);

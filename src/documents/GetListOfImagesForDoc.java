@@ -7,8 +7,8 @@ package documents;
 import documents.SwitchImagesForDocument;
 import entidad.ImagenInsertada;
 import entidad.Sublote;
-import BasedeDatos.Conexion;
-import BasedeDatos.GetUltimoIDInsertado;
+import database.Conexion;
+import database.SelectLastID;
 import Helpers.GetIdandExtensionImg;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,7 +33,7 @@ public class GetListOfImagesForDoc {
 
   private void getImagenes(List<Object> objectList, int idTraza, int idImagen) {
     Sublote sublote = null;
-    idSublote = new GetUltimoIDInsertado(conexion, "sublotes").getUltimoID();
+    idSublote = new SelectLastID(conexion, "sublotes").getUltimoID();
     for (Iterator<Object> it = objectList.iterator(); it.hasNext();)
       {
       String path = (String) it.next();

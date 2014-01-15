@@ -4,10 +4,10 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.SelectControlesporVerificacionList;
-import BasedeDatos.SelectArchivobyTrazaList;
-import BasedeDatos.SubLotePorTrazaList;
-import BasedeDatos.Conexion;
+import database.SelectControlesporVerificacionList;
+import database.SelectArchivobyTrazaList;
+import database.SelectSubloteporTrazaList;
+import database.Conexion;
 import entidad.TiposDeControl;
 import entidad.TrazaDao;
 import Helpers.Encoder;
@@ -48,7 +48,7 @@ public final class LlenarTrazaDao {
     return traza;
   }
   private TrazaDao llenartrazaDocumento() {
-    List<Object> imagenesList = new SubLotePorTrazaList(conexion, idTraza, parent).getImagenesList();
+    List<Object> imagenesList = new SelectSubloteporTrazaList(conexion, idTraza, parent).getImagenesList();
     List<TiposDeControl> tiposList = new SelectControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     this.traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList, true);
     return traza;

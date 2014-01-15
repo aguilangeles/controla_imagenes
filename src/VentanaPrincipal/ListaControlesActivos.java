@@ -8,7 +8,7 @@ import entidad.TiposDeControl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import Helpers.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 

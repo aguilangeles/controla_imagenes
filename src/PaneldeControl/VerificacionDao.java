@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import Helpers.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 

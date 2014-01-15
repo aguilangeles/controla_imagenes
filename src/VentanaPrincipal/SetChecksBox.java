@@ -4,7 +4,7 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.TiposdeControlPorArchivo;
+import database.SelectTiposControlbyArchivo;
 import entidad.TiposDeControl;
 import javax.swing.JTable;
 
@@ -23,7 +23,7 @@ public class SetChecksBox {
 
   public void set(int id) {
     for (int index = 0; index < tablaCheck.getRowCount(); index++) {
-      TiposdeControlPorArchivo controles = new TiposdeControlPorArchivo(id);
+      SelectTiposControlbyArchivo controles = new SelectTiposControlbyArchivo(id);
       for (TiposDeControl t : controles.getTiposControlList()) {
         String nombre = (String) tablaCheck.getValueAt(index, 1);
         if (nombre.equals(t.getNombre())) {

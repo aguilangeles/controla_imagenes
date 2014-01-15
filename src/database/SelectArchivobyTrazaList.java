@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import entidad.Imagen;
 import Helpers.MensajeJoptionPane;

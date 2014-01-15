@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import entidad.Imagen;
 import Helpers.MensajeJoptionPane;
@@ -18,9 +18,9 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class SubLotePorTrazaList {
+public class SelectSubloteporTrazaList {
 
-  private String className = SubLotePorTrazaList.class.getName();
+  private String className = SelectSubloteporTrazaList.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane mensaje = new MensajeJoptionPane(null, type);
 
@@ -30,7 +30,7 @@ public class SubLotePorTrazaList {
   private List<Object> imagenProcesadaList = new ArrayList<>();
   private List<Sublote> subloteList;
 
-  public SubLotePorTrazaList(Conexion conexion, int idTraza, String parent) {
+  public SelectSubloteporTrazaList(Conexion conexion, int idTraza, String parent) {
     this.conexion = conexion;
     this.idTraza = idTraza;
     this.parent = parent;

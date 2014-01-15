@@ -4,7 +4,7 @@
  */
 package documents;
 
-import BasedeDatos.SelectTamanioMuestra;
+import database.SelectTamanioMuestra;
 import files.CreateRamdom;
 import java.io.File;
 import java.util.List;

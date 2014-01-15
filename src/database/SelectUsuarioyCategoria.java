@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import entidad.Usuario;
 import Helpers.MensajeJoptionPane;
@@ -16,15 +16,15 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public final class GetUsuarioyCategoriaQs {
+public final class SelectUsuarioyCategoria {
 
-  private static final String className = GetUsuarioyCategoriaQs.class.getName();
+  private static final String className = SelectUsuarioyCategoria.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private Usuario usuarioValidado = null;
   private boolean usuario;
 
-  public GetUsuarioyCategoriaQs(String aName, String aPassw) {
+  public SelectUsuarioyCategoria(String aName, String aPassw) {
     String name = aName.trim();
     String password = aPassw.trim();
     verificarUsuarioEnBaseDeDatos(name, password);

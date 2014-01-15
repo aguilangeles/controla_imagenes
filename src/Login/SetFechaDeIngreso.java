@@ -5,7 +5,7 @@
 package Login;
 
 import archivoConfiguracion.SetConfigFile;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import entidad.Usuario;
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;

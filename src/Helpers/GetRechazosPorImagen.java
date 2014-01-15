@@ -4,7 +4,7 @@
  */
 package Helpers;
 
-import BasedeDatos.Conexion;
+import database.Conexion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

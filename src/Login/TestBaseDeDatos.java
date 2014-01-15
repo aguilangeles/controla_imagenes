@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import entidad.LogQualitys;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;

@@ -4,12 +4,12 @@
  */
 package PaneldeControl;
 
-import BasedeDatos.InsertarFilasABM;
-import BasedeDatos.GetUltimoIDInsertado;
+import database.InsertarFilasABM;
+import database.SelectLastID;
 import java.sql.SQLException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import Helpers.MensajeJoptionPane;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +105,7 @@ public class RangosDao extends ABMPaneles {
   }
 
   public int getLastId() {
-    return new GetUltimoIDInsertado(aConexion, NOMBRE_TABLA).getUltimoID();
+    return new SelectLastID(aConexion, NOMBRE_TABLA).getUltimoID();
   }
 
   public Editar getEditar() {

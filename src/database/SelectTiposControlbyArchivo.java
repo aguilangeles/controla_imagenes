@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import entidad.TiposDeControl;
 import Helpers.MensajeJoptionPane;
@@ -17,9 +17,9 @@ import javax.swing.JTable;
  *
  * @author MUTNPROD003
  */
-public class TiposdeControlPorArchivo {
+public class SelectTiposControlbyArchivo {
 
-  private static final String className = TiposdeControlPorArchivo.class.getName();
+  private static final String className = SelectTiposControlbyArchivo.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private static Conexion conexion = new Conexion();
@@ -28,7 +28,7 @@ public class TiposdeControlPorArchivo {
   private JTable tabla;
   private List<TiposDeControl> tiposControlList = new ArrayList<>();
 
-  public TiposdeControlPorArchivo(int idArchivo) {
+  public SelectTiposControlbyArchivo(int idArchivo) {
     this.idArchivo = idArchivo;
     traerChecks();
   }

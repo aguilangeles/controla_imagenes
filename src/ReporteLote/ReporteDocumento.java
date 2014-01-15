@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ReporteDocumento extends javax.swing.JFrame {
 
-  private BasedeDatos.Conexion conexion = new BasedeDatos.Conexion();
+  private database.Conexion conexion = new database.Conexion();
   private int idtraza;
   private DefaultTableModel modelDetalles;
   private DefaultTableModel modelTipos;

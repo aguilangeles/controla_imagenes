@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
@@ -15,14 +15,14 @@ import javax.swing.JOptionPane;
  *
  * @author aguilangeles@gmail.com
  */
-public class InsertTrazaArchivoContolYEstado {
+public class InsertTrazaArchivoContol {
 
-  private static final String className = InsertTrazaArchivoContolYEstado.class.getName();
+  private static final String className = InsertTrazaArchivoContol.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private int idtraza;
 
-  public InsertTrazaArchivoContolYEstado(int idtr, List<Integer> idControl, Conexion conexion) {
+  public InsertTrazaArchivoContol(int idtr, List<Integer> idControl, Conexion conexion) {
     this.idtraza = idtr + 1;
     insert(idControl, conexion);
   }
@@ -31,7 +31,7 @@ public class InsertTrazaArchivoContolYEstado {
     int id = idtraza;
     for (Integer idarchivo : idControl)
       {
-      int lasid = new GetUltimoIDInsertado(conexion, "archivo").getUltimoID();
+      int lasid = new SelectLastID(conexion, "archivo").getUltimoID();
       String insertar = "Insert into qualitys.traza_archivo_controles "
               + "(idtraza"
               + ", idarchivo "

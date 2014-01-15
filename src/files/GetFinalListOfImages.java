@@ -4,7 +4,7 @@
  */
 package files;
 
-import BasedeDatos.SelectTamanioMuestra;
+import database.SelectTamanioMuestra;
 import VentanaPrincipal.WorkerImage;
 import java.io.File;
 import java.util.List;

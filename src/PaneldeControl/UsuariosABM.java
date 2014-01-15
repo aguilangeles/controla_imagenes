@@ -7,7 +7,7 @@ package PaneldeControl;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
 import static PaneldeControl.ControlesABM.ROW_EMPTY;

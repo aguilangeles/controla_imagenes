@@ -9,7 +9,7 @@ import archivoConfiguracion.SetConfigFile;
 import Helpers.InputVerifier;
 import javax.swing.JOptionPane;
 import entidad.Usuario;
-import BasedeDatos.GetUsuarioyCategoriaQs;
+import database.SelectUsuarioyCategoria;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
 
@@ -207,7 +207,7 @@ public class Login extends javax.swing.JFrame {
 
   private boolean isUsuarioValidado() {
     /*Identifica si es un usuario y qué categoria posee*/
-    GetUsuarioyCategoriaQs userCat = new GetUsuarioyCategoriaQs(user.getText(), password.getText());
+    SelectUsuarioyCategoria userCat = new SelectUsuarioyCategoria(user.getText(), password.getText());
     if (userCat.isUsuario())
       {
       usuario = userCat.getUsuarioValidado();

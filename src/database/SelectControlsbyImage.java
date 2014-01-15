@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import entidad.ControlPorImagen;
 import Helpers.MensajeJoptionPane;
@@ -16,15 +16,15 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class LlenarControles {
-  private static final String className = LlenarControles.class.getName();
+public class SelectControlsbyImage {
+  private static final String className = SelectControlsbyImage.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private int idTraza;
   private int idImagen;
   private List<ControlPorImagen> controlesList = new ArrayList<>();
 
-  public LlenarControles(int idTraza, int idImagen, Conexion conexion) {
+  public SelectControlsbyImage(int idTraza, int idImagen, Conexion conexion) {
     this.idTraza = idTraza;
     this.idImagen = idImagen;
     llenarControles(conexion);

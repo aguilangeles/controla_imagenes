@@ -4,7 +4,7 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.SelectImagenesRechazadas;
+import database.SelectImagenesRechazadas;
 import entidad.Imagen;
 import entidad.TrazaDao;
 import Helpers.RutaMouseListener;

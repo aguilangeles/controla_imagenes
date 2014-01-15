@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
@@ -13,15 +13,15 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class GetUltimoIDInsertado {
+public class SelectLastID {
 
-  private static final String className = GetUltimoIDInsertado.class.getName();
+  private static final String className = SelectLastID.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private Conexion conexion;
   private String tabla;
 
-  public GetUltimoIDInsertado(Conexion conexion, String tabla) {
+  public SelectLastID(Conexion conexion, String tabla) {
     this.conexion = conexion;
     this.tabla = tabla;
   }

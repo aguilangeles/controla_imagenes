@@ -2,11 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import entidad.ImagenInsertada;
 import entidad.Sublote;
-import BasedeDatos.Conexion;
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.List;

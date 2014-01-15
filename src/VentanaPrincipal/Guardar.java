@@ -4,10 +4,10 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.UpdateCheckBoxs;
-import BasedeDatos.LlenarControles;
+import database.UpdateCheckBoxs;
+import database.SelectControlsbyImage;
 import entidad.ControlPorImagen;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import entidad.Imagen;
 import entidad.TrazaDao;
 import Helpers.MensajeJoptionPane;
@@ -43,7 +43,7 @@ public class Guardar {
       /*Trae la imagen desde la base de datos, junto con la pagina*/
       Imagen imagen = (Imagen) traza.getImageByNameAndPage(nombre, page);
       /*trae los controles asignados a esa imagen*/
-      LlenarControles controles = new LlenarControles(traza.getId(), imagen.getId(), conexion);
+      SelectControlsbyImage controles = new SelectControlsbyImage(traza.getId(), imagen.getId(), conexion);
       /*itera las posibilidades*/
       for (ControlPorImagen controlImagen : controles.getControlesList())
         {

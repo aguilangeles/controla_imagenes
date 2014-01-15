@@ -4,10 +4,10 @@
  */
 package VentanaPrincipal;
 
-import BasedeDatos.Conexion;
-import BasedeDatos.SelectTamanioMuestra;
-import BasedeDatos.GetUltimoIDInsertado;
-import BasedeDatos.InsertarNuevaTraza;
+import database.Conexion;
+import database.SelectTamanioMuestra;
+import database.SelectLastID;
+import database.InsertarNuevaTraza;
 import Helpers.GetIdandExtensionImg;
 import Helpers.GetUltimaCarpeta;
 import Helpers.GetParent;
@@ -50,7 +50,7 @@ public class WorkerImage extends SwingWorker<Object, Object> {
   protected String doInBackground() {
     if (conexion.isConexion())
       {
-      idTraza = new GetUltimoIDInsertado(conexion, "traza").getUltimoID();
+      idTraza = new SelectLastID(conexion, "traza").getUltimoID();
       InsertarNuevaTraza insertarNuevaTraza =
               new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
               tamanioLote, parent, ultimaCarpeta, muestra, idRango);

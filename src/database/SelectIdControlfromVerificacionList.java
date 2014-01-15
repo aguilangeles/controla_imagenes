@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BasedeDatos;
+package database;
 
 import Helpers.MensajeJoptionPane;
 import java.sql.SQLException;
@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author aguilangeles@gmail.com
  */
-public class IdControlFromVerificacionList {
+public class SelectIdControlfromVerificacionList {
 
-  private static final String className = IdControlFromVerificacionList.class.getName();
+  private static final String className = SelectIdControlfromVerificacionList.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private static int idVerificacion;
 
-  public IdControlFromVerificacionList() {
+  public SelectIdControlfromVerificacionList() {
   }
 
   public List<Integer> idControlesByVerificacion(JComboBox tipoVerificacionBox,

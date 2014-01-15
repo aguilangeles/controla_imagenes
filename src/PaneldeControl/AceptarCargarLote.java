@@ -4,8 +4,8 @@
  */
 package PaneldeControl;
 
-import BasedeDatos.IdControlFromVerificacionList;
-import BasedeDatos.Conexion;
+import database.SelectIdControlfromVerificacionList;
+import database.Conexion;
 import Helpers.GetIdandExtensionImg;
 import files.GetFinalListOfImages;
 import documents.GetFinalListOfDocuments;
@@ -74,7 +74,7 @@ public class AceptarCargarLote {
     getControlesPorVerificacion();//controles de la verificacion seleccionada
     conexion.isConexionClose();////cierra conexion
     GetParent parent = new GetParent(files); // trae la ruta completa
-    GetFinalListOfImages idext = new GetFinalListOfImages(cargarLoteFrame, infoJLabel, idtipoControlList, file, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion());
+    GetFinalListOfImages idext = new GetFinalListOfImages(cargarLoteFrame, infoJLabel, idtipoControlList, file, getTipoDocumento(), SelectIdControlfromVerificacionList.getIdVerificacion());
     idext.execute();
     aceptarButton.setEnabled(false);
   }
@@ -85,7 +85,7 @@ public class AceptarCargarLote {
     List<Object> listaIdc = contadorSublotes.getDocumentoList();
     getControlesPorVerificacion();
     conexion.isConexion();
-    GetFinalListOfDocuments idext = new GetFinalListOfDocuments(cargarLoteFrame, infoJLabel, file, getTipoDocumento(), IdControlFromVerificacionList.getIdVerificacion(), idtipoControlList, listaIdc);
+    GetFinalListOfDocuments idext = new GetFinalListOfDocuments(cargarLoteFrame, infoJLabel, file, getTipoDocumento(), SelectIdControlfromVerificacionList.getIdVerificacion(), idtipoControlList, listaIdc);
     idext.execute();
     aceptarButton.setEnabled(false);
 
@@ -103,7 +103,7 @@ public class AceptarCargarLote {
   }
 
   private void getControlesPorVerificacion() {
-    IdControlFromVerificacionList ctrls = new IdControlFromVerificacionList();
+    SelectIdControlfromVerificacionList ctrls = new SelectIdControlfromVerificacionList();
     idtipoControlList = ctrls.idControlesByVerificacion(tipoVerificacionBox, conexion, idtipoControlList);
   }
 }

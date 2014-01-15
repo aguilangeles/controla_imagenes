@@ -5,7 +5,7 @@
 package PaneldeControl;
 
 import javax.swing.table.DefaultTableModel;
-import BasedeDatos.Conexion;
+import database.Conexion;
 import Helpers.MensajeJoptionPane;
 import Helpers.VersionEImageIcon;
 import java.beans.PropertyVetoException;
