@@ -50,4 +50,9 @@ class GetPagesPDFList {
       }
     return listaImagenesInsertadas;
   }
+
+  public String getParent() {
+    return parent;
+  }
+
 }
