@@ -7,7 +7,7 @@ package VentanaPrincipal;
 import database.SelectImagenesRechazadas;
 import entidad.Imagen;
 import entidad.TrazaDao;
-import helper.RutaMouseListener;
+import helper.RutaImagenesAdyacentes;
 import helper.VersionEImageIcon;
 import reporteFinal.Reporte;
 import java.awt.event.KeyEvent;
@@ -45,7 +45,7 @@ public class Ventana extends javax.swing.JFrame {
     terminar.setEnabled(false);
     anterior.setEnabled(false);
     getFirstImage(version);
-    rutaLabel.addMouseListener(new RutaMouseListener());
+    adyacentes.addActionListener(new RutaImagenesAdyacentes());
     siguiente.addKeyListener(keylistener());
     anterior.addKeyListener(keylistener());
   }
@@ -108,6 +108,7 @@ public class Ventana extends javax.swing.JFrame {
     panelScroll = new javax.swing.JPanel();
     scrollImage = new javax.swing.JScrollPane();
     terminar = new javax.swing.JButton();
+    adyacentes = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setBackground(new java.awt.Color(230, 252, 238));
@@ -223,7 +224,7 @@ public class Ventana extends javax.swing.JFrame {
     panelScroll.setLayout(panelScrollLayout);
     panelScrollLayout.setHorizontalGroup(
       panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+      .addComponent(scrollImage)
     );
     panelScrollLayout.setVerticalGroup(
       panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,6 +241,8 @@ public class Ventana extends javax.swing.JFrame {
       }
     });
 
+    adyacentes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/Monitoring24.png"))); // NOI18N
+
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
     internalLayout.setHorizontalGroup(
@@ -248,10 +251,11 @@ public class Ventana extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(pageLabel)
-            .addGap(11, 11, 11))
+            .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+            .addGap(18, 18, 18)
+            .addComponent(pageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(adyacentes))
           .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -265,9 +269,9 @@ public class Ventana extends javax.swing.JFrame {
       internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(internalLayout.createSequentialGroup()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(rutaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(pageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(rutaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(pageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(adyacentes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,6 +380,7 @@ public class Ventana extends javax.swing.JFrame {
 //    });
 //  }
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton adyacentes;
   private javax.swing.JButton ampliar;
   private javax.swing.JButton anterior;
   private javax.swing.JComboBox combo;
@@ -402,7 +407,7 @@ public class Ventana extends javax.swing.JFrame {
 
   private void getFirstImage(VersionEImageIcon version) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
-    // RutaMouseListener.getAdyacentes(pdf, siguientes);
+    RutaImagenesAdyacentes.getAdyacentes(siguientes, traza.getIdImagen());
     miframes = new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
             anterior, ampliar, entera, getSizeRamdom(), version);
     miframes.mostrarPrimeraImagen(siguientes, cantidad);
@@ -412,7 +417,7 @@ public class Ventana extends javax.swing.JFrame {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
-    //RutaMouseListener.getAdyacentes(pdf, imagen1);
+    RutaImagenesAdyacentes.getAdyacentes(imagen1, traza.getIdImagen());
     miframes.setNextImage(imagen1, cantidad);
 
   }
@@ -421,7 +426,7 @@ public class Ventana extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
-    // RutaMouseListener.getAdyacentes(pdf, pr);
+    RutaImagenesAdyacentes.getAdyacentes(pr, traza.getIdImagen());
     miframes.setBackImage(pr, cantidad);
 
   }

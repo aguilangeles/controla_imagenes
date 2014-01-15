@@ -44,10 +44,15 @@ public class ImageDrawingComponent extends JPanel {
   public ImageDrawingComponent() {
   }
 
-  public ImageDrawingComponent(String imagen, JPanel panel, int opcion, int idImg) {
+  public ImageDrawingComponent(String imagen, final JPanel panel, int idImg, final JComboBox comboBox) {
     loadImage(imagen, idImg);
-    dimensionPanel.setSize(panel.getSize());
-    setOpIndex(opcion);
+    comboBox.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setOpIndex(comboBox.getSelectedIndex());
+        dimensionPanel.setSize(panel.getSize());
+      }
+    });
   }
 
   public void cargarImage(String path, final JComboBox combo, final JPanel panelscroll, JButton button, JButton entera, int idImg) {

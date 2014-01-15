@@ -10,7 +10,7 @@ import VentanaPrincipal.TablaCheckBox;
 import database.SelectDocsRechazados;
 import entidad.Imagen;
 import entidad.TrazaDao;
-import helper.RutaMouseListener;
+import helper.RutaImagenesAdyacentes;
 import helper.VersionEImageIcon;
 import reporteFinal.ReporteDocumento;
 import entidad.Sublote;
@@ -54,7 +54,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     anterior.setEnabled(false);
     prevDocum.setEnabled(false);
     getFirstImage(version);
-    rutaLabel.addMouseListener(new RutaMouseListener());
+//    rutaLabel.addMouseListener(new RutaImagenesAdyacentes());
   }
 
   /**

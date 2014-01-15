@@ -77,17 +77,18 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="rutaLabel" pref="568" max="32767" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="pageLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                  <Component id="rutaLabel" pref="509" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pageLabel" pref="72" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="adyacentes" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="panelScroll" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jPanel1" max="32767" attributes="0"/>
                               <Component id="terminar" alignment="1" max="32767" attributes="0"/>
@@ -102,10 +103,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="rutaLabel" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="pageLabel" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="rutaLabel" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="pageLabel" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="adyacentes" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -325,7 +325,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="scrollImage" alignment="0" pref="648" max="32767" attributes="0"/>
+                          <Component id="scrollImage" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -353,6 +353,13 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="terminarActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="adyacentes">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/imageicon/Monitoring24.png"/>
+                    </Property>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

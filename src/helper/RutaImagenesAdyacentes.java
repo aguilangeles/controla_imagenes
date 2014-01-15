@@ -7,44 +7,50 @@ package helper;
 import entidad.Imagen;
 import Imagenes.ImagenesWorker;
 import Imagenes.PanelVisual;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author aguilangeles@gmail.com
  */
-public class RutaMouseListener implements MouseListener {
+public class RutaImagenesAdyacentes implements ActionListener {
 
   private PanelVisual panelVisual;
   private static boolean pdf, tiff;
   private static String filenotfound = "AyudaImagenes/imagen-no-encontrada.jpg";
   private static GetImagenesAdyacentes imagenesAdyacentes;
+  private static int idImagen;
 
-  public RutaMouseListener() {
+  public RutaImagenesAdyacentes() {
   }
 
-  public static void getAdyacentes(boolean pdf, Imagen imagen) {
-    if (pdf)
+  public static void getAdyacentes(Imagen imagen, int idImage) {
+    idImagen = idImage;
+    switch (idImagen)
       {
-      RutaMouseListener.pdf = true;
-      String pareng = imagen.getParent();
-      GetImagenesAdyacentes adyacentes =
-              new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
-      ImagenAdyacenteParaPdf previus = getWorkerForPreviusPage(adyacentes, pareng, imagen);
-      ImagenAdyacenteParaPdf next = getWorkerForNextPAge(adyacentes, pareng, imagen);
+      case 1:
 
-      GetImagenesAdyacentes newAdd = new GetImagenesAdyacentes();
-      newAdd.setImagenAnterior(previus.getName());
-      newAdd.setImagenPosterior(next.getName());
-      int paginalabel = 1 + imagen.getPagina();
-      newAdd.setNombreA("Anterior de " + previus.getNameforDb() + " (" + paginalabel + ")");
-      newAdd.setNombreP("Posterior de " + next.getNameforDb() + " (" + paginalabel + ")");
-      imagenesAdyacentes = newAdd;
-      } else
-      {
-      RutaMouseListener.tiff = true;
-      imagenesAdyacentes = imagen.adyacentes();
+        RutaImagenesAdyacentes.pdf = true;
+        String pareng = imagen.getParent();
+        GetImagenesAdyacentes adyacentes =
+                new GetImagenesAdyacentes(imagen.getRutaParaConversion(), imagen.getPagina());
+        ImagenAdyacenteParaPdf previus = getWorkerForPreviusPage(adyacentes, pareng, imagen);
+        ImagenAdyacenteParaPdf next = getWorkerForNextPAge(adyacentes, pareng, imagen);
+
+        GetImagenesAdyacentes newAdd = new GetImagenesAdyacentes();
+        newAdd.setImagenAnterior(previus.getName());
+        newAdd.setImagenPosterior(next.getName());
+        int paginalabel = 1 + imagen.getPagina();
+        newAdd.setNombreA("Anterior de " + previus.getNameforDb() + " (" + paginalabel + ")");
+        newAdd.setNombreP("Posterior de " + next.getNameforDb() + " (" + paginalabel + ")");
+        imagenesAdyacentes = newAdd;
+        break;
+      case 2:
+      case 3:
+        RutaImagenesAdyacentes.tiff = true;
+        imagenesAdyacentes = imagen.adyacentes();
+        break;
       }
   }
 
@@ -58,32 +64,6 @@ public class RutaMouseListener implements MouseListener {
 
   public static boolean isTiff() {
     return tiff;
-  }
-
-  @Override
-  public void mouseClicked(MouseEvent e) {
-    new PanelVisual(imagenesAdyacentes.getImagenAnterior(),
-            imagenesAdyacentes.getImagenPosterior(),
-            imagenesAdyacentes.getNombreA(),
-            imagenesAdyacentes.getNombreP(),
-            isPdf(),
-            isTiff()).setVisible(true);
-  }
-
-  @Override
-  public void mousePressed(MouseEvent e) {
-  }
-
-  @Override
-  public void mouseReleased(MouseEvent e) {
-  }
-
-  @Override
-  public void mouseEntered(MouseEvent e) {
-  }
-
-  @Override
-  public void mouseExited(MouseEvent e) {
   }
 
   private static ImagenAdyacenteParaPdf getImagenPrevia(GetImagenesAdyacentes ady) {
@@ -141,5 +121,15 @@ public class RutaMouseListener implements MouseListener {
       newPosterior = posterior;
       }
     return newPosterior;
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+
+    new PanelVisual(imagenesAdyacentes.getImagenAnterior(),
+            imagenesAdyacentes.getImagenPosterior(),
+            imagenesAdyacentes.getNombreA(),
+            imagenesAdyacentes.getNombreP(), idImagen).setVisible(true);
+//    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 }
