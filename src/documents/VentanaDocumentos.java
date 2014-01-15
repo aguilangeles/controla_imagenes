@@ -2,8 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package VentanaPrincipal;
+package documents;
 
+import VentanaPrincipal.Guardar;
+import VentanaPrincipal.MostrarInternalFramesForDocument;
+import VentanaPrincipal.TablaCheckBox;
 import database.SelectDocsRechazados;
 import entidad.Imagen;
 import entidad.TrazaDao;

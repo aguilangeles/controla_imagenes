@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import javax.swing.JComboBox;
 import database.Conexion;
 import helper.MensajeJoptionPane;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 

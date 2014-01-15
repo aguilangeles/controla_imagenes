@@ -13,7 +13,6 @@ import documents.GetListOfImagesForDoc;
 import files.OnlyPdf;
 import entidad.Sublote;
 import VentanaPrincipal.LlenarTrazaDao;
-import VentanaPrincipal.VentanaDocumentos;
 import files.Tif_Png_Jpg;
 import java.util.List;
 import javax.swing.JFrame;

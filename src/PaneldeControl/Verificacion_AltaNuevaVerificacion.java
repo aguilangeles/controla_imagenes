@@ -6,7 +6,7 @@ package PaneldeControl;
 
 import entidad.TiposDeControl;
 import database.SelectLastID;
-import VentanaPrincipal.TiposVerificacion;
+import entidad.TiposVerificacion;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;

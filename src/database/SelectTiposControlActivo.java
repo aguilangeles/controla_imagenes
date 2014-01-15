@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package VentanaPrincipal;
+package database;
 
 import entidad.TiposDeControl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import database.Conexion;
 import helper.MensajeJoptionPane;
 import javax.swing.JOptionPane;
 
@@ -16,18 +15,18 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class ListaControlesActivos {
+public class SelectTiposControlActivo {
 
   private Conexion conexion;
-  private List<TiposDeControl> lista;
+  private List<TiposDeControl> ctlsActivosList;
 
-  public ListaControlesActivos(Conexion conexion) {
-    this.lista = new ArrayList<>();
+  public SelectTiposControlActivo(Conexion conexion) {
     this.conexion = conexion;
-    poblarLista();
+    this.ctlsActivosList = poblarLista();
   }
 
   private List<TiposDeControl> poblarLista() {
+    List<TiposDeControl> listaCa = new ArrayList<>();
     TiposDeControl tipos;
     if (conexion.isConexion())
       {
@@ -39,19 +38,19 @@ public class ListaControlesActivos {
           int id = conexion.resulset.getInt(1);
           String descripcion = conexion.resulset.getString(2);
           tipos = new TiposDeControl(id, descripcion);
-          lista.add(tipos);
+          listaCa.add(tipos);
           }
         } catch (SQLException ex)
         {
         MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
-        msg.getMessage(ex.getMessage(), ListaControlesActivos.class.getName());
+        msg.getMessage(ex.getMessage(), SelectTiposControlActivo.class.getName());
 
         }
       }
-    return lista;
+    return listaCa;
   }
 
-  public List<TiposDeControl> getLista() {
-    return lista;
+  public List<TiposDeControl> getListaCrtlsActivos() {
+    return ctlsActivosList;
   }
 }

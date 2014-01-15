@@ -5,7 +5,7 @@
 package PaneldeControl;
 
 import entidad.TiposDeControl;
-import VentanaPrincipal.ListaControlesActivos;
+import database.SelectTiposControlActivo;
 import helper.InputVerifier;
 import java.util.ArrayList;
 import java.util.List;
@@ -256,8 +256,8 @@ public class VerificacionAlta extends javax.swing.JFrame {
     }//GEN-LAST:event_removerActionPerformed
 
   private void poblarLista() {
-    ListaControlesActivos lista = new ListaControlesActivos(conexion);
-    List<TiposDeControl> tipos = lista.getLista();
+    SelectTiposControlActivo lista = new SelectTiposControlActivo(conexion);
+    List<TiposDeControl> tipos = lista.getListaCrtlsActivos();
     for (int i = 0; i < tipos.size(); i++) {
       modeloOrigen.addElement(tipos.get(i));
     }

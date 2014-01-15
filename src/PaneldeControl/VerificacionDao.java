@@ -6,7 +6,7 @@ package PaneldeControl;
 
 import entidad.ColumnaTamanio;
 import entidad.TiposDeControl;
-import VentanaPrincipal.TiposVerificacion;
+import entidad.TiposVerificacion;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@
 package VentanaPrincipal;
 
 import database.UpdateCheckBoxs;
-import database.SelectControlsbyImage;
+import database.SelectControlbyImage;
 import entidad.ControlPorImagen;
 import database.Conexion;
 import entidad.Imagen;
@@ -43,7 +43,7 @@ public class Guardar {
       /*Trae la imagen desde la base de datos, junto con la pagina*/
       Imagen imagen = (Imagen) traza.getImageByNameAndPage(nombre, page);
       /*trae los controles asignados a esa imagen*/
-      SelectControlsbyImage controles = new SelectControlsbyImage(traza.getId(), imagen.getId(), conexion);
+      SelectControlbyImage controles = new SelectControlbyImage(traza.getId(), imagen.getId(), conexion);
       /*itera las posibilidades*/
       for (ControlPorImagen controlImagen : controles.getControlesList())
         {
