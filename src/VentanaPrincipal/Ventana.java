@@ -9,7 +9,7 @@ import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.RutaMouseListener;
 import helper.VersionEImageIcon;
-import ReporteLote.Reporte;
+import reporteFinal.Reporte;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.table.DefaultTableModel;

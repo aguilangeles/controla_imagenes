@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Login;
+package database;
 
-import archivoConfiguracion.SetConfigFile;
 import database.Conexion;
 import entidad.Usuario;
 import helper.MensajeJoptionPane;
@@ -16,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author MUTNPROD003
  */
-public class SetFechaDeIngreso {
+public class UpdateFechaIngreso {
 
-  public SetFechaDeIngreso() {
+  public UpdateFechaIngreso() {
   }
 
-  SetFechaDeIngreso(Usuario usuario) {
+  public UpdateFechaIngreso(Usuario usuario) {
     setFecha(usuario);
   }
 
@@ -41,7 +40,7 @@ public class SetFechaDeIngreso {
         } catch (SQLException ex)
         {
         MensajeJoptionPane mensaje = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
-        mensaje.getMessage(ex.getMessage(), SetFechaDeIngreso.class.getName());
+        mensaje.getMessage(ex.getMessage(), UpdateFechaIngreso.class.getName());
         }
       }
   }

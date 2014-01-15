@@ -4,6 +4,7 @@
  */
 package Login;
 
+import database.UpdateFechaIngreso;
 import PaneldeControl.PanelControl;
 import archivoConfiguracion.SetConfigFile;
 import helper.InputVerifier;
@@ -188,7 +189,7 @@ public class Login extends javax.swing.JFrame {
     /*si el usuario es apto, setea la fecha de ingreso*/
     if (isUsuarioValidado())
       {
-      SetFechaDeIngreso setfecha = new SetFechaDeIngreso(getUsuario());
+      UpdateFechaIngreso setfecha = new UpdateFechaIngreso(getUsuario());
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
         public void run() {

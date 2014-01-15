@@ -25,8 +25,6 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
   private DefaultComboBoxModel tipoDocumento = new DefaultComboBoxModel();
   private DefaultComboBoxModel tipoVerificacion = new DefaultComboBoxModel();
   private Conexion conexion = new Conexion();
-  private List<Object> documentoList = new ArrayList<>();
-  private List<Object> verificacionList = new ArrayList<>();
 
   public Verificacion_CargarComboBoxs() {
   }
@@ -43,9 +41,7 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
           int id = conexion.resulset.getInt(1);
           String nombre = conexion.resulset.getString(2);
           TiposDeControl t = new TiposDeControl(id, nombre);
-          verificacionList.add(t.newToString());
           tipoVerificacion.addElement(t.newToString());
-
           }
         conexion.isConexionClose();
         } catch (SQLException ex)
@@ -68,7 +64,6 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
           int id = conexion.resulset.getInt(1);
           String nombre = conexion.resulset.getString(2);
           TiposDeControl t = new TiposDeControl(id, nombre);
-          documentoList.add(t.getId() + "-" + t.getTexto());
           tipoDocumento.addElement(t.getId() + "-" + t.getTexto());
           }
         }
@@ -88,11 +83,4 @@ public class Verificacion_CargarComboBoxs extends JComboBox<Object> {
     return tipoVerificacion;
   }
 
-  public List<Object> getDocumentoList() {
-    return documentoList;
-  }
-
-  public List<Object> getVerificacionList() {
-    return verificacionList;
-  }
 }

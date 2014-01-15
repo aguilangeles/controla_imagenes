@@ -322,6 +322,7 @@ public class PanelControl extends javax.swing.JFrame {
   }
 
   private void getCargaLote() {
+
     ControlDocumentosyVerificaciones control =
             new ControlDocumentosyVerificaciones(this);
   }

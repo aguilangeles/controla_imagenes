@@ -9,7 +9,7 @@ import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.RutaMouseListener;
 import helper.VersionEImageIcon;
-import ReporteLote.ReporteDocumento;
+import reporteFinal.ReporteDocumento;
 import entidad.Sublote;
 import java.util.HashMap;
 import java.util.List;

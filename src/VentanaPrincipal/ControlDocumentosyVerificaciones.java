@@ -7,7 +7,6 @@ package VentanaPrincipal;
 import PaneldeControl.CargarLote;
 import PaneldeControl.Verificacion_CargarComboBoxs;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  * Chequea que existan tipos de verificacion y documentos aplicables al Lote,

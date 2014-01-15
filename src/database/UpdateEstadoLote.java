@@ -2,13 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ReporteLote;
+package database;
 
 import javax.swing.JTextArea;
-import database.Conexion;
 import helper.MensajeJoptionPane;
 import java.sql.SQLException;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
