@@ -11,7 +11,7 @@ import BasedeDatos.Conexion;
 import Entidades.TiposDeControl;
 import Entidades.TrazaDao;
 import Helpers.Encoder;
-import Helpers.GetExtensionIdImagen;
+import Helpers.GetIdandExtensionImg;
 import java.util.List;
 
 /**
@@ -21,26 +21,32 @@ import java.util.List;
 public final class LlenarTrazaDao {
 
   private TrazaDao traza;
-  private int idImg = GetExtensionIdImagen.getIdImagen();
+  private Conexion conexion;
+  private int idTraza;
+  private String parent;
+  private int idImg = GetIdandExtensionImg.getIdImagen();
 
-  public LlenarTrazaDao(int trazaID, String parent, Conexion con) {
-    String parent1 = Encoder.encoder(parent + "\\", LlenarTrazaDao.class.getName());
-    llenarTrazaVolumen(con, trazaID, parent1);
+  public LlenarTrazaDao(Conexion con, int trazaID, String parent) {
+    this.idTraza = trazaID;
+    this.parent = Encoder.encoder(parent + "\\", LlenarTrazaDao.class.getName());
+    this.conexion = con;
+    llenarTrazaVolumen();
   }
 
-  public LlenarTrazaDao(int trazaID, String parent, Conexion con, boolean issublote) {
-    String parent1 = Encoder.encoder(parent + "\\", LlenarTrazaDao.class.getName());
-    llenartrazaDocumento(parent1, con, trazaID);
+  public LlenarTrazaDao(Conexion con, int trazaID, String parent, boolean issublote) {
+    this.idTraza=trazaID;
+    this.parent= Encoder.encoder(parent + "\\", LlenarTrazaDao.class.getName());;
+    this.conexion=con;
+    llenartrazaDocumento();
   }
 
-  private TrazaDao llenarTrazaVolumen(Conexion conexion, int idTraza, String parent) {
+  private TrazaDao llenarTrazaVolumen() {
     List<Object> imagenesList = new ArchivosPorTrazaList(conexion, idTraza, parent, true).getImagenesList();
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList);
     return traza;
   }
-
-  private TrazaDao llenartrazaDocumento(String parent, Conexion conexion, int idTraza) {
+  private TrazaDao llenartrazaDocumento() {
     List<Object> imagenesList = new SubLotePorTrazaList(conexion, idTraza, parent).getImagenesList();
     List<TiposDeControl> tiposList = new ControlesporVerificacionList(conexion, idTraza).getTiposDeControlList();
     traza = new TrazaDao(idTraza, idImg, tiposList, imagenesList, true);
