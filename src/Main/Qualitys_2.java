@@ -10,7 +10,7 @@ import log.Login;
  *
  * @author MUTNPROD003
  */
-public class Qualitys_10001 {
+public class Qualitys_2 {
     /**
      * @param args the command line arguments
      */
