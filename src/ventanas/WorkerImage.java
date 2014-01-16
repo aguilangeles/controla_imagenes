@@ -2,17 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package documents;
+package ventanas;
 
 import database.Conexion;
 import database.SelectLastID;
 import database.InsertarNuevaTraza;
 import helper.GetIdandExtensionImg;
-import panelContol.ContadorSublotes;
-import documents.GetListOfImagesForDoc;
+import helper.GetUltimaCarpeta;
+import helper.GetParent;
 import files.OnlyPdf;
-import entidad.Sublote;
-import ventanas.LlenarTrazaDao;
 import files.Tif_Png_Jpg;
 import java.util.List;
 import javax.swing.JFrame;
@@ -23,44 +21,39 @@ import javax.swing.SwingWorker;
  *
  * @author MUTNPROD003
  */
-public class WorkerDocument extends SwingWorker<Object, Object> {
+public class WorkerImage extends SwingWorker<Object, Object> {
 
   private Conexion conexion = new Conexion();
-  //
   private JFrame cargaLote;// lo necesito para mostrar el conteo
   private JLabel infoLabel;
-  private String parent, extension, ultimaCarpeta;
-  private int idDocumento, idVerificacion, muestra, tamanioLote, idRango, contador, idTraza;
-  private List<Integer> idControlList;//lo necesito para crear la tabla de checkbox
+  private List<Integer> idControl;//lo necesito para crear la tabla de checkbox
   private List<Object> listaImagenes;
-  private List<Sublote> sublotes;
+  private String parent, ultimaCarpeta;
+  private int idTraza, idDocumento, idVerificacion, muestra, tamanioLote, idRango;
 
-  public WorkerDocument(JFrame cargarLote, JLabel infoLabel, int idDocumento, int idVerificacion, int muestra, int idRango, int tamanioLote, List<Object> listaImagenes, List<Integer> idControl) {
-    this.cargaLote = cargarLote;
+  public WorkerImage(JFrame controles, JLabel infoLabel, List<Integer> idControl, List<Object> listaImagenes, int idDocumento, int idVerificacion, int muestra, int idRango) {
+    this.cargaLote = controles;
     this.infoLabel = infoLabel;
+    this.idControl = idControl;
+    this.listaImagenes = listaImagenes;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
+    this.tamanioLote = listaImagenes.size();
+    this.parent = GetParent.getParent();
+    this.ultimaCarpeta = GetUltimaCarpeta.getLastFolder(parent);
     this.muestra = muestra;
     this.idRango = idRango;
-    this.tamanioLote = tamanioLote;//
-    this.idControlList = idControl;
-    this.listaImagenes = listaImagenes;//
-    this.parent = ContadorSublotes.getParent();
-    this.extension = ContadorSublotes.getExtension();//la uso_
-    this.ultimaCarpeta = ContadorSublotes.getUltimaCarpeta();
   }
 
   @Override
   protected String doInBackground() {
     if (conexion.isConexion())
       {
-      int idImagen = GetIdandExtensionImg.getIdImagen();
       idTraza = new SelectLastID(conexion, "traza").getUltimoID();
       InsertarNuevaTraza insertarNuevaTraza =
               new InsertarNuevaTraza(conexion, idDocumento, idVerificacion,
               tamanioLote, parent, ultimaCarpeta, muestra, idRango);
-      GetListOfImagesForDoc imagenesList = new GetListOfImagesForDoc(conexion, listaImagenes, idTraza);
-      sublotes = imagenesList.getSubloteList();
+      int idImagen = GetIdandExtensionImg.getIdImagen();
       switch (idImagen)
         {
         case 1:
@@ -91,20 +84,22 @@ public class WorkerDocument extends SwingWorker<Object, Object> {
       {
       int resultado = idTraza + 1;
       trazaID = (resultado == 0) ? 1 : resultado;
-      LlenarTrazaDao trazaDao = new LlenarTrazaDao(con, trazaID, parent, true);
-      new VentanaDocumentos(trazaDao.getTraza()).setVisible(true);
+      LlenarTrazaDao trazaDao = new LlenarTrazaDao(con, trazaID, parent);
+      new Ventana(trazaDao.getTraza()).setVisible(true);
       }
     con.isConexionClose();
     cargaLote.dispose();
   }
 
   private void Tif_Png_Jpg() {
-    Tif_Png_Jpg varios = new Tif_Png_Jpg(conexion, muestra, idTraza, infoLabel, idControlList, sublotes);
+    Tif_Png_Jpg insertarFormatos_tifPngJpg =
+            new Tif_Png_Jpg(infoLabel, conexion, muestra, idTraza,
+            parent, idControl, listaImagenes);
   }
 
   private void OnlyPdf() {
     OnlyPdf onlyPdf =
-            new OnlyPdf(conexion, muestra, idTraza,
-            listaImagenes, infoLabel, idControlList, sublotes);
+            new OnlyPdf(infoLabel, conexion, muestra, idTraza,
+            parent, idControl, listaImagenes);
   }
 }

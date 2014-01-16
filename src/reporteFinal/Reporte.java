@@ -311,7 +311,7 @@ public class Reporte extends javax.swing.JFrame {
         } else
         {
         dispose();
-        new PaneldeControl.PanelControl().setVisible(true);
+        new panelContol.PanelControl().setVisible(true);
         }
       }
   }

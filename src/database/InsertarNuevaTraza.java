@@ -6,7 +6,7 @@ package database;
 
 import helper.MensajeJoptionPane;
 import helper.Time;
-import Login.Login;
+import log.Login;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 

@@ -5,8 +5,8 @@
 package helper;
 
 import entidad.Imagen;
-import Imagenes.ImagenesWorker;
-import Imagenes.PanelVisual;
+import imagen.ImagenesWorker;
+import imagen.PanelVisual;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

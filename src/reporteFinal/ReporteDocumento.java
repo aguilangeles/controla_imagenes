@@ -311,7 +311,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
         } else
         {
         this.dispose();
-        new PaneldeControl.PanelControl().setVisible(true);
+        new panelContol.PanelControl().setVisible(true);
         }
       }
   }

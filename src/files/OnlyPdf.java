@@ -13,7 +13,7 @@ import entidad.NombrePaginaDelPDF;
 import database.Conexion;
 import database.SelectLastID;
 import database.InsertarNuevoArchivo;
-import PaneldeControl.ContadorSublotes;
+import panelContol.ContadorSublotes;
 import java.util.List;
 import javax.swing.JLabel;
 

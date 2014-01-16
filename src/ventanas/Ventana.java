@@ -2,46 +2,38 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package documents;
+package ventanas;
 
-import ventanas.Guardar;
-import ventanas.MostrarInternalFramesForDocument;
-import ventanas.TablaCheckBox;
-import database.SelectDocsRechazados;
+import database.SelectImagenesRechazadas;
 import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.RutaImagenesAdyacentes;
 import helper.VersionEImageIcon;
-import reporteFinal.ReporteDocumento;
-import entidad.Sublote;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import reporteFinal.Reporte;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author aguilangeles@gmail.com
  */
-public class VentanaDocumentos extends javax.swing.JFrame {
+public class Ventana extends javax.swing.JFrame {
 
-  private int idArchivo = 0;
-  private int idSublote=0;
-  private int nrodeImagen = 1;
-  private int nroSublote = 1;
+  private int sizeRamdom;
+  private int contador = 0;
+  private int cantidad = 1;
   private DefaultTableModel model;
   private TrazaDao traza;
   private final TablaCheckBox tablaCheckBox;
-  private Map<Integer, Imagen> mapa;
-  private MostrarInternalFramesForDocument mostDoc;
-  private Map<Integer, Sublote> mapSublote;
+  private MostrarInternalFrames miframes;
 
   /**
    * Creates new form Ventana
    *
    * @param trazadao
    */
-  public VentanaDocumentos(TrazaDao trazadao) {
+  public Ventana(TrazaDao trazadao) {
     iniciar(trazadao);
     setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
@@ -52,9 +44,41 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     terminar.setEnabled(false);
     anterior.setEnabled(false);
-    prevDocum.setEnabled(false);
     getFirstImage(version);
-//    rutaLabel.addMouseListener(new RutaImagenesAdyacentes());
+    adyacentes.addActionListener(new RutaImagenesAdyacentes());
+    siguiente.addKeyListener(keylistener());
+    anterior.addKeyListener(keylistener());
+  }
+
+  private KeyListener keylistener() {
+    KeyListener kl = new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+        myKeyEvt(e, "KeyTyped");
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        myKeyEvt(e, "keyReleased");
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+        myKeyEvt(e, "keyPressed");
+      }
+
+      private void myKeyEvt(KeyEvent e, String text) {
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_KP_LEFT || key == KeyEvent.VK_LEFT)
+          {
+          setBackImage();
+          } else if (key == KeyEvent.VK_KP_RIGHT || key == KeyEvent.VK_RIGHT)
+          {
+          getNextImage();
+          }
+      }
+    };
+    return kl;
   }
 
   /**
@@ -78,22 +102,19 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     jLabel1 = new javax.swing.JLabel();
     entera = new javax.swing.JButton();
     ampliar = new javax.swing.JButton();
-    nextDocum = new javax.swing.JButton();
-    prevDocum = new javax.swing.JButton();
     rutaLabel = new javax.swing.JLabel();
     pageLabel = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
     panelScroll = new javax.swing.JPanel();
     scrollImage = new javax.swing.JScrollPane();
     terminar = new javax.swing.JButton();
-    totales = new javax.swing.JLabel();
+    adyacentes = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setBackground(new java.awt.Color(230, 252, 238));
 
     panelInicial.setBackground(new java.awt.Color(230, 252, 238));
 
-    internal.setBackground(new java.awt.Color(230, 252, 238));
     internal.setIconifiable(true);
     internal.setMaximizable(true);
     internal.setResizable(true);
@@ -151,20 +172,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     ampliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/1383001847_stock_zoom-page-width_1.png"))); // NOI18N
     ampliar.setToolTipText("Ajustar al ancho de ventana");
 
-    nextDocum.setText("Sig. Doc.");
-    nextDocum.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        nextDocumActionPerformed(evt);
-      }
-    });
-
-    prevDocum.setText("Ant. Doc.");
-    prevDocum.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        prevDocumActionPerformed(evt);
-      }
-    });
-
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -176,19 +183,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addGap(33, 33, 33)
             .addComponent(ampliar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
             .addComponent(entera, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(21, 21, 21))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap())))
-      .addGroup(jPanel1Layout.createSequentialGroup()
-        .addComponent(nextDocum, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(prevDocum, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(21, 21, 21))))
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,15 +197,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(24, 24, 24)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(nextDocum, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-          .addComponent(prevDocum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+        .addGap(9, 9, 9)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel1)
-          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(18, 18, 18)
+          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel1))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(entera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(ampliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -215,6 +212,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
     pageLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     pageLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    pageLabel.setText("pagina:  ");
 
     jLabel2.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -226,7 +224,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     panelScroll.setLayout(panelScrollLayout);
     panelScrollLayout.setHorizontalGroup(
       panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+      .addComponent(scrollImage)
     );
     panelScrollLayout.setVerticalGroup(
       panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +241,8 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
     });
 
-    totales.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    adyacentes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/Monitoring24.png"))); // NOI18N
+    adyacentes.setToolTipText("Ver imágenes adyacentes");
 
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
@@ -253,11 +252,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+            .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+            .addGap(18, 18, 18)
+            .addComponent(pageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(pageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(totales, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(adyacentes))
           .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -270,15 +269,17 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     internalLayout.setVerticalGroup(
       internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(internalLayout.createSequentialGroup()
-        .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(pageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(rutaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(pageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(totales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addGroup(internalLayout.createSequentialGroup()
+            .addGap(5, 5, 5)
+            .addComponent(adyacentes)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,25 +321,17 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }//GEN-LAST:event_terminarActionPerformed
 
   private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-    getBackImage();
+    setBackImage();
   }//GEN-LAST:event_anteriorActionPerformed
 
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
 
-  private void nextDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDocumActionPerformed
-    nextDocument();
-  }//GEN-LAST:event_nextDocumActionPerformed
-
-  private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
-    backDocument();
-
-  }//GEN-LAST:event_prevDocumActionPerformed
-
-  private Imagen getImagenWithSublote(int contador) {
-    Imagen imagen = mapa.get(contador);
-    if (contador == getLastIdArchivo())
+  private Imagen goImagen(int contador) {
+    int limiteSuperior = getSizeRamdom() - 1;
+    Imagen imagen = (Imagen) traza.getImagenList().get(contador);
+    if (contador == limiteSuperior)
       {
       siguiente.setEnabled(false);
       terminar.setEnabled(true);
@@ -347,48 +340,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   }
 
   private Imagen backImagen(int contador) {
-    Imagen imagen = mapa.get(contador);
-    if (contador == getFirstIdArchivo())
+    int limiteInferior = 0;
+    Imagen imagen = (Imagen) traza.getImagenList().get(contador);
+    if (limiteInferior == contador)
       {
       anterior.setEnabled(false);
-      prevDocum.setEnabled(false);
       }
     return imagen;
-  }
-
-  private int getLastIdArchivo() {
-    int sizeSub = mapSublote.size() - 1;
-    Sublote sublote = mapSublote.get(sizeSub);
-    int ultimo = sublote.objectList().size() - 1;
-    Imagen im = (Imagen) sublote.objectList().get(ultimo);
-    return im.getId();
-  }
-
-  private int getFirstIdArchivo() {
-    Sublote sublote = mapSublote.get(0);
-    Imagen im = (Imagen) sublote.objectList().get(0);
-    return im.getId();
-  }
-
-  private void nextDocument() {
-    int nextdoc = getNumerosublote();
-    Sublote s = mapSublote.get(nextdoc);
-    Imagen imagen = (Imagen) s.objectList().get(0);
-    int id = imagen.getId() - 1;
-    setIdArchivo(id);
-    setNumerosublote(nextdoc);
-    getNextImage();
-  }
-
-  private void backDocument() {
-    int previus = getSubNumero() - 1;
-    Sublote subPrevius = getsublotebyId(previus);
-    Imagen imgPrevius = (Imagen) subPrevius.objectList().get(1);
-    setSubNumero(previus);
-    setIdArchivo(imgPrevius.getId());
-    setNumerodeImagen(2);
-    nroSublote--;
-    getBackImage();
   }
   /**
    * @param args the command line arguments
@@ -425,6 +383,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 //    });
 //  }
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton adyacentes;
   private javax.swing.JButton ampliar;
   private javax.swing.JButton anterior;
   private javax.swing.JComboBox combo;
@@ -435,156 +394,61 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel2;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JScrollPane jScrollPane2;
-  private javax.swing.JButton nextDocum;
   private javax.swing.JLabel pageLabel;
   private javax.swing.JPanel panelInicial;
   private javax.swing.JPanel panelScroll;
-  private javax.swing.JButton prevDocum;
   private javax.swing.JLabel rutaLabel;
   private javax.swing.JScrollPane scrollImage;
   private javax.swing.JButton siguiente;
   private javax.swing.JTable tabla;
   private javax.swing.JButton terminar;
-  private javax.swing.JLabel totales;
   // End of variables declaration//GEN-END:variables
 
   private void iniciar(TrazaDao traza) {
-    mapa = new HashMap<>();
-    mapSublote = new HashMap<>();
-    List<Object> objList = traza.getObjetoList();
-    for (int i = 0; i < objList.size(); i++)
-      {
-      Sublote sublote1 = (Sublote) objList.get(i);
-      mapSublote.put(i, sublote1);
-      for (int j = 0; j < sublote1.objectList().size(); j++)
-        {
-        Object object = sublote1.objectList().get(j);
-        Imagen imagen = (Imagen) object;
-        mapa.put(imagen.getId(), imagen);
-        }
-      }
+    traza.getImagenList();
   }
-
 
   private void getFirstImage(VersionEImageIcon version) {
-    Sublote sublote = mapSublote.get(0);
-    Imagen im = (Imagen) sublote.objectList().get(0);
-    idArchivo = im.getId();
-    idSublote = sublote.getId();
-    Imagen siguientes = getImagenWithSublote(idArchivo);//trae el ramdom
-    mostDoc = new MostrarInternalFramesForDocument(desktopPane, internal, rutaLabel, pageLabel, panelScroll, tabla, combo, traza, siguiente,
-            anterior, ampliar, entera, scrollImage, getTotalDocumentos(), version, nextDocum, prevDocum, totales);
-    mostDoc.mostrarPrimeraImagen(siguientes, nrodeImagen, sublote, nroSublote);
+    Imagen siguientes = goImagen(contador);//trae el ramdom
+    RutaImagenesAdyacentes.getAdyacentes(siguientes, traza.getIdImagen());
+    miframes = new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
+            anterior, ampliar, entera, getSizeRamdom(), version);
+    miframes.mostrarPrimeraImagen(siguientes, cantidad);
   }
-
 
   private void getNextImage() {
-    idArchivo++;
-    nrodeImagen++;
-    Imagen imagen1 = getImagenWithSublote(idArchivo);
-    Sublote sublote = getsublotebyId(imagen1.getIdSublote());
-    int idsub = sublote.getId();
-    if (idsub != idSublote)
-      {
-      nroSublote++;
-      setNumerodeImagen(1);
-      setSubNumero(idsub);
-      }
-    if (nroSublote == mapSublote.size())
-      {
-      setNumerosublote(mapSublote.size());
-      nextDocum.setEnabled(false);
-      terminar.setEnabled(true);
-      }
-    mostDoc.setNextImage(imagen1, nrodeImagen, sublote, nroSublote);
+    contador++;
+    cantidad++;
+    Imagen imagen1 = goImagen(contador);
+    RutaImagenesAdyacentes.getAdyacentes(imagen1, traza.getIdImagen());
+    miframes.setNextImage(imagen1, cantidad);
+
   }
 
-  private void getBackImage() {
-    idArchivo--;
-    nrodeImagen--;
-    Imagen pr = backImagen(idArchivo);
-    Sublote sb = getsublotebyId(pr.getIdSublote());
-    int idsub = sb.getId();
-    if (idsub != idSublote)
-      {
-      nroSublote--;
-      setNumerodeImagen(sb.objectList().size());
-      setSubNumero(idsub);
-      }
-    if (nroSublote == 1)
-      {
-      setNumerosublote(1);
-      prevDocum.setEnabled(false);
-      }
-    mostDoc.setBackImage(pr, nrodeImagen, sb, nroSublote);
-  }
+  private void setBackImage() {
+    contador--;
+    cantidad--;
+    Imagen pr = backImagen(contador);
+    RutaImagenesAdyacentes.getAdyacentes(pr, traza.getIdImagen());
+    miframes.setBackImage(pr, cantidad);
 
-  public int getNumerosublote() {
-    return nroSublote;
-  }
-
-  public void setNumerosublote(int numerosublote) {
-    this.nroSublote = numerosublote;
-  }
-
-  public int getSubNumero() {
-    return idSublote;
-  }
-
-  public void setSubNumero(int subNumero) {
-    this.idSublote = subNumero;
-  }
-
-  private Sublote getsublotebyId(int idsublote) {
-    Sublote sublote = null;
-    for (Map.Entry<Integer, Sublote> entry : mapSublote.entrySet())
-      {
-      Integer integer = entry.getKey();
-      Sublote sub = entry.getValue();
-      if (sub.getId() == idsublote)
-        {
-        sublote = sub;
-        }
-      }
-    return sublote;
-  }
-
-  public void setIdArchivo(int contador) {
-    this.idArchivo = contador;
-  }
-
-  public int getIdArchivo() {
-    return idArchivo;
   }
 
   private void setFinalizar() {
     Guardar save = new Guardar();
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel);
-    SelectDocsRechazados numeroRechazo =
-            new SelectDocsRechazados(traza.getId());
-
+    SelectImagenesRechazadas numeroRechazo =
+            new SelectImagenesRechazadas(traza.getId());
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        new ReporteDocumento(traza.getId()).setVisible(true);
+        new Reporte(traza.getId()).setVisible(true);
       }
     });
     dispose();
   }
 
-  public Map<Integer, Imagen> getMapa() {
-    return mapa;
-  }
-
-  public int getNumerodeImagen() {
-    return nrodeImagen;
-  }
-
-  public void setNumerodeImagen(int cantidad) {
-    this.nrodeImagen = cantidad;
-  }
-
-  private int getTotalDocumentos() {
-    return mapSublote.size();
+  private int getSizeRamdom() {
+    return traza.getImagenList().size();
   }
 }

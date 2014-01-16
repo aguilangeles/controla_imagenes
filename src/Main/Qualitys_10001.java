@@ -4,7 +4,7 @@
  */
 package Main;
 
-import Login.Login;
+import log.Login;
 
 /**
  *

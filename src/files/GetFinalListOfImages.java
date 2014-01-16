@@ -5,7 +5,7 @@
 package files;
 
 import database.SelectTamanioMuestra;
-import VentanaPrincipal.WorkerImage;
+import ventanas.WorkerImage;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFrame;
