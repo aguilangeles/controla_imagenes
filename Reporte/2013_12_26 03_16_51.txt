@@ -1,0 +1,24 @@
+Operador de Control: admin
+Fecha de Control: 2013-12-26 03:15:43.0
+Id Traza: 2
+Ruta Completa: c:\angeles\testeo\notas
+Tamanio Lote: 18
+Cantidad muestreada: 8
+Limite Rechazos: 1
+Total Rechazos: 8
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: Detección de conflictos que afecten a la integridad y coherencia del documento digitalizado.
+Tipo de Documento: FRP
+Documentos rechazados  
+c:\angeles\testeo\notas\NB20130715NB20130715.pdf: Documento desordenado. 
+c:\angeles\testeo\notas\NB20130703NB20130703.pdf: Documento desordenado. 
+c:\angeles\testeo\notas\NB20130710NB20130710.pdf: Documento desordenado. 
+c:\angeles\testeo\notas\NB20130716NB20130716.pdf: Documento desordenado. 
+c:\angeles\testeo\notas\NB20130711NB20130711.pdf: Primer imagen no es carátula. 
+c:\angeles\testeo\notas\NB20130704NB20130704.pdf: Datos de  caratula erróneos o faltantes. 
+c:\angeles\testeo\notas\NB20130717NB20130717.pdf: Datos de  caratula erróneos o faltantes. 
+c:\angeles\testeo\notas\NB20130730NB20130730.pdf: Datos de  caratula erróneos o faltantes. 
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 2.0.0

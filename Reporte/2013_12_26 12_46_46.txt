@@ -1,0 +1,19 @@
+Operador de Control: admin
+Fecha de Control: 2013-12-26 12:45:17.0
+Id Traza: 18
+Ruta Completa: c:\angeles\testeo\notas
+Tamanio Lote: 18
+Cantidad muestreada: 4
+Limite Rechazos: 1
+Total Rechazos: 3
+Linea de captura: --/--
+Digitalizador: --/--
+Tipo de Verificacion: control de sublote
+Tipo de Documento: FRP
+Documentos rechazados  
+c:\angeles\testeo\notas\NB20130717NB20130717.pdf: Orden de captura
+c:\angeles\testeo\notas\NB20130703NB20130703.pdf: Validez de Contenido
+c:\angeles\testeo\notas\NB20130718NB20130718.pdf: Validez de Contenido
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 2.0.0
