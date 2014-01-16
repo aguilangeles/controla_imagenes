@@ -5,7 +5,6 @@
 package VentanaPrincipal;
 
 import database.Conexion;
-import database.SelectTamanioMuestra;
 import database.SelectLastID;
 import database.InsertarNuevaTraza;
 import helper.GetIdandExtensionImg;

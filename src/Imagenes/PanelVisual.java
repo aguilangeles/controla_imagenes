@@ -98,7 +98,6 @@ public class PanelVisual extends javax.swing.JFrame {
     jLabel1.setText("Zoom");
 
     jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
-    jComboBox1.setSelectedIndex(4);
     jComboBox1.setToolTipText("");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

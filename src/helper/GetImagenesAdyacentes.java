@@ -53,6 +53,7 @@ public class GetImagenesAdyacentes {
           getNextFile(files, imas);
           } catch (ArrayIndexOutOfBoundsException e)
           {
+          //todo
           System.out.println("exception !!!!");
           }
         }

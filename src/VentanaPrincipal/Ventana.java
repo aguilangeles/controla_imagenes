@@ -242,6 +242,7 @@ public class Ventana extends javax.swing.JFrame {
     });
 
     adyacentes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/Monitoring24.png"))); // NOI18N
+    adyacentes.setToolTipText("Ver imágenes adyacentes");
 
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
@@ -271,8 +272,10 @@ public class Ventana extends javax.swing.JFrame {
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(rutaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(pageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(adyacentes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(internalLayout.createSequentialGroup()
+            .addGap(5, 5, 5)
+            .addComponent(adyacentes)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()

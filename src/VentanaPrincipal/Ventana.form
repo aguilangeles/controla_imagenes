@@ -105,8 +105,11 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="rutaLabel" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="pageLabel" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="adyacentes" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  <Component id="adyacentes" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -359,6 +362,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/imageicon/Monitoring24.png"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Ver im&#xe1;genes adyacentes"/>
                   </Properties>
                 </Component>
               </SubComponents>

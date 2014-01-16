@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class GetRechazosPorImagen {
 
- private static List<ImagenyRechazo> listaImg;
+  private static List<ImagenyRechazo> listaImg;
 
   public GetRechazosPorImagen(Conexion conexion, int idtraza) {
     listaImg = getImagenes(conexion, idtraza);
@@ -75,9 +75,8 @@ public class GetRechazosPorImagen {
             + " on a.id = tac.idarchivo "
             + " join controles c "
             + " on tac.idcontrol = c.id "
-            + " where a.id ="  + idtraza
+            + " where a.id =" + idtraza
             + " and tac.estado =1 ;";
-    System.out.println(query);
     if (conexion.isConexion())
       {
       try
@@ -95,6 +94,4 @@ public class GetRechazosPorImagen {
       }
     return listaControles;
   }
-
-
 }
