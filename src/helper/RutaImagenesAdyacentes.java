@@ -42,8 +42,8 @@ public class RutaImagenesAdyacentes implements ActionListener {
         newAdd.setImagenAnterior(previus.getName());
         newAdd.setImagenPosterior(next.getName());
         int paginalabel = 1 + imagen.getPagina();
-        newAdd.setNombreA("Anterior de " + previus.getNameforDb() + " (" + paginalabel + ")");
-        newAdd.setNombreP("Posterior de " + next.getNameforDb() + " (" + paginalabel + ")");
+        newAdd.setNombreA(previus.getNameforDb() + " (" + paginalabel + ")");
+        newAdd.setNombreP(next.getNameforDb() + " (" + paginalabel + ")");
         imagenesAdyacentes = newAdd;
         break;
       case 2:

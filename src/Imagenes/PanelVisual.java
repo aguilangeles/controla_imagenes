@@ -22,11 +22,13 @@ public class PanelVisual extends javax.swing.JFrame {
    * @param posterior
    * @param nombreA
    * @param nombreP
+   * @param idImagen
    */
   public PanelVisual(String anterior, String posterior, String nombreA, String nombreP, int idImagen) {
     initComponents();
     this.anterior = anterior;
     this.posterior = posterior;
+    setResizable(false);
     VersionEImageIcon vi = new VersionEImageIcon(this);
     this.setBackground(new Color(230, 252, 238));
     nameAnt.setText(nombreA);
@@ -50,11 +52,10 @@ public class PanelVisual extends javax.swing.JFrame {
     jScrollPane1 = new javax.swing.JScrollPane();
     jPanel1 = new javax.swing.JPanel();
     jScrollPane2 = new javax.swing.JScrollPane();
-    panellabel = new javax.swing.JPanel();
-    namePost = new javax.swing.JLabel();
-    jComboBox1 = new javax.swing.JComboBox();
-    jLabel1 = new javax.swing.JLabel();
     nameAnt = new javax.swing.JLabel();
+    namePost = new javax.swing.JLabel();
+    jLabel1 = new javax.swing.JLabel();
+    jComboBox1 = new javax.swing.JComboBox();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Imagenes Adyacentes");
@@ -65,11 +66,11 @@ public class PanelVisual extends javax.swing.JFrame {
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+      .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+      .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
 
     jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 51, 0)));
@@ -78,55 +79,27 @@ public class PanelVisual extends javax.swing.JFrame {
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+      .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
     );
     jPanel1Layout.setVerticalGroup(
       jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane2)
+      .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
 
-    namePost.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-    namePost.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    namePost.setText("Imagen posterior");
+    nameAnt.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    nameAnt.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    nameAnt.setText("Imagen anterior");
 
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
-    jComboBox1.setSelectedIndex(2);
+    namePost.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    namePost.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    namePost.setText("Imagen posterior");
 
     jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel1.setText("Zoom");
 
-    nameAnt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-    nameAnt.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-    nameAnt.setText("Imagen anterior");
-
-    javax.swing.GroupLayout panellabelLayout = new javax.swing.GroupLayout(panellabel);
-    panellabel.setLayout(panellabelLayout);
-    panellabelLayout.setHorizontalGroup(
-      panellabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(panellabelLayout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(nameAnt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGap(232, 232, 232)
-        .addComponent(namePost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGap(113, 113, 113)
-        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap())
-    );
-    panellabelLayout.setVerticalGroup(
-      panellabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(panellabelLayout.createSequentialGroup()
-        .addContainerGap()
-        .addGroup(panellabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(panellabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(nameAnt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(namePost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-          .addGroup(panellabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(jComboBox1)
-            .addComponent(jLabel1)))
-        .addContainerGap())
-    );
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
+    jComboBox1.setSelectedIndex(4);
+    jComboBox1.setToolTipText("");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -134,18 +107,32 @@ public class PanelVisual extends javax.swing.JFrame {
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGap(18, 18, 18)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(nameAnt, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+            .addComponent(namePost, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
-      .addComponent(panellabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addComponent(panellabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(nameAnt, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel1)
+          .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(namePost, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
@@ -203,6 +190,5 @@ public class PanelVisual extends javax.swing.JFrame {
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JLabel nameAnt;
   private javax.swing.JLabel namePost;
-  private javax.swing.JPanel panellabel;
   // End of variables declaration//GEN-END:variables
 }
