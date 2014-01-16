@@ -1,0 +1,18 @@
+Operador de Control: admin
+Fecha de Control: 2014-01-16 02:51:26.0
+Id Traza: 45
+Ruta Completa: c:\angeles\testeo\gnd3
+Tamanio Lote: 143
+Cantidad muestreada: 4
+Limite Rechazos: 2
+Total Rechazos: 1
+Linea de captura: b
+Digitalizador: b
+Tipo de Verificacion: Control Calidad Básico
+Tipo de Documento: FRP
+Imagenes rechazadas: 
+GND#V201012V0000002#GEN00_000000040#48\Imagenes\48_0010_00013744.tif, pagina=0
+controles=[Imágenes mal rotadas]
+Estado: Aceptado.
+Observaciones: 
+Versión  app: Qualitys 2.0.1_beta
