@@ -9,6 +9,10 @@ import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.RutaImagenesAdyacentes;
 import helper.VersionEImageIcon;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import reporteFinal.Reporte;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -27,6 +31,7 @@ public class Ventana extends javax.swing.JFrame {
   private TrazaDao traza;
   private final TablaCheckBox tablaCheckBox;
   private MostrarInternalFrames miframes;
+  private String pathname;
 
   /**
    * Creates new form Ventana
@@ -246,6 +251,11 @@ public class Ventana extends javax.swing.JFrame {
     adyacentes.setToolTipText("Ver imágenes adyacentes");
 
     copy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/copy.png"))); // NOI18N
+    copy.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        copyActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
@@ -335,6 +345,10 @@ public class Ventana extends javax.swing.JFrame {
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
 
+  private void copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyActionPerformed
+    pasteToClipBoard();
+  }//GEN-LAST:event_copyActionPerformed
+
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
     Imagen imagen = (Imagen) traza.getImagenList().get(contador);
@@ -418,16 +432,34 @@ public class Ventana extends javax.swing.JFrame {
 
   private void getFirstImage(VersionEImageIcon version) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
+    pathname = siguientes.getRutaParaConversion();
     RutaImagenesAdyacentes.getAdyacentes(siguientes, traza.getIdImagen());
     miframes = new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
             anterior, ampliar, entera, copy, getSizeRamdom(), version);
     miframes.mostrarPrimeraImagen(siguientes, cantidad);
+  }
+  /*
+   copy.addActionListener(new ActionListener() {
+   @Override
+   public void actionPerformed(ActionEvent e) {
+   pasteToClipBoard(rutapara);
+   }
+   });
+   }*/
+
+  private void pasteToClipBoard() {
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Clipboard clipboard = toolkit.getSystemClipboard();
+    StringSelection selection = new StringSelection(getPathname());
+    clipboard.setContents(selection, null);
   }
 
   private void getNextImage() {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
+    pathname = imagen1.getRutaParaConversion();
+
     RutaImagenesAdyacentes.getAdyacentes(imagen1, traza.getIdImagen());
     miframes.setNextImage(imagen1, cantidad);
 
@@ -437,9 +469,13 @@ public class Ventana extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
+    pathname = pr.getRutaParaConversion();
     RutaImagenesAdyacentes.getAdyacentes(pr, traza.getIdImagen());
     miframes.setBackImage(pr, cantidad);
+  }
 
+  public String getPathname() {
+    return pathname;
   }
 
   private void setFinalizar() {
