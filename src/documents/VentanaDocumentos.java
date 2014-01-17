@@ -13,6 +13,9 @@ import entidad.TrazaDao;
 import helper.VersionEImageIcon;
 import reporteFinal.ReporteDocumento;
 import entidad.Sublote;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaDocumentos extends javax.swing.JFrame {
 
   private int idArchivo = 0;
-  private int idSublote=0;
+  private int idSublote = 0;
   private int nrodeImagen = 1;
   private int nroSublote = 1;
   private DefaultTableModel model;
@@ -34,6 +37,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private Map<Integer, Imagen> mapa;
   private MostrarInternalFramesForDocument mostDoc;
   private Map<Integer, Sublote> mapSublote;
+  private String pathname;
 
   /**
    * Creates new form Ventana
@@ -85,6 +89,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     scrollImage = new javax.swing.JScrollPane();
     terminar = new javax.swing.JButton();
     totales = new javax.swing.JLabel();
+    copy = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setBackground(new java.awt.Color(230, 252, 238));
@@ -174,7 +179,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addGap(33, 33, 33)
             .addComponent(ampliar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING)
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -224,7 +229,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     panelScroll.setLayout(panelScrollLayout);
     panelScrollLayout.setHorizontalGroup(
       panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(scrollImage, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+      .addComponent(scrollImage)
     );
     panelScrollLayout.setVerticalGroup(
       panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,6 +248,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
 
     totales.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
 
+    copy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/copy.png"))); // NOI18N
+    copy.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        copyActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
     internalLayout.setHorizontalGroup(
@@ -251,32 +263,40 @@ public class VentanaDocumentos extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(pageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(totales, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(pageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(totales, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(copy, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(2, 2, 2))
           .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-          .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(terminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+            .addComponent(terminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addContainerGap())
     );
     internalLayout.setVerticalGroup(
       internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(internalLayout.createSequentialGroup()
-        .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(pageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(totales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, internalLayout.createSequentialGroup()
+            .addGap(12, 12, 12)
+            .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(pageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(totales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(copy, javax.swing.GroupLayout.Alignment.TRAILING)
+              .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -333,6 +353,10 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     backDocument();
 
   }//GEN-LAST:event_prevDocumActionPerformed
+
+  private void copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyActionPerformed
+    pasteToClipBoard();
+  }//GEN-LAST:event_copyActionPerformed
 
   private Imagen getImagenWithSublote(int contador) {
     Imagen imagen = mapa.get(contador);
@@ -426,6 +450,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private javax.swing.JButton ampliar;
   private javax.swing.JButton anterior;
   private javax.swing.JComboBox combo;
+  private javax.swing.JButton copy;
   private javax.swing.JDesktopPane desktopPane;
   private javax.swing.JButton entera;
   private javax.swing.JInternalFrame internal;
@@ -463,23 +488,24 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
   }
 
-
   private void getFirstImage(VersionEImageIcon version) {
     Sublote sublote = mapSublote.get(0);
     Imagen im = (Imagen) sublote.objectList().get(0);
     idArchivo = im.getId();
     idSublote = sublote.getId();
     Imagen siguientes = getImagenWithSublote(idArchivo);//trae el ramdom
+    pathname = siguientes.getRutaParaConversion();
     mostDoc = new MostrarInternalFramesForDocument(desktopPane, internal, rutaLabel, pageLabel, panelScroll, tabla, combo, traza, siguiente,
             anterior, ampliar, entera, scrollImage, getTotalDocumentos(), version, nextDocum, prevDocum, totales);
     mostDoc.mostrarPrimeraImagen(siguientes, nrodeImagen, sublote, nroSublote);
   }
 
-
   private void getNextImage() {
     idArchivo++;
     nrodeImagen++;
     Imagen imagen1 = getImagenWithSublote(idArchivo);
+    pathname = imagen1.getRutaParaConversion();
+
     Sublote sublote = getsublotebyId(imagen1.getIdSublote());
     int idsub = sublote.getId();
     if (idsub != idSublote)
@@ -501,6 +527,8 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     idArchivo--;
     nrodeImagen--;
     Imagen pr = backImagen(idArchivo);
+    pathname = pr.getRutaParaConversion();
+
     Sublote sb = getsublotebyId(pr.getIdSublote());
     int idsub = sb.getId();
     if (idsub != idSublote)
@@ -515,6 +543,17 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       prevDocum.setEnabled(false);
       }
     mostDoc.setBackImage(pr, nrodeImagen, sb, nroSublote);
+  }
+
+  private void pasteToClipBoard() {
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Clipboard clipboard = toolkit.getSystemClipboard();
+    StringSelection selection = new StringSelection(getPathname());
+    clipboard.setContents(selection, null);
+  }
+
+  public String getPathname() {
+    return pathname;
   }
 
   public int getNumerosublote() {
