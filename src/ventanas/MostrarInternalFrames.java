@@ -9,6 +9,11 @@ import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.MensajeJoptionPane;
 import helper.VersionEImageIcon;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -39,10 +44,10 @@ public class MostrarInternalFrames {
   private static Guardar save;
   private static SetChecksBox setCB;
   private JPanel panelScroll;
-  private JButton anterior, siguiente, botonAncho, pEntera;
+  private JButton anterior, siguiente, botonAncho, pEntera, copy;
   private VersionEImageIcon vic;
 
-  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, int sizeRamdom, VersionEImageIcon version) {
+  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JButton copy, int sizeRamdom, VersionEImageIcon version) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -57,6 +62,7 @@ public class MostrarInternalFrames {
     this.siguiente = siguiente;
     this.botonAncho = ancho;
     this.pEntera = pEntera;
+    this.copy = copy;
     this.panelScroll = panelSroll;
     this.vic = version;
     MostrarInternalFrames.save = new Guardar();// sa
@@ -126,10 +132,12 @@ public class MostrarInternalFrames {
     desktopPane.repaint();
   }
 
-  private void setImagenes(Imagen siguientes) {
+  private void setImagenes( Imagen siguientes) {
     String ruta = rutadeimagen.getImage(siguientes, idImagen);
+    final String rutapara =siguientes.getRutaParaConversion();
     setLabelPagina(siguientes);
     imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImagen);
     scrollImage.getViewport().add(imageDraw);
   }
+
 }
