@@ -439,7 +439,6 @@ public class Ventana extends javax.swing.JFrame {
     save.guardar(traza, rutaLabel.getText(), tabla, pageLabel);
     SelectImagenesRechazadas numeroRechazo =
             new SelectImagenesRechazadas(traza.getId());
-    System.out.println(entidad.Rangos_qs.getMuestra()+", rechazso"+entidad.Rangos_qs.getRechazo());
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {

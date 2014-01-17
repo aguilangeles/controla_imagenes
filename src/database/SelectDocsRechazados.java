@@ -4,11 +4,13 @@
  */
 package database;
 
+import entidad.Rangos_qs;
 import helper.MensajeJoptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import reporteFinal.AutomaticoRoA;
 
 /**
  * Cuenta la cantidad de imagenes con estado 1 (rechazado) e incluye esa
@@ -52,6 +54,8 @@ public class SelectDocsRechazados {
           numero = conexion.resulset.getInt(1);
           idSubloteRechazado.add(numero);
           }
+        int nro_rech = Rangos_qs.getRechazo();
+        AutomaticoRoA automaticoRoA = new AutomaticoRoA(nro_rech, contador);
         UpdateNroRechazoDocsInTraza updateNroRechazoDocsInTraza =
                 new UpdateNroRechazoDocsInTraza(conexion, idTraza, contador);
         conexion.isConexionClose();
