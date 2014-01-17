@@ -21,7 +21,6 @@ public class UpdateEstadoLote {
   private JTextArea mensaje;
   private String captura;
   private String digitalizador;
-//////
 
   public UpdateEstadoLote(Conexion conexion, int idtraza, JTextArea mensaje, String captura, String digitalizador) {
     this.conexion = conexion;
