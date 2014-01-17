@@ -44,10 +44,10 @@ public class MostrarInternalFrames {
   private static Guardar save;
   private static SetChecksBox setCB;
   private JPanel panelScroll;
-  private JButton anterior, siguiente, botonAncho, pEntera, copy;
+  private JButton anterior, siguiente, botonAncho, pEntera;
   private VersionEImageIcon vic;
 
-  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, JButton copy, int sizeRamdom, VersionEImageIcon version) {
+  public MostrarInternalFrames(JDesktopPane desktopPane, JInternalFrame internal, JScrollPane scrollImage, JLabel rutaLabel, JLabel pageLabel, JTable tabla, JPanel panelSroll, JComboBox combo, TrazaDao traza, JButton siguiente, JButton anterior, JButton ancho, JButton pEntera, int sizeRamdom, VersionEImageIcon version) {
     this.traza = traza;
     this.desktopPane = desktopPane;
     this.internal = internal;
@@ -62,7 +62,6 @@ public class MostrarInternalFrames {
     this.siguiente = siguiente;
     this.botonAncho = ancho;
     this.pEntera = pEntera;
-    this.copy = copy;
     this.panelScroll = panelSroll;
     this.vic = version;
     MostrarInternalFrames.save = new Guardar();// sa

@@ -213,8 +213,8 @@ public class Ventana extends javax.swing.JFrame {
           .addComponent(ampliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
-    rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 10)); // NOI18N
-    rutaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 11)); // NOI18N
+    rutaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
     pageLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 10)); // NOI18N
     pageLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -435,7 +435,7 @@ public class Ventana extends javax.swing.JFrame {
     pathname = siguientes.getRutaParaConversion();
     RutaImagenesAdyacentes.getAdyacentes(siguientes, traza.getIdImagen());
     miframes = new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
-            anterior, ampliar, entera, copy, getSizeRamdom(), version);
+            anterior, ampliar, entera, getSizeRamdom(), version);
     miframes.mostrarPrimeraImagen(siguientes, cantidad);
   }
   /*
