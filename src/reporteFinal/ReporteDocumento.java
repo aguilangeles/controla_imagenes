@@ -300,7 +300,7 @@ public class ReporteDocumento extends javax.swing.JFrame {
       String captura = (String) tablaDetalles.getValueAt(8, 1);
       String digitalizador = (String) tablaDetalles.getValueAt(9, 1);
       UpdateEstadoLote updateEstadoLote =
-              new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
+              new UpdateEstadoLote(conexion, idtraza,
               jTextArea1, captura, digitalizador);
       EscribeInformeDocumento escribeInformeDocumento =
               new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
