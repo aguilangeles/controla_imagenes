@@ -38,7 +38,7 @@ public class SelectImagenesRechazadas {
           {
           nro_rechazo = c.resulset.getInt(1);
           }
-          setEstadoYrechazo(idTraza, nro_rechazo, c);
+        setEstadoYrechazo(idTraza, nro_rechazo, c);
         c.isConexionClose();
         } catch (SQLException ex)
         {
@@ -49,9 +49,8 @@ public class SelectImagenesRechazadas {
 
   private void setEstadoYrechazo(int idTraza, int nro_rechazo, Conexion c) throws SQLException {
     int rechazo = Rangos_qs.getRechazo();
-    AutomaticoRoA estado = new AutomaticoRoA(rechazo, idTraza);
-    boolean accept = AutomaticoRoA.isAceptado();
-    int estadoLote = AutomaticoRoA.setEstado(accept);
+    AutomaticoRoA estado = new AutomaticoRoA(rechazo, nro_rechazo);
+    int estadoLote = AutomaticoRoA.getStatusValue();
     String update = "UPDATE `qualitys`.`traza` "
             + "SET `nro_rechazo` = " + nro_rechazo
             + ", `estadoLote` = " + estadoLote
