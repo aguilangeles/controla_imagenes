@@ -32,6 +32,7 @@ public class Tabla_TrazaReporte extends JFrame {
   private String verificacion;
   private String usuario;
   private String documento;
+  private String estado;
 
   public Tabla_TrazaReporte(Conexion conexion, int idtraza, JTable tabla) {
     this.conexion = conexion;
@@ -45,7 +46,7 @@ public class Tabla_TrazaReporte extends JFrame {
     DefaultTableModel modelo = new DefaultTableModel() {
       @Override
       public boolean isCellEditable(int fila, int columna) {
-        if (fila == 8 || fila ==9)
+        if (fila == 9 || fila == 10)
           {
           return true;
           }
@@ -95,6 +96,7 @@ public class Tabla_TrazaReporte extends JFrame {
         documento = conexion.resulset.getString(8);
         ide = conexion.resulset.getInt(9);
         rutaCompleta = conexion.resulset.getString(10);
+        estado = AutomaticoRoA.getStatusName();
         resultados = ordenarResultados();
         }
       } catch (SQLException ex)
@@ -107,7 +109,7 @@ public class Tabla_TrazaReporte extends JFrame {
   private void poblarTabla(DefaultTableModel modelo) {
     String titulos = "Operador de Control, Fecha de Control, Id Traza, Ruta Completa, "
             + "Tamanio Lote, Cantidad muestreada, Limite Rechazos, Total Rechazos, "
-            + "Linea de captura, Digitalizador, Tipo de Verificacion, Tipo de Documento, ";
+            + "Estado, Linea de captura, Digitalizador, Tipo de Verificacion, Tipo de Documento, ";
     String[] titulo = titulos.split(", ");
     for (int t = 0; t < titulo.length; t++)
       {
@@ -120,10 +122,10 @@ public class Tabla_TrazaReporte extends JFrame {
   }
 
   private String ordenarResultados() {
-    String captura ="";
-    String digitalizador ="";
+    String captura = "";
+    String digitalizador = "";
     String ret = usuario + ", " + fecha + ", " + ide + ", " + rutaCompleta + ", " + tamanio
-            + ", " + muestra + ", " + limite + ", " + rechazo+ ", " + captura+ ", " + digitalizador
+            + ", " + muestra + ", " + limite + ", " + rechazo + ", " + estado + ", " + captura + ", " + digitalizador
             + ", " + verificacion + ", " + documento;
     return ret;
   }

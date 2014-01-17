@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import reporteFinal.AutomaticoRoA;
 
 /**
  *
@@ -28,10 +29,12 @@ public class UpdateNroRechazoDocsInTraza {
   }
 
   private void updateTrazaNroRechazo() {
+    int estado = AutomaticoRoA.getStatusValue();
     try
       {
       String update = "UPDATE `qualitys`.`traza` "
               + "SET `nro_rechazo` = " + rechazos
+              + ", `estadoLote` = " + estado
               + " WHERE id = " + idTraza + ";";
       conexion.executeUpdate(update);
       } catch (SQLException ex)

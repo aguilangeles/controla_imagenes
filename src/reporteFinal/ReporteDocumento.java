@@ -46,10 +46,9 @@ public class ReporteDocumento extends javax.swing.JFrame {
               new Tabla_TrazaReporte(conexion, idtraza, tablaDetalles);
       Tabla_TiposDeControlEnDocumento poblarTablaDiscriminacionTipos =
               new Tabla_TiposDeControlEnDocumento(idtraza, conexion, tabladeTipos);
-      actionRadioButton();
-      imagenesRechazadas.setText("Cantidad de documentos rechazados:  "
-              + poblarTablaTraza.getRechazo());
-      UBICACION = "Reporte/Traza_" + idtraza + "  " + new Time().getDateForTXT() + ".txt";
+      String status = AutomaticoRoA.getStatusName();
+      estado.setText(status);
+      UBICACION = "Reporte/Traza_" + idtraza + "  " + status + "  " + new Time().getDateForTXT() + ".txt";
       }
   }
 
@@ -69,14 +68,12 @@ public class ReporteDocumento extends javax.swing.JFrame {
     jLabel2 = new javax.swing.JLabel();
     jScrollPane2 = new javax.swing.JScrollPane();
     tabladeTipos = new javax.swing.JTable();
-    imagenesRechazadas = new javax.swing.JLabel();
     jLabel4 = new javax.swing.JLabel();
-    aceptar = new javax.swing.JRadioButton();
-    rechazar = new javax.swing.JRadioButton();
     jScrollPane3 = new javax.swing.JScrollPane();
     jTextArea1 = new javax.swing.JTextArea();
     jButton1 = new javax.swing.JButton();
     jButton2 = new javax.swing.JButton();
+    estado = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setTitle("Qualitys_v_1.00.01");
@@ -119,22 +116,12 @@ public class ReporteDocumento extends javax.swing.JFrame {
     tabladeTipos.setFocusable(false);
     jScrollPane2.setViewportView(tabladeTipos);
 
-    imagenesRechazadas.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    imagenesRechazadas.setText("Cantidad de imagenes rechazadas: xxx");
-
     jLabel4.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    jLabel4.setText("Definir estado del Lote");
-
-    aceptar.setText("Aceptado");
-    aceptar.setOpaque(false);
-
-    rechazar.setText("Rechazado");
-    rechazar.setNextFocusableComponent(aceptar);
-    rechazar.setOpaque(false);
+    jLabel4.setText("Estado del Lote:");
 
     jTextArea1.setColumns(20);
     jTextArea1.setRows(5);
-    jTextArea1.setNextFocusableComponent(aceptar);
+    jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Observaciones ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Bitstream Vera Sans Mono", 0, 10), new java.awt.Color(204, 204, 204))); // NOI18N
     jScrollPane3.setViewportView(jTextArea1);
 
     jButton1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
@@ -161,6 +148,9 @@ public class ReporteDocumento extends javax.swing.JFrame {
       }
     });
 
+    estado.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    estado.setText("estado");
+
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -168,24 +158,21 @@ public class ReporteDocumento extends javax.swing.JFrame {
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addContainerGap()
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(imagenesRechazadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jScrollPane2)
           .addComponent(jScrollPane3)
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGap(39, 39, 39)
-            .addComponent(aceptar)
-            .addGap(41, 41, 41)
-            .addComponent(rechazar))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addComponent(jScrollPane1)
           .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jScrollPane2)
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(jLabel2)
             .addGap(0, 0, Short.MAX_VALUE))
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(jButton2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(18, 18, 18)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         .addContainerGap())
     );
     jPanel1Layout.setVerticalGroup(
@@ -193,20 +180,17 @@ public class ReporteDocumento extends javax.swing.JFrame {
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(imagenesRechazadas, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel4)
-          .addComponent(aceptar)
-          .addComponent(rechazar))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jButton1)
@@ -239,17 +223,11 @@ public class ReporteDocumento extends javax.swing.JFrame {
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     getFinalizar(true);
   }//GEN-LAST:event_jButton2ActionPerformed
-  private void actionRadioButton() {
-    bg = new ButtonGroup();
-    bg.add(aceptar);
-    bg.add(rechazar);
-  }
   /**
    * @param args the command line arguments
    */
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JRadioButton aceptar;
-  private javax.swing.JLabel imagenesRechazadas;
+  private javax.swing.JLabel estado;
   private javax.swing.JButton jButton1;
   private javax.swing.JButton jButton2;
   private javax.swing.JLabel jLabel1;
@@ -260,13 +238,13 @@ public class ReporteDocumento extends javax.swing.JFrame {
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JScrollPane jScrollPane3;
   private javax.swing.JTextArea jTextArea1;
-  private javax.swing.JRadioButton rechazar;
   private javax.swing.JTable tablaDetalles;
   private javax.swing.JTable tabladeTipos;
   // End of variables declaration//GEN-END:variables
 
   private void getFinalizar(boolean isNewQs) {
     tablaDetalles.editCellAt(-1, -1);
+<<<<<<< HEAD
     if (bg.getSelection() != null)
       {
       setMensajeYUpdate(isNewQs);
@@ -278,6 +256,10 @@ public class ReporteDocumento extends javax.swing.JFrame {
       }
   }//
 
+=======
+    setMensajeYUpdate(isNewQs);
+  }
+>>>>>>> Sublotes
 
   private void setMensajeYUpdate(boolean isNewQs) throws HeadlessException {
     if (jTextArea1.getText().length() >= 500)
@@ -285,25 +267,25 @@ public class ReporteDocumento extends javax.swing.JFrame {
       JOptionPane.showMessageDialog(jTextArea1,
               "Reduzca el texto a 500 caracteres", "Limite de texto permitido",
               JOptionPane.INFORMATION_MESSAGE);
-      } else if (tablaDetalles.getValueAt(8, 1).toString().equals(""))
+      } else if (tablaDetalles.getValueAt(9, 1).toString().equals(""))
       {
       JOptionPane.showMessageDialog(tablaDetalles,
               "Debe completar Linea de Captura", "campo vacio no permitido",
               JOptionPane.INFORMATION_MESSAGE);
-      } else if (tablaDetalles.getValueAt(9, 1).toString().equals(""))
+      } else if (tablaDetalles.getValueAt(10, 1).toString().equals(""))
       {
       JOptionPane.showMessageDialog(tablaDetalles,
               "Debe completar Digitalizador", "campo vacio no permitido",
               JOptionPane.INFORMATION_MESSAGE);
       } else
       {
-      String captura = (String) tablaDetalles.getValueAt(8, 1);
-      String digitalizador = (String) tablaDetalles.getValueAt(9, 1);
+      String captura = (String) tablaDetalles.getValueAt(9, 1);
+      String digitalizador = (String) tablaDetalles.getValueAt(10, 1);
       UpdateEstadoLote updateEstadoLote =
-              new UpdateEstadoLote(conexion, idtraza, aceptar.isSelected(),
+              new UpdateEstadoLote(conexion, idtraza,
               jTextArea1, captura, digitalizador);
       EscribeInformeDocumento escribeInformeDocumento =
-              new EscribeInformeDocumento(tablaDetalles, aceptar.isSelected(), jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
+              new EscribeInformeDocumento(tablaDetalles, jTextArea1.getText(), jButton1, tabladeTipos, UBICACION);
       conexion.isConexionClose();
       if (!isNewQs)
         {

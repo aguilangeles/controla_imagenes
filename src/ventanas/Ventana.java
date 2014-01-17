@@ -9,6 +9,10 @@ import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.RutaImagenesAdyacentes;
 import helper.VersionEImageIcon;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import reporteFinal.Reporte;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -27,6 +31,7 @@ public class Ventana extends javax.swing.JFrame {
   private TrazaDao traza;
   private final TablaCheckBox tablaCheckBox;
   private MostrarInternalFrames miframes;
+  private String pathname;
 
   /**
    * Creates new form Ventana
@@ -109,6 +114,7 @@ public class Ventana extends javax.swing.JFrame {
     scrollImage = new javax.swing.JScrollPane();
     terminar = new javax.swing.JButton();
     adyacentes = new javax.swing.JButton();
+    copy = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     setBackground(new java.awt.Color(230, 252, 238));
@@ -207,10 +213,10 @@ public class Ventana extends javax.swing.JFrame {
           .addComponent(ampliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
-    rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
-    rutaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 11)); // NOI18N
+    rutaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-    pageLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
+    pageLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 10)); // NOI18N
     pageLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     pageLabel.setText("pagina:  ");
 
@@ -244,6 +250,13 @@ public class Ventana extends javax.swing.JFrame {
     adyacentes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/Monitoring24.png"))); // NOI18N
     adyacentes.setToolTipText("Ver imágenes adyacentes");
 
+    copy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/copy.png"))); // NOI18N
+    copy.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        copyActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout internalLayout = new javax.swing.GroupLayout(internal.getContentPane());
     internal.getContentPane().setLayout(internalLayout);
     internalLayout.setHorizontalGroup(
@@ -252,9 +265,11 @@ public class Ventana extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-            .addGap(18, 18, 18)
-            .addComponent(pageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+            .addComponent(rutaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(pageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(copy, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(adyacentes))
           .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -275,7 +290,9 @@ public class Ventana extends javax.swing.JFrame {
           .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGroup(internalLayout.createSequentialGroup()
             .addGap(5, 5, 5)
-            .addComponent(adyacentes)))
+            .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(copy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(adyacentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
@@ -327,6 +344,10 @@ public class Ventana extends javax.swing.JFrame {
   private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
     getNextImage();
   }//GEN-LAST:event_siguienteActionPerformed
+
+  private void copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyActionPerformed
+    pasteToClipBoard();
+  }//GEN-LAST:event_copyActionPerformed
 
   private Imagen goImagen(int contador) {
     int limiteSuperior = getSizeRamdom() - 1;
@@ -387,6 +408,7 @@ public class Ventana extends javax.swing.JFrame {
   private javax.swing.JButton ampliar;
   private javax.swing.JButton anterior;
   private javax.swing.JComboBox combo;
+  private javax.swing.JButton copy;
   private javax.swing.JDesktopPane desktopPane;
   private javax.swing.JButton entera;
   private javax.swing.JInternalFrame internal;
@@ -410,16 +432,34 @@ public class Ventana extends javax.swing.JFrame {
 
   private void getFirstImage(VersionEImageIcon version) {
     Imagen siguientes = goImagen(contador);//trae el ramdom
+    pathname = siguientes.getRutaParaConversion();
     RutaImagenesAdyacentes.getAdyacentes(siguientes, traza.getIdImagen());
     miframes = new MostrarInternalFrames(desktopPane, internal, scrollImage, rutaLabel, pageLabel, tabla, panelScroll, combo, traza, siguiente,
             anterior, ampliar, entera, getSizeRamdom(), version);
     miframes.mostrarPrimeraImagen(siguientes, cantidad);
+  }
+  /*
+   copy.addActionListener(new ActionListener() {
+   @Override
+   public void actionPerformed(ActionEvent e) {
+   pasteToClipBoard(rutapara);
+   }
+   });
+   }*/
+
+  private void pasteToClipBoard() {
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Clipboard clipboard = toolkit.getSystemClipboard();
+    StringSelection selection = new StringSelection(getPathname());
+    clipboard.setContents(selection, null);
   }
 
   private void getNextImage() {
     contador++;
     cantidad++;
     Imagen imagen1 = goImagen(contador);
+    pathname = imagen1.getRutaParaConversion();
+
     RutaImagenesAdyacentes.getAdyacentes(imagen1, traza.getIdImagen());
     miframes.setNextImage(imagen1, cantidad);
 
@@ -429,9 +469,13 @@ public class Ventana extends javax.swing.JFrame {
     contador--;
     cantidad--;
     Imagen pr = backImagen(contador);
+    pathname = pr.getRutaParaConversion();
     RutaImagenesAdyacentes.getAdyacentes(pr, traza.getIdImagen());
     miframes.setBackImage(pr, cantidad);
+  }
 
+  public String getPathname() {
+    return pathname;
   }
 
   private void setFinalizar() {

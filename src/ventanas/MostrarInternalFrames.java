@@ -9,6 +9,11 @@ import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.MensajeJoptionPane;
 import helper.VersionEImageIcon;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -126,10 +131,12 @@ public class MostrarInternalFrames {
     desktopPane.repaint();
   }
 
-  private void setImagenes(Imagen siguientes) {
+  private void setImagenes( Imagen siguientes) {
     String ruta = rutadeimagen.getImage(siguientes, idImagen);
+    final String rutapara =siguientes.getRutaParaConversion();
     setLabelPagina(siguientes);
     imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImagen);
     scrollImage.getViewport().add(imageDraw);
   }
+
 }

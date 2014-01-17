@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import reporteFinal.AutomaticoRoA;
 
 /**
  * Genera un reporte de la tabla descriptiva.
@@ -25,15 +26,8 @@ public class EscribeInforme {
   private MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
   private String UBICACION;
 
-  public EscribeInforme(JTable tabla, boolean estado, String observaciones, JButton finalizar, String UBICACION) {
-    String estadoS;
-    if (estado)
-      {
-      estadoS = "Aceptado.";
-      } else
-      {
-      estadoS = "Rechazado.";
-      }
+  public EscribeInforme(JTable tabla, String observaciones, JButton finalizar, String UBICACION) {
+    String estadoS = AutomaticoRoA.getStatusName();
     this.UBICACION = UBICACION;
     write(tabla, estadoS, observaciones, finalizar);
   }

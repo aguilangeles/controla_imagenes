@@ -4,9 +4,11 @@
  */
 package database;
 
+import entidad.Rangos_qs;
 import helper.MensajeJoptionPane;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import reporteFinal.AutomaticoRoA;
 
 /**
  * Cuenta la cantidad de imagenes con estado 1 (rechazado) e incluye esa
@@ -21,7 +23,7 @@ public class SelectImagenesRechazadas {
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
 
   public SelectImagenesRechazadas(int idTraza) {
-    int numero = 0;
+    int nro_rechazo = 0;
     Conexion c = new Conexion();
     if (c.isConexion())
       {
@@ -34,17 +36,25 @@ public class SelectImagenesRechazadas {
         c.executeQuery(query);
         while (c.resulset.next())
           {
-          numero = c.resulset.getInt(1);
+          nro_rechazo = c.resulset.getInt(1);
           }
-        String update = "UPDATE `qualitys`.`traza` "
-                + "SET `nro_rechazo` = " + numero
-                + " WHERE id = " + idTraza + ";";
-        c.executeUpdate(update);
+        setEstadoYrechazo(idTraza, nro_rechazo, c);
         c.isConexionClose();
         } catch (SQLException ex)
         {
         msg.getMessage(ex.getMessage(), className);
         }
       }
+  }
+
+  private void setEstadoYrechazo(int idTraza, int nro_rechazo, Conexion c) throws SQLException {
+    int rechazo = Rangos_qs.getRechazo();
+    AutomaticoRoA estado = new AutomaticoRoA(rechazo, nro_rechazo);
+    int estadoLote = AutomaticoRoA.getStatusValue();
+    String update = "UPDATE `qualitys`.`traza` "
+            + "SET `nro_rechazo` = " + nro_rechazo
+            + ", `estadoLote` = " + estadoLote
+            + " WHERE id = " + idTraza + ";";
+    c.executeUpdate(update);
   }
 }
