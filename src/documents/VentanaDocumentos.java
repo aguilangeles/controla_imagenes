@@ -239,6 +239,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     totales.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
 
     copy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/copy.png"))); // NOI18N
+    copy.setToolTipText("Copiar ruta al portapapeles");
     copy.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         copyActionPerformed(evt);
