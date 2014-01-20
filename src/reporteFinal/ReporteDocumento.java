@@ -244,22 +244,9 @@ public class ReporteDocumento extends javax.swing.JFrame {
 
   private void getFinalizar(boolean isNewQs) {
     tablaDetalles.editCellAt(-1, -1);
-<<<<<<< HEAD
-    if (bg.getSelection() != null)
-      {
-      setMensajeYUpdate(isNewQs);
-      } else
-      {
-      JOptionPane.showMessageDialog(null,
-              "Debe aceptar o rechazar el lote antes de salir", "Selección de Lote",
-              JOptionPane.ERROR_MESSAGE);
-      }
-  }//
 
-=======
     setMensajeYUpdate(isNewQs);
   }
->>>>>>> Sublotes
 
   private void setMensajeYUpdate(boolean isNewQs) throws HeadlessException {
     if (jTextArea1.getText().length() >= 500)
