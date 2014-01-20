@@ -254,9 +254,6 @@
                         <Property name="text" type="java.lang.String" value="Siguiente"/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT+S"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="siguienteActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="anterior">
                       <Properties>
@@ -267,9 +264,6 @@
                         <Property name="text" type="java.lang.String" value="Anterior"/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT+A"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anteriorActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="combo">
                       <Properties>
@@ -321,9 +315,6 @@
                         <Property name="text" type="java.lang.String" value="Sig. Doc."/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT + Q"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextDocumActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="prevDocum">
                       <Properties>
@@ -334,9 +325,6 @@
                         <Property name="text" type="java.lang.String" value="Ant. Doc."/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT + Q"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prevDocumActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

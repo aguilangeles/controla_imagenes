@@ -16,9 +16,11 @@ import entidad.Sublote;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.AbstractAction;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -49,7 +51,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
-    tabla.requestFocus();
+    siguiente.requestFocus();
     this.traza = trazadao;
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -57,6 +59,10 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     anterior.setEnabled(false);
     prevDocum.setEnabled(false);
     getFirstImage(version);
+    siguienteActionPerformed();
+    siguienteDocActionPerformed();
+    anteriorActionPerformed();
+    anteriorDocActionPerformed();
   }
 
   /**
@@ -126,21 +132,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     siguiente.setMnemonic('S');
     siguiente.setText("Siguiente");
     siguiente.setToolTipText("ALT+S");
-    siguiente.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        siguienteActionPerformed(evt);
-      }
-    });
 
     anterior.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     anterior.setMnemonic('a');
     anterior.setText("Anterior");
     anterior.setToolTipText("ALT+A");
-    anterior.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        anteriorActionPerformed(evt);
-      }
-    });
 
     combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
@@ -158,21 +154,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     nextDocum.setMnemonic('Q');
     nextDocum.setText("Sig. Doc.");
     nextDocum.setToolTipText("ALT + Q");
-    nextDocum.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        nextDocumActionPerformed(evt);
-      }
-    });
 
     prevDocum.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 11)); // NOI18N
     prevDocum.setMnemonic('W');
     prevDocum.setText("Ant. Doc.");
     prevDocum.setToolTipText("ALT + Q");
-    prevDocum.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        prevDocumActionPerformed(evt);
-      }
-    });
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
@@ -343,23 +329,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     setFinalizar();
   }//GEN-LAST:event_terminarActionPerformed
 
-  private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-    getBackImage();
-  }//GEN-LAST:event_anteriorActionPerformed
-
-  private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-    getNextImage();
-  }//GEN-LAST:event_siguienteActionPerformed
-
-  private void nextDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDocumActionPerformed
-    nextDocument();
-  }//GEN-LAST:event_nextDocumActionPerformed
-
-  private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
-    backDocument();
-
-  }//GEN-LAST:event_prevDocumActionPerformed
-
   private void copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyActionPerformed
     pasteToClipBoard();
   }//GEN-LAST:event_copyActionPerformed
@@ -408,7 +377,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     getNextImage();
   }
 
-  private void backDocument() {
+  private void previusDocument() {
     int previus = getSubNumero() - 1;
     Sublote subPrevius = getsublotebyId(previus);
     Imagen imgPrevius = (Imagen) subPrevius.objectList().get(1);
@@ -613,6 +582,58 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
     });
     dispose();
+  }
+
+  private void siguienteActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        getNextImage();
+      }
+    };
+    siguiente.addActionListener(buttonPressed);
+    siguiente.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_RIGHT, 0), "Right");
+    siguiente.getActionMap().put("Right", buttonPressed);
+  }
+
+  private void anteriorActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        getBackImage();
+      }
+    };
+    anterior.addActionListener(buttonPressed);
+    anterior.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LEFT, 0), "Left");
+    anterior.getActionMap().put("Left", buttonPressed);
+  }
+
+  private void siguienteDocActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        nextDocument();
+      }
+    };
+    nextDocum.addActionListener(buttonPressed);
+    nextDocum.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_UP, 0), "Up");
+    nextDocum.getActionMap().put("Up", buttonPressed);
+  }
+
+  private void anteriorDocActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        previusDocument();
+      }
+    };
+    prevDocum.addActionListener(buttonPressed);
+    prevDocum.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DOWN, 0), "Down");
+    prevDocum.getActionMap().put("Down", buttonPressed);
   }
 
   public Map<Integer, Imagen> getMapa() {

@@ -42,7 +42,7 @@ public class Ventana extends javax.swing.JFrame {
     setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
-    tabla.requestFocus();
+    siguiente.requestFocus();
     this.traza = trazadao;
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -400,10 +400,8 @@ public class Ventana extends javax.swing.JFrame {
     cantidad++;
     Imagen imagen1 = goImagen(contador);
     pathname = imagen1.getRutaParaConversion();
-
     RutaImagenesAdyacentes.getAdyacentes(imagen1, traza.getIdImagen());
     miframes.setNextImage(imagen1, cantidad);
-
   }
 
   private void setBackImage() {
