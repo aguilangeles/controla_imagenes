@@ -151,12 +151,12 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     ampliar.setToolTipText("Ajustar al ancho de ventana");
 
     nextDocum.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 11)); // NOI18N
-    nextDocum.setMnemonic('Q');
+    nextDocum.setMnemonic('W');
     nextDocum.setText("Sig. Doc.");
-    nextDocum.setToolTipText("ALT + Q");
+    nextDocum.setToolTipText("ALT + W");
 
     prevDocum.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 11)); // NOI18N
-    prevDocum.setMnemonic('W');
+    prevDocum.setMnemonic('Q');
     prevDocum.setText("Ant. Doc.");
     prevDocum.setToolTipText("ALT + Q");
 
