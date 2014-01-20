@@ -14,8 +14,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import reporteFinal.Reporte;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javax.swing.AbstractAction;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,41 +50,9 @@ public class Ventana extends javax.swing.JFrame {
     anterior.setEnabled(false);
     getFirstImage(version);
     adyacentes.addActionListener(new RutaImagenesAdyacentes());
-    siguiente.addKeyListener(keylistener());
-    anterior.addKeyListener(keylistener());
+    siguienteActionPerformed();
+    anteriorActionPerformed();
   }
-
-  private KeyListener keylistener() {
-    KeyListener kl = new KeyListener() {
-      @Override
-      public void keyTyped(KeyEvent e) {
-        myKeyEvt(e, "KeyTyped");
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e) {
-        myKeyEvt(e, "keyReleased");
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-        myKeyEvt(e, "keyPressed");
-      }
-
-      private void myKeyEvt(KeyEvent e, String text) {
-        int key = e.getKeyCode();
-        if (key == KeyEvent.VK_KP_LEFT || key == KeyEvent.VK_LEFT)
-          {
-          setBackImage();
-          } else if (key == KeyEvent.VK_KP_RIGHT || key == KeyEvent.VK_RIGHT)
-          {
-          getNextImage();
-          }
-      }
-    };
-    return kl;
-  }
-
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,21 +117,11 @@ public class Ventana extends javax.swing.JFrame {
     siguiente.setMnemonic('S');
     siguiente.setText("Siguiente");
     siguiente.setToolTipText("ALT+S");
-    siguiente.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        siguienteActionPerformed(evt);
-      }
-    });
 
     anterior.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     anterior.setMnemonic('a');
     anterior.setText("Anterior");
     anterior.setToolTipText("ALT+A");
-    anterior.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        anteriorActionPerformed(evt);
-      }
-    });
 
     combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
@@ -337,14 +294,6 @@ public class Ventana extends javax.swing.JFrame {
     setFinalizar();
   }//GEN-LAST:event_terminarActionPerformed
 
-  private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-    setBackImage();
-  }//GEN-LAST:event_anteriorActionPerformed
-
-  private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-    getNextImage();
-  }//GEN-LAST:event_siguienteActionPerformed
-
   private void copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyActionPerformed
     pasteToClipBoard();
   }//GEN-LAST:event_copyActionPerformed
@@ -438,14 +387,6 @@ public class Ventana extends javax.swing.JFrame {
             anterior, ampliar, entera, getSizeRamdom(), version);
     miframes.mostrarPrimeraImagen(siguientes, cantidad);
   }
-  /*
-   copy.addActionListener(new ActionListener() {
-   @Override
-   public void actionPerformed(ActionEvent e) {
-   pasteToClipBoard(rutapara);
-   }
-   });
-   }*/
 
   private void pasteToClipBoard() {
     Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -494,5 +435,31 @@ public class Ventana extends javax.swing.JFrame {
 
   private int getSizeRamdom() {
     return traza.getImagenList().size();
+  }
+
+  private void siguienteActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        getNextImage();
+      }
+    };
+    siguiente.addActionListener(buttonPressed);
+    siguiente.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_RIGHT, 0), "Right");
+    siguiente.getActionMap().put("Right", buttonPressed);
+  }
+
+  private void anteriorActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setBackImage();
+      }
+    };
+    anterior.addActionListener(buttonPressed);
+    anterior.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LEFT, 0), "Left");
+    anterior.getActionMap().put("Left", buttonPressed);
   }
 }

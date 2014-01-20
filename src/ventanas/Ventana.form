@@ -235,9 +235,6 @@
                         <Property name="text" type="java.lang.String" value="Siguiente"/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT+S"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="siguienteActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="anterior">
                       <Properties>
@@ -248,9 +245,6 @@
                         <Property name="text" type="java.lang.String" value="Anterior"/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT+A"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anteriorActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="combo">
                       <Properties>
