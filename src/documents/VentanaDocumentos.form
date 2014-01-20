@@ -85,16 +85,16 @@
                               <Group type="102" attributes="0">
                                   <Component id="rutaLabel" pref="484" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                                  <Component id="pageLabel" pref="38" max="32767" attributes="0"/>
+                                  <Component id="pageLabel" min="-2" pref="38" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                   <Component id="totales" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                   <Component id="copy" min="-2" pref="47" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="panelScroll" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="terminar" alignment="1" max="32767" attributes="0"/>
@@ -111,21 +111,24 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" max="32767" attributes="0"/>
+                              <Component id="jLabel2" pref="36" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="pageLabel" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="totales" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="copy" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rutaLabel" max="32767" attributes="0"/>
+                                      <Component id="copy" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="totales" alignment="0" pref="19" max="32767" attributes="0"/>
+                                          <Component id="pageLabel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="rutaLabel" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
+                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jScrollPane2" pref="188" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" pref="189" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -198,17 +201,14 @@
                                       <Component id="ampliar" min="-2" pref="44" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="36" max="32767" attributes="0"/>
+                              <EmptySpace pref="46" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="anterior" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="entera" min="-2" pref="44" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="combo" min="-2" pref="97" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="combo" alignment="1" min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -231,9 +231,9 @@
                                   <Component id="prevDocum" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="23" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="combo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="combo" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -254,9 +254,6 @@
                         <Property name="text" type="java.lang.String" value="Siguiente"/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT+S"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="siguienteActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="anterior">
                       <Properties>
@@ -267,9 +264,6 @@
                         <Property name="text" type="java.lang.String" value="Anterior"/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT+A"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anteriorActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="combo">
                       <Properties>
@@ -314,19 +308,23 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="nextDocum">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Bitstream Vera Sans Mono" size="11" style="0"/>
+                        </Property>
+                        <Property name="mnemonic" type="int" value="87"/>
                         <Property name="text" type="java.lang.String" value="Sig. Doc."/>
+                        <Property name="toolTipText" type="java.lang.String" value="ALT + W"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextDocumActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="prevDocum">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Bitstream Vera Sans Mono" size="11" style="0"/>
+                        </Property>
+                        <Property name="mnemonic" type="int" value="81"/>
                         <Property name="text" type="java.lang.String" value="Ant. Doc."/>
+                        <Property name="toolTipText" type="java.lang.String" value="ALT + Q"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prevDocumActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -335,7 +333,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Bitstream Vera Sans Mono" size="12" style="0"/>
                     </Property>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="pageLabel">
@@ -408,6 +406,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/imageicon/copy.png"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Copiar ruta al portapapeles"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyActionPerformed"/>

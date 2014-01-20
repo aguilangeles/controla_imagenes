@@ -16,9 +16,11 @@ import entidad.Sublote;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.AbstractAction;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -49,7 +51,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
-    tabla.requestFocus();
+    siguiente.requestFocus();
     this.traza = trazadao;
     this.tablaCheckBox = new TablaCheckBox(model, tabla, traza);//llena la tabla con los contenidos adecuados
     tabla.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -57,6 +59,10 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     anterior.setEnabled(false);
     prevDocum.setEnabled(false);
     getFirstImage(version);
+    siguienteActionPerformed();
+    siguienteDocActionPerformed();
+    anteriorActionPerformed();
+    anteriorDocActionPerformed();
   }
 
   /**
@@ -126,21 +132,11 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     siguiente.setMnemonic('S');
     siguiente.setText("Siguiente");
     siguiente.setToolTipText("ALT+S");
-    siguiente.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        siguienteActionPerformed(evt);
-      }
-    });
 
     anterior.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     anterior.setMnemonic('a');
     anterior.setText("Anterior");
     anterior.setToolTipText("ALT+A");
-    anterior.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        anteriorActionPerformed(evt);
-      }
-    });
 
     combo.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "150%", "125%", "100%", "75%", "50%", "25%" }));
@@ -154,19 +150,15 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     ampliar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/1383001847_stock_zoom-page-width_1.png"))); // NOI18N
     ampliar.setToolTipText("Ajustar al ancho de ventana");
 
+    nextDocum.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 11)); // NOI18N
+    nextDocum.setMnemonic('W');
     nextDocum.setText("Sig. Doc.");
-    nextDocum.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        nextDocumActionPerformed(evt);
-      }
-    });
+    nextDocum.setToolTipText("ALT + W");
 
+    prevDocum.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 11)); // NOI18N
+    prevDocum.setMnemonic('Q');
     prevDocum.setText("Ant. Doc.");
-    prevDocum.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        prevDocumActionPerformed(evt);
-      }
-    });
+    prevDocum.setToolTipText("ALT + Q");
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
@@ -179,15 +171,13 @@ public class VentanaDocumentos extends javax.swing.JFrame {
           .addGroup(jPanel1Layout.createSequentialGroup()
             .addGap(33, 33, 33)
             .addComponent(ampliar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING)
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
             .addComponent(entera, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(21, 21, 21))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap())))
+          .addComponent(combo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
       .addGroup(jPanel1Layout.createSequentialGroup()
         .addComponent(nextDocum, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -204,9 +194,9 @@ public class VentanaDocumentos extends javax.swing.JFrame {
           .addComponent(nextDocum, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
           .addComponent(prevDocum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel1)
-          .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(combo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGap(18, 18, 18)
         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(entera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +204,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     );
 
     rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
-    rutaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    rutaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
     pageLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     pageLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -249,6 +239,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     totales.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
 
     copy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageicon/copy.png"))); // NOI18N
+    copy.setToolTipText("Copiar ruta al portapapeles");
     copy.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         copyActionPerformed(evt);
@@ -265,7 +256,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
           .addGroup(internalLayout.createSequentialGroup()
             .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(pageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addComponent(pageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(totales, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(18, 18, 18)
@@ -285,18 +276,20 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(internalLayout.createSequentialGroup()
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, internalLayout.createSequentialGroup()
-            .addGap(12, 12, 12)
+            .addContainerGap()
             .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(pageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(totales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(copy, javax.swing.GroupLayout.Alignment.TRAILING)
-              .addComponent(rutaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+              .addComponent(copy, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(totales, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                .addComponent(pageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rutaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGap(5, 5, 5)))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(internalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(internalLayout.createSequentialGroup()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -336,23 +329,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
   private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
     setFinalizar();
   }//GEN-LAST:event_terminarActionPerformed
-
-  private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-    getBackImage();
-  }//GEN-LAST:event_anteriorActionPerformed
-
-  private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-    getNextImage();
-  }//GEN-LAST:event_siguienteActionPerformed
-
-  private void nextDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDocumActionPerformed
-    nextDocument();
-  }//GEN-LAST:event_nextDocumActionPerformed
-
-  private void prevDocumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevDocumActionPerformed
-    backDocument();
-
-  }//GEN-LAST:event_prevDocumActionPerformed
 
   private void copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyActionPerformed
     pasteToClipBoard();
@@ -402,7 +378,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     getNextImage();
   }
 
-  private void backDocument() {
+  private void previusDocument() {
     int previus = getSubNumero() - 1;
     Sublote subPrevius = getsublotebyId(previus);
     Imagen imgPrevius = (Imagen) subPrevius.objectList().get(1);
@@ -607,6 +583,58 @@ public class VentanaDocumentos extends javax.swing.JFrame {
       }
     });
     dispose();
+  }
+
+  private void siguienteActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        getNextImage();
+      }
+    };
+    siguiente.addActionListener(buttonPressed);
+    siguiente.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_RIGHT, 0), "Right");
+    siguiente.getActionMap().put("Right", buttonPressed);
+  }
+
+  private void anteriorActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        getBackImage();
+      }
+    };
+    anterior.addActionListener(buttonPressed);
+    anterior.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_LEFT, 0), "Left");
+    anterior.getActionMap().put("Left", buttonPressed);
+  }
+
+  private void siguienteDocActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        nextDocument();
+      }
+    };
+    nextDocum.addActionListener(buttonPressed);
+    nextDocum.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_UP, 0), "Up");
+    nextDocum.getActionMap().put("Up", buttonPressed);
+  }
+
+  private void anteriorDocActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        previusDocument();
+      }
+    };
+    prevDocum.addActionListener(buttonPressed);
+    prevDocum.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+            put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DOWN, 0), "Down");
+    prevDocum.getActionMap().put("Down", buttonPressed);
   }
 
   public Map<Integer, Imagen> getMapa() {

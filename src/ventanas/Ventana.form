@@ -80,12 +80,12 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="rutaLabel" min="-2" pref="461" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="rutaLabel" pref="459" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="pageLabel" min="-2" pref="79" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="copy" min="-2" pref="49" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="adyacentes" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="panelScroll" max="32767" attributes="0"/>
@@ -105,8 +105,6 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rutaLabel" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="pageLabel" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
@@ -115,6 +113,8 @@
                                       <Component id="adyacentes" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="rutaLabel" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="pageLabel" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -235,9 +235,6 @@
                         <Property name="text" type="java.lang.String" value="Siguiente"/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT+S"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="siguienteActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="anterior">
                       <Properties>
@@ -248,9 +245,6 @@
                         <Property name="text" type="java.lang.String" value="Anterior"/>
                         <Property name="toolTipText" type="java.lang.String" value="ALT+A"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anteriorActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="combo">
                       <Properties>
@@ -298,7 +292,7 @@
                 <Component class="javax.swing.JLabel" name="rutaLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Bitstream Vera Sans Mono" size="11" style="0"/>
+                      <Font name="Bitstream Vera Sans Mono" size="10" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
@@ -306,9 +300,9 @@
                 <Component class="javax.swing.JLabel" name="pageLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Bitstream Vera Sans Mono" size="10" style="0"/>
+                      <Font name="Bitstream Vera Sans Mono" size="11" style="0"/>
                     </Property>
-                    <Property name="horizontalAlignment" type="int" value="4"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="text" type="java.lang.String" value="pagina:  "/>
                   </Properties>
                 </Component>
