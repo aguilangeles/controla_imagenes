@@ -30,6 +30,7 @@ public class Conexion {
   private int filasAfectadas;
   private int messageType = JOptionPane.ERROR_MESSAGE;
   private String className = Conexion.class.getName();
+  private static String toolpath;
   MensajeJoptionPane mensaje = new MensajeJoptionPane(null, messageType);
 
   public Conexion() {
@@ -47,6 +48,7 @@ public class Conexion {
       String urlExtendida = "jdbc:mysql://" + url + "/" + base;
       String user = prop.getProperty("dbuser");
       String passw = prop.getProperty("dbpassword");
+      toolpath = prop.getProperty("toolpath");
       Class.forName(DRIVER);
       conexion = DriverManager.getConnection(urlExtendida, user, passw);
       if (conexion != null)
@@ -154,4 +156,9 @@ public class Conexion {
     prepareStatement = conexion.prepareStatement(sql);
     filasAfectadas = prepareStatement.executeUpdate();
   }
+
+  public static String getToolpath() {
+    return toolpath;
+  }
+  
 }

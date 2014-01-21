@@ -4,6 +4,7 @@
  */
 package imagen;
 
+import database.Conexion;
 import entidad.LogQualitys;
 import helper.ExtensionTemporal;
 import helper.MensajeJoptionPane;
@@ -27,7 +28,7 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
   private static final String className = ImagenesWorker.class.getName();
   private int type = JOptionPane.ERROR_MESSAGE;
   MensajeJoptionPane msg = new MensajeJoptionPane(null, type);
-  private static final String IM4JAVA_TOOLPATH = LogQualitys.getToolpathImageMagick();
+  private String IM4JAVA_TOOLPATH;
 //  private static final String IM4JAVA_TOOLPATH = "C:\\Program Files (x86)\\ImageMagick-6.8.6-Q16";
   private String rutaConPagina;
   private String ruta_archivo;
@@ -39,6 +40,7 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
     this.ruta_archivo = ruta_archivo;
     this.parent = parent;
     this.pagina = pagina;
+    this.IM4JAVA_TOOLPATH = Conexion.getToolpath();
   }
 
   @Override

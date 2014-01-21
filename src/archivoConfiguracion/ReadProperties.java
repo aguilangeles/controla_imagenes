@@ -34,8 +34,7 @@ public class ReadProperties {
       String base = p.getProperty("database");
       String usuario = p.getProperty("dbuser");
       String password = p.getProperty("dbpassword");
-      String toolpath=p.getProperty("toolpath");
-      user = new LogQualitys(url, base, usuario, password, null);
+      user = new LogQualitys(url, base, usuario, password);
       } catch (IOException ex)
       {
       mensaje.getMessage(ex.getMessage(), className);
