@@ -36,7 +36,7 @@ public class TestBaseDeDatos {
       String thisDatabase = validarString(database.getText());
       String thisUsuario = validarString(usuario.getText());
       String thisPassw = validarString(password.getText());
-      LogQualitys userQualitys = new LogQualitys(thisUrl, thisDatabase, thisUsuario, thisPassw);
+      LogQualitys userQualitys = new LogQualitys(thisUrl, thisDatabase, thisUsuario, thisPassw, null);
       testConexion(userQualitys, conexion, aceptar, isTest, validarUsuario);
       } catch (RuntimeException aRuntimeExc)
       {

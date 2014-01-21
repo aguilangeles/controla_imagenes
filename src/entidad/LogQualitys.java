@@ -15,12 +15,18 @@ public class LogQualitys {
   private String base;
   private String usuario;
   private String password;
+  private static String toolpathImageMagick ;
 
-  public LogQualitys(String url, String base, String usuario, String password) {
+  public LogQualitys(String url, String base, String usuario, String password, String toolpath) {
     this.url = url;
     this.base = base;
     this.usuario = usuario;
     this.password = password;
+    LogQualitys.toolpathImageMagick=toolpath;
+  }
+
+  public static String getToolpathImageMagick() {
+    return toolpathImageMagick;
   }
 
   public String getUrl() {
