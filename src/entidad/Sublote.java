@@ -4,6 +4,7 @@
  */
 package entidad;
 
+import java.io.File;
 import java.util.List;
 
 /**
