@@ -1,2 +1,0 @@
-controla_imagenes
-=================

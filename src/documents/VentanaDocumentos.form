@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -58,9 +58,7 @@
       <SubComponents>
         <Container class="javax.swing.JDesktopPane" name="desktopPane">
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-            <Property name="useNullLayout" type="boolean" value="true"/>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout"/>
           <SubComponents>
             <Container class="javax.swing.JInternalFrame" name="internal">
               <Properties>
@@ -73,8 +71,8 @@
                 <Property name="visible" type="boolean" value="true"/>
               </Properties>
               <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="0" width="960" height="500"/>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
+                  <JLayeredPaneConstraints x="0" y="0" width="960" height="500" layer="0" position="-1"/>
                 </Constraint>
               </Constraints>
 
@@ -194,38 +192,29 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel1" min="-2" pref="121" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                                  <Component id="ampliar" min="-2" pref="44" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="siguiente" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="siguiente" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" pref="121" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="nextDocum" min="-2" pref="105" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                      <Component id="ampliar" min="-2" pref="44" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="prevDocum" max="32767" attributes="0"/>
+                              <EmptySpace pref="46" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="anterior" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="entera" min="-2" pref="44" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="anterior" alignment="0" pref="106" max="32767" attributes="0"/>
-                                  <Component id="combo" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="combo" alignment="1" min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="nextDocum" min="-2" pref="105" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="prevDocum" min="-2" pref="97" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
