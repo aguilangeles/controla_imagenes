@@ -92,6 +92,7 @@ public class WorkerDocument extends SwingWorker<Object, Object> {
       int resultado = idTraza + 1;
       trazaID = (resultado == 0) ? 1 : resultado;
       LlenarTrazaDao trazaDao = new LlenarTrazaDao(con, trazaID, parent, true);
+      
       new VentanaDocumentos(trazaDao.getTraza()).setVisible(true);
       }
     con.isConexionClose();
