@@ -7,6 +7,7 @@ package entidad;
 import helper.Decoder;
 import helper.GetIdandExtensionImg;
 import helper.GetImagenesAdyacentes;
+import java.io.File;
 
 /**
  * @author MUTNPROD003
@@ -38,14 +39,13 @@ public class Imagen {
     this.pagina = pagina;
     this.rutaInsertadaEnDB = rutaImagen;
     this.parent = parent;
-    this.rutaParaConversion = (idImagen == 2) ? (sublote.getNombre() + "\\" + rutaImagen) : sublote.getNombre();
+    this.rutaParaConversion = (idImagen == 2) ? (sublote.getNombre() + File.separator + rutaImagen) : sublote.getNombre();
     this.idSublote = sublote.getId();
     this.rutaSublote = sublote.getNombre();
     this.cantImagenes = sublote.getTamanio();
   }
 
   public GetImagenesAdyacentes adyacentes() {
-//    String ad = decodear(getRutaParaConversion());
     GetImagenesAdyacentes imagenesAdyacentes = new GetImagenesAdyacentes(getRutaParaConversion());
     return imagenesAdyacentes;
   }
