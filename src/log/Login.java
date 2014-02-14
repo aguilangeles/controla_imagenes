@@ -69,16 +69,9 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         user.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-        user.setText("carga");
         user.setNextFocusableComponent(password);
 
         password.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-        password.setText("carga");
-        password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
-            }
-        });
 
         entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
         entrar.setMnemonic('e');
@@ -178,10 +171,6 @@ public class Login extends javax.swing.JFrame {
   private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
     setEntrar();
   }//GEN-LAST:event_entrarActionPerformed
-
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
   private void setEntrar() {
     /*Define si se setea el archivo o permite el ingreso del usuario*/
     if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
