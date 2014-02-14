@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/panelContol/Desactivar.java</file>
-            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/panelContol/DesactivarBoton.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/panelContol/ContadorSublotes.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/documents/GetFinalListOfDocuments.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/files/CreateRamdom.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/documents/WorkerDocument.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/documents/GetListOfImagesForDoc.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/documents/SwitchImagesForDocument.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/files/SearchImagesFromFiles.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/helper/VersionEImageIcon.java</file>
         </group>
     </open-files>
 </project-private>
