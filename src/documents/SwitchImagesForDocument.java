@@ -6,6 +6,7 @@ package documents;
 
 import entidad.ImagenInsertada;
 import entidad.NombrePaginaDelPDF;
+import helper.GetExtensionNoDeseada;
 import helper.MensajeJoptionPane;
 import java.io.File;
 import java.io.IOException;
@@ -49,12 +50,16 @@ class SwitchImagesForDocument {
         List<ImagenInsertada> imagenList = new ArrayList<>();
         ImagenInsertada imagenes = null;
         File file = new File(ruta);
-        System.out.println("ruta " + file.getAbsolutePath());
         File[] files = file.listFiles();
         for (int i = 0; i < files.length; i++) {
             File file1 = files[i];
-            imagenes = new ImagenInsertada(idsubolote, file1.getName(), 0);
-            imagenList.add(imagenes);
+            String[] fin = file1.getName().split("\\.");
+            String exts = fin[1];
+            if (!GetExtensionNoDeseada.noDeseadosList().contains(exts)) {
+                File neoFile = file1;
+                imagenes = new ImagenInsertada(idsubolote, neoFile.getName(), 0);
+                imagenList.add(imagenes);
+            }
         }
         return imagenList;
     }

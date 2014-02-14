@@ -9,7 +9,6 @@ import database.SelectLastID;
 import database.InsertarNuevaTraza;
 import helper.GetIdandExtensionImg;
 import panelContol.ContadorSublotes;
-import documents.GetListOfImagesForDoc;
 import files.OnlyPdf;
 import entidad.Sublote;
 import ventanas.LlenarTrazaDao;

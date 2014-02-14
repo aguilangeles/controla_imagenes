@@ -4,7 +4,6 @@
  */
 package documents;
 
-import documents.SwitchImagesForDocument;
 import entidad.ImagenInsertada;
 import entidad.Sublote;
 import database.Conexion;

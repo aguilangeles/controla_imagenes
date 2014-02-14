@@ -16,6 +16,7 @@ public class GetIdandExtensionImg {
   private static int idImagen;
   private static String extension;
 
+  
   public GetIdandExtensionImg(String extension) {
     identificarExtension(extension);
   }
@@ -66,8 +67,8 @@ public class GetIdandExtensionImg {
     return idImagen;
   }
 
-  public static String getExtension() {
-    return extension;
-  }
+//  public static String getExtension() {
+//    return extension;
+//  }
 
 }
