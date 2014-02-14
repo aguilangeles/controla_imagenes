@@ -1,0 +1,17 @@
+Operador de Control: carga
+Fecha de Control: 2014-02-14 11:50:04.0
+Id Traza: 11
+Ruta Completa: C:\Users\Maria\Desktop\SNR
+Tamanio Lote: 634
+Cantidad muestreada: 80
+Limite Rechazos: 6
+Total Rechazos: 0
+Estado: ACEPTADO
+Linea de captura: h
+Digitalizador: h
+Tipo de Verificacion: Control Calidad Básico
+Tipo de Documento: FRP
+Imagenes rechazadas: 
+Estado: ACEPTADO
+Observaciones: 
+Versión  app: Qualitys 2.0.02_beta

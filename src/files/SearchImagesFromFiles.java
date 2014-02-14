@@ -45,7 +45,7 @@ public class SearchImagesFromFiles {
       {
       String[] spl = fin.split("\\.");
       String exts = spl[1];
-      if (!exts.equalsIgnoreCase("txt") && !exts.equalsIgnoreCase("xml"))
+      if (!exts.equalsIgnoreCase("txt") && !exts.equalsIgnoreCase("xml")&& !exts.equalsIgnoreCase("db"))
         {
         GetIdandExtensionImg extensionIdImagen = new GetIdandExtensionImg(exts);
         imageList.add(file.getAbsolutePath());
