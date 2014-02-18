@@ -1,0 +1,17 @@
+Operador de Control: carga
+Fecha de Control: 2014-02-14 02:57:34.0
+Id Traza: 5
+Ruta Completa: c:\angeles\testeo\frp
+Tamanio Lote: 256
+Cantidad muestreada: 32
+Limite Rechazos: 3
+Total Rechazos: 0
+Estado: ACEPTADO
+Linea de captura: f
+Digitalizador: f
+Tipo de Verificacion: Control Básico de Documento
+Tipo de Documento: FRP
+Documentos rechazados  
+Estado: ACEPTADO
+Observaciones: 
+Versión  app: Qualitys 2.0.02_beta
