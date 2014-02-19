@@ -19,8 +19,7 @@ public final class GetRutaDeImagen {
   }
 
   public String getImage(Imagen imagen, int idImg) {
-    switch (idImg)
-      {
+    switch (idImg) {
       case 1:
         ImagenesWorker worker = new ImagenesWorker(imagen.getRutaParaConversion(),
                 imagen.getParent(), imagen.getPagina());
@@ -31,7 +30,8 @@ public final class GetRutaDeImagen {
       case 3:
         proximaRuta = imagen.getRutaParaConversion();
         break;
-      }
+    }
+    System.out.println("get ruta de imagen "+proximaRuta);
     return proximaRuta;
   }
 }

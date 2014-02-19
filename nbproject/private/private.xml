@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/panelContol/CargarLote.java</file>
-            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/log/Login.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/ventanas/Guardar.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/database/SelectControlbyImage.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/documents/VentanaDocumentos.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/ventanas/MostrarInternalFramesForDocument.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/entidad/ControlPorImagen.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/database/UpdateCheckBoxs.java</file>
         </group>
     </open-files>
 </project-private>

@@ -12,6 +12,7 @@ public class ControlPorImagen {
 
   private int idImagen;
   private int idTrazaArchivoControl;
+  private int idSublote;
   private int idControl;
   private String descripcion;
   private boolean check;
@@ -21,6 +22,16 @@ public class ControlPorImagen {
           String descripcion, boolean check) {
     this.idImagen = idImagen;
     this.idTrazaArchivoControl = idTrazaArchivoControl;
+    this.idControl = idControl;
+    this.descripcion = descripcion;
+    this.check = check;
+  }
+
+  public ControlPorImagen(int idImagen, int idTrazaArchivoControl, int idSublote, int idControl,
+          String descripcion, boolean check) {
+    this.idImagen = idImagen;
+    this.idTrazaArchivoControl = idTrazaArchivoControl;
+    this.idSublote = idSublote;
     this.idControl = idControl;
     this.descripcion = descripcion;
     this.check = check;
@@ -44,6 +55,14 @@ public class ControlPorImagen {
 
   public int getIdTrazaArchivoControl() {
     return idTrazaArchivoControl;
+  }
+
+  public int getIdSublote() {
+    return idSublote;
+  }
+
+  public void setIdSublote(int idSublote) {
+    this.idSublote = idSublote;
   }
 
   public void setIdTrazaArchivoControl(int idTrazaArchivoControl) {
@@ -77,6 +96,8 @@ public class ControlPorImagen {
 
   @Override
   public String toString() {
-    return "Control{" + "idTrazaArchivoControl=" + idTrazaArchivoControl + ", idControl=" + idControl + ", descripcion=" + descripcion + ", check=" + check + ", estado=" + getEstado() + '}';
+    return "ControlPorImagen{" + "idImagen=" + idImagen + ", idTrazaArchivoControl=" + idTrazaArchivoControl + ", idSublote=" + idSublote + ", idControl=" + idControl + ", descripcion=" + descripcion + ", check=" + check + ", estado=" + estado + '}';
   }
+
+  
 }

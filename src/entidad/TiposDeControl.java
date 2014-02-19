@@ -26,4 +26,5 @@ public class TiposDeControl extends Control {
   public String toString() {
     return getTexto();
   }
+  
 }

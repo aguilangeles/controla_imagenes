@@ -33,23 +33,19 @@ public class UpdateCheckBoxs {
     String update = "UPDATE traza_archivo_controles "
             + "SET estado = " + estado
             + " WHERE id= " + idtrazaArchivo + ";";
-    try
-      {
+    try {
       conexion.executeUpdate(update);
-      } catch (SQLException ex)
-      {
+    } catch (SQLException ex) {
       msg.getMessage(ex.getMessage(), className);
-      }
+    }
   }
 
   public void updateEstadoArchivo(int id) {
     String update = "UPDATE archivo SET estado =  1 WHERE id = " + id + ";";
-    try
-      {
+    try {
       conexion.executeUpdate(update);
-      } catch (SQLException ex)
-      {
+    } catch (SQLException ex) {
       msg.getMessage(ex.getMessage(), className);
-      }
+    }
   }
 }

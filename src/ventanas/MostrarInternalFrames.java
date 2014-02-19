@@ -9,11 +9,6 @@ import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.MensajeJoptionPane;
 import helper.VersionEImageIcon;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -69,19 +64,17 @@ public class MostrarInternalFrames {
   }
 
   public void mostrarPrimeraImagen(Imagen siguientes, int cantidad) {
-    try
-      {
+    try {
       internal.setMaximum(true);
       vic.newColorFromPanel(panelScroll);
       internal.setBackground(vic.getColor());
       setTituloYRutaLabel(siguientes, cantidad);
       setImagenes(siguientes);
       setCB.set(siguientes.getId());
-      } catch (PropertyVetoException ex)
-      {
+    } catch (PropertyVetoException ex) {
       MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
       msg.getMessage(ex.getMessage(), MostrarInternalFrames.class.getName());
-      }
+    }
   }//
 
   public void setNextImage(Imagen imagen1, int cantidad) {
@@ -89,6 +82,8 @@ public class MostrarInternalFrames {
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
     desktopPane.add(internal);
     setTituloYRutaLabel(imagen1, cantidad);
+    System.out.println(imagen1.getId());
+
     setCB.set(imagen1.getId());
     setImagenes(imagen1);
     internal.setVisible(true);
@@ -111,8 +106,7 @@ public class MostrarInternalFrames {
   }
 
   private void setLabelPagina(Imagen siguientes) {
-    switch (idImagen)
-      {
+    switch (idImagen) {
       case 1:
         int page1 = siguientes.getPagina() + 1;
         pageLabel.setText("Pagina: " + page1);
@@ -121,7 +115,7 @@ public class MostrarInternalFrames {
         pageLabel.setVisible(false);
       case 3:
         break;
-      }
+    }
   }
 
   private void guardarYLimpiar(JLabel rutaJlabel, JTable tablaCheck, JLabel pagina) {
@@ -131,9 +125,9 @@ public class MostrarInternalFrames {
     desktopPane.repaint();
   }
 
-  private void setImagenes( Imagen siguientes) {
+  private void setImagenes(Imagen siguientes) {
     String ruta = rutadeimagen.getImage(siguientes, idImagen);
-    final String rutapara =siguientes.getRutaParaConversion();
+    final String rutapara = siguientes.getRutaParaConversion();
     setLabelPagina(siguientes);
     imageDraw.cargarImage(ruta, combo, panelScroll, botonAncho, pEntera, idImagen);
     scrollImage.getViewport().add(imageDraw);

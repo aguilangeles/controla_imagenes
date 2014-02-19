@@ -33,16 +33,14 @@ public class TrazaDao {
     this.id = id;
     this.ObjetoList = objList;
     this.imagenList = new ArrayList<>();
-    for (Object object : objList)
-      {
+    for (Object object : objList) {
       Sublote sub = (Sublote) object;
       List<Object> ob = sub.objectList();
-      for (int i = 0; i < ob.size(); i++)
-        {
+      for (int i = 0; i < ob.size(); i++) {
         Object object1 = ob.get(i);
         imagenList.add(object1);
-        }
       }
+    }
     this.tiposList = tiposList;
     this.idImagen = idImagen;
   }
@@ -83,17 +81,29 @@ public class TrazaDao {
     return tiposList;
   }
 
+  public Imagen getImageByNamePageAndSublote(String nombre, int page, String title) {
+    /*va a iterar en la lista hasta encontrar coincidencias*/
+    Imagen tif = null;
+    for (Iterator<Object> it = imagenList.iterator(); it.hasNext();) {
+      Imagen temp = (Imagen) it.next();
+      if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page && temp.getRutaSublote().equals(title)) {
+        tif = temp;
+      }
+    }
+    System.out.println("Guardara los elementos de " + tif.getId());
+    return tif;
+  }
+
   public Imagen getImageByNameAndPage(String nombre, int page) {
     /*va a iterar en la lista hasta encontrar coincidencias*/
     Imagen tif = null;
-    for (Iterator<Object> it = imagenList.iterator(); it.hasNext();)
-      {
+    for (Iterator<Object> it = imagenList.iterator(); it.hasNext();) {
       Imagen temp = (Imagen) it.next();
-      if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page)
-        {
+      if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page) {
         tif = temp;
-        }
+        System.out.println(temp.getId());
       }
+    }
     return tif;
   }
 

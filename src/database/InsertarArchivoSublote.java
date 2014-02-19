@@ -15,13 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class InsertarArchivoSublote {
 
+  private int idTraza = 1;
+
   public InsertarArchivoSublote(Conexion conexion, int idtraza, int idarchivo, int idsublote) {
-    insertar(conexion, idtraza, idarchivo, idsublote);
+    int nuevoId = idtraza + 1;
+    insertar(conexion, nuevoId, idarchivo, idsublote);
   }
 
   private void insertar(Conexion conexion, int idtraza, int idarchivo, int idsublote) {
-    try
-      {
+    try {
       String insert = "INSERT INTO qualitys.archivo_sublote"
               + " ( idcategoria"
               + ", idtraza"
@@ -35,10 +37,9 @@ public class InsertarArchivoSublote {
               + ", " + idsublote
               + ");";
       conexion.executeUpdate(insert);
-      } catch (SQLException ex)
-      {
+    } catch (SQLException ex) {
       MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
       msg.getMessage(ex.getMessage(), InsertarArchivoSublote.class.getName());
-      }
+    }
   }
 }
