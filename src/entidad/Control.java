@@ -16,15 +16,19 @@ public class Control {
   protected String nombre;
   protected String texto;
 
-  public Control() {
-  }
-
   public Control(int id, String nombre, boolean check, String texto, String imagen) {
     this.id = id;
     this.nombre = nombre;
     this.check = check;
     this.texto = texto;
     this.imagen = imagen;
+  }
+
+  public Control(int id, String nombre, boolean check) {
+
+    this.id = id;
+    this.nombre = nombre;
+    this.check = check;
   }
 
   public Control(int id, String nombre, String texto) {

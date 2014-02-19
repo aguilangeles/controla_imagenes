@@ -10,8 +10,15 @@ package entidad;
  */
 public class TiposDeControl extends Control {
 
-  public TiposDeControl(int id, String nombre, boolean check, String texto, String imagen) {
-    super(id, nombre, check, texto, imagen);
+  private int aId;
+  private String aName;
+  private boolean aCheck;
+
+  public TiposDeControl(int id, String nombre, boolean check) {
+    super(id, nombre, check);
+    this.aId = getId();
+    this.aName = getNombre();
+    this.aCheck = isCheck();
   }
 
   public TiposDeControl(int id, String texto) {
@@ -24,7 +31,7 @@ public class TiposDeControl extends Control {
 
   @Override
   public String toString() {
-    return getTexto();
+    return "TiposDeControl{" + "aId=" + aId + ", aName=" + aName + ", aCheck=" + aCheck + '}';
   }
-  
+
 }

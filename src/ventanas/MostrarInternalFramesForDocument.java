@@ -75,11 +75,7 @@ public class MostrarInternalFramesForDocument {
       internal.setMaximum(true);
       vic.newColorFromPanel(panelScroll);
       internal.setBackground(vic.getColor());
-      setTituloYRutaLabel(imagen, numSublote, sublote);
-      setImagenes(imagen, nroImagen, sublote);
-      System.out.println("recibe " + imagen.getId());
-      setCB.setDoc(imagen.getId(), imagen.getIdSublote());
-//      adaptarFrame(imagen, nroImagen, sublote, numSublote);
+      adaptarFrame(imagen, nroImagen, sublote, numSublote);
 
     } catch (PropertyVetoException ex) {
       MensajeJoptionPane msg = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
@@ -92,13 +88,7 @@ public class MostrarInternalFramesForDocument {
     prevDoc.setEnabled(true);
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
     desktopPane.add(internal);
-    setTituloYRutaLabel(imagen1, numSublote, sublote);
-    setImagenes(imagen1, nroImagen, sublote);
-    System.out.println("recibe " + imagen1.getId());
-
-    setCB.setDoc(imagen1.getId(), imagen1.getIdSublote());
-//    
-//    adaptarFrame(imagen1, nroImagen, sublote, numSublote);
+    adaptarFrame(imagen1, nroImagen, sublote, numSublote);
     internal.setVisible(true);
   }
 
@@ -108,13 +98,7 @@ public class MostrarInternalFramesForDocument {
     nextDoc.setEnabled(true);
     desktopPane.add(internal);
     internal.setVisible(true);
-    setTituloYRutaLabel(pr, numSublote, sublote);
-    setImagenes(pr, numSublote, sublote);
-    System.out.println("recibe " + pr.getId());
-
-    setCB.setDoc(pr.getId(), pr.getIdSublote());
-//    
-//    adaptarFrame(pr, cantidad, sublote, numSublote);
+    adaptarFrame(pr, cantidad, sublote, numSublote);
   }
 
   private void setTituloYRutaLabel(Imagen imagen, int cantSublote, Sublote sublotes) {
@@ -157,14 +141,13 @@ public class MostrarInternalFramesForDocument {
   }
 
   private void adaptarFrame(Imagen imagen, int nroImagen, Sublote sublote, int nroSublote) {
-//    setTituloYRutaLabel(imagen, nroSublote, sublote);
-//    setImagenes(imagen, nroImagen, sublote);
-//    System.out.println("set check de id imagen \t " + imagen.getId());
-//    setCB.setDoc(imagen.getId(), imagen.getIdSublote());
+    setTituloYRutaLabel(imagen, nroSublote, sublote);
+    setImagenes(imagen, nroImagen, sublote);
+    setCB.set(imagen.getId());
   }
 
   public String getParcialSoTotal() {
     return parcialSoTotal;
   }
-  
+
 }

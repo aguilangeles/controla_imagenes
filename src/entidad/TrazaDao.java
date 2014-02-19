@@ -90,7 +90,6 @@ public class TrazaDao {
         tif = temp;
       }
     }
-    System.out.println("Guardara los elementos de " + tif.getId());
     return tif;
   }
 

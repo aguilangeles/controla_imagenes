@@ -565,7 +565,6 @@ public class VentanaDocumentos extends javax.swing.JFrame {
     Guardar save = new Guardar();
     String parcial = mostDoc.getParcialSoTotal();
     String interno = internal.getTitle().toString().replace(parcial, "");
-    ////todo revisar como integro el sublote
     save.guardarDoc(traza, rutaLabel.getText(), tabla, pageLabel, interno);
     SelectDocsRechazados numeroRechazo
             = new SelectDocsRechazados(traza.getId());

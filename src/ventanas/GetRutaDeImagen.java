@@ -31,7 +31,6 @@ public final class GetRutaDeImagen {
         proximaRuta = imagen.getRutaParaConversion();
         break;
     }
-    System.out.println("get ruta de imagen "+proximaRuta);
     return proximaRuta;
   }
 }

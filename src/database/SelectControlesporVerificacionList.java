@@ -57,7 +57,7 @@ public class SelectControlesporVerificacionList {
         String descripcion = conexion.resulset.getString(2);
         String texto = conexion.resulset.getString(3);
         String imagen = conexion.resulset.getString(4);
-        tipos = new TiposDeControl(idControl, descripcion, false, texto, imagen);
+        tipos = new TiposDeControl(idControl, descripcion, false);
         tiposdeControlList.add(tipos);
         }
       conexion.isConexionClose();

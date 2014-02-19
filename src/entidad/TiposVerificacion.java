@@ -4,8 +4,6 @@
  */
 package entidad;
 
-import entidad.Control;
-import entidad.TiposDeControl;
 import java.util.List;
 
 /**

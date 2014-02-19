@@ -30,7 +30,8 @@ public class VerificacionDao extends ABMPaneles {
   private TiposVerificacion verificacion;
   private List<TiposVerificacion> listaV = new ArrayList<>();
 
-  public VerificacionDao(JTable tabla, Conexion conexion) {
+  public VerificacionDao(JTable tabla, Conexion conexion)
+  {
     super(conexion, tabla);
     this.aTable = tabla;
     this.aConexion = conexion;
@@ -43,21 +44,24 @@ public class VerificacionDao extends ABMPaneles {
     centrarColumna(4);
   }
 
-  private DefaultTableModel modelarFilasyColumnas() {
+  private DefaultTableModel modelarFilasyColumnas()
+  {
     DefaultTableModel model = new DefaultTableModel() {
       @Override
-      public boolean isCellEditable(int fila, int columna) {
+      public boolean isCellEditable(int fila, int columna)
+      {
         if (columna == 0)
-          {
+        {
           return false;
-          }
+        }
         return isEditable();
       }
 
       @Override
-      public Class getColumnClass(int col) {
+      public Class getColumnClass(int col)
+      {
         switch (getColumnName(col))
-          {
+        {
           case "id":
             return Integer.class;
           case "nombre"://nombre
@@ -68,7 +72,7 @@ public class VerificacionDao extends ABMPaneles {
             return String.class;
           default://estado
             return Integer.class;
-          }
+        }
       }
     };
     setTitulos(model);
@@ -77,73 +81,78 @@ public class VerificacionDao extends ABMPaneles {
     return model;
   }
 
-  private void llenarListaTiposVerificacion() {
+  private void llenarListaTiposVerificacion()
+  {
     if (aConexion.isConexion())
-      {
+    {
       try
-        {
+      {
         aConexion.executeQuery("SELECT * FROM tipos_verificacion;");
         while (aConexion.resulset.next())
-          {
+        {
           int id = aConexion.resulset.getInt(1);
           String nombre = aConexion.resulset.getString(2);
           String descripcion = aConexion.resulset.getString(3);
           int estado = aConexion.resulset.getInt(4);
           verificacion = new TiposVerificacion(id, nombre, descripcion, estado, null);
           listaV.add(verificacion);
-          }
-        } catch (SQLException ex)
-        {
+        }
+      } catch (SQLException ex)
+      {
         msg = new MensajeJoptionPane(tabla, JOptionPane.ERROR_MESSAGE);
         msg.getMessage(ex.getMessage(), classname);
-        }
       }
+    }
   }
 
-  private void llenarTabla(DefaultTableModel model) {
+  private void llenarTabla(DefaultTableModel model)
+  {
     List<Object[]> lista = new ArrayList<>();
     for (TiposVerificacion t : listaV)
-      {
+    {
       t.setListaControles(listaTiposControl(t.getId()));
       String ret = t.getListaControles().toString();
       String trat = ret.substring(1, ret.length() - 1).replace(", ", "\n");
       lista.add(new Object[]
-        {
+      {
         t.getId(), t.getNombre(), t.getDescripcion(), trat, t.getEstado()
-        });
-      }
+      });
+    }
     consulta(model, lista);
   }
 
-  public List<TiposDeControl> listaTiposControl(int id) {
+  public List<TiposDeControl> listaTiposControl(int id)
+  {
     List<TiposDeControl> tipos = new ArrayList<>();
     TiposDeControl tcv;
     if (aConexion.isConexion())
-      {
+    {
       try
-        {
+      {
         String ret = "SELECT  v.idControl, c.descripcion "
                 + "FROM controles_verificacion v join controles c on v.idControl = c.id "
                 + "where v.idVerificacion =" + id + ";";
         aConexion.executeQuery(ret);
         while (aConexion.resulset.next())
-          {
+        {
           tcv = new TiposDeControl(aConexion.resulset.getInt(1), aConexion.resulset.getString(2));
           tipos.add(tcv);
-          }
-        } catch (SQLException ex)
-        {
-        msg.getMessage(ex.getMessage(), classname);
         }
+      } catch (SQLException ex)
+      {
+        msg.getMessage(ex.getMessage(), classname);
       }
+    }
     return tipos;
   }
 
-  public boolean isEditable() {
+  public boolean isEditable()
+  {
     return editable;
   }
 
-  private void setAnchoColumna() {
+  private void setAnchoColumna()
+  {
     List<ColumnaTamanio> lista = new ArrayList<>();
     lista.add(new ColumnaTamanio(0, 20));
     lista.add(new ColumnaTamanio(1, 100));
@@ -153,14 +162,16 @@ public class VerificacionDao extends ABMPaneles {
     anchoColumnas(aTable, lista);
   }
 
-  private void setAltoFilas() {
+  private void setAltoFilas()
+  {
     List<ColumnaTamanio> l = new ArrayList<>();
     l.add(new ColumnaTamanio(2, 0));
     l.add(new ColumnaTamanio(3, 0));
     cellRenderer(l, 100);
   }
 
-  private void setTitulos(DefaultTableModel model) {
+  private void setTitulos(DefaultTableModel model)
+  {
     String split = "id, nombre, descripcion, controles, est";
     titulos(model, split);
   }
