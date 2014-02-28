@@ -49,7 +49,7 @@ public class VentanaDocumentos extends javax.swing.JFrame {
    */
   public VentanaDocumentos(TrazaDao trazadao) {
     iniciar(trazadao);
-//    setExtendedState(6);
+    setExtendedState(6);
     VersionEImageIcon version = new VersionEImageIcon(this);
     initComponents();
     siguiente.requestFocus();

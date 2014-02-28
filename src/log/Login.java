@@ -175,18 +175,18 @@ public class Login extends javax.swing.JFrame {
     /*Define si se setea el archivo o permite el ingreso del usuario*/
     if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
             && password.getText().trim().equalsIgnoreCase(USER_DEFAULT))
-      {
+    {
       SetConfigFile setConfigFile = new SetConfigFile();
-      } else
-      {
+    } else
+    {
       loginUsuario();
-      }
+    }
   }
 
   private void loginUsuario() {
     /*si el usuario es apto, setea la fecha de ingreso*/
     if (isUsuarioValidado())
-      {
+    {
       UpdateFechaIngreso setfecha = new UpdateFechaIngreso(getUsuario());
       java.awt.EventQueue.invokeLater(new Runnable() {
         @Override
@@ -195,23 +195,23 @@ public class Login extends javax.swing.JFrame {
         }
       });
       dispose();
-      } else
-      {
+    } else
+    {
       MensajeJoptionPane mensaje = new MensajeJoptionPane(entrar, JOptionPane.ERROR_MESSAGE);
-      mensaje.getMessage("Campos vacíos o incorrectos", Login.class.getName());
+      mensaje.getMessage("Campos vacÃ­os o incorrectos", Login.class.getName());
       user.setText("");
       password.setText("");
-      }
+    }
   }
 
   private boolean isUsuarioValidado() {
-    /*Identifica si es un usuario y qué categoria posee*/
+    /*Identifica si es un usuario y quÃ© categoria posee*/
     SelectUsuarioyCategoria userCat = new SelectUsuarioyCategoria(user.getText(), password.getText());
     if (userCat.isUsuario())
-      {
+    {
       usuario = userCat.getUsuarioValidado();
       return true;
-      }
+    }
     return false;
   }
 

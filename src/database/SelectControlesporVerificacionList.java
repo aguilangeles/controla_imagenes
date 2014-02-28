@@ -36,7 +36,7 @@ public class SelectControlesporVerificacionList {
 
   private List<TiposDeControl> getLista() {
     try
-      {
+    {
       Runtime gar = Runtime.getRuntime();
       TiposDeControl tipos;
       String query = "select v.idControl"
@@ -52,20 +52,20 @@ public class SelectControlesporVerificacionList {
               + "where t.id = " + idTraza + ");";//
       conexion.executeQuery(query);
       while (conexion.resulset.next())
-        {
+      {
         int idControl = conexion.resulset.getInt(1);
         String descripcion = conexion.resulset.getString(2);
         String texto = conexion.resulset.getString(3);
         String imagen = conexion.resulset.getString(4);
-        tipos = new TiposDeControl(idControl, descripcion, false);
+        tipos = new TiposDeControl(idControl, descripcion, texto, imagen);
         tiposdeControlList.add(tipos);
-        }
+      }
       conexion.isConexionClose();
       gar.gc();
-      } catch (SQLException ex)
-      {
+    } catch (SQLException ex)
+    {
       msg.getMessage(ex.getMessage(), className);
-      }
+    }
     return tiposdeControlList;
   }
 

@@ -29,6 +29,7 @@ public class AyudaVisual extends javax.swing.JFrame {
     this.descripcion = descripcion;
     this.texto = texto;
     this.imagen = imagen;
+    System.out.println("imagen " + imagen);
     initComponents();
     vic.newColorFromPanel(jPanel1);
     cerrar.requestFocus();

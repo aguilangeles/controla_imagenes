@@ -1,0 +1,20 @@
+Operador de Control: carga
+Fecha de Control: 2014-02-28 11:28:26.0
+Id Traza: 15
+Ruta Completa: \\Gnanas001\INPI\Producción\Linea00\201212L00V01
+Tamanio Lote: 193
+Cantidad muestreada: 32
+Limite Rechazos: 3
+Total Rechazos: 2
+Estado: ACEPTADO
+Linea de captura: c
+Digitalizador: c
+Tipo de Verificacion: Control Básico de Documento
+Tipo de Documento: FRP
+Documentos rechazados  
+\\Gnanas001\INPI\Producción\Linea00\201212L00V01\20121221_03\0100000002419868: Documento desordenado. 
+\\Gnanas001\INPI\Producción\Linea00\201212L00V01\20121221_03\0100000002419868: Documento con docs. ocultos. 
+\\Gnanas001\INPI\Producción\Linea00\201212L00V01\20121220_01\0100000002418173: Documento con docs. ocultos. 
+Estado: ACEPTADO
+Observaciones: 
+Versión  app: Qualitys 2.0.07

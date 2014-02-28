@@ -16,8 +16,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
 /**
- * Permite que la tercer columna del la tabla tenga comportamiento de
- * jbutton
+ * Permite que la tercer columna del la tabla tenga comportamiento de jbutton
+ *
  * @author MUTNPROD003
  */
 public class ButtonEditor extends DefaultCellEditor {
@@ -46,14 +46,14 @@ public class ButtonEditor extends DefaultCellEditor {
   public Component getTableCellEditorComponent(JTable table, Object value,
           boolean isSelected, int row, int column) {
     if (isSelected)
-      {
+    {
       button.setForeground(table.getSelectionForeground());
       button.setBackground(table.getSelectionBackground());
-      } else
-      {
+    } else
+    {
       button.setForeground(table.getForeground());
       button.setBackground(table.getBackground());
-      }
+    }
     label = (value == null) ? "" : value.toString();
     button.setText(label);
     isPushed = true;
@@ -62,19 +62,23 @@ public class ButtonEditor extends DefaultCellEditor {
 
   @Override
   public Object getCellEditorValue() {
-    String ret="";
+    String ret = "";
     if (isPushed)
-      {
+    {
       for (TiposDeControl t : listado)
-        {
+      {
         int id = Integer.parseInt(button.getText());
+        System.out.println(id);
+        System.out.println(t.getId() == id);
+        System.out.println(t.getId() +" == "+id);
         if (t.getId() == id)
-          {
+        {
+          System.out.println(t.getNombre() + ", " + t.getTexto() + ", " + t.getImagen());
           ayuda = new AyudaVisual(t.getNombre(), t.getTexto(), t.getImagen());
           ayuda.setVisible(true);
-          }
         }
       }
+    }
     isPushed = false;
     ret = label;
     return ret;

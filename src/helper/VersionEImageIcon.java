@@ -14,9 +14,8 @@ import javax.swing.JPanel;
  * @author aguilangeles@gmail.com
  */
 public final class VersionEImageIcon extends JFrame {
-//tiene boton de ampliar en ancho y mostrar pagina entera.
 
-  public static final String VERSION = "Qualitys 2.0.06";
+  public static final String VERSION = "Qualitys 2.0.07";
   private Color color;
 
   public VersionEImageIcon() {

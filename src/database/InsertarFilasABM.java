@@ -109,7 +109,7 @@ public class InsertarFilasABM {
         break;
       default:
         String valorInput = JOptionPane.showInputDialog(null, "El estado debe ser '"
-                + "'1' activo, '2' inactivo", "Estado inválido", JOptionPane.QUESTION_MESSAGE);
+                + "'1' activo, '2' inactivo", "Estado invalido", JOptionPane.QUESTION_MESSAGE);
         ret = Integer.parseInt(valorInput);
         break;
       }
@@ -128,7 +128,7 @@ public class InsertarFilasABM {
         break;
       default:
         String valorInput = JOptionPane.showInputDialog(null, "El usuario debe ser '"
-                + "'1' admin, '2' carga", "Tipo de usuario inválido", JOptionPane.QUESTION_MESSAGE);
+                + "'1' admin, '2' carga", "Tipo de usuario invalido", JOptionPane.QUESTION_MESSAGE);
         ret = Integer.parseInt(valorInput);
         break;
       }

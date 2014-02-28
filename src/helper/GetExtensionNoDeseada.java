@@ -22,9 +22,11 @@ public class GetExtensionNoDeseada {
         noadd.add("txt");
         noadd.add("xml");
         noadd.add("db");
+        noadd.add("dat");
         noadd.add("TXT");
         noadd.add("XML");
         noadd.add("DB");
+        noadd.add("DAT");
         return noadd;
     }
 }

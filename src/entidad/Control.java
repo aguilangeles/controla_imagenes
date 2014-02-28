@@ -25,10 +25,16 @@ public class Control {
   }
 
   public Control(int id, String nombre, boolean check) {
-
     this.id = id;
     this.nombre = nombre;
     this.check = check;
+  }
+
+  public Control(int id, String nombre, String texto, String imagen) {
+    this.id = id;
+    this.nombre = nombre;
+    this.texto = texto;
+    this.imagen = imagen;
   }
 
   public Control(int id, String nombre, String texto) {
