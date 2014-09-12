@@ -11,6 +11,7 @@ import log.IngresoBaseDeDatos;
 import log.Login;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -322,9 +323,14 @@ public class PanelControl extends javax.swing.JFrame {
   }
 
   private void getCargaLote() {
-
+//    JOptionPane.showMessageDialog(null, "hola","hola aca va el filechooser", JOptionPane.INFORMATION_MESSAGE);
+    TryFilechooser filechooser = new TryFilechooser();
+    filechooser.getfilechooser();
+    System.out.println("Se ha seleccionado: " + filechooser.getPath());
+    
     ControlDocumentosyVerificaciones control =
-            new ControlDocumentosyVerificaciones(this);
+            new ControlDocumentosyVerificaciones(this, filechooser.getPath());
+//    System.exit(0);
   }
 
   private void action(java.awt.event.ActionEvent evt) {

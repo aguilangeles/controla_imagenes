@@ -34,12 +34,13 @@ public class CargarLote extends javax.swing.JFrame {
     initComponents();
   }
 
-  public CargarLote(DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion, JFrame panelControl) {
+  public CargarLote(DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion, JFrame panelControl, String path) {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this, "Carga de Volumen.");
     versionEImageIcon.newColorFromPanel(jPanel1);
     this.usarioTipo = log.Login.getUsuario();
-    rutaCarpeta.setInputVerifier(new helper.InputVerifier().inputVerifierT());
+    rutaCarpeta.setText(path);
+//    rutaCarpeta.setInputVerifier(new helper.InputVerifier().inputVerifierT());
     this.tipoDocumentoBox.setModel(documentos);
     this.tipoVerificacionBox.setModel(verificacion);
     this.panelControl = panelControl;
@@ -78,6 +79,7 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel2.setText("Ruta");
 
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
+    rutaCarpeta.setText("c:\\angeles\\testeo\\gnd3");
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     aceptarSeleccion.setMnemonic('c');

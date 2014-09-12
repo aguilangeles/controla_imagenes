@@ -16,11 +16,12 @@ import javax.swing.JFrame;
  */
 public class ControlDocumentosyVerificaciones {
 
-  public ControlDocumentosyVerificaciones(JFrame panelControl) {
-    cargar(panelControl);
+  public ControlDocumentosyVerificaciones(JFrame panelControl,  String path) {
+    
+    cargar(panelControl, path);
   }
 
-  private void cargar(final JFrame panelControl) {
+  private void cargar(final JFrame panelControl, final String path) {
     final Verificacion_CargarComboBoxs vc = new Verificacion_CargarComboBoxs();
     vc.llenarQualitys();    //llena el combo de verificacion
     vc.llenarDocumentos(); //llena el combo documentos
@@ -28,7 +29,7 @@ public class ControlDocumentosyVerificaciones {
       @Override
       public void run() {
         new CargarLote(vc.getTipoDocumento(), vc.getTipoVerificacion(),
-                panelControl).setVisible(true);
+                panelControl, path).setVisible(true);
       }
     });
   }
