@@ -17,6 +17,7 @@ import org.im4java.core.IM4JavaException;
 import org.im4java.core.IMOperation;
 import org.im4java.core.Info;
 import org.im4java.core.InfoException;
+import org.im4java.process.ProcessStarter;
 
 /**
  * Convierte el pdf en un jpg gracias al image magick
@@ -40,7 +41,6 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
     this.ruta_archivo = ruta_archivo;
     this.parent = parent;
     this.pagina = pagina;
-    this.IM4JAVA_TOOLPATH = Conexion.getToolpath();
   }
 
   @Override
@@ -48,35 +48,38 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
     File input = new File(rutaConPagina);
     File outputTemp = null;
     try
-      {
+    {
       String rutaEnTemporal = new ExtensionTemporal(ruta_archivo, parent, pagina).getRutaTemporal() + "_t_";
       outputTemp = File.createTempFile(rutaEnTemporal, ".png", new File("temp"));
       try
-        {
-//        getInfoOriginalImage(input);
-        IMOperation operation = new IMOperation();
-        operation.density(200);
-        operation.quality(80D);
-        operation.depth(16);
-        operation.addImage();
-        operation.addImage();
-        ConvertCmd convert = new ConvertCmd();
-        convert.setSearchPath(IM4JAVA_TOOLPATH);
-        convert.run(operation, new Object[]
-          {
-          input.getAbsolutePath(), outputTemp.getAbsolutePath()
-          });
-        operation.closeOperation();
-
-        } catch (IOException | InterruptedException | IM4JavaException ex)
-        {
-        msg.getMessage(ex.getMessage(), className);
-        System.exit(0);
-        }
-      } catch (IOException ex)
       {
-      msg.getMessage(ex.getMessage(), className);
+	String myPath = "C:\\ImageMagick-6.8.6-Q16";
+	ProcessStarter.setGlobalSearchPath(myPath);
+
+	IMOperation operation = new IMOperation();
+	operation.density(200);
+	operation.quality(80D);
+	operation.depth(16);
+	operation.addImage();
+	operation.addImage();
+	ConvertCmd convert = new ConvertCmd();
+	convert.setSearchPath(IM4JAVA_TOOLPATH);
+	convert.run(operation, new Object[]
+	{
+	  input.getAbsolutePath(), outputTemp.getAbsolutePath()
+	});
+	operation.closeOperation();
+
+      } catch (IOException | InterruptedException | IM4JavaException ex)
+      {
+	msg.getMessage(ex.getMessage(), className);
+	System.out.println(ex.getMessage());
+	System.exit(0);
       }
+    } catch (IOException ex)
+    {
+      msg.getMessage(ex.getMessage(), className);
+    }
     outputTemp.deleteOnExit();
     return outputTemp.getAbsolutePath();
   }
