@@ -40,6 +40,7 @@ public class SearchImagesFromFiles {
 
     private void extraerExtensionImagen(File file) {
         String fin = file.getName();
+        System.out.println("Final " + fin);
         if (fin.contains(".")) {
             String[] spl = fin.split("\\.");
             String exts = spl[1];
