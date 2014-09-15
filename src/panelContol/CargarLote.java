@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import ventanas.WorkerImage;
@@ -48,6 +47,7 @@ public class CargarLote extends javax.swing.JFrame {
       rutaCarpeta.setText(myfilechooser.getPath());
     } else
     {
+      //TODO mejorar el estilo del input
       String seleccion = JOptionPane.showInputDialog(
 	      null,
 	      "Ingrese para el reporte",
@@ -95,7 +95,6 @@ public class CargarLote extends javax.swing.JFrame {
     jLabel2.setText("Ruta");
 
     rutaCarpeta.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    rutaCarpeta.setText("c:\\angeles\\testeo\\gnd3");
 
     aceptarSeleccion.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     aceptarSeleccion.setMnemonic('c');

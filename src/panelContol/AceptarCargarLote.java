@@ -60,17 +60,23 @@ public class AceptarCargarLote {
     {
       if (tipoVerificacionBox.getSelectedItem().toString().equalsIgnoreCase("2-Control Básico de Documento"))
       {
+	if(chooser.isaDirectory()){
+	  getDocumentosSelected();
+	}else{
 	getDocumentos(file);
+	  
+	}
+	
+	// TODO agregar seleccion muultiple
       } else
       {
 	if (chooser.isaDirectory())
 	{
 
-	  getFilesForVolumenSelected();
+	  getFilesForVolumeSelected();
 	} else
 	{
 	  getFilesForVolumen(file);
-
 	}
       }
     } else
@@ -93,7 +99,7 @@ public class AceptarCargarLote {
     aceptarButton.setEnabled(false);
   }
 
-  private void getFilesForVolumenSelected() {
+  private void getFilesForVolumeSelected() {
     getControlesPorVerificacion();//controles de la verificacion seleccionada
     conexion.isConexionClose();////cierra conexion
     GetFinalListOfImages idext = new GetFinalListOfImages(cargarLoteFrame,
@@ -109,7 +115,24 @@ public class AceptarCargarLote {
     List<Object> listaIdc = contadorSublotes.getDocumentoList();
     getControlesPorVerificacion();
     conexion.isConexion();
-    GetFinalListOfDocuments idext = new GetFinalListOfDocuments(cargarLoteFrame, infoJLabel, file, getTipoDocumento(), SelectIdControlfromVerificacionList.getIdVerificacion(), idtipoControlList, listaIdc);
+    GetFinalListOfDocuments idext = new GetFinalListOfDocuments(cargarLoteFrame, 
+	    infoJLabel, file, getTipoDocumento(),
+	    SelectIdControlfromVerificacionList.getIdVerificacion(), 
+	    idtipoControlList, listaIdc);
+    idext.execute();
+    aceptarButton.setEnabled(false);
+
+  }
+  private void getDocumentosSelected() {
+    ContadorSublotes contadorSublotes = new ContadorSublotes(chooser);
+    GetIdandExtensionImg extensionIdImagen = new GetIdandExtensionImg(ContadorSublotes.getExtension());
+    List<Object> listaIdc = contadorSublotes.getDocumentoList();
+    getControlesPorVerificacion();
+    conexion.isConexion();
+    GetFinalListOfDocuments idext = new GetFinalListOfDocuments(cargarLoteFrame, 
+	    infoJLabel,  getTipoDocumento(),
+	    SelectIdControlfromVerificacionList.getIdVerificacion(), 
+	    idtipoControlList, listaIdc);
     idext.execute();
     aceptarButton.setEnabled(false);
 

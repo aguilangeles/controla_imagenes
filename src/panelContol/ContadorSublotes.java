@@ -26,6 +26,14 @@ public class ContadorSublotes {
         parent = (file.getAbsolutePath());
         getCantidadSublotes(file);
     }
+    
+    public ContadorSublotes(TryFilechooser mychooser) {
+        parent = ( mychooser.getFileList().get(0).getAbsolutePath());
+	for(File filechoser : mychooser.getFileList()){
+	  
+	getCantidadSublotes(filechoser);
+	}
+    }
 
     private void getCantidadSublotes(File file) {
         File[] files = file.listFiles();

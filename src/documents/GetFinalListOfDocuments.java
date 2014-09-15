@@ -34,7 +34,18 @@ public class GetFinalListOfDocuments extends SwingWorker<Void, Object> {
   public GetFinalListOfDocuments(JFrame frame, JLabel infoLabel, File file, int idDocumento, int idVerificacion, List<Integer> controlesList, List<Object> listaIdc) {
     this.frame = frame;
     this.infoLabel = infoLabel;
-    this.file = file;
+//    this.file = file;
+    this.idDocumento = idDocumento;
+    this.idVerificacion = idVerificacion;
+    this.controlesList = controlesList;
+    this.documentList = listaIdc;
+    this.tamanio = documentList.size();
+
+  }
+  public GetFinalListOfDocuments(JFrame frame, JLabel infoLabel,  int idDocumento, int idVerificacion, List<Integer> controlesList, List<Object> listaIdc) {
+    this.frame = frame;
+    this.infoLabel = infoLabel;
+//    this.file = file;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
     this.controlesList = controlesList;
