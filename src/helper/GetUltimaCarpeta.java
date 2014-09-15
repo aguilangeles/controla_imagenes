@@ -4,11 +4,15 @@
  */
 package helper;
 
+import panelContol.TryFilechooser;
+
 /**
  * obtiene la ultima carpeta del volumen
  * @author aguilangeles@gmail.com
  */
 public class GetUltimaCarpeta {
+  private String addLastFolder;
+  
 
   public GetUltimaCarpeta() {
   }
@@ -24,6 +28,16 @@ public class GetUltimaCarpeta {
         ret = (rsplit[i]);
         }
       }
-    return ret;
+    String ultima =(TryFilechooser.isaDirectory())?ret+"-"+TryFilechooser.getCarpeta():ret;
+    return ultima;
   }
+
+  public String getAddLastFolder() {
+    return addLastFolder;
+  }
+
+  public void setAddLastFolder(String addLastFolder) {
+    this.addLastFolder = addLastFolder;
+  }
+  
 }

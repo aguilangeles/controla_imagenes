@@ -4,15 +4,16 @@
  */
 package panelContol;
 
-import ventanas.WorkerImage;
-import java.util.ArrayList;
-import java.util.List;
 import entidad.Usuario;
 import helper.VersionEImageIcon;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import ventanas.WorkerImage;
 
 /**
  *
@@ -45,8 +46,15 @@ public class CargarLote extends javax.swing.JFrame {
     if (!myfilechooser.isaDirectory())
     {
       rutaCarpeta.setText(myfilechooser.getPath());
-    }else{
+    } else
+    {
+      String seleccion = JOptionPane.showInputDialog(
+	      null,
+	      "Ingrese para el reporte",
+	      JOptionPane.QUESTION_MESSAGE);
+      myfilechooser.setCarpeta(seleccion);
       rutaCarpeta.setText(myfilechooser.getFileList().get(0).toString());
+      
       
     }
     this.tipoDocumentoBox.setModel(documentos);

@@ -18,9 +18,9 @@ import javax.swing.JFileChooser;
 public class TryFilechooser {
 
   private String path; 
-  private String carpeta;
+  private static String carpeta;
   private List<File> fileList =new ArrayList<>();
-  private boolean aDirectory;
+  private static boolean aDirectory;
   private JFileChooser chooser;
 
   public TryFilechooser() {
@@ -76,15 +76,15 @@ public class TryFilechooser {
     this.path = path;
   }
 
-  public boolean isaDirectory() {
+  public static boolean isaDirectory() {
     return aDirectory;
   }
-  public String getCarpeta() {
+  public static String getCarpeta() {
     return carpeta;
   }
 
-  public void setCarpeta(String carpeta) {
-    this.carpeta = carpeta;
+  public static void setCarpeta(String carpeta) {
+    TryFilechooser.carpeta = carpeta;
   }
 
 }

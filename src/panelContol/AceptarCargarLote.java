@@ -96,8 +96,6 @@ public class AceptarCargarLote {
   private void getFilesForVolumenSelected() {
     getControlesPorVerificacion();//controles de la verificacion seleccionada
     conexion.isConexionClose();////cierra conexion
-    
-
     GetFinalListOfImages idext = new GetFinalListOfImages(cargarLoteFrame,
 	    infoJLabel, idtipoControlList, getTipoDocumento(),
 	    SelectIdControlfromVerificacionList.getIdVerificacion(), chooser);

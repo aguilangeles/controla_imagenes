@@ -33,7 +33,6 @@ public class GetFinalListOfImages extends SwingWorker<Void, Object> {
   private static String extension;
   private static List<Object> imageList;
   private static List<Object> finalImageList;
-//  private File[] listoffiles ;
   private SearchImagesFromFiles searchImages;
   
   public GetFinalListOfImages(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, int idDocumento, int idVerificacion) {
@@ -48,7 +47,6 @@ public class GetFinalListOfImages extends SwingWorker<Void, Object> {
   }
   public GetFinalListOfImages(JFrame frame, JLabel infoLabel, List<Integer> controlesList, int idDocumento, int idVerificacion, TryFilechooser chooser) {
     this.controlesList = controlesList;
-//    this.listoffiles = files;
     this.frame = frame;
     this.infoLabel = infoLabel;
     this.idDocumento = idDocumento;
@@ -63,8 +61,6 @@ public class GetFinalListOfImages extends SwingWorker<Void, Object> {
     imageList = searchImages.getImageList();
     finalImageList = new SwitchImageList(infoLabel).switchExtension(imageList);
     tamanio = finalImageList.size();
-    System.out.println(tamanio);
-    
     SelectTamanioMuestra muestrafromRango = new SelectTamanioMuestra(tamanio);
     muestra = SelectTamanioMuestra.getMuestra();
     idRango = SelectTamanioMuestra.getIdRango();
