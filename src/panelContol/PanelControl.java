@@ -317,20 +317,22 @@ public class PanelControl extends javax.swing.JFrame {
     java.awt.EventQueue.invokeLater(new Runnable() {
       @Override
       public void run() {
-        new UsuariosABM().setVisible(true);
+	new UsuariosABM().setVisible(true);
       }
     });
   }
 
   private void getCargaLote() {
-//    JOptionPane.showMessageDialog(null, "hola","hola aca va el filechooser", JOptionPane.INFORMATION_MESSAGE);
     TryFilechooser filechooser = new TryFilechooser();
-    filechooser.getfilechooser();
-    System.out.println("Se ha seleccionado: " + filechooser.getPath());
-    
-    ControlDocumentosyVerificaciones control =
-            new ControlDocumentosyVerificaciones(this, filechooser.getPath());
-//    System.exit(0);
+
+//    if (filechooser.isaDirectory())
+//    {
+//      String name = JOptionPane.showInputDialog("ingrese nombre de la carpeta", this);
+//      filechooser.setCarpeta(name);
+//    }
+    System.out.println("entrando a documentos y verificacion");
+    ControlDocumentosyVerificaciones control
+	    = new ControlDocumentosyVerificaciones(this, filechooser);
   }
 
   private void action(java.awt.event.ActionEvent evt) {

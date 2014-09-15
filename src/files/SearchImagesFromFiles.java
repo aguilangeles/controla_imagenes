@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JLabel;
+import panelContol.TryFilechooser;
 
 /**
  *
  * @author aguilangeles@gmail.com
  */
+
 public class SearchImagesFromFiles {
 
     private JLabel infoLabel;
@@ -25,6 +27,15 @@ public class SearchImagesFromFiles {
         this.infoLabel = infoLabel;
         buscarExtensiones(file);
     }
+
+  public SearchImagesFromFiles(JLabel infoLabel, TryFilechooser chooser) {
+    this.infoLabel = infoLabel;
+    for(File afile : chooser.getFileList()){
+      
+      buscarExtensiones(afile);
+    }
+  }
+    
 
     private void buscarExtensiones(File aFile) {
         File[] files = aFile.listFiles();
@@ -40,7 +51,6 @@ public class SearchImagesFromFiles {
 
     private void extraerExtensionImagen(File file) {
         String fin = file.getName();
-        System.out.println("Final " + fin);
         if (fin.contains(".")) {
             String[] spl = fin.split("\\.");
             String exts = spl[1];

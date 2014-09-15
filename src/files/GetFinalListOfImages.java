@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import panelContol.TryFilechooser;
 
 /**
  *
@@ -32,7 +33,9 @@ public class GetFinalListOfImages extends SwingWorker<Void, Object> {
   private static String extension;
   private static List<Object> imageList;
   private static List<Object> finalImageList;
-
+//  private File[] listoffiles ;
+  private SearchImagesFromFiles searchImages;
+  
   public GetFinalListOfImages(JFrame frame, JLabel infoLabel, List<Integer> controlesList, File file, int idDocumento, int idVerificacion) {
     this.controlesList = controlesList;
     this.file = file;
@@ -40,16 +43,28 @@ public class GetFinalListOfImages extends SwingWorker<Void, Object> {
     this.infoLabel = infoLabel;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
+     searchImages = new SearchImagesFromFiles(infoLabel, file);
+
+  }
+  public GetFinalListOfImages(JFrame frame, JLabel infoLabel, List<Integer> controlesList, int idDocumento, int idVerificacion, TryFilechooser chooser) {
+    this.controlesList = controlesList;
+//    this.listoffiles = files;
+    this.frame = frame;
+    this.infoLabel = infoLabel;
+    this.idDocumento = idDocumento;
+    this.idVerificacion = idVerificacion;
+     searchImages = new SearchImagesFromFiles(infoLabel, chooser);
 
   }
 
   @Override
   protected Void doInBackground() {
 
-    SearchImagesFromFiles searchImages = new SearchImagesFromFiles(infoLabel, file);
     imageList = searchImages.getImageList();
     finalImageList = new SwitchImageList(infoLabel).switchExtension(imageList);
     tamanio = finalImageList.size();
+    System.out.println(tamanio);
+    
     SelectTamanioMuestra muestrafromRango = new SelectTamanioMuestra(tamanio);
     muestra = SelectTamanioMuestra.getMuestra();
     idRango = SelectTamanioMuestra.getIdRango();

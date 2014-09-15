@@ -5,7 +5,10 @@
  */
 package panelContol;
 
+import helper.GetParent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 
 /**
@@ -15,10 +18,20 @@ import javax.swing.JFileChooser;
 public class TryFilechooser {
 
   private String path; 
-  public void getfilechooser() {
-    JFileChooser chooser = new JFileChooser();
+  private String carpeta;
+  private List<File> fileList =new ArrayList<>();
+  private boolean aDirectory;
+  private JFileChooser chooser;
+
+  public TryFilechooser() {
+    getfilechooser();
+  }
+  
+  
+  private void getfilechooser() {
+    chooser = new JFileChooser();
     chooser.setCurrentDirectory(new java.io.File("."));
-    chooser.setDialogTitle("choosertitle");
+    chooser.setDialogTitle("Seleccione Carpeta");
     chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     chooser.setAcceptAllFileFilterUsed(false);
     chooser.setMultiSelectionEnabled(true);
@@ -26,25 +39,33 @@ public class TryFilechooser {
     if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
     {
       File[] files = chooser.getSelectedFiles();
+      GetParent parent = new GetParent(files); // trae la ruta completa
+
       if (files.length != 1)
       {
-
+	aDirectory=true;
 	for (int i = 0; i < files.length; i++)
 	{
 	  File file = files[i];
-	  System.out.println(file.getAbsoluteFile());
+	  fileList.add(file);
 	}
       } else
       {
+	aDirectory=false;
 	path = chooser.getSelectedFile().toString();
-//	System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
-//	System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
       }
     } else
     {
       System.out.println("No Selection ");
     }
+  }
 
+  public List<File> getFileList() {
+    return fileList;
+  }
+
+  public void setFileList(List<File> fileList) {
+    this.fileList = fileList;
   }
 
   public String getPath() {
@@ -53,6 +74,17 @@ public class TryFilechooser {
 
   public void setPath(String path) {
     this.path = path;
+  }
+
+  public boolean isaDirectory() {
+    return aDirectory;
+  }
+  public String getCarpeta() {
+    return carpeta;
+  }
+
+  public void setCarpeta(String carpeta) {
+    this.carpeta = carpeta;
   }
 
 }

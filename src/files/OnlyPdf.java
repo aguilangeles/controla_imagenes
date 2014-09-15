@@ -24,7 +24,7 @@ import javax.swing.JLabel;
 public class OnlyPdf {
 
   private Conexion conexion;
-  private int muestra,idTraza;
+  private int muestra, idTraza;
   private String parent;
   private CreateRamdom crearRamdom;
   private JLabel infoLabel;
@@ -59,7 +59,7 @@ public class OnlyPdf {
 
     List<Object> ramdomPdf = ramdom.getStack();
     for (Object o : ramdomPdf)
-      {
+    {
       NombrePaginaDelPDF pagina = (NombrePaginaDelPDF) o;
       int parentlength = parent.length() + 1;
       String adaptarFile = pagina.getNombre().substring(parentlength);
@@ -67,19 +67,19 @@ public class OnlyPdf {
       int page = pagina.getNumeroPagina();
       InsertarNuevoArchivo archivo = new InsertarNuevoArchivo(conexion, idTraza, filename, page, infoLabel, 1);
       imagenyControl();
-      }
+    }
   }
 
   private void pruebainsertarImagen() {
     int estado = 0;
     for (Sublote s : sublotes)
-      {
+    {
       for (ImagenInsertada img : s.getImagenes())
-        {
-        cargarImagen(img, idTraza, s.getId());
-        imagenyControl();
-        }
+      {
+	cargarImagen(img, idTraza, s.getId());
+	imagenyControl();
       }
+    }
   }
 
   private void cargarImagen(ImagenInsertada img, int idtraza, int idsublote) {
@@ -93,7 +93,7 @@ public class OnlyPdf {
   }
 
   private void imagenyControl() {
-    InsertTrazaArchivoContol insertTrazaArchivoContolYEstado =
-            new InsertTrazaArchivoContol(idTraza, idControl, conexion);
+    InsertTrazaArchivoContol insertTrazaArchivoContolYEstado
+	    = new InsertTrazaArchivoContol(idTraza, idControl, conexion);
   }
 }

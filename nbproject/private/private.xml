@@ -4,8 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/panelContol/CargarLote.java</file>
-            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/files/SearchImagesFromFiles.java</file>
-            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/helper/GetExtensionNoDeseada.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/panelContol/PanelControl.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/panelContol/TryFilechooser.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/ventanas/ControlDocumentosyVerificaciones.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/panelContol/ABMPaneles.java</file>
+            <file>file:/C:/Users/Maria/Documents/GitHub/controla_imagenes/src/log/Login.java</file>
         </group>
     </open-files>
 </project-private>

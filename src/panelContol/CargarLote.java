@@ -11,6 +11,7 @@ import entidad.Usuario;
 import helper.VersionEImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 /**
@@ -26,6 +27,7 @@ public class CargarLote extends javax.swing.JFrame {
   private WorkerImage worker;
   private JComboBox documentos, verificacion;
   private JFrame panelControl;
+  private TryFilechooser myfilechooser;
 
   /**
    * Creates new form CargarLote
@@ -34,13 +36,19 @@ public class CargarLote extends javax.swing.JFrame {
     initComponents();
   }
 
-  public CargarLote(DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion, JFrame panelControl, String path) {
+  public CargarLote(DefaultComboBoxModel documentos, DefaultComboBoxModel verificacion, JFrame panelControl, TryFilechooser myfilechooser) {
     initComponents();
     VersionEImageIcon versionEImageIcon = new VersionEImageIcon(this, "Carga de Volumen.");
     versionEImageIcon.newColorFromPanel(jPanel1);
     this.usarioTipo = log.Login.getUsuario();
-    rutaCarpeta.setText(path);
-//    rutaCarpeta.setInputVerifier(new helper.InputVerifier().inputVerifierT());
+    this.myfilechooser = myfilechooser;
+    if (!myfilechooser.isaDirectory())
+    {
+      rutaCarpeta.setText(myfilechooser.getPath());
+    }else{
+      rutaCarpeta.setText(myfilechooser.getFileList().get(0).toString());
+      
+    }
     this.tipoDocumentoBox.setModel(documentos);
     this.tipoVerificacionBox.setModel(verificacion);
     this.panelControl = panelControl;
@@ -252,9 +260,9 @@ public class CargarLote extends javax.swing.JFrame {
   // End of variables declaration//GEN-END:variables
 
   private void getAceptar() {
-    AceptarCargarLote acc =
-            new AceptarCargarLote(this,
-            rutaCarpeta, aceptarSeleccion, tipoDocumentoBox, tipoVerificacionBox, informa, con, 0);
+    AceptarCargarLote acc
+	    = new AceptarCargarLote(this,
+		    rutaCarpeta, aceptarSeleccion, tipoDocumentoBox, tipoVerificacionBox, informa, con, 0, myfilechooser);
     panelControl.dispose();
   }
 }
