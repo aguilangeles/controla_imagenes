@@ -102,11 +102,11 @@ public class ReporteDocumento extends javax.swing.JFrame {
 
       },
       new String [] {
-        "Defecto id", "Descripcion", "Cantidad hallazgos"
+        "Descripcion", "Cantidad hallazgos"
       }
     ) {
       boolean[] canEdit = new boolean [] {
-        false, false, false
+        false, false
       };
 
       public boolean isCellEditable(int rowIndex, int columnIndex) {

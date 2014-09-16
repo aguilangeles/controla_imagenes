@@ -47,7 +47,7 @@ public class EscribeInformeDocumento {
       pw.println("Documentos rechazados  ");
       for (int row = 0; row < descripcion.getRowCount(); row++)
         {
-        pw.println(descripcion.getValueAt(row, 1) + ": " + descripcion.getValueAt(row, 2));
+        pw.println(descripcion.getValueAt(row, 0) + ": " + descripcion.getValueAt(row, 1));
         }
 
       pw.println("Estado: " + estado);

@@ -23,7 +23,7 @@ public class Tabla_TiposDeControlEnDocumento extends JFrame {
   private JTable tabla;
   private int idControl;
   private String rutaSublote;
-  private String descricion;
+  private String descripcion;
 
   public Tabla_TiposDeControlEnDocumento(int idtraza, Conexion conexion, JTable tabla) {
     this.idtraza = idtraza;
@@ -36,9 +36,9 @@ public class Tabla_TiposDeControlEnDocumento extends JFrame {
     DefaultTableModel modelo = poblarSegundatabla();
     tabla.setModel(modelo);
     tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-    tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
-    tabla.getColumnModel().getColumn(1).setPreferredWidth(300);
-    tabla.getColumnModel().getColumn(2).setPreferredWidth(127);
+//    tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
+    tabla.getColumnModel().getColumn(0).setPreferredWidth(320);
+    tabla.getColumnModel().getColumn(1).setPreferredWidth(135);
   }
 
   private DefaultTableModel poblarSegundatabla() {
@@ -48,7 +48,7 @@ public class Tabla_TiposDeControlEnDocumento extends JFrame {
         return false;
       }
     };
-    modelTipos.addColumn("idSublote");
+//    modelTipos.addColumn("idSublote");
     modelTipos.addColumn("Sublote");
     modelTipos.addColumn("Ctrl");
     CantidadesEncontradasDeErroresPorTDC(modelTipos);
@@ -76,10 +76,10 @@ public class Tabla_TiposDeControlEnDocumento extends JFrame {
         {
         idControl = conexion.resulset.getInt(1);
         rutaSublote = conexion.resulset.getString(2);
-        descricion = conexion.resulset.getString(3);
+        descripcion = conexion.resulset.getString(3);
         modelTipos.addRow(new Object[]
           {
-          idControl, rutaSublote, descricion
+          rutaSublote, descripcion
           });
 
         }

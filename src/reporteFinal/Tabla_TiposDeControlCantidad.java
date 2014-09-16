@@ -36,9 +36,8 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
     DefaultTableModel modelo = poblarSegundatabla();
     tabla.setModel(modelo);
     tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-    tabla.getColumnModel().getColumn(0).setPreferredWidth((int) 31.8);
-    tabla.getColumnModel().getColumn(1).setPreferredWidth(397);
-    tabla.getColumnModel().getColumn(2).setPreferredWidth((int) 26);
+    tabla.getColumnModel().getColumn(0).setPreferredWidth(412);
+    tabla.getColumnModel().getColumn(1).setPreferredWidth(27);
 
   }
 
@@ -49,9 +48,9 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
         return false;
       }
     };
-    modelTipos.addColumn("id");
+//    modelTipos.addColumn("id");
     modelTipos.addColumn("Descripcion");
-    modelTipos.addColumn("C");
+    modelTipos.addColumn("Cant");
     CantidadesEncontradasDeErroresPorTDC(modelTipos);
     return modelTipos;
   }
@@ -74,7 +73,7 @@ public class Tabla_TiposDeControlCantidad extends JFrame {
         cantidad = conexion.resulset.getInt(3);
         modelTipos.addRow(new Object[]
           {
-          idControl, descripcion, cantidad
+          descripcion, cantidad
           });
 
         }
