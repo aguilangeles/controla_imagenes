@@ -82,7 +82,6 @@ public class MostrarInternalFrames {
     guardarYLimpiar(rutaLabel, tabla, pageLabel);
     desktopPane.add(internal);
     setTituloYRutaLabel(imagen1, cantidad);
-    System.out.println(imagen1.getId());
 
     setCB.set(imagen1.getId());
     setImagenes(imagen1);

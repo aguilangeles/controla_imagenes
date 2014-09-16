@@ -83,19 +83,16 @@ public class ImageSize {
   }
 
   public Dimension getDimforPanel() {
-//    System.out.println("dim for panel");
     int w = 0;
     int h = 0;
     if (isMasAnchoqueAlto())
       {
-//      System.out.println("mas ancho" + imgSize.getWidth() + " " + imgSize.getHeight());
       double wight = hepanel * imgSize.getWidth() / imgSize.getHeight()-20;
       double height = wight * imgSize.getHeight() / imgSize.getWidth();
       w = (int) (wight);
       h = (int) (height);
       } else
       {
-//      System.out.println("mas alto " + imgSize.getWidth() + " " + imgSize.getHeight());
       double height = ((wipanel) * imgSize.getHeight() / imgSize.getWidth() )/1.8;
       double wight = (height * imgSize.getWidth() / imgSize.getHeight());
       w = (int) (wight);

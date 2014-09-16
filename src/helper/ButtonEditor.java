@@ -68,12 +68,8 @@ public class ButtonEditor extends DefaultCellEditor {
       for (TiposDeControl t : listado)
       {
         int id = Integer.parseInt(button.getText());
-        System.out.println(id);
-        System.out.println(t.getId() == id);
-        System.out.println(t.getId() +" == "+id);
         if (t.getId() == id)
         {
-          System.out.println(t.getNombre() + ", " + t.getTexto() + ", " + t.getImagen());
           ayuda = new AyudaVisual(t.getNombre(), t.getTexto(), t.getImagen());
           ayuda.setVisible(true);
         }

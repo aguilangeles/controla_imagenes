@@ -53,7 +53,6 @@ public class AceptarCargarLote {
   }
 
   private void getAceptar() {
-
     String ruta = pathnameJtext.getText();//trae la ruta
     File file = new File(ruta);//busca el file
     if (file.exists())
@@ -66,8 +65,6 @@ public class AceptarCargarLote {
 	getDocumentos(file);
 	  
 	}
-	
-	// TODO agregar seleccion muultiple
       } else
       {
 	if (chooser.isaDirectory())

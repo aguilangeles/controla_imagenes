@@ -33,12 +33,6 @@ public class AutomaticoRoA {
       statusName="RECHAZADO";
       statusValue=0;
     }
-    System.out.println("mayor o igual ");
-    System.out.println(numeroRechazo >= cantidadRechazada);
-    System.out.println(numeroRechazo + "/" + cantidadRechazada);
-    System.out.println("menor");
-    System.out.println(numeroRechazo < cantidadRechazada);
-    System.out.println(numeroRechazo + "/" + cantidadRechazada);
   }
 
   public static boolean isAceptar() {

@@ -30,7 +30,6 @@ class SwitchImagesForDocument {
         try {
             String ruta = astring;
             File file = new File(ruta);
-            System.out.println("ruta " + file.getAbsolutePath());
             PDDocument pddDocument = PDDocument.load(file.getAbsolutePath());
             int pagina = pddDocument.getDocumentCatalog().getAllPages().size();
             for (int i = 0; i < pagina; i++) {

@@ -100,7 +100,6 @@ public class TrazaDao {
       Imagen temp = (Imagen) it.next();
       if (temp.getRutaInsertadaEnDB().equalsIgnoreCase(nombre) && temp.getPagina() == page) {
         tif = temp;
-        System.out.println(temp.getId());
       }
     }
     return tif;

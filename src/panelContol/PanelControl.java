@@ -325,12 +325,6 @@ public class PanelControl extends javax.swing.JFrame {
   private void getCargaLote() {
     TryFilechooser filechooser = new TryFilechooser();
 
-//    if (filechooser.isaDirectory())
-//    {
-//      String name = JOptionPane.showInputDialog("ingrese nombre de la carpeta", this);
-//      filechooser.setCarpeta(name);
-//    }
-    System.out.println("entrando a documentos y verificacion");
     ControlDocumentosyVerificaciones control
 	    = new ControlDocumentosyVerificaciones(this, filechooser);
   }

@@ -54,7 +54,6 @@ public class GetImagenesAdyacentes {
           } catch (ArrayIndexOutOfBoundsException e)
           {
           //todo
-          System.out.println("exception !!!!");
           }
         }
       }
@@ -117,7 +116,6 @@ public class GetImagenesAdyacentes {
       pddDocument.close();
       } catch (IOException ex)
       {
-      System.out.println("io exception");
       Logger.getLogger(GetImagenesAdyacentes.class.getName()).log(Level.SEVERE, null, ex);
       }
   }
@@ -186,13 +184,11 @@ public class GetImagenesAdyacentes {
     try
       {
       this.imagenAnterior = (files[imin]).toString();
-      //System.out.println("imagen anterior " + imagenAnterior);
       this.nombreA = files[imin].getName();
       } catch (ArrayIndexOutOfBoundsException e)
       {
       this.imagenAnterior = filenotfound;
       this.nombreA = "Sin imagen anterior";
-      System.out.println("exception Anterior !!!!");
       }
 
   }
@@ -206,7 +202,6 @@ public class GetImagenesAdyacentes {
 
       } catch (ArrayIndexOutOfBoundsException ee)
       {
-      System.out.println("exception posterior");
       this.imagenPosterior = filenotfound;
       this.nombreP = "Sin Imagen Posterior";
       }

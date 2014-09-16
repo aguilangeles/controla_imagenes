@@ -73,7 +73,6 @@ public class ImagenesWorker extends SwingWorker<Object, String> {
       } catch (IOException | InterruptedException | IM4JavaException ex)
       {
 	msg.getMessage(ex.getMessage(), className);
-	System.out.println(ex.getMessage());
 	System.exit(0);
       }
     } catch (IOException ex)
