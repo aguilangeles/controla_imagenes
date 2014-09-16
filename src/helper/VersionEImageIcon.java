@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  */
 public final class VersionEImageIcon extends JFrame {
 
-  public static final String VERSION = "Qualitys 2.0.07";
+  public static final String VERSION = "Qualitys 2.0.08";
   private Color color;
 
   public VersionEImageIcon() {
