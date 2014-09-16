@@ -170,7 +170,7 @@ public class Ventana extends javax.swing.JFrame {
           .addComponent(ampliar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
-    rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 10)); // NOI18N
+    rutaLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 12)); // NOI18N
     rutaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
     pageLabel.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 11)); // NOI18N
@@ -262,8 +262,8 @@ public class Ventana extends javax.swing.JFrame {
         .addGap(9, 9, 9))
     );
 
+    desktopPane.add(internal);
     internal.setBounds(0, 0, 960, 500);
-    desktopPane.add(internal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     javax.swing.GroupLayout panelInicialLayout = new javax.swing.GroupLayout(panelInicial);
     panelInicial.setLayout(panelInicialLayout);
