@@ -4,15 +4,17 @@
  */
 package log;
 
-import database.UpdateFechaIngreso;
-import panelContol.PanelControl;
 import archivoConfiguracion.SetConfigFile;
-import helper.InputVerifier;
-import javax.swing.JOptionPane;
-import entidad.Usuario;
 import database.SelectUsuarioyCategoria;
+import database.UpdateFechaIngreso;
+import entidad.Usuario;
+import helper.InputVerifier;
 import helper.MensajeJoptionPane;
 import helper.VersionEImageIcon;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
+import panelContol.PanelControl;
 
 /**
  *
@@ -22,7 +24,7 @@ public class Login extends javax.swing.JFrame {
 
   private static final String USER_DEFAULT = "default";
   private static final String USER_INVALID = "<html>El Usuario o password "
-          + "no existe en la base de datos, o no es un usuario activo</html>";
+	  + "no existe en la base de datos, o no es un usuario activo</html>";
   private static Usuario usuario;
 
   /**
@@ -36,6 +38,8 @@ public class Login extends javax.swing.JFrame {
     user.requestFocusInWindow();
     user.setInputVerifier(new InputVerifier().inputVerifierT());
     password.setInputVerifier(new InputVerifier().inputVerifierT());
+
+    setEntrarActionPerformed();
   }
 
   /**
@@ -69,16 +73,13 @@ public class Login extends javax.swing.JFrame {
     jLabel2.setText("Password");
 
     user.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    user.setText("admin");
     user.setNextFocusableComponent(password);
 
     password.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    password.setText("admin");
 
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
-    entrar.setMnemonic('e');
     entrar.setText("Entrar");
-    entrar.setToolTipText("Alt+e");
+    entrar.setToolTipText("");
     entrar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         entrarActionPerformed(evt);
@@ -165,6 +166,18 @@ public class Login extends javax.swing.JFrame {
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
+  private void setEntrarActionPerformed() {
+    AbstractAction buttonPressed = new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+	setEntrar();
+      }
+    };
+    entrar.addActionListener(buttonPressed);
+    entrar.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).
+	    put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, 0), "Enter");
+    entrar.getActionMap().put("Enter", buttonPressed);
+  }
 
   private void entrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entrarKeyPressed
     setEntrar();
@@ -176,7 +189,7 @@ public class Login extends javax.swing.JFrame {
   private void setEntrar() {
     /*Define si se setea el archivo o permite el ingreso del usuario*/
     if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)
-            && password.getText().trim().equalsIgnoreCase(USER_DEFAULT))
+	    && password.getText().trim().equalsIgnoreCase(USER_DEFAULT))
     {
       SetConfigFile setConfigFile = new SetConfigFile();
     } else
@@ -191,10 +204,10 @@ public class Login extends javax.swing.JFrame {
     {
       UpdateFechaIngreso setfecha = new UpdateFechaIngreso(getUsuario());
       java.awt.EventQueue.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          new PanelControl().setVisible(true);
-        }
+	@Override
+	public void run() {
+	  new PanelControl().setVisible(true);
+	}
       });
       dispose();
     } else
