@@ -24,7 +24,6 @@ public class ReadProperties {
   private final String className = ReadProperties.class.getName();
   private final int messageType = JOptionPane.ERROR_MESSAGE;
   private final MensajeJoptionPane mensaje = new MensajeJoptionPane(null, messageType);
-  private  String ignoreme;
 
   public ReadProperties() {
   }
@@ -68,22 +67,6 @@ public class ReadProperties {
     String password = p.getProperty("dbpassword");
     user = new LogQualitys(url, base, usuario, password);
     return user;
-  }
-
-  public List<String> getIgnoremeList() {
-    List<String> noadd = new ArrayList<>();
-    Properties p = readProperties("ignoreme.properties");
-    String ingoreOriginal = p.getProperty("ignoreme");
-    String ignoreUpper = ingoreOriginal.toUpperCase();
-    String add = ingoreOriginal += ignoreUpper;
-    String[] split = add.split(",");
-    for (int i = 0; i < split.length; i++)
-    {
-      String string = split[i];
-      noadd.add(string);
-    }
-    return noadd;
-
   }
 
 }
