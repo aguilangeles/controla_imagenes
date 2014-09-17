@@ -155,6 +155,12 @@ public class ImageDrawingComponent extends JPanel {
           } catch (IOException ex)
           {
           msg.getMessage(ex.getMessage(), className);
+          } catch (ArrayIndexOutOfBoundsException ex)
+          {
+          msg.getMessage("No se puede leer el archivo\n"+
+		  path
+		  +"\nContactese con el administrador para que excluya "
+		  + "\ndicha extension del control de imagenes", className);
           }
         break;
       }

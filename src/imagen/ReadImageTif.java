@@ -30,13 +30,14 @@ public final class ReadImageTif extends JComponent {
   public ReadImageTif() {
   }
 
-  static Image imageTif(byte[] data) {
+  static Image imageTif(byte[] data) throws ArrayIndexOutOfBoundsException{
     SeekableStream stream = null;
     Image image = null;
     try
       {
       stream = new ByteArraySeekableStream(data);
       String[] names = ImageCodec.getDecoderNames(stream);
+      
       ImageDecoder dec =
               ImageCodec.createImageDecoder(names[0], stream, null);
       RenderedImage im = dec.decodeAsRenderedImage();
@@ -59,14 +60,17 @@ public final class ReadImageTif extends JComponent {
     return image;
   }
 
-  public Image getImagen(String location) throws FileNotFoundException, IOException {
+  public Image getImagen(String location) throws FileNotFoundException, IOException, ArrayIndexOutOfBoundsException {
     ByteBuffer buffer;
+   
+      
     FileInputStream in = new FileInputStream(location);
     System.out.println("location"+ location);
     FileChannel channel = in.getChannel();
     buffer = ByteBuffer.allocate((int) channel.size());
     buffer.clear();
     channel.read(buffer);
+   
     return imageTif(buffer.array());
   }
 }
