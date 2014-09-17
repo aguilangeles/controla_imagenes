@@ -65,7 +65,6 @@ public final class ReadImageTif extends JComponent {
    
       
     FileInputStream in = new FileInputStream(location);
-    System.out.println("location"+ location);
     FileChannel channel = in.getChannel();
     buffer = ByteBuffer.allocate((int) channel.size());
     buffer.clear();

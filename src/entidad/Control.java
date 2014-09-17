@@ -44,7 +44,6 @@ public class Control {
   }
 
   public Control(int id, String texto) {
-    System.out.println("algo aqui");
     this.id = id;
     this.texto = texto;
   }

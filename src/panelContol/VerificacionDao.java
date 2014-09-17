@@ -139,9 +139,7 @@ public class VerificacionDao extends ABMPaneles {
         {
 	  int id_ =aConexion.resulset.getInt(1);
 	  String descripcion=aConexion.resulset.getString(2);
-	  System.out.println("id: "+ id +" dexc: " + descripcion);
           tcv = new TiposDeControl(id_, descripcion );
-	  System.out.println(tcv);
           tipos.add(tcv);
         }
       } catch (SQLException ex)
