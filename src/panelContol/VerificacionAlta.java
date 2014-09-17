@@ -39,9 +39,6 @@ public class VerificacionAlta extends javax.swing.JFrame {
    */
   public VerificacionAlta(Conexion conexion, DefaultTableModel abmModel, JTable tabla) {
     initComponents();
-//    String rutaImagen = "Logos/nuevo logo sin letras UTN.png";
-//    ImageIcon im = new ImageIcon(rutaImagen);
-//    setIconImage(im.getImage());
     VersionEImageIcon vic = new VersionEImageIcon(this, "Alta Nueva Verificación. ");
     vic.newColorFromPanel(jPanel1);
     nombreQs.setInputVerifier((new InputVerifier().inputVerifierT()));

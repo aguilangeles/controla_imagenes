@@ -44,6 +44,7 @@ public class Control {
   }
 
   public Control(int id, String texto) {
+    System.out.println("algo aqui");
     this.id = id;
     this.texto = texto;
   }
@@ -88,8 +89,12 @@ public class Control {
     this.texto = texto;
   }
 
+  
   @Override
   public String toString() {
     return "Tipos{" + "id=" + id + ", nombre=" + nombre + ", check=" + check + ", texto=" + texto + ", imagen=" + imagen + '}';
+  }
+  public String getIdandName() {
+    return "Tipos{" + "id=" + id +  ", texto=" + texto + '}';
   }
 }

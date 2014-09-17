@@ -32,16 +32,20 @@ public class TiposDeControl extends Control {
   }
 
   public TiposDeControl(int id, String texto) {
+    
     super(id, texto);
+    this.aId= id;
+    this.aTexto=texto;
+//    System.out.println(texto);
   }
 
   public String newToString() {
     return getId() + "-" + getTexto();
   }
-
   @Override
   public String toString() {
-    return "TiposDeControl{" + "aId=" + aId + ", aName=" + aName + ", aCheck=" + aCheck + '}';
+    return  aTexto ;
   }
+  
 
 }

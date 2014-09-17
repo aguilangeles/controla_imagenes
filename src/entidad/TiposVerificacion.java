@@ -64,4 +64,10 @@ public class TiposVerificacion extends Control {
     public void setListaControles(List<TiposDeControl> listaControles) {
         this.listaControles = listaControles;
     }
+
+  @Override
+  public String toString() {
+    return "TiposVerificacion{" + "estado=" + estado + ", listaControles=" + listaControles + '}';
+  }
+    
 }

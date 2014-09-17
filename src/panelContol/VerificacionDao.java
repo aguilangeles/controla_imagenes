@@ -28,7 +28,7 @@ public class VerificacionDao extends ABMPaneles {
   private JTable aTable;
   private boolean editable;
   private TiposVerificacion verificacion;
-  private List<TiposVerificacion> listaV = new ArrayList<>();
+  private final List<TiposVerificacion> listaVerificacion = new ArrayList<>();
 
   public VerificacionDao(JTable tabla, Conexion conexion)
   {
@@ -95,7 +95,7 @@ public class VerificacionDao extends ABMPaneles {
           String descripcion = aConexion.resulset.getString(3);
           int estado = aConexion.resulset.getInt(4);
           verificacion = new TiposVerificacion(id, nombre, descripcion, estado, null);
-          listaV.add(verificacion);
+          listaVerificacion.add(verificacion);
         }
       } catch (SQLException ex)
       {
@@ -108,8 +108,10 @@ public class VerificacionDao extends ABMPaneles {
   private void llenarTabla(DefaultTableModel model)
   {
     List<Object[]> lista = new ArrayList<>();
-    for (TiposVerificacion t : listaV)
+    for (TiposVerificacion t : listaVerificacion)
     {
+      List<TiposDeControl> tiposcontrolList = listaTiposControl(t.getId());
+      
       t.setListaControles(listaTiposControl(t.getId()));
       String ret = t.getListaControles().toString();
       String trat = ret.substring(1, ret.length() - 1).replace(", ", "\n");
@@ -135,7 +137,11 @@ public class VerificacionDao extends ABMPaneles {
         aConexion.executeQuery(ret);
         while (aConexion.resulset.next())
         {
-          tcv = new TiposDeControl(aConexion.resulset.getInt(1), aConexion.resulset.getString(2));
+	  int id_ =aConexion.resulset.getInt(1);
+	  String descripcion=aConexion.resulset.getString(2);
+	  System.out.println("id: "+ id +" dexc: " + descripcion);
+          tcv = new TiposDeControl(id_, descripcion );
+	  System.out.println(tcv);
           tipos.add(tcv);
         }
       } catch (SQLException ex)

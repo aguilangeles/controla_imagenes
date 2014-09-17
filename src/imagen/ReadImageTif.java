@@ -4,11 +4,11 @@
  */
 package imagen;
 
-import helper.MensajeJoptionPane;
 import com.sun.media.jai.codec.ByteArraySeekableStream;
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
 import com.sun.media.jai.codec.SeekableStream;
+import helper.MensajeJoptionPane;
 import java.awt.*;
 import java.awt.image.RenderedImage;
 import java.io.FileInputStream;
@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.jai.PlanarImage;
 import javax.swing.*;
 
@@ -43,7 +45,7 @@ public final class ReadImageTif extends JComponent {
       } catch (IOException ex)
       {
       msg.getMessage(ex.getMessage(), className);
-//      Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(ReadImageTif.class.getName()).log(Level.SEVERE, null, ex);
       } finally
       {
       try
@@ -60,6 +62,7 @@ public final class ReadImageTif extends JComponent {
   public Image getImagen(String location) throws FileNotFoundException, IOException {
     ByteBuffer buffer;
     FileInputStream in = new FileInputStream(location);
+    System.out.println("location"+ location);
     FileChannel channel = in.getChannel();
     buffer = ByteBuffer.allocate((int) channel.size());
     buffer.clear();

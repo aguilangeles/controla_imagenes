@@ -9,8 +9,6 @@ import database.Conexion;
 import helper.MensajeJoptionPane;
 import helper.VersionEImageIcon;
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
