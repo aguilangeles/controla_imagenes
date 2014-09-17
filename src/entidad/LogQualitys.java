@@ -55,7 +55,6 @@ public class LogQualitys {
   public void setPassword(String password) {
     this.password = password;
   }
-
   @Override
   public String toString() {
     return "Usuario{" + "url=" + url + ", base=" + base + ", usuario="

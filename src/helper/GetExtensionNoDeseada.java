@@ -5,7 +5,7 @@
  */
 package helper;
 
-import java.util.ArrayList;
+import archivoConfiguracion.ReadProperties;
 import java.util.List;
 
 /**
@@ -13,20 +13,14 @@ import java.util.List;
  * @author Maria
  */
 public class GetExtensionNoDeseada {
-
     public GetExtensionNoDeseada() {
+      
     }
+    
 
     public static List<String> noDeseadosList() {
-        List<String> noadd = new ArrayList<>();
-        noadd.add("txt");
-        noadd.add("xml");
-        noadd.add("db");
-        noadd.add("dat");
-        noadd.add("TXT");
-        noadd.add("XML");
-        noadd.add("DB");
-        noadd.add("DAT");
+        List<String> noadd = new ReadProperties().getIgnoremeList();
         return noadd;
     }
+  
 }

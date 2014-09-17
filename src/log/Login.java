@@ -80,16 +80,6 @@ public class Login extends javax.swing.JFrame {
     entrar.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 14)); // NOI18N
     entrar.setText("Entrar");
     entrar.setToolTipText("");
-    entrar.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        entrarActionPerformed(evt);
-      }
-    });
-    entrar.addKeyListener(new java.awt.event.KeyAdapter() {
-      public void keyPressed(java.awt.event.KeyEvent evt) {
-        entrarKeyPressed(evt);
-      }
-    });
 
     jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -178,14 +168,6 @@ public class Login extends javax.swing.JFrame {
 	    put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, 0), "Enter");
     entrar.getActionMap().put("Enter", buttonPressed);
   }
-
-  private void entrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entrarKeyPressed
-    setEntrar();
-  }//GEN-LAST:event_entrarKeyPressed
-
-  private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-    setEntrar();
-  }//GEN-LAST:event_entrarActionPerformed
   private void setEntrar() {
     /*Define si se setea el archivo o permite el ingreso del usuario*/
     if (user.getText().trim().equalsIgnoreCase(USER_DEFAULT)

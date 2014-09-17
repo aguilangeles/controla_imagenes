@@ -7,7 +7,7 @@ package entidad;
 import helper.Time;
 
 /**
- *define el tipo de usuario que ingreso al sistema.
+ *define el tipo de usuario que ingresara al sistema.
  * @author MUTNPROD003
  */
 public class Usuario {
@@ -27,8 +27,8 @@ public class Usuario {
     this.password = password;
     this.categoria = categoria;
     this.estado = estado;
-    administrador = (categoria == 1) ? true : false;
-    activo = (estado == 1) ? true : false;
+    administrador = (categoria == 1);
+    activo = (estado == 1);
   }
 
   public int getId() {
