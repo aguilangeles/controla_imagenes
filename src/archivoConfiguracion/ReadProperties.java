@@ -8,8 +8,6 @@ import entidad.LogQualitys;
 import helper.MensajeJoptionPane;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 
@@ -29,23 +27,23 @@ public class ReadProperties {
   }
 
   private Properties readProperties(String path) {
-    FileInputStream in = null;
-    Properties p = null;
+    FileInputStream input = null;
+    Properties properties = null;
     try
     {
-      p = new Properties();
-      in = new FileInputStream(path);
-      p.load(in);
+      properties = new Properties();
+      input = new FileInputStream(path);
+      properties.load(input);
     } catch (IOException ex)
     {
       mensaje.getMessage(ex.getMessage(), className);
     } finally
     {
-      if (in != null)
+      if (input != null)
       {
 	try
 	{
-	  in.close();
+	  input.close();
 	} catch (IOException ex)
 	{
 	  mensaje.getMessage(ex.getMessage(), className);
@@ -55,17 +53,16 @@ public class ReadProperties {
 	}
       }
     }
-    return p;
+    return properties;
   }
 
   public LogQualitys getUser() {
-    LogQualitys user = null;
     Properties p = readProperties("config.properties");
     String url = p.getProperty("url");
     String base = p.getProperty("database");
     String usuario = p.getProperty("dbuser");
     String password = p.getProperty("dbpassword");
-    user = new LogQualitys(url, base, usuario, password);
+    LogQualitys user = new LogQualitys(url, base, usuario, password);
     return user;
   }
 
