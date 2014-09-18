@@ -18,52 +18,42 @@ import javax.swing.JOptionPane;
  */
 public class SetConfigFile {
 
-  private String className = SetConfigFile.class.getName();
   private static final String CONFIG = "config.properties";
-  private Properties properties = new Properties();
+  private Properties properties = new ReadProperties().readProperties(CONFIG);
+  private String className = SetConfigFile.class.getName();
   private MensajeJoptionPane mensaje = new MensajeJoptionPane(null, JOptionPane.ERROR_MESSAGE);
 
   public SetConfigFile() {
-    removerCamposYAbrirNuevoLog();
+    /*si el usuario es admininstrador, permite el ingreso de nuevos campos*/
+    setProperties("", "", "", "");
+    newLogin();
   }
 
   public SetConfigFile(String url, String database, String user, String password) {
-    mostrarCamposExistentes(url, database, user, password);
-  }
-
-  private void removerCamposYAbrirNuevoLog() {
-    /*si el usuario es admininstrador, permite el ingreso de nuevos campos*/
-    try
-      {
-      properties.setProperty("url", "");
-      properties.setProperty("database", "");
-      properties.setProperty("dbuser", "");
-      properties.setProperty("dbpassword", "");
-      properties.store(new FileOutputStream(CONFIG), null);
-      java.awt.EventQueue.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          new IngresoBaseDeDatos().setVisible(true);
-        }
-      });
-      } catch (IOException e)
-      {
-      mensaje.getMessage(e.getMessage(), className);
-      }
-  }
-
-  private void mostrarCamposExistentes(String url, String database, String user, String password) {
     /*si el usuario es carga, muestra la base que se ha establecido como principal*/
+    setProperties(url, database, user, password);
+  }
+
+  private void newLogin() {
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+	new IngresoBaseDeDatos().setVisible(true);
+      }
+    });
+  }
+
+  private void setProperties(String url, String database, String user, String password) {
     try
-      {
+    {
       properties.setProperty("url", url);
       properties.setProperty("database", database);
       properties.setProperty("dbuser", user);
       properties.setProperty("dbpassword", password);
       properties.store(new FileOutputStream(CONFIG), null);
-      } catch (IOException e)
-      {
+    } catch (IOException e)
+    {
       mensaje.getMessage(e.getMessage(), className);
-      }
+    }
   }
 }
