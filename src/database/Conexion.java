@@ -4,9 +4,8 @@
  */
 package database;
 
+import archivoConfiguracion.ReadProperties;
 import helper.MensajeJoptionPane;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,61 +29,34 @@ public class Conexion {
   private int filasAfectadas;
   private int messageType = JOptionPane.ERROR_MESSAGE;
   private String className = Conexion.class.getName();
-  private static String toolpath;
   MensajeJoptionPane mensaje = new MensajeJoptionPane(null, messageType);
 
   public Conexion() {
   }
 
   public boolean isConexion() {
-    FileInputStream in = null;
+    Properties prop = new ReadProperties().readProperties("config.properties");
+    String url = prop.getProperty("url");
+    String base = prop.getProperty("database");
+    String urlExtendida = "jdbc:mysql://" + url + "/" + base;
+    String user = prop.getProperty("dbuser");
+    String passw = prop.getProperty("dbpassword");
     try
-      {
-      Properties prop = new Properties();
-      in = new FileInputStream("config.properties");
-      prop.load(in);
-      String url = prop.getProperty("url");
-      String base = prop.getProperty("database");
-      String urlExtendida = "jdbc:mysql://" + url + "/" + base;
-      String user = prop.getProperty("dbuser");
-      String passw = prop.getProperty("dbpassword");
-      toolpath = prop.getProperty("toolpath");
+    {
       Class.forName(DRIVER);
       conexion = DriverManager.getConnection(urlExtendida, user, passw);
-      if (conexion != null)
-        {
-        return true;
-        }
-      } catch (SQLException ex)
-      {
+    } catch (SQLException ex)
+    {
+      mensaje.getMessage(ex.getMessage(), className);
 
-      mensaje.getMessage(null, null);
-      } catch (ClassNotFoundException ex)
-      {
-      mensaje.getMessage(ex.getMessage(), className);
-      } catch (IOException ex)
-      {
-      mensaje.getMessage(ex.getMessage(), className);
-      } catch (Exception ex)
-      {
-      mensaje.getMessage(ex.getMessage(), className);
-      } finally
-      {
-      try
-        {
-        in.close();
-        finalize();
-        } catch (IOException ex)
-        {
-        mensaje.getMessage(ex.getMessage(), className);
-        } catch (Throwable ex)
-        {
-        mensaje.getMessage(ex.getMessage(), className);
-        }
-      }
-    return false;
+    } catch (ClassNotFoundException e)
+    {
+      mensaje.getMessage(e.getMessage(), className);
+    }
+    return conexion != null;
   }
-
+  
+ 
   public boolean isConexionClose() {
     if (resulset != null)
       {
@@ -155,10 +127,6 @@ public class Conexion {
   public void executeUpdate(String sql) throws SQLException {
     prepareStatement = conexion.prepareStatement(sql);
     filasAfectadas = prepareStatement.executeUpdate();
-  }
-
-  public static String getToolpath() {
-    return toolpath;
   }
   
 }

@@ -26,7 +26,7 @@ public class ReadProperties {
   public ReadProperties() {
   }
 
-  private Properties readProperties(String path) {
+  public  Properties readProperties(String path) {
     FileInputStream input = null;
     Properties properties = null;
     try
