@@ -34,7 +34,6 @@ public class GetFinalListOfDocuments extends SwingWorker<Void, Object> {
   public GetFinalListOfDocuments(JFrame frame, JLabel infoLabel, File file, int idDocumento, int idVerificacion, List<Integer> controlesList, List<Object> listaIdc) {
     this.frame = frame;
     this.infoLabel = infoLabel;
-//    this.file = file;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
     this.controlesList = controlesList;
@@ -45,7 +44,6 @@ public class GetFinalListOfDocuments extends SwingWorker<Void, Object> {
   public GetFinalListOfDocuments(JFrame frame, JLabel infoLabel,  int idDocumento, int idVerificacion, List<Integer> controlesList, List<Object> listaIdc) {
     this.frame = frame;
     this.infoLabel = infoLabel;
-//    this.file = file;
     this.idDocumento = idDocumento;
     this.idVerificacion = idVerificacion;
     this.controlesList = controlesList;
@@ -75,7 +73,15 @@ public class GetFinalListOfDocuments extends SwingWorker<Void, Object> {
         java.awt.EventQueue.invokeLater(new Runnable() {
           @Override
           public void run() {
-            WorkerDocument worker = new WorkerDocument(frame, infoLabel, idDocumento, idVerificacion, muestra, idRango, tamanio, finalDocumentList, controlesList);
+            WorkerDocument worker = new WorkerDocument(frame
+		    , infoLabel
+		    , idDocumento
+		    , idVerificacion
+		    , muestra
+		    , idRango
+		    , tamanio
+		    , finalDocumentList
+		    , controlesList);
             worker.execute();
           }
         });
