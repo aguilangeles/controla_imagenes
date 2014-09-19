@@ -67,7 +67,9 @@ public class TiposVerificacion extends Control {
 
   @Override
   public String toString() {
-    return "TiposVerificacion{" + "estado=" + estado + ", listaControles=" + listaControles + '}';
+    return "TiposVerificacion{" 
+            + "estado=" + estado 
+            + ", listaControles=" + listaControles + '}';
   }
     
 }

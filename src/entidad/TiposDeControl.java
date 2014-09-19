@@ -36,7 +36,6 @@ public class TiposDeControl extends Control {
     super(id, texto);
     this.aId= id;
     this.aTexto=texto;
-//    System.out.println(texto);
   }
 
   public String newToString() {
