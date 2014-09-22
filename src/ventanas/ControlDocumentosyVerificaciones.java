@@ -4,7 +4,6 @@
  */
 package ventanas;
 
-import javax.swing.JFileChooser;
 import panelContol.CargarLote;
 import panelContol.Verificacion_CargarComboBoxs;
 import javax.swing.JFrame;

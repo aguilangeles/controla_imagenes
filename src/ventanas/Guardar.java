@@ -11,7 +11,6 @@ import database.Conexion;
 import entidad.Imagen;
 import entidad.TrazaDao;
 import helper.MensajeJoptionPane;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -69,7 +68,7 @@ public class Guardar {
 
   public void guardarDoc(TrazaDao traza, String nombre, JTable tabla, JLabel pagina, String gettitle) {
     if (conexion.isConexion()) {
-      pdf = (traza.getIdImagen() == 1) ? true : false;// discrimina entre pdf y otros
+      pdf = (traza.getIdImagen() == 1);// discrimina entre pdf y otros
       /*diferencia entre pdf y otros y obtiene el numero de pagina*/
       getNumerodePagina(pdf, pagina);
       /*Trae la imagen desde la base de datos, junto con la pagina*/
