@@ -11,7 +11,6 @@ import log.IngresoBaseDeDatos;
 import log.Login;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 /**
  *
